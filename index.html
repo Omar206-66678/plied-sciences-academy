@@ -115,7 +115,12 @@
                 box-sizing: border-box;
             }
 
-            .container { max-width: 680px; margin: auto; }
+            .container { 
+                max-width: 680px; 
+                margin: auto; 
+                width: 100%;
+                box-sizing: border-box;
+            }
 
             /* مؤشر التقدم العلوي */
             .top-progress-bar {
@@ -313,7 +318,7 @@
                 font-weight: 600;
             }
 
-            /* معرض الصور الثابت */
+            /* معرض الصور الثابت والمتناسق مع جميع الشاشات */
             .hero-gallery-grid {
                 display: grid;
                 grid-template-columns: 1.2fr 1.8fr;
@@ -339,8 +344,10 @@
             .gallery-sub-item img {
                 width: 100%;
                 height: 100%;
+                max-width: 100%;
                 object-fit: cover;
                 object-position: center;
+                display: block;
             }
 
             .gallery-main-item {
@@ -353,8 +360,10 @@
             .gallery-main-item img {
                 width: 100%;
                 height: 100%;
+                max-width: 100%;
                 object-fit: cover;
                 object-position: 25% center;
+                display: block;
             }
 
             .image-floating-badge {
@@ -736,7 +745,7 @@
                 </div>
             </div>
 
-            <!-- كارت الترحيب الثابت (مع مسارات الصور المحدثة) -->
+            <!-- كارت الترحيب الثابت -->
             <div class="hero-section-wrapper" data-nav-color="#0284C7" data-nav-glow="rgba(2, 132, 199, 0.35)">
                 <div class="global-hero-card">
                     <div class="hero-header-split">
