@@ -362,11 +362,12 @@
                 display: block;
             }
 
-            /* 🌟 نظام الـ Grid العالمي المرن والمضبوط بدقة للغة العربية RTL */
+            /* 🌟 نظام الـ Grid العالمي المرن مع تثبيت اتجاه اليمين لليسار تماماً لمنع أي لخبطة */
             .pillars-list { 
                 display: grid; 
                 grid-template-columns: 1fr; 
                 gap: 20px; 
+                direction: rtl;
             }
 
             @media (min-width: 768px) {
@@ -435,7 +436,7 @@
             }
             .pillar-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 6px; }
 
-            /* تخصيص الكاردات بالترتيب الصحيح تماماً */
+            /* تخصيص الكاردات بالترتيب الصحيح الثابت */
             .card-en.pillar-card {
                 background: linear-gradient(145deg, var(--card-bg) 0%, var(--en-light-bg) 100%);
                 border: 2px solid var(--en-border);
@@ -779,7 +780,7 @@
                 </div>
             </div>
 
-            <!-- بطاقات الأقسام الرئيسية الثلاثة بالترتيب الصحيح تماماً -->
+            <!-- بطاقات الأقسام الرئيسية الثلاثة بالترتيب الصحيح الثابت -->
             <div class="pillars-list" id="pillars">
                 <!-- المسار الأول: اللغة الإنجليزية -->
                 <a href="english/english.html" class="pillar-card card-en" data-nav-color="#0E7490" data-nav-glow="rgba(14, 116, 144, 0.35)">
