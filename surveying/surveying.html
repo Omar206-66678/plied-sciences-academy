@@ -6,79 +6,64 @@
         <title>قسم المساحة - أكاديمية العلوم التطبيقية</title>
         <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
         
+        <!-- تطبيق الثيم فوراً لتفادي الوميض -->
         <script>
             let savedTheme = localStorage.getItem("em_theme");
-            if (savedTheme === "light") {
-                document.documentElement.classList.remove("dark-mode");
-            } else {
+            if (savedTheme === "dark") {
                 document.documentElement.classList.add("dark-mode");
             }
         </script>
         
         <style>
             :root {
-                --bg-main: #030712;
-                --card-bg: rgba(15, 23, 42, 0.75);
-                --card-border: rgba(30, 144, 255, 0.25);
-                --text-primary: #F8FAFC;
-                --text-secondary: #94A3B8;
-                
-                --header-bg: rgba(15, 23, 42, 0.85);
-                --header-border: rgba(30, 144, 255, 0.3);
-                --header-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), 0 10px 25px rgba(0, 0, 0, 0.2);
-                
-                --primary: #38BDF8;
-                --primary-dark: #0284C7;
-                --accent: #818CF8;
-                
-                /* المسار الأول: مساحة عملي */
-                --survey-color: #EA580C;
-                --survey-bg: #FFF7ED;
-                --survey-border: rgba(234, 88, 12, 0.35);
-
-                /* المسار الثاني: المساحة التصويرية */
-                --photo-color: #4F46E5;
-                --photo-bg: rgba(238, 242, 255, 0.95);
-                --photo-border: rgba(79, 70, 229, 0.35);
-
-                /* المسار الثالث: علوم الأرض */
-                --earth-color: #059669;
-                --earth-bg: rgba(236, 253, 245, 0.95);
-                --earth-border: rgba(5, 150, 105, 0.35);
-
-                /* 🌈 متغيرات تفاعل الشريط السفلي والأيقونات */
-                --nav-theme-color: #EA580C;
-                --nav-glow-color: rgba(234, 88, 12, 0.3);
-            }
-
-            html.dark-mode {
-                --survey-bg: rgba(251, 146, 60, 0.1);
-                --survey-color: #FB923C;
-                --survey-border: rgba(251, 146, 60, 0.45);
-
-                --photo-bg: rgba(129, 140, 248, 0.1);
-                --photo-color: #818CF8;
-                --photo-border: rgba(129, 140, 248, 0.45);
-
-                --earth-bg: rgba(52, 211, 153, 0.1);
-                --earth-color: #34D399;
-                --earth-border: rgba(52, 211, 153, 0.45);
-
-                --nav-theme-color: #FB923C;
-                --nav-glow-color: rgba(251, 146, 60, 0.35);
-            }
-
-            html:not(.dark-mode) {
-                --bg-main: #F1F5F9;
-                --card-bg: rgba(255, 255, 255, 0.85);
-                --card-border: rgba(203, 213, 225, 0.8);
+                --bg-main: #F8FAFC;
+                --card-bg: #FFFFFF;
+                --card-border: #E2E8F0;
                 --text-primary: #0F172A;
-                --text-secondary: #475569;
-                --header-bg: rgba(255, 255, 255, 0.90);
-                --header-border: rgba(30, 144, 255, 0.2);
+                --text-secondary: #64748B;
+                
+                --neutral-dark: #334155;
+                --neutral-light: #64748B;
+                
+                --header-bg: #FFFFFF;
+                --header-border: rgba(100, 116, 139, 0.2);
+                --header-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+                --shadow-main: 0 10px 25px rgba(0, 0, 0, 0.03);
+                
+                /* 📐 متغيرات قسم المساحة (اللون البرتقالي/الهندسي المميز) */
+                --su-primary: #B45309;
+                --su-accent: #D97706;
+                --su-light-bg: rgba(217, 119, 6, 0.04);
+                --su-header-bg: linear-gradient(135deg, rgba(217, 119, 6, 0.12) 0%, rgba(245, 158, 11, 0.04) 100%);
+                --su-border: rgba(217, 119, 6, 0.35);
 
-                --nav-theme-color: #EA580C;
-                --nav-glow-color: rgba(234, 88, 12, 0.25);
+                --nav-theme-color: #D97706;
+                --nav-glow-color: rgba(217, 119, 6, 0.25);
+            }
+
+            html.dark-mode, body.dark-mode {
+                --bg-main: #07090E;
+                --card-bg: #0D111A;
+                --card-border: rgba(255, 255, 255, 0.08);
+                --text-primary: #F9FAFB;
+                --text-secondary: #9CA3AF;
+                
+                --neutral-dark: #1E293B;
+                --neutral-light: #475569;
+                
+                --header-bg: #0D111A;
+                --header-border: rgba(255, 255, 255, 0.1);
+                --header-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+                --shadow-main: 0 10px 25px rgba(0, 0, 0, 0.5);
+
+                --su-primary: #F59E0B;
+                --su-accent: #D97706;
+                --su-light-bg: rgba(245, 158, 11, 0.06);
+                --su-header-bg: linear-gradient(135deg, rgba(245, 158, 11, 0.12) 0%, rgba(217, 119, 6, 0.05) 100%);
+                --su-border: rgba(245, 158, 11, 0.35);
+
+                --nav-theme-color: #F59E0B;
+                --nav-glow-color: rgba(245, 158, 11, 0.3);
             }
 
             body {
@@ -86,773 +71,437 @@
                 color: var(--text-primary);
                 font-family: 'Cairo', system-ui, -apple-system, sans-serif;
                 margin: 0;
-                padding: 16px 14px 95px 14px;
+                padding: 16px 14px 90px 14px;
                 min-height: 100vh;
                 box-sizing: border-box;
-                transition: background-color 0.4s ease, color 0.4s ease;
             }
 
             .container { max-width: 680px; margin: auto; }
 
-            .top-progress-bar { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: transparent; z-index: 9999; }
-            .top-progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--survey-color), var(--accent)); }
+            /* مؤشر التقدم العلوي */
+            .top-progress-bar {
+                position: fixed; top: 0; left: 0; right: 0; height: 3px; background: transparent; z-index: 9999;
+            }
+            .top-progress-fill {
+                height: 100%; width: 0%; background: var(--neutral-dark);
+            }
 
-            /* 🌟 الهيدر العلوي */
+            /* الهيدر الهندسي الثابت */
             .nav-bar {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                margin-bottom: 22px;
-                background: var(--header-bg);
-                backdrop-filter: blur(15px);
-                -webkit-backdrop-filter: blur(15px);
-                border: 1px solid var(--card-border);
-                padding: 8px 14px;
-                border-radius: 18px;
-                box-shadow: var(--header-shadow);
-            }
-            .nav-right-group { display: flex; align-items: center; }
-            .nav-left-group { display: flex; align-items: center; gap: 6px; }
-            
-            .nav-titles-box { 
-                display: flex; 
-                flex-direction: column; 
-                align-items: center; 
-                text-align: center;
-                gap: 1px; 
-                flex: 1;
-                padding: 0 8px;
-            }
-            .nav-main-title { font-size: 13.5px; font-weight: 950; color: var(--text-primary); margin: 0; line-height: 1.2; }
-            .nav-sub-title { font-size: 9.5px; font-weight: 800; color: var(--survey-color); margin: 0; line-height: 1.2; }
-
-            .home-icon-btn, .nav-icon-btn {
-                background: var(--survey-bg); 
-                border: 1.5px solid var(--survey-border);
-                width: 33px; 
-                height: 33px; 
-                border-radius: 12px; 
-                display: flex; 
-                align-items: center; 
-                justify-content: center;
-                color: var(--text-primary); 
-                font-size: 13.5px; 
-                text-decoration: none; 
-                cursor: pointer; 
-                transition: 0.3s;
-                box-sizing: border-box;
-            }
-            .home-icon-btn { color: var(--survey-color); }
-            .home-icon-btn:hover, .nav-icon-btn:hover { transform: scale(1.08); border-color: var(--survey-color); }
-
-            /* نافذة البحث والقائمة الجانبية */
-            .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(3, 7, 18, 0.85); backdrop-filter: blur(16px); display: none; align-items: center; justify-content: center; z-index: 10000; padding: 16px; box-sizing: border-box; }
-            .modal-overlay.active { display: flex; }
-            .search-modal-card { background: var(--card-bg); backdrop-filter: blur(20px); border: 2px solid var(--survey-border); border-radius: 30px; padding: 24px; width: 100%; max-width: 500px; box-shadow: 0 25px 60px rgba(0,0,0,0.8); display: flex; flex-direction: column; gap: 16px; }
-            .modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--card-border); padding-bottom: 12px; }
-            .modal-title-box { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 950; color: var(--text-primary); }
-            .close-modal-btn { background: var(--survey-bg); border: 1.5px solid var(--survey-border); width: 36px; height: 36px; border-radius: 12px; color: var(--text-primary); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-            .search-input-wrapper { background: var(--bg-main); border: 2px solid var(--survey-color); border-radius: 18px; padding: 12px 16px; display: flex; align-items: center; }
-            .search-input-field { width: 100%; background: transparent; border: none; outline: none; color: var(--text-primary); font-family: 'Cairo', sans-serif; font-size: 14px; font-weight: 800; }
-            .search-results-list { display: flex; flex-direction: column; gap: 10px; max-height: 320px; overflow-y: auto; }
-            .search-result-card { background: var(--bg-main); border: 1.5px solid var(--card-border); padding: 14px 16px; border-radius: 20px; text-decoration: none; color: var(--text-primary); display: flex; align-items: center; justify-content: space-between; transition: 0.3s; }
-            
-            .side-menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(3, 7, 18, 0.85); backdrop-filter: blur(16px); display: none; justify-content: flex-start; z-index: 10001; }
-            .side-menu-overlay.active { display: flex; }
-            .side-menu-drawer { background: var(--card-bg); backdrop-filter: blur(20px); border-left: 2px solid var(--survey-border); width: 88%; max-width: 330px; height: 100%; box-shadow: -20px 0 50px rgba(0,0,0,0.8); display: flex; flex-direction: column; padding: 24px; box-sizing: border-box; overflow-y: auto; }
-            .drawer-top-box { background: var(--survey-bg); border: 1.5px solid var(--survey-border); border-radius: 20px; padding: 16px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
-            .drawer-brand-title { font-size: 14.5px; font-weight: 950; color: var(--survey-color); margin: 0; }
-            .drawer-brand-sub { font-size: 10.5px; font-weight: 800; color: var(--text-secondary); margin: 0; }
-            .drawer-theme-switch-box { background: var(--bg-main); border: 1.5px solid var(--card-border); border-radius: 18px; padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
-            .drawer-theme-label { font-size: 12px; font-weight: 900; color: var(--text-primary); display: flex; align-items: center; gap: 8px; }
-            .switch-toggle { position: relative; display: inline-block; width: 48px; height: 26px; }
-            .switch-toggle input { opacity: 0; width: 0; height: 0; }
-            .slider-round { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #475569; transition: .3s; border-radius: 34px; }
-            .slider-round:before { position: absolute; content: ""; height: 20px; width: 20px; left: 3px; bottom: 3px; background-color: white; transition: .3s; border-radius: 50%; }
-            input:checked + .slider-round { background-color: var(--survey-color); }
-            input:checked + .slider-round:before { transform: translateX(22px); }
-            .drawer-links-title { font-size: 11px; font-weight: 900; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; }
-            .drawer-links-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: auto; }
-            .drawer-link-item { display: flex; align-items: center; justify-content: space-between; background: var(--bg-main); border: 1.5px solid var(--card-border); padding: 13px 16px; border-radius: 16px; color: var(--text-primary); text-decoration: none; font-size: 13px; font-weight: 900; transition: 0.3s; }
-            .drawer-link-item.active { border-color: var(--survey-color); background: var(--survey-bg); color: var(--survey-color); }
-            .drawer-footer-text { margin-top: 20px; text-align: center; font-size: 10.5px; font-weight: 800; color: var(--text-secondary); border-top: 1px solid var(--card-border); padding-top: 14px; }
-
-            /* =========================================================
-               🔥 كارت الترحيب الهندسي الشامل والمحدث (Welcome Hero Card)
-               ========================================================= */
-            .hero-welcome-card {
-                background: var(--card-bg);
-                backdrop-filter: blur(25px);
-                -webkit-backdrop-filter: blur(25px);
-                border: 2px solid var(--survey-border);
-                border-radius: 28px;
-                padding: 24px 20px;
                 margin-bottom: 24px;
-                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+                background: var(--header-bg);
+                border: 1.5px solid var(--header-border);
+                padding: 12px 16px;
+                border-radius: 24px;
+                box-shadow: var(--header-shadow);
+                position: relative;
+                overflow: hidden;
+            }
+
+            .graduation-brand-icon {
+                width: 40px;
+                height: 40px;
+                background: rgba(217, 119, 6, 0.1);
+                border: 1.5px solid rgba(217, 119, 6, 0.35);
+                border-radius: 13px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 20px;
+                flex-shrink: 0;
+                text-decoration: none;
+            }
+
+            .brand-minimalist-box {
                 display: flex;
                 flex-direction: column;
                 align-items: center;
+                justify-content: center;
                 text-align: center;
-                position: relative;
-                overflow: hidden;
+                flex-grow: 1;
+                margin: 0 10px;
+                min-width: 0;
             }
-            .hero-welcome-card::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                height: 4px;
-                background: linear-gradient(90deg, var(--survey-color), var(--primary), var(--accent));
-            }
-            .hero-badge {
-                background: var(--survey-bg);
-                border: 1.5px solid var(--survey-border);
-                color: var(--survey-color);
-                font-size: 11.5px;
+
+            .brand-main-title {
+                font-size: 14px;
                 font-weight: 900;
-                padding: 6px 16px;
-                border-radius: 20px;
-                display: inline-flex;
-                align-items: center;
-                gap: 7px;
-                margin-bottom: 16px;
-                box-shadow: 0 4px 12px rgba(234, 88, 12, 0.12);
-            }
-            .hero-title {
-                font-size: 22px;
-                font-weight: 950;
                 color: var(--text-primary);
-                line-height: 1.35;
-                margin: 0 0 12px 0;
-                letter-spacing: -0.2px;
-            }
-            .hero-title span {
-                color: var(--survey-color);
-                text-shadow: 0 0 20px rgba(234, 88, 12, 0.2);
-            }
-            .hero-description {
-                font-size: 12.5px;
-                font-weight: 700;
-                color: var(--text-secondary);
-                line-height: 1.8;
-                margin: 0 0 20px 0;
-                max-width: 560px;
-                text-align: center;
-                padding: 0 4px;
-            }
-            .hero-image-container {
-                width: 100%;
-                height: 210px;
-                border-radius: 20px;
-                overflow: hidden;
-                position: relative;
-                border: 1.5px solid var(--survey-border);
-                box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            }
-            .hero-image-container img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                transition: transform 0.4s ease;
-            }
-            .hero-image-container:hover img {
-                transform: scale(1.02);
-            }
-            .hero-image-overlay-badge {
-                position: absolute;
-                bottom: 12px;
-                left: 50%;
-                transform: translateX(-50%);
-                background: rgba(3, 7, 18, 0.86);
-                backdrop-filter: blur(10px);
-                -webkit-backdrop-filter: blur(10px);
-                border: 1.5px solid var(--survey-border);
-                color: var(--survey-color);
-                padding: 7px 18px;
-                border-radius: 16px;
-                font-size: 11.5px;
-                font-weight: 900;
+                line-height: 1.2;
                 white-space: nowrap;
+            }
+
+            .brand-sub-inline {
                 display: flex;
                 align-items: center;
-                gap: 7px;
-                box-shadow: 0 5px 15px rgba(0,0,0,0.6);
+                gap: 6px;
+                margin-top: 2px;
             }
 
-            /* =========================================================
-               🔥 الكروت والهندسة البصرية الموحدة للأقسام مع توهج الأيقونات
-               ========================================================= */
-            .practical-course-card, .survey-style-card {
-                background: var(--card-bg);
-                backdrop-filter: blur(20px);
-                -webkit-backdrop-filter: blur(20px);
-                border: 2px solid var(--sec-border);
+            .brand-subtitle-text {
+                font-size: 10px;
+                font-weight: 800;
+                color: #D97706;
+                letter-spacing: 0.3px;
+                text-transform: uppercase;
+                white-space: nowrap;
+            }
+
+            html.dark-mode .brand-subtitle-text {
+                color: #F59E0B;
+            }
+
+            .nav-left-side {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                z-index: 5;
+                flex-shrink: 0;
+            }
+
+            .glow-theme-btn {
+                background: rgba(217, 119, 6, 0.1);
+                border: 1.5px solid rgba(217, 119, 6, 0.3);
+                width: 34px; height: 34px; border-radius: 11px;
+                display: flex; align-items: center; justify-content: center;
+                font-size: 15px; cursor: pointer;
+            }
+
+            .hamburger-modern-btn {
+                background: rgba(128, 128, 128, 0.08); border: 1px solid var(--card-border);
+                width: 34px; height: 34px; border-radius: 11px;
+                display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 3px; cursor: pointer;
+            }
+            .hamburger-modern-btn span { display: block; width: 13px; height: 2px; background-color: var(--text-primary); border-radius: 2px; }
+
+            /* قسم محتوى صفحة المساحة */
+            .section-header-card {
+                background: var(--su-header-bg);
+                border: 2px solid var(--su-border);
                 border-radius: 28px;
-                padding: 22px 18px;
-                margin-bottom: 24px;
-                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-                position: relative;
-                overflow: hidden;
-                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            }
-            .practical-course-card::before, .survey-style-card::before {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                right: 0;
-                height: 4px;
-                background: var(--sec-color, var(--survey-color));
+                padding: 24px;
+                margin-bottom: 20px;
+                box-shadow: var(--shadow-main);
+                text-align: center;
             }
 
-            .card-survey { --sec-color: var(--survey-color); --sec-bg: var(--survey-bg); --sec-border: var(--survey-border); --glow-shadow: rgba(234, 88, 12, 0.35); }
-            .card-photo { --sec-color: var(--photo-color); --sec-bg: var(--photo-bg); --sec-border: var(--photo-border); --glow-shadow: rgba(79, 70, 229, 0.35); }
-            .card-earth { --sec-color: var(--earth-color); --sec-bg: var(--earth-bg); --sec-border: var(--earth-border); --glow-shadow: rgba(5, 150, 105, 0.35); }
+            .section-header-card h1 {
+                margin: 0 0 10px 0;
+                font-size: 22px;
+                font-weight: 900;
+                color: var(--su-primary);
+            }
 
-            .card-header-banner, .survey-inner-header {
-                background: var(--sec-bg);
-                backdrop-filter: blur(12px);
-                border: 1.5px solid var(--sec-border);
+            .section-header-card p {
+                margin: 0;
+                font-size: 13px;
+                color: var(--text-secondary);
+                line-height: 1.7;
+                font-weight: 700;
+            }
+
+            /* قائمة المجلدات والمسارات الفرعية */
+            .lessons-list {
+                display: flex;
+                flex-direction: column;
+                gap: 14px;
+                margin-bottom: 30px;
+            }
+
+            .lesson-card {
+                background: var(--card-bg);
+                border: 1.5px solid var(--card-border);
                 border-radius: 20px;
-                padding: 14px 18px;
+                padding: 18px 20px;
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-                margin-bottom: 16px;
+                text-decoration: none;
+                color: var(--text-primary);
+                box-shadow: var(--shadow-main);
+                transition: transform 0.25s ease, border-color 0.25s ease;
             }
 
-            .banner-text-side, .survey-header-texts {
+            .lesson-card:hover {
+                transform: translateY(-2px);
+                border-color: var(--su-primary);
+            }
+
+            .lesson-info {
                 display: flex;
-                flex-direction: column;
-                gap: 2px;
-            }
-            .banner-sub-tag, .survey-path-num {
-                font-size: 11px;
-                font-weight: 900;
-                color: var(--sec-color);
-                letter-spacing: 0.5px;
+                align-items: center;
+                gap: 14px;
             }
 
-            .banner-main-title, .survey-path-title {
-                font-size: 20px;
-                font-weight: 950;
-                color: var(--sec-color);
+            .lesson-icon {
+                width: 42px;
+                height: 42px;
+                background: var(--su-light-bg);
+                border: 1.5px solid var(--su-border);
+                border-radius: 14px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 18px;
+                flex-shrink: 0;
+            }
+
+            .lesson-title {
+                font-size: 14px;
+                font-weight: 900;
+                color: var(--text-primary);
+                margin: 0 0 4px 0;
+            }
+
+            .lesson-desc {
+                font-size: 11px;
+                color: var(--text-secondary);
+                font-weight: 700;
                 margin: 0;
             }
 
-            .banner-icon-box, .survey-header-icon-box {
-                width: 50px;
-                height: 50px;
-                background: var(--card-bg);
-                backdrop-filter: blur(10px);
-                border: 1.5px solid var(--sec-border);
-                border-radius: 16px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 24px;
-                box-shadow: 0 0 15px var(--glow-shadow), inset 0 0 10px var(--glow-shadow);
-                transition: transform 0.3s ease, box-shadow 0.3s ease;
-            }
-            .card-survey:hover .banner-icon-box, 
-            .card-photo:hover .survey-header-icon-box, 
-            .card-earth:hover .survey-header-icon-box {
-                transform: scale(1.06);
-                box-shadow: 0 0 22px var(--glow-shadow), inset 0 0 14px var(--glow-shadow);
-            }
-
-            .card-description-text, .survey-desc {
-                font-size: 12.5px;
-                font-weight: 700;
-                color: var(--text-secondary);
-                line-height: 1.8;
-                text-align: justify;
-                margin: 0 0 16px 0;
-                padding: 0 4px;
-            }
-
-            .chips-grid-container, .survey-sub-grid {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 12px;
-                margin-bottom: 16px;
-            }
-            .chip-item-btn, .survey-sub-chip {
-                background: var(--sec-bg);
-                backdrop-filter: blur(12px);
-                -webkit-backdrop-filter: blur(12px);
-                border: 1.5px solid var(--sec-border);
-                border-radius: 16px;
-                padding: 12px 14px;
-                height: 48px;
-                box-sizing: border-box;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                color: var(--sec-color);
-                font-size: 11.5px;
+            .lesson-arrow {
+                font-size: 16px;
+                color: var(--su-primary);
                 font-weight: 900;
-                cursor: pointer;
-                user-select: none;
-                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             }
 
-            .chip-item-btn:hover, .survey-sub-chip:hover {
-                filter: brightness(1.1);
-                transform: translateY(-2px);
-                box-shadow: 0 0 12px var(--glow-shadow);
+            /* القائمة الجانبية */
+            .menu-overlay {
+                position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+                background: rgba(0, 0, 0, 0.7);
+                z-index: 10000; opacity: 0; pointer-events: none;
+                transition: opacity 0.3s ease;
             }
-            .chip-item-btn:active, .survey-sub-chip:active {
-                transform: scale(0.97);
+            .menu-overlay.active { opacity: 1; pointer-events: auto; }
+            .side-drawer {
+                position: fixed; top: 0; bottom: 0; right: -320px; width: 290px;
+                background: var(--card-bg); border-left: 1px solid var(--card-border);
+                z-index: 10001; padding: 22px; box-sizing: border-box; display: flex;
+                flex-direction: column; justify-content: space-between;
+                box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5);
+                overflow-y: auto;
+                transition: right 0.3s ease;
             }
-            .chip-icon, .survey-chip-icon {
-                font-size: 15px;
-                flex-shrink: 0;
-                filter: drop-shadow(0 0 6px var(--glow-shadow));
-                transition: filter 0.3s ease;
-            }
-            .chip-item-btn:hover .chip-icon, .survey-sub-chip:hover .survey-chip-icon {
-                filter: drop-shadow(0 0 10px var(--sec-color));
-            }
-            .chip-item-btn span:first-child, .survey-sub-chip span:first-child {
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
+            .side-drawer.active { right: 0; }
+            .drawer-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--card-border); }
+            .drawer-title { font-size: 15px; font-weight: 900; color: var(--text-primary); }
+            .close-btn { background: rgba(128, 128, 128, 0.1); border: none; color: var(--text-primary); width: 30px; height: 30px; border-radius: 10px; font-weight: 800; cursor: pointer; }
+            .drawer-profile { background: rgba(100, 116, 139, 0.08); border: 1px solid rgba(100, 116, 139, 0.2); padding: 12px; border-radius: 14px; margin-bottom: 18px; display: flex; align-items: center; gap: 10px; }
+            .profile-avatar { width: 36px; height: 36px; background: #D97706; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #FFF; font-weight: 900; font-size: 15px; }
+            .profile-info h4 { margin: 0 0 2px 0; font-size: 13px; font-weight: 900; color: var(--text-primary); }
+            .profile-info p { margin: 0; font-size: 10.5px; color: var(--text-secondary); font-weight: 700; }
+            .theme-toggle-row { display: flex; align-items: center; justify-content: space-between; background: rgba(128, 128, 128, 0.05); border: 1px solid var(--card-border); padding: 10px 14px; border-radius: 14px; margin-bottom: 18px; }
+            .theme-toggle-label { font-size: 12.5px; font-weight: 800; color: var(--text-primary); display: flex; align-items: center; gap: 8px; }
+            .switch { position: relative; display: inline-block; width: 42px; height: 22px; }
+            .switch input { opacity: 0; width: 0; height: 0; }
+            .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #CBD5E1; border-radius: 34px; transition: 0.3s; }
+            .slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 3px; bottom: 3px; background-color: white; border-radius: 50%; transition: 0.3s; }
+            input:checked + .slider { background-color: #D97706; }
+            input:checked + .slider:before { transform: translateX(20px); }
+            .drawer-section-title { font-size: 10.5px; font-weight: 900; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.5px; }
+            .drawer-links { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
+            .drawer-link { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 12px; color: var(--text-primary); text-decoration: none; font-size: 12.5px; font-weight: 800; cursor: pointer; }
+            .drawer-link:hover { background: rgba(128, 128, 128, 0.08); }
 
-            .modern-cta-box {
-                background: var(--sec-bg);
-                backdrop-filter: blur(12px);
-                border: 1.5px solid var(--sec-border);
-                border-radius: 20px;
-                padding: 14px 16px;
-                display: flex;
-                flex-direction: column;
-                gap: 10px;
-            }
-            .modern-cta-label {
-                font-size: 11.5px;
-                font-weight: 900;
-                color: var(--text-secondary);
-                text-align: right;
-            }
-            .modern-cta-button {
-                background: linear-gradient(135deg, var(--sec-color) 0%, var(--primary-dark) 100%);
-                color: #FFFFFF;
-                text-decoration: none;
-                padding: 11px 18px;
-                border-radius: 14px;
-                font-size: 12.5px;
-                font-weight: 950;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            }
-            .modern-cta-button span.arrow-icon {
-                transition: transform 0.3s ease;
-            }
-            .modern-cta-button:hover {
-                transform: translateY(-2px);
-                filter: brightness(1.12);
-                box-shadow: 0 6px 20px var(--glow-shadow);
-            }
-            .modern-cta-button:hover span.arrow-icon {
-                transform: translateX(-4px);
-            }
-
-            .info-toast {
-                position: fixed;
-                bottom: 85px;
-                left: 50%;
-                transform: translateX(-50%) translateY(40px);
-                background: var(--card-bg);
-                backdrop-filter: blur(16px);
-                border: 2px solid var(--survey-color);
-                color: var(--text-primary);
-                padding: 12px 22px;
-                border-radius: 16px;
-                font-size: 12.5px;
-                font-weight: 900;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-                opacity: 0;
-                visibility: hidden;
-                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-                z-index: 20000;
-                text-align: center;
-                max-width: 90%;
-            }
-            .info-toast.show {
-                opacity: 1;
-                visibility: visible;
-                transform: translateX(-50%) translateY(0);
-            }
-
+            /* 🌟 الشريط السفلي الملون */
             .bottom-nav {
                 position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); 
                 width: calc(100% - 32px); max-width: 460px;
-                background: linear-gradient(135deg, var(--nav-glow-color) 0%, rgba(3, 7, 18, 0.85) 100%);
+                background: linear-gradient(135deg, var(--nav-glow-color) 0%, rgba(13, 17, 26, 0.85) 100%);
                 backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
                 display: flex; justify-content: space-around; align-items: center;
-                padding: 6px 10px; 
-                border: none; 
-                border-radius: 24px; 
+                padding: 6px 10px; border-radius: 24px; 
                 box-shadow: 0 12px 35px var(--nav-glow-color), inset 0 1px 1px rgba(255, 255, 255, 0.2); 
                 z-index: 999; box-sizing: border-box;
-                transition: all 0.4s ease;
             }
-
             html:not(.dark-mode) .bottom-nav {
                 background: linear-gradient(135deg, var(--nav-glow-color) 0%, rgba(255, 255, 255, 0.92) 100%);
-                box-shadow: 0 12px 35px var(--nav-glow-color), inset 0 1px 1px rgba(255, 255, 255, 0.9);
             }
-
             .bottom-nav a { 
-                color: var(--text-secondary); 
-                text-decoration: none; 
-                font-size: 10px; 
-                text-align: center; 
-                font-weight: 800; 
-                display: flex; 
-                flex-direction: column; 
-                align-items: center; 
-                gap: 2px; 
-                padding: 6px 12px; 
-                border-radius: 16px; 
-                flex: 1; 
-                border: 1px solid rgba(128, 128, 128, 0.18);
-                background: rgba(128, 128, 128, 0.05);
-                transition: all 0.3s ease;
+                color: var(--text-secondary); text-decoration: none; font-size: 10px; text-align: center; font-weight: 800; 
+                display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 12px; border-radius: 16px; flex: 1; 
+                border: 1px solid rgba(128, 128, 128, 0.18); background: rgba(128, 128, 128, 0.05);
             }
-
-            .bottom-nav a span { 
-                font-size: 16px; 
-                line-height: 1; 
-            }
-
-            .bottom-nav a:hover {
-                color: var(--nav-theme-color);
-                border-color: var(--nav-theme-color);
-                background: rgba(128, 128, 128, 0.1);
-            }
-
-            .bottom-nav a.active { 
-                color: #FFFFFF; 
-                background: var(--nav-theme-color); 
-                border-color: var(--nav-theme-color);
-                box-shadow: 0 4px 15px var(--nav-glow-color);
-            }
+            .bottom-nav a span.nav-icon { font-size: 16px; line-height: 1; }
+            .bottom-nav a.active { color: #FFFFFF; background: var(--nav-theme-color); border-color: var(--nav-theme-color); }
         </style>
     </head>
     <body>
 
         <div class="top-progress-bar"><div class="top-progress-fill" id="progressFill"></div></div>
+        <div class="menu-overlay" id="menuOverlay"></div>
 
-        <div class="info-toast" id="infoToast">هذا العنصر وصفي وتوضيحي. للدخول للقسم بالكامل، اضغط على زر الاستعراض بالأسفل 🚀</div>
+        <!-- القائمة الجانبية -->
+        <div class="side-drawer" id="sideDrawer">
+            <div>
+                <div class="drawer-header">
+                    <div class="drawer-title">أكاديمية العلوم التطبيقية 🎓</div>
+                    <button class="close-btn" id="closeDrawerBtn">✕</button>
+                </div>
 
-        <!-- نافذة البحث -->
-        <div class="modal-overlay" id="searchModal">
-            <div class="search-modal-card">
-                <div class="modal-header">
-                    <div class="modal-title-box"><span>🔍</span><span>البحث في قسم المساحة</span></div>
-                    <button class="close-modal-btn" id="closeSearchBtn">✕</button>
-                </div>
-                <div class="search-input-wrapper">
-                    <input type="text" class="search-input-field" placeholder="ابحث عن: Total Station، الترافرس...">
-                </div>
-                <div class="search-results-list">
-                    <a href="My work area/practical-surveying.html" class="search-result-card">
-                        <div style="display:flex; align-items:center; gap:12px;">
-                            <div style="width:38px; height:38px; background:var(--survey-bg); border: 1px solid var(--survey-border); border-radius:12px; display:flex; align-items:center; justify-content:center;">📐</div>
-                            <div>
-                                <div style="font-size:13.5px; font-weight:950;">مساحة عملي</div>
-                                <div style="font-size:11px; color:var(--text-secondary);">Total Station، حساب الإحداثيات</div>
-                            </div>
-                        </div>
-                        <span>➔</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <!-- القائمة الجانبية (محدثة بالمسارات السليمة للجذر) -->
-        <div class="side-menu-overlay" id="sideMenu">
-            <div class="side-menu-drawer">
-                <div class="drawer-top-box">
-                    <div>
-                        <h3 class="drawer-brand-title">أكاديمية العلوم التطبيقية</h3>
-                        <p class="drawer-brand-sub">قسم المساحة وعلوم الأرض</p>
+                <div class="drawer-profile">
+                    <div class="profile-avatar">📐</div>
+                    <div class="profile-info">
+                        <h4>قسم المساحة</h4>
+                        <p>الهندسة الميدانية وععلوم الأرض</p>
                     </div>
-                    <div>🎓</div>
                 </div>
 
-                <div class="drawer-theme-switch-box">
-                    <span class="drawer-theme-label"><span>🌙</span> الوضع الهادئ</span>
-                    <label class="switch-toggle">
-                        <input type="checkbox" id="themeSwitchCheckbox" checked>
-                        <span class="slider-round"></span>
+                <div class="theme-toggle-row">
+                    <div class="theme-toggle-label">
+                        <span id="themeModeIcon">🌙</span>
+                        <span id="themeModeText">الوضع الليلي</span>
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="themeSwitch">
+                        <span class="slider"></span>
                     </label>
                 </div>
 
-                <div class="drawer-links-title">التنقل السريع</div>
-                <div class="drawer-links-list">
-                    <a href="../index.html" class="drawer-link-item"><span>🏠 الصفحة الرئيسية</span><span>➔</span></a>
-                    <a href="surveying.html" class="drawer-link-item active"><span>📐 قسم المساحة</span><span>➔</span></a>
-                    <a href="../english/english.html" class="drawer-link-item"><span>🇬🇧 قسم اللغة الإنجليزية</span><span>➔</span></a>
-                    <a href="../programming/programming.html" class="drawer-link-item"><span>💻 قسم البرمجة و AI</span><span>➔</span></a>
+                <div class="drawer-section-title">التنقل السريع</div>
+                <div class="drawer-links">
+                    <a href="../index.html" class="drawer-link"><span>🏠</span> الصفحة الرئيسية</a>
+                    <a href="../english/english.html" class="drawer-link"><span>🇬🇧</span> قسم اللغة الإنجليزية</a>
+                    <a href="surveying.html" class="drawer-link"><span>📐</span> قسم المساحة</a>
+                    <a href="../programming/programming.html" class="drawer-link"><span>💻</span> قسم البرمجة و AI</a>
                 </div>
-
-                <div class="drawer-footer-text">Clean Surveying Edition v6.4</div>
+            </div>
+            
+            <div style="font-size: 10.5px; color: var(--text-secondary); text-align: center; font-weight: 700; padding-top: 12px; border-top: 1px solid var(--card-border);">
+                Surveying Department • ASA v115.0
             </div>
         </div>
 
         <div class="container">
-            <!-- 🌟 الهيدر العلوي -->
+            <!-- الهيدر الهندسي -->
             <div class="nav-bar">
-                <div class="nav-right-group">
-                    <a href="../index.html" class="home-icon-btn" title="الرئيسية">🏠</a>
-                </div>
-                <div class="nav-titles-box">
-                    <h1 class="nav-main-title">قسم المساحة</h1>
-                    <p class="nav-sub-title">الهندسة الميدانية والعلوم</p>
-                </div>
-                <div class="nav-left-group">
-                    <button class="nav-icon-btn" id="themeToggleBtn" title="تغيير الثيم">🌙</button>
-                    <button class="nav-icon-btn" id="searchBtn" title="بحث">🔍</button>
-                    <button class="nav-icon-btn" id="menuBtn" title="القائمة">☰</button>
-                </div>
-            </div>
-
-            <!-- =========================================================
-               🔥 كارت الترحيب الهندسي الشامل (Welcome Hero Card)
-               ========================================================= -->
-            <div class="hero-welcome-card">
-                <div class="hero-badge">
-                    <span>📐</span>
-                    <span>الهندسة المساحية والعلوم الأرضية</span>
-                </div>
-                
-                <h2 class="hero-title">
-                    بوابتك لاحتراف المساحة العملية،<br><span>التصوير الجوي، وعلوم الأرض.</span>
-                </h2>
-                
-                <p class="hero-description">
-                    دليلك الشامل لإتقان أعمال الرفع الميداني وتسيير الأجهزة المساحية (Total Station & Level)، استخلاص الإحداثيات والخرائط عبر التصوير الجوي والاستشعار عن بعد، بالإضافة إلى استكشاف طبقات القشرة الأرضية، الصخور، والمعادن بأسلوب هندسي دقيق.
-                </p>
-
-                <div class="hero-image-container">
-                    <img src="../images/surveyor.jpg" alt="مهندس مساحة وجهاز Total Station">
-                    <div class="hero-image-overlay-badge">
-                        <span>🔭</span>
-                        <span>الهندسة المساحية الميدانية ورفع المواقع</span>
+                <a href="../index.html" class="graduation-brand-icon" title="الرئيسية">📐</a>
+                <div class="brand-minimalist-box">
+                    <span class="brand-main-title">قسم المساحة</span>
+                    <div class="brand-sub-inline">
+                        <span class="brand-subtitle-text">الهندسة الميدانية والعلوم</span>
                     </div>
+                </div>
+                <div class="nav-left-side">
+                    <button class="glow-theme-btn" id="headerThemeToggleBtn" title="تغيير الوضع">
+                        <span id="headerThemeIcon">🌙</span>
+                    </button>
+                    <button class="hamburger-modern-btn" id="hamburgerBtn" aria-label="Open Menu">
+                        <span></span><span></span><span></span>
+                    </button>
                 </div>
             </div>
 
-            <!-- =========================================================
-               🔥 المسار الأول: مساحة عملي
-               ========================================================= -->
-            <div class="practical-course-card card-survey">
-                <div class="card-header-banner">
-                    <div class="banner-text-side">
-                        <span class="banner-sub-tag">المسار الأول ▪ التطبيق الحقلي</span>
-                        <h2 class="banner-main-title">مساحة عملي</h2>
-                    </div>
-                    <div class="banner-icon-box">📐</div>
-                </div>
-
-                <p class="card-description-text">
-                    دليلك العملي لأساليب الرفع الميداني، تشغيل وتسيير الأجهزة المساحية (Total Station & Level)، وحسابات الترافرس والإحداثيات بدقة عالية.
-                </p>
-
-                <div class="chips-grid-container">
-                    <div class="chip-item-btn info-chip" data-info="حساب المناسيب وتصحيح الأخطاء الرأسية بالدقة الحقلية المطلوبة.">
-                        <span>حساب المناسيب</span>
-                        <span class="chip-icon">📊</span>
-                    </div>
-                    <div class="chip-item-btn info-chip" data-info="إعداد وتسيير ورصد المحطة الشاملة (Total Station).">
-                        <span>Total Station</span>
-                        <span class="chip-icon">🔭</span>
-                    </div>
-                    <div class="chip-item-btn info-chip" data-info="القياسات الفضائية وتحديد الإحداثيات باستخدام شبكات الـ GPS.">
-                        <span>قياسات الـ GPS</span>
-                        <span class="chip-icon">🛰️</span>
-                    </div>
-                    <div class="chip-item-btn info-chip" data-info="أعمال الترافرس المفتوح والمغلق وحساب المضلعات بدقة هندسية.">
-                        <span>أعمال الترافرس</span>
-                        <span class="chip-icon">📐</span>
-                    </div>
-                </div>
-
-                <div class="modern-cta-box">
-                    <span class="modern-cta-label">دليلك الميداني لتشغيل الأجهزة والحسابات</span>
-                    <a href="My work area/practical-surveying.html" class="modern-cta-button">
-                        <span>ابدأ العمل</span>
-                        <span class="arrow-icon">←</span>
-                    </a>
-                </div>
+            <!-- هيدر القسم -->
+            <div class="section-header-card">
+                <h1>دليلك الهندسي الشامل</h1>
+                <p>اختر المسار التخصصي لاستعراض الدروس والمحتوى العملي:</p>
             </div>
 
-            <!-- =========================================================
-               🔥 المسار الثاني: المساحة التصويرية
-               ========================================================= -->
-            <div class="survey-style-card card-photo">
-                <div class="survey-inner-header">
-                    <div class="banner-text-side">
-                        <span class="survey-path-num">المسار الثاني • التصوير الجوي</span>
-                        <h2 class="survey-path-title">المساحة التصويرية</h2>
+            <!-- قائمة مسارات قسم المساحة -->
+            <div class="lessons-list">
+                <!-- المسار الأول: المساحة العملية -->
+                <a href="practical-surveying/practical-surveying.html" class="lesson-card">
+                    <div class="lesson-info">
+                        <div class="lesson-icon">🔭</div>
+                        <div>
+                            <h3 class="lesson-title">المساحة العملية (Practical Surveying)</h3>
+                            <p class="lesson-desc">أعمال الرفع، التوقيع، وتشغيل الأجهزة الميدانية</p>
+                        </div>
                     </div>
-                    <div class="survey-header-icon-box">🛰️</div>
-                </div>
+                    <div class="lesson-arrow">←</div>
+                </a>
 
-                <p class="survey-desc">
-                    دراسة علم الصور الجوية والفضائية، استخلاص الإحداثيات ثلاثية الأبعاد (3D)، وإنتاج الخرائط الرقمية وتصنيف الكاميرات.
-                </p>
+                <!-- المسار الثاني: المسح التصويري -->
+                <a href="photogrammetry/photogrammetry.html" class="lesson-card">
+                    <div class="lesson-info">
+                        <div class="lesson-icon">📸</div>
+                        <div>
+                            <h3 class="lesson-title">المسح التصويري (Photogrammetry)</h3>
+                            <p class="lesson-desc">الصور الجوية، الخرائط المجسمة، ونظم المعالجة</p>
+                        </div>
+                    </div>
+                    <div class="lesson-arrow">←</div>
+                </a>
 
-                <div class="survey-sub-grid">
-                    <div class="survey-sub-chip info-chip" data-info="تحليل الصور الجوية الملتقطة بالكاميرات المترية والمسح الجوي.">
-                        <span>الصور الجوية</span> <span class="survey-chip-icon">📷</span>
+                <!-- المسار الثالث: علوم الأرض -->
+                <a href="earth-science/earth-science.html" class="lesson-card">
+                    <div class="lesson-info">
+                        <div class="lesson-icon">🌍</div>
+                        <div>
+                            <h3 class="lesson-title">علوم الأرض (Earth Science)</h3>
+                            <p class="lesson-desc">الجيولوجيا، طبقات القشرة، والتحليل المكانى</p>
+                        </div>
                     </div>
-                    <div class="survey-sub-chip info-chip" data-info="دراسة المساقط الكارتوجرافية وخصائص العدسات الضوئية.">
-                        <span>المساقط والعدسات</span> <span class="survey-chip-icon">🗺️</span>
-                    </div>
-                    <div class="survey-sub-chip info-chip" data-info="حساب حقل الرؤية (FOV) وزوايا التغطية للكاميرات الفضائية.">
-                        <span>حاسبة FOV</span> <span class="survey-chip-icon">🧮</span>
-                    </div>
-                    <div class="survey-sub-chip info-chip" data-info="تطبيقات الاستشعار عن بعد وتصنيف المرئيات الفضائية الرقمية.">
-                        <span>الاستشعار عن بعد</span> <span class="survey-chip-icon">🛰️</span>
-                    </div>
-                </div>
-
-                <div class="modern-cta-box">
-                    <span class="modern-cta-label">بوابة الصور الجوية والفضائية و3D</span>
-                    <a href="Photographic Space/photogrammetry.html" class="modern-cta-button">
-                        <span>اكتشف الآن</span>
-                        <span class="arrow-icon">←</span>
-                    </a>
-                </div>
-            </div>
-
-            <!-- =========================================================
-               🔥 المسار الثالث: علوم الأرض والجيولوجيا
-               ========================================================= -->
-            <div class="survey-style-card card-earth">
-                <div class="survey-inner-header">
-                    <div class="banner-text-side">
-                        <span class="survey-path-num">المسار الثالث • طبقات وتضاريس القشرة</span>
-                        <h2 class="survey-path-title">علم الأرض والجيولوجيا</h2>
-                    </div>
-                    <div class="survey-header-icon-box">🌍</div>
-                </div>
-
-                <p class="survey-desc">
-                    استكشاف بنية الأرض، طبقات القشرة الأرضية، دراسة الصخور والمعادن، جداول التركيب الكيميائي، ومقياس موس للقساوة.
-                </p>
-
-                <div class="survey-sub-grid">
-                    <div class="survey-sub-chip info-chip" data-info="دراسة الغلاف الصخري، الجوي، المائي، والحيوي لكوكب الأرض.">
-                        <span>أغلفة الأرض</span> <span class="survey-chip-icon">🌌</span>
-                    </div>
-                    <div class="survey-sub-chip info-chip" data-info="الخصائص الفيزيائية والكيميائية لتشكيلات المعادن والصخور.">
-                        <span>تركيب المعادن</span> <span class="survey-chip-icon">💎</span>
-                    </div>
-                    <div class="survey-sub-chip info-chip" data-info="مقياس موس لتحديد درجات القساوة وصلادة المعادن المختلفة.">
-                        <span>مقياس موس للقساوة</span> <span class="survey-chip-icon">🔍</span>
-                    </div>
-                    <div class="survey-sub-chip info-chip" data-info="تحليل مستويات الانفصام وخصائص الكسر في البلورات الصخرية.">
-                        <span>الانفصام والكسر</span> <span class="survey-chip-icon">🧪</span>
-                    </div>
-                </div>
-
-                <div class="modern-cta-box">
-                    <span class="modern-cta-label">موسوعة الصخور، المعادن، وطبقات القشرة</span>
-                    <a href="Earth Science/earth-science.html" class="modern-cta-button">
-                        <span>افتح الموسوعة</span>
-                        <span class="arrow-icon">←</span>
-                    </a>
-                </div>
+                    <div class="lesson-arrow">←</div>
+                </a>
             </div>
         </div>
 
-        <!-- شريط التنقل السفلي -->
+        <!-- الشريط السفلي للتنقل -->
         <div class="bottom-nav" id="bottomNav">
             <a href="../index.html"><span class="nav-icon">🏠</span>الرئيسية</a>
-            <a href="surveying.html" class="active"><span class="nav-icon">📐</span>المساحة</a>
             <a href="../english/english.html"><span class="nav-icon">🇬🇧</span>الإنجليزي</a>
+            <a href="surveying.html" class="active"><span class="nav-icon">📐</span>المساحة</a>
             <a href="../programming/programming.html"><span class="nav-icon">💻</span>البرمجة</a>
         </div>
 
         <script>
-            let toastTimeout;
-            const toast = document.getElementById("infoToast");
-            let bottomNav = document.getElementById("bottomNav");
-            
-            document.querySelectorAll(".info-chip").forEach(chip => {
-                chip.addEventListener("click", () => {
-                    let infoText = chip.getAttribute("data-info");
-                    if (infoText) {
-                        toast.textContent = infoText;
-                        toast.classList.add("show");
-                        clearTimeout(toastTimeout);
-                        toastTimeout = setTimeout(() => {
-                            toast.classList.remove("show");
-                        }, 3000);
-                    }
-                });
-            });
+            document.addEventListener("DOMContentLoaded", function() {
+                let hamburgerBtn = document.getElementById("hamburgerBtn");
+                let closeDrawerBtn = document.getElementById("closeDrawerBtn");
+                let menuOverlay = document.getElementById("menuOverlay");
+                let sideDrawer = document.getElementById("sideDrawer");
+                let themeSwitch = document.getElementById("themeSwitch");
+                let icon = document.getElementById("themeModeIcon");
+                let text = document.getElementById("themeModeText");
+                let headerThemeToggleBtn = document.getElementById("headerThemeToggleBtn");
+                let headerThemeIcon = document.getElementById("headerThemeIcon");
 
-            let themeBtn = document.getElementById("themeToggleBtn");
-            let themeSwitchCheckbox = document.getElementById("themeSwitchCheckbox");
-
-            function applyTheme(isDark) {
-                if (isDark) {
-                    document.documentElement.classList.add("dark-mode");
-                    localStorage.setItem("em_theme", "dark");
-                    if (themeBtn) themeBtn.innerHTML = "☀️";
-                    if (themeSwitchCheckbox) themeSwitchCheckbox.checked = true;
-                } else {
-                    document.documentElement.classList.remove("dark-mode");
-                    localStorage.setItem("em_theme", "light");
-                    if (themeBtn) themeBtn.innerHTML = "🌙";
-                    if (themeSwitchCheckbox) themeSwitchCheckbox.checked = false;
+                if (hamburgerBtn) {
+                    hamburgerBtn.addEventListener("click", () => { sideDrawer.classList.add("active"); menuOverlay.classList.add("active"); });
                 }
-            }
+                if (closeDrawerBtn) {
+                    closeDrawerBtn.addEventListener("click", () => { sideDrawer.classList.remove("active"); menuOverlay.classList.remove("active"); });
+                }
+                if (menuOverlay) {
+                    menuOverlay.addEventListener("click", () => { sideDrawer.classList.remove("active"); menuOverlay.classList.remove("active"); });
+                }
 
-            let isDarkNow = localStorage.getItem("em_theme") !== "light";
-            applyTheme(isDarkNow);
+                function applyThemeState(isDark) {
+                    if (isDark) {
+                        document.documentElement.classList.add("dark-mode");
+                        document.body.classList.add("dark-mode");
+                        localStorage.setItem("em_theme", "dark");
+                        if (themeSwitch) themeSwitch.checked = true;
+                        if (icon) icon.innerHTML = "🌙";
+                        if (text) text.innerHTML = "الوضع الليلي";
+                        if (headerThemeIcon) headerThemeIcon.innerHTML = "☀️";
+                    } else {
+                        document.documentElement.classList.remove("dark-mode");
+                        document.body.classList.remove("dark-mode");
+                        localStorage.setItem("em_theme", "light");
+                        if (themeSwitch) themeSwitch.checked = false;
+                        if (icon) icon.innerHTML = "☀️";
+                        if (text) text.innerHTML = "الوضع النهاري";
+                        if (headerThemeIcon) headerThemeIcon.innerHTML = "🌙";
+                    }
+                }
 
-            if (themeBtn) {
-                themeBtn.addEventListener("click", () => {
-                    applyTheme(!document.documentElement.classList.contains("dark-mode"));
-                });
-            }
-            if (themeSwitchCheckbox) {
-                themeSwitchCheckbox.addEventListener("change", () => {
-                    applyTheme(themeSwitchCheckbox.checked);
-                });
-            }
+                if (localStorage.getItem("em_theme") === "dark") applyThemeState(true);
+                else applyThemeState(false);
 
-            let searchBtn = document.getElementById("searchBtn");
-            let searchModal = document.getElementById("searchModal");
-            let closeSearchBtn = document.getElementById("closeSearchBtn");
-            if (searchBtn && searchModal) searchBtn.addEventListener("click", () => searchModal.classList.add("active"));
-            if (closeSearchBtn && searchModal) closeSearchBtn.addEventListener("click", () => searchModal.classList.remove("active"));
-            if (searchModal) {
-                searchModal.addEventListener("click", (e) => {
-                    if (e.target === searchModal) searchModal.classList.remove("active");
-                });
-            }
-
-            let menuBtn = document.getElementById("menuBtn");
-            let sideMenu = document.getElementById("sideMenu");
-            if (menuBtn && sideMenu) menuBtn.addEventListener("click", () => sideMenu.classList.add("active"));
-            if (sideMenu) {
-                sideMenu.addEventListener("click", (e) => {
-                    if (e.target === sideMenu) sideMenu.classList.remove("active");
-                });
-            }
+                if (headerThemeToggleBtn) {
+                    headerThemeToggleBtn.addEventListener("click", () => applyThemeState(!document.documentElement.classList.contains("dark-mode")));
+                }
+                if (themeSwitch) {
+                    themeSwitch.addEventListener("change", () => applyThemeState(themeSwitch.checked));
+                }
+            });
 
             window.onscroll = function() {
                 let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
