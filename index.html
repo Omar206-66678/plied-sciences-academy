@@ -115,11 +115,12 @@
                 box-sizing: border-box;
             }
 
-            /* 🌟 حاوية متجاوبة بالكامل لجميع الشاشات */
+            /* 🌟 الحاوية العالمية الذكية (Fluid Container متجاوبة تماماً مع المواقع العالمية) */
             .container { 
-                width: 95%;
-                max-width: 1200px;
+                width: 100%;
+                max-width: 1400px;
                 margin: 0 auto; 
+                padding: 0 10px;
                 box-sizing: border-box;
             }
 
@@ -139,7 +140,7 @@
                 margin-bottom: 24px;
                 background: var(--header-bg);
                 border: 1.5px solid var(--header-border);
-                padding: 12px 16px;
+                padding: 12px 20px;
                 border-radius: 24px;
                 box-shadow: var(--header-shadow);
                 position: relative;
@@ -171,7 +172,7 @@
             }
 
             .brand-main-title {
-                font-size: 14px;
+                font-size: 15px;
                 font-weight: 900;
                 color: var(--text-primary);
                 line-height: 1.2;
@@ -186,7 +187,7 @@
             }
 
             .brand-subtitle-text {
-                font-size: 10px;
+                font-size: 10.5px;
                 font-weight: 800;
                 color: #0284C7;
                 letter-spacing: 0.3px;
@@ -264,7 +265,7 @@
                 background: var(--hero-card-bg);
                 border: 1.5px solid var(--hero-border);
                 border-radius: 32px;
-                padding: 26px 22px;
+                padding: 28px 24px;
                 box-shadow: var(--shadow-main);
                 display: flex;
                 flex-direction: column;
@@ -301,7 +302,7 @@
 
             .hero-title-main {
                 margin: 0;
-                font-size: 23px;
+                font-size: 24px;
                 font-weight: 900;
                 color: var(--text-primary);
                 line-height: 1.25;
@@ -313,26 +314,24 @@
 
             .hero-text-desc {
                 margin: 0;
-                font-size: 12.5px;
+                font-size: 13px;
                 color: var(--text-secondary);
                 line-height: 1.7;
                 font-weight: 600;
             }
 
-            /* معرض الصور */
+            /* معرض الصور الاحترافي المتجاوب */
             .hero-gallery-grid {
                 display: grid;
-                grid-template-columns: 1fr 1fr;
+                grid-template-columns: 1fr;
                 gap: 12px;
                 width: 100%;
-                height: 240px;
             }
 
             .gallery-sub-stack {
                 display: flex;
-                flex-direction: column;
                 gap: 10px;
-                height: 100%;
+                height: 160px;
             }
 
             .gallery-sub-item {
@@ -354,13 +353,43 @@
                 border-radius: 18px;
                 overflow: hidden;
                 border: 1.5px solid var(--card-border);
-                height: 100%;
+                height: 220px;
             }
             .gallery-main-item img {
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
                 display: block;
+            }
+
+            /* 🖥️ Media Queries للشاشات الكبيرة والكمبيوتر (زي المواقع العالمية) */
+            @media (min-width: 768px) {
+                .hero-gallery-grid {
+                    grid-template-columns: 1.2fr 1.8fr;
+                    height: 280px;
+                }
+                .gallery-sub-stack {
+                    flex-direction: column;
+                    height: 100%;
+                }
+                .gallery-main-item {
+                    height: 100%;
+                }
+                .pillars-list {
+                    grid-template-columns: repeat(2, 1fr) !important;
+                }
+            }
+
+            @media (min-width: 1024px) {
+                .pillars-list {
+                    grid-template-columns: repeat(3, 1fr) !important;
+                }
+                .global-hero-card {
+                    padding: 36px;
+                }
+                .hero-title-main {
+                    font-size: 30px;
+                }
             }
 
             .image-floating-badge {
@@ -390,17 +419,7 @@
             .pillars-list { 
                 display: grid; 
                 grid-template-columns: 1fr; 
-                gap: 18px; 
-            }
-
-            /* 🖥️ تنسيق الشاشات العريضة (سطح المكتب) */
-            @media (min-width: 768px) {
-                .pillars-list {
-                    grid-template-columns: repeat(3, 1fr);
-                }
-                .hero-gallery-grid {
-                    height: 300px;
-                }
+                gap: 20px; 
             }
 
             .pillar-card {
@@ -559,6 +578,7 @@
                 position: fixed; top: 0; left: 0; right: 0; bottom: 0;
                 background: rgba(0, 0, 0, 0.7);
                 z-index: 10000; opacity: 0; pointer-events: none;
+                transition: opacity 0.3s ease;
             }
             .menu-overlay.active { opacity: 1; pointer-events: auto; }
             .side-drawer {
@@ -582,13 +602,14 @@
             .theme-toggle-label { font-size: 12.5px; font-weight: 800; color: var(--text-primary); display: flex; align-items: center; gap: 8px; }
             .switch { position: relative; display: inline-block; width: 42px; height: 22px; }
             .switch input { opacity: 0; width: 0; height: 0; }
-            .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #CBD5E1; border-radius: 34px; }
-            .slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 3px; bottom: 3px; background-color: white; border-radius: 50%; }
+            .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #CBD5E1; border-radius: 34px; transition: 0.3s; }
+            .slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 3px; bottom: 3px; background-color: white; border-radius: 50%; transition: 0.3s; }
             input:checked + .slider { background-color: #0284C7; }
             input:checked + .slider:before { transform: translateX(20px); }
             .drawer-section-title { font-size: 10.5px; font-weight: 900; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.5px; }
             .drawer-links { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
             .drawer-link { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 12px; color: var(--text-primary); text-decoration: none; font-size: 12.5px; font-weight: 800; cursor: pointer; }
+            .drawer-link:hover { background: rgba(128, 128, 128, 0.08); }
 
             /* 🌟 الشريط السفلي */
             .bottom-nav {
@@ -598,7 +619,6 @@
                 backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
                 display: flex; justify-content: space-around; align-items: center;
                 padding: 6px 10px; 
-                border: none; 
                 border-radius: 24px; 
                 box-shadow: 0 12px 35px var(--nav-glow-color), inset 0 1px 1px rgba(255, 255, 255, 0.2); 
                 z-index: 999; box-sizing: border-box;
@@ -624,6 +644,11 @@
                 flex: 1; 
                 border: 1px solid rgba(128, 128, 128, 0.18); 
                 background: rgba(128, 128, 128, 0.05);
+            }
+
+            .bottom-nav a span.nav-icon { 
+                font-size: 16px; 
+                line-height: 1; 
             }
 
             .bottom-nav a.active { 
@@ -710,9 +735,9 @@
             <div class="nav-bar">
                 <div class="graduation-brand-icon">🎓</div>
                 <div class="brand-minimalist-box">
-                    <span class="brand-main-title">أكاديمية</span>
+                    <span class="brand-main-title">أكاديمية العلوم التطبيقية</span>
                     <div class="brand-sub-inline">
-                        <span class="brand-subtitle-text">العلوم التطبيقية</span>
+                        <span class="brand-subtitle-text">منصة التعلم الذكي المعتمدة</span>
                     </div>
                 </div>
                 <div class="nav-left-side">
@@ -996,4 +1021,4 @@
             };
         </script>
     </body>
-    </html>
+</html>
