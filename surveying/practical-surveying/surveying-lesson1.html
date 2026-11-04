@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+        <title>الترافرس والعمل الميداني - أكاديمية العلوم التطبيقية</title>
+        <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+        
+        <script>
+            let savedTheme = localStorage.getItem("em_theme");
+            if (savedTheme === "dark") {
+                document.documentElement.classList.add("dark-mode");
+            }
+        </script>
+        
+        <style>
+            :root {
+                --bg-main: #F8FAFC;
+                --card-bg: #FFFFFF;
+                --card-border: #E2E8F0;
+                --text-primary: #0F172A;
+                --text-secondary: #64748B;
+                
+                --header-bg: rgba(255, 255, 255, 0.85);
+                --header-border: rgba(194, 65, 12, 0.15);
+                --header-shadow: 0 10px 30px rgba(194, 65, 12, 0.05);
+                --shadow-main: 0 20px 40px -15px rgba(15, 23, 42, 0.05);
+                
+                --primary: #EA580C;
+                --primary-dark: #C2410C;
+                --accent: #FB923C;
+                --light-bg: rgba(234, 88, 12, 0.05);
+                --border-glow: rgba(234, 88, 12, 0.25);
+                --card-glow: 0 10px 30px rgba(234, 88, 12, 0.08);
+            }
+
+            html.dark-mode, body.dark-mode {
+                --bg-main: #030712;
+                --card-bg: #0B0F19;
+                --card-border: rgba(255, 255, 255, 0.07);
+                --text-primary: #F8FAFC;
+                --text-secondary: #94A3B8;
+                
+                --header-bg: rgba(11, 15, 25, 0.85);
+                --header-border: rgba(249, 115, 22, 0.2);
+                --header-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+                --shadow-main: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+                
+                --primary: #F97316;
+                --primary-dark: #EA580C;
+                --accent: #FDBA74;
+                --light-bg: rgba(249, 115, 22, 0.08);
+                --border-glow: rgba(249, 115, 22, 0.35);
+                --card-glow: 0 15px 40px rgba(249, 115, 22, 0.12);
+            }
+
+            body {
+                background-color: var(--bg-main);
+                color: var(--text-primary);
+                font-family: 'Cairo', system-ui, -apple-system, sans-serif;
+                margin: 0;
+                padding: 16px 14px 90px 14px;
+                min-height: 100vh;
+                box-sizing: border-box;
+                transition: background-color 0.3s ease, color 0.3s ease;
+            }
+
+            .container { max-width: 680px; margin: auto; }
+
+            .top-progress-bar { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: transparent; z-index: 9999; }
+            .top-progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--primary), var(--accent)); }
+
+            .nav-bar {
+                display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
+                background: var(--header-bg); backdrop-filter: blur(12px); border: 1.5px solid var(--header-border); padding: 12px 18px;
+                border-radius: 24px; box-shadow: var(--header-shadow);
+            }
+            .brand-minimalist-box { display: flex; flex-direction: column; align-items: center; text-align: center; }
+            .brand-main-title { font-size: 14px; font-weight: 900; color: var(--text-primary); }
+            .brand-subtitle-text { font-size: 10px; font-weight: 800; color: var(--primary); letter-spacing: 0.5px; text-transform: uppercase; }
+
+            .back-btn, .theme-btn {
+                background: var(--light-bg); border: 1.5px solid var(--border-glow);
+                width: 38px; height: 38px; border-radius: 14px; display: flex; align-items: center; justify-content: center;
+                color: var(--text-primary); font-size: 16px; text-decoration: none; cursor: pointer; transition: 0.25s;
+            }
+            .back-btn:hover, .theme-btn:hover { transform: scale(1.05); border-color: var(--primary); }
+
+            /* كارت الشرح الشامل للدرس الأول */
+            .hero-card {
+                background: var(--card-bg); border: 1.5px solid var(--border-glow); border-radius: 28px;
+                padding: 24px; margin-bottom: 20px; box-shadow: var(--card-glow); position: relative; overflow: hidden;
+            }
+            .hero-card::after {
+                content: ''; position: absolute; top: -50px; left: -50px; width: 120px; height: 120px;
+                background: var(--primary); opacity: 0.08; border-radius: 50%; filter: blur(30px);
+            }
+
+            .pro-hero-badge {
+                display: inline-flex; align-items: center; gap: 8px;
+                background: linear-gradient(135deg, var(--light-bg) 0%, rgba(234, 88, 12, 0.1) 100%);
+                border: 1.5px solid var(--border-glow); color: var(--primary);
+                padding: 6px 16px; border-radius: 16px; font-size: 11.5px; font-weight: 950;
+                margin-bottom: 12px; box-shadow: 0 4px 15px rgba(234, 88, 12, 0.08);
+            }
+            .pro-badge-dot { width: 7px; height: 7px; background: var(--primary); border-radius: 50%; box-shadow: 0 0 10px var(--primary); }
+
+            .hero-title { margin: 0 0 8px 0; font-size: 21px; font-weight: 900; letter-spacing: -0.5px; }
+            .hero-desc { margin: 0; font-size: 13px; color: var(--text-secondary); line-height: 1.8; font-weight: 600; text-align: justify; }
+
+            .lesson-card {
+                background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 30px;
+                padding: 24px; margin-bottom: 24px; box-shadow: var(--card-glow); display: flex; flex-direction: column; gap: 20px;
+                position: relative; overflow: hidden;
+            }
+            .lesson-card::before { content: ''; display: block; height: 5px; width: 70px; background: linear-gradient(90deg, var(--primary), var(--accent)); border-radius: 10px; }
+            
+            .lesson-header { display: flex; align-items: center; justify-content: space-between; border-bottom: 1.5px dashed var(--card-border); padding-bottom: 14px; }
+            .lesson-tag { font-size: 11.5px; font-weight: 900; color: var(--accent); text-transform: uppercase; letter-spacing: 0.5px; }
+            .lesson-heading { margin: 0; font-size: 20px; font-weight: 950; color: var(--primary); line-height: 1.4; }
+            .lesson-icon-badge { width: 48px; height: 48px; border-radius: 16px; background: var(--light-bg); border: 1.5px solid var(--border-glow); display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: inset 0 2px 5px rgba(234, 88, 12, 0.1); }
+
+            .section-block { display: flex; flex-direction: column; gap: 12px; }
+            .block-title { font-size: 14.5px; font-weight: 900; color: var(--text-primary); border-right: 3.5px solid var(--primary); padding-right: 10px; }
+            
+            /* كروت التعريفات الزجاجية المنفصلة للدرس الأول */
+            .glass-definition-card {
+                background: var(--light-bg);
+                backdrop-filter: blur(12px);
+                border: 1.5px solid var(--border-glow);
+                border-radius: 20px;
+                padding: 16px 18px;
+                margin: 8px 0;
+                box-shadow: var(--shadow-main);
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+                transition: 0.25s;
+            }
+            .glass-definition-card:hover {
+                border-color: var(--primary);
+                transform: translateY(-2px);
+                box-shadow: 0 10px 25px rgba(234, 88, 12, 0.12);
+            }
+            .glass-def-title {
+                font-size: 14px;
+                font-weight: 950;
+                color: var(--primary);
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+            .glass-def-text {
+                font-size: 13px;
+                font-weight: 700;
+                color: var(--text-primary);
+                line-height: 1.7;
+                margin: 0;
+            }
+
+            /* تنسيق خطوات العمل الميداني بأيقونات زجاجية داخلية للعنوان والترتيب */
+            .steps-container {
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+                margin: 10px 0;
+            }
+            .step-item-card {
+                background: var(--light-bg);
+                backdrop-filter: blur(12px);
+                border: 1.5px solid var(--border-glow);
+                border-radius: 20px;
+                padding: 16px 18px;
+                box-shadow: var(--shadow-main);
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                transition: 0.25s;
+            }
+            .step-item-card:hover {
+                border-color: var(--primary);
+                transform: translateY(-2px);
+                box-shadow: 0 10px 25px rgba(234, 88, 12, 0.12);
+            }
+            .step-title-badge {
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+                background: var(--card-bg);
+                border: 1.5px solid var(--border-glow);
+                padding: 6px 14px;
+                border-radius: 14px;
+                font-size: 13.5px;
+                font-weight: 950;
+                color: var(--primary);
+                align-self: flex-start;
+                box-shadow: 0 4px 12px rgba(234, 88, 12, 0.08);
+            }
+            .step-desc-text {
+                font-size: 13px;
+                font-weight: 700;
+                color: var(--text-primary);
+                line-height: 1.7;
+                margin: 0;
+            }
+
+            /* كارت الوصف الميداني (V2) */
+            .pro-description-card-v2 {
+                background: linear-gradient(135deg, rgba(234, 88, 12, 0.04) 0%, rgba(234, 88, 12, 0.1) 100%);
+                border: 2px solid var(--border-glow); border-radius: 26px; padding: 22px; margin: 16px 0; box-shadow: 0 12px 35px rgba(234, 88, 12, 0.08); position: relative; overflow: hidden;
+            }
+            .pro-description-card-v2::before { content: ''; position: absolute; top: 0; right: 0; width: 6px; height: 100%; background: var(--primary); }
+            .pro-v2-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; border-bottom: 1.5px dashed var(--border-glow); padding-bottom: 12px; }
+            .pro-v2-title-box { display: flex; align-items: center; gap: 10px; }
+            .pro-v2-title-text { font-size: 15px; font-weight: 950; color: var(--primary); }
+            .pro-v2-code-pill { background: var(--primary); color: #FFFFFF; font-size: 12px; font-weight: 900; padding: 5px 14px; border-radius: 12px; font-family: monospace; box-shadow: 0 4px 15px rgba(234, 88, 12, 0.3); }
+            .pro-v2-body { display: flex; flex-direction: column; gap: 12px; }
+            .pro-v2-item { display: flex; align-items: flex-start; gap: 12px; background: var(--card-bg); border: 1px solid var(--card-border); padding: 14px 16px; border-radius: 18px; box-shadow: var(--shadow-main); transition: 0.25s; }
+            .pro-v2-item:hover { border-color: var(--primary); transform: translateX(-3px); }
+            .pro-v2-item-content { display: flex; flex-direction: column; gap: 4px; font-size: 13px; font-weight: 700; color: var(--text-primary); line-height: 1.7; }
+            .pro-v2-item-content strong { color: var(--primary); font-weight: 900; }
+            .pro-v2-item-content p { margin: 0; color: var(--text-secondary); font-weight: 600; }
+            
+            /* حاوية الصورة ثابتة في مكانها المنظم مع تكبير داخلي سلس */
+            .lesson-img-box {
+                background: transparent;
+                border: none;
+                border-radius: 0;
+                padding: 4px 0;
+                text-align: center;
+                margin: 14px 0;
+                box-shadow: none;
+                overflow: hidden;
+                position: relative;
+            }
+            .lesson-img-box img {
+                max-width: 100%;
+                height: auto;
+                border-radius: 14px;
+                display: block;
+                margin: auto;
+                transition: transform 0.2s ease;
+                transform-origin: center center;
+                cursor: zoom-in;
+                box-shadow: var(--shadow-main);
+                border: 1.5px solid var(--card-border);
+            }
+            .img-caption { font-size: 12px; font-weight: 800; color: var(--text-secondary); margin-top: 10px; }
+
+            .example-box {
+                background: rgba(16, 185, 129, 0.06); border: 1.5px solid rgba(16, 185, 129, 0.35); border-radius: 20px;
+                padding: 16px; font-size: 13px; font-weight: 700; line-height: 1.8; margin-top: 8px; box-shadow: 0 8px 20px rgba(16, 185, 129, 0.05);
+            }
+            .example-title { font-weight: 900; color: #059669; font-size: 13.5px; margin-bottom: 8px; }
+
+            /* زر فتح نافذة التحدي اليومي والاختبارات */
+            .modal-trigger-btn {
+                background: var(--card-bg);
+                border: 1.5px solid var(--border-glow);
+                color: var(--primary);
+                padding: 14px 18px;
+                border-radius: 20px;
+                font-family: 'Cairo', sans-serif;
+                font-size: 13.5px;
+                font-weight: 900;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+                margin: 14px 0;
+                box-shadow: var(--shadow-main);
+                transition: 0.25s;
+            }
+            .modal-trigger-btn:hover {
+                background: var(--light-bg);
+                transform: translateY(-2px);
+                border-color: var(--primary);
+            }
+
+            /* تصميم النافذة المنبثقة (Modal Overlay & Box) مطابقة للصورة المطلوبة */
+            .custom-modal-overlay {
+                position: fixed;
+                top: 0; left: 0; right: 0; bottom: 0;
+                background: rgba(0, 0, 0, 0.6);
+                backdrop-filter: blur(8px);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 99999;
+                opacity: 0;
+                visibility: hidden;
+                transition: 0.3s ease;
+                padding: 16px;
+            }
+            .custom-modal-overlay.active {
+                opacity: 1;
+                visibility: visible;
+            }
+            .custom-modal-box {
+                background: var(--card-bg);
+                border: 2px solid var(--border-glow);
+                border-radius: 28px;
+                width: 100%;
+                max-width: 520px;
+                padding: 24px;
+                box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+                transform: scale(0.9);
+                transition: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+                position: relative;
+            }
+            .custom-modal-overlay.active .custom-modal-box {
+                transform: scale(1);
+            }
+            .custom-modal-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                border-bottom: 1.5px dashed var(--card-border);
+                padding-bottom: 12px;
+            }
+            .custom-modal-title {
+                font-size: 15px;
+                font-weight: 950;
+                color: var(--primary);
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+            .custom-modal-close {
+                background: var(--light-bg);
+                border: 1.5px solid var(--border-glow);
+                width: 36px; height: 36px;
+                border-radius: 12px;
+                display: flex; align-items: center; justify-content: center;
+                color: var(--text-primary);
+                font-size: 16px; font-weight: 900;
+                cursor: pointer;
+                transition: 0.2s;
+            }
+            .custom-modal-close:hover {
+                background: var(--primary);
+                color: #FFFFFF;
+            }
+            .custom-modal-body {
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+                max-height: 65vh;
+                overflow-y: auto;
+                padding-left: 4px;
+            }
+
+            /* تصميم الكروت الفرعية للأسئلة الثمانية داخل النافذة المنبثقة */
+            .quiz-modal-item {
+                background: var(--light-bg);
+                border: 1.5px solid var(--border-glow);
+                border-radius: 20px;
+                padding: 16px;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                box-shadow: var(--shadow-main);
+            }
+            .quiz-modal-q {
+                font-size: 13.5px;
+                font-weight: 900;
+                color: var(--text-primary);
+                line-height: 1.7;
+            }
+            .quiz-modal-a {
+                font-size: 13px;
+                font-weight: 700;
+                color: #059669;
+                background: rgba(16, 185, 129, 0.1);
+                padding: 10px 14px;
+                border-radius: 14px;
+                border-right: 3.5px solid #059669;
+                line-height: 1.7;
+            }
+
+            .bottom-nav {
+                position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); width: calc(100% - 28px); max-width: 500px;
+                background: var(--header-bg); backdrop-filter: blur(15px); display: flex; justify-content: space-around; align-items: center;
+                padding: 8px 10px; border: 1.5px solid var(--header-border); border-radius: 22px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15); z-index: 999;
+            }
+            .bottom-nav a { color: var(--text-secondary); text-decoration: none; font-size: 11.5px; text-align: center; font-weight: 800; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 6px 12px; border-radius: 16px; flex: 1; transition: 0.25s; }
+            .bottom-nav a span { font-size: 18px; line-height: 1; }
+            .bottom-nav a:hover { color: var(--primary); }
+            .bottom-nav a.active { color: var(--primary); background: var(--light-bg); border: 1.5px solid var(--border-glow); }
+        </style>
+    </head>
+    <body>
+
+        <div class="top-progress-bar"><div class="top-progress-fill" id="progressFill"></div></div>
+
+        <div class="container">
+            <div class="nav-bar">
+                <a href="practical-surveying.html" class="back-btn" title="رجوع لقسم العمل المساحي">←</a>
+                <div class="brand-minimalist-box">
+                    <span class="brand-main-title">الترافرس والعمل الميداني</span>
+                    <span class="brand-subtitle-text">أكاديمية العلوم التطبيقية</span>
+                </div>
+                <button class="theme-btn" id="themeToggleBtn" title="تغيير الثيم">🌙</button>
+            </div>
+
+            <!-- كارت الشرح الشامل للدرس الأول -->
+            <div class="hero-card">
+                <div class="pro-hero-badge">
+                    <span class="pro-badge-dot"></span>
+                    أكاديمية العلوم التطبيقية • هندسة المساحة والجيوماتكس
+                </div>
+                <h1 class="hero-title">الترافرس (Traverse) والعمل الميداني</h1>
+                <p class="hero-desc">
+                    يغطي هذا الدرس المفاهيم الأساسية لتصميم شبكات الترافرس الهندسية، وعناصر الخريطة الإرشادية، وطريقة توثيق المحطات عبر بطاقات الوصف الميداني بدقة تامة لضمان سهولة استرجاعها وإعادة رصدها.
+                </p>
+            </div>
+
+            <!-- محتوى الدرس الأول -->
+            <div class="lesson-card">
+                <div class="lesson-header">
+                    <div class="lesson-title-box">
+                        <span class="lesson-tag">العمل الميداني الأساسي</span>
+                        <h2 class="lesson-heading">الترافرس والعمل الميداني وعناصر الخريطة وبطاقة الوصف</h2>
+                    </div>
+                    <div class="lesson-icon-badge">📐</div>
+                </div>
+
+                <div class="section-block">
+                    <div class="block-title">1. تعريف الترافرس وعناصر الخريطة الأساسية</div>
+                    
+                    <!-- الكارت الزجاجي الأول: الترافرس -->
+                    <div class="glass-definition-card">
+                        <div class="glass-def-title"><span>📐</span><span>تعريف الترافرس</span></div>
+                        <p class="glass-def-text">سلسلة من الخطوط المستقيمة المتصلة التي تربط بين نقاط ثابتة على سطح الأرض، ويتم قياس أطوالها والزوايا المحصورة بينها لتحديد الإحداثيات بدقة.</p>
+                    </div>
+
+                    <!-- الكارت الزجاجي الثاني: عناصر الخريطة الأساسية -->
+                    <div class="glass-definition-card">
+                        <div class="glass-def-title"><span>🗺️</span><span>عناصر الخريطة الأساسية</span></div>
+                        <p class="glass-def-text">تشمل عنوان الخريطة، الإطار، مفتاح الخريطة، اتجاه الشمال، مقياس الرسم، ودليل الموقع.</p>
+                    </div>
+                </div>
+
+                <div class="section-block">
+                    <div class="block-title">2. أنواع الترافرس الهندسية</div>
+                    
+                    <!-- الكارت الزجاجي الأول: ترافرس مغلق -->
+                    <div class="glass-definition-card">
+                        <div class="glass-def-title"><span>🔄</span><span>ترافرس مغلق</span></div>
+                        <p class="glass-def-text">
+                            هو سلسلة أضلاع تبدأ من نقطة معلومة وتنتهي وتغلق عند نفس النقطة (أو عند نقطة أخرى معلومة الإحداثيات والاتجاه).<br><br>
+                            • <strong>التحقق الهندسي:</strong> يتيز بوجود إغلاق هندسي يسمح بمعرفة مجموع الزوايا النظرية للمضلع ومقارنتها بالواقع.<br>
+                            • <strong>اكتشاف الأخطاء:</strong> يسهل اكتشاف أخطاء القياس في العمل الميداني سواء في الأطوال أو الزوايا فور الانتهاء من الحسابات.<br>
+                            • <strong>تصحيح الإغلاق:</strong> يتيح حساب خطأ الإغلاق المضلعي وتوزيعه بنسبة وتناسب على الأضلاع والزوايا (مثل طريقة باوديتش).<br>
+                            • <strong>الدقة العالية:</strong> يُعد من أدق أنواع الترافرسات ويُستخدم بشكل أساسي في شبكات الثوابت الأرضية والمشروعات الهندسية الهامة.
+                        </p>
+                    </div>
+
+                    <!-- الكارت الزجاجي الثاني: ترافرس مفتوح (مرتبط أو حر) -->
+                    <div class="glass-definition-card">
+                        <div class="glass-def-title"><span>🔗</span><span>ترافرس مفتوح (مرتبط أو حر)</span></div>
+                        <p class="glass-def-text">
+                            هو سلسلة أضلاع تبدأ من نقطة معلومة وتنتهي في اتجاه أو نقطة غير مغلقة على البداية.<br><br>
+                            • <strong>النوع الحر:</strong> يبدأ من نقطة معلومة وينتهي بنقطة مجهولة تماماً دون أي ربط نهائي.<br>
+                            • <strong>خطورة الحر:</strong> لا يمكن اكتشاف أخطاء القياس فيه أو تصحيحها بسبب انعدام وجود أي تحقق هندسي.<br>
+                            • <strong>النوع المرتبط:</strong> يربط نهايته بنقطة أخرى معلومة الإحداثيات أو باتجاه مرجعي معلوم.<br>
+                            • <strong>فائدة المرتبط:</strong> يسمح بحساب خطأ الإغلاق وتوزيع التصحيحات على الأضلاع للوصول لدقة مساحية عالية.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="section-block">
+                    <div class="block-title">3. خطوات الترافرس وبطاقة الوصف الميداني</div>
+                    
+                    <!-- خطوات العمل الميداني الستة بتنسيق الأيقونات الزجاجية وعناوين ملونة (برقم 3) -->
+                    <div class="steps-container">
+                        <div class="step-item-card">
+                            <div class="step-title-badge">1. الاستطلاع</div>
+                            <p class="step-desc-text">معاينة الموقع على الطبيعة قبل البدء لرؤية طبيعة الأرض، اختيار أفضل الأماكن لوضع المحطات، والتأكد من وضوح الرؤية بينها وبين النقاط المعلومة.</p>
+                        </div>
+
+                        <div class="step-item-card">
+                            <div class="step-title-badge">2. اختيار وترسيم المحطات</div>
+                            <p class="step-desc-text">تحديد مواقع المحطات بدقة على الأرض وتثبيتها بعلامات واضحة (مثل خازوق خشبي أو مسمار صلب أو علامة دهان) لضمان ثباتها وعدم تحركها طوال فترة العمل الميداني.</p>
+                        </div>
+
+                        <div class="step-item-card">
+                            <div class="step-title-badge">3. رسم الكروكي</div>
+                            <p class="step-desc-text">عمل رسم تخطيطي يدوي مبسط في دفتر العمل الميداني يوضح مواقع المحطات، واتجاهات الخطوط، وأي معالم ثابتة أو عوائق حولها لتسهيل الرجوع إليها أثناء الحسابات.</p>
+                        </div>
+
+                        <div class="step-item-card">
+                            <div class="step-title-badge">4. مسح الترافرس</div>
+                            <p class="step-desc-text">تنفيذ أعمال الرصد الفعلية للمسار عن طريق قياس المسافات الأفقية والزوايا بين المحطات المتتالية لتكوين الهيكل الأساسي لشبكة القياس.</p>
+                        </div>
+
+                        <div class="step-item-card">
+                            <div class="step-title-badge">5. القياس الميداني</div>
+                            <p class="step-desc-text">تسجيل القراءات التفصيلية الكاملة باستخدام الأجهزة (مثل التوتال استيشن)، وتتضمن رصد التفاصيل، المناسيب، والتأكد من أخذ أكثر من قراءة لتقليل نسب الخطأ.</p>
+                        </div>
+
+                        <div class="step-item-card">
+                            <div class="step-title-badge">6. التحشية والجشني</div>
+                            <p class="step-desc-text">ربط معالم ومباني الموقع الخارجية والداخلية (التفاصيل) بخطوط الترافرس الرئيسية عن طريق أخذ قياسات تعامدية أو تقاطعية لتكتمل الخريطة بكل تفاصيل الطبيعة.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="pro-description-card-v2">
+                        <div class="pro-v2-header">
+                            <div class="pro-v2-title-box">
+                                <span class="pro-v2-title-text">بطاقة الوصف الميداني المعتمدة</span>
+                            </div>
+                            <div class="pro-v2-code-pill">AFJ 20223</div>
+                        </div>
+                        
+                        <div class="pro-v2-body">
+                            <div class="pro-v2-item">
+                                <div class="pro-v2-item-content">
+                                    <strong>الوصف الدقيق للموقع:</strong>
+                                    <p>تقع النقطة في طريق غمر ميت غمر بجوار مسجد عمر بن عبد العزيز على يمين مشفى الأمل، وعلى يسار محل بقالة أبو عمر، وتبعد عن مدرسة الوفاء الابتدائية أربعة كيلو مترات تقريبا.</p>
+                                </div>
+                            </div>
+
+                            <div class="pro-v2-item">
+                                <div class="pro-v2-item-content">
+                                    <strong>دليل العمل الميداني:</strong>
+                                    <p>الأستاذ / مكرم عبد الحليم علي | هاتف: <strong>1020678950</strong></p>
+                                </div>
+                            </div>
+
+                            <div class="pro-v2-item">
+                                <div class="pro-v2-item-content">
+                                    <strong>العنوان الإداري:</strong>
+                                    <p>ميت غمر - بجوار مركز شباب ميت غمر.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lesson-img-box">
+                        <img src="Space images/lesson1-description-card.png" alt="كارت الوصف وتنسيب النقطة" class="zoomable-img">
+                        <div class="img-caption">شكل توضيحي: كارت الوصف وتنسيب النقطة لـ 3 معالم ثابتة</div>
+                    </div>
+                </div>
+
+                <div class="section-block">
+                    <div class="block-title">4. شروط اختيار محطات الترافرس في الميدان</div>
+                    
+                    <!-- كارت زجاجي إضافي لشروط اختيار المحطات (برقم 4) -->
+                    <div class="glass-definition-card">
+                        <div class="glass-def-title"><span>📍</span><span>أهم المعايير الهندسية لاختيار المحطات</span></div>
+                        <p class="glass-def-text">
+                            • <strong>الرؤية المتبادلة:</strong> ضرورة توفر رؤية واضحة ومباشرة بين كل محطة ومحطتيها (السابقة والتالية) دون أي عوائق بصرية.<br>
+                            • <strong>الثبات والاستقرار:</strong> اختيار أرض صلبة وثابتة بعيداً عن حركة المرور الكثيفة أو التربة الرخوة التي تعرض الخازوق أو المسمار للحركة.<br>
+                            • <strong>تجنب العوائق:</strong> الابتعاد قدر الإمكان عن خطوط الضغط العالي أو الانكسارات الحادة التي تؤثر على دقة رصد الزوايا وتصعب حركة الجهاز.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="example-box">
+                    <div class="example-title">مثال تطبيقي مفصل (التحقق من زوايا الترافرس):</div>
+                    إذا كانت الزوايا الداخلية المقاسة لترافرس ثلاثي هي (60، 60، 60)، فهل التعديل الهندسي سليم؟<br><br>
+                    <strong>التقييم:</strong> نعم، لأن مجموعها يساوي 180 وهي في النطاق الآمن للاختيار الهندسي للمحطات.<br><br>
+                    <strong>💡 شرح إضافي للطالب:</strong>
+                    <ul style="margin: 5px 0 0 0; padding-right: 18px; line-height: 1.7;">
+                        <li><strong>قاعدة المجموع الهندسي:</strong> في أي مضلع هندسي مغلق (مثل الترافرس الثلاثي الذي يشبه المثلث)، يجب أن يساوي مجموع الزوايا الداخلية قيمة ثابتة تُحسب من القانون (ن - 2) × 180 (حيث ن هو عدد أضلاع أو محطات الترافرس).</li>
+                        <li><strong>التطبيق على الترافرس الثلاثي:</strong> بما أن عدد المحطات ن = 3، فإن مجموع الزوايا الداخلية النظرية هو (3 - 2) × 180 = 1 × 180 = 180 درجة.</li>
+                        <li><strong>الحكم الميداني:</strong> بما أن مجموع الزوايا المقاسة حقيقياً في المثال هو 60 + 60 + 60 = 180 درجة تماماً بدون أي خطأ إغلاق، إذن الرصد سليم بنسبة 100% والترافرس جاهز للحسابات الإحداثية التالية.</li>
+                    </ul>
+                </div>
+
+                <!-- زر فتح نافذة الأسئلة -->
+                <button class="modal-trigger-btn" onclick="openModal('quizModal')">
+                    <span>⚡ 8 أسئلة محلوله لدرس الترافرس</span>
+                    <span>←</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- نافذة منبثقة مستقلة (Modal) للاختبارات (8 أسئلة محلولة) -->
+        <div class="custom-modal-overlay" id="quizModal">
+            <div class="custom-modal-box">
+                <div class="custom-modal-header">
+                    <div class="custom-modal-title"><span>⚡</span><span>8 أسئلة محلوله لدرس الترافرس</span></div>
+                    <button class="custom-modal-close" onclick="closeModal('quizModal')">✕</button>
+                </div>
+                <div class="custom-modal-body">
+                    
+                    <!-- السؤال 1 -->
+                    <div class="quiz-modal-item">
+                        <div class="quiz-modal-q">س1: ما هو الترافرس الهندسي باختصار؟</div>
+                        <div class="quiz-modal-a"><strong>الإجابة:</strong> سلسلة من الخطوط المستقيمة المتصلة بين نقاط ثابتة لتحديد الإحداثيات بدقة.</div>
+                    </div>
+
+                    <!-- السؤال 2 -->
+                    <div class="quiz-modal-item">
+                        <div class="quiz-modal-q">س2: اذكر اثنين من عناصر الخريطة الأساسية؟</div>
+                        <div class="quiz-modal-a"><strong>الإجابة:</strong> عنوان الخريطة، واتجاه الشمال (أو مقياس الرسم).</div>
+                    </div>
+
+                    <!-- السؤال 3 -->
+                    <div class="quiz-modal-item">
+                        <div class="quiz-modal-q">س3: ما الفرق الأساسي بين الترافرس المغلق والمفتوح؟</div>
+                        <div class="quiz-modal-a"><strong>الإجابة:</strong> المغلق يبدأ وينتهي عند نفس النقطة (أو نقطة معلومة)، بينما المفتوح ينتهي بنقطة مجهولة أو غير مغلقة.</div>
+                    </div>
+
+                    <!-- السؤال 4 -->
+                    <div class="quiz-modal-item">
+                        <div class="quiz-modal-q">س4: لماذا يُفضل استخدام الترافرس المغلق في المشروعات الهندسية؟</div>
+                        <div class="quiz-modal-a"><strong>الإجابة:</strong> لتميزه بوجود إغلاق هندسي يسمح بمعرفة واكتشاف أخطاء القياس وتصحيحها.</div>
+                    </div>
+
+                    <!-- السؤال 5 -->
+                    <div class="quiz-modal-item">
+                        <div class="quiz-modal-q">س5: ما هي الغاية من رسم الكروكي في العمل الميداني؟</div>
+                        <div class="quiz-modal-a"><strong>الإجابة:</strong> توضيح مواقع المحطات، واتجاهات الخطوط، والمعالم المحيطة لتسهيل الرجوع إليها.</div>
+                    </div>
+
+                    <!-- السؤال 6 -->
+                    <div class="quiz-modal-item">
+                        <div class="quiz-modal-q">س6: لِمَ يُشترط تنسيب نقطة الترافرس لـ 3 معالم ثابتة في كارت الوصف؟</div>
+                        <div class="quiz-modal-a"><strong>الإجابة:</strong> لضمان إعادة إيجاد مركز النقطة المساحية بدقة في حال تعرض إحداها للتلف أو الإزالة.</div>
+                    </div>
+
+                    <!-- السؤال 7 -->
+                    <div class="quiz-modal-item">
+                        <div class="quiz-modal-q">س7: ما هو الشرط الأساسي لاختيار محطات الترافرس ميدانياً؟</div>
+                        <div class="quiz-modal-a"><strong>الإجابة:</strong> توفر الرؤية المتبادلة والواضحة بين كل محطة ومحطتيها (السابقة والتالية).</div>
+                    </div>
+
+                    <!-- السؤال 8 -->
+                    <div class="quiz-modal-item">
+                        <div class="quiz-modal-q">س8: ما هي خطوة "التحشية والجشني" في العمل الميداني؟</div>
+                        <div class="quiz-modal-a"><strong>الإجابة:</strong> ربط معالم ومباني الموقع بخطوط الترافرس الرئيسية عبر قياسات تعامدية أو تقاطعية لتكتمل تفاصيل الخريطة.</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-nav">
+            <a href="index.html"><span>🏠</span>الرئيسية</a>
+            <a href="practical-surveying.html" class="active"><span>📐</span>المساحة</a>
+            <a href="english.html"><span>🇬🇧</span>الإنجليزي</a>
+            <a href="programming.html"><span>💻</span>البرمجة</a>
+        </div>
+
+        <script>
+            // دوال التحكم في النافذة المنبثقة (Modal)
+            function openModal(modalId) {
+                document.getElementById(modalId).classList.add('active');
+            }
+            function closeModal(modalId) {
+                document.getElementById(modalId).classList.remove('active');
+            }
+            // إغلاق النافذة عند النقر في المساحة الخارجية
+            window.addEventListener('click', function(e) {
+                if (e.target.classList.contains('custom-modal-overlay')) {
+                    e.target.classList.remove('active');
+                }
+            });
+
+            // نظام التكبير والتصغير الثابت في مكانه (In-Place Pinch to Zoom) للصور
+            document.addEventListener("DOMContentLoaded", function() {
+                const images = document.querySelectorAll(".zoomable-img");
+
+                images.forEach(img => {
+                    let scale = 1;
+                    let initialDistance = null;
+
+                    function updateScale() {
+                        img.style.transform = "scale(" + scale + ")";
+                        if (scale > 1) {
+                            img.style.zIndex = "50";
+                            img.style.position = "relative";
+                        } else {
+                            img.style.zIndex = "1";
+                            img.style.position = "static";
+                        }
+                    }
+
+                    img.addEventListener('touchstart', function (e) {
+                        if (e.touches.length === 2) {
+                            initialDistance = Math.hypot(
+                                e.touches[0].pageX - e.touches[1].pageX,
+                                e.touches[0].pageY - e.touches[1].pageY
+                            );
+                        }
+                    });
+
+                    img.addEventListener('touchmove', function (e) {
+                        if (e.touches.length === 2 && initialDistance) {
+                            let currentDistance = Math.hypot(
+                                e.touches[0].pageX - e.touches[1].pageX,
+                                e.touches[0].pageY - e.touches[1].pageY
+                            );
+                            let zoomFactor = currentDistance / initialDistance;
+                            scale = Math.min(Math.max(1, scale * zoomFactor), 3.5);
+                            initialDistance = currentDistance;
+                            updateScale();
+                        }
+                    });
+
+                    img.addEventListener('touchend', function (e) {
+                        if (e.touches.length < 2) {
+                            initialDistance = null;
+                        }
+                    });
+
+                    img.addEventListener('dblclick', function () {
+                        if (scale > 1) {
+                            scale = 1;
+                        } else {
+                            scale = 2.2;
+                        }
+                        updateScale();
+                    });
+                });
+            });
+
+            // إدارة الثيمات (الداكن والفاتح)
+            document.addEventListener("DOMContentLoaded", function() {
+                let themeBtn = document.getElementById("themeToggleBtn");
+                function applyTheme(isDark) {
+                    if (isDark) {
+                        document.documentElement.classList.add("dark-mode");
+                        localStorage.setItem("em_theme", "dark");
+                        if (themeBtn) themeBtn.innerHTML = "☀️";
+                    } else {
+                        document.documentElement.classList.remove("dark-mode");
+                        localStorage.setItem("em_theme", "light");
+                        if (themeBtn) themeBtn.innerHTML = "🌙";
+                    }
+                }
+
+                applyTheme(localStorage.getItem("em_theme") === "dark");
+
+                if (themeBtn) {
+                    themeBtn.addEventListener("click", () => {
+                        applyTheme(!document.documentElement.classList.contains("dark-mode"));
+                    });
+                }
+            });
+
+            // شريط التقدم العلوي
+            window.onscroll = function() {
+                let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                let scrolled = (winScroll / height) * 100;
+                let progressFill = document.getElementById("progressFill");
+                if (progressFill) progressFill.style.width = scrolled + "%";
+            };
+        </script>
+    </body>
+</html>

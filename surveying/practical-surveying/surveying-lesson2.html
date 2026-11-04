@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+        <title>الانحرافات والزوايا - أكاديمية العلوم التطبيقية</title>
+        <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+        
+        <script>
+            let savedTheme = localStorage.getItem("em_theme");
+            if (savedTheme === "dark") {
+                document.documentElement.classList.add("dark-mode");
+            }
+        </script>
+        
+        <style>
+            :root {
+                --bg-main: #F8FAFC;
+                --card-bg: #FFFFFF;
+                --card-border: #E2E8F0;
+                --text-primary: #0F172A;
+                --text-secondary: #64748B;
+                
+                --header-bg: rgba(255, 255, 255, 0.85);
+                --header-border: rgba(194, 65, 12, 0.15);
+                --header-shadow: 0 10px 30px rgba(194, 65, 12, 0.05);
+                --shadow-main: 0 20px 40px -15px rgba(15, 23, 42, 0.05);
+                
+                --primary: #EA580C;
+                --primary-dark: #C2410C;
+                --accent: #FB923C;
+                --light-bg: rgba(234, 88, 12, 0.05);
+                --border-glow: rgba(234, 88, 12, 0.25);
+                --card-glow: 0 10px 30px rgba(234, 88, 12, 0.08);
+            }
+
+            html.dark-mode, body.dark-mode {
+                --bg-main: #030712;
+                --card-bg: #0B0F19;
+                --card-border: rgba(255, 255, 255, 0.07);
+                --text-primary: #F8FAFC;
+                --text-secondary: #94A3B8;
+                
+                --header-bg: rgba(11, 15, 25, 0.85);
+                --header-border: rgba(249, 115, 22, 0.2);
+                --header-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+                --shadow-main: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+                
+                --primary: #F97316;
+                --primary-dark: #EA580C;
+                --accent: #FDBA74;
+                --light-bg: rgba(249, 115, 22, 0.08);
+                --border-glow: rgba(249, 115, 22, 0.35);
+                --card-glow: 0 15px 40px rgba(249, 115, 22, 0.12);
+            }
+
+            body {
+                background-color: var(--bg-main);
+                color: var(--text-primary);
+                font-family: 'Cairo', system-ui, -apple-system, sans-serif;
+                margin: 0;
+                padding: 16px 14px 90px 14px;
+                min-height: 100vh;
+                box-sizing: border-box;
+                transition: background-color 0.3s ease, color 0.3s ease;
+            }
+
+            .container { max-width: 680px; margin: auto; }
+
+            .top-progress-bar { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: transparent; z-index: 9999; }
+            .top-progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--primary), var(--accent)); }
+
+            .nav-bar {
+                display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
+                background: var(--header-bg); backdrop-filter: blur(12px); border: 1.5px solid var(--header-border); padding: 12px 18px;
+                border-radius: 24px; box-shadow: var(--header-shadow);
+            }
+            .brand-minimalist-box { display: flex; flex-direction: column; align-items: center; text-align: center; }
+            .brand-main-title { font-size: 14px; font-weight: 900; color: var(--text-primary); }
+            .brand-subtitle-text { font-size: 10px; font-weight: 800; color: var(--primary); letter-spacing: 0.5px; text-transform: uppercase; }
+
+            .back-btn, .theme-btn {
+                background: var(--light-bg); border: 1.5px solid var(--border-glow);
+                width: 38px; height: 38px; border-radius: 14px; display: flex; align-items: center; justify-content: center;
+                color: var(--text-primary); font-size: 16px; text-decoration: none; cursor: pointer; transition: 0.25s;
+            }
+            .back-btn:hover, .theme-btn:hover { transform: scale(1.05); border-color: var(--primary); }
+
+            /* كارت الشرح الشامل */
+            .hero-card {
+                background: var(--card-bg); border: 1.5px solid var(--border-glow); border-radius: 28px;
+                padding: 24px; margin-bottom: 20px; box-shadow: var(--card-glow); position: relative; overflow: hidden;
+            }
+            .hero-card::after {
+                content: ''; position: absolute; top: -50px; left: -50px; width: 120px; height: 120px;
+                background: var(--primary); opacity: 0.08; border-radius: 50%; filter: blur(30px);
+            }
+
+            .pro-hero-badge {
+                display: inline-flex; align-items: center; gap: 8px;
+                background: linear-gradient(135deg, var(--light-bg) 0%, rgba(234, 88, 12, 0.1) 100%);
+                border: 1.5px solid var(--border-glow); color: var(--primary);
+                padding: 6px 16px; border-radius: 16px; font-size: 11.5px; font-weight: 950;
+                margin-bottom: 12px; box-shadow: 0 4px 15px rgba(234, 88, 12, 0.08);
+            }
+            .pro-badge-dot { width: 7px; height: 7px; background: var(--primary); border-radius: 50%; box-shadow: 0 0 10px var(--primary); }
+
+            .hero-title { margin: 0 0 8px 0; font-size: 21px; font-weight: 900; letter-spacing: -0.5px; }
+            .hero-desc { margin: 0; font-size: 13px; color: var(--text-secondary); line-height: 1.8; font-weight: 600; text-align: justify; }
+
+            .lesson-card {
+                background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 30px;
+                padding: 24px; margin-bottom: 24px; box-shadow: var(--card-glow); display: flex; flex-direction: column; gap: 20px;
+                position: relative; overflow: hidden;
+            }
+            .lesson-card::before { content: ''; display: block; height: 5px; width: 70px; background: linear-gradient(90deg, var(--primary), var(--accent)); border-radius: 10px; }
+            
+            .lesson-header { display: flex; align-items: center; justify-content: space-between; border-bottom: 1.5px dashed var(--card-border); padding-bottom: 14px; }
+            .lesson-tag { font-size: 11.5px; font-weight: 900; color: var(--accent); text-transform: uppercase; letter-spacing: 0.5px; }
+            .lesson-heading { margin: 0; font-size: 20px; font-weight: 950; color: var(--primary); line-height: 1.4; }
+            .lesson-icon-badge { width: 48px; height: 48px; border-radius: 16px; background: var(--light-bg); border: 1.5px solid var(--border-glow); display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: inset 0 2px 5px rgba(234, 88, 12, 0.1); }
+
+            .section-block { display: flex; flex-direction: column; gap: 12px; }
+            .block-title { font-size: 14.5px; font-weight: 900; color: var(--text-primary); border-right: 3.5px solid var(--primary); padding-right: 10px; }
+            
+            /* كروت التعريفات والتحليلات الشاملة المنفصلة */
+            .glass-definition-card {
+                background: var(--light-bg);
+                backdrop-filter: blur(12px);
+                border: 1.5px solid var(--border-glow);
+                border-radius: 20px;
+                padding: 18px;
+                margin: 10px 0;
+                box-shadow: var(--shadow-main);
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+                transition: 0.25s;
+            }
+            .glass-definition-card:hover {
+                border-color: var(--primary);
+                transform: translateY(-2px);
+                box-shadow: 0 10px 25px rgba(234, 88, 12, 0.12);
+            }
+            .glass-def-title {
+                font-size: 14.5px;
+                font-weight: 950;
+                color: var(--primary);
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+            
+            /* حاوية الأيقونات الإنجليزية بجانب بعضها */
+            .term-pills-row {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 8px;
+                align-items: center;
+            }
+
+            /* أيقونة زجاجية مستطيلة بخلفية نيون وبدون توهج للأسماء الإنجليزية */
+            .term-en-pill {
+                background: var(--light-bg);
+                border: 1.5px solid var(--border-glow);
+                border-radius: 12px;
+                padding: 6px 12px;
+                font-size: 13px;
+                font-weight: 900;
+                color: var(--primary);
+                direction: ltr;
+                display: inline-block;
+                box-shadow: none;
+            }
+
+            .glass-def-text {
+                font-size: 13.5px;
+                font-weight: 700;
+                color: var(--text-primary);
+                line-height: 1.8;
+                margin: 0;
+            }
+
+            .detailed-sub-list {
+                margin: 0;
+                padding-right: 18px;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                font-size: 13px;
+                font-weight: 700;
+                line-height: 1.7;
+                color: var(--text-primary);
+            }
+            .detailed-sub-list li strong {
+                color: var(--primary);
+                font-weight: 900;
+            }
+
+            .formula-box {
+                background: var(--light-bg); border: 1.5px solid var(--border-glow); border-radius: 18px;
+                padding: 16px; text-align: center; font-family: 'Courier New', monospace; font-weight: 900; font-size: 15px; color: var(--primary); margin: 8px 0; direction: ltr;
+                box-shadow: 0 5px 15px rgba(234, 88, 12, 0.08);
+            }
+
+            /* تصميم الحاسبة التفاعلية المزدوجة (+180 و -180) */
+            .calc-container {
+                background: var(--card-bg);
+                border: 2px solid var(--border-glow);
+                border-radius: 20px;
+                padding: 18px;
+                margin: 10px 0;
+                box-shadow: var(--shadow-main);
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+            }
+            .calc-title {
+                font-size: 14px;
+                font-weight: 950;
+                color: var(--primary);
+                display: flex;
+                align-items: center;
+                gap: 6px;
+            }
+            .calc-row {
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                background: var(--light-bg);
+                border: 1.5px solid var(--border-glow);
+                border-radius: 16px;
+                padding: 12px;
+            }
+            .calc-row-label {
+                font-size: 12.5px;
+                font-weight: 900;
+                color: var(--text-primary);
+            }
+            .calc-input-wrapper {
+                position: relative;
+                flex: 1;
+                display: flex;
+                align-items: center;
+            }
+            .calc-input {
+                width: 100%;
+                background: var(--card-bg);
+                border: 1.5px solid var(--card-border);
+                border-radius: 12px;
+                padding: 8px 35px 8px 12px;
+                font-family: 'Cairo', sans-serif;
+                font-size: 13.5px;
+                font-weight: 800;
+                color: var(--text-primary);
+                outline: none;
+                transition: 0.2s;
+                direction: ltr;
+                text-align: right;
+            }
+            .calc-input:focus {
+                border-color: var(--primary);
+                box-shadow: 0 0 8px var(--border-glow);
+            }
+            .calc-input-symbol {
+                position: absolute;
+                right: 12px;
+                color: var(--primary);
+                font-weight: 900;
+                font-size: 14px;
+                pointer-events: none;
+            }
+            .calc-input-group {
+                display: flex;
+                gap: 8px;
+            }
+            .calc-btn {
+                background: var(--primary);
+                color: #FFFFFF;
+                border: none;
+                border-radius: 12px;
+                padding: 0 16px;
+                font-family: 'Cairo', sans-serif;
+                font-size: 13px;
+                font-weight: 900;
+                cursor: pointer;
+                transition: 0.2s;
+                box-shadow: 0 4px 12px rgba(234, 88, 12, 0.2);
+            }
+            .calc-btn:hover {
+                background: var(--primary-dark);
+                transform: translateY(-1px);
+            }
+            .calc-result {
+                background: var(--card-bg);
+                border: 1px solid var(--card-border);
+                border-radius: 10px;
+                padding: 8px 12px;
+                font-size: 12.5px;
+                font-weight: 900;
+                color: var(--primary);
+                text-align: center;
+                display: none;
+            }
+
+            .example-box {
+                background: var(--light-bg); border: 1.5px solid var(--border-glow); border-radius: 20px;
+                padding: 16px; font-size: 13px; font-weight: 700; line-height: 1.8; margin-top: 8px; box-shadow: var(--shadow-main);
+            }
+            .example-title { font-weight: 900; color: var(--primary); font-size: 13.5px; margin-bottom: 8px; }
+
+            /* زر فتح نافذة الأسئلة */
+            .modal-trigger-btn {
+                background: var(--card-bg);
+                border: 1.5px solid var(--border-glow);
+                color: var(--primary);
+                padding: 14px 18px;
+                border-radius: 20px;
+                font-family: 'Cairo', sans-serif;
+                font-size: 13.5px;
+                font-weight: 900;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+                margin: 14px 0;
+                box-shadow: var(--shadow-main);
+                transition: 0.25s;
+            }
+            .modal-trigger-btn:hover {
+                background: var(--light-bg);
+                transform: translateY(-2px);
+                border-color: var(--primary);
+            }
+
+            /* تصميم النافذة المنبثقة (Modal Overlay & Box) */
+            .custom-modal-overlay {
+                position: fixed;
+                top: 0; left: 0; right: 0; bottom: 0;
+                background: rgba(0, 0, 0, 0.6);
+                backdrop-filter: blur(8px);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 99999;
+                opacity: 0;
+                visibility: hidden;
+                transition: 0.3s ease;
+                padding: 16px;
+            }
+            .custom-modal-overlay.active {
+                opacity: 1;
+                visibility: visible;
+            }
+            .custom-modal-box {
+                background: var(--card-bg);
+                border: 2px solid var(--border-glow);
+                border-radius: 28px;
+                width: 100%;
+                max-width: 520px;
+                padding: 24px;
+                box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+                transform: scale(0.9);
+                transition: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+                position: relative;
+            }
+            .custom-modal-overlay.active .custom-modal-box {
+                transform: scale(1);
+            }
+            .custom-modal-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                border-bottom: 1.5px dashed var(--card-border);
+                padding-bottom: 12px;
+            }
+            .custom-modal-title {
+                font-size: 15px;
+                font-weight: 950;
+                color: var(--primary);
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+            .custom-modal-close {
+                background: var(--light-bg);
+                border: 1.5px solid var(--border-glow);
+                width: 36px; height: 36px;
+                border-radius: 12px;
+                display: flex; align-items: center; justify-content: center;
+                color: var(--text-primary);
+                font-size: 16px; font-weight: 900;
+                cursor: pointer;
+                transition: 0.2s;
+            }
+            .custom-modal-close:hover {
+                background: var(--primary);
+                color: #FFFFFF;
+            }
+            .custom-modal-body {
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+                max-height: 65vh;
+                overflow-y: auto;
+                padding-left: 4px;
+            }
+
+            .quiz-modal-item {
+                background: var(--light-bg);
+                border: 1.5px solid var(--border-glow);
+                border-radius: 20px;
+                padding: 16px;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                box-shadow: var(--shadow-main);
+            }
+            .quiz-modal-q {
+                font-size: 13.5px;
+                font-weight: 900;
+                color: var(--text-primary);
+                line-height: 1.7;
+            }
+            .quiz-modal-a {
+                font-size: 13px;
+                font-weight: 700;
+                color: #059669;
+                background: rgba(16, 185, 129, 0.1);
+                padding: 10px 14px;
+                border-radius: 14px;
+                border-right: 3.5px solid #059669;
+                line-height: 1.7;
+            }
+
+            .bottom-nav {
+                position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); width: calc(100% - 28px); max-width: 500px;
+                background: var(--header-bg); backdrop-filter: blur(15px); display: flex; justify-content: space-around; align-items: center;
+                padding: 8px 10px; border: 1.5px solid var(--header-border); border-radius: 22px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15); z-index: 999;
+            }
+            .bottom-nav a { color: var(--text-secondary); text-decoration: none; font-size: 11.5px; text-align: center; font-weight: 800; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 6px 12px; border-radius: 16px; flex: 1; transition: 0.25s; }
+            .bottom-nav a span { font-size: 18px; line-height: 1; }
+            .bottom-nav a:hover { color: var(--primary); }
+            .bottom-nav a.active { color: var(--primary); background: var(--light-bg); border: 1px solid var(--border-glow); }
+        </style>
+    </head>
+    <body>
+
+        <div class="top-progress-bar"><div class="top-progress-fill" id="progressFill"></div></div>
+
+        <div class="container">
+            <div class="nav-bar">
+                <a href="practical-surveying.html" class="back-btn" title="رجوع لقسم العمل المساحي">←</a>
+                <div class="brand-minimalist-box">
+                    <span class="brand-main-title">الانحرافات والزوايا</span>
+                    <span class="brand-subtitle-text">أكاديمية العلوم التطبيقية</span>
+                </div>
+                <button class="theme-btn" id="themeToggleBtn" title="تغيير الثيم">🌙</button>
+            </div>
+
+            <!-- كارت الشرح الشامل -->
+            <div class="hero-card">
+                <div class="pro-hero-badge">
+                    <span class="pro-badge-dot"></span>
+                    أكاديمية العلوم التطبيقية • هندسة المساحة والجيوماتكس
+                </div>
+                <h1 class="hero-title">الانحرافات والزوايا والمصطلحات المساحية</h1>
+                <p class="hero-desc">
+                    يغطي هذا الدرس الأنظمة المختلفة لحساب الانحرافات المساحية (الدائري الكامل والمختصر)، والعلاقات الرياضية بين الانحرافات الأمامية والخلفية، وكيفية معالجة الحسابات بدقة لضمان صحة الاتجاهات في الميدان.
+                </p>
+            </div>
+
+            <!-- محتوى الدرس -->
+            <div class="lesson-card">
+                <div class="lesson-header">
+                    <div class="lesson-title-box">
+                        <span class="lesson-tag">الحسابات المساحية الأساسية</span>
+                        <h2 class="lesson-heading">الانحرافات والمصطلحات المساحية</h2>
+                    </div>
+                    <div class="lesson-icon-badge">🧭</div>
+                </div>
+
+                <div class="section-block">
+                    <div class="block-title">1. أنواع الانحرافات والمصطلحات الشاملة</div>
+                    
+                    <!-- 1. الانحراف الدائري الكامل -->
+                    <div class="glass-definition-card">
+                        <div class="glass-def-title"><span>🧭</span><span>الانحراف الدائري الكامل</span></div>
+                        <div class="term-pills-row">
+                            <div class="term-en-pill">Whole Circle Bearing</div>
+                            <div class="term-en-pill">W.C.B</div>
+                        </div>
+                        <p class="glass-def-text">هو الزاوية المقاسة أفقياً في اتجاه حركة عقارب الساعة ابتداءً من اتجاه الشمال وحتى الضلع المطلوب، وتتراوح قيمته بين 0° وحتى 360°.</p>
+                        
+                        <ul class="detailed-sub-list">
+                            <li><strong>طريقة القياس:</strong> يُقاس دائماً ابتداءً من اتجاه الشمال (0°) في اتجاه عقارب الساعة (Clockwise) وصولاً للخط.</li>
+                            <li><strong>تحديد الأرباع (حسب القيمة):</strong> 
+                                الربع الأول (0° - 90°)، الربع الثاني (90° - 180°)، الربع الثالث (180° - 270°)، والربع الرابع (270° - 360°).</li>
+                            <li><strong>مميزاته وأهميته:</strong> يُعتبر النظام الأساسي المفضل في حسابات الترافرسات والإحداثيات لسهولة تعامله الرياضي كزاوية متصلة بلا رموز.</li>
+                        </ul>
+                    </div>
+
+                    <!-- 2. الانحراف الدائري المختصر -->
+                    <div class="glass-definition-card">
+                        <div class="glass-def-title"><span>📐</span><span>الانحراف الدائري المختصر أو الربع دائري</span></div>
+                        <div class="term-pills-row">
+                            <div class="term-en-pill">Reduced Bearing</div>
+                            <div class="term-en-pill">R.B</div>
+                        </div>
+                        <p class="glass-def-text">هو الزاوية الحادة المقاسة ابتداءً من الشمال أو الجنوب (حسب القرب) اتجاه الشرق أو الغرب، ولا تتجاوز قيمته 90° أبداً.</p>
+                        
+                        <ul class="detailed-sub-list">
+                            <li><strong>طريقة القياس:</strong> يُقاس بحد أقصى 90° انطلاقاً من محور الشمال أو الجنوب باتجاه الشرق أو الغرب.</li>
+                            <li><strong>دليل حروف الاتجاهات:</strong> (<strong>N</strong> = شمال، <strong>S</strong> = جنوب، <strong>E</strong> = شرق، <strong>W</strong> = غرب).</li>
+                            <li><strong>كيفية الكتابة:</strong> يُكتب دائماً مقروناً برمز الربع التابع له لتحديد الاتجاه بدقة (مثل N 45° E أو S 30° W).</li>
+                            <li><strong>مميزاته وأهميته:</strong> يُستخدم لتسهيل استخراج القيم المثلثية (الجيوب وجيب التمام) يدوياً في العمليات الحسابية المبسطة.</li>
+                        </ul>
+                    </div>
+
+                    <!-- 3. الانحراف الأمامي والخلفي -->
+                    <div class="glass-definition-card">
+                        <div class="glass-def-title"><span>🔄</span><span>الانحراف الأمامي والخلفي</span></div>
+                        <div class="term-pills-row">
+                            <div class="term-en-pill">Fore & Back Bearing</div>
+                        </div>
+                        <p class="glass-def-text">الانحراف الأمامي هو اتجاه الضلع مرصوداً من بدايته لنهايته، بينما الانحراف الخلفي هو اتجاه نفس الضلع مرصوداً من نهايته لبدايته.</p>
+                        
+                        <ul class="detailed-sub-list">
+                            <li><strong>طريقة القياس:</strong> يُرصد الأمامي من محطة البداية إلى النهاية، والخلفي بالعكس تماماً للتحقق من سلامة الأرصاد.</li>
+                            <li><strong>القاعدة الرياضية:</strong> B.B = F.B ± 180°</li>
+                            <li><strong>شرح القاعدة بالحالات:</strong> 
+                                • <strong>إذا كان الانحراف الأمامي أقل من 180°:</strong> نضيف 180°.<br>
+                                • <strong>إذا كان الانحراف الأمامي أكبر من 180°:</strong> نطرح 180°.
+                            </li>
+                            <li><strong>مميزاته وأهميته:</strong> الركيزة الأساسية لكشف الأخطاء الكبيرة في قياسات الزوايا والتأكد من عدم انحراف مسار الترافرس.</li>
+                        </ul>
+                    </div>
+
+                    <div class="formula-box">B.B = F.B ± 180°</div>
+
+                    <!-- آلة حاسبة تفاعلية بمخانتي (+180 و -180) -->
+                    <div class="calc-container">
+                        <div class="calc-title"><span>🧮</span><span>حاسبة الانحراف الخلفي التفاعلية (B.B Calculator)</span></div>
+                        
+                        <!-- خانة الجمع (+ 180) -->
+                        <div class="calc-row">
+                            <div class="calc-row-label">➕ حالة الجمع (إذا كان الانحراف الأمامي &lt; 180°):</div>
+                            <div class="calc-input-group">
+                                <div class="calc-input-wrapper">
+                                    <input type="number" id="fbAddInput" class="calc-input" placeholder="أدخل F.B..." min="0" max="180" step="any">
+                                    <span class="calc-input-symbol">°</span>
+                                </div>
+                                <button class="calc-btn" onclick="calculateAddBB()">+ 180°</button>
+                            </div>
+                            <div class="calc-result" id="calcAddResult"></div>
+                        </div>
+
+                        <!-- خانة الطرح (- 180) -->
+                        <div class="calc-row">
+                            <div class="calc-row-label">➖ حالة الطرح (إذا كان الانحراف الأمامي &gt; 180°):</div>
+                            <div class="calc-input-group">
+                                <div class="calc-input-wrapper">
+                                    <input type="number" id="fbSubInput" class="calc-input" placeholder="أدخل F.B..." min="180" max="360" step="any">
+                                    <span class="calc-input-symbol">°</span>
+                                </div>
+                                <button class="calc-btn" onclick="calculateSubBB()">- 180°</button>
+                            </div>
+                            <div class="calc-result" id="calcSubResult"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- المثالين التطبيقيين المفصلين (المثال الأول بلون الدرس) -->
+                <div class="example-box">
+                    <div class="example-title">المثال التطبيقي الأول (حالة الجمع - أقل من 180°):</div>
+                    <strong>المسألة:</strong> إذا كان الانحراف الأمامي (F.B) لضلع ما يساوي 75°20'، فكم يكون انحرافه الخلفي (B.B)؟<br><br>
+                    <strong>الحل:</strong><br>
+                    بما أن F.B أقل من 180°، إذن نطبق الجمع:<br>
+                    <code style="color:var(--primary); font-weight:900;">B.B = 75°20' + 180° = 255°20'</code>
+                </div>
+
+                <div class="example-box">
+                    <div class="example-title">المثال التطبيقي الثاني (حالة الطرح - أكبر من 180°):</div>
+                    <strong>المسألة:</strong> إذا كان الانحراف الأمامي (F.B) لضلع ما يساوي 230°45'، فكم يكون انحرافه الخلفي (B.B)؟<br><br>
+                    <strong>الحل:</strong><br>
+                    بما أن F.B أكبر من 180°، إذن نطبق الطرح:<br>
+                    <code style="color:var(--primary); font-weight:900;">B.B = 230°45' - 180° = 50°45'</code>
+                </div>
+
+                <!-- زر فتح نافذة الأسئلة -->
+                <button class="modal-trigger-btn" onclick="openModal('quizModal')">
+                    <span>⚡ 8 أسئلة محلولة لدرس الانحرافات والزوايا</span>
+                    <span>←</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- نافذة منبثقة مستقلة (Modal) للاختبارات (8 أسئلة محلولة) -->
+        <div class="custom-modal-overlay" id="quizModal">
+            <div class="custom-modal-box">
+                <div class="custom-modal-header">
+                    <div class="custom-modal-title"><span>⚡</span><span>8 أسئلة محلولة لدرس الانحرافات والزوايا</span></div>
+                    <button class="custom-modal-close" onclick="closeModal('quizModal')">✕</button>
+                </div>
+                <div class="custom-modal-body">
+                    
+                    <div class="quiz-modal-item">
+                        <div class="quiz-modal-q">س1: ما هو تعريف الانحراف الدائري الكامل (Whole Circle Bearing - W.C.B)؟</div>
+                        <div class="quiz-modal-a"><strong>الإجابة:</strong> زاوية أفقية مقاسة مع عقارب الساعة من اتجاه الشمال حتى 360°.</div>
+                    </div>
+
+                    <div class="quiz-modal-item">
+                        <div class="quiz-modal-q">س2: ما هو الحد الأقصى لقيمة الانحراف المختصر (Reduced Bearing - R.B)؟</div>
+                        <div class="quiz-modal-a"><strong>الإجابة:</strong> 90 درجة كحد أقصى مقاسة من الشمال أو الجنوب.</div>
+                    </div>
+
+                    <div class="quiz-modal-item">
+                        <div class="quiz-modal-q">س3: إذا كان F.B = 210°، احسب الانحراف الخلفي (B.B)؟</div>
+                        <div class="quiz-modal-a"><strong>الإجابة:</strong> B.B = 210° - 180° = **30°**.</div>
+                    </div>
+
+                    <div class="quiz-modal-item">
+                        <div class="quiz-modal-q">س4: متى نجمع 180° على الانحراف الأمامي؟</div>
+                        <div class="quiz-modal-a"><strong>الإجابة:</strong> إذا كانت قيمة الانحراف الأمامي أقل من 180°.</div>
+                    </div>
+
+                    <div class="quiz-modal-item">
+                        <div class="quiz-modal-q">س5: كيف يُكتب الانحراف المختصر (Reduced Bearing - R.B) في دفتر الحسابات؟</div>
+                        <div class="quiz-modal-a"><strong>الإجابة:</strong> يُكتب متبوعاً بحرفي البداية والنهاية للربع (مثل N 30° E).</div>
+                    </div>
+
+                    <div class="quiz-modal-item">
+                        <div class="quiz-modal-q">س6: إذا كان F.B = 120°، فما هو انحرافه الخلفي؟</div>
+                        <div class="quiz-modal-a"><strong>الإجابة:</strong> 120° + 180° = **300°**.</div>
+                    </div>
+
+                    <div class="quiz-modal-item">
+                        <div class="quiz-modal-q">س7: ما هي الاتجاهات الأساسية الأربعة في النظام الدائري الكامل؟</div>
+                        <div class="quiz-modal-a"><strong>الإجابة:</strong> الشمال (0°)، الشرق (90°)، الجنوب (180°)، الغرب (270°).</div>
+                    </div>
+
+                    <div class="quiz-modal-item">
+                        <div class="quiz-modal-q">س8: لماذا نحتاج لحساب الانحراف الخلفي في شبكات الترافرس؟</div>
+                        <div class="quiz-modal-a"><strong>الإجابة:</strong> للتحقق من خلو أرصاد الزوايا من الأخطاء الكبيرة ومنع انحراف المسار.</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-nav">
+            <a href="index.html"><span>🏠</span>الرئيسية</a>
+            <a href="practical-surveying.html" class="active"><span>📐</span>المساحة</a>
+            <a href="english.html"><span>🇬🇧</span>الإنجليزي</a>
+            <a href="programming.html"><span>💻</span>البرمجة</a>
+        </div>
+
+        <script>
+            // دوال الآلة الحاسبة المزدوجة (جمع وطرح)
+            function calculateAddBB() {
+                let fb = parseFloat(document.getElementById('fbAddInput').value);
+                let resultBox = document.getElementById('calcAddResult');
+                
+                if (isNaN(fb)) {
+                    resultBox.style.display = 'block';
+                    resultBox.innerHTML = '⚠️ من فضلك أدخل قيمة الانحراف الأمامي';
+                    resultBox.style.color = '#EF4444';
+                    return;
+                }
+
+                let bb = fb + 180;
+                resultBox.style.display = 'block';
+                resultBox.style.color = 'var(--primary)';
+                resultBox.innerHTML = `✅ الانحراف الخلفي (B.B) = <span style="direction: ltr; display: inline-block;">${bb}°</span> (${fb}° + 180°)`;
+            }
+
+            function calculateSubBB() {
+                let fb = parseFloat(document.getElementById('fbSubInput').value);
+                let resultBox = document.getElementById('calcSubResult');
+                
+                if (isNaN(fb)) {
+                    resultBox.style.display = 'block';
+                    resultBox.innerHTML = '⚠️ من فضلك أدخل قيمة الانحراف الأمامي';
+                    resultBox.style.color = '#EF4444';
+                    return;
+                }
+
+                let bb = fb - 180;
+                resultBox.style.display = 'block';
+                resultBox.style.color = 'var(--primary)';
+                resultBox.innerHTML = `✅ الانحراف الخلفي (B.B) = <span style="direction: ltr; display: inline-block;">${bb}°</span> (${fb}° - 180°)`;
+            }
+
+            // دوال التحكم في النافذة المنبثقة (Modal)
+            function openModal(modalId) {
+                document.getElementById(modalId).classList.add('active');
+            }
+            function closeModal(modalId) {
+                document.getElementById(modalId).classList.remove('active');
+            }
+            window.addEventListener('click', function(e) {
+                if (e.target.classList.contains('custom-modal-overlay')) {
+                    e.target.classList.remove('active');
+                }
+            });
+
+            // إدارة الثيمات (الداكن والفاتح)
+            document.addEventListener("DOMContentLoaded", function() {
+                let themeBtn = document.getElementById("themeToggleBtn");
+                function applyTheme(isDark) {
+                    if (isDark) {
+                        document.documentElement.classList.add("dark-mode");
+                        localStorage.setItem("em_theme", "dark");
+                        if (themeBtn) themeBtn.innerHTML = "☀️";
+                    } else {
+                        document.documentElement.classList.remove("dark-mode");
+                        localStorage.setItem("em_theme", "light");
+                        if (themeBtn) themeBtn.innerHTML = "🌙";
+                    }
+                }
+
+                applyTheme(localStorage.getItem("em_theme") === "dark");
+
+                if (themeBtn) {
+                    themeBtn.addEventListener("click", () => {
+                        applyTheme(!document.documentElement.classList.contains("dark-mode"));
+                    });
+                }
+            });
+
+            // شريط التقدم العلوي
+            window.onscroll = function() {
+                let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                let scrolled = (winScroll / height) * 100;
+                let progressFill = document.getElementById("progressFill");
+                if (progressFill) progressFill.style.width = scrolled + "%";
+            };
+        </script>
+    </body>
+</html>

@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+        <title>المساحة التاكيومترية - أكاديمية العلوم التطبيقية</title>
+        <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+        
+        <script>
+            let savedTheme = localStorage.getItem("em_theme");
+            if (savedTheme === "dark") {
+                document.documentElement.classList.add("dark-mode");
+            }
+        </script>
+        
+        <style>
+            :root {
+                --bg-main: #F8FAFC;
+                --card-bg: #FFFFFF;
+                --card-border: #E2E8F0;
+                --text-primary: #0F172A;
+                --text-secondary: #64748B;
+                
+                --header-bg: rgba(255, 255, 255, 0.85);
+                --header-border: rgba(194, 65, 12, 0.15);
+                --header-shadow: 0 10px 30px rgba(194, 65, 12, 0.05);
+                --shadow-main: 0 20px 40px -15px rgba(15, 23, 42, 0.05);
+                
+                --primary: #EA580C;
+                --primary-dark: #C2410C;
+                --accent: #FB923C;
+                --light-bg: rgba(234, 88, 12, 0.05);
+                --border-glow: rgba(234, 88, 12, 0.25);
+                --card-glow: 0 10px 30px rgba(234, 88, 12, 0.08);
+            }
+
+            html.dark-mode, body.dark-mode {
+                --bg-main: #030712;
+                --card-bg: #0B0F19;
+                --card-border: rgba(255, 255, 255, 0.07);
+                --text-primary: #F8FAFC;
+                --text-secondary: #94A3B8;
+                
+                --header-bg: rgba(11, 15, 25, 0.85);
+                --header-border: rgba(249, 115, 22, 0.2);
+                --header-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+                --shadow-main: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+                
+                --primary: #F97316;
+                --primary-dark: #EA580C;
+                --accent: #FDBA74;
+                --light-bg: rgba(249, 115, 22, 0.08);
+                --border-glow: rgba(249, 115, 22, 0.35);
+                --card-glow: 0 15px 40px rgba(249, 115, 22, 0.12);
+            }
+
+            body {
+                background-color: var(--bg-main);
+                color: var(--text-primary);
+                font-family: 'Cairo', system-ui, -apple-system, sans-serif;
+                margin: 0;
+                padding: 16px 14px 90px 14px;
+                min-height: 100vh;
+                box-sizing: border-box;
+                transition: background-color 0.3s ease, color 0.3s ease;
+            }
+
+            .container { max-width: 680px; margin: auto; }
+
+            .top-progress-bar { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: transparent; z-index: 9999; }
+            .top-progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--primary), var(--accent)); }
+
+            .nav-bar {
+                display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
+                background: var(--header-bg); backdrop-filter: blur(12px); border: 1.5px solid var(--header-border); padding: 12px 18px;
+                border-radius: 24px; box-shadow: var(--header-shadow);
+            }
+            .brand-minimalist-box { display: flex; flex-direction: column; align-items: center; text-align: center; }
+            .brand-main-title { font-size: 14px; font-weight: 900; color: var(--text-primary); }
+            .brand-subtitle-text { font-size: 10px; font-weight: 800; color: var(--primary); letter-spacing: 0.5px; text-transform: uppercase; }
+
+            .back-btn, .theme-btn {
+                background: var(--light-bg); border: 1.5px solid var(--border-glow);
+                width: 38px; height: 38px; border-radius: 14px; display: flex; align-items: center; justify-content: center;
+                color: var(--text-primary); font-size: 16px; text-decoration: none; cursor: pointer; transition: 0.25s;
+            }
+            .back-btn:hover, .theme-btn:hover { transform: scale(1.05); border-color: var(--primary); }
+
+            /* كارت الشرح الشامل */
+            .hero-card {
+                background: var(--card-bg); border: 1.5px solid var(--border-glow); border-radius: 28px;
+                padding: 24px; margin-bottom: 20px; box-shadow: var(--card-glow); position: relative; overflow: hidden;
+            }
+            .hero-card::after {
+                content: ''; position: absolute; top: -50px; left: -50px; width: 120px; height: 120px;
+                background: var(--primary); opacity: 0.08; border-radius: 50%; filter: blur(30px);
+            }
+
+            .pro-hero-badge {
+                display: inline-flex; align-items: center; gap: 8px;
+                background: linear-gradient(135deg, var(--light-bg) 0%, rgba(234, 88, 12, 0.1) 100%);
+                border: 1.5px solid var(--border-glow); color: var(--primary);
+                padding: 6px 16px; border-radius: 16px; font-size: 11.5px; font-weight: 950;
+                margin-bottom: 12px; box-shadow: 0 4px 15px rgba(234, 88, 12, 0.08);
+            }
+            .pro-badge-dot { width: 7px; height: 7px; background: var(--primary); border-radius: 50%; box-shadow: 0 0 10px var(--primary); }
+
+            .hero-title { margin: 0 0 8px 0; font-size: 21px; font-weight: 900; letter-spacing: -0.5px; }
+            .hero-desc { margin: 0; font-size: 13px; color: var(--text-secondary); line-height: 1.8; font-weight: 600; text-align: justify; }
+
+            .lesson-card {
+                background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 30px;
+                padding: 24px; margin-bottom: 24px; box-shadow: var(--card-glow); display: flex; flex-direction: column; gap: 20px;
+                position: relative; overflow: hidden;
+            }
+            .lesson-card::before { content: ''; display: block; height: 5px; width: 70px; background: linear-gradient(90deg, var(--primary), var(--accent)); border-radius: 10px; }
+            
+            .lesson-header { display: flex; align-items: center; justify-content: space-between; border-bottom: 1.5px dashed var(--card-border); padding-bottom: 14px; }
+            .lesson-tag { font-size: 11.5px; font-weight: 900; color: var(--accent); text-transform: uppercase; letter-spacing: 0.5px; }
+            .lesson-heading { margin: 0; font-size: 20px; font-weight: 950; color: var(--primary); line-height: 1.4; }
+            .lesson-icon-badge { width: 48px; height: 48px; border-radius: 16px; background: var(--light-bg); border: 1.5px solid var(--border-glow); display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: inset 0 2px 5px rgba(234, 88, 12, 0.1); }
+
+            .section-block { display: flex; flex-direction: column; gap: 12px; }
+            .block-title { font-size: 14.5px; font-weight: 900; color: var(--text-primary); border-right: 3.5px solid var(--primary); padding-right: 10px; }
+            
+            /* كروت التعريفات والتحليلات الشاملة المنفصلة */
+            .glass-definition-card {
+                background: var(--light-bg);
+                backdrop-filter: blur(12px);
+                border: 1.5px solid var(--border-glow);
+                border-radius: 20px;
+                padding: 18px;
+                margin: 10px 0;
+                box-shadow: var(--shadow-main);
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+                transition: 0.25s;
+            }
+            .glass-definition-card:hover {
+                border-color: var(--primary);
+                transform: translateY(-2px);
+                box-shadow: 0 10px 25px rgba(234, 88, 12, 0.12);
+            }
+            .glass-def-title {
+                font-size: 14.5px;
+                font-weight: 950;
+                color: var(--primary);
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+            
+            .term-pills-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+
+            .term-en-pill {
+                background: var(--light-bg); border: 1.5px solid var(--border-glow); border-radius: 12px;
+                padding: 6px 12px; font-size: 13px; font-weight: 900; color: var(--primary); direction: ltr; display: inline-block;
+            }
+
+            .glass-def-text { font-size: 13.5px; font-weight: 700; color: var(--text-primary); line-height: 1.8; margin: 0; }
+
+            .detailed-sub-list {
+                margin: 0; padding-right: 18px; display: flex; flex-direction: column; gap: 8px; font-size: 13px; font-weight: 700; line-height: 1.7; color: var(--text-primary);
+            }
+            .detailed-sub-list li strong { color: var(--primary); font-weight: 900; }
+
+            .formula-box {
+                background: var(--light-bg); border: 1.5px solid var(--border-glow); border-radius: 18px;
+                padding: 16px; text-align: center; font-family: 'Courier New', monospace; font-weight: 900; font-size: 14px; color: var(--primary); margin: 8px 0; direction: ltr;
+                box-shadow: 0 5px 15px rgba(234, 88, 12, 0.08);
+            }
+
+            /* بطاقة شرح أزرار الآلة اليدوية */
+            .manual-calc-guide {
+                background: var(--card-bg); border: 1.5px solid var(--border-glow); border-radius: 18px;
+                padding: 16px; font-size: 13px; font-weight: 700; line-height: 1.9; color: var(--text-primary); margin: 10px 0; box-shadow: var(--shadow-main);
+            }
+            .manual-calc-guide-title { font-size: 13.5px; font-weight: 900; color: var(--primary); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+            .manual-calc-guide code { background: var(--light-bg); border: 1px solid var(--border-glow); padding: 2px 6px; border-radius: 6px; color: var(--primary); font-weight: 900; font-family: monospace; }
+
+            /* تصميم الحاسبة التفاعلية */
+            .calc-container {
+                background: var(--card-bg); border: 2px solid var(--border-glow); border-radius: 20px; padding: 18px; margin: 10px 0; box-shadow: var(--shadow-main); display: flex; flex-direction: column; gap: 14px;
+            }
+            .calc-title { font-size: 14px; font-weight: 950; color: var(--primary); display: flex; align-items: center; gap: 6px; }
+            .calc-inputs-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; }
+            .calc-input-group { display: flex; flex-direction: column; gap: 6px; }
+            .calc-input-group label { font-size: 11.5px; font-weight: 900; color: var(--text-secondary); }
+            .calc-input {
+                width: 100%; background: var(--bg-main); border: 1.5px solid var(--card-border); border-radius: 12px; padding: 10px 12px; font-family: 'Cairo', sans-serif; font-size: 13.5px; font-weight: 800; color: var(--text-primary); outline: none; transition: 0.2s; direction: ltr; text-align: right; box-sizing: border-box;
+            }
+            .calc-input:focus { border-color: var(--primary); box-shadow: 0 0 10px var(--border-glow); }
+            .calc-btn {
+                background: var(--primary); color: #FFFFFF; border: none; border-radius: 14px; padding: 10px 18px; font-family: 'Cairo', sans-serif; font-size: 13.5px; font-weight: 900; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 15px rgba(234, 88, 12, 0.2); align-self: flex-start;
+            }
+            .calc-btn:hover { background: var(--primary-dark); transform: translateY(-1px); }
+            .calc-result {
+                background: var(--light-bg); border: 1.5px solid var(--border-glow); border-radius: 14px; padding: 12px 14px; font-size: 13px; font-weight: 900; color: var(--primary); text-align: center; display: none; direction: ltr;
+            }
+
+            /* حاوية الصور والتكبير */
+            .lesson-img-box { background: transparent; text-align: center; margin: 14px 0; overflow: hidden; position: relative; }
+            .lesson-img-box img {
+                max-width: 100%; height: auto; border-radius: 14px; display: block; margin: auto; transition: transform 0.2s ease; transform-origin: center center; cursor: zoom-in; box-shadow: var(--shadow-main); border: 1.5px solid var(--card-border);
+            }
+            .img-caption { font-size: 12px; font-weight: 800; color: var(--text-secondary); margin-top: 10px; }
+
+            /* الأمثلة التطبيقية الثلاثة بلون الدرس البرتقالي */
+            .example-box {
+                background: var(--light-bg); border: 1.5px solid var(--border-glow); border-radius: 20px;
+                padding: 16px; font-size: 13px; font-weight: 700; line-height: 1.8; margin-top: 10px; box-shadow: var(--shadow-main);
+            }
+            .example-title { font-weight: 900; color: var(--primary); font-size: 13.5px; margin-bottom: 8px; }
+
+            /* زر فتح نافذة الأسئلة */
+            .modal-trigger-btn {
+                background: var(--card-bg); border: 1.5px solid var(--border-glow); color: var(--primary); padding: 14px 18px; border-radius: 20px; font-family: 'Cairo', sans-serif; font-size: 13.5px; font-weight: 900; cursor: pointer; display: flex; align-items: center; justify-content: space-between; width: 100%; margin: 14px 0; box-shadow: var(--shadow-main); transition: 0.25s;
+            }
+            .modal-trigger-btn:hover { background: var(--light-bg); transform: translateY(-2px); border-color: var(--primary); }
+
+            /* تصميم النافذة المنبثقة (Modal) */
+            .custom-modal-overlay {
+                position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 99999; opacity: 0; visibility: hidden; transition: 0.3s ease; padding: 16px;
+            }
+            .custom-modal-overlay.active { opacity: 1; visibility: visible; }
+            .custom-modal-box {
+                background: var(--card-bg); border: 2px solid var(--border-glow); border-radius: 28px; width: 100%; max-width: 520px; padding: 24px; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3); transform: scale(0.9); transition: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); display: flex; flex-direction: column; gap: 16px; position: relative;
+            }
+            .custom-modal-overlay.active .custom-modal-box { transform: scale(1); }
+            .custom-modal-header { display: flex; align-items: center; justify-content: space-between; border-bottom: 1.5px dashed var(--card-border); padding-bottom: 12px; }
+            .custom-modal-title { font-size: 15px; font-weight: 950; color: var(--primary); display: flex; align-items: center; gap: 8px; }
+            .custom-modal-close {
+                background: var(--light-bg); border: 1.5px solid var(--border-glow); width: 36px; height: 36px; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: var(--text-primary); font-size: 16px; font-weight: 900; cursor: pointer; transition: 0.2s;
+            }
+            .custom-modal-close:hover { background: var(--primary); color: #FFFFFF; }
+            .custom-modal-body { display: flex; flex-direction: column; gap: 12px; max-height: 65vh; overflow-y: auto; padding-left: 4px; }
+
+            .quiz-modal-item {
+                background: var(--light-bg); border: 1.5px solid var(--border-glow); border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 10px; box-shadow: var(--shadow-main);
+            }
+            .quiz-modal-q { font-size: 13.5px; font-weight: 900; color: var(--text-primary); line-height: 1.7; }
+            .quiz-modal-a {
+                font-size: 13px; font-weight: 700; color: #059669; background: rgba(16, 185, 129, 0.1); padding: 10px 14px; border-radius: 14px; border-right: 3.5px solid #059669; line-height: 1.7;
+            }
+
+            .bottom-nav {
+                position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); width: calc(100% - 28px); max-width: 500px; background: var(--header-bg); backdrop-filter: blur(15px); display: flex; justify-content: space-around; align-items: center; padding: 8px 10px; border: 1.5px solid var(--header-border); border-radius: 22px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15); z-index: 999;
+            }
+            .bottom-nav a { color: var(--text-secondary); text-decoration: none; font-size: 11.5px; text-align: center; font-weight: 800; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 6px 12px; border-radius: 16px; flex: 1; transition: 0.25s; }
+            .bottom-nav a span { font-size: 18px; line-height: 1; }
+            .bottom-nav a:hover { color: var(--primary); }
+            .bottom-nav a.active { color: var(--primary); background: var(--light-bg); border: 1.5px solid var(--border-glow); }
+        </style>
+    </head>
+    <body>
+
+        <div class="top-progress-bar"><div class="top-progress-fill" id="progressFill"></div></div>
+
+        <div class="container">
+            <div class="nav-bar">
+                <a href="practical-surveying.html" class="back-btn" title="رجوع لقسم العمل المساحي">←</a>
+                <div class="brand-minimalist-box">
+                    <span class="brand-main-title">المساحة التاكيومترية</span>
+                    <span class="brand-subtitle-text">أكاديمية العلوم التطبيقية</span>
+                </div>
+                <button class="theme-btn" id="themeToggleBtn" title="تغيير الثيم">🌙</button>
+            </div>
+
+            <!-- كارت الشرح الشامل -->
+            <div class="hero-card">
+                <div class="pro-hero-badge">
+                    <span class="pro-badge-dot"></span>
+                    أكاديمية العلوم التطبيقية • هندسة المساحة والجيوماتكس
+                </div>
+                <h1 class="hero-title">المساحة التاكيومترية والقاعدة الأفقية</h1>
+                <p class="hero-desc">
+                    يغطي هذا الدرس الطرق البصرية غير المباشرة لقياس المسافات والمناسيب، وتحديداً الاعتماد على القاعدة الأفقية وذراع المسافة الثابت في التضاريس الصعبة وشديدة الانحدار.
+                </p>
+            </div>
+
+            <!-- محتوى الدرس -->
+            <div class="lesson-card">
+                <div class="lesson-header">
+                    <div class="lesson-title-box">
+                        <span class="lesson-tag">القياس البصري غير المباشر</span>
+                        <h2 class="lesson-heading">المساحة التاكيومترية والقاعدة الأفقية</h2>
+                    </div>
+                    <div class="lesson-icon-badge">🔭</div>
+                </div>
+
+                <div class="section-block">
+                    <div class="block-title">1. المفاهيم الأساسية وطريقة القاعدة الأفقية</div>
+                    
+                    <!-- تعريف التاكيومتري -->
+                    <div class="glass-definition-card">
+                        <div class="glass-def-title"><span>🔭</span><span>المساحة التاكيومترية</span></div>
+                        <div class="term-pills-row">
+                            <div class="term-en-pill">Tackymetry Surveying</div>
+                        </div>
+                        <p class="glass-def-text">هي طريقة قياس أفقية ورأسية سريعة بطرق غير مباشرة باستخدام الأجهزة البصرية والعدسات دون الحاجة لمد الشريط لمسافات طويلة.</p>
+                        
+                        <ul class="detailed-sub-list">
+                            <li><strong>الهدف الميداني:</strong> سرعة إنجاز الرفع المساحي الطبوغرافي في الأراضي الوعرة.</li>
+                            <li><strong>العناصر المرصودة:</strong> المسافة الأفقية (D)، الزاوية الرأسية، وفرق المنسوب.</li>
+                        </ul>
+                    </div>
+
+                    <!-- القاعدة الأفقية -->
+                    <div class="glass-definition-card">
+                        <div class="glass-def-title"><span>📏</span><span>القاعدة الأفقية وذراع المسافة</span></div>
+                        <div class="term-pills-row">
+                            <div class="term-en-pill">Horizontal Base</div>
+                        </div>
+                        <p class="glass-def-text">تعتمد على تثبيت مسطرة (ذراع مسافة) بطول ثابت (غالباً 2 متر) على إحدى النقطتين ورصدها بجهاز الثيودوليت من النقطة الأخرى.</p>
+                        
+                        <ul class="detailed-sub-list">
+                            <li><strong>طريقة العمل:</strong> يُقاس الانفراج الزوايي للذراع الأفقية بدقة شديدة لحساب المسافة.</li>
+                            <li><strong>المميزات:</strong> تتغلب على عقبات العوائق المائية والأودية شديدة الانحدار.</li>
+                        </ul>
+                    </div>
+
+                    <div class="lesson-img-box">
+                        <img src="Space images/lesson3-horizontal-base.png" alt="التاكيومترية باستخدام القاعدة الأفقية" class="zoomable-img">
+                        <div class="img-caption">شكل توضيحي: التاكيومترية باستخدام القاعدة الأفقية وذراع المسافة</div>
+                    </div>
+
+                    <div class="formula-box">D = ( 0.5 ) * Cotan ( angle / 2 ) * ( طول ذراع المسافة )</div>
+                    
+                    <!-- دليل وطريقة الحساب على الآلة اليدوية خطوة بخطوة -->
+                    <div class="manual-calc-guide">
+                        <div class="manual-calc-guide-title"><span>📱</span><span>طريقة الحساب خطوة بخطوة على الآلة الحاسبة اليدوية:</span></div>
+                        تأكد أولاً أن الآلة على وضع الدرجات <code>Deg</code>، ثم اضغط بالترتيب التالي:<br>
+                        1. افتح قوسين واكتب الزاوية مقسومة على اتنين: <code>( ( angle ÷ 2 ) )</code> ثم اضغط <code>tan</code>.<br>
+                        2. اقلب الناتج لجلب الـ Cotan بالضغط على زرار المقلوب: <code>1/x</code> (أو أس <code>^-1</code>).<br>
+                        3. أكمل باقي العملية بالضرب المباشر: <code>× 0.5 × طول الذراع =</code> لتظهر المسافة الأفقية (D) بالمتر فوراً.
+                    </div>
+
+                    <!-- آلة حاسبة تفاعلية -->
+                    <div class="calc-container">
+                        <div class="calc-title"><span>🧮</span><span>حاسبة القاعدة الأفقية التفاعلية</span></div>
+                        <div class="calc-inputs-grid">
+                            <div class="calc-input-group">
+                                <label>الزاوية المرصودة (بالدرجات)</label>
+                                <input type="number" id="calcAngle" class="calc-input" placeholder="مثال: 1.5" step="any">
+                            </div>
+                            <div class="calc-input-group">
+                                <label>طول الذراع (متر)</label>
+                                <input type="number" id="calcLength" class="calc-input" value="2" step="any">
+                            </div>
+                        </div>
+                        <button class="calc-btn" onclick="calculateHorizontalBase()">حساب المسافة (D)</button>
+                        <div class="calc-result" id="calcResultBox"></div>
+                    </div>
+                </div>
+
+                <!-- الأمثلة التطبيقية الثلاثة بلون الدرس -->
+                <div class="example-box">
+                    <div class="example-title">المثال التطبيقي الأول (حساب المسافة بقاعدة 2 متر):</div>
+                    <strong>المسألة:</strong> رُصدت قاعدة أفقية طولها الثابت 2 متر باستخدام الثيودوليت، فكانت الزاوية المرصودة تقابل الانفراج 1.5 درجة، احسب المسافة الأفقية (D).<br><br>
+                    <strong>الحل:</strong><br>
+                    بتطبيق القانون الرياضي: <code style="color:var(--primary);">D = 0.5 × Cotan(1.5° / 2) × 2</code> لتنتج المسافة الأفقية بدقة عالية في الموقع.
+                </div>
+
+                <div class="example-box">
+                    <div class="example-title">المثال التطبيقي الثاني (تغيير طول ذراع المسافة):</div>
+                    <strong>المسألة:</strong> في مشروع هندسي آخر، تم استبدال ذراع المسافة ليصبح بطول 3 أمتار، وكانت زاوية الانفراج المرصودة 2 درجة، فما هي المسافة الأفقية الناتجة؟<br><br>
+                    <strong>الحل:</strong><br>
+                    نعوض بطول الذراع الجديد (3 متر) في العلاقة التاكيومترية للحصول على المسافة الميدانية متجاوزين العوائق الطبيعية.
+                </div>
+
+                <div class="example-box">
+                    <div class="example-title">المثال التطبيقي الثالث (التحقق من زوايا الرصد):</div>
+                    <strong>المسألة:</strong> إذا كانت المسافة الأفقية المقاسة بين محطتين عبر القاعدة الأفقية هي 100 متر، واستُخدم ذراع مسافة 2 متر، فكيف نتأكد من صحة الزاوية المرصودة؟<br><br>
+                    <strong>الحل:</strong><br>
+                    يتم عكس القانون واستخراج قيمة الزاوية المتوقعة ومقارنتها بالرصد الميداني للتأكد من خلو الأرصاد البصرية من أي خطأ بشري أو انكسار جوي.
+                </div>
+
+                <!-- زر فتح نافذة الأسئلة -->
+                <button class="modal-trigger-btn" onclick="openModal('quizModal')">
+                    <span>⚡ 5 أسئلة محلولة لدرس المساحة التاكيومترية</span>
+                    <span>←</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- نافذة منبثقة للأسئلة -->
+        <div class="custom-modal-overlay" id="quizModal">
+            <div class="custom-modal-box">
+                <div class="custom-modal-header">
+                    <div class="custom-modal-title"><span>⚡</span><span>5 أسئلة محلولة لدرس المساحة التاكيومترية</span></div>
+                    <button class="custom-modal-close" onclick="closeModal('quizModal')">✕</button>
+                </div>
+                <div class="custom-modal-body">
+                    
+                    <div class="quiz-modal-item">
+                        <div class="quiz-modal-q">س1: ما هو الأساس العلمي للمساحة التاكيومترية؟</div>
+                        <div class="quiz-modal-a"><strong>الإجابة:</strong> القياس البصري غير المباشر للمسافات والمناسيب.</div>
+                    </div>
+
+                    <div class="quiz-modal-item">
+                        <div class="quiz-modal-q">س2: ما هو الطول العرفي الشائع لذراع المسافة في القاعدة الأفقية؟</div>
+                        <div class="quiz-modal-a"><strong>الإجابة:</strong> غالباً **2 متر**.</div>
+                    </div>
+
+                    <div class="quiz-modal-item">
+                        <div class="quiz-modal-q">س3: متى نلجأ لاستخدام القاعدة الأفقية ميدانياً؟</div>
+                        <div class="quiz-modal-a"><strong>الإجابة:</strong> في الأراضي شديدة الانحدار والعوائق المائية التي تمنع مد الشريط.</div>
+                    </div>
+
+                    <div class="quiz-modal-item">
+                        <div class="quiz-modal-q">س4: ما هي الدالة المثلثية المستخدمة في قانون القاعدة الأفقية؟</div>
+                        <div class="quiz-modal-a"><strong>الإجابة:</strong> ظل التمام (Cotan) لنصف الزاوية.</div>
+                    </div>
+
+                    <div class="quiz-modal-item">
+                        <div class="quiz-modal-q">س5: ما فائدة استخدام ذراع مسافة ثابت الطول؟</div>
+                        <div class="quiz-modal-a"><strong>الإجابة:</strong> لتسهيل حساب المسافات الأفقية بدقة من رصات الثيودوليت الزواوية.</div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="bottom-nav">
+            <a href="index.html"><span>🏠</span>الرئيسية</a>
+            <a href="surveying.html" class="active"><span>📐</span>المساحة</a>
+            <a href="english.html"><span>🇬🇧</span>الإنجليزي</a>
+            <a href="programming.html"><span>💻</span>البرمجة</a>
+        </div>
+
+        <script>
+            // تحويل الدرجات لراديان
+            function toRadians(deg) { return deg * (Math.PI / 180); }
+
+            // دالة الآلة الحاسبة للقاعدة الأفقية
+            function calculateHorizontalBase() {
+                let angle = parseFloat(document.getElementById('calcAngle').value);
+                let length = parseFloat(document.getElementById('calcLength').value);
+                let resultBox = document.getElementById('calcResultBox');
+                
+                if (isNaN(angle) || isNaN(length)) {
+                    resultBox.style.display = 'block';
+                    resultBox.innerHTML = '⚠️ من فضلك أدخل قيم صحيحة للزاوية والطول';
+                    resultBox.style.color = '#EF4444';
+                    return;
+                }
+
+                let halfAngleRad = toRadians(angle / 2);
+                let tanVal = Math.tan(halfAngleRad);
+                if (tanVal === 0) {
+                    resultBox.style.display = 'block';
+                    resultBox.innerHTML = '⚠️ خطأ: قيمة الزاوية صغيرة جداً أو صفرية!';
+                    resultBox.style.color = '#EF4444';
+                    return;
+                }
+                
+                let cotanVal = 1 / tanVal;
+                let D = 0.5 * cotanVal * length;
+
+                resultBox.style.display = 'block';
+                resultBox.style.color = 'var(--primary)';
+                resultBox.innerHTML = `✅ المسافة الأفقية (D) = <span style="direction: ltr; display: inline-block;">${D.toFixed(3)} متر</span>`;
+            }
+
+            // دوال التحكم في النافذة المنبثقة
+            function openModal(modalId) {
+                document.getElementById(modalId).classList.add('active');
+            }
+            function closeModal(modalId) {
+                document.getElementById(modalId).classList.remove('active');
+            }
+            window.addEventListener('click', function(e) {
+                if (e.target.classList.contains('custom-modal-overlay')) {
+                    e.target.classList.remove('active');
+                }
+            });
+
+            // مكبر الصور الميدانية
+            document.addEventListener("DOMContentLoaded", function() {
+                const images = document.querySelectorAll(".zoomable-img");
+                images.forEach(img => {
+                    let scale = 1;
+                    let initialDistance = null;
+
+                    function updateScale() {
+                        img.style.transform = `scale(${scale})`;
+                        img.style.zIndex = scale > 1 ? "50" : "1";
+                        img.style.position = scale > 1 ? "relative" : "static";
+                    }
+
+                    img.addEventListener('touchstart', function(e) {
+                        if (e.touches.length === 2) {
+                            initialDistance = Math.hypot(e.touches[0].pageX - e.touches[1].pageX, e.touches[0].pageY - e.touches[1].pageY);
+                        }
+                    });
+
+                    img.addEventListener('touchmove', function(e) {
+                        if (e.touches.length === 2 && initialDistance) {
+                            let currentDistance = Math.hypot(e.touches[0].pageX - e.touches[1].pageX, e.touches[0].pageY - e.touches[1].pageY);
+                            scale = Math.min(Math.max(1, scale * (currentDistance / initialDistance)), 3.5);
+                            initialDistance = currentDistance;
+                            updateScale();
+                        }
+                    });
+
+                    img.addEventListener('touchend', function() { initialDistance = null; });
+                    img.addEventListener('dblclick', function() { scale = scale > 1 ? 1 : 2.2; updateScale(); });
+                });
+            });
+
+            // إدارة الثيمات
+            document.addEventListener("DOMContentLoaded", function() {
+                let themeBtn = document.getElementById("themeToggleBtn");
+                function applyTheme(isDark) {
+                    if (isDark) {
+                        document.documentElement.classList.add("dark-mode");
+                        localStorage.setItem("em_theme", "dark");
+                        if (themeBtn) themeBtn.innerHTML = "☀️";
+                    } else {
+                        document.documentElement.classList.remove("dark-mode");
+                        localStorage.setItem("em_theme", "light");
+                        if (themeBtn) themeBtn.innerHTML = "🌙";
+                    }
+                }
+                applyTheme(localStorage.getItem("em_theme") === "dark");
+                if (themeBtn) {
+                    themeBtn.addEventListener("click", () => {
+                        applyTheme(!document.documentElement.classList.contains("dark-mode"));
+                    });
+                }
+            });
+
+            // شريط التقدم العلوي
+            window.onscroll = function() {
+                let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                let scrolled = (winScroll / height) * 100;
+                let progressFill = document.getElementById("progressFill");
+                if (progressFill) progressFill.style.width = scrolled + "%";
+            };
+        </script>
+    </body>
+</html>
