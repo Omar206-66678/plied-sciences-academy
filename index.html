@@ -736,7 +736,7 @@
                 </div>
             </div>
 
-            <!-- كارت الترحيب الثابت -->
+            <!-- كارت الترحيب الثابت (مع مسارات الصور المحدثة) -->
             <div class="hero-section-wrapper" data-nav-color="#0284C7" data-nav-glow="rgba(2, 132, 199, 0.35)">
                 <div class="global-hero-card">
                     <div class="hero-header-split">
@@ -862,7 +862,7 @@
             </div>
         </div>
 
-        <!-- الشريط السفلي القياسي (بدون بروفايل خارجي، والبروفايل والتسجيل داخل مسار الألعاب) -->
+        <!-- الشريط السفلي القياسي -->
         <div class="bottom-nav" id="bottomNav">
             <a href="index.html" class="active"><span class="nav-icon">🏠</span>الرئيسية</a>
             <a href="english/english.html"><span class="nav-icon">🇬🇧</span>الإنجليزي</a>
@@ -977,7 +977,6 @@
                     themeSwitch.addEventListener("change", () => applyThemeState(themeSwitch.checked));
                 }
 
-                /* تفاعل لون الشريط السفلي بناءً على القسم الظاهر أثناء التمرير */
                 let sections = document.querySelectorAll("[data-nav-color]");
                 function updateBottomNavColor() {
                     let scrollPosition = window.scrollY + window.innerHeight / 2;
