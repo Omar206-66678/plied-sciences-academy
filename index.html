@@ -115,11 +115,28 @@
                 box-sizing: border-box;
             }
 
+            /* حاوية مرنة تتكيف مع الهاتف وسطح المكتب تلقائياً */
             .container { 
                 max-width: 680px; 
                 margin: auto; 
                 width: 100%;
                 box-sizing: border-box;
+                transition: max-width 0.3s ease;
+            }
+
+            /* 🖥️ تعديل العرض التلقائي لشاشات الكمبيوتر الكبيرة */
+            @media (min-width: 992px) {
+                .container {
+                    max-width: 1100px; /* توسيع المنصة على الكمبيوتر لتملأ الشاشة بأناقة */
+                }
+                .pillars-list {
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr); /* عرض الأقسام الثلاثة بجانب بعضها على الكمبيوتر */
+                    gap: 20px;
+                }
+                .hero-gallery-grid {
+                    height: 320px; /* تكبير معرض الصور ليناسب شاشات الديسكتوب الكبيرة */
+                }
             }
 
             /* مؤشر التقدم العلوي */
@@ -318,7 +335,7 @@
                 font-weight: 600;
             }
 
-            /* معرض الصور الثابت والمتناسق مع جميع الشاشات */
+            /* معرض الصور الثابت والمتناسق */
             .hero-gallery-grid {
                 display: grid;
                 grid-template-columns: 1.2fr 1.8fr;
