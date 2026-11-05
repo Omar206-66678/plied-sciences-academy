@@ -2,7 +2,7 @@
 <html lang="ar" dir="rtl">
     <head>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
         <title>علم الأرض والجيولوجيا - أكاديمية العلوم التطبيقية</title>
         <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
         
@@ -21,7 +21,7 @@
                 --text-primary: #F8FAFC;
                 --text-secondary: #94A3B8;
                 
-                --header-bg: rgba(11, 15, 25, 0.85);
+                --header-bg: #0B0F19;
                 --header-border: rgba(4, 120, 87, 0.3);
                 --header-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
                 --shadow-main: 0 20px 50px rgba(0, 0, 0, 0.5);
@@ -36,6 +36,9 @@
                 --math-color: #2DD4BF; 
                 --content-bg: rgba(255, 255, 255, 0.02);
                 --term-bg: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(4, 120, 87, 0.05));
+
+                --nav-theme-color: #10B981;
+                --nav-glow-color: rgba(16, 185, 129, 0.35);
             }
 
             html:not(.dark-mode) {
@@ -45,7 +48,7 @@
                 --text-primary: #0F172A;
                 --text-secondary: #475569;
                 
-                --header-bg: rgba(255, 255, 255, 0.85);
+                --header-bg: #FFFFFF;
                 --header-border: rgba(4, 120, 87, 0.15);
                 --header-shadow: 0 10px 30px rgba(4, 120, 87, 0.08);
                 --shadow-main: 0 20px 40px -15px rgba(15, 23, 42, 0.08);
@@ -60,6 +63,9 @@
                 --math-color: #0D9488; 
                 --content-bg: rgba(248, 250, 252, 0.8);
                 --term-bg: linear-gradient(135deg, rgba(4, 120, 87, 0.1), rgba(16, 185, 129, 0.03));
+
+                --nav-theme-color: #047857;
+                --nav-glow-color: rgba(4, 120, 87, 0.25);
             }
 
             body {
@@ -88,17 +94,24 @@
 
             .nav-bar {
                 display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px;
-                background: var(--header-bg); backdrop-filter: blur(16px); border: 1.5px solid var(--header-border); padding: 12px 18px;
-                border-radius: 24px; box-shadow: var(--header-shadow);
+                background: var(--header-bg); border: 1.5px solid var(--header-border); padding: 12px 18px;
+                border-radius: 24px; box-shadow: var(--header-shadow); gap: 10px;
             }
-            .brand-minimalist-box { display: flex; flex-direction: column; align-items: center; text-align: center; }
-            .brand-main-title { font-size: 14px; font-weight: 900; color: var(--text-primary); }
-            .brand-subtitle-text { font-size: 10px; font-weight: 800; color: var(--primary); letter-spacing: 0.5px; text-transform: uppercase; }
+            .brand-minimalist-box { display: flex; flex-direction: column; align-items: center; text-align: center; flex: 1; padding: 0 4px; min-width: 0; }
+            .brand-main-title { font-size: 13.5px; font-weight: 900; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
+            .brand-subtitle-text { font-size: 10px; font-weight: 800; color: var(--primary); letter-spacing: 0.5px; text-transform: uppercase; margin-top: 2px; }
+
+            .nav-actions-group {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                flex-shrink: 0;
+            }
 
             .back-btn, .theme-btn {
                 background: var(--light-bg); border: 1.5px solid var(--border-glow);
                 width: 38px; height: 38px; border-radius: 14px; display: flex; align-items: center; justify-content: center;
-                color: var(--text-primary); font-size: 16px; text-decoration: none; cursor: pointer; transition: 0.3s;
+                color: var(--text-primary); font-size: 16px; text-decoration: none; cursor: pointer; transition: 0.3s; flex-shrink: 0;
             }
             .back-btn:hover, .theme-btn:hover { transform: scale(1.08); border-color: var(--primary); box-shadow: 0 0 15px var(--border-glow); }
 
@@ -249,15 +262,27 @@
             .quiz-item-q { font-weight: 850; color: var(--text-primary); line-height: 1.8; }
             .quiz-item-a { font-weight: 750; color: var(--primary); background: var(--card-bg); padding: 10px 14px; border-radius: 14px; border-right: 4px solid var(--primary); line-height: 1.8; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
 
+            /* شريط التنقل السفلي بخلفية صلبة وثيم متناسق تماماً */
             .bottom-nav {
-                position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); width: calc(100% - 28px); max-width: 500px;
-                background: var(--header-bg); backdrop-filter: blur(20px); display: flex; justify-content: space-around; align-items: center;
-                padding: 10px 12px; border: 1.5px solid var(--header-border); border-radius: 24px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4); z-index: 999;
+                position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); 
+                width: calc(100% - 32px); max-width: 460px;
+                background: var(--header-bg);
+                display: flex; justify-content: space-around; align-items: center;
+                padding: 6px 10px; border-radius: 24px; 
+                border: 1.5px solid var(--card-border);
+                box-shadow: 0 8px 24px rgba(0,0,0,0.25); 
+                z-index: 999; box-sizing: border-box;
+                transition: all 0.4s ease;
             }
-            .bottom-nav a { color: var(--text-secondary); text-decoration: none; font-size: 11px; text-align: center; font-weight: 800; display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 6px 12px; border-radius: 16px; flex: 1; transition: 0.3s; }
-            .bottom-nav a span { font-size: 18px; line-height: 1; }
-            .bottom-nav a:hover { color: var(--primary); transform: translateY(-2px); }
-            .bottom-nav a.active { color: var(--primary); background: var(--light-bg); border: 1.5px solid var(--border-glow); box-shadow: 0 0 15px var(--border-glow); }
+            .bottom-nav a { 
+                color: var(--text-secondary); text-decoration: none; font-size: 10px; text-align: center; font-weight: 800; 
+                display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 12px; border-radius: 16px; flex: 1; 
+                border: 1px solid rgba(128, 128, 128, 0.18); background: rgba(128, 128, 128, 0.05);
+                transition: all 0.3s ease;
+            }
+            .bottom-nav a span { font-size: 16px; line-height: 1; }
+            .bottom-nav a:hover { color: var(--nav-theme-color); border-color: var(--nav-theme-color); background: rgba(128, 128, 128, 0.1); }
+            .bottom-nav a.active { color: #FFFFFF; background: var(--nav-theme-color); border-color: var(--nav-theme-color); box-shadow: 0 4px 15px var(--nav-glow-color); }
         </style>
     </head>
     <body>
@@ -265,14 +290,16 @@
         <div class="top-progress-bar"><div class="top-progress-fill" id="progressFill"></div></div>
 
         <div class="container">
+            <!-- الهيدر العلوي المُعدل: زر رجوع، عنوان بالمنتصف، زر ثيم أقصى اليسار بدون أيقونات إضافية -->
             <div class="nav-bar">
-                <!-- تم تعديل مسار زر الرجوع ليصعد إلى صفحة قسم المساحة الرئيسي -->
                 <a href="../surveying.html" class="back-btn" title="رجوع لقسم المساحة">←</a>
                 <div class="brand-minimalist-box">
                     <span class="brand-main-title">علم الأرض والجيولوجيا</span>
                     <span class="brand-subtitle-text">أكاديمية العلوم التطبيقية</span>
                 </div>
-                <button class="theme-btn" id="themeToggleBtn" title="تغيير الثيم">🌙</button>
+                <div class="nav-actions-group">
+                    <button class="theme-btn" id="themeToggleBtn" title="تغيير الثيم">🌙</button>
+                </div>
             </div>
 
             <!-- كارت الترحيب السينمائي -->
@@ -472,7 +499,7 @@
                                 <tr>
                                     <td>علم المحيطات</td>
                                     <td>علم المحيطات الفيزيائي / جيولوجيا البحار</td>
-                                    <td>الملوحة والتيارات، والصفات الرئيسية لقاع المحيط.</td>
+                                    <td>الملوحة والتيارات، والصفات الرئيسية قاع المحيط.</td>
                                 </tr>
                                 <tr>
                                     <td>علم البيئة</td>
@@ -815,12 +842,12 @@
             </div>
         </div>
 
-        <!-- تم تحديث مسارات التنقل السفلي لترتبط بالجذر الرئيسي وباقي الأقسام -->
-        <div class="bottom-nav">
-            <a href="../../index.html"><span>🏠</span>الرئيسية</a>
-            <a href="../surveying.html" class="active"><span>📐</span>المساحة</a>
-            <a href="../../english/english.html"><span>🇬🇧</span>الإنجليزي</a>
-            <a href="../../programming/programming.html"><span>💻</span>البرمجة</a>
+        <!-- شريط التنقل السفلي المطور بخلفية صلبة وثيم متناسق -->
+        <div class="bottom-nav" id="bottomNav">
+            <a href="../../index.html"><span class="nav-icon">🏠</span>الرئيسية</a>
+            <a href="../surveying.html" class="active"><span class="nav-icon">📐</span>المساحة</a>
+            <a href="../../english/english.html"><span class="nav-icon">🇬🇧</span>الإنجليزي</a>
+            <a href="../../programming/programming.html"><span class="nav-icon">💻</span>البرمجة</a>
         </div>
 
         <script>
