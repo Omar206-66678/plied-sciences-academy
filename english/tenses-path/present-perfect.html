@@ -31,7 +31,6 @@
                 --light-bg: rgba(30, 144, 255, 0.06);
                 --border-glow: rgba(30, 144, 255, 0.35);
 
-                /* 🎨 ألوان تمييز الجمل والكلمات */
                 --tense-pos: #2563EB; 
                 --tense-neg: #DC2626; 
                 --tense-ques: #059669; 
@@ -40,7 +39,6 @@
                 --s-color: #DB2777;
                 --heading-pure-color: #0F172A; 
 
-                /* 🌈 متغيرات تفاعل الشريط السفلي */
                 --nav-theme-color: #1E90FF;
                 --nav-glow-color: rgba(30, 144, 255, 0.25);
             }
@@ -189,7 +187,6 @@
             .app-main-heading { margin: 0; font-size: 20px; font-weight: 950; color: var(--heading-pure-color); letter-spacing: -0.4px; font-family: 'Cairo', sans-serif; direction: ltr; text-align: right; }
             .app-sub-pill { display: inline-flex; align-items: center; gap: 6px; background: var(--light-bg); border: 1.5px solid var(--border-glow); color: var(--heading-pure-color); padding: 6px 14px; border-radius: 12px; font-size: 12px; font-weight: 850; width: fit-content; }
 
-            /* 🌟 الكروت الفرعية بلون أزرق موحد */
             .glass-glow-card {
                 background: var(--card-bg);
                 backdrop-filter: blur(16px);
@@ -332,7 +329,6 @@
             .quiz-next-btn { background: #2563EB; color: #FFFFFF; border: none; padding: 8px 18px; border-radius: 12px; font-family: 'Cairo', sans-serif; font-weight: 900; cursor: pointer; display: none; }
             .quiz-next-btn.active { display: block; }
 
-            /* 🌟 شريط التنقل السفلي المطور الموحد للمنصة */
             .bottom-nav {
                 position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); 
                 width: calc(100% - 32px); max-width: 480px;
@@ -426,10 +422,10 @@
         </div>
 
         <div class="container">
-            <!-- شريط الهيدر -->
+            <!-- شريط الهيدر (تم تعديل زر العودة لأيقونة سهم للخارج ➔) -->
             <div class="nav-bar">
                 <div class="nav-right-group">
-                    <a href="tenses-path.html" class="home-icon-btn" title="الرجوع للأزمنة">🏠</a>
+                    <a href="tenses-path.html" class="home-icon-btn" title="الرجوع للأزمنة">➔</a>
                 </div>
                 <div class="nav-titles-box">
                     <h1 class="nav-main-title">المضارع التام</h1>
@@ -511,7 +507,6 @@
                             </div>
                         </div>
 
-                        <!-- قاعدة الأفعال المنتظمة وغير المنتظمة -->
                         <div class="method-box">
                             <div class="method-box-title" style="color: #2563EB;">📌 قواعد التصريف الثالث (V3):</div>
                             <div style="font-size: 12px; font-weight: 800; color: var(--text-primary); display: flex; flex-direction: column; gap: 6px; margin-top: 6px; line-height: 1.6; text-align: right;" dir="rtl">
@@ -521,7 +516,6 @@
                             </div>
                         </div>
 
-                        <!-- 7 كروت التطبيق العملي للإثبات -->
                         <div class="prep-practice-group">
                             <div style="font-size: 12px; font-weight: 900; color: #2563EB; margin-top: 4px;">🎯 التطبيق العملي (7 كروت للإثبات):</div>
                             <div class="icon-cards-list">
@@ -585,7 +579,7 @@
                                             <div class="line-en-1"><strong style="color:var(--subj-color);">It</strong> <strong style="color:var(--tense-pos);">has</strong> <span style="color:var(--tense-pos);">stopped</span> raining.</div>
                                             <button class="speak-btn pos-speak" onclick="speakText('It has stopped raining.', 'card-pos-7', this)" title="استمع للنطق">🔊</button>
                                         </div>
-                                        <div class="line-ar-1"><strong style="color:var(--subj-color);">هي</strong> <strong style="color:var(--tense-pos);"></strong>توقفت</strong> عن المطر.</div>
+                                        <div class="line-ar-1"><strong style="color:var(--subj-color);">هي</strong> <strong style="color:var(--tense-pos);">توقفت</strong> عن المطر.</div>
                                     </div>
                                 </div>
                             </div>
@@ -611,7 +605,6 @@
                             </div>
                         </div>
 
-                        <!-- 7 كروت التطبيق العملي للنفي -->
                         <div class="prep-practice-group">
                             <div style="font-size: 12px; font-weight: 900; color: #2563EB; margin-top: 4px;">🎯 التطبيق العملي (7 كروت للنفي):</div>
                             <div class="icon-cards-list">
@@ -675,7 +668,7 @@
                                             <div class="line-en-1"><strong style="color:var(--subj-color);">It</strong> <strong style="color:var(--tense-neg);">hasn't</strong> <span style="color:var(--tense-neg);">rained</span>.</div>
                                             <button class="speak-btn pos-speak" onclick="speakText('It hasnt rained.', 'card-neg-7', this)" title="استمع للنطق">🔊</button>
                                         </div>
-                                        <div class="line-ar-1"><strong style="color:var(--subj-color);">هي</strong> <strong style="color:var(--tense-n">لم تمطر</strong>.</div>
+                                        <div class="line-ar-1"><strong style="color:var(--subj-color);">هي</strong> <strong style="color:var(--tense-neg);">لم تمطر</strong>.</div>
                                     </div>
                                 </div>
                             </div>
@@ -701,7 +694,6 @@
                             </div>
                         </div>
 
-                        <!-- 7 كروت التطبيق العملي للاستفهام مع الرد بـ Yes / No -->
                         <div class="prep-practice-group">
                             <div style="font-size: 12px; font-weight: 900; color: #2563EB; margin-top: 4px;">🎯 التطبيق العملي (7 كروت للأسئلة مع الردود):</div>
                             <div class="icon-cards-list">
@@ -920,13 +912,13 @@
 
         </div>
 
-        <!-- شريط التنقل السفلي المطور الموحد للمنصة -->
+        <!-- شريط التنقل السفلي المطور الموحد للمنصة (تم ضبط مسارات الخروج خطوتين للخلف ../../) -->
         <div class="bottom-nav" id="bottomNav">
-            <a href="../index.html"><span class="nav-icon">🏠</span>الرئيسية</a>
-            <a href="../english/english.html"><span class="nav-icon">🇬🇧</span>الإنجليزي</a>
+            <a href="../../index.html"><span class="nav-icon">🏠</span>الرئيسية</a>
+            <a href="../english.html"><span class="nav-icon">🇬🇧</span>الإنجليزي</a>
             <a href="tenses-path.html" class="active"><span class="nav-icon">⏳</span>الأزمنة</a>
-            <a href="../surveying/surveying.html"><span class="nav-icon">📐</span>المساحة</a>
-            <a href="../programming/programming.html"><span class="nav-icon">💻</span>البرمجة</a>
+            <a href="../../surveying/surveying.html"><span class="nav-icon">📐</span>المساحة</a>
+            <a href="../../programming/programming.html"><span class="nav-icon">💻</span>البرمجة</a>
         </div>
 
         <script>
@@ -1124,7 +1116,7 @@
                         if (lastQuizTimestamp > 0 && (now - lastQuizTimestamp < twentyFourHours) && currentSubQuestionIndex === 0) {
                             let remainingTime = twentyFourHours - (now - lastQuizTimestamp);
                             let hoursLeft = Math.ceil(remainingTime / (1000 * 60 * 60));
-                            alert(`عذراً يا بشمهندس، مجموعة التحدي الجديدة تفتح بعد ${hoursLeft} ساعة تقريباً بنظام الـ 24 ساعة! ⏳`);
+                            alert(`عذراً يا باشمهندس، مجموعة التحدي الجديدة تفتح بعد ${hoursLeft} ساعة تقريباً بنظام الـ 24 ساعة! ⏳`);
                             return;
                         }
                         quizModal.classList.add("active");
