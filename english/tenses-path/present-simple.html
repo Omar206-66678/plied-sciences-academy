@@ -31,7 +31,6 @@
                 --light-bg: rgba(30, 144, 255, 0.06);
                 --border-glow: rgba(30, 144, 255, 0.35);
 
-                /* 🎨 ألوان تمييز الجمل والكلمات */
                 --tense-pos: #2563EB; 
                 --tense-neg: #DC2626; 
                 --tense-ques: #059669; 
@@ -40,7 +39,6 @@
                 --s-color: #DB2777;
                 --heading-pure-color: #0F172A; 
 
-                /* 🌈 متغيرات تفاعل الشريط السفلي */
                 --nav-theme-color: #1E90FF;
                 --nav-glow-color: rgba(30, 144, 255, 0.25);
             }
@@ -189,7 +187,6 @@
             .app-main-heading { margin: 0; font-size: 20px; font-weight: 950; color: var(--heading-pure-color); letter-spacing: -0.4px; font-family: 'Cairo', sans-serif; direction: ltr; text-align: right; }
             .app-sub-pill { display: inline-flex; align-items: center; gap: 6px; background: var(--light-bg); border: 1.5px solid var(--border-glow); color: var(--heading-pure-color); padding: 6px 14px; border-radius: 12px; font-size: 12px; font-weight: 850; width: fit-content; }
 
-            /* 🌟 الكروت الفرعية بلون أزرق موحد */
             .glass-glow-card {
                 background: var(--card-bg);
                 backdrop-filter: blur(16px);
@@ -332,7 +329,6 @@
             .quiz-next-btn { background: #2563EB; color: #FFFFFF; border: none; padding: 8px 18px; border-radius: 12px; font-family: 'Cairo', sans-serif; font-weight: 900; cursor: pointer; display: none; }
             .quiz-next-btn.active { display: block; }
 
-            /* 🌟 شريط التنقل السفلي المطور الموحد للمنصة (الترتيب: الرئيسية -> الإنجليزي -> الأزمنة -> المساحة -> البرمجة) */
             .bottom-nav {
                 position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); 
                 width: calc(100% - 32px); max-width: 480px;
@@ -426,7 +422,7 @@
         </div>
 
         <div class="container">
-            <!-- شريط الهيدر -->
+            <!-- شريط الهيدر (تم ضبط زر الرجوع للأزمنة ليكون في نفس المجلد الحالي) -->
             <div class="nav-bar">
                 <div class="nav-right-group">
                     <a href="tenses-path.html" class="home-icon-btn" title="الرجوع للأزمنة">🏠</a>
@@ -513,22 +509,20 @@
                             <div class="method-box-title" style="color: #2563EB;">💡 قاعدة تكوين الجملة المثبتة</div>
                             <div style="font-size: 12.5px; font-weight: 800; color: var(--text-primary); display: flex; flex-direction: column; gap: 8px; margin-top: 4px; line-height: 1.6;">
                                 <div>🔹 ضمائر الجمع والمتكلم (<strong style="color:var(--subj-color);">I</strong>, <strong style="color:var(--subj-color);">We</strong>, <strong style="color:var(--subj-color);">They</strong>, <strong style="color:var(--subj-color);">You</strong>) أو أي اسم جمع: يأتي بعدها الفعل في مصدره الأساسي (بدون أي إضافات).</div>
-                                <div>🔹 ضمائر المفرد الغائب (<strong style="color:var(--subj-color);">He</strong>, <strong style="color:var(--subj-color);">She</strong>, <strong style="color:var(--subj-color);">It</strong>) أو أي اسم مفرد (مثل: <strong style="color:var(--subj-color);">أحمد</strong>، <strong style="color:var(--subj-color);">الدكتورة</strong>، <strong style="color:var(--subj-color);">القط</strong>): يجب أن نضيف للفعل <strong style="color:var(--s-color);">s</strong> أو <strong style="color:var(--s-color);">es</strong> أو <strong style="color:var(--s-color);">ies</strong>.</div>
+                                <div>🔹 ضمائر المفرد الغائب (<strong style="color:var(--subj-color);">He</strong>, <strong style="color:var(--subj-color);">She</strong>, <strong style="color:var(--subj-color);">It</strong>) أو أي اسم مفرد: يجب أن نضيف للفعل <strong style="color:var(--s-color);">s</strong> أو <strong style="color:var(--s-color);">es</strong> أو <strong style="color:var(--s-color);">ies</strong>.</div>
                             </div>
                         </div>
 
-                        <!-- كارت إضافة s / es / ies -->
                         <div class="method-box">
                             <div class="method-box-title" style="color: #2563EB;">📌 متى نضع (s / es / ies) مع المفرد الغائب؟</div>
                             <div style="font-size: 12px; font-weight: 800; color: var(--text-primary); display: flex; flex-direction: column; gap: 6px; margin-top: 6px; line-height: 1.6;" dir="ltr">
                                 <div style="text-align: right; direction: rtl; color: var(--text-secondary); font-size: 11.5px;">مع الضمائر (He, She, It) نضيف حسب نهاية الفعل:</div>
                                 <div>1. <strong>es</strong> ➔ إذا انتهى بـ (ch, sh, ss, x, o): <span style="color:var(--s-color);">watch ➔ watches / go ➔ goes</span></div>
-                                <div>2. <strong>ies</strong> ➔ إذا انتهى بـ (y) وقبله حرف ساكن (نحذف y ونضع ies): <span style="color:var(--s-color);">study ➔ studies</span></div>
+                                <div>2. <strong>ies</strong> ➔ إذا انتهى بـ (y) وقبله حرف ساكن: <span style="color:var(--s-color);">study ➔ studies</span></div>
                                 <div>3. <strong>s</strong> ➔ مع باقي الأفعال العادية: <span style="color:var(--s-color);">play ➔ plays / read ➔ reads</span></div>
                             </div>
                         </div>
 
-                        <!-- 7 كروت التطبيق العملي للإثبات -->
                         <div class="prep-practice-group">
                             <div style="font-size: 12px; font-weight: 900; color: #2563EB; margin-top: 4px;">🎯 التطبيق العملي (7 كروت للإثبات):</div>
                             <div class="icon-cards-list">
@@ -618,7 +612,6 @@
                             </div>
                         </div>
 
-                        <!-- 7 كروت التطبيق العملي للنفي -->
                         <div class="prep-practice-group">
                             <div style="font-size: 12px; font-weight: 900; color: #2563EB; margin-top: 4px;">🎯 التطبيق العملي (7 كروت للنفي):</div>
                             <div class="icon-cards-list">
@@ -708,7 +701,6 @@
                             </div>
                         </div>
 
-                        <!-- 7 كروت التطبيق العملي للاستفهام مع الرد بـ Yes / No -->
                         <div class="prep-practice-group">
                             <div style="font-size: 12px; font-weight: 900; color: #2563EB; margin-top: 4px;">🎯 التطبيق العملي (7 كروت للأسئلة مع الردود):</div>
                             <div class="icon-cards-list">
@@ -883,7 +875,6 @@
                             </div>
                         </div>
 
-                        <!-- عبارات التكرار في نهاية الجملة -->
                         <div class="method-box" style="margin-top: 16px;">
                             <div class="method-box-title" style="color: #2563EB;">⭐ ثانياً: عبارات التكرار (توضع في نهاية الجملة)</div>
                         </div>
@@ -945,13 +936,13 @@
 
         </div>
 
-        <!-- شريط التنقل السفلي المطور الموحد للمنصة (الترتيب: الرئيسية -> الإنجليزي -> الأزمنة -> المساحة -> البرمجة) -->
+        <!-- شريط التنقل السفلي المطور الموحد للمنصة (تم ضبط مسارات الخروج خطوتين للخلف ../../) -->
         <div class="bottom-nav" id="bottomNav">
-            <a href="../index.html"><span class="nav-icon">🏠</span>الرئيسية</a>
-            <a href="../english/english.html"><span class="nav-icon">🇬🇧</span>الإنجليزي</a>
+            <a href="../../index.html"><span class="nav-icon">🏠</span>الرئيسية</a>
+            <a href="../english.html"><span class="nav-icon">🇬🇧</span>الإنجليزي</a>
             <a href="tenses-path.html" class="active"><span class="nav-icon">⏳</span>الأزمنة</a>
-            <a href="../surveying/surveying.html"><span class="nav-icon">📐</span>المساحة</a>
-            <a href="../programming/programming.html"><span class="nav-icon">💻</span>البرمجة</a>
+            <a href="../../surveying/surveying.html"><span class="nav-icon">📐</span>المساحة</a>
+            <a href="../../programming/programming.html"><span class="nav-icon">💻</span>البرمجة</a>
         </div>
 
         <script>
