@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>English Master - منشئ الأفاتار</title>
+<style>
+:root{--bg:#f5f7fb;--card:#fff;--tx:#1f2937;--mut:#6b7280;--pri:#10B981;--bd:#e5e7eb;color-scheme:light;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111827;--card:#1f2937;--tx:#f3f4f6;--mut:#9ca3af;--bd:#374151;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#111827;--card:#1f2937;--tx:#f3f4f6;--mut:#9ca3af;--bd:#374151;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:'Cairo',system-ui,-apple-system,"Segoe UI",Tahoma,sans-serif}
+.app{max-width:560px;margin:0 auto;padding:16px}
+#preview{background:var(--card);border:1px solid var(--bd);border-radius:20px;padding:8px;text-align:center;box-shadow:0 10px 25px rgba(0,0,0,0.1)}
+#preview svg{width:min(240px,65vw);height:auto}
+.tabs{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:6px;padding:12px 0}
+.opts{display:flex;flex-wrap:wrap;gap:10px;background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:14px}
+.sw{width:42px;height:42px;border-radius:50%;border:3px solid var(--bd);cursor:pointer;padding:0}
+.sw.on{border-color:var(--pri);box-shadow:0 0 0 2px var(--card) inset}
+.row{display:flex;gap:10px;margin-top:16px}
+.act{flex:1;padding:12px;border-radius:12px;border:0;font:inherit;font-weight:900;cursor:pointer;background:var(--pri);color:#fff;text-align:center;box-shadow:0 4px 12px rgba(16,185,129,0.3)}
+.act.alt{background:var(--card);color:var(--tx);border:1px solid var(--bd);box-shadow:none}
+.act.confirm { background: #06B6D4; color: #fff; box-shadow: 0 4px 12px rgba(6,182,212,0.3); }
+pre{direction:ltr;text-align:left;background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:12px;overflow-x:auto;font-size:12px;display:none}
+.tab{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 2px;border-radius:12px;font-size:11px;font-weight:800;border:1px solid var(--bd);background:var(--card);color:var(--tx);cursor:pointer}.tab.on{background:var(--pri);border-color:var(--pri);color:#fff}.tab b{font-size:18px;font-weight:400}
+.th{display:flex;flex-direction:column;align-items:center;gap:4px;border:2px solid var(--bd);background:var(--bg);color:var(--tx);border-radius:14px;padding:6px;font:inherit;font-size:12px;font-weight:800;cursor:pointer;width:88px}.th.on{border-color:var(--pri);background:rgba(16,185,129,0.1)}.th svg{width:72px;height:auto;border-radius:10px}
+</style>
+</head>
+<body>
+<div class="app">
+  <div id="preview"></div>
+  <div class="tabs" id="tabs"></div>
+  <div class="opts" id="opts"></div>
+  <div class="row">
+    <button class="act confirm" id="okBtn">✅ موافق</button>
+    <button class="act" id="rnd">🎲 عشوائي</button>
+    <button class="act alt" id="rst">إعادة ضبط</button>
+  </div>
+  <pre id="out"></pre>
+</div>
+<script>
+const SKIN=['#ffe0c7','#ffdbb4','#f1c27d','#e0ac69','#c68642','#a86b3c','#8d5524','#6b4226','#5c3a21','#3d2314'];
+const HAIR=['#0f0a08','#2b1b12','#5a3825','#a0522d','#d9a441','#f0e2a0','#c0392b','#ff7eb6','#7d3cff','#2d9cdb'];
+const CLOTH=['#58cc02','#1cb0f6','#ff4b4b','#ffc800','#ce82ff','#ff9600','#374151','#f9fafb','#ff7eb6','#14b8a6'];
+const BG=['#d7f0ff','#e3ffd1','#ffe4e4','#fff4cc','#efdcff','#e5e7eb','#ffd9b3','#c7f9ee','#2b3a55','#ffb3d1'];
+
+const BODY={
+ boy:[['نحيف',[40,38,38]],['متوسط',[54,52,52]],['رياضي',[68,50,54]],['ممتلئ',[66,68,70]]],
+ girl:[['نحيفة',[38,32,36]],['متوسطة',[48,42,46]],['منحنية',[50,34,58]],['ممتلئة',[58,58,64]]]
+};
+const FACE={
+ boy:[['بيضاوي',[44,36,30,150]],['فك مربع',[45,44,41,148]],['مستدير',[46,48,34,146]],['طويل',[40,42,26,156]]],
+ girl:[['بيضاوي',[42,36,28,150]],['قلب',[44,28,14,153]],['مستدير',[45,48,34,146]],['ناعم',[43,42,37,148]]]
+};
+const IC={gender:'👫',face:'🙂',body:'🧍',skin:'🎨',hair:'💇',hairColor:'🖌️',brows:'🤨',eyes:'👀',mouth:'👄',extra:'🧔',glasses:'👓',outfit:'👕',outfitColor:'🌈',acc:'🎩',bg:'🖼️',pattern:'✨'};
+const FULL='0 0 200 240',ZOOM='40 22 120 140';
+const VB={hair:'10 10 180 200',brows:ZOOM,eyes:ZOOM,mouth:ZOOM,extra:ZOOM,glasses:ZOOM,acc:ZOOM};
+const CFG=[
+ {k:'gender',t:'النوع',o:()=>[['boy','ولد'],['girl','بنت']]},
+ {k:'face',t:'الوجه',o:()=>FACE[S.gender].map((b,i)=>[i,b[0]])},
+ {k:'body',t:'هيئة الجسم',o:()=>BODY[S.gender].map((b,i)=>[i,b[0]])},
+ {k:'skin',t:'البشرة',c:SKIN},
+ {k:'hair',t:'الشعر',o:()=>[['none','بدون'],['buzz','حليق'],['short','قصير'],['spiky','مدبب'],['curly','مجعد'],['afro','أفرو'],['mohawk','موهوك'],['long','طويل'],['bob','كاريه'],['bun','كعكة'],['pony','ذيل حصان'],['pigtails','ضفيرتان']]},
+ {k:'hairColor',t:'لون الشعر',c:HAIR},
+ {k:'brows',t:'الحواجب',o:()=>[['normal','عادية'],['thick','سميكة'],['thin','رفيعة'],['arch','مقوسة'],['angry','غاضبة'],['sad','حزينة'],['raised','مرفوعة'],['none','بدون']]},
+ {k:'eyes',t:'العيون',o:()=>[['round','دائرية'],['happy','سعيدة'],['sleepy','ناعسة'],['wink','غمزة'],['big','واسعة'],['closed','مغمضة'],['heart','قلوب'],['star','نجوم'],['dots','صغيرة']]},
+ {k:'mouth',t:'الفم',o:()=>[['smile','ابتسامة'],['big','ضحكة'],['flat','عادي'],['wow','مندهش'],['smirk','ابتسامة جانبية'],['sad','حزين'],['tongue','لسان'],['grin','أسنان'],['kiss','قبلة'],['laugh','قهقهة']]},
+ {k:'extra',t:'ملامح',o:()=>[['none','بدون'],['freckles','نمش'],['mustache','شارب'],['beard','لحية'],['goatee','سكسوكة'],['stubble','ذقن خفيفة'],['mole','شامة'],['bandaid','لاصق']]},
+ {k:'glasses',t:'النظارات',o:()=>[['none','بدون'],['round','دائرية'],['square','مربعة'],['sun','شمسية'],['cat','قطة'],['heart','قلوب'],['thin','رفيعة'],['visor','رياضية']]},
+ {k:'outfit',t:'الملابس',o:()=>[['tee','تيشيرت'],['hoodie','هودي'],['stripes','مخطط'],['formal','رسمي'],['vneck','ياقة V'],['overalls','أفرول'],['dots','منقط'],['jacket','جاكيت'],['tank','حمالات'],['polo','بولو']]},
+ {k:'outfitColor',t:'لون الملابس',c:CLOTH},
+ {k:'acc',t:'إكسسوار',o:()=>[['none','بدون'],['cap','كاب'],['beanie','طاقية'],['band','عصابة'],['ear','حلق'],['bow','فيونكة'],['crown','تاج'],['flower','وردة'],['phones','سماعات'],['bandana','بندانا']]},
+ {k:'bg',t:'لون الخلفية',c:BG},
+ {k:'pattern',t:'نقش الخلفية',o:()=>[['none','سادة'],['dots','نقاط'],['stripes','خطوط'],['circles','دوائر'],['stars','نجوم'],['waves','أمواج'],['grid','شبكة'],['rays','أشعة']]}
+];
+const DEF={gender:'boy',face:0,body:1,skin:SKIN[2],hair:'short',hairColor:HAIR[1],brows:'normal',eyes:'round',mouth:'smile',extra:'none',glasses:'none',outfit:'tee',outfitColor:CLOTH[0],acc:'none',bg:BG[0],pattern:'none'};
+let S={...DEF},tab=0;
+
+const mir=t=>`${t}<g transform="translate(200 0) scale(-1 1)">${t}</g>`;
+const star=(x,y,k,f)=>`<polygon fill="${f}" points="${[[0,-7],[2,-2],[7,-2],[3,1.5],[4.5,7],[0,3.5],[-4.5,7],[-3,1.5],[-7,-2],[-2,-2]].map(p=>(x+p[0]*k).toFixed(1)+','+(y+p[1]*k).toFixed(1)).join(' ')}"/>`;
+
+function pattern(p,u){
+ const F='rgba(255,255,255,.4)',n=(a,b)=>Array.from({length:b-a},(_,i)=>a+i);
+ const ln=`<g fill="none" stroke="${F}" stroke-width="8">`;
+ let c='';
+ if(p==='dots')c=`<g fill="${F}">`+n(0,6).map(y=>n(0,5).map(x=>`<circle cx="${20+x*40+(y%2)*20}" cy="${20+y*40}" r="5"/>`).join('')).join('')+'</g>';
+ if(p==='stripes')c=ln+n(-3,8).map(i=>`<line x1="${i*30}" y1="0" x2="${i*30+90}" y2="240"/>`).join('')+'</g>';
+ if(p==='circles')c=ln+'<circle cx="40" cy="40" r="30"/><circle cx="165" cy="200" r="40"/><circle cx="175" cy="50" r="16"/></g>';
+ if(p==='stars')c=[[30,40],[165,30],[172,120],[24,150],[150,215],[50,215]].map(q=>star(q[0],q[1],1.8,F)).join('');
+ if(p==='waves')c=ln+n(0,6).map(i=>{const y=30+i*40;return `<path d="M0 ${y}Q25 ${y-15} 50 ${y}T100 ${y}T150 ${y}T200 ${y}"/>`}).join('')+'</g>';
+ if(p==='grid')c=ln.replace('8','3')+n(0,6).map(i=>`<line x1="${i*40}" y1="0" x2="${i*40}" y2="240"/><line x1="0" y1="${i*40}" x2="200" y2="${i*40}"/>`).join('')+'</g>';
+ if(p==='rays')c=ln.replace('8','10')+n(0,12).map(i=>{const a=i*Math.PI/6;return `<line x1="100" y1="120" x2="${(100+260*Math.cos(a)).toFixed(0)}" y2="${(120+260*Math.sin(a)).toFixed(0)}"/>`}).join('')+'</g>';
+ return `<g clip-path="url(#bc${u})">${c}</g>`;
+}
+
+function draw(s,vb=FULL,u=''){
+ const [w,wa,h]=BODY[s.gender][s.body][1],[rx,fa,fj,fc]=FACE[s.gender][s.face][1],g=s.gender==='girl',hc=s.hairColor,sk=s.skin,oc=s.outfitColor;
+ const sh='rgba(0,0,0,.15)',E='#1f2937',M='#7a2a2a';
+ const cap=`<path d="M54 100Q52 50 100 48Q148 50 146 100Q142 72 100 70Q58 72 54 100Z" fill="${hc}"/>`;
+ const hairs={
+  buzz:['',`<path d="M56 98Q54 58 100 54Q146 58 144 98Q140 84 100 80Q60 84 56 98Z" fill="${hc}"/>`],
+  short:['',cap],
+  spiky:['',`<polygon points="55,96 57,60 72,68 76,38 92,58 104,34 116,58 132,40 136,66 146,58 145,96 130,74 100,68 70,74" fill="${hc}"/>`],
+  curly:['',[[60,80,16],[74,60,17],[100,52,18],[126,60,17],[140,80,16]].map(c=>`<circle cx="${c[0]}" cy="${c[1]}" r="${c[2]}" fill="${hc}"/>`).join('')],
+  afro:[`<circle cx="100" cy="78" r="58" fill="${hc}"/>`,cap],
+  mohawk:['',`<path d="M88 78Q84 26 100 18Q116 26 112 78Z" fill="${hc}"/>`],
+  long:[`<path d="M54 100Q50 40 100 40Q150 40 146 100L152 195Q100 207 48 195Z" fill="${hc}"/>`,cap],
+  bob:[`<path d="M54 100Q50 40 100 40Q150 40 146 100L149 152Q100 162 51 152Z" fill="${hc}"/>`,cap],
+  bun:['',cap+`<circle cx="100" cy="40" r="15" fill="${hc}"/>`],
+  pony:[`<path d="M138 78Q178 86 166 154Q150 124 140 104Z" fill="${hc}"/>`,cap],
+  pigtails:[`<ellipse cx="44" cy="124" rx="11" ry="30" fill="${hc}"/><ellipse cx="156" cy="124" rx="11" ry="30" fill="${hc}"/>`,cap]
+ };
+ const [back,front]=hairs[s.hair]||['',''];
+ const P=`M${100-h} 240L${100-wa} 208Q${100-w} 198 ${100-w} 186Q${100-w} 168 ${122-w} 166L${w-22+100} 166Q${100+w} 168 ${100+w} 186Q${100+w} 198 ${100+wa} 208L${100+h} 240Z`;
+ const x1=100-w,x2=100+w,clip=`<clipPath id="tc${u}"><path d="${P}"/></clipPath><clipPath id="bc${u}"><rect width="200" height="240" rx="24"/></clipPath>`;
+ const bodyFill=s.outfit==='overalls'?'#f3f4f6':oc;
+ const cl=t=>`<g clip-path="url(#tc${u})">${t}</g>`;
+ const out={
+  stripes:cl([178,194,210,226].map(y=>`<rect x="0" y="${y}" width="200" height="7" fill="rgba(255,255,255,.55)"/>`).join('')),
+  dots:cl([0,1,2,3].map(r=>[0,1,2,3,4,5].map(q=>`<circle cx="${x1+8+q*24+(r%2)*12}" cy="${180+r*18}" r="3.5" fill="rgba(255,255,255,.6)"/>`).join('')).join('')),
+  hoodie:`<path d="M${x1+14} 172Q100 214 ${x2-14} 172" fill="none" stroke="${sh}" stroke-width="6"/><line x1="90" y1="196" x2="90" y2="222" stroke="#fff" stroke-width="3"/><line x1="110" y1="196" x2="110" y2="222" stroke="#fff" stroke-width="3"/>`,
+  formal:`<path d="M84 166L100 190L116 166Z" fill="#fff"/><path d="M96 190L104 190L108 232L100 238L92 232Z" fill="#c0392b"/>`,
+  vneck:`<path d="M82 166L100 196L118 166Z" fill="${sk}"/>`,
+  overalls:cl(`<rect x="80" y="198" width="40" height="50" fill="${oc}"/><rect x="80" y="160" width="8" height="42" fill="${oc}"/><rect x="112" y="160" width="8" height="42" fill="${oc}"/><circle cx="84" cy="200" r="3" fill="#ffc800"/><circle cx="116" cy="200" r="3" fill="#ffc800"/>`),
+  jacket:`<path d="M88 166L100 186L112 166Z" fill="#f9fafb"/><line x1="100" y1="186" x2="100" y2="240" stroke="rgba(0,0,0,.35)" stroke-width="3"/><rect x="${x1+8}" y="214" width="16" height="3" fill="rgba(0,0,0,.25)"/><rect x="${x2-24}" y="214" width="16" height="3" fill="rgba(0,0,0,.25)"/>`,
+  tank:cl(`<rect x="${x1}" y="160" width="19" height="44" fill="${sk}"/><rect x="${x2-19}" y="160" width="19" height="44" fill="${sk}"/><path d="M80 166Q100 200 120 166Z" fill="${sk}"/>`),
+  polo:`<path d="M84 166L100 184L90 190Z" fill="#fff"/><path d="M116 166L100 184L110 190Z" fill="#fff"/><circle cx="100" cy="198" r="2.2" fill="#fff"/><circle cx="100" cy="210" r="2.2" fill="#fff"/>`
+ }[s.outfit]||'';
+ const neck=`<rect x="89" y="138" width="22" height="34" fill="${sk}"/><path d="M89 160Q100 172 111 160L111 172L89 172Z" fill="${sh}"/>`;
+ const ears=`<circle cx="${100-rx}" cy="106" r="8" fill="${sk}"/><circle cx="${100+rx}" cy="106" r="8" fill="${sk}"/>`;
+ const head=`<path d="M${100-rx} 98C${100-rx} 66 ${100-rx*.55} 50 100 50C${100+rx*.55} 50 ${100+rx} 66 ${100+rx} 98C${100+rx} ${98+fa} ${100+fj} ${fc} 100 ${fc}C${100-fj} ${fc} ${100-rx} ${98+fa} ${100-rx} 98Z" fill="${sk}"/>`;
+ const blush=g?`<circle cx="72" cy="116" r="6" fill="#ff7a8a" opacity=".35"/><circle cx="128" cy="116" r="6" fill="#ff7a8a" opacity=".35"/>`:'';
+ const bshape=`M58 112Q60 150 100 156Q140 150 142 112Q138 134 100 136Q62 134 58 112Z`;
+ const extra={
+  freckles:[[70,114],[76,119],[68,120],[82,116],[118,116],[124,119],[132,114],[130,120]].map(p=>`<circle cx="${p[0]}" cy="${p[1]}" r="1.4" fill="rgba(120,60,20,.6)"/>`).join(''),
+  mustache:`<path d="M84 122Q92 116 100 121Q108 116 116 122Q108 126 100 124Q92 126 84 122Z" fill="${hc}"/>`,
+  beard:`<path d="${bshape}" fill="${hc}"/>`,
+  goatee:`<ellipse cx="100" cy="146" rx="9" ry="8" fill="${hc}"/>`,
+  stubble:`<path d="${bshape}" fill="${hc}" opacity=".28"/><path d="M62 118Q100 160 138 118L138 150L62 150Z" fill="${hc}" opacity=".12"/>`,
+  mole:`<circle cx="112" cy="119" r="2.2" fill="#5a3825"/>`,
+  bandaid:`<g transform="rotate(-20 74 116)"><rect x="64" y="111" width="20" height="9" rx="4" fill="#f5c28b" stroke="#c89560"/></g>`
+ }[s.extra]||'';
+
+ let eyes='',brows='';
+ [84,116].forEach((x,i)=>{
+  const d=i?-1:1,dark=`fill="${E}"`,hl=`<circle cx="${x+1.8}" cy="100" r="1.8" fill="#fff"/>`;
+  const round=`<circle cx="${x}" cy="102" r="5.5" ${dark}/>${hl}`,happy=`<path d="M${x-7} 105Q${x} 95 ${x+7} 105" fill="none" stroke="${E}" stroke-width="3" stroke-linecap="round"/>`;
+  eyes+={
+   round,happy,
+   sleepy:`<line x1="${x-7}" y1="102" x2="${x+7}" y2="102" stroke="${E}" stroke-width="3" stroke-linecap="round"/>`,
+   wink:i?happy:round,
+   big:`<circle cx="${x}" cy="102" r="8" fill="#fff" stroke="${E}" stroke-width="2"/><circle cx="${x}" cy="102" r="5" ${dark}/><circle cx="${x+2}" cy="100" r="2" fill="#fff"/>`,
+   closed:`<path d="M${x-7} 100Q${x} 108 ${x+7} 100" fill="none" stroke="${E}" stroke-width="3" stroke-linecap="round"/>`,
+   heart:`<path d="M${x} 108C${x-12} 99 ${x-6} 92 ${x} 98C${x+6} 92 ${x+12} 99 ${x} 108Z" fill="#ff4b6e"/>`,
+   star:star(x,102,1,'#ffc800'),
+   dots:`<circle cx="${x}" cy="102" r="3" ${dark}/>`
+  }[s.eyes];
+  if(g&&['round','big','wink'].includes(s.eyes))eyes+=`<path d="M${x-d*7} 100l${-d*5} -4" stroke="${E}" stroke-width="2" stroke-linecap="round"/>`;
+  const bp={
+   normal:[`M${x-9} 90Q${x} 85 ${x+9} 90`,3.5],thick:[`M${x-9} 90Q${x} 85 ${x+9} 90`,6],thin:[`M${x-9} 90Q${x} 86 ${x+9} 90`,2],
+   arch:[`M${x-9} 92Q${x} 80 ${x+9} 92`,3.5],angry:[`M${x-d*9} 85L${x+d*9} 93`,4],sad:[`M${x-d*9} 93L${x+d*9} 85`,4],raised:[`M${x-9} 86Q${x} 78 ${x+9} 86`,3.5]
+  }[s.brows];
+  if(bp)brows+=`<path d="${bp[0]}" fill="none" stroke="${hc}" stroke-width="${bp[1]}" stroke-linecap="round"/>`;
+ });
+ const nose=`<path d="M100 108Q96 118 101 120" fill="none" stroke="${sh}" stroke-width="2.5" stroke-linecap="round"/>`;
+ const mouth={
+  smile:`<path d="M85 128Q100 142 115 128" fill="none" stroke="${M}" stroke-width="3.5" stroke-linecap="round"/>`,
+  big:`<path d="M82 124Q100 150 118 124Z" fill="${M}"/><path d="M88 125Q100 130 112 125L110 129Q100 132 90 129Z" fill="#fff"/>`,
+  flat:`<line x1="89" y1="130" x2="111" y2="130" stroke="${M}" stroke-width="3.5" stroke-linecap="round"/>`,
+  wow:`<ellipse cx="100" cy="132" rx="6" ry="8" fill="${M}"/>`,
+  smirk:`<path d="M87 131Q100 135 114 124" fill="none" stroke="${M}" stroke-width="3.5" stroke-linecap="round"/>`,
+  sad:`<path d="M86 136Q100 124 114 136" fill="none" stroke="${M}" stroke-width="3.5" stroke-linecap="round"/>`,
+  tongue:`<path d="M83 126Q100 144 117 126Z" fill="${M}"/><path d="M93 134Q100 148 107 134Z" fill="#ff6b81"/>`,
+  grin:`<rect x="84" y="124" width="32" height="13" rx="6" fill="#fff" stroke="${M}" stroke-width="3"/><line x1="86" y1="130.5" x2="114" y2="130.5" stroke="${M}" stroke-width="2"/>`,
+  kiss:`<ellipse cx="100" cy="131" rx="6" ry="4.5" fill="#d94a5a"/><line x1="94" y1="131" x2="106" y2="131" stroke="${M}" stroke-width="1.5"/>`,
+  laugh:`<path d="M80 122Q100 156 120 122Z" fill="${M}"/><ellipse cx="100" cy="135" rx="9" ry="4" fill="#ff6b81"/>`
+ }[s.mouth];
+ const lens={
+  round:`<circle cx="84" cy="102" r="13" fill="rgba(180,220,255,.25)" stroke="#111" stroke-width="3"/>`,
+  square:`<rect x="70" y="91" width="27" height="22" rx="4" fill="rgba(180,220,255,.25)" stroke="#111" stroke-width="3"/>`,
+  sun:`<rect x="69" y="91" width="29" height="20" rx="8" fill="#111"/>`,
+  cat:`<path d="M68 94Q70 90 82 92L97 97Q95 113 83 113Q69 113 68 94Z" fill="rgba(180,220,255,.25)" stroke="#111" stroke-width="3"/>`,
+  heart:`<path d="M84 115C64 102 72 89 84 98C96 89 104 102 84 115Z" fill="rgba(255,150,190,.4)" stroke="#d6336c" stroke-width="3"/>`,
+  thin:`<rect x="70" y="93" width="27" height="18" rx="3" fill="none" stroke="#111" stroke-width="1.8"/>`
+ }[s.glasses];
+ let gl=lens?mir(lens)+`<line x1="96" y1="100" x2="104" y2="100" stroke="#111" stroke-width="3"/>`:'';
+ if(s.glasses==='visor')gl=`<rect x="64" y="92" width="72" height="19" rx="9.5" fill="rgba(30,150,255,.5)" stroke="#111" stroke-width="2.5"/>`;
+ const ac={
+  cap:`<path d="M54 86Q54 44 100 44Q146 44 146 86Z" fill="${oc}"/><path d="M96 86L164 86Q164 96 96 92Z" fill="${oc}" stroke="${sh}" stroke-width="1.5"/>`,
+  beanie:`<path d="M52 90Q52 38 100 36Q148 38 148 90Z" fill="${oc}"/><rect x="50" y="82" width="100" height="14" rx="7" fill="rgba(0,0,0,.22)"/><circle cx="100" cy="34" r="7" fill="${oc}"/>`,
+  band:`<path d="M56 82Q100 54 144 82" fill="none" stroke="${oc}" stroke-width="8" stroke-linecap="round"/>`,
+  ear:`<circle cx="${100-rx}" cy="118" r="4" fill="#ffc800"/><circle cx="${100+rx}" cy="118" r="4" fill="#ffc800"/>`,
+  bow:`<path d="M126 54L106 44L106 64Z M126 54L146 44L146 64Z" fill="${oc}"/><circle cx="126" cy="54" r="5" fill="${oc}" stroke="${sh}"/>`,
+  crown:`<path d="M68 62L72 36L86 52L100 30L114 52L128 36L132 62Z" fill="#ffc800" stroke="#e0a800" stroke-width="2"/>`,
+  flower:[[0,-8],[8,-2],[5,7],[-5,7],[-8,-2]].map(p=>`<circle cx="${128+p[0]}" cy="${58+p[1]}" r="6" fill="#ff7eb6"/>`).join('')+`<circle cx="128" cy="58" r="4" fill="#ffc800"/>`,
+  phones:`<path d="M56 100Q56 40 100 40Q144 40 144 100" fill="none" stroke="#374151" stroke-width="6"/><rect x="46" y="92" width="14" height="28" rx="6" fill="${oc}"/><rect x="140" y="92" width="14" height="28" rx="6" fill="${oc}"/>`,
+  bandana:`<path d="M54 84Q100 62 146 84L146 94Q100 76 54 94Z" fill="${oc}"/><path d="M146 84L158 78L156 96L146 94Z" fill="${oc}"/>`
+ }[s.acc]||'';
+ return `<svg viewBox="${vb}" xmlns="http://www.w3.org/2000/svg"><defs>${clip}</defs>
+ <rect width="200" height="240" rx="24" fill="${s.bg}"/>${pattern(s.pattern,u)}${back}${neck}<path d="${P}" fill="${bodyFill}"/>${out}${ears}${head}${blush}${extra}${front}${brows}${eyes}${nose}${mouth}${gl}${ac}</svg>`;
+}
+
+const opts=c=>c.o?c.o():c.c.map(x=>[x,x]);
+function render(){
+ document.getElementById('preview').innerHTML=draw(S);
+ document.getElementById('out').textContent=JSON.stringify(S,null,2);
+ const tabs=document.getElementById('tabs');tabs.innerHTML='';
+ CFG.forEach((c,i)=>{const b=document.createElement('button');b.className='tab'+(i===tab?' on':'');b.innerHTML='<b>'+IC[c.k]+'</b>'+c.t;b.onclick=()=>{tab=i;render()};tabs.appendChild(b)});
+ const c=CFG[tab],o=document.getElementById('opts');o.innerHTML='';
+ opts(c).forEach((it,n)=>{
+  const b=document.createElement('button'),on=S[c.k]===it[0];
+  if(c.o){b.className='th'+(on?' on':'');b.innerHTML=draw({...S,[c.k]:it[0]},VB[c.k]||FULL,'t'+n)+'<span>'+it[1]+'</span>'}
+  else{b.className='sw'+(on?' on':'');b.style.background=it[0];b.setAttribute('aria-label',it[0])}
+  b.onclick=()=>{S[c.k]=it[0];if(c.k==='gender')tab=1;render()};
+  o.appendChild(b);
+ });
+}
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+document.getElementById('rnd').onclick=()=>{CFG.forEach(c=>{S[c.k]=pick(opts(c))[0]});render()};
+document.getElementById('rst').onclick=()=>{S={...DEF};render()};
+
+// زر موافق: يحفظ الأفاتار (SVG كـ Data URI) وينتقل لصفحة البروفايل تلقائياً
+document.getElementById('okBtn').onclick=()=>{
+ const svgString = draw(S);
+ const encodedSvg = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgString);
+ localStorage.setItem("em_user_avatar", encodedSvg);
+ alert("تم حفظ الأفاتار بنجاح! 🎉");
+ window.location.href = "profile.html";
+};
+
+render();
+</script>
+</body>
+</html>

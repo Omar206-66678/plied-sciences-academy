@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <title>English Master - الملف الشخصي للطالب</title>
+        <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+        
+        <script>
+            let currentSavedTheme = localStorage.getItem("em_theme");
+            if (currentSavedTheme === "light") {
+                document.documentElement.classList.add("light-mode");
+            } else {
+                document.documentElement.classList.add("dark-mode");
+            }
+
+            function toggleTheme() {
+                let isLight = document.documentElement.classList.toggle("light-mode");
+                document.documentElement.classList.toggle("dark-mode");
+                localStorage.setItem("em_theme", isLight ? "light" : "dark");
+                updateThemeIcon(!isLight);
+            }
+
+            function updateThemeIcon(isDark) {
+                let btn = document.getElementById("themeIconBtn");
+                if (btn) {
+                    btn.innerHTML = isDark ? "☀️" : "🌙";
+                }
+            }
+
+            const ranksList = [
+                { level: 1, name: "هاوي", xpRequired: 100, badge: "🌱", desc: "بداية" },
+                { level: 2, name: "مبتدئ", xpRequired: 300, badge: "⚙️", desc: "تأسيس" },
+                { level: 3, name: "متدرب", xpRequired: 600, badge: "🔑", desc: "انطلاق" },
+                { level: 4, name: "مستكشف", xpRequired: 1000, badge: "🧩", desc: "تقدم" },
+                { level: 5, name: "محترف", xpRequired: 1500, badge: "🛡️", desc: "ثبات" },
+                { level: 6, name: "خبير", xpRequired: 2200, badge: "⚔️", desc: "إتقان" },
+                { level: 7, name: "صقر اللغات", xpRequired: 3000, badge: "🦅", desc: "احتراف" },
+                { level: 8, name: "فنان القواعد", xpRequired: 4000, badge: "💎", desc: "براعة" },
+                { level: 9, name: "بطل اسطوري", xpRequired: 5500, badge: "👑", desc: "سيادة" },
+                { level: 10, name: "إمبراطور الإنجليزية", xpRequired: 7500, badge: "🌟", desc: "أسطورة" }
+            ];
+
+            function getUserRank(score) {
+                let current = ranksList[0];
+                for (let i = 0; i < ranksList.length; i++) {
+                    if (score >= ranksList[i].xpRequired) {
+                        current = ranksList[i];
+                    }
+                }
+                return current;
+            }
+
+            window.addEventListener("DOMContentLoaded", () => {
+                let isDark = !document.documentElement.classList.contains("light-mode");
+                updateThemeIcon(isDark);
+                loadProfileData();
+            });
+
+            function loadProfileData() {
+                let score = parseInt(localStorage.getItem("em_game_score")) || 0;
+                let gems = parseInt(localStorage.getItem("em_game_gems")) || 50;
+                let streak = parseInt(localStorage.getItem("em_game_streak")) || 0;
+                let rankData = getUserRank(score);
+
+                let scoreEl = document.getElementById("profileScore");
+                let gemsEl = document.getElementById("profileGems");
+                let streakEl = document.getElementById("profileStreak");
+                let rankEl = document.getElementById("profileRankTitle");
+
+                if (scoreEl) scoreEl.innerText = score;
+                if (gemsEl) gemsEl.innerText = gems;
+                if (streakEl) streakEl.innerText = streak;
+                if (rankEl) rankEl.innerText = `Lv.${rankData.level} - ${rankData.name} (${rankData.desc})`;
+
+                // جلب اسم الطالب المحفوظ وعرضه في الحقل
+                let savedName = localStorage.getItem("em_student_name") || "";
+                let nameInput = document.getElementById("profileStudentNameInput");
+                if (nameInput) nameInput.value = savedName;
+
+                // جلب الأفاتار المحفوظ وعرضه بسلاسة
+                let savedAvatar = localStorage.getItem("em_user_avatar") || "🎓";
+                let avatarFrame = document.getElementById("profileAvatarContent");
+                if (avatarFrame) {
+                    if (savedAvatar.startsWith("http") || savedAvatar.startsWith("data:") || savedAvatar.length > 5) {
+                        avatarFrame.innerHTML = `<img src="${savedAvatar}" style="width:100%; height:100%; border-radius:50%; object-fit:cover;">`;
+                    } else {
+                        avatarFrame.innerText = savedAvatar;
+                    }
+                }
+
+                // حساب التقدم للمستوى التالي
+                let nextRank = ranksList.find(r => r.level === rankData.level + 1);
+                let progressText = "أنت في القمة! (الرتبة القصوى)";
+                if (nextRank) {
+                    let needed = nextRank.xpRequired - score;
+                    progressText = `متبقي ${needed} نقطة XP للوصول إلى المستوى القادم (${nextRank.name})`;
+                }
+                let progressEl = document.getElementById("profileProgressText");
+                if (progressEl) progressEl.innerText = progressText;
+            }
+
+            // دالة الحفظ التلقائي أو تحديث الاسم عند التغيير
+            function updateStudentName() {
+                let nameInput = document.getElementById("profileStudentNameInput");
+                if (nameInput) {
+                    let newName = nameInput.value.trim();
+                    if (newName) {
+                        localStorage.setItem("em_student_name", newName);
+                    }
+                }
+            }
+
+            // دالة تسجيل الخروج ومسح الجلسة
+            function logoutStudent() {
+                localStorage.removeItem("em_is_logged_in");
+                localStorage.removeItem("em_student_name");
+                window.location.href = "login.html";
+            }
+        </script>
+        <style>
+            :root, html.dark-mode {
+                --bg-main: #0B0F19;
+                --card-bg: linear-gradient(135deg, rgba(21, 29, 46, 0.92) 0%, rgba(15, 23, 42, 0.95) 100%);
+                --text-main: #FFFFFF;
+                --text-muted: #9CA3AF;
+                --accent-primary: #6366F1;
+                --neon-cyan: #06B6D4;
+                --neon-green: #10B981;
+                --neon-amber: #F59E0B;
+                --neon-rose: #F43F5E;
+                --border-line: 2px solid rgba(6, 182, 212, 0.35);
+                --card-border-glow: 2px solid rgba(6, 182, 212, 0.35);
+                --card-glow: 0 25px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(6, 182, 212, 0.1);
+                --glass-blur: blur(25px);
+                --stat-pill-bg: rgba(6, 182, 212, 0.06);
+            }
+
+            html.light-mode {
+                --bg-main: #F1F5F9;
+                --card-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(248, 250, 252, 0.98) 100%);
+                --text-main: #0F172A;
+                --text-muted: #64748B;
+                --accent-primary: #4F46E5;
+                --neon-cyan: #0891B2;
+                --neon-green: #059669;
+                --neon-amber: #D97706;
+                --neon-rose: #E11D48;
+                --border-line: 2px solid rgba(8, 145, 178, 0.3);
+                --card-border-glow: 2px solid rgba(8, 145, 178, 0.3);
+                --card-glow: 0 20px 40px rgba(0, 0, 0, 0.08), 0 0 25px rgba(8, 145, 178, 0.08);
+                --glass-blur: blur(25px);
+                --stat-pill-bg: rgba(8, 145, 178, 0.04);
+            }
+
+            body {
+                background: var(--bg-main);
+                color: var(--text-main);
+                font-family: 'Cairo', sans-serif;
+                margin: 0;
+                min-height: 100vh;
+                padding: 16px 12px 95px 12px;
+                box-sizing: border-box;
+                background-image: 
+                    radial-gradient(circle at 10% 10%, rgba(6, 182, 212, 0.12) 0%, transparent 40%),
+                    radial-gradient(circle at 90% 80%, rgba(99, 102, 241, 0.1) 0%, transparent 40%);
+                transition: background 0.4s ease, color 0.4s ease;
+            }
+
+            .container { max-width: 600px; margin: auto; }
+
+            .profile-card {
+                background: var(--card-bg);
+                backdrop-filter: var(--glass-blur);
+                -webkit-backdrop-filter: var(--glass-blur);
+                border: var(--card-border-glow);
+                border-radius: 32px;
+                padding: 24px;
+                box-shadow: var(--card-glow);
+                text-align: center;
+                position: relative;
+                overflow: hidden;
+                margin-bottom: 20px;
+            }
+
+            .profile-header-row {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 20px;
+                padding-bottom: 14px;
+                border-bottom: var(--border-line);
+            }
+
+            .nav-close-btn, .theme-toggle-btn {
+                background: var(--stat-pill-bg);
+                border: 1.5px solid rgba(6, 182, 212, 0.3);
+                color: var(--text-main);
+                width: 38px;
+                height: 38px;
+                border-radius: 12px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                text-decoration: none;
+                transition: all 0.2s ease;
+                backdrop-filter: blur(8px);
+                font-size: 15px;
+            }
+            .nav-close-btn:hover, .theme-toggle-btn:hover {
+                background: rgba(6, 182, 212, 0.15);
+                border-color: var(--neon-cyan);
+                color: var(--neon-cyan);
+            }
+
+            .avatar-container {
+                position: relative;
+                width: 90px;
+                height: 90px;
+                margin: 0 auto 14px auto;
+                cursor: pointer;
+            }
+
+            .avatar-frame {
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                background: linear-gradient(135deg, var(--neon-cyan), var(--accent-primary));
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 40px;
+                border: 3px solid rgba(255, 255, 255, 0.2);
+                box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
+                overflow: hidden;
+            }
+
+            .avatar-badge-overlay {
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                background: #111827;
+                border: 2px solid var(--neon-cyan);
+                border-radius: 50%;
+                width: 34px;
+                height: 34px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 15px;
+                box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+                transition: transform 0.2s;
+            }
+            .avatar-container:hover .avatar-badge-overlay {
+                transform: scale(1.1);
+            }
+
+            .name-edit-box {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 6px;
+            }
+
+            .name-input {
+                background: var(--stat-pill-bg);
+                border: 1.5px solid rgba(6, 182, 212, 0.3);
+                color: var(--text-main);
+                padding: 10px 16px;
+                border-radius: 12px;
+                font-family: 'Cairo', sans-serif;
+                font-size: 16px;
+                font-weight: 900;
+                text-align: center;
+                outline: none;
+                width: 100%;
+                max-width: 260px;
+            }
+            .name-input:focus { border-color: var(--neon-cyan); }
+
+            .profile-rank-badge-text {
+                font-size: 13px;
+                font-weight: 800;
+                color: #A855F7;
+                margin-bottom: 16px;
+                margin-top: 6px;
+            }
+
+            .stats-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+                margin-bottom: 20px;
+            }
+
+            .stat-box {
+                background: var(--stat-pill-bg);
+                border: 1.5px solid rgba(6, 182, 212, 0.3);
+                border-radius: 18px;
+                padding: 12px;
+                text-align: center;
+                backdrop-filter: blur(8px);
+            }
+
+            .stat-box .stat-icon { font-size: 20px; margin-bottom: 4px; display: block; }
+            .stat-box .stat-val { font-size: 16px; font-weight: 900; color: var(--text-main); display: block; }
+            .stat-box .stat-label { font-size: 11px; font-weight: 700; color: var(--text-muted); }
+
+            .section-title {
+                text-align: right;
+                font-size: 15px;
+                font-weight: 900;
+                color: var(--text-main);
+                margin-bottom: 12px;
+                display: flex;
+                align-items: center;
+                gap: 6px;
+            }
+
+            .progress-box {
+                background: var(--stat-pill-bg);
+                border: 1.5px solid rgba(168, 85, 247, 0.3);
+                border-radius: 20px;
+                padding: 16px;
+                text-align: right;
+                margin-bottom: 16px;
+            }
+
+            .progress-box p {
+                margin: 0;
+                font-size: 13px;
+                font-weight: 800;
+                color: #C084FC;
+            }
+
+            .logout-container {
+                margin-top: 10px;
+            }
+
+            .logout-btn {
+                background: rgba(244, 63, 94, 0.1);
+                border: 1.5px solid rgba(244, 63, 94, 0.3);
+                color: var(--neon-rose);
+                width: 100%;
+                padding: 12px;
+                border-radius: 16px;
+                font-family: 'Cairo', sans-serif;
+                font-weight: 900;
+                font-size: 14px;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                transition: all 0.2s;
+            }
+            .logout-btn:hover {
+                background: var(--neon-rose);
+                color: #FFFFFF;
+            }
+
+            .bottom-nav {
+                position: fixed;
+                bottom: 0; left: 0; right: 0;
+                background: var(--card-bg);
+                backdrop-filter: var(--glass-blur);
+                display: flex;
+                justify-content: space-around;
+                padding: 12px 0;
+                border-top: 1.5px solid rgba(6, 182, 212, 0.3);
+                z-index: 999;
+            }
+            .bottom-nav a { color: var(--text-muted); text-decoration: none; font-size: 11px; text-align: center; font-weight: 800; }
+            .bottom-nav a.active { color: var(--neon-cyan); }
+            .bottom-nav a span { display: block; font-size: 18px; margin-bottom: 2px; }
+        </style>
+    </head>
+    <body>
+
+        <div class="container">
+            <div class="profile-card">
+                
+                <!-- هيدرو البروفايل -->
+                <div class="profile-header-row">
+                    <a href="gaming-hub.html" class="nav-close-btn" title="العودة">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+                    </a>
+                    <span style="font-size: 16px; font-weight: 900;">الملف الشخصي للطالب</span>
+                    <button id="themeIconBtn" class="theme-toggle-btn" onclick="toggleTheme()" title="تبديل الثيم">🌙</button>
+                </div>
+
+                <!-- الأفاتار مع زر القلم -->
+                <div class="avatar-container" onclick="window.location.href='avatar-selector.html'" title="اضغط لتغيير الأفاتار">
+                    <div class="avatar-frame" id="profileAvatarContent">🎓</div>
+                    <div class="avatar-badge-overlay" title="تعديل الأفاتار">✏️</div>
+                </div>
+
+                <!-- حقل تعديل الاسم (بحفظ تلقائي عند التعديل) -->
+                <div class="name-edit-box">
+                    <input type="text" id="profileStudentNameInput" class="name-input" placeholder="اكتب اسمك هنا..." oninput="updateStudentName()">
+                </div>
+                <div class="profile-rank-badge-text" id="profileRankTitle">Lv.1 - هاوي (بداية)</div>
+
+                <!-- مربعات الإحصائيات -->
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <span class="stat-icon">🔥</span>
+                        <span class="stat-val" id="profileStreak">0</span>
+                        <span class="stat-label">الستريك</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-icon">💎</span>
+                        <span class="stat-val" id="profileGems">50</span>
+                        <span class="stat-label">الجواهر</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-icon">⚡</span>
+                        <span class="stat-val" id="profileScore">0</span>
+                        <span class="stat-label">نقاط XP</span>
+                    </div>
+                </div>
+
+                <!-- تقدم المستوى الحالي -->
+                <div class="section-title">📊 حالة التقدم والمستويات</div>
+                <div class="progress-box">
+                    <p id="profileProgressText">جارٍ تحميل حالة التقدم...</p>
+                </div>
+
+                <!-- زر تسجيل الخروج -->
+                <div class="logout-container">
+                    <button class="logout-btn" onclick="logoutStudent()">
+                        🚪 تسجيل الخروج من الحساب
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- شريط التنقل السفلي -->
+        <div class="bottom-nav">
+            <a href="../english.html"><span>🇬🇧</span>الإنجليزي</a>
+            <a href="gaming-hub.html"><span>🎮</span>الألعاب</a>
+            <a href="leaderboard.html"><span>🏆</span>المتصدرين</a>
+            <a href="profile.html" class="active"><span>👤</span>البروفايل</a>
+        </div>
+
+    </body>
+</html>
