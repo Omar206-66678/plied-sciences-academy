@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+        <title>الدرس الثالث: مراحل تحويل الصور الجوية إلى خرائط - أكاديمية العلوم التطبيقية</title>
+        <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+        
+        <script>
+            if (typeof savedTheme === 'undefined') {
+                var savedTheme = localStorage.getItem("em_theme");
+                if (savedTheme === "dark") {
+                    document.documentElement.classList.add("dark-mode");
+                }
+            }
+        </script>
+        
+        <style>
+            :root {
+                --bg-main: #F4F6F9;
+                --card-bg: #FFFFFF;
+                --card-border: #E2E8F0;
+                --text-primary: #0F172A;
+                --text-secondary: #475569;
+                
+                --header-bg: rgba(255, 255, 255, 0.85);
+                --header-border: rgba(67, 56, 202, 0.15);
+                --header-shadow: 0 10px 30px rgba(67, 56, 202, 0.05);
+                --shadow-main: 0 20px 40px -15px rgba(15, 23, 42, 0.05);
+                
+                --primary: #4338CA;
+                --primary-dark: #3730A3;
+                --accent: #818CF8;
+                --light-bg: rgba(67, 56, 202, 0.05);
+                --border-glow: rgba(67, 56, 202, 0.25);
+                --card-glow: 0 10px 30px rgba(67, 56, 202, 0.08);
+            }
+
+            html.dark-model, html.dark-mode, body.dark-mode {
+                --bg-main: #06080F;
+                --card-bg: #0B0F19;
+                --card-border: rgba(255, 255, 255, 0.07);
+                --text-primary: #F3F4F6;
+                --text-secondary: #CBD5E1;
+                
+                --header-bg: rgba(11, 15, 25, 0.85);
+                --header-border: rgba(129, 140, 248, 0.2);
+                --header-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+                --shadow-main: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+                
+                --primary: #818CF8;
+                --primary-dark: #6366F1;
+                --accent: #A5B4FC;
+                --light-bg: rgba(129, 140, 248, 0.08);
+                --border-glow: rgba(129, 140, 248, 0.35);
+                --card-glow: 0 15px 40px rgba(129, 140, 248, 0.12);
+            }
+
+            body {
+                background-color: var(--bg-main);
+                color: var(--text-primary);
+                font-family: 'Cairo', system-ui, -apple-system, sans-serif;
+                margin: 0;
+                padding: 16px 14px 90px 14px;
+                min-height: 100vh;
+                box-sizing: border-box;
+                transition: background-color 0.3s ease, color 0.3s ease;
+            }
+
+            .container { max-width: 680px; margin: auto; }
+
+            .top-progress-bar { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: transparent; z-index: 9999; }
+            .top-progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--primary), var(--accent)); }
+
+            .nav-bar {
+                display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
+                background: var(--header-bg); backdrop-filter: blur(12px); border: 1.5px solid var(--header-border); padding: 12px 16px;
+                border-radius: 24px; box-shadow: var(--header-shadow); gap: 10px;
+            }
+            .brand-minimalist-box { display: flex; flex-direction: column; align-items: center; text-align: center; flex: 1; padding: 0 4px; min-width: 0; }
+            .brand-main-title { font-size: 13.5px; font-weight: 900; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
+            .brand-subtitle-text { font-size: 10px; font-weight: 800; color: var(--primary); letter-spacing: 0.5px; text-transform: uppercase; margin-top: 2px; }
+
+            .back-btn, .theme-btn {
+                background: var(--light-bg); border: 1.5px solid var(--border-glow);
+                width: 36px; height: 36px; border-radius: 14px; display: flex; align-items: center; justify-content: center;
+                color: var(--text-primary); font-size: 16px; text-decoration: none; cursor: pointer; transition: 0.25s; flex-shrink: 0;
+            }
+            .back-btn:hover, .theme-btn:hover { transform: scale(1.05); border-color: var(--primary); color: var(--primary); }
+
+            .lesson-card {
+                background: var(--card-bg); border: 1.5px solid var(--card-border); border-radius: 28px;
+                padding: 26px; margin-bottom: 24px; box-shadow: var(--shadow-main); display: flex; flex-direction: column; gap: 22px;
+                position: relative; overflow: hidden;
+            }
+            .lesson-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, var(--primary), var(--accent)); }
+            
+            .lesson-header { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--card-border); padding-bottom: 16px; }
+            .lesson-title-box { display: flex; flex-direction: column; gap: 6px; }
+            .lesson-tag { font-size: 11px; font-weight: 900; color: var(--accent); text-transform: uppercase; letter-spacing: 0.8px; }
+            .lesson-heading { margin: 0; font-size: 20px; font-weight: 950; color: var(--primary); line-height: 1.3; }
+            .lesson-icon-badge { width: 50px; height: 50px; border-radius: 16px; background: var(--light-bg); border: 1.5px solid var(--border-glow); display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+
+            .section-block { display: flex; flex-direction: column; gap: 14px; background: var(--light-bg); border: 1.5px solid var(--border-glow); padding: 18px; border-radius: 20px; }
+            .block-title { font-size: 14.5px; font-weight: 900; color: var(--text-primary); display: flex; align-items: center; gap: 8px; }
+            .block-title::before { content: ''; width: 4px; height: 16px; background: var(--primary); border-radius: 4px; display: inline-block; }
+            
+            .definition-box {
+                background: var(--card-bg); border: 2px solid var(--primary); border-radius: 16px; padding: 16px; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(67, 56, 202, 0.05);
+            }
+            .definition-title { font-size: 13px; font-weight: 900; color: var(--primary); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+            .definition-text { font-size: 14px; font-weight: 800; color: var(--text-primary); line-height: 1.9; margin: 0; }
+
+            /* تصميم ستوري إنستجرام الأفقي المتسلسل */
+            .insta-horizontal-feed {
+                display: flex;
+                gap: 16px;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                padding-bottom: 10px;
+                scrollbar-width: thin;
+                scrollbar-color: var(--primary) var(--card-border);
+                margin-top: 10px;
+            }
+            .insta-horizontal-feed::-webkit-scrollbar {
+                height: 6px;
+            }
+            .insta-horizontal-feed::-webkit-scrollbar-thumb {
+                background: var(--primary);
+                border-radius: 10px;
+            }
+
+            .insta-story-card {
+                flex: 0 0 100%;
+                max-width: 100%;
+                scroll-snap-align: center;
+                background: var(--card-bg);
+                border: 1.5px solid var(--border-glow);
+                border-radius: 20px;
+                overflow: hidden;
+                box-shadow: 0 6px 20px rgba(67, 56, 202, 0.06);
+                display: flex;
+                flex-direction: column;
+            }
+
+            .insta-post-header {
+                padding: 12px 16px; display: flex; align-items: center; justify-content: space-between;
+                background: var(--light-bg); border-bottom: 1px solid var(--card-border);
+            }
+            .insta-user-info { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 900; color: var(--primary); }
+            .insta-avatar { width: 28px; height: 28px; border-radius: 50%; background: var(--primary); color: #FFF; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 900; }
+            .insta-step-badge { font-size: 11px; font-weight: 800; color: var(--text-secondary); background: var(--card-bg); padding: 3px 8px; border-radius: 10px; border: 1.5px solid var(--card-border); }
+            
+            .insta-image-wrapper { width: 100%; background: var(--bg-main); display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; min-height: 300px; }
+            .insta-image-wrapper img { width: 100%; height: auto; max-height: 420px; object-fit: contain; display: block; }
+            
+            .insta-post-footer { padding: 14px 16px; display: flex; flex-direction: column; gap: 6px; background: var(--card-bg); }
+            .insta-caption { font-size: 13.5px; font-weight: 800; color: var(--text-primary); text-align: center; line-height: 1.6; }
+            .swipe-hint { font-size: 11px; font-weight: 800; color: var(--accent); text-align: center; margin-top: 4px; }
+
+            /* تنسيق الكارت العلوي: الرقم فقط أزرق، والكلام كله أسود تماماً */
+            .custom-list-group { display: flex; flex-direction: column; gap: 14px; }
+            .list-item-row { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; font-weight: 800; line-height: 1.9; }
+            .list-bullet { color: var(--primary); font-size: 18px; line-height: 1.4; flex-shrink: 0; font-weight: 950; }
+            .list-content { flex: 1; color: #000000; font-weight: 800; }
+            html.dark-model .list-content, html.dark-mode .list-content, body.dark-mode .list-content { color: #FFFFFF; }
+            .list-content strong { color: #000000; font-weight: 800; }
+            html.dark-model .list-content strong, html.dark-mode .list-content strong, body.dark-mode .list-content strong { color: #FFFFFF; }
+
+            .accordion-card {
+                background: var(--card-bg); border: 1.5px solid var(--border-glow); border-radius: 20px;
+                overflow: hidden; transition: 0.3s ease; box-shadow: 0 4px 15px rgba(67, 56, 202, 0.04);
+            }
+            .accordion-header {
+                padding: 16px 18px; background: var(--light-bg); cursor: pointer; display: flex;
+                align-items: center; justify-content: space-between; gap: 10px; user-select: none;
+            }
+            .accordion-header-title { font-size: 14px; font-weight: 900; color: var(--primary); display: flex; align-items: center; gap: 8px; }
+            .accordion-arrow { font-size: 14px; transition: transform 0.3s ease; color: var(--primary); font-weight: 900; }
+            .accordion-card.active .accordion-arrow { transform: rotate(180deg); }
+
+            .accordion-body {
+                display: none; padding: 16px; flex-direction: column; gap: 14px;
+                border-top: 1px solid var(--border-glow); background: var(--card-bg);
+            }
+            .accordion-card.active .accordion-body { display: flex; }
+
+            .quiz-item { display: flex; flex-direction: column; gap: 8px; font-size: 14px; background: var(--light-bg); border: 1.5px solid var(--border-glow); border-radius: 14px; padding: 12px 14px; }
+            .quiz-item-q { font-weight: 850; color: var(--text-primary); line-height: 1.8; }
+            .reveal-ans-btn { background: var(--card-bg); border: 1.5px solid var(--border-glow); color: var(--primary); padding: 7px 12px; border-radius: 10px; font-size: 12px; font-weight: 900; cursor: pointer; align-self: flex-start; font-family: 'Cairo', sans-serif; transition: 0.2s; }
+            .reveal-ans-btn:hover { background: var(--primary); color: #FFF; }
+            .quiz-item-a { display: none; font-weight: 800; color: #059669; background: rgba(16, 185, 129, 0.08); padding: 10px 12px; border-radius: 10px; border-right: 3.5px solid #059669; line-height: 1.8; margin-top: 4px; }
+            .quiz-item-a.show { display: block; }
+
+            .bottom-nav {
+                position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%); width: calc(100% - 32px); max-width: 460px;
+                background: var(--header-bg); backdrop-filter: blur(15px); display: flex; justify-content: space-around; align-items: center;
+                padding: 5px 6px; border: 1.5px solid var(--header-border); border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); z-index: 999;
+            }
+            .bottom-nav a { 
+                color: var(--text-secondary); text-decoration: none; font-size: 10.5px; text-align: center; font-weight: 800; 
+                display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 5px 8px; border-radius: 14px; flex: 1; transition: 0.25s;
+                background: var(--light-bg); border: 1px solid var(--border-glow); margin: 0 2px;
+            }
+            .bottom-nav a span { font-size: 16px; line-height: 1; }
+            .bottom-nav a:hover { color: var(--primary); border-color: var(--primary); transform: translateY(-1px); }
+            .bottom-nav a.active { color: #FFFFFF; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); border: 1px solid var(--accent); box-shadow: 0 4px 12px rgba(67, 56, 202, 0.3); }
+        </style>
+    </head>
+    <body>
+
+        <div class="top-progress-bar"><div class="top-progress-fill" id="progressFill"></div></div>
+
+        <div class="container">
+            <div class="nav-bar">
+                <a href="photogrammetry.html" class="back-btn" title="رجوع للقسم الرئيسي">←</a>
+                <div class="brand-minimalist-box">
+                    <span class="brand-main-title">مراحل إنتاج الخرائط</span>
+                    <span class="brand-subtitle-text">أكاديمية العلوم التطبيقية</span>
+                </div>
+                <button class="theme-btn" id="themeToggleBtn" title="تغيير الثيم">🌙</button>
+            </div>
+
+            <div class="lesson-card">
+                <div class="lesson-header">
+                    <div class="lesson-title-box">
+                        <span class="lesson-tag">الدرس الثالث • دورة العمل الهندسية</span>
+                        <h2 class="lesson-heading">مراحل إنتاج الخرائط والمخططات من الصور الجوية</h2>
+                    </div>
+                    <div class="lesson-icon-badge">🗺️</div>
+                </div>
+
+                <div class="section-block">
+                    <div class="block-title">مفهوم دورة الإنتاج الخريطي</div>
+                    <div class="definition-box">
+                        <div class="definition-title">📖 الإطار المنهجي:</div>
+                        <p class="definition-text">عند الحديث عن أقسام المساحة التصويرية، فإن الصور الملتقطة من الجو تُستخدم لإنتاج الخرائط والمخططات المساحية بدقة عالية عبر خطوات تفصيلية متسلسلة.</p>
+                    </div>
+                </div>
+
+                <!-- خطوات العمل الأساسية في الأعلى -->
+                <div class="section-block">
+                    <div class="block-title">خطوات العمل الأساسية</div>
+                    <div class="custom-list-group">
+                        <div class="list-item-row">
+                            <span class="list-bullet">1.</span>
+                            <div class="list-content"><strong>منطقة مطلوب عمل خريطة لها:</strong> بمقياس ودقة محددة.</div>
+                        </div>
+                        <div class="list-item-row">
+                            <span class="list-bullet">2.</span>
+                            <div class="list-content"><strong>جمع المعلومات:</strong> من الخرائط أو الصور القديمة والاستكشاف الميداني.</div>
+                        </div>
+                        <div class="list-item-row">
+                            <span class="list-bullet">3.</span>
+                            <div class="list-content"><strong>التخطيط لعملية الطيران.</strong></div>
+                        </div>
+                        <div class="list-item-row">
+                            <span class="list-bullet">4.</span>
+                            <div class="list-content"><strong>إنشاء نقاط التحكم الاصطناعية:</strong> لتظهر في الصورة (حسب الحاجة).</div>
+                        </div>
+                        <div class="list-item-row">
+                            <span class="list-bullet">5.</span>
+                            <div class="list-content"><strong>تنفيذ عملية التصوير وطبع الصور وتصحيحها.</strong></div>
+                        </div>
+                        <div class="list-item-row">
+                            <span class="list-bullet">6.</span>
+                            <div class="list-content"><strong>إيجاد نقاط التحكم الأفقية والرأسية:</strong> بطرق المسح الأرضي إذا لم تكن متوفرة أو تكثيفها بطرق المسح الأرضي أو التثليث الجوي.</div>
+                        </div>
+                        <div class="list-item-row">
+                            <span class="list-bullet">7.</span>
+                            <div class="list-content"><strong>استخراج الخريطة الأساس:</strong> بأحد طرق المسح الجوي.</div>
+                        </div>
+                        <div class="list-item-row">
+                            <span class="list-bullet">8.</span>
+                            <div class="list-content"><strong>التعديل الحقلي:</strong> الزيارة الميدانية للموقع لاختبار دقة الخريطة وتحديد هوية بعض المعالم غير الواضحة في الصور واستكمال المسميات.</div>
+                        </div>
+                        <div class="list-item-row">
+                            <span class="list-bullet">9.</span>
+                            <div class="list-content"><strong>الإخراج النهائي للخرائط وطبعها وتوزيعها.</strong></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- معرض المراحل والخطوات بالصور (بأسلوب إنستجرام) -->
+                <div class="section-block">
+                    <div class="block-title">مراحل تحويل الصور الجوية إلي خرائط</div>
+
+                    <div class="insta-horizontal-feed">
+                        
+                        <!-- المرحلة 1 -->
+                        <div class="insta-story-card">
+                            <div class="insta-post-header">
+                                <div class="insta-user-info"><div class="insta-avatar">📸</div>أكاديمية العلوم التطبيقية</div>
+                                <div class="insta-step-badge">المرحلة 1 من 9</div>
+                            </div>
+                            <div class="insta-image-wrapper">
+                                <img src="Aerial photography/img1.jpg" alt="Aerial Photo Step 1" onerror="this.src='Aerial photography/img1.png'">
+                            </div>
+                            <div class="insta-post-footer">
+                                <div class="insta-caption">تحديد منطقة العمل المطلوب إنتاج خريطة لها بدقة ومقياس رسم محدد</div>
+                                <div class="swipe-hint">اسحب يميناً أو يساراً للتنقل ➔</div>
+                            </div>
+                        </div>
+
+                        <!-- المرحلة 2 -->
+                        <div class="insta-story-card">
+                            <div class="insta-post-header">
+                                <div class="insta-user-info"><div class="insta-avatar">📸</div>أكاديمية العلوم التطبيقية</div>
+                                <div class="insta-step-badge">المرحلة 2 من 9</div>
+                            </div>
+                            <div class="insta-image-wrapper">
+                                <img src="Aerial photography/img2.jpg" alt="Aerial Photo Step 2" onerror="this.src='Aerial photography/img2.png'">
+                            </div>
+                            <div class="insta-post-footer">
+                                <div class="insta-caption">جمع المعلومات من الخرائط أو الصور القديمة والاستكشاف الميداني</div>
+                                <div class="swipe-hint">اسحب يميناً أو يساراً للتنقل ➔</div>
+                            </div>
+                        </div>
+
+                        <!-- المرحلة 3 -->
+                        <div class="insta-story-card">
+                            <div class="insta-post-header">
+                                <div class="insta-user-info"><div class="insta-avatar">📸</div>أكاديمية العلوم التطبيقية</div>
+                                <div class="insta-step-badge">المرحلة 3 من 9</div>
+                            </div>
+                            <div class="insta-image-wrapper">
+                                <img src="Aerial photography/img3.jpg" alt="Aerial Photo Step 3" onerror="this.src='Aerial photography/img3.png'">
+                            </div>
+                            <div class="insta-post-footer">
+                                <div class="insta-caption">التخطيط قبل الالتقاط: تبدأ الخريطة قبل الطيران، تُحدد منطقة التغطية، الارتفاع، GSD، مسارات الطيران، ويُضبط التداخل (Recouvrement) لضمان صور صالحة للمعالجة.</div>
+                                <div class="swipe-hint">اسحب يميناً أو يساراً للتنقل ➔</div>
+                            </div>
+                        </div>
+
+                        <!-- المرحلة 4 -->
+                        <div class="insta-story-card">
+                            <div class="insta-post-header">
+                                <div class="insta-user-info"><div class="insta-avatar">📸</div>أكاديمية العلوم التطبيقية</div>
+                                <div class="insta-step-badge">المرحلة 4 من 9</div>
+                            </div>
+                            <div class="insta-image-wrapper">
+                                <img src="Aerial photography/img4.jpg" alt="Aerial Photo Step 4" onerror="this.src='Aerial photography/img4.png'">
+                            </div>
+                            <div class="insta-post-footer">
+                                <div class="insta-caption">إنشاء نقاط التحكم الاصطناعية لتظهر في الصورة بوضوح (حسب الحاجة)</div>
+                                <div class="swipe-hint">اسحب يميناً أو يساراً للتنقل ➔</div>
+                            </div>
+                        </div>
+
+                        <!-- المرحلة 5 -->
+                        <div class="insta-story-card">
+                            <div class="insta-post-header">
+                                <div class="insta-user-info"><div class="insta-avatar">📸</div>أكاديمية العلوم التطبيقية</div>
+                                <div class="insta-step-badge">المرحلة 5 من 9</div>
+                            </div>
+                            <div class="insta-image-wrapper">
+                                <img src="Aerial photography/img5.jpg" alt="Aerial Photo Step 5" onerror="this.src='Aerial photography/img5.png'">
+                            </div>
+                            <div class="insta-post-footer">
+                                <div class="insta-caption">تنفيذ عملية التصوير الميداني وطبع الصور وتصحيحها هندسياً</div>
+                                <div class="swipe-hint">اسحب يميناً أو يساراً للتنقل ➔</div>
+                            </div>
+                        </div>
+
+                        <!-- المرحلة 6 -->
+                        <div class="insta-story-card">
+                            <div class="insta-post-header">
+                                <div class="insta-user-info"><div class="insta-avatar">📸</div>أكاديمية العلوم التطبيقية</div>
+                                <div class="insta-step-badge">المرحلة 6 من 9</div>
+                            </div>
+                            <div class="insta-image-wrapper">
+                                <img src="Aerial photography/img6.jpg" alt="Aerial Photo Step 6" onerror="this.src='Aerial photography/img6.png'">
+                            </div>
+                            <div class="insta-post-footer">
+                                <div class="insta-caption">إيجاد نقاط التحكم الأفقية والرأسية بطرق المسح الأرضي أو التثليث الجوي</div>
+                                <div class="swipe-hint">اسحب يميناً أو يساراً للتنقل ➔</div>
+                            </div>
+                        </div>
+
+                        <!-- المرحلة 7 -->
+                        <div class="insta-story-card">
+                            <div class="insta-post-header">
+                                <div class="insta-user-info"><div class="insta-avatar">📸</div>أكاديمية العلوم التطبيقية</div>
+                                <div class="insta-step-badge">المرحلة 7 من 9</div>
+                            </div>
+                            <div class="insta-image-wrapper">
+                                <img src="Aerial photography/img7.jpg" alt="Aerial Photo Step 7" onerror="this.src='Aerial photography/img7.png'">
+                            </div>
+                            <div class="insta-post-footer">
+                                <div class="insta-caption">استخراج الخريطة الأساس باستخدام أحدث طرق المسح الجوي الرقمي</div>
+                                <div class="swipe-hint">اسحب يميناً أو يساراً للتنقل ➔</div>
+                            </div>
+                        </div>
+
+                        <!-- المرحلة 8 -->
+                        <div class="insta-story-card">
+                            <div class="insta-post-header">
+                                <div class="insta-user-info"><div class="insta-avatar">📸</div>أكاديمية العلوم التطبيقية</div>
+                                <div class="insta-step-badge">المرحلة 8 من 9</div>
+                            </div>
+                            <div class="insta-image-wrapper">
+                                <img src="Aerial photography/img8.jpg" alt="Aerial Photo Step 8" onerror="this.src='Aerial photography/img8.png'">
+                            </div>
+                            <div class="insta-post-footer">
+                                <div class="insta-caption">ما لا تكشفه الصورة وحدها: بعض المعلومات تحتاج تحققاً ميدانياً، مثل أسماء الأماكن، وظيفة المبنى، أو حالة الطريق، ثم لدمج الهندسة والصفات داخل قاعدة البيانات الجغرافية (Base de données géographique).</div>
+                                <div class="swipe-hint">اسحب يميناً أو يساراً للتنقل ➔</div>
+                            </div>
+                        </div>
+
+                        <!-- المرحلة 9 -->
+                        <div class="insta-story-card">
+                            <div class="insta-post-header">
+                                <div class="insta-user-info"><div class="insta-avatar">📸</div>أكاديمية العلوم التطبيقية</div>
+                                <div class="insta-step-badge">المرحلة 9 من 9</div>
+                            </div>
+                            <div class="insta-image-wrapper">
+                                <img src="Aerial photography/img9.jpg" alt="Aerial Photo Step 9" onerror="this.src='Aerial photography/img9.png'">
+                            </div>
+                            <div class="insta-post-footer">
+                                <div class="insta-caption">الإخراج النهائي للخرائط وطبعها وتوزيعها للاستخدام التنموي</div>
+                                <div class="swipe-hint">نهاية المعرض التفاعلي ✨</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- كارت الأسئلة التفاعلية المنسدل (8 أسئلة محلولة للدرس الثالث) -->
+                <div class="accordion-card" id="quizAccordion">
+                    <div class="accordion-header" id="quizAccordionHeader">
+                        <div class="accordion-header-title">
+                            <span>💡</span> 8 أسئلة تفاعلية ومحلولة على مراحل إنتاج الخرائط
+                        </div>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-body">
+                        
+                        <div class="quiz-item">
+                            <span class="quiz-item-q">س1: ما هي نقطة البداية الأساسية لإنتاج الخرائط والمخططات من الصور الجوية؟</span>
+                            <button class="reveal-ans-btn">🔍 أظهر الإجابة النموذجية</button>
+                            <div class="quiz-item-a"><strong>الإجابة:</strong> تحديد المنطقة المطلوبة لعمل خريطة لها بمقياس ودقة محددة.</div>
+                        </div>
+
+                        <div class="quiz-item">
+                            <span class="quiz-item-q">س2: ماذا تتضمن مرحلة جمع المعلومات قبل عملية التصوير؟</span>
+                            <button class="reveal-ans-btn">🔍 أظهر الإجابة النموذجية</button>
+                            <div class="quiz-item-a"><strong>الإجابة:</strong> جمع المعلومات من الخرائط أو الصور القديمة والاستكشاف الميداني.</div>
+                        </div>
+
+                        <div class="quiz-item">
+                            <span class="quiz-item-q">س3: متى يتم إنشاء نقاط التحكم الاصطناعية؟</span>
+                            <button class="reveal-ans-btn">🔍 أظهر الإجابة النموذجية</button>
+                            <div class="quiz-item-a"><strong>الإجابة:</strong> يتم إنشاؤها لتظهر في الصورة (حسب الحاجة).</div>
+                        </div>
+
+                        <div class="quiz-item">
+                            <span class="quiz-item-q">س4: كيف يتم التعامل مع نقاط التحكم الأفقية والرأسية إذا لم تكن متوفرة؟</span>
+                            <button class="reveal-ans-btn">🔍 أظهر الإجابة النموذجية</button>
+                            <div class="quiz-item-a"><strong>الإجابة:</strong> يتم إيجادها بطرق المسح الأرضي أو تكثيفها بطرق المسح الأرضي أو التثليث الجوي.</div>
+                        </div>
+
+                        <div class="quiz-item">
+                            <span class="quiz-item-q">س5: ما هو الغرض الأساسي من مرحلة التحقق الميداني وقاعدة البيانات؟</span>
+                            <button class="reveal-ans-btn">🔍 أظهر الإجابة النموذجية</button>
+                            <div class="quiz-item-a"><strong>الإجابة:</strong> معرفة ما لا تكشفه الصورة وحدها مثل أسماء الأماكن، وظيفة المبنى، أو حالة الطريق، لدمجها داخل قاعدة البيانات الجغرافية.</div>
+                        </div>
+
+                        <div class="quiz-item">
+                            <span class="quiz-item-q">س6: ما هي الخطوة التي تعقب عمليات المعالجة الجوية؟</span>
+                            <button class="reveal-ans-btn">🔍 أظهر الإجابة النموذجية</button>
+                            <div class="quiz-item-a"><strong>الإجابة:</strong> استخراج الخريطة الأساس بأحد طرق المسح الجوي الرقمي.</div>
+                        </div>
+
+                        <div class="quiz-item">
+                            <span class="quiz-item-q">س7: ما هي محطة النهاية (الخاتمة) في دورة إنتاج الخرائط الجوية؟</span>
+                            <button class="reveal-ans-btn">🔍 أظهر الإجابة النموذجية</button>
+                            <div class="quiz-item-a"><strong>الإجابة:</strong> الإخراج النهائي للخرائط وطبعها وتوزيعها.</div>
+                        </div>
+
+                        <div class="quiz-item">
+                            <span class="quiz-item-q">س8: ما أهمية تخطيط عملية الطيران في هذه المراحل؟</span>
+                            <button class="reveal-ans-btn">🔍 أظهر الإجابة النموذجية</button>
+                            <div class="quiz-item-a"><strong>الإجابة:</strong> تبدأ الخريطة قبل الطيران لتحديد منطقة التغطية، الارتفاع، GSD، مسارات الطيران، وضبط التداخل (Recouvrement) لضمان صور صالحة للمعالجة.</div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="bottom-nav">
+            <a href="../../index.html"><span>🏠</span>الرئيسية</a>
+            <a href="../surveying.html" class="active"><span>📐</span>المساحة</a>
+            <a href="../../english/english.html"><span>🇬🇧</span>الإنجليزي</a>
+            <a href="../../programming/programming.html"><span>💻</span>البرمجة</a>
+        </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                // تفعيل الأكورديون للأسئلة
+                let accordionCard = document.getElementById("quizAccordion");
+                let accordionHeader = document.getElementById("quizAccordionHeader");
+                if (accordionHeader && accordionCard) {
+                    accordionHeader.addEventListener("click", function() {
+                        accordionCard.classList.toggle("active");
+                    });
+                }
+
+                // كشف الإجابات
+                let revealBtns = document.querySelectorAll(".reveal-ans-btn");
+                revealBtns.forEach(btn => {
+                    btn.addEventListener("click", function(e) {
+                        e.stopPropagation();
+                        let ansBox = this.nextElementSibling;
+                        if (ansBox.style.display === "block" || ansBox.classList.contains("show")) {
+                            ansBox.classList.remove("show");
+                            ansBox.style.display = "none";
+                            this.innerHTML = "🔍 أظهر الإجابة النموذجية";
+                        } else {
+                            ansBox.classList.add("show");
+                            ansBox.style.display = "block";
+                            this.innerHTML = "🔒 إخفاء الإجابة";
+                        }
+                    });
+                });
+
+                // نظام الثيمات
+                let themeBtn = document.getElementById("themeToggleBtn");
+                function applyTheme(isDark) {
+                    if (isDark) {
+                        document.documentElement.classList.add("dark-mode");
+                        localStorage.setItem("em_theme", "dark");
+                        if (themeBtn) themeBtn.innerHTML = "☀️";
+                    } else {
+                        document.documentElement.classList.remove("dark-mode");
+                        localStorage.setItem("em_theme", "light");
+                        if (themeBtn) themeBtn.innerHTML = "🌙";
+                    }
+                }
+                applyTheme(localStorage.getItem("em_theme") === "dark");
+                if (themeBtn) {
+                    themeBtn.addEventListener("click", () => {
+                        applyTheme(!document.documentElement.classList.contains("dark-mode"));
+                    });
+                }
+            });
+
+            // شريط التقدم العلوي
+            window.onscroll = function() {
+                let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                let scrolled = (winScroll / height) * 100;
+                let progressFill = document.getElementById("progressFill");
+                if (progressFill) progressFill.style.width = scrolled + "%";
+            };
+        </script>
+    </body>
+</html>
