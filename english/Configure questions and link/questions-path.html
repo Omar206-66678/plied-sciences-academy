@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <title>المسار الرابع: تكوين الأسئلة والربط - أكاديمية العلوم التطبيقية</title>
+        <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+        
+        <script>
+            let savedTheme = localStorage.getItem("em_theme");
+            if (savedTheme === "dark") { document.documentElement.classList.add("dark-mode"); }
+        </script>
+        
+        <style>
+            :root {
+                --bg-main: #F4F7FA;
+                --card-bg: rgba(255, 255, 255, 0.85);
+                --card-border: rgba(14, 165, 233, 0.25);
+                --text-primary: #0A2540;
+                --text-secondary: #4A5568;
+                --header-bg: rgba(255, 255, 255, 0.90);
+                --header-border: rgba(14, 165, 233, 0.2);
+                --primary: #0EA5E9;
+                --primary-dark: #0284C7;
+                --accent: #38BDF8;
+                --light-bg: rgba(14, 165, 233, 0.06);
+                --border-glow: rgba(14, 165, 233, 0.35);
+                --card-glow: 0 20px 45px rgba(14, 165, 233, 0.10);
+            }
+            html.dark-mode, body.dark-mode {
+                --bg-main: #060913;
+                --card-bg: rgba(13, 19, 34, 0.78);
+                --card-border: rgba(14, 165, 233, 0.22);
+                --text-primary: #F0F4F8;
+                --text-secondary: #93A4BC;
+                --header-bg: rgba(13, 19, 34, 0.95);
+                --header-border: rgba(14, 165, 233, 0.25);
+                --primary: #0EA5E9;
+                --primary-dark: #0284C7;
+                --accent: #38BDF8;
+                --light-bg: rgba(14, 165, 233, 0.1);
+                --border-glow: rgba(56, 189, 248, 0.35);
+                --card-glow: 0 25px 50px rgba(0, 0, 0, 0.6);
+            }
+            body {
+                background-color: var(--bg-main); color: var(--text-primary);
+                font-family: 'Cairo', sans-serif; margin: 0; padding: 16px 14px 95px 14px; min-height: 100vh; box-sizing: border-box;
+            }
+            .container { max-width: 680px; margin: auto; }
+            .nav-bar {
+                display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
+                background: var(--header-bg); backdrop-filter: blur(14px); border: 1.5px solid var(--header-border); padding: 9px 14px; border-radius: 20px;
+            }
+            .home-icon-btn { background: var(--light-bg); border: 1.5px solid var(--border-glow); width: 34px; height: 34px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: var(--primary); text-decoration: none; }
+            
+            /* كارت عنوان المسار */
+            .path-hero-card {
+                background: var(--card-bg); border: 2px solid var(--border-glow); border-radius: 28px; padding: 22px; margin-bottom: 24px;
+                box-shadow: var(--card-glow); text-align: right; position: relative; overflow: hidden;
+            }
+            .path-hero-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--primary), var(--accent)); }
+            .path-tag { font-size: 11px; font-weight: 900; color: var(--accent); text-transform: uppercase; margin-bottom: 6px; display: inline-block; }
+            .path-title { font-size: 20px; font-weight: 950; color: var(--text-primary); margin: 0 0 8px 0; }
+            .path-desc { font-size: 13px; font-weight: 700; color: var(--text-secondary); line-height: 1.7; margin: 0; }
+
+            /* كروت الدروس الفردية */
+            .lesson-item-card {
+                background: var(--card-bg); border: 1.5px solid var(--card-border); border-radius: 20px; padding: 18px; margin-bottom: 14px;
+                display: flex; flex-direction: column; gap: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.04); transition: 0.25s;
+            }
+            .lesson-item-card:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 12px 30px var(--border-glow); }
+            
+            .lesson-header-row { display: flex; align-items: center; justify-content: space-between; }
+            .lesson-title-box { display: flex; align-items: center; gap: 12px; }
+            .lesson-icon { width: 42px; height: 42px; background: var(--light-bg); border: 1.5px solid var(--border-glow); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+            .lesson-name { font-size: 15px; font-weight: 950; color: var(--text-primary); margin: 0; }
+            .lesson-snippet { font-size: 12px; font-weight: 700; color: var(--text-secondary); margin: 0; line-height: 1.6; }
+            
+            .lesson-action-btn {
+                display: flex; align-items: center; justify-content: space-between; background: var(--light-bg);
+                border: 1.5px solid var(--border-glow); padding: 10px 16px; border-radius: 14px; color: var(--primary);
+                text-decoration: none; font-size: 12px; font-weight: 950; transition: 0.2s;
+            }
+            .lesson-action-btn:hover { background: var(--primary); color: #FFF; border-color: var(--primary); }
+
+            .bottom-nav {
+                position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); width: calc(100% - 28px); max-width: 500px;
+                background: var(--header-bg); backdrop-filter: blur(15px); display: flex; justify-content: space-around; align-items: center;
+                padding: 8px 10px; border: 1.5px solid var(--header-border); border-radius: 22px; box-shadow: 0 15px 35px rgba(0,0,0,0.15); z-index: 999;
+            }
+            .bottom-nav a { color: var(--text-secondary); text-decoration: none; font-size: 11px; text-align: center; font-weight: 800; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 6px 12px; border-radius: 16px; flex: 1; }
+            .bottom-nav a.active { color: var(--primary); background: var(--light-bg); border: 1.5px solid var(--border-glow); }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <!-- الهيدر -->
+            <div class="nav-bar">
+                <a href="../english.html" class="home-icon-btn" title="العودة للقسم">➔</a>
+                <div style="font-weight: 950; font-size: 13px; color: var(--primary);">المسار الرابع: تكوين الأسئلة والربط</div>
+                <a href="../index.html" class="home-icon-btn" title="الرئيسية">🏠</a>
+            </div>
+
+            <!-- كارت الترحيب بالمسار -->
+            <div class="path-hero-card">
+                <span class="path-tag">🧩 المسار الأكاديمي الرابع</span>
+                <h1 class="path-title">تكوين الأسئلة والربط (Questions & Connectors)</h1>
+                <p class="path-desc">مسار احترافي لتعلم صياغة الأسئلة المفتوحة والمغلقة بدقة، واستخدام أدوات الربط وجمل الوصل لدمج الأفكار ببعضها.</p>
+            </div>
+
+            <!-- قائمة دروس المسار الرابع -->
+            <div class="lesson-item-card">
+                <div class="lesson-header-row">
+                    <div class="lesson-title-box">
+                        <div class="lesson-icon">❓</div>
+                        <h3 class="lesson-name">أدوات الاستفهام (Wh- Questions)</h3>
+                    </div>
+                </div>
+                <p class="lesson-snippet">تعلم كيفية صياغة الأسئلة والاستعلام عن المعلومات باستخدام Who, What, Where, When, Why, How.</p>
+                <a href="questions.html" class="lesson-action-btn"><span>دخول الدرس والشرح الكامل</span><span>➔</span></a>
+            </div>
+
+            <div class="lesson-item-card">
+                <div class="lesson-header-row">
+                    <div class="lesson-title-box">
+                        <div class="lesson-icon">💬</div>
+                        <h3 class="lesson-name">الأسئلة المغلقة (Yes/No Questions)</h3>
+                    </div>
+                </div>
+                <p class="lesson-snippet">طريقة تكوين الأسئلة التي تبدأ بفعل مساعد وتتطلب إجابة مختصرة بـ نعم أو لا.</p>
+                <a href="questions.html" class="lesson-action-btn"><span>دخول الدرس والشرح الكامل</span><span>➔</span></a>
+            </div>
+
+            <div class="lesson-item-card">
+                <div class="lesson-header-row">
+                    <div class="lesson-title-box">
+                        <div class="lesson-icon">🔗</div>
+                        <h3 class="lesson-name">أدوات الربط والوصل (Connectors)</h3>
+                    </div>
+                </div>
+                <p class="lesson-snippet">كيفية ربط الجمل والأفكار بسلاسة باستخدام أدوات التناقض، السبب، والنتيجة.</p>
+                <a href="questions.html" class="lesson-action-btn"><span>دخول الدرس والشرح الكامل</span><span>➔</span></a>
+            </div>
+
+            <div class="lesson-item-card">
+                <div class="lesson-header-row">
+                    <div class="lesson-title-box">
+                        <div class="lesson-icon">🪢</div>
+                        <h3 class="lesson-name">جمل الوصل النسبية (Relative Clauses)</h3>
+                    </div>
+                </div>
+                <p class="lesson-snippet">استخدام ضمائر الوصل مثل who, which, that لإعطاء معلومات إضافية عن الأسماء.</p>
+                <a href="questions.html" class="lesson-action-btn"><span>دخول الدرس والشرح الكامل</span><span>➔</span></a>
+            </div>
+
+        </div>
+
+        <!-- شريط التنقل السفلي -->
+        <div class="bottom-nav">
+            <a href="../index.html"><span>🏠</span>الرئيسية</a>
+            <a href="../english.html" class="active"><span>🇬🇧</span>الإنجليزي</a>
+            <a href="../../surveying/surveying.html"><span>📐</span>المساحة</a>
+            <a href="../../programming/programming.html"><span>💻</span>البرمجة</a>
+        </div>
+    </body>
+</html>
