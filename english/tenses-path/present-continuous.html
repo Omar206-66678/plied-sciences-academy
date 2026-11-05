@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <title>المضارع المستمر (Present Continuous) - أكاديمية العلوم التطبيقية</title>
+        <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+        
+        <script>
+            let savedTheme = localStorage.getItem("em_theme");
+            if (savedTheme === "dark") {
+                document.documentElement.classList.add("dark-mode");
+            }
+        </script>
+        
+        <style>
+            :root {
+                --bg-main: #F4F7FA;
+                --card-bg: rgba(255, 255, 255, 0.90);
+                --card-border: rgba(30, 144, 255, 0.25);
+                --text-primary: #0A2540;
+                --text-secondary: #516079;
+                
+                --header-bg: rgba(255, 255, 255, 0.92);
+                --header-border: rgba(30, 144, 255, 0.2);
+                --header-shadow: 0 10px 30px rgba(30, 144, 255, 0.06);
+                
+                --primary: #1E90FF;
+                --primary-dark: #0066CC;
+                --accent: #00BFFF; 
+                --light-bg: rgba(30, 144, 255, 0.06);
+                --border-glow: rgba(30, 144, 255, 0.35);
+
+                /* 🎨 ألوان تمييز الجمل والكلمات */
+                --tense-pos: #2563EB; 
+                --tense-neg: #DC2626; 
+                --tense-ques: #059669; 
+                --tense-kw: #D97706;
+                --subj-color: #7C3AED;
+                --s-color: #DB2777;
+                --heading-pure-color: #0F172A; 
+
+                /* 🌈 متغيرات تفاعل الشريط السفلي */
+                --nav-theme-color: #1E90FF;
+                --nav-glow-color: rgba(30, 144, 255, 0.25);
+            }
+
+            html.dark-mode, body.dark-mode {
+                --bg-main: #060913;
+                --card-bg: rgba(13, 19, 34, 0.85);
+                --card-border: rgba(30, 144, 255, 0.22);
+                --text-primary: #F0F4F8;
+                --text-secondary: #93A4BC;
+                
+                --header-bg: rgba(13, 19, 34, 0.95);
+                --header-border: rgba(30, 144, 255, 0.25);
+                --header-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+                
+                --primary: #1E90FF;
+                --primary-dark: #0066CC;
+                --accent: #00BFFF;
+                --light-bg: rgba(30, 144, 255, 0.1);
+                --border-glow: rgba(0, 191, 255, 0.35);
+
+                --tense-pos: #60A5FA;
+                --tense-neg: #F87171;
+                --tense-ques: #34D399;
+                --tense-kw: #FBBF24;
+                --subj-color: #A78BFA;
+                --s-color: #F472B6;
+                --heading-pure-color: #FFFFFF; 
+
+                --nav-theme-color: #1E90FF;
+                --nav-glow-color: rgba(30, 144, 255, 0.3);
+            }
+
+            html { scroll-behavior: smooth; }
+
+            body {
+                background-color: var(--bg-main);
+                color: var(--text-primary);
+                font-family: 'Cairo', system-ui, -apple-system, sans-serif;
+                margin: 0;
+                padding: 16px 14px 95px 14px;
+                min-height: 100vh;
+                box-sizing: border-box;
+                transition: background-color 0.3s ease, color 0.3s ease;
+            }
+
+            .container { max-width: 680px; margin: auto; }
+
+            .top-progress-bar { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: transparent; z-index: 9999; }
+            .top-progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--primary)); }
+
+            .scroll-to-top-btn {
+                position: fixed; bottom: 80px; left: 20px; width: 44px; height: 44px;
+                background: var(--card-bg); backdrop-filter: blur(16px);
+                border: 1.5px solid var(--border-glow); border-radius: 14px; color: var(--accent); font-size: 18px;
+                display: flex; align-items: center; justify-content: center; cursor: pointer;
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); z-index: 998; opacity: 0; visibility: hidden;
+                transform: translateY(15px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            .scroll-to-top-btn.show { opacity: 1; visibility: visible; transform: translateY(0); }
+            .scroll-to-top-btn:hover { background: var(--accent); color: #FFFFFF; border-color: var(--accent); transform: translateY(-3px); }
+
+            .nav-bar {
+                display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
+                background: var(--header-bg); backdrop-filter: blur(14px); border: 1.5px solid var(--header-border); padding: 10px 16px;
+                border-radius: 24px; box-shadow: var(--header-shadow);
+            }
+            .nav-right-group { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+            .nav-left-group { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+            
+            .nav-titles-box { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 0px; flex-grow: 1; margin: 0 10px; }
+            .nav-main-title { font-size: 12.5px; font-weight: 950; color: var(--text-primary); margin: 0; line-height: 1.2; font-family: 'Cairo', sans-serif; }
+            .nav-sub-title { font-size: 9.5px; font-weight: 800; color: var(--accent); margin: 0; line-height: 1.2; }
+            .nav-academy-title { font-size: 8.5px; font-weight: 700; color: var(--text-secondary); margin: 0; line-height: 1.2; }
+
+            .home-icon-btn, .nav-icon-btn {
+                background: var(--light-bg); border: 1.5px solid var(--border-glow);
+                width: 36px; height: 36px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
+                color: var(--text-primary); font-size: 15px; text-decoration: none; cursor: pointer; transition: 0.25s; flex-shrink: 0;
+            }
+            .home-icon-btn:hover, .nav-icon-btn:hover { transform: scale(1.05); border-color: var(--accent); color: var(--accent); }
+
+            .hero-card {
+                background: var(--card-bg); 
+                border: 2px solid transparent;
+                background-image: linear-gradient(var(--card-bg), var(--card-bg)), linear-gradient(135deg, var(--accent), var(--primary));
+                background-origin: border-box;
+                background-clip: padding-box, border-box;
+                border-radius: 28px;
+                padding: 24px; 
+                margin-bottom: 24px; 
+                box-shadow: 0 10px 30px var(--border-glow); 
+                display: flex; 
+                flex-direction: column; 
+                align-items: center;
+                text-align: center;
+                gap: 16px;
+                position: relative; 
+                overflow: hidden;
+            }
+            
+            .hero-title-en { margin: 0; font-size: 21px; font-weight: 950; color: var(--heading-pure-color); letter-spacing: -0.3px; }
+            .hero-title-ar { margin: 0; font-size: 14px; font-weight: 800; color: var(--accent); background: var(--light-bg); padding: 4px 16px; border-radius: 12px; border: 1px solid var(--border-glow); }
+
+            .table-container {
+                width: 100%;
+                overflow-x: auto;
+                margin-bottom: 24px;
+                border-radius: 28px;
+                border: 2px solid transparent;
+                background-image: linear-gradient(var(--card-bg), var(--card-bg)), linear-gradient(135deg, var(--accent), var(--primary));
+                background-origin: border-box;
+                background-clip: padding-box, border-box;
+                box-shadow: 0 15px 40px var(--border-glow);
+                text-align: right;
+                box-sizing: border-box;
+                padding: 16px;
+            }
+
+            .styled-master-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+            .styled-master-table th, .styled-master-table td { padding: 12px 14px; border-bottom: 1px solid var(--card-border); border-left: 1px solid var(--card-border); }
+            .styled-master-table th:last-child, .styled-master-table td:last-child { border-left: none; }
+            .styled-master-table th { background: var(--light-bg); color: var(--heading-pure-color); font-weight: 950; font-size: 13px; }
+            .styled-master-table td { background: var(--card-bg); color: var(--text-primary); font-weight: 800; }
+            .styled-master-table tr:last-child td { border-bottom: none; }
+
+            .lesson-card-full {
+                background: var(--card-bg); 
+                border: 2px solid transparent;
+                background-image: linear-gradient(var(--card-bg), var(--card-bg)), linear-gradient(135deg, #2563EB, #60A5FA);
+                background-origin: border-box;
+                background-clip: padding-box, border-box;
+                border-radius: 28px;
+                padding: 26px; 
+                margin-bottom: 24px; 
+                box-shadow: 0 20px 45px rgba(37, 99, 235, 0.12); 
+                display: flex; 
+                flex-direction: column; 
+                gap: 20px;
+                position: relative; 
+                overflow: hidden;
+            }
+            
+            .lesson-header { display: flex; flex-direction: column; gap: 14px; }
+            .app-title-wrapper { display: flex; flex-direction: column; gap: 8px; position: relative; padding-right: 14px; border-right: 4px solid var(--accent); }
+            .app-main-heading { margin: 0; font-size: 20px; font-weight: 950; color: var(--heading-pure-color); letter-spacing: -0.4px; font-family: 'Cairo', sans-serif; direction: ltr; text-align: right; }
+            .app-sub-pill { display: inline-flex; align-items: center; gap: 6px; background: var(--light-bg); border: 1.5px solid var(--border-glow); color: var(--heading-pure-color); padding: 6px 14px; border-radius: 12px; font-size: 12px; font-weight: 850; width: fit-content; }
+
+            /* 🌟 الكروت الفرعية بلون أزرق موحد */
+            .glass-glow-card {
+                background: var(--card-bg);
+                backdrop-filter: blur(16px);
+                border-radius: 22px;
+                padding: 24px 22px 22px 22px;
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+                position: relative;
+                overflow: hidden;
+                box-shadow: 0 10px 30px rgba(37, 99, 235, 0.06);
+                width: 100%;
+                box-sizing: border-box;
+                border: 1.5px solid rgba(37, 99, 235, 0.35);
+            }
+            .glass-glow-card::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 4px; background: linear-gradient(90deg, #2563EB, #60A5FA); width: 100%; }
+
+            .card-top-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+                margin-bottom: 4px;
+            }
+
+            .usage-title { 
+                font-size: 15px; 
+                font-weight: 950; 
+                color: var(--heading-pure-color); 
+                display: flex; 
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 6px; 
+                margin-top: 4px;
+                direction: rtl;
+                width: 100%;
+            }
+            .title-line-1 { font-size: 16px; font-weight: 950; color: var(--heading-pure-color); display: flex; align-items: center; gap: 8px; }
+            .title-line-2 { font-size: 13.5px; font-weight: 900; color: var(--text-secondary); margin-right: 24px; }
+
+            .usage-content { font-size: 13.5px; font-weight: 700; color: var(--text-secondary); line-height: 1.8; }
+
+            .method-box { background: var(--light-bg); border: 1.5px solid rgba(37, 99, 235, 0.3); padding: 14px; border-radius: 16px; margin: 12px 0; display: flex; flex-direction: column; gap: 8px; }
+
+            .prep-practice-group {
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+                margin-top: 8px;
+            }
+
+            .icon-cards-list { display: flex; flex-direction: column; gap: 12px; }
+            
+            .icon-single-card {
+                background: rgba(37, 99, 235, 0.04);
+                border: 1.5px solid rgba(37, 99, 235, 0.3);
+                border-radius: 18px;
+                padding: 14px 18px;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                transition: 0.3s ease;
+                position: relative;
+                overflow: hidden;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            }
+            
+            .pos-speak { color: #2563EB !important; border-color: rgba(37, 99, 235, 0.3) !important; background: rgba(37, 99, 235, 0.08) !important; }
+            .pos-speak:hover, .pos-speak.playing { background: #2563EB !important; color: #FFFFFF !important; }
+
+            @keyframes laserScan {
+                0% { box-shadow: 0 0 15px currentColor; }
+                50% { box-shadow: 0 0 25px currentColor; }
+                100% { box-shadow: 0 0 15px currentColor; }
+            }
+            .icon-single-card.scanning { animation: laserScan 1.2s infinite ease-in-out; background: var(--card-bg) !important; }
+
+            .sentence-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; direction: ltr; }
+            .line-en-1 { font-family: system-ui, -apple-system, sans-serif; font-size: 13.5px; font-weight: 900; color: var(--heading-pure-color); text-align: left; direction: ltr; flex: 1; }
+            .line-ar-1 { font-family: 'Cairo', sans-serif; font-size: 13px; font-weight: 800; color: var(--heading-pure-color); text-align: right; direction: rtl; margin-top: -2px; }
+            .sentence-group { display: flex; flex-direction: column; gap: 4px; }
+
+            .speak-btn {
+                width: 30px; height: 30px; border-radius: 10px; display: flex; align-items: center; justify-content: center;
+                cursor: pointer; font-size: 13px; transition: 0.2s; flex-shrink: 0; border: 1.5px solid;
+            }
+
+            .quiz-banner-card {
+                background: var(--card-bg); border: 2px solid rgba(37, 99, 235, 0.3); border-radius: 26px; padding: 24px;
+                display: flex; flex-direction: column; gap: 18px; margin-top: 24px; box-shadow: 0 15px 35px rgba(37, 99, 235, 0.08);
+                position: relative; overflow: hidden;
+            }
+            .quiz-banner-top { display: flex; flex-direction: column; align-items: flex-end; text-align: right; gap: 6px; }
+            .quiz-banner-title { font-size: 16px; font-weight: 950; color: var(--heading-pure-color); line-height: 1.5; }
+            .quiz-banner-desc { font-size: 12.5px; font-weight: 800; color: var(--text-secondary); line-height: 1.4; }
+            .quiz-banner-btn {
+                background: linear-gradient(135deg, #2563EB, #1D4ED8); color: #FFFFFF; border: none; padding: 14px 22px;
+                border-radius: 18px; font-family: 'Cairo', sans-serif; font-size: 14px; font-weight: 950; cursor: pointer;
+                box-shadow: 0 8px 25px rgba(37, 99, 235, 0.35); transition: 0.25s ease; display: flex; align-items: center;
+                justify-content: center; gap: 8px; width: 100%;
+            }
+            .quiz-banner-btn:hover { transform: scale(1.02); box-shadow: 0 12px 30px rgba(37, 99, 235, 0.5); }
+
+            .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(37, 99, 235, 0.35); backdrop-filter: blur(14px); display: none; align-items: center; justify-content: center; z-index: 10000; padding: 16px; box-sizing: border-box; }
+            .modal-overlay.active { display: flex; }
+            
+            .quiz-modal-card { 
+                background: var(--card-bg); border: 2px solid #2563EB; border-radius: 28px; padding: 22px; width: 100%; max-width: 500px; max-height: 85vh;
+                overflow-y: auto; box-shadow: 0 25px 60px rgba(37, 99, 235, 0.3); display: flex; flex-direction: column; gap: 16px; position: relative; 
+            }
+            .quiz-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--card-border); padding-bottom: 12px; }
+            .quiz-title { font-size: 15px; font-weight: 950; color: var(--heading-pure-color); display: flex; align-items: center; gap: 8px; }
+            .quiz-close-btn { background: var(--light-bg); border: 1.5px solid var(--border-glow); width: 32px; height: 32px; border-radius: 10px; color: var(--text-primary); cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; }
+
+            .quiz-body { display: flex; flex-direction: column; gap: 14px; }
+            .quiz-question-card {
+                background: var(--card-bg); border: 1.5px solid var(--border-glow); border-radius: 20px; padding: 18px;
+                display: flex; flex-direction: column; gap: 14px; box-shadow: 0 8px 25px rgba(37, 99, 235, 0.06); transition: 0.3s ease;
+            }
+            
+            @keyframes successPulse {
+                0% { transform: scale(1); border-color: #059669; box-shadow: 0 0 25px rgba(5, 150, 105, 0.45); }
+                50% { transform: scale(1.02); border-color: #34D399; box-shadow: 0 0 35px rgba(52, 211, 153, 0.65); }
+                100% { transform: scale(1); border-color: #059669; box-shadow: 0 0 25px rgba(5, 150, 105, 0.45); }
+            }
+            .quiz-question-card.success-fx { animation: successPulse 0.6s ease infinite alternate; background: rgba(5, 150, 105, 0.04); }
+
+            .quiz-question-text { font-family: system-ui, -apple-system, sans-serif; font-size: 14px; font-weight: 900; color: var(--heading-pure-color); text-align: left; direction: ltr; line-height: 1.6; }
+            .quiz-options-grid { display: flex; flex-direction: column; gap: 8px; margin-top: 4px; }
+            .quiz-option-btn {
+                background: var(--bg-main); border: 1.5px solid var(--card-border); padding: 10px 14px; border-radius: 14px;
+                font-family: system-ui, -apple-system, sans-serif; font-size: 12.5px; font-weight: 900; color: var(--text-primary);
+                cursor: pointer; transition: 0.2s; text-align: left; direction: ltr; width: 100%; box-sizing: border-box;
+            }
+            .quiz-option-btn:hover { border-color: #2563EB; background: rgba(37, 99, 235, 0.05); color: #2563EB; }
+            .quiz-option-btn.correct { background: rgba(5, 150, 105, 0.15) !important; border-color: #059669 !important; color: #059669 !important; transform: scale(1.01); }
+            .quiz-option-btn.wrong { background: rgba(239, 68, 68, 0.15) !important; border-color: #EF4444 !important; color: #EF4444 !important; }
+
+            .quiz-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; border-top: 1px solid var(--card-border); padding-top: 12px; font-size: 12px; font-weight: 800; color: var(--text-secondary); }
+            .quiz-next-btn { background: #2563EB; color: #FFFFFF; border: none; padding: 8px 18px; border-radius: 12px; font-family: 'Cairo', sans-serif; font-weight: 900; cursor: pointer; display: none; }
+            .quiz-next-btn.active { display: block; }
+
+            /* 🌟 شريط التنقل السفلي المطور الموحد للمنصة (الترتيب: الرئيسية -> الإنجليزي -> الأزمنة -> المساحة -> البرمجة) */
+            .bottom-nav {
+                position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); 
+                width: calc(100% - 32px); max-width: 480px;
+                background: linear-gradient(135deg, var(--nav-glow-color) 0%, rgba(13, 19, 34, 0.85) 100%);
+                backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+                display: flex; justify-content: space-around; align-items: center;
+                padding: 6px 8px; 
+                border: none; 
+                border-radius: 24px; 
+                box-shadow: 0 12px 35px var(--nav-glow-color), inset 0 1px 1px rgba(255, 255, 255, 0.2); 
+                z-index: 999; box-sizing: border-box;
+                transition: all 0.4s ease;
+            }
+
+            html:not(.dark-mode) .bottom-nav {
+                background: linear-gradient(135deg, var(--nav-glow-color) 0%, rgba(255, 255, 255, 0.92) 100%);
+                box-shadow: 0 12px 35px var(--nav-glow-color), inset 0 1px 1px rgba(255, 255, 255, 0.9);
+            }
+
+            .bottom-nav a { 
+                color: var(--text-secondary); 
+                text-decoration: none; 
+                font-size: 9.5px; 
+                text-align: center; 
+                font-weight: 800; 
+                display: flex; 
+                flex-direction: column; 
+                align-items: center; 
+                gap: 2px; 
+                padding: 6px 8px; 
+                border-radius: 16px; 
+                flex: 1; 
+                border: 1px solid rgba(128, 128, 128, 0.18);
+                background: rgba(128, 128, 128, 0.05);
+                transition: all 0.3s ease;
+            }
+
+            .bottom-nav a span { 
+                font-size: 15px; 
+                line-height: 1; 
+            }
+
+            .bottom-nav a:hover {
+                color: var(--nav-theme-color);
+                border-color: var(--nav-theme-color);
+                background: rgba(128, 128, 128, 0.1);
+            }
+
+            .bottom-nav a.active { 
+                color: #FFFFFF !important; 
+                background: var(--nav-theme-color); 
+                border-color: var(--nav-theme-color);
+                box-shadow: 0 4px 15px var(--nav-glow-color);
+            }
+
+            .qa-response-box {
+                margin-top: 6px;
+                padding-top: 6px;
+                border-top: 1px dashed rgba(37, 99, 235, 0.3);
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                font-size: 11.5px;
+                font-weight: 850;
+                direction: ltr;
+            }
+            .qa-response-box .ans-yes { color: #059669; }
+            .qa-response-box .ans-no { color: #DC2626; }
+        </style>
+    </head>
+    <body>
+
+        <!-- زر العودة للأعلى -->
+        <button class="scroll-to-top-btn" id="scrollToTopBtn" title="العودة للأعلى">↑</button>
+
+        <div class="top-progress-bar"><div class="top-progress-fill" id="progressFill"></div></div>
+
+        <!-- نافذة التحدي اليومي وبنك الأسئلة -->
+        <div class="modal-overlay" id="quizModal">
+            <div class="quiz-modal-card">
+                <div class="quiz-header">
+                    <div class="quiz-title"><span>⚡</span><span>التحدي اليومي (4 أسئلة / 24 ساعة)</span></div>
+                    <button class="quiz-close-btn" id="closeQuizBtn">✕</button>
+                </div>
+                <div class="quiz-body" id="quizBody"></div>
+                <div class="quiz-footer">
+                    <span id="quizScoreIndicator">النتيجة: 0 / 4</span>
+                    <button class="quiz-next-btn" id="quizNextBtn" onclick="nextQuestion()">السؤال التالي ➔</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <!-- شريط الهيدر -->
+            <div class="nav-bar">
+                <div class="nav-right-group">
+                    <a href="tenses-path.html" class="home-icon-btn" title="الرجوع للأزمنة">🏠</a>
+                </div>
+                <div class="nav-titles-box">
+                    <h1 class="nav-main-title">المضارع المستمر</h1>
+                    <p class="nav-sub-title">Present Continuous Tense</p>
+                    <p class="nav-academy-title">أكاديمية العلوم التطبيقية</p>
+                </div>
+                <div class="nav-left-group">
+                    <button class="nav-icon-btn" id="themeToggleBtn" title="تغيير الثيم">🌙</button>
+                </div>
+            </div>
+
+            <!-- كارت الترحيب -->
+            <div class="hero-card">
+                <h1 class="hero-title-en">Present Continuous Tense</h1>
+                <h2 class="hero-title-ar">زمن المضارع المستمر (التكوين والاستخدام)</h2>
+            </div>
+
+            <!-- جدول الملخص الشامل -->
+            <div class="table-container">
+                <div class="app-sub-pill" style="margin-bottom: 12px;"><span>جدول الملخص الشامل 📊</span></div>
+                <table class="styled-master-table">
+                    <thead>
+                        <tr>
+                            <th>الحالة (Form)</th>
+                            <th>الضمائر (Pronouns)</th>
+                            <th>القاعدة الفعلية (Rule)</th>
+                            <th>مثال توضيحي (Example)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong style="color:var(--tense-pos);">الإثبات (Positive)</strong></td>
+                            <td>I</td>
+                            <td><strong style="color:var(--tense-pos);">am</strong> + Verb<strong style="color:var(--s-color);">-ing</strong></td>
+                            <td dir="ltr">I am play<strong style="color:var(--s-color);">-ing</strong>.</td>
+                        </tr>
+                        <tr>
+                            <td><strong style="color:var(--tense-pos);">الإثبات (Positive)</strong></td>
+                            <td>He, She, It</td>
+                            <td><strong style="color:var(--tense-pos);">is</strong> + Verb<strong style="color:var(--s-color);">-ing</strong></td>
+                            <td dir="ltr">He is play<strong style="color:var(--s-color);">-ing</strong>.</td>
+                        </tr>
+                        <tr>
+                            <td><strong style="color:var(--tense-pos);">الإثبات (Positive)</strong></td>
+                            <td>We, They, You</td>
+                            <td><strong style="color:var(--tense-pos);">are</strong> + Verb<strong style="color:var(--s-color);">-ing</strong></td>
+                            <td dir="ltr">They are play<strong style="color:var(--s-color);">-ing</strong>.</td>
+                        </tr>
+                        <tr>
+                            <td><strong style="color:var(--tense-neg);">النفي (Negative)</strong></td>
+                            <td>He, She, It, We, They...</td>
+                            <td>am/is/are + <strong style="color:var(--tense-neg);">not</strong> + Verb<strong style="color:var(--s-color);">-ing</strong></td>
+                            <td dir="ltr">She <strong style="color:var(--tense-neg);">is not</strong> work<strong style="color:var(--s-color);">-ing</strong>.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- كارت الشرح الشامل الرئيسي للمضارع المستمر -->
+            <div class="lesson-card-full" id="mainLessonCard">
+                <div class="lesson-header">
+                    <div class="app-title-wrapper" style="border-right-color: var(--accent);">
+                        <h2 class="app-main-heading">
+                            Mastering <span style="color:var(--tense-pos);">Present Continuous</span> & Usage
+                        </h2>
+                        <div class="app-sub-pill"><span>دليلك الشامل لاحتراف زمن المضارع المستمر ⏳</span></div>
+                    </div>
+                </div>
+
+                <!-- 1. الإثبات والتكوين -->
+                <div class="glass-glow-card">
+                    <div class="card-top-header">
+                        <div class="usage-title" style="margin: 0;">
+                            <div class="title-line-1"><span class="dot-icon">🔵</span>قاعدة الإثبات والتكوين</div>
+                            <div class="title-line-2"><strong style="color:var(--tense-pos);">(am / is / are + Verb-ing)</strong></div>
+                        </div>
+                    </div>
+                    <div class="usage-content" style="margin-top: 8px;">
+                        نستخدم المضارع المستمر للتعبير عن حدث يحدث الآن وقت الكلام ومستمر في الوقوع:
+                        <div class="method-box">
+                            <div class="method-box-title" style="color: #2563EB;">💡 تكوين الجملة</div>
+                            <div style="font-size: 12.5px; font-weight: 800; color: var(--text-primary); display: flex; flex-direction: column; gap: 8px; margin-top: 4px; line-height: 1.6;">
+                                <div>🔹 الضمير (<strong style="color:var(--subj-color);">I</strong>) يأخذ ➔ <strong style="color:var(--tense-pos);">am</strong> + الفعل مضاف إليه <strong style="color:var(--s-color);">-ing</strong>.</div>
+                                <div>🔹 ضمائر المفرد (<strong style="color:var(--subj-color);">He</strong>, <strong style="color:var(--subj-color);">She</strong>, <strong style="color:var(--subj-color);">It</strong>) أو أي اسم مفرد: تأخذ ➔ <strong style="color:var(--tense-pos);">is</strong> + الفعل + <strong style="color:var(--s-color);">-ing</strong>.</div>
+                                <div>🔹 ضمائر الجمع (<strong style="color:var(--subj-color);">We</strong>, <strong style="color:var(--subj-color);">They</strong>, <strong style="color:var(--subj-color);">You</strong>) أو أي اسم جمع: تأخذ ➔ <strong style="color:var(--tense-pos);">are</strong> + الفعل + <strong style="color:var(--s-color);">-ing</strong>.</div>
+                            </div>
+                        </div>
+
+                        <!-- قاعدة إضافة -ing المبسطة -->
+                        <div class="method-box">
+                            <div class="method-box-title" style="color: #2563EB;">📌 قواعد هامة عند إضافة (-ing) للفعل:</div>
+                            <div style="font-size: 12px; font-weight: 800; color: var(--text-primary); display: flex; flex-direction: column; gap: 6px; margin-top: 6px; line-height: 1.6; text-align: right;" dir="rtl">
+                                <div style="color: var(--text-secondary); font-size: 11.5px;">أبرز قواعد الكتابة:</div>
+                                <div dir="ltr" style="text-align: left;">1. إذا انتهى الفعل بـ (e) صامتة، نحذفها ونضيف ing: <span style="color:var(--s-color);">write ➔ writing / make ➔ making</span></div>
+                                <div dir="ltr" style="text-align: left;">2. إذا انتهى الفعل بحرف ساكن وقبله حرف متحرك واحد، نضاعف الحرف الأخير ونضيف ing: <span style="color:var(--s-color);">swim ➔ swimming / sit ➔ sitting</span></div>
+                                <div dir="ltr" style="text-align: left;">3. الباقي نضيف ing مباشرة: <span style="color:var(--s-color);">play ➔ playing / eat ➔ eating</span></div>
+                            </div>
+                        </div>
+
+                        <!-- 7 كروت التطبيق العملي للإثبات -->
+                        <div class="prep-practice-group">
+                            <div style="font-size: 12px; font-weight: 900; color: #2563EB; margin-top: 4px;">🎯 التطبيق العملي (7 كروت للإثبات):</div>
+                            <div class="icon-cards-list">
+                                <div class="icon-single-card" id="card-pos-1">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1"><strong style="color:var(--subj-color);">I</strong> <strong style="color:var(--tense-pos);">am</strong> <span style="color:var(--tense-pos);">read</span><strong style="color:var(--s-color);">ing</strong> a book now.</div>
+                                            <button class="speak-btn pos-speak" onclick="speakText('I am reading a book now.', 'card-pos-1', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1"><strong style="color:var(--subj-color);">أنا</strong> <strong style="color:var(--tense-pos);">أقرأ</strong> كتاباً الآن.</div>
+                                    </div>
+                                </div>
+                                <div class="icon-single-card" id="card-pos-2">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1"><strong style="color:var(--subj-color);">You</strong> <strong style="color:var(--tense-pos);">are</strong> <span style="color:var(--tense-pos);">listen</span><strong style="color:var(--s-color);">ing</strong> carefully.</div>
+                                            <button class="speak-btn pos-speak" onclick="speakText('You are listening carefully.', 'card-pos-2', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1"><strong style="color:var(--subj-color);">أنت</strong> <strong style="color:var(--tense-pos);">تستمع</strong> باهتمام.</div>
+                                    </div>
+                                </div>
+                                <div class="icon-single-card" id="card-pos-3">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1"><strong style="color:var(--subj-color);">We</strong> <strong style="color:var(--tense-pos);">are</strong> <span style="color:var(--tense-pos);">learn</span><strong style="color:var(--s-color);">ing</strong> English.</div>
+                                            <button class="speak-btn pos-speak" onclick="speakText('We are learning English.', 'card-pos-3', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1"><strong style="color:var(--subj-color);">نحن</strong> <strong style="color:var(--tense-pos);">نتعلم</strong> الإنجليزية.</div>
+                                    </div>
+                                </div>
+                                <div class="icon-single-card" id="card-pos-4">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1"><strong style="color:var(--subj-color);">They</strong> <strong style="color:var(--tense-pos);">are</strong> <span style="color:var(--tense-pos);">play</span><strong style="color:var(--s-color);">ing</strong> football.</div>
+                                            <button class="speak-btn pos-speak" onclick="speakText('They are playing football.', 'card-pos-4', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1"><strong style="color:var(--subj-color);">هم</strong> <strong style="color:var(--tense-pos);">يلعبون</strong> كرة القدم.</div>
+                                    </div>
+                                </div>
+                                <div class="icon-single-card" id="card-pos-5">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1"><strong style="color:var(--subj-color);">He</strong> <strong style="color:var(--tense-pos);">is</strong> <span style="color:var(--tense-pos);">work</span><strong style="color:var(--s-color);">ing</strong> right now.</div>
+                                            <button class="speak-btn pos-speak" onclick="speakText('He is working right now.', 'card-pos-5', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1"><strong style="color:var(--subj-color);">هو</strong> <strong style="color:var(--tense-pos);">يعمل</strong> في هذه اللحظة.</div>
+                                    </div>
+                                </div>
+                                <div class="icon-single-card" id="card-pos-6">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1"><strong style="color:var(--subj-color);">She</strong> <strong style="color:var(--tense-pos);">is</strong> <span style="color:var(--tense-pos);">cook</span><strong style="color:var(--s-color);">ing</strong> dinner.</div>
+                                            <button class="speak-btn pos-speak" onclick="speakText('She is cooking dinner.', 'card-pos-6', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1"><strong style="color:var(--subj-color);">هي</strong> <strong style="color:var(--tense-pos);">تطبخ</strong> العشاء.</div>
+                                    </div>
+                                </div>
+                                <div class="icon-single-card" id="card-pos-7">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1"><strong style="color:var(--subj-color);">It</strong> <strong style="color:var(--tense-pos);">is</strong> <span style="color:var(--tense-pos);">rain</span><strong style="color:var(--s-color);">ing</strong> outside.</div>
+                                            <button class="speak-btn pos-speak" onclick="speakText('It is raining outside.', 'card-pos-7', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1"><strong style="color:var(--subj-color);">هي</strong> <strong style="color:var(--tense-pos);">تمطر</strong> بالخارج.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- 2. النفي -->
+                <div class="glass-glow-card">
+                    <div class="card-top-header">
+                        <div class="usage-title" style="margin: 0;">
+                            <div class="title-line-1"><span class="dot-icon">🔵</span>قاعدة النفي</div>
+                            <div class="title-line-2"><strong style="color:var(--tense-neg);">(am/is/are + not + Verb-ing)</strong></div>
+                        </div>
+                    </div>
+                    <div class="usage-content" style="margin-top: 8px;">
+                        لنفي الجملة في المضارع المستمر: نضع كلمة <strong style="color:var(--tense-neg);">not</strong> مباشرة بعد الفعل المساعد (am, is, are).
+                        <div class="method-box">
+                            <div class="method-box-title" style="color: #2563EB;">💡 اختصارات النفي الشائعة</div>
+                            <div style="font-size: 12.5px; font-weight: 800; color: var(--text-primary); display: flex; flex-direction: column; gap: 6px; margin-top: 4px;">
+                                <div>⚠️ is not = isn't / are not = aren't / am not = am not (لا تُختصر مع am).</div>
+                            </div>
+                        </div>
+
+                        <!-- 7 كروت التطبيق العملي للنفي -->
+                        <div class="prep-practice-group">
+                            <div style="font-size: 12px; font-weight: 900; color: #2563EB; margin-top: 4px;">🎯 التطبيق العملي (7 كروت للنفي):</div>
+                            <div class="icon-cards-list">
+                                <div class="icon-single-card" id="card-neg-1">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1"><strong style="color:var(--subj-color);">I</strong> <strong style="color:var(--tense-neg);">am not</strong> <span style="color:var(--tense-neg);">sleep</span><strong style="color:var(--s-color);">ing</strong>.</div>
+                                            <button class="speak-btn pos-speak" onclick="speakText('I am not sleeping.', 'card-neg-1', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1"><strong style="color:var(--subj-color);">أنا</strong> <strong style="color:var(--tense-neg);">لست نائماً</strong>.</div>
+                                    </div>
+                                </div>
+                                <div class="icon-single-card" id="card-neg-2">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1"><strong style="color:var(--subj-color);">You</strong> <strong style="color:var(--tense-neg);">aren't</strong> <span style="color:var(--tense-neg);">listen</span><strong style="color:var(--s-color);">ing</strong> to me.</div>
+                                            <button class="speak-btn pos-speak" onclick="speakText('You arent listening to me.', 'card-neg-2', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1"><strong style="color:var(--subj-color);">أنت</strong> <strong style="color:var(--tense-neg);">لا تستمع</strong> إليّ.</div>
+                                    </div>
+                                </div>
+                                <div class="icon-single-card" id="card-neg-3">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1"><strong style="color:var(--subj-color);">We</strong> <strong style="color:var(--tense-neg);">aren't</strong> <span style="color:var(--tense-neg);">wast</span><strong style="color:var(--s-color);">ing</strong> time.</div>
+                                            <button class="speak-btn pos-speak" onclick="speakText('We arent wasting time.', 'card-neg-3', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1"><strong style="color:var(--subj-color);">نحن</strong> <strong style="color:var(--tense-neg);">لا نضيع</strong> الوقت.</div>
+                                    </div>
+                                </div>
+                                <div class="icon-single-card" id="card-neg-4">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1"><strong style="color:var(--subj-color);">They</strong> <strong style="color:var(--tense-neg);">aren't</strong> <span style="color:var(--tense-neg);">work</span><strong style="color:var(--s-color);">ing</strong> today.</div>
+                                            <button class="speak-btn pos-speak" onclick="speakText('They arent working today.', 'card-neg-4', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1"><strong style="color:var(--subj-color);">هم</strong> <strong style="color:var(--tense-neg);">لا يعملون</strong> اليوم.</div>
+                                    </div>
+                                </div>
+                                <div class="icon-single-card" id="card-neg-5">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1"><strong style="color:var(--subj-color);">He</strong> <strong style="color:var(--tense-neg);">isn't</strong> <span style="color:var(--tense-neg);">play</span><strong style="color:var(--s-color);">ing</strong> games.</div>
+                                            <button class="speak-btn pos-speak" onclick="speakText('He isnt playing games.', 'card-neg-5', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1"><strong style="color:var(--subj-color);">هو</strong> <strong style="color:var(--tense-neg);">لا يلعب</strong> ألعاباً.</div>
+                                    </div>
+                                </div>
+                                <div class="icon-single-card" id="card-neg-6">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1"><strong style="color:var(--subj-color);">She</strong> <strong style="color:var(--tense-neg);">isn't</strong> <span style="color:var(--tense-neg);">watch</span><strong style="color:var(--s-color);">ing</strong> TV.</div>
+                                            <button class="speak-btn pos-speak" onclick="speakText('She isnt watching TV.', 'card-neg-6', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1"><strong style="color:var(--subj-color);">هي</strong> <strong style="color:var(--tense-neg);">لا تشاهد</strong> التلفاز.</div>
+                                    </div>
+                                </div>
+                                <div class="icon-single-card" id="card-neg-7">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1"><strong style="color:var(--subj-color);">It</strong> <strong style="color:var(--tense-neg);">isn't</strong> <span style="color:var(--tense-neg);">rain</span><strong style="color:var(--s-color);">ing</strong> now.</div>
+                                            <button class="speak-btn pos-speak" onclick="speakText('It isnt raining now.', 'card-neg-7', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1"><strong style="color:var(--subj-color);">هي</strong> <strong style="color:var(--tense-neg);">لا تمطر</strong> الآن.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- 3. الاستفهام والسؤال -->
+                <div class="glass-glow-card">
+                    <div class="card-top-header">
+                        <div class="usage-title" style="margin: 0;">
+                            <div class="title-line-1"><span class="dot-icon">🔵</span>قاعدة تكوين السؤال</div>
+                            <div class="title-line-2"><strong style="color:var(--tense-ques);">(Am / Is / Are + Subject + Verb-ing)</strong></div>
+                        </div>
+                    </div>
+                    <div class="usage-content" style="margin-top: 8px;">
+                        لتكوين السؤال في المضارع المستمر: نبدأ بالفعل المساعد (Am / Is / Are) في بداية الجملة قبل الفاعل.
+                        <div class="method-box">
+                            <div class="method-box-title" style="color: #2563EB;">💡 صيغة السؤال مع الإجابة</div>
+                            <div style="font-size: 12.5px; font-weight: 800; color: var(--text-primary); display: flex; flex-direction: column; gap: 6px; margin-top: 4px;">
+                                <div>❓ Am/Is/Are + الفاعل + الفعل مضاف إليه -ing؟</div>
+                            </div>
+                        </div>
+
+                        <!-- 7 كروت التطبيق العملي للاستفهام مع الرد بـ Yes / No -->
+                        <div class="prep-practice-group">
+                            <div style="font-size: 12px; font-weight: 900; color: #2563EB; margin-top: 4px;">🎯 التطبيق العملي (7 كروت للأسئلة مع الردود):</div>
+                            <div class="icon-cards-list">
+                                <div class="icon-single-card" id="card-ques-1">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1"><strong style="color:var(--tense-ques);">Am</strong> <strong style="color:var(--subj-color);">I</strong> <span style="color:var(--tense-ques);">do</span><strong style="color:var(--s-color);">ing</strong> well?</div>
+                                            <button class="speak-btn pos-speak" onclick="speakText('Am I doing well?', 'card-ques-1', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1"><strong style="color:var(--tense-ques);">هل</strong> <strong style="color:var(--subj-color);">أنا</strong> <strong style="color:var(--tense-ques);">أقوم</strong> بعمل جيد؟</div>
+                                        <div class="qa-response-box">
+                                            <span class="ans-yes">✔ Yes, you are.</span>
+                                            <span class="ans-no">✘ No, you aren't.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="icon-single-card" id="card-ques-2">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1"><strong style="color:var(--tense-ques);">Are</strong> <strong style="color:var(--subj-color);">you</strong> <span style="color:var(--tense-ques);">listen</span><strong style="color:var(--s-color);">ing</strong> to me?</div>
+                                            <button class="speak-btn pos-speak" onclick="speakText('Are you listening to me?', 'card-ques-2', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1"><strong style="color:var(--tense-ques);">هل</strong> <strong style="color:var(--subj-color);">أنت</strong> <strong style="color:var(--tense-ques);">تستمع</strong> إليّ؟</div>
+                                        <div class="qa-response-box">
+                                            <span class="ans-yes">✔ Yes, I am.</span>
+                                            <span class="ans-no">✘ No, I'm not.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="icon-single-card" id="card-ques-3">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1"><strong style="color:var(--tense-ques);">Are</strong> <strong style="color:var(--subj-color);">we</strong> <span style="color:var(--tense-ques);">learn</span><strong style="color:var(--s-color);">ing</strong> fast?</div>
+                                            <button class="speak-btn pos-speak" onclick="speakText('Are we learning fast?', 'card-ques-3', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1"><strong style="color:var(--tense-ques);">هل</strong> <strong style="color:var(--subj-color);">نحن</strong> <strong style="color:var(--tense-ques);">نتعلم</strong> بسرعة؟</div>
+                                        <div class="qa-response-box">
+                                            <span class="ans-yes">✔ Yes, we are.</span>
+                                            <span class="ans-no">✘ No, we aren't.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="icon-single-card" id="card-ques-4">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1"><strong style="color:var(--tense-ques);">Are</strong> <strong style="color:var(--subj-color);">they</strong> <span style="color:var(--tense-ques);">com</span><strong style="color:var(--s-color);">ing</strong> soon?</div>
+                                            <button class="speak-btn pos-speak" onclick="speakText('Are they coming soon?', 'card-ques-4', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1"><strong style="color:var(--tense-ques);">هل</strong> <strong style="color:var(--subj-color);">هم</strong> <strong style="color:var(--tense-ques);">قادمون</strong> قريباً؟</div>
+                                        <div class="qa-response-box">
+                                            <span class="ans-yes">✔ Yes, they are.</span>
+                                            <span class="ans-no">✘ No, they aren't.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="icon-single-card" id="card-ques-5">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1"><strong style="color:var(--tense-ques);">Is</strong> <strong style="color:var(--subj-color);">he</strong> <span style="color:var(--tense-ques);">work</span><strong style="color:var(--s-color);">ing</strong> hard?</div>
+                                            <button class="speak-btn pos-speak" onclick="speakText('Is he working hard?', 'card-ques-5', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1"><strong style="color:var(--tense-ques);">هل</strong> <strong style="color:var(--subj-color);">هو</strong> <strong style="color:var(--tense-ques);">يعمل</strong> بجد؟</div>
+                                        <div class="qa-response-box">
+                                            <span class="ans-yes">✔ Yes, he is.</span>
+                                            <span class="ans-no">✘ No, he isn't.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="icon-single-card" id="card-ques-6">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1"><strong style="color:var(--tense-ques);">Is</strong> <strong style="color:var(--subj-color);">she</strong> <span style="color:var(--tense-ques);">cook</span><strong style="color:var(--s-color);">ing</strong> lunch?</div>
+                                            <button class="speak-btn pos-speak" onclick="speakText('Is she cooking lunch?', 'card-ques-6', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1"><strong style="color:var(--tense-ques);">هل</strong> <strong style="color:var(--subj-color);">هي</strong> <strong style="color:var(--tense-ques);">تطبخ</strong> الغداء؟</div>
+                                        <div class="qa-response-box">
+                                            <span class="ans-yes">✔ Yes, she is.</span>
+                                            <span class="ans-no">✘ No, she isn't.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="icon-single-card" id="card-ques-7">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1"><strong style="color:var(--tense-ques);">Is</strong> <strong style="color:var(--subj-color);">it</strong> <span style="color:var(--tense-ques);">rain</span><strong style="color:var(--s-color);">ing</strong>?</div>
+                                            <button class="speak-btn pos-speak" onclick="speakText('Is it raining?', 'card-ques-7', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1"><strong style="color:var(--tense-ques);">هل</strong> <strong style="color:var(--subj-color);">هي</strong> <strong style="color:var(--tense-ques);">تمطر</strong>؟</div>
+                                        <div class="qa-response-box">
+                                            <span class="ans-yes">✔ Yes, it is.</span>
+                                            <span class="ans-no">✘ No, it isn't.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- 4. الكلمات الدالة -->
+                <div class="glass-glow-card">
+                    <div class="card-top-header">
+                        <div class="usage-title" style="margin: 0;">
+                            <div class="title-line-1"><span class="dot-icon">🔵</span>الكلمات الدالة</div>
+                            <div class="title-line-2"><strong style="color:var(--tense-kw);">(Keywords & Time Expressions)</strong></div>
+                        </div>
+                    </div>
+                    <div class="usage-content" style="margin-top: 8px;">
+                        أبرز الكلمات والعبارات التي تدل على زمن المضارع المستمر:
+                        
+                        <div class="method-box">
+                            <div class="method-box-title" style="color: #2563EB;">⭐ الكلمات الدالة على استمرار الحدث الآن</div>
+                        </div>
+
+                        <div class="prep-practice-group">
+                            <div class="icon-cards-list">
+                                <div class="icon-single-card" id="card-kw-1">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1"><strong style="color:var(--subj-color);">I</strong> am study<strong style="color:var(--s-color);">ing</strong> <strong style="color:var(--tense-kw);">now</strong>.</div>
+                                            <button class="speak-btn pos-speak" onclick="speakText('I am studying now.', 'card-kw-1', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1"><strong style="color:var(--subj-color);">أنا</strong> أدرس <strong style="color:var(--tense-kw);">الآن</strong>.</div>
+                                    </div>
+                                </div>
+                                <div class="icon-single-card" id="card-kw-2">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1"><strong style="color:var(--subj-color);">She</strong> is working <strong style="color:var(--tense-kw);">at the moment</strong>.</div>
+                                            <button class="speak-btn pos-speak" onclick="speakText('She is working at the moment.', 'card-kw-2', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1"><strong style="color:var(--subj-color);">هي</strong> تعمل <strong style="color:var(--tense-kw);">في هذه اللحظة</strong>.</div>
+                                    </div>
+                                </div>
+                                <div class="icon-single-card" id="card-kw-3">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1"><strong style="color:var(--tense-kw);">Look!</strong> The train is arriv<strong style="color:var(--s-color);">ing</strong>.</div>
+                                            <button class="speak-btn pos-speak" onclick="speakText('Look! The train is arriving.', 'card-kw-3', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1"><strong style="color:var(--tense-kw);">انظر!</strong> القطار قادم.</div>
+                                    </div>
+                                </div>
+                                <div class="icon-single-card" id="card-kw-4">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1"><strong style="color:var(--tense-kw);">Listen!</strong> Someone is sing<strong style="color:var(--s-color);">ing</strong>.</div>
+                                            <button class="speak-btn pos-speak" onclick="speakText('Listen! Someone is singing.', 'card-kw-4', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1"><strong style="color:var(--tense-kw);">استمع!</strong> شخص ما يغني.</div>
+                                    </div>
+                                </div>
+                                <div class="icon-single-card" id="card-kw-5">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1"><strong style="color:var(--subj-color);">They</strong> are building a new house <strong style="color:var(--tense-kw);">these days</strong>.</div>
+                                            <button class="speak-btn pos-speak" onclick="speakText('They are building a new house these days.', 'card-kw-5', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1"><strong style="color:var(--subj-color);">هم</strong> يبنون منزلاً جديداً <strong style="color:var(--tense-kw);">هذه الأيام</strong>.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- كارت الفرق بين المضارع البسيط والمضارع المستمر -->
+                <div class="glass-glow-card">
+                    <div class="card-top-header">
+                        <div class="usage-title" style="margin: 0;">
+                            <div class="title-line-1"><span class="dot-icon">🔵</span>الفرق بين المضارع البسيط والمضارع المستمر</div>
+                            <div class="title-line-2"><strong style="color:#9333EA;">(Present Simple vs Present Continuous)</strong></div>
+                        </div>
+                    </div>
+                    <div class="usage-content" style="margin-top: 8px;">
+                        المضارع البسيط يعبر عن <strong>الحقائق والعادات المتكررة</strong>، بينما المضارع المستمر يعبر عن <strong>حدث مؤقت يقع الآن</strong>:
+                        
+                        <div class="prep-practice-group" style="margin-top: 12px;">
+                            <div class="icon-cards-list">
+                                <div class="icon-single-card" id="card-diff-1">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1">1. I <strong style="color:var(--tense-pos);">work</strong> in a bank. <span style="font-size:11px; color:var(--text-secondary);">(عادة وثبات)</span></div>
+                                            <button class="speak-btn pos-speak" onclick="speakText('I work in a bank.', 'card-diff-1', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1">أنا <strong style="color:var(--tense-pos);">أعمل</strong> في بنك (هذه وظيفتي الثابتة).</div>
+                                    </div>
+                                </div>
+
+                                <div class="icon-single-card" id="card-diff-2">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1">2. I <strong style="color:var(--tense-kw);">am working</strong> from home today. <span style="font-size:11px; color:var(--text-secondary);">(مؤقت الآن)</span></div>
+                                            <button class="speak-btn pos-speak" onclick="speakText('I am working from home today.', 'card-diff-2', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1">أنا <strong style="color:var(--tense-kw);">أعمل</strong> من البيت اليوم (حالة مؤقتة).</div>
+                                    </div>
+                                </div>
+
+                                <div class="icon-single-card" id="card-diff-3">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1">3. She <strong style="color:var(--tense-pos);">speaks</strong> vs She <strong style="color:var(--tense-kw);">is speaking</strong>.</div>
+                                            <button class="speak-btn pos-speak" onclick="speakText('She speaks English well. She is speaking now.', 'card-diff-3', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1">هي <strong style="color:var(--tense-pos);">تتحدث</strong> جيداً (مهارة) / هي <strong style="color:var(--tense-kw);">تتحدث</strong> الآن (فعل مستمر).</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- كارت التحدي اليومي وبنك الأسئلة -->
+                <div class="quiz-banner-card" id="launchQuizBtn">
+                    <div class="quiz-banner-top">
+                        <div class="quiz-banner-title">تحدي المضارع المستمر 🎯</div>
+                        <div class="quiz-banner-desc" id="quizLaunchDesc">ابدأ التحدي اليومي لتعزيز مهاراتك واكتساب 10 XP لكل إجابة صحيحة 🧠</div>
+                    </div>
+                    <button class="quiz-banner-btn" id="launchBtnText">ابدأ التحدي اليومي (4 أسئلة) ➔</button>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- شريط التنقل السفلي المطور الموحد للمنصة (الترتيب: الرئيسية -> الإنجليزي -> الأزمنة -> المساحة -> البرمجة) -->
+        <div class="bottom-nav" id="bottomNav">
+            <a href="../index.html"><span class="nav-icon">🏠</span>الرئيسية</a>
+            <a href="../english/english.html"><span class="nav-icon">🇬🇧</span>الإنجليزي</a>
+            <a href="tenses-path.html" class="active"><span class="nav-icon">⏳</span>الأزمنة</a>
+            <a href="../surveying/surveying.html"><span class="nav-icon">📐</span>المساحة</a>
+            <a href="../programming/programming.html"><span class="nav-icon">💻</span>البرمجة</a>
+        </div>
+
+        <script>
+            function speakText(text, cardId, buttonElement) {
+                if ('speechSynthesis' in window) {
+                    window.speechSynthesis.cancel();
+                    document.querySelectorAll('.icon-single-card').forEach(card => card.classList.remove('scanning'));
+                    document.querySelectorAll('.speak-btn').forEach(btn => btn.classList.remove('playing'));
+
+                    let utterance = new SpeechSynthesisUtterance(text);
+                    utterance.lang = 'en-US';
+                    utterance.rate = 0.7;
+
+                    let targetCard = cardId ? document.getElementById(cardId) : null;
+                    if (targetCard) targetCard.classList.add('scanning');
+                    if (buttonElement) buttonElement.classList.add('playing');
+
+                    utterance.onend = function() {
+                        if (targetCard) targetCard.classList.remove('scanning');
+                        if (buttonElement) buttonElement.classList.remove('playing');
+                    };
+                    utterance.onerror = function() {
+                        if (targetCard) targetCard.classList.remove('scanning');
+                        if (buttonElement) buttonElement.classList.remove('playing');
+                    };
+
+                    window.speechSynthesis.speak(utterance);
+                } else {
+                    alert("متصفحك لا يدعم خاصية النطق الصوتي.");
+                }
+            }
+
+            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            function playSound(type) {
+                if (!audioCtx) return;
+                if (audioCtx.state === 'suspended') { audioCtx.resume(); }
+                let now = audioCtx.currentTime;
+
+                if (type === 'success') {
+                    let notes = [523.25, 659.25, 783.99]; 
+                    notes.forEach((freq, index) => {
+                        let osc = audioCtx.createOscillator();
+                        let gain = audioCtx.createGain();
+                        osc.type = 'triangle';
+                        osc.frequency.setValueAtTime(freq, now + (index * 0.08));
+                        gain.gain.setValueAtTime(0.12, now + (index * 0.08));
+                        gain.gain.exponentialRampToValueAtTime(0.001, now + (index * 0.08) + 0.3);
+                        osc.connect(gain);
+                        gain.connect(audioCtx.destination);
+                        osc.start(now + (index * 0.08));
+                        osc.stop(now + (index * 0.08) + 0.3);
+                    });
+                } else if (type === 'wrong') {
+                    let osc = audioCtx.createOscillator();
+                    let gain = audioCtx.createGain();
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(160, now);
+                    osc.frequency.linearRampToValueAtTime(110, now + 0.2);
+                    gain.gain.setValueAtTime(0.1, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.2);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start(now);
+                    osc.stop(now + 0.2);
+                }
+            }
+
+            const masterQuizBank = [
+                { q: "Look! The baby ( ...... ) in his crib right now.", options: ["is sleeping", "sleeps", "slept", "sleep"], correct: 0 },
+                { q: "Listen! Someone ( ...... ) at the front door.", options: ["knock", "is knocking", "knocks", "knocked"], correct: 1 },
+                { q: "At the moment, we ( ...... ) for our final exams.", options: ["prepare", "are preparing", "prepared", "prepares"], correct: 1 },
+                { q: "Why ( ...... ) you wearing a heavy coat today? It's warm.", options: ["do", "are", "is", "did"], correct: 1 },
+
+                { q: "Hurry up! The bus ( ...... ) away.", options: ["is leaving", "leaves", "left", "leave"], correct: 0 },
+                { q: "I can't talk right now because I ( ...... ) dinner.", options: ["cook", "am cooking", "cooked", "cooks"], correct: 1 },
+                { q: "State verbs like 'know' or 'want' ( ...... ) normally used in continuous tenses.", options: ["are", "aren't", "is", "isn't"], correct: 1 },
+                { q: "My brother usually drives, but today he ( ...... ) the train.", options: ["takes", "is taking", "took", "take"], correct: 1 }
+            ];
+
+            let userXp = parseInt(localStorage.getItem("em_cont_xp") || "0");
+            let currentDayIndex = parseInt(localStorage.getItem("em_cont_day") || "0");
+            let lastQuizTimestamp = parseInt(localStorage.getItem("em_cont_quiz_time") || "0");
+            let currentDayQuestionOffset = currentDayIndex * 4;
+            let currentSubQuestionIndex = 0;
+            let answered = false;
+
+            function checkQuizAvailability() {
+                let now = Date.now();
+                let twentyFourHours = 24 * 60 * 60 * 1000;
+                let desc = document.getElementById("quizLaunchDesc");
+                let btnText = document.getElementById("launchBtnText");
+
+                if (currentDayQuestionOffset >= masterQuizBank.length) {
+                    if (desc) desc.innerText = "لقد أكملت جميع الأسئلة بنجاح تام! أسطورة المضارع المستمر ⭐";
+                    if (btnText) btnText.innerText = "مكتملة 🎉";
+                    return;
+                }
+
+                if (lastQuizTimestamp > 0 && (now - lastQuizTimestamp < twentyFourHours)) {
+                    let remainingTime = twentyFourHours - (now - lastQuizTimestamp);
+                    let hoursLeft = Math.ceil(remainingTime / (1000 * 60 * 60));
+                    if (desc) desc.innerText = `مجموعة الأسئلة اليومية تفتح خلال ${hoursLeft} ساعة تقريباً ⏳`;
+                    if (btnText) btnText.innerText = "انتظار 🔒";
+                } else {
+                    if (desc) desc.innerText = `ابدأ التحدي اليومي لتعزيز مهاراتك 🧠 (متاحة 4 أسئلة جديدة)`;
+                    if (btnText) btnText.innerText = "ابدأ التحدي اليومي (4 أسئلة) ➔";
+                }
+            }
+
+            function loadQuizQuestion() {
+                answered = false;
+                let globalIndex = currentDayQuestionOffset + currentSubQuestionIndex;
+                if (globalIndex >= masterQuizBank.length || currentSubQuestionIndex >= 4) {
+                    showQuizCompletion();
+                    return;
+                }
+
+                let q = masterQuizBank[globalIndex];
+                let body = document.getElementById('quizBody');
+                let nextBtn = document.getElementById('quizNextBtn');
+                nextBtn.classList.remove('active');
+
+                let html = `<div class="quiz-question-card" id="activeQuestionCard">
+                    <div class="quiz-question-text">السؤال (${currentSubQuestionIndex + 1}/4):<br>${q.q}</div>
+                    <div class="quiz-options-grid">`;
+                
+                q.options.forEach((opt, idx) => {
+                    html += `<button class="quiz-option-btn" onclick="checkAnswer(${idx}, this)">${opt}</button>`;
+                });
+
+                html += `</div></div>`;
+                body.innerHTML = html;
+                document.getElementById('quizScoreIndicator').innerText = `السؤال (${currentSubQuestionIndex + 1}/4)`;
+            }
+
+            function checkAnswer(selectedIndex, btnElement) {
+                if (answered) return;
+                answered = true;
+                let globalIndex = currentDayQuestionOffset + currentSubQuestionIndex;
+                let q = masterQuizBank[globalIndex];
+                let optionButtons = document.querySelectorAll('.quiz-option-btn');
+                let cardElement = document.getElementById('activeQuestionCard');
+
+                if (selectedIndex === q.correct) {
+                    userXp += 10;
+                    localStorage.setItem("em_cont_xp", userXp);
+                    playSound('success');
+                    btnElement.classList.add('correct');
+                    if (cardElement) cardElement.classList.add('success-fx');
+                } else {
+                    btnElement.classList.add('wrong');
+                    optionButtons[q.correct].classList.add('correct');
+                    playSound('wrong');
+                }
+                document.getElementById('quizNextBtn').classList.add('active');
+            }
+
+            function nextQuestion() {
+                currentSubQuestionIndex++;
+                if (currentSubQuestionIndex < 4 && (currentDayQuestionOffset + currentSubQuestionIndex) < masterQuizBank.length) {
+                    loadQuizQuestion();
+                } else {
+                    localStorage.setItem("em_cont_quiz_time", Date.now());
+                    currentDayIndex++;
+                    localStorage.setItem("em_cont_day", currentDayIndex);
+                    currentDayQuestionOffset = currentDayIndex * 4;
+                    currentSubQuestionIndex = 0;
+                    showQuizCompletion();
+                }
+            }
+
+            function showQuizCompletion() {
+                let body = document.getElementById('quizBody');
+                document.getElementById('quizNextBtn').classList.remove('active');
+                body.innerHTML = `<div class="quiz-question-card success-fx" style="text-align:center; padding: 24px; gap: 14px;">
+                    <h3 style="margin:0; font-size: 18px; color: var(--heading-pure-color);">🎉 ممتاز جداً! أنهيت تحدي اليوم</h3>
+                    <p style="margin:0; font-size: 14px; color: var(--text-secondary);">تم إضافة نقاط التحدي لرصيدك بنجاح.</p>
+                    <p style="margin:0; font-size: 15px; color: var(--accent); font-weight: 950;">رصيدك الحالي: ${userXp} XP ⭐</p>
+                    <button onclick="document.getElementById('quizModal').classList.remove('active'); checkQuizAvailability();" style="background:#2563EB; color:#fff; border:none; padding:10px 20px; border-radius:12px; font-weight:900; cursor:pointer; font-family:'Cairo'; margin-top:6px;">إغلاق والعودة للدراسة ➔</button>
+                </div>`;
+                playSound('success');
+                checkQuizAvailability();
+            }
+
+            document.addEventListener("DOMContentLoaded", function() {
+                checkQuizAvailability();
+                let launchBtn = document.getElementById("launchQuizBtn");
+                let quizModal = document.getElementById("quizModal");
+                let closeQuizBtn = document.getElementById("closeQuizBtn");
+
+                if (launchBtn && quizModal) {
+                    launchBtn.addEventListener("click", () => {
+                        let now = Date.now();
+                        let twentyFourHours = 24 * 60 * 60 * 1000;
+                        if (lastQuizTimestamp > 0 && (now - lastQuizTimestamp < twentyFourHours) && currentSubQuestionIndex === 0) {
+                            let remainingTime = twentyFourHours - (now - lastQuizTimestamp);
+                            let hoursLeft = Math.ceil(remainingTime / (1000 * 60 * 60));
+                            alert(`عذراً يا بشمهندس، مجموعة التحدي الجديدة تفتح بعد ${hoursLeft} ساعة تقريباً بنظام الـ 24 ساعة! ⏳`);
+                            return;
+                        }
+                        quizModal.classList.add("active");
+                        currentSubQuestionIndex = 0;
+                        loadQuizQuestion();
+                    });
+                }
+                if (closeQuizBtn && quizModal) {
+                    closeQuizBtn.addEventListener("click", () => { quizModal.classList.remove("active"); checkQuizAvailability(); });
+                }
+
+                let themeBtn = document.getElementById("themeToggleBtn");
+                function applyTheme(isDark) {
+                    if (isDark) {
+                        document.documentElement.classList.add("dark-mode");
+                        localStorage.setItem("em_theme", "dark");
+                        if (themeBtn) themeBtn.innerHTML = "☀️";
+                    } else {
+                        document.documentElement.classList.remove("dark-mode");
+                        localStorage.setItem("em_theme", "light");
+                        if (themeBtn) themeBtn.innerHTML = "🌙";
+                    }
+                }
+                applyTheme(localStorage.getItem("em_theme") === "dark");
+                if (themeBtn) {
+                    themeBtn.addEventListener("click", () => {
+                        applyTheme(!document.documentElement.classList.contains("dark-mode"));
+                    });
+                }
+            });
+
+            window.onscroll = function() {
+                let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                let scrolled = (winScroll / height) * 100;
+                let progressFill = document.getElementById("progressFill");
+                if (progressFill) progressFill.style.width = scrolled + "%";
+
+                let scrollToTopBtn = document.getElementById("scrollToTopBtn");
+                if (scrollToTopBtn) {
+                    if (window.scrollY > 300) {
+                        scrollToTopBtn.classList.add("show");
+                    } else {
+                        scrollToTopBtn.classList.remove("show");
+                    }
+                }
+            };
+
+            let scrollToTopBtn = document.getElementById("scrollToTopBtn");
+            if (scrollToTopBtn) {
+                scrollToTopBtn.addEventListener("click", () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+        </script>
+    </body>
+</html>
