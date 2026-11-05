@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <title>الصفات والظروف المقارنة (Comparatives) - أكاديمية العلوم التطبيقية</title>
+        <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+        
+        <script>
+            let savedTheme = localStorage.getItem("em_theme");
+            if (savedTheme === "dark") {
+                document.documentElement.classList.add("dark-mode");
+            }
+        </script>
+        
+        <style>
+            :root {
+                --bg-main: #F4F6F9;
+                --card-bg: #FFFFFF;
+                --card-border: #E2E8F0;
+                --text-primary: #0F172A;
+                --text-secondary: #64748B;
+                
+                --header-bg: rgba(255, 255, 255, 0.85);
+                --header-border: rgba(37, 99, 235, 0.15);
+                --header-shadow: 0 10px 30px rgba(37, 99, 235, 0.05);
+                
+                --primary: #2563EB;
+                --primary-dark: #1D4ED8;
+                --accent: #F59E0B; 
+                --light-bg: rgba(245, 158, 11, 0.05);
+                --border-glow: rgba(245, 158, 11, 0.25);
+
+                --comp-short: #2563EB; 
+                --comp-long: #059669; 
+                --comp-irreg: #D97706;
+                --heading-pure-color: #0F172A; 
+            }
+
+            html.dark-mode, body.dark-mode {
+                --bg-main: #06080F;
+                --card-bg: #0B0F19;
+                --card-border: rgba(255, 255, 255, 0.07);
+                --text-primary: #F3F4F6;
+                --text-secondary: #9CA3AF;
+                
+                --header-bg: rgba(11, 15, 25, 0.85);
+                --header-border: rgba(245, 158, 11, 0.3);
+                --header-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+                
+                --primary: #3B82F6;
+                --primary-dark: #2563EB;
+                --accent: #FBBF24;
+                --light-bg: rgba(245, 158, 11, 0.08);
+                --border-glow: rgba(245, 158, 11, 0.35);
+
+                --comp-short: #60A5FA;
+                --comp-long: #34D399;
+                --comp-irreg: #FBBF24;
+                --heading-pure-color: #FFFFFF; 
+            }
+
+            body {
+                background-color: var(--bg-main);
+                color: var(--text-primary);
+                font-family: 'Cairo', system-ui, -apple-system, sans-serif;
+                margin: 0;
+                padding: 16px 14px 90px 14px;
+                min-height: 100vh;
+                box-sizing: border-box;
+                transition: background-color 0.3s ease, color 0.3s ease;
+            }
+
+            .container { max-width: 680px; margin: auto; }
+
+            .top-progress-bar { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: transparent; z-index: 9999; }
+            .top-progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--primary)); }
+
+            .scroll-to-top-btn {
+                position: fixed; bottom: 80px; left: 20px; width: 44px; height: 44px;
+                background: var(--card-bg); backdrop-filter: blur(16px);
+                border: 1.5px solid var(--border-glow); border-radius: 14px; color: var(--accent); font-size: 18px;
+                display: flex; align-items: center; justify-content: center; cursor: pointer;
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); z-index: 998; opacity: 0; visibility: hidden;
+                transform: translateY(15px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            .scroll-to-top-btn.show { opacity: 1; visibility: visible; transform: translateY(0); }
+            .scroll-to-top-btn:hover { background: var(--accent); color: #FFFFFF; border-color: var(--accent); transform: translateY(-3px); }
+
+            .nav-bar {
+                display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
+                background: var(--header-bg); backdrop-filter: blur(12px); border: 1.5px solid var(--header-border); padding: 10px 16px;
+                border-radius: 24px; box-shadow: var(--header-shadow);
+            }
+            .nav-right-group { display: flex; align-items: center; gap: 8px; text-align: right; }
+            .nav-left-group { display: flex; align-items: center; gap: 6px; }
+            
+            .nav-titles-box { display: flex; flex-direction: column; align-items: flex-start; gap: 0px; }
+            .nav-main-title { font-size: 12.5px; font-weight: 950; color: var(--text-primary); margin: 0; line-height: 1.2; font-family: 'Cairo', sans-serif; }
+            .nav-sub-title { font-size: 9.5px; font-weight: 800; color: var(--accent); margin: 0; line-height: 1.2; }
+            .nav-academy-title { font-size: 8.5px; font-weight: 700; color: var(--text-secondary); margin: 0; line-height: 1.2; }
+
+            .home-icon-btn, .nav-icon-btn {
+                background: var(--light-bg); border: 1.5px solid var(--border-glow);
+                width: 36px; height: 36px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
+                color: var(--text-primary); font-size: 15px; text-decoration: none; cursor: pointer; transition: 0.25s; border: none; flex-shrink: 0;
+            }
+            .home-icon-btn:hover, .nav-icon-btn:hover { transform: scale(1.05); border-color: var(--accent); color: var(--accent); }
+
+            .hero-card {
+                background: var(--card-bg); 
+                border: 2px solid transparent;
+                background-image: linear-gradient(var(--card-bg), var(--card-bg)), linear-gradient(135deg, var(--accent), var(--primary));
+                background-origin: border-box;
+                background-clip: padding-box, border-box;
+                border-radius: 28px;
+                padding: 24px; 
+                margin-bottom: 24px; 
+                box-shadow: 0 10px 30px var(--border-glow); 
+                display: flex; 
+                flex-direction: column; 
+                align-items: center;
+                text-align: center;
+                gap: 16px;
+                position: relative; 
+                overflow: hidden;
+            }
+            
+            .hero-title-en { margin: 0; font-size: 21px; font-weight: 950; color: var(--heading-pure-color); letter-spacing: -0.3px; }
+            .hero-title-ar { margin: 0; font-size: 14px; font-weight: 800; color: var(--accent); background: var(--light-bg); padding: 4px 16px; border-radius: 12px; border: 1px solid var(--border-glow); }
+
+            .table-container { width: 100%; overflow-x: auto; margin-top: 4px; border-radius: 16px; border: 1.5px solid var(--card-border); text-align: right; }
+            .styled-master-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+            .styled-master-table th, .styled-master-table td { padding: 10px 14px; border-bottom: 1px solid var(--card-border); border-left: 1px solid var(--card-border); }
+            .styled-master-table th:last-child, .styled-master-table td:last-child { border-left: none; }
+            .styled-master-table th { background: var(--light-bg); color: var(--heading-pure-color); font-weight: 950; font-size: 13px; }
+            .styled-master-table td { background: var(--card-bg); color: var(--text-primary); font-weight: 800; }
+            .styled-master-table tr:last-child td { border-bottom: none; }
+
+            .th-comp { color: var(--accent) !important; background: var(--light-bg) !important; font-weight: 950 !important; }
+
+            .lesson-card-full {
+                background: var(--card-bg); 
+                border: 2px solid transparent;
+                background-image: linear-gradient(var(--card-bg), var(--card-bg)), linear-gradient(135deg, #F59E0B, var(--primary));
+                background-origin: border-box;
+                background-clip: padding-box, border-box;
+                border-radius: 28px;
+                padding: 26px; 
+                margin-bottom: 24px; 
+                box-shadow: 0 20px 45px rgba(245, 158, 11, 0.1); 
+                display: flex; 
+                flex-direction: column; 
+                gap: 20px;
+                position: relative; 
+                overflow: hidden;
+            }
+            
+            .lesson-header { display: flex; flex-direction: column; gap: 14px; }
+            .app-title-wrapper { display: flex; flex-direction: column; gap: 8px; position: relative; padding-right: 14px; border-right: 4px solid var(--accent); }
+            .app-main-heading { margin: 0; font-size: 20px; font-weight: 950; color: var(--heading-pure-color); letter-spacing: -0.4px; font-family: 'Cairo', sans-serif; direction: ltr; text-align: right; }
+            .app-sub-pill { display: inline-flex; align-items: center; gap: 6px; background: var(--light-bg); border: 1.5px solid var(--border-glow); color: var(--heading-pure-color); padding: 6px 14px; border-radius: 12px; font-size: 12px; font-weight: 850; width: fit-content; }
+
+            .glass-glow-card {
+                background: var(--card-bg);
+                backdrop-filter: blur(16px);
+                border-radius: 22px;
+                padding: 24px 22px 22px 22px;
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+                position: relative;
+                overflow: hidden;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .card-top-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+                margin-bottom: 4px;
+            }
+
+            .time-badge { 
+                position: static; 
+                padding: 5px 12px; 
+                border-radius: 10px; 
+                font-size: 10.5px; 
+                font-weight: 950; 
+                color: #FFFFFF; 
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15); 
+            }
+            .badge-short { background: linear-gradient(135deg, #2563EB, #60A5FA); }
+            .badge-long { background: linear-gradient(135deg, #059669, #34D399); }
+            .badge-irreg { background: linear-gradient(135deg, #D97706, #FBBF24); }
+
+            .glass-glow-card.short-card { border: 1.5px solid rgba(37, 99, 235, 0.3); }
+            .glass-glow-card.short-card::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 4px; background: linear-gradient(90deg, #2563EB, #60A5FA); width: 100%; }
+
+            .glass-glow-card.long-card { border: 1.5px solid rgba(5, 150, 105, 0.35); }
+            .glass-glow-card.long-card::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 4px; background: linear-gradient(90deg, #059669, #34D399); width: 100%; }
+
+            .glass-glow-card.irreg-card { border: 1.5px solid rgba(217, 119, 6, 0.35); }
+            .glass-glow-card.irreg-card::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 4px; background: linear-gradient(90deg, #D97706, #FBBF24); width: 100%; }
+
+            .usage-title { 
+                font-size: 15px; 
+                font-weight: 950; 
+                color: var(--heading-pure-color); 
+                display: flex; 
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px; 
+                margin-top: 4px;
+                direction: rtl;
+            }
+            .title-line-1 { font-size: 15px; font-weight: 950; color: var(--heading-pure-color); display: flex; align-items: center; gap: 6px; }
+            .title-line-2 { font-size: 13.5px; font-weight: 900; color: var(--text-secondary); margin-right: 24px; }
+
+            .usage-content { font-size: 13.5px; font-weight: 700; color: var(--text-secondary); line-height: 1.8; }
+
+            .method-box { background: var(--light-bg); border: 1.5px solid var(--border-glow); padding: 14px; border-radius: 16px; margin: 12px 0; display: flex; flex-direction: column; gap: 8px; }
+
+            .prep-practice-group {
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+                margin-top: 8px;
+            }
+
+            .icon-cards-list { display: flex; flex-direction: column; gap: 12px; }
+            
+            .icon-single-card {
+                background: var(--light-bg);
+                border: 1.5px solid var(--border-glow);
+                border-radius: 18px;
+                padding: 14px 18px;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                transition: 0.3s ease;
+                position: relative;
+                overflow: hidden;
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            }
+            
+            .icon-single-card.short-practice-card {
+                border-color: rgba(37, 99, 235, 0.3);
+                background: rgba(37, 99, 235, 0.04);
+            }
+            .icon-single-card.short-practice-card:hover {
+                border-color: #2563EB;
+                box-shadow: 0 8px 25px rgba(37, 99, 235, 0.15);
+            }
+            .short-speak {
+                color: #2563EB !important;
+                border-color: rgba(37, 99, 235, 0.3) !important;
+                background: rgba(37, 99, 235, 0.08) !important;
+            }
+            .short-speak:hover, .short-speak.playing {
+                background: #2563EB !important;
+                color: #FFFFFF !important;
+            }
+
+            .icon-single-card.long-practice-card {
+                border-color: rgba(5, 150, 105, 0.3);
+                background: rgba(5, 150, 105, 0.04);
+            }
+            .icon-single-card.long-practice-card:hover {
+                border-color: #059669;
+                box-shadow: 0 8px 25px rgba(5, 150, 105, 0.15);
+            }
+            .long-speak {
+                color: #059669 !important;
+                border-color: rgba(5, 150, 105, 0.3) !important;
+                background: rgba(5, 150, 105, 0.08) !important;
+            }
+            .long-speak:hover, .long-speak.playing {
+                background: #059669 !important;
+                color: #FFFFFF !important;
+            }
+
+            .icon-single-card.irreg-practice-card {
+                border-color: rgba(217, 119, 6, 0.3);
+                background: rgba(217, 119, 6, 0.04);
+            }
+            .icon-single-card.irreg-practice-card:hover {
+                border-color: #D97706;
+                box-shadow: 0 8px 25px rgba(217, 119, 6, 0.15);
+            }
+            .irreg-speak {
+                color: #D97706 !important;
+                border-color: rgba(217, 119, 6, 0.3) !important;
+                background: rgba(217, 119, 6, 0.08) !important;
+            }
+            .irreg-speak:hover, .irreg-speak.playing {
+                background: #D97706 !important;
+                color: #FFFFFF !important;
+            }
+
+            @keyframes laserScan {
+                0% { box-shadow: 0 0 15px currentColor; }
+                50% { box-shadow: 0 0 25px currentColor; }
+                100% { box-shadow: 0 0 15px currentColor; }
+            }
+
+            .icon-single-card.scanning {
+                animation: laserScan 1.2s infinite ease-in-out;
+                background: var(--card-bg) !important;
+            }
+
+            .sentence-row {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 10px;
+                direction: ltr;
+            }
+
+            .line-en-1 { 
+                font-family: system-ui, -apple-system, sans-serif; 
+                font-size: 13.5px; 
+                font-weight: 900; 
+                color: var(--heading-pure-color); 
+                text-align: left; 
+                direction: ltr; 
+                flex: 1;
+            }
+
+            .line-ar-1 { 
+                font-family: 'Cairo', sans-serif; 
+                font-size: 13px; 
+                font-weight: 800; 
+                color: var(--heading-pure-color); 
+                text-align: right; 
+                direction: rtl;
+                margin-top: -2px;
+            }
+
+            .sentence-group {
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .speak-btn {
+                width: 30px;
+                height: 30px;
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                font-size: 13px;
+                transition: 0.2s;
+                flex-shrink: 0;
+                border: 1.5px solid;
+            }
+
+            .quiz-banner-card {
+                background: var(--card-bg);
+                border: 2px solid rgba(147, 51, 234, 0.25);
+                border-radius: 26px;
+                padding: 24px;
+                display: flex;
+                flex-direction: column;
+                gap: 18px;
+                margin-top: 24px;
+                box-shadow: 0 15px 35px rgba(147, 51, 234, 0.08);
+                position: relative;
+                overflow: hidden;
+            }
+            .quiz-banner-top {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                text-align: right;
+                gap: 6px;
+            }
+            .quiz-banner-title {
+                font-size: 16px;
+                font-weight: 950;
+                color: var(--heading-pure-color);
+                line-height: 1.5;
+            }
+            .quiz-banner-desc {
+                font-size: 12.5px;
+                font-weight: 800;
+                color: var(--text-secondary);
+                line-height: 1.4;
+            }
+            .quiz-banner-btn {
+                background: linear-gradient(135deg, #9333EA, #7E22CE);
+                color: #FFFFFF;
+                border: none;
+                padding: 14px 22px;
+                border-radius: 18px;
+                font-family: 'Cairo', sans-serif;
+                font-size: 14px;
+                font-weight: 950;
+                cursor: pointer;
+                box-shadow: 0 8px 25px rgba(147, 51, 234, 0.35);
+                transition: 0.25s ease;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 8px;
+                width: 100%;
+            }
+            .quiz-banner-btn:hover {
+                transform: scale(1.02);
+                box-shadow: 0 12px 30px rgba(147, 51, 234, 0.5);
+            }
+
+            .modal-overlay { 
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+                background: rgba(147, 51, 234, 0.35); backdrop-filter: blur(14px); 
+                display: none; align-items: center; justify-content: center; z-index: 10000; padding: 16px; box-sizing: border-box; 
+            }
+            .modal-overlay.active { display: flex; }
+            
+            .quiz-modal-card { 
+                background: var(--card-bg); 
+                border: 2px solid #9333EA; 
+                border-radius: 28px; 
+                padding: 22px; 
+                width: 100%; 
+                max-width: 500px; 
+                max-height: 85vh;
+                overflow-y: auto;
+                box-shadow: 0 25px 60px rgba(147, 51, 234, 0.3); 
+                display: flex; 
+                flex-direction: column; 
+                gap: 16px; 
+                position: relative; 
+            }
+            
+            .quiz-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--card-border); padding-bottom: 12px; }
+            .quiz-title { font-size: 15px; font-weight: 950; color: var(--heading-pure-color); display: flex; align-items: center; gap: 8px; }
+            .quiz-close-btn { background: var(--light-bg); border: 1.5px solid var(--border-glow); width: 32px; height: 32px; border-radius: 10px; color: var(--text-primary); cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; }
+
+            .quiz-body { display: flex; flex-direction: column; gap: 14px; }
+            
+            .quiz-question-card {
+                background: var(--card-bg);
+                border: 1.5px solid var(--border-glow);
+                border-radius: 20px;
+                padding: 18px;
+                display: flex;
+                flex-direction: column;
+                gap: 14px;
+                box-shadow: 0 8px 25px rgba(147, 51, 234, 0.06);
+                transition: 0.3s ease;
+            }
+            
+            @keyframes successPulse {
+                0% { transform: scale(1); border-color: #059669; box-shadow: 0 0 25px rgba(5, 150, 105, 0.45); }
+                50% { transform: scale(1.02); border-color: #34D399; box-shadow: 0 0 35px rgba(52, 211, 153, 0.65); }
+                100% { transform: scale(1); border-color: #059669; box-shadow: 0 0 25px rgba(5, 150, 105, 0.45); }
+            }
+            .quiz-question-card.success-fx {
+                animation: successPulse 0.6s ease infinite alternate;
+                background: rgba(5, 150, 105, 0.04);
+            }
+
+            .quiz-question-text { 
+                font-family: system-ui, -apple-system, sans-serif;
+                font-size: 14.5px; 
+                font-weight: 900; 
+                color: var(--heading-pure-color); 
+                text-align: left;
+                direction: ltr;
+                line-height: 1.6; 
+            }
+            
+            .quiz-options-grid { display: flex; gap: 8px; justify-content: center; margin-top: 4px; }
+            .quiz-option-btn {
+                background: var(--bg-main);
+                border: 1.5px solid var(--card-border);
+                padding: 10px 16px;
+                border-radius: 14px;
+                font-family: system-ui, -apple-system, sans-serif;
+                font-size: 13px;
+                font-weight: 900;
+                color: var(--text-primary);
+                cursor: pointer;
+                transition: 0.2s;
+                flex: 1;
+                text-align: center;
+            }
+            .quiz-option-btn:hover { border-color: #9333EA; background: rgba(147, 51, 234, 0.05); color: #9333EA; }
+            
+            .quiz-option-btn.correct { background: rgba(5, 150, 105, 0.15) !important; border-color: #059669 !important; color: #059669 !important; transform: scale(1.05); }
+            .quiz-option-btn.wrong { background: rgba(239, 68, 68, 0.15) !important; border-color: #EF4444 !important; color: #EF4444 !important; }
+
+            .quiz-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; border-top: 1px solid var(--card-border); padding-top: 12px; font-size: 12px; font-weight: 800; color: var(--text-secondary); }
+            .quiz-next-btn {
+                background: #9333EA;
+                color: #FFFFFF;
+                border: none;
+                padding: 8px 18px;
+                border-radius: 12px;
+                font-family: 'Cairo', sans-serif;
+                font-weight: 900;
+                cursor: pointer;
+                display: none;
+            }
+            .quiz-next-btn.active { display: block; }
+
+            .search-modal-card { background: var(--card-bg); border: 1.5px solid var(--border-glow); border-radius: 26px; padding: 22px; width: 100%; max-width: 500px; box-shadow: 0 25px 50px rgba(0,0,0,0.5); display: flex; flex-direction: column; gap: 16px; }
+            .lesson-modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--card-border); padding-bottom: 12px; }
+            .lesson-modal-title-box { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 950; color: var(--heading-pure-color); }
+            .close-modal-btn { background: var(--light-bg); border: 1.5px solid var(--border-glow); width: 34px; height: 34px; border-radius: 10px; color: var(--text-primary); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+            .search-input-wrapper { background: var(--bg-main); border: 1.5px solid var(--border-glow); border-radius: 16px; padding: 10px 14px; display: flex; align-items: center; }
+            .search-input-field { width: 100%; background: transparent; border: none; outline: none; color: var(--text-primary); font-family: 'Cairo', sans-serif; font-size: 13px; font-weight: 700; }
+            .search-results-list { display: flex; flex-direction: column; gap: 10px; max-height: 320px; overflow-y: auto; scrollbar-width: none; }
+            .search-result-item { background: var(--bg-main); border: 1.5px solid var(--card-border); border-radius: 16px; padding: 12px 14px; display: flex; flex-direction: column; gap: 3px; text-decoration: none; }
+            .search-result-title { font-size: 13px; font-weight: 950; color: var(--heading-pure-color); margin: 0; }
+            .search-result-desc { font-size: 11px; font-weight: 700; color: var(--text-secondary); margin: 0; }
+
+            .side-menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 8, 17, 0.82); backdrop-filter: blur(10px); display: none; justify-content: flex-start; z-index: 10001; }
+            .side-menu-overlay.active { display: flex; }
+            .side-menu-drawer { background: var(--card-bg); border-left: 2px solid var(--border-glow); width: 85%; max-width: 320px; height: 100%; box-shadow: -15px 0 40px rgba(0,0,0,0.6); display: flex; flex-direction: column; padding: 22px; box-sizing: border-box; }
+            .drawer-top-box { background: var(--light-bg); border: 1.5px solid var(--border-glow); border-radius: 20px; padding: 14px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+            .drawer-brand-info { display: flex; flex-direction: column; gap: 2px; }
+            .drawer-brand-title { font-size: 14px; font-weight: 950; color: var(--heading-pure-color); margin: 0; }
+            .drawer-brand-sub { font-size: 10px; font-weight: 800; color: var(--text-secondary); margin: 0; }
+            .drawer-brand-icon { width: 42px; height: 42px; background: var(--card-bg); border: 1.5px solid var(--border-glow); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+            .drawer-links-list { display: flex; flex-direction: column; gap: 8px; flex-grow: 1; }
+            .drawer-link-item { display: flex; align-items: center; justify-content: space-between; background: var(--bg-main); border: 1.5px solid var(--card-border); padding: 12px 16px; border-radius: 16px; color: var(--text-primary); text-decoration: none; font-size: 12px; font-weight: 900; }
+            .drawer-link-item.active { border-color: var(--accent); background: var(--light-bg); color: var(--heading-pure-color); }
+            .drawer-link-left { display: flex; align-items: center; gap: 10px; }
+            .drawer-footer { text-align: center; font-size: 10px; font-weight: 800; color: var(--text-secondary); border-top: 1px solid var(--card-border); padding-top: 14px; margin-top: auto; }
+
+            .bottom-nav {
+                position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); width: calc(100% - 28px); max-width: 500px; background: var(--header-bg); backdrop-filter: blur(15px); display: flex; justify-content: space-around; align-items: center; padding: 8px 10px; border: 1.5px solid var(--header-border); border-radius: 22px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15); z-index: 999;
+            }
+            .bottom-nav a { color: var(--text-secondary); text-decoration: none; font-size: 11px; text-align: center; font-weight: 800; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 6px 12px; border-radius: 16px; flex: 1; }
+            .bottom-nav a span { font-size: 18px; line-height: 1; }
+            .bottom-nav a.active { color: var(--heading-pure-color); background: var(--light-bg); border: 1.5px solid var(--border-glow); }
+        </style>
+    </head>
+    <body>
+
+        <!-- زر العودة للأعلى -->
+        <button class="scroll-to-top-btn" id="scrollToTopBtn" title="العودة للأعلى">↑</button>
+
+        <div class="top-progress-bar"><div class="top-progress-fill" id="progressFill"></div></div>
+
+        <!-- نافذة البحث -->
+        <div class="modal-overlay" id="searchModal" style="background: rgba(5, 8, 17, 0.82);">
+            <div class="search-modal-card">
+                <div class="lesson-modal-header">
+                    <div class="lesson-modal-title-box"><span>🔍</span><span>البحث في الصفات والمقارنة</span></div>
+                    <button class="close-modal-btn" id="closeSearchBtn">✕</button>
+                </div>
+                <div class="search-input-wrapper"><input type="text" class="search-input-field" placeholder="ابحث عن: Short, Long, Irregular..."></div>
+                <div class="search-results-list">
+                    <a href="#" class="search-result-item" onclick="document.getElementById('searchModal').classList.remove('active');">
+                        <span class="search-result-title">⚖️ صفات المقارنة والتفضيل (Comparatives)</span>
+                        <span class="search-result-desc">دليل شامل لإتقان المقارنة بين الأشياء والأشخاص.</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- نافذة اختبار التحدي اليومي -->
+        <div class="modal-overlay" id="quizModal">
+            <div class="quiz-modal-card">
+                <div class="quiz-header">
+                    <div class="quiz-title"><span>⚡</span><span>التحدي اليومي (4 أسئلة / 24 ساعة)</span></div>
+                    <button class="quiz-close-btn" id="closeQuizBtn">✕</button>
+                </div>
+                <div class="quiz-body" id="quizBody">
+                    <!-- محتوى كارت السؤال -->
+                </div>
+                <div class="quiz-footer">
+                    <span id="quizScoreIndicator">النتيجة: 0 / 4</span>
+                    <button class="quiz-next-btn" id="quizNextBtn" onclick="nextQuestion()">السؤال التالي ➔</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- القائمة الجانبية -->
+        <div class="side-menu-overlay" id="sideMenu" style="background: rgba(5, 8, 17, 0.82);">
+            <div class="side-menu-drawer">
+                <div class="drawer-top-box">
+                    <div class="drawer-brand-info"><h3 class="drawer-brand-title">أكاديمية العلوم التطبيقية</h3><p class="drawer-brand-sub">قسم قواعد اللغة الإنجليزية</p></div>
+                    <div class="drawer-brand-icon">🎓</div>
+                </div>
+                <div class="drawer-links-list">
+                    <a href="index.html" class="drawer-link-item"><span class="drawer-link-left"><span>🏠</span> الرئيسية</span><span>➔</span></a>
+                    <a href="english.html" class="drawer-link-item"><span class="drawer-link-left"><span>🇬🇧</span> الإنجليزي</span><span>➔</span></a>
+                    <a href="fundamentals-path.html" class="drawer-link-item active"><span class="drawer-link-left"><span>📖</span> القواعد والأساسيات</span><span>➔</span></a>
+                    <a href="surveying.html" class="drawer-link-item"><span class="drawer-link-left"><span>📐</span> المساحة</span><span>➔</span></a>
+                    <a href="programming.html" class="drawer-link-item"><span class="drawer-link-left"><span>💻</span> البرمجة</span><span>➔</span></a>
+                </div>
+                <div class="drawer-footer">English Master v2.1 • Pro Edition</div>
+            </div>
+        </div>
+
+        <div class="container">
+            <!-- شريط الهيدر -->
+            <div class="nav-bar">
+                <div class="nav-right-group">
+                    <a href="fundamentals-path.html" class="home-icon-btn" title="الرجوع للقائمة">🏠</a>
+                    <div class="nav-titles-box">
+                        <h1 class="nav-main-title">الصفات والظروف المقارنة</h1>
+                        <p class="nav-sub-title">Comparatives & Superlatives</p>
+                        <p class="nav-academy-title">أكاديمية العلوم التطبيقية</p>
+                    </div>
+                </div>
+                <div class="nav-left-group">
+                    <button class="nav-icon-btn" id="themeToggleBtn" title="تغيير الثيم">🌙</button>
+                    <button class="nav-icon-btn" id="searchBtn" title="بحث">🔍</button>
+                    <button class="nav-icon-btn" id="menuBtn" title="القائمة">☰</button>
+                </div>
+            </div>
+
+            <!-- الكارت العلوي الهندسي -->
+            <div class="hero-card">
+                <h1 class="hero-title-en">Comparatives & Superlatives</h1>
+                <h2 class="hero-title-ar">قواعد المقارنة والتفضيل بين الصفات</h2>
+
+                <div class="table-container">
+                    <table class="styled-master-table">
+                        <thead>
+                            <tr>
+                                <th class="th-comp">نوع الصفة</th>
+                                <th>الصفة العادية (Adjective)</th>
+                                <th>المقارنة (Comparative)</th>
+                                <th>التفضيل (Superlative)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong style="color:var(--comp-short);">قصيرة (Short)</strong></td><td>Tall (طويل)</td><td>Taller <span style="color:var(--comp-short);">than</span></td><td><span style="color:var(--comp-short);">The</span> tallest</td></tr>
+                            <tr><td><strong style="color:var(--comp-long);">طويلة (Long)</strong></td><td>Modern (حديث)</td><td><span style="color:var(--comp-long);">More</span> modern <span style="color:var(--comp-long);">than</span></td><td><span style="color:var(--comp-long);">The</span> <span style="color:var(--comp-long);">most</span> modern</td></tr>
+                            <tr><td><strong style="color:var(--comp-irreg);">شاذة (Irregular)</strong></td><td>Good (جيد)</td><td>Better <span style="color:var(--comp-irreg);">than</span></td><td><span style="color:var(--comp-irreg);">The</span> best</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- كارت الشرح الشامل الرئيسي -->
+            <div class="lesson-card-full" id="mainLessonCard">
+                <div class="lesson-header">
+                    <div class="app-title-wrapper" style="border-right-color: var(--accent);">
+                        <h2 class="app-main-heading">
+                            Mastering <span style="color:var(--comp-short);">Comparatives</span> & <span style="color:var(--comp-long);">Superlatives</span>
+                        </h2>
+                        <div class="app-sub-pill"><span>دليلك الشامل لاحتراف درجات الصفات والظروف ⚖️</span></div>
+                    </div>
+                </div>
+
+                <!-- 1. الصفات القصيرة (Short Adjectives) -->
+                <div class="glass-glow-card short-card" id="sectionShort">
+                    <div class="card-top-header">
+                        <div class="usage-title" style="margin: 0;">
+                            <div class="title-line-1"><span class="dot-icon">🔵</span>قاعدة الصفات القصيرة</div>
+                            <div class="title-line-2"><strong style="color:var(--comp-short);">(<span style="color:var(--comp-short);">+er</span> / <span style="color:var(--comp-short);">+est</span>)</strong></div>
+                        </div>
+                        <div class="time-badge badge-short">Short Adjectives</div>
+                    </div>
+                    <div class="usage-content">
+                        عند مقارنة شيء قصير بآخر، نضيف للنهاية <strong style="color:var(--comp-short);">(+er)</strong> يليه <strong style="color:var(--comp-short);">than</strong>، وللتفضيل على مجموعة نضيف <strong style="color:var(--comp-short);">(+est)</strong> مسبوقة بـ <strong style="color:var(--comp-short);">The</strong>.
+                        <div class="method-box" style="border-color: #2563EB; background: var(--bg-main); margin-top: 12px;">
+                            <div class="method-box-title" style="color: #2563EB;">💡 أمثلة توضيحية</div>
+                            <div style="font-size: 12.5px; font-weight: 800; color: var(--text-primary); display: flex; flex-direction: column; gap: 6px; margin-top: 4px;">
+                                <div>📏 <strong>مقارنة:</strong> <span dir="ltr">Ali is <strong style="color:var(--comp-short);">taller than</strong> Ahmed.</span> (علي أطول من أحمد).</div>
+                                <div>🏆 <strong>تفضيل:</strong> <span dir="ltr">He is <strong style="color:var(--comp-short);">the tallest</strong> in class.</span> (هو الأطول في الفصل).</div>
+                            </div>
+                        </div>
+
+                        <!-- 4 كروت التطبيق العملي الخاصة بالصفات القصيرة -->
+                        <div class="prep-practice-group">
+                            <div style="font-size: 12px; font-weight: 900; color: #2563EB; margin-top: 4px;">🎯 التطبيق العملي (4 أمثلة للصفات القصيرة):</div>
+                            <div class="icon-cards-list">
+                                <div class="icon-single-card short-practice-card" id="card-short-1">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1">My car is <strong style="color:var(--comp-short);">faster than</strong> yours.</div>
+                                            <button class="speak-btn short-speak" onclick="speakText('My car is faster than yours.', 'card-short-1', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1">سيارتي <strong style="color:var(--comp-short);">أسرع من</strong> سيارتك.</div>
+                                    </div>
+                                </div>
+                                <div class="icon-single-card short-practice-card" id="card-short-2">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1">This box is <strong style="color:var(--comp-short);">heavier than</strong> that one.</div>
+                                            <button class="speak-btn short-speak" onclick="speakText('This box is heavier than that one.', 'card-short-2', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1">هذا الصندوق <strong style="color:var(--comp-short);">أثقل من</strong> ذاك.</div>
+                                    </div>
+                                </div>
+                                <div class="icon-single-card short-practice-card" id="card-short-3">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1">Today is <strong style="color:var(--comp-short);">hotter than</strong> yesterday.</div>
+                                            <button class="speak-btn short-speak" onclick="speakText('Today is hotter than yesterday.', 'card-short-3', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1">اليوم <strong style="color:var(--comp-short);">أحر من</strong> أمس.</div>
+                                    </div>
+                                </div>
+                                <div class="icon-single-card short-practice-card" id="card-short-4">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1">He is <strong style="color:var(--comp-short);">the smartest</strong> boy.</div>
+                                            <button class="speak-btn short-speak" onclick="speakText('He is the smartest boy.', 'card-short-4', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1">هو الولد <strong style="color:var(--comp-short);">الأكثر ذكاءً</strong>.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- 2. الصفات الطويلة (Long Adjectives) -->
+                <div class="glass-glow-card long-card" id="sectionLong">
+                    <div class="card-top-header">
+                        <div class="usage-title" style="margin: 0;">
+                            <div class="title-line-1"><span class="dot-icon">🟢</span>قاعدة الصفات الطويلة</div>
+                            <div class="title-line-2"><strong style="color:var(--comp-long);">(<span style="color:var(--comp-long);">More</span> / <span style="color:var(--comp-long);">Most</span>)</strong></div>
+                        </div>
+                        <div class="time-badge badge-long">Long Adjectives</div>
+                    </div>
+                    <div class="usage-content">
+                        الصفات التي تتكون من مقطعين أو أكثر نستخدم قبلها <strong style="color:var(--comp-long);">more</strong> (متبوعة بـ <strong style="color:var(--comp-long);">than</strong>) للمقارنة و <strong style="color:var(--comp-long);">the most</strong> للتفضيل دون تغيير أصل الصفة.
+                        <div class="method-box" style="border-color: #059669; background: var(--bg-main); margin-top: 12px;">
+                            <div class="method-box-title" style="color: #059669;">💡 أمثلة توضيحية</div>
+                            <div style="font-size: 12.5px; font-weight: 800; color: var(--text-primary); display: flex; flex-direction: column; gap: 6px; margin-top: 4px;">
+                                <div>💎 <strong>مقارنة:</strong> <span dir="ltr">Gold is <strong style="color:var(--comp-long);">more expensive than</strong> silver.</span> (الذهب أغلى من الفضة).</div>
+                                <div>🌟 <strong>تفضيل:</strong> <span dir="ltr">It is <strong style="color:var(--comp-long);">the most expensive</strong> watch.</span> (هذه أغلى ساعة).</div>
+                            </div>
+                        </div>
+
+                        <!-- 4 كروت التطبيق العملي الخاصة بالصفات الطويلة -->
+                        <div class="prep-practice-group">
+                            <div style="font-size: 12px; font-weight: 900; color: #059669; margin-top: 4px;">🎯 التطبيق العملي (4 أمثلة للصفات الطويلة):</div>
+                            <div class="icon-cards-list">
+                                <div class="icon-single-card long-practice-card" id="card-long-1">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1">Science is <strong style="color:var(--comp-long);">more interesting than</strong> history.</div>
+                                            <button class="speak-btn long-speak" onclick="speakText('Science is more interesting than history.', 'card-long-1', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1">العلوم <strong style="color:var(--comp-long);">أكثر إثارة من</strong> التاريخ.</div>
+                                    </div>
+                                </div>
+                                <div class="icon-single-card long-practice-card" id="card-long-2">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1">This test is <strong style="color:var(--comp-long);">more difficult than</strong> the last one.</div>
+                                            <button class="speak-btn long-speak" onclick="speakText('This test is more difficult than the last one.', 'card-long-2', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1">هذا الاختبار <strong style="color:var(--comp-long);">أصعب من</strong> السابق.</div>
+                                    </div>
+                                </div>
+                                <div class="icon-single-card long-practice-card" id="card-long-3">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1">This villa is <strong style="color:var(--comp-long);">more modern than</strong> that house.</div>
+                                            <button class="speak-btn long-speak" onclick="speakText('This villa is more modern than that house.', 'card-long-3', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1">هذه الفيلا <strong style="color:var(--comp-long);">أحدث من</strong> ذلك المنزل.</div>
+                                    </div>
+                                </div>
+                                <div class="icon-single-card long-practice-card" id="card-long-4">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1">She is <strong style="color:var(--comp-long);">the most beautiful</strong> girl.</div>
+                                            <button class="speak-btn long-speak" onclick="speakText('She is the most beautiful girl.', 'card-long-4', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1">هي الفتاة <strong style="color:var(--comp-long);">الأكثر جمالاً</strong>.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- 3. الصفات الشاذة (Irregular Adjectives) -->
+                <div class="glass-glow-card irreg-card" id="sectionIrreg">
+                    <div class="card-top-header">
+                        <div class="usage-title" style="margin: 0;">
+                            <div class="title-line-1"><span class="dot-icon">🟠</span>قاعدة الصفات الشاذة</div>
+                            <div class="title-line-2"><strong style="color:var(--comp-irreg);">(Good / Bad / Far)</strong></div>
+                        </div>
+                        <div class="time-badge badge-irreg">Irregular</div>
+                    </div>
+                    <div class="usage-content">
+                        صفات لا تتبع قواعد `er` أو `more` بل يتغير شكلها كلياً في المقارنة (متبوعة بـ <strong style="color:var(--comp-irreg);">than</strong>) والتفضيل (مسبوقة بـ <strong style="color:var(--comp-irreg);">The</strong>) ويجب حفظها كما هي.
+                        <div class="method-box" style="border-color: #D97706; background: var(--bg-main); margin-top: 12px;">
+                            <div class="method-box-title" style="color: #D97706;">💡 أمثلة توضيحية</div>
+                            <div style="font-size: 12.5px; font-weight: 800; color: var(--text-primary); display: flex; flex-direction: column; gap: 6px; margin-top: 4px;">
+                                <div>⭐ <strong>مقارنة:</strong> <span dir="ltr">Your English is <strong style="color:var(--comp-irreg);">better than</strong> mine.</span> (إنجليزيك أفضل من إنجليزي).</div>
+                                <div>🏆 <strong>تفضيل:</strong> <span dir="ltr">This is <strong style="color:var(--comp-irreg);">the best</strong> choice.</span> (هذا أفضل خيار).</div>
+                            </div>
+                        </div>
+
+                        <!-- 4 كروت التطبيق العملي الخاصة بالصفات الشاذة -->
+                        <div class="prep-practice-group">
+                            <div style="font-size: 12px; font-weight: 900; color: #D97706; margin-top: 4px;">🎯 التطبيق العملي (4 أمثلة للصفات الشاذة):</div>
+                            <div class="icon-cards-list">
+                                <div class="icon-single-card irreg-practice-card" id="card-irreg-1">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1">His health is <strong style="color:var(--comp-irreg);">better today</strong>.</div>
+                                            <button class="speak-btn irreg-speak" onclick="speakText('His health is better today.', 'card-irreg-1', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1">صحيته <strong style="color:var(--comp-irreg);">أفضل اليوم</strong>.</div>
+                                    </div>
+                                </div>
+                                <div class="icon-single-card irreg-practice-card" id="card-irreg-2">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1">That was <strong style="color:var(--comp-irreg);">the best</strong> meal ever.</div>
+                                            <button class="speak-btn irreg-speak" onclick="speakText('That was the best meal ever.', 'card-irreg-2', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1">تلك كانت <strong style="color:var(--comp-irreg);">أفضل</strong> وجبة على الإطلاق.</div>
+                                    </div>
+                                </div>
+                                <div class="icon-single-card irreg-practice-card" id="card-irreg-3">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1">Yesterday's weather was <strong style="color:var(--comp-irreg);">worse than</strong> today.</div>
+                                            <button class="speak-btn irreg-speak" onclick="speakText('Yesterdays weather was worse than today.', 'card-irreg-3', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1">طقس الأمس كان <strong style="color:var(--comp-irreg);">أسوأ من</strong> اليوم.</div>
+                                    </div>
+                                </div>
+                                <div class="icon-single-card irreg-practice-card" id="card-irreg-4">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1">This is <strong style="color:var(--comp-irreg);">the worst</strong> movie.</div>
+                                            <button class="speak-btn irreg-speak" onclick="speakText('This is the worst movie.', 'card-irreg-4', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1">هذا هو الفيلم <strong style="color:var(--comp-irreg);">الأسوأ</strong>.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- كارت التحدي اليومي بالمواصفات المطابقة للصورة -->
+                <div class="quiz-banner-card" id="launchQuizBtn">
+                    <div class="quiz-banner-top">
+                        <div class="quiz-banner-title">افهم، استمع، وتحدى نفسك يومياً 🎯</div>
+                        <div class="quiz-banner-desc" id="quizLaunchDesc">ابدأ التحدي اليومي لتعزيز مهاراتك 🧠</div>
+                    </div>
+                    <button class="quiz-banner-btn" id="launchBtnText">ابدأ التحدي اليومي ➔</button>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="bottom-nav">
+            <a href="index.html"><span>🏠</span>الرئيسية</a>
+            <a href="fundamentals-path.html" class="active"><span>🇬🇧</span>القواعد</a>
+            <a href="surveying.html"><span>📐</span>المساحة</a>
+            <a href="programming.html"><span>💻</span>البرمجة</a>
+        </div>
+
+        <script>
+            function speakText(text, cardId, buttonElement) {
+                if ('speechSynthesis' in window) {
+                    window.speechSynthesis.cancel();
+                    document.querySelectorAll('.icon-single-card').forEach(card => card.classList.remove('scanning'));
+                    document.querySelectorAll('.speak-btn').forEach(btn => btn.classList.remove('playing'));
+
+                    let utterance = new SpeechSynthesisUtterance(text);
+                    utterance.lang = 'en-US';
+                    utterance.rate = 0.7;
+
+                    let targetCard = document.getElementById(cardId);
+                    if (targetCard) targetCard.classList.add('scanning');
+                    if (buttonElement) buttonElement.classList.add('playing');
+
+                    utterance.onend = function() {
+                        if (targetCard) targetCard.classList.remove('scanning');
+                        if (buttonElement) buttonElement.classList.remove('playing');
+                    };
+                    utterance.onerror = function() {
+                        if (targetCard) targetCard.classList.remove('scanning');
+                        if (buttonElement) buttonElement.classList.remove('playing');
+                    };
+
+                    window.speechSynthesis.speak(utterance);
+                } else {
+                    alert("متصفحك لا يدعم خاصية النطق الصوتي.");
+                }
+            }
+
+            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            function playSound(type) {
+                if (!audioCtx) return;
+                if (audioCtx.state === 'suspended') { audioCtx.resume(); }
+                let now = audioCtx.currentTime;
+
+                if (type === 'success') {
+                    let notes = [523.25, 659.25, 783.99]; 
+                    notes.forEach((freq, index) => {
+                        let osc = audioCtx.createOscillator();
+                        let gain = audioCtx.createGain();
+                        osc.type = 'triangle';
+                        osc.frequency.setValueAtTime(freq, now + (index * 0.08));
+                        gain.gain.setValueAtTime(0.12, now + (index * 0.08));
+                        gain.gain.exponentialRampToValueAtTime(0.001, now + (index * 0.08) + 0.3);
+                        osc.connect(gain);
+                        gain.connect(audioCtx.destination);
+                        osc.start(now + (index * 0.08));
+                        osc.stop(now + (index * 0.08) + 0.3);
+                    });
+                } else if (type === 'wrong') {
+                    let osc = audioCtx.createOscillator();
+                    let gain = audioCtx.createGain();
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(160, now);
+                    osc.frequency.linearRampToValueAtTime(110, now + 0.2);
+                    gain.gain.setValueAtTime(0.1, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.2);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start(now);
+                    osc.stop(now + 0.2);
+                }
+            }
+
+            const masterQuizBank = [
+                { q: "Mount Everest is ( &nbsp;......&nbsp; ) mountain in the world.", options: ["higher than", "the highest", "high"], correct: 1 },
+                { q: "This physics problem is ( &nbsp;......&nbsp; ) than the previous one.", options: ["more difficult", "difficult", "most difficult"], correct: 0 },
+                { q: "My brother is ( &nbsp;......&nbsp; ) than me by two years.", options: ["oldest", "older", "old"], correct: 1 },
+                { q: "Who is ( &nbsp;......&nbsp; ) person in your family?", options: ["the funniest", "funnier than", "funny"], correct: 0 },
+
+                { q: "Traveling by train is ( &nbsp;......&nbsp; ) than driving in rush hour.", options: ["safest", "safe", "safer"], correct: 2 },
+                { q: "This is ( &nbsp;......&nbsp; ) restaurant I have ever visited.", options: ["better than", "the best", "good"], correct: 1 },
+                { q: "A sports car is ( &nbsp;......&nbsp; ) than a standard family car.", options: ["more expensive", "expensive", "most expensive"], correct: 0 },
+                { q: "July is usually ( &nbsp;......&nbsp; ) month of the year in Egypt.", options: ["hotter than", "the hottest", "hot"], correct: 1 },
+
+                { q: "English grammar is ( &nbsp;......&nbsp; ) than people think.", options: ["easier", "easy", "easiest"], correct: 0 },
+                { q: "She sings ( &nbsp;......&nbsp; ) than anyone else in the choir.", options: ["the best", "better", "good"], correct: 1 },
+                { q: "Jupiter is ( &nbsp;......&nbsp; ) planet in our solar system.", options: ["bigger than", "the biggest", "big"], correct: 1 },
+                { q: "Learning a new language requires ( &nbsp;......&nbsp; ) patience.", options: ["more", "most", "much"], correct: 0 },
+
+                { q: "Action movies are ( &nbsp;......&nbsp; ) than documentaries for me.", options: ["exciting", "more exciting", "most exciting"], correct: 1 },
+                { q: "That was ( &nbsp;......&nbsp; ) mistake I have ever made.", options: ["worse than", "the worst", "bad"], correct: 1 },
+                { q: "Is a smartphone ( &nbsp;......&nbsp; ) than a traditional watch?", options: ["useful", "more useful", "most useful"], correct: 1 },
+                { q: "Whales are ( &nbsp;......&nbsp; ) animals living on Earth.", options: ["the largest", "larger than", "large"], correct: 0 },
+
+                { q: "My laptop runs ( &nbsp;......&nbsp; ) than my old desktop computer.", options: ["fast", "faster", "fastest"], correct: 1 },
+                { q: "Mount Kilimanjaro is ( &nbsp;......&nbsp; ) than most people expect.", options: ["high", "higher", "highest"], correct: 1 },
+                { q: "She is ( &nbsp;......&nbsp; ) student in our graduating class.", options: ["smart", "smarter than", "the smartest"], correct: 2 },
+                { q: "Walking is ( &nbsp;......&nbsp; ) for your health than sitting all day.", options: ["better", "good", "best"], correct: 0 },
+
+                { q: "This smartphone has ( &nbsp;......&nbsp; ) camera quality on the market.", options: ["the best", "better than", "good"], correct: 0 },
+                { q: "Physics is often considered ( &nbsp;......&nbsp; ) subject by students.", options: ["harder than", "the hardest", "hard"], correct: 1 },
+                { q: "My bag is ( &nbsp;......&nbsp; ) than your luggage.", options: ["heavy", "heaviest", "heavier"], correct: 2 },
+                { q: "China is ( &nbsp;......&nbsp; ) populated than Canada.", options: ["more densely", "densely", "most densely"], correct: 0 },
+
+                { q: "He arrived at the meeting ( &nbsp;......&nbsp; ) than expected.", options: ["earlier", "early", "earliest"], correct: 0 },
+                { q: "This museum holds ( &nbsp;......&nbsp; ) collection of artifacts.", options: ["richer than", "the richest", "rich"], correct: 1 },
+                { q: "Gold is definitely ( &nbsp;......&nbsp; ) than copper.", options: ["valuable", "more valuable", "most valuable"], correct: 1 },
+                { q: "That comedian told ( &nbsp;......&nbsp; ) joke of the entire night.", options: ["the funniest", "funnier than", "funny"], correct: 0 },
+
+                { q: "Winter nights are ( &nbsp;......&nbsp; ) than summer nights.", options: ["long", "longest", "longer"], correct: 2 },
+                { q: "Who is ( &nbsp;......&nbsp; ) runner in the national marathon?", options: ["fastest", "the fastest", "faster than"], correct: 1 },
+                { q: "My new office is ( &nbsp;......&nbsp; ) from home than the old one.", options: ["further", "far", "farthest"], correct: 0 },
+                { q: "This software program is ( &nbsp;......&nbsp; ) to use than the previous version.", options: ["simpler", "simple", "simplest"], correct: 0 },
+
+                { q: "She felt ( &nbsp;......&nbsp; ) after taking a short nap.", options: ["well", "better", "best"], correct: 1 },
+                { q: "Mount Blanc is ( &nbsp;......&nbsp; ) peak in the Alps mountain range.", options: ["the highest", "higher than", "high"], correct: 0 },
+                { q: "Driving in heavy traffic is ( &nbsp;......&nbsp; ) than taking the subway.", options: ["stressful", "more stressful", "most stressful"], correct: 1 },
+                { q: "This is ( &nbsp;......&nbsp; ) sculpture created by the famous artist.", options: ["the finest", "finer than", "fine"], correct: 0 },
+
+                { q: "Your plan sounds ( &nbsp;......&nbsp; ) than my original idea.", options: ["good", "better", "best"], correct: 1 },
+                { q: "The Sahara is ( &nbsp;......&nbsp; ) hot desert in the world.", options: ["the hottest", "hotter than", "hot"], correct: 0 },
+                { q: "Learning coding is ( &nbsp;......&nbsp; ) than learning basic typing.", options: ["complex", "more complex", "most complex"], correct: 1 },
+                { q: "A modern electric vehicle is ( &nbsp;......&nbsp; ) than a diesel car.", options: ["quieter", "quiet", "quietest"], correct: 0 }
+            ];
+
+            let userXp = parseInt(localStorage.getItem("em_user_xp") || "0");
+            let currentDayIndex = parseInt(localStorage.getItem("em_current_day") || "0");
+            let lastQuizTimestamp = parseInt(localStorage.getItem("em_last_quiz_time") || "0");
+            let currentDayQuestionOffset = currentDayIndex * 4;
+            let currentSubQuestionIndex = 0;
+            let answered = false;
+
+            function checkQuizAvailability() {
+                let now = Date.now();
+                let twentyFourHours = 24 * 60 * 60 * 1000;
+                let desc = document.getElementById("quizLaunchDesc");
+                let btnText = document.getElementById("launchBtnText");
+
+                if (currentDayQuestionOffset >= masterQuizBank.length) {
+                    if (desc) desc.innerText = "لقد أكملت جميع الـ 40 سؤالاً بنجاح تام! أسطورة القواعد الخارقة ⭐";
+                    if (btnText) btnText.innerText = "مكتملة 🎉";
+                    return;
+                }
+
+                if (lastQuizTimestamp > 0 && (now - lastQuizTimestamp < twentyFourHours)) {
+                    let remainingTime = twentyFourHours - (now - lastQuizTimestamp);
+                    let hoursLeft = Math.ceil(remainingTime / (1000 * 60 * 60));
+                    if (desc) desc.innerText = `مجموعة الأسئلة الخارجية تفتح خلال ${hoursLeft} ساعة تقريباً ⏳`;
+                    if (btnText) btnText.innerText = "انتظار 🔒";
+                } else {
+                    if (desc) desc.innerText = `ابدأ التحدي اليومي لتعزيز مهاراتك 🧠 (متاحة 4 أسئلة جديدة)`;
+                    if (btnText) btnText.innerText = "ابدأ التحدي اليومي ➔";
+                }
+            }
+
+            function loadQuizQuestion() {
+                answered = false;
+                let globalIndex = currentDayQuestionOffset + currentSubQuestionIndex;
+                if (globalIndex >= masterQuizBank.length || currentSubQuestionIndex >= 4) {
+                    showQuizCompletion();
+                    return;
+                }
+
+                let q = masterQuizBank[globalIndex];
+                let body = document.getElementById('quizBody');
+                let nextBtn = document.getElementById('quizNextBtn');
+                nextBtn.classList.remove('active');
+
+                let html = `<div class="quiz-question-card" id="activeQuestionCard">
+                    <div class="quiz-question-text">السؤال (${currentSubQuestionIndex + 1}/4) [المجموع: ${globalIndex + 1}/40]:<br>${q.q}</div>
+                    <div class="quiz-options-grid">`;
+                
+                q.options.forEach((opt, idx) => {
+                    html += `<button class="quiz-option-btn" onclick="checkAnswer(${idx}, this)">${opt}</button>`;
+                });
+
+                html += `</div></div>`;
+                body.innerHTML = html;
+                document.getElementById('quizScoreIndicator').innerText = `اليوم (${currentDayIndex + 1}/10) • السؤال (${currentSubQuestionIndex + 1}/4)`;
+            }
+
+            function checkAnswer(selectedIndex, btnElement) {
+                if (answered) return;
+                answered = true;
+                let globalIndex = currentDayQuestionOffset + currentSubQuestionIndex;
+                let q = masterQuizBank[globalIndex];
+                let optionButtons = document.querySelectorAll('.quiz-option-btn');
+                let cardElement = document.getElementById('activeQuestionCard');
+
+                if (selectedIndex === q.correct) {
+                    userXp += 10;
+                    localStorage.setItem("em_user_xp", userXp);
+                    playSound('success');
+                    btnElement.classList.add('correct');
+                    if (cardElement) cardElement.classList.add('success-fx');
+                } else {
+                    btnElement.classList.add('wrong');
+                    optionButtons[q.correct].classList.add('correct');
+                    playSound('wrong');
+                }
+                document.getElementById('quizNextBtn').classList.add('active');
+            }
+
+            function nextQuestion() {
+                currentSubQuestionIndex++;
+                if (currentSubQuestionIndex < 4 && (currentDayQuestionOffset + currentSubQuestionIndex) < masterQuizBank.length) {
+                    loadQuizQuestion();
+                } else {
+                    localStorage.setItem("em_last_quiz_time", Date.now());
+                    currentDayIndex++;
+                    localStorage.setItem("em_current_day", currentDayIndex);
+                    currentDayQuestionOffset = currentDayIndex * 4;
+                    currentSubQuestionIndex = 0;
+                    showQuizCompletion();
+                }
+            }
+
+            function showQuizCompletion() {
+                let body = document.getElementById('quizBody');
+                document.getElementById('quizNextBtn').classList.remove('active');
+                body.innerHTML = `<div class="quiz-question-card success-fx" style="text-align:center; padding: 24px; gap: 14px;">
+                    <h3 style="margin:0; font-size: 18px; color: var(--heading-pure-color);">🎉 ممتاز جداً! أنهيت تحدي اليوم</h3>
+                    <p style="margin:0; font-size: 14px; color: var(--text-secondary);">تم إضافة نقاط التحدي الخارجي لرصيدك بنجاح.</p>
+                    <p style="margin:0; font-size: 15px; color: var(--accent); font-weight: 950;">رصيدك الحالي: ${userXp} XP ⭐</p>
+                    <p style="margin:0; font-size: 12px; color: var(--text-secondary);">المجموعة التالية ستفتح بعد 24 ساعة.</p>
+                    <button onclick="document.getElementById('quizModal').classList.remove('active'); checkQuizAvailability();" style="background:#9333EA; color:#fff; border:none; padding:10px 20px; border-radius:12px; font-weight:900; cursor:pointer; font-family:'Cairo'; margin-top:6px;">إغلاق والعودة للدراسة ➔</button>
+                </div>`;
+                playSound('success');
+                checkQuizAvailability();
+            }
+
+            document.addEventListener("DOMContentLoaded", function() {
+                checkQuizAvailability();
+                let launchBtn = document.getElementById("launchQuizBtn");
+                let quizModal = document.getElementById("quizModal");
+                let closeQuizBtn = document.getElementById("closeQuizBtn");
+
+                if (launchBtn && quizModal) {
+                    launchBtn.addEventListener("click", () => {
+                        let now = Date.now();
+                        let twentyFourHours = 24 * 60 * 60 * 1000;
+                        if (lastQuizTimestamp > 0 && (now - lastQuizTimestamp < twentyFourHours) && currentSubQuestionIndex === 0) {
+                            let remainingTime = twentyFourHours - (now - lastQuizTimestamp);
+                            let hoursLeft = Math.ceil(remainingTime / (1000 * 60 * 60));
+                            alert(`عذراً يا باشمهندس، مجموعة التحدي الخارجي الجديدة تفتح بعد ${hoursLeft} ساعة تقريباً بنظام الـ 24 ساعة! ⏳`);
+                            return;
+                        }
+                        quizModal.classList.add("active");
+                        currentSubQuestionIndex = 0;
+                        loadQuizQuestion();
+                    });
+                }
+                if (closeQuizBtn && quizModal) {
+                    closeQuizBtn.addEventListener("click", () => { quizModal.classList.remove("active"); checkQuizAvailability(); });
+                }
+
+                let themeBtn = document.getElementById("themeToggleBtn");
+                function applyTheme(isDark) {
+                    if (isDark) {
+                        document.documentElement.classList.add("dark-mode");
+                        localStorage.setItem("em_theme", "dark");
+                        if (themeBtn) themeBtn.innerHTML = "☀️";
+                    } else {
+                        document.documentElement.classList.remove("dark-mode");
+                        localStorage.setItem("em_theme", "light");
+                        if (themeBtn) themeBtn.innerHTML = "🌙";
+                    }
+                }
+                applyTheme(localStorage.getItem("em_theme") === "dark");
+                if (themeBtn) {
+                    themeBtn.addEventListener("click", () => {
+                        applyTheme(!document.documentElement.classList.contains("dark-mode"));
+                    });
+                }
+
+                let searchBtn = document.getElementById("searchBtn");
+                let searchModal = document.getElementById("searchModal");
+                let closeSearchBtn = document.getElementById("closeSearchBtn");
+                if (searchBtn && searchModal) {
+                    searchBtn.addEventListener("click", () => { searchModal.classList.add("active"); });
+                }
+                if (closeSearchBtn && searchModal) {
+                    closeSearchBtn.addEventListener("click", () => { searchModal.classList.remove("active"); });
+                }
+
+                let menuBtn = document.getElementById("menuBtn");
+                let sideMenu = document.getElementById("sideMenu");
+                if (menuBtn && sideMenu) {
+                    menuBtn.addEventListener("click", () => { sideMenu.classList.add("active"); });
+                }
+                if (sideMenu) {
+                    sideMenu.addEventListener("click", (e) => { if (e.target === sideMenu) sideMenu.classList.remove("active"); });
+                }
+            });
+
+            window.onscroll = function() {
+                let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                let scrolled = (winScroll / height) * 100;
+                let progressFill = document.getElementById("progressFill");
+                if (progressFill) progressFill.style.width = scrolled + "%";
+
+                let scrollToTopBtn = document.getElementById("scrollToTopBtn");
+                if (scrollToTopBtn) {
+                    if (window.scrollY > 300) {
+                        scrollToTopBtn.classList.add("show");
+                    } else {
+                        scrollToTopBtn.classList.remove("show");
+                    }
+                }
+            };
+
+            let scrollToTopBtn = document.getElementById("scrollToTopBtn");
+            if (scrollToTopBtn) {
+                scrollToTopBtn.addEventListener("click", () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
+        </script>
+    </body>
+</html>

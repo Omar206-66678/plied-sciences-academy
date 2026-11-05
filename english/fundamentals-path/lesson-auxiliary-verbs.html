@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <title>الأفعال المساعدة - أكاديمية العلوم التطبيقية</title>
+        <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+        
+        <script>
+            let savedTheme = localStorage.getItem("em_theme");
+            if (savedTheme === "dark") { document.documentElement.classList.add("dark-mode"); }
+        </script>
+        
+        <style>
+            :root {
+                --bg-main: #F4F6F9;
+                --card-bg: #FFFFFF;
+                --card-border: #E2E8F0;
+                --text-primary: #0F172A;
+                --text-secondary: #64748B;
+                
+                --header-bg: rgba(255, 255, 255, 0.85);
+                --header-border: rgba(37, 99, 235, 0.15);
+                --header-shadow: 0 10px 30px rgba(37, 99, 235, 0.05);
+                
+                --primary: #2563EB;
+                --primary-dark: #1D4ED8;
+                --accent: #3B82F6; 
+                --light-bg: rgba(37, 99, 235, 0.06);
+                --border-glow: rgba(37, 99, 235, 0.25);
+                --heading-pure-color: #0F172A; 
+            }
+
+            html.dark-mode, body.dark-mode {
+                --bg-main: #06080F;
+                --card-bg: #0B0F19;
+                --card-border: rgba(255, 255, 255, 0.07);
+                --text-primary: #F3F4F6;
+                --text-secondary: #9CA3AF;
+                
+                --header-bg: rgba(11, 15, 25, 0.85);
+                --header-border: rgba(59, 130, 246, 0.3);
+                --header-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+                
+                --primary: #3B82F6;
+                --primary-dark: #2563EB;
+                --accent: #60A5FA;
+                --light-bg: rgba(59, 130, 246, 0.09);
+                --border-glow: rgba(59, 130, 246, 0.35);
+                --heading-pure-color: #FFFFFF; 
+            }
+
+            body {
+                background-color: var(--bg-main);
+                color: var(--text-primary);
+                font-family: 'Cairo', system-ui, -apple-system, sans-serif;
+                margin: 0;
+                padding: 16px 14px 90px 14px;
+                min-height: 100vh;
+                box-sizing: border-box;
+                transition: background-color 0.3s ease, color 0.3s ease;
+            }
+
+            .container { max-width: 680px; margin: auto; }
+
+            .top-progress-bar { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: transparent; z-index: 9999; }
+            .top-progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--primary), var(--primary-dark)); }
+
+            /* شريط الهيدر المتناسق */
+            .nav-bar {
+                display: flex; 
+                justify-content: space-between; 
+                align-items: center; 
+                margin-bottom: 20px;
+                background: var(--header-bg); 
+                backdrop-filter: blur(12px); 
+                border: 1.5px solid var(--header-border); 
+                padding: 10px 14px;
+                border-radius: 24px; 
+                box-shadow: var(--header-shadow);
+            }
+            .nav-right-group { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+            .nav-left-group { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+            
+            .nav-titles-box { 
+                display: flex; 
+                flex-direction: column; 
+                align-items: center; 
+                text-align: center; 
+                flex-grow: 1; 
+                padding: 0 8px;
+            }
+            .nav-main-title { font-size: 12px; font-weight: 950; color: var(--text-primary); margin: 0; line-height: 1.2; font-family: 'Cairo', sans-serif; }
+            .nav-sub-title { font-size: 9.5px; font-weight: 800; color: var(--primary); margin: 0; line-height: 1.2; }
+            .nav-academy-title { font-size: 8.5px; font-weight: 700; color: var(--text-secondary); margin: 0; line-height: 1.2; }
+
+            .home-icon-btn, .nav-icon-btn {
+                background: var(--light-bg); 
+                border: 1.5px solid var(--border-glow);
+                width: 36px; height: 36px; 
+                border-radius: 12px; 
+                display: flex; 
+                align-items: center; 
+                justify-content: center;
+                color: var(--text-primary); 
+                font-size: 15px; 
+                text-decoration: none; 
+                cursor: pointer; 
+                transition: 0.25s; 
+                flex-shrink: 0;
+            }
+            .home-icon-btn:hover, .nav-icon-btn:hover { transform: scale(1.05); border-color: var(--primary); color: var(--primary); }
+
+            /* كارت الترحيب الرئيسي مع الأيقونات الصامتة بداخله */
+            .hero-card {
+                background: var(--card-bg); 
+                border: 1.5px solid var(--primary);
+                border-radius: 28px;
+                padding: 22px 18px; 
+                margin-bottom: 20px; 
+                box-shadow: 0 0 20px rgba(37, 99, 235, 0.15), inset 0 0 10px rgba(37, 99, 235, 0.05); 
+                display: flex; 
+                flex-direction: column; 
+                gap: 16px;
+            }
+            .hero-header-row {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                border-bottom: 1.5px solid var(--card-border);
+                padding-bottom: 12px;
+            }
+            .hero-title-en { margin: 0; font-size: 18px; font-weight: 950; color: var(--heading-pure-color); }
+            .hero-title-ar { margin: 0; font-size: 13.5px; font-weight: 850; color: var(--primary); }
+
+            /* الأيقونات الصامتة داخل الكارت */
+            .sub-lessons-list {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+            .sub-lesson-item {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 10px 14px;
+                border-radius: 16px;
+                border: 1.5px solid transparent;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+                white-space: nowrap;
+                overflow: hidden;
+                pointer-events: none; /* صامتة تماماً لا تستجيب للضغط */
+            }
+            .item-be { background: rgba(37, 99, 235, 0.08); border-color: rgba(37, 99, 235, 0.3); color: #2563EB; }
+            .item-have { background: rgba(16, 185, 129, 0.08); border-color: rgba(16, 185, 129, 0.3); color: #10B981; }
+            .item-do { background: rgba(245, 158, 11, 0.08); border-color: rgba(245, 158, 11, 0.3); color: #F59E0B; }
+            .item-modals { background: rgba(139, 92, 246, 0.08); border-color: rgba(139, 92, 246, 0.3); color: #8B5CF6; }
+
+            html.dark-mode .item-be { background: rgba(59, 130, 246, 0.12); color: #60A5FA; }
+            html.dark-mode .item-have { background: rgba(16, 185, 129, 0.12); color: #34D399; }
+            html.dark-mode .item-do { background: rgba(245, 158, 11, 0.12); color: #FBBF24; }
+            html.dark-mode .item-modals { background: rgba(139, 92, 246, 0.12); color: #A78BFA; }
+
+            .sub-lesson-text {
+                font-size: 11.5px;
+                font-weight: 900;
+                display: flex;
+                align-items: center;
+                gap: 6px;
+            }
+            .sub-lesson-label {
+                font-size: 11px;
+                font-weight: 850;
+                font-family: 'Cairo', sans-serif;
+            }
+            .sub-lesson-dot {
+                width: 7px;
+                height: 7px;
+                border-radius: 50%;
+                background: currentColor;
+            }
+
+            .hero-description-box {
+                background: var(--light-bg);
+                border: 1.5px solid var(--border-glow);
+                border-radius: 18px;
+                padding: 14px;
+                font-size: 12px;
+                font-weight: 700;
+                color: var(--text-secondary);
+                line-height: 1.7;
+                text-align: justify;
+            }
+
+            /* --- كروت النيون الزجاجية الكبيرة تحت الكارت (الخاصة بالفتح الفعلي) --- */
+            .neon-cards-container {
+                display: flex;
+                flex-direction: column;
+                gap: 14px;
+                margin-bottom: 24px;
+            }
+
+            .neon-lesson-card {
+                background: var(--card-bg);
+                backdrop-filter: blur(16px);
+                border-radius: 22px;
+                padding: 18px 20px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                text-decoration: none;
+                position: relative;
+                overflow: hidden;
+                transition: all 0.3s ease;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+            }
+
+            .neon-lesson-card:hover {
+                transform: translateY(-3px);
+                filter: brightness(1.04);
+            }
+
+            .card-be {
+                border: 1.5px solid rgba(37, 99, 235, 0.4);
+                box-shadow: 0 8px 25px rgba(37, 99, 235, 0.12);
+            }
+            .card-be::before { content: ''; position: absolute; top: 0; right: 0; bottom: 0; width: 5px; background: linear-gradient(180deg, #2563EB, #60A5FA); }
+
+            .card-have {
+                border: 1.5px solid rgba(16, 185, 129, 0.4);
+                box-shadow: 0 8px 25px rgba(16, 185, 129, 0.12);
+            }
+            .card-have::before { content: ''; position: absolute; top: 0; right: 0; bottom: 0; width: 5px; background: linear-gradient(180deg, #10B981, #34D399); }
+
+            .card-do {
+                border: 1.5px solid rgba(245, 158, 11, 0.4);
+                box-shadow: 0 8px 25px rgba(245, 158, 11, 0.12);
+            }
+            .card-do::before { content: ''; position: absolute; top: 0; right: 0; bottom: 0; width: 5px; background: linear-gradient(180deg, #F59E0B, #FBBF24); }
+
+            .card-modals {
+                border: 1.5px solid rgba(139, 92, 246, 0.4);
+                box-shadow: 0 8px 25px rgba(139, 92, 246, 0.12);
+            }
+            .card-modals::before { content: ''; position: absolute; top: 0; right: 0; bottom: 0; width: 5px; background: linear-gradient(180deg, #8B5CF6, #A78BFA); }
+
+            .card-content-group {
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .card-title-main {
+                font-size: 14.5px;
+                font-weight: 950;
+                color: var(--heading-pure-color);
+                letter-spacing: -0.2px;
+            }
+
+            .card-title-sub {
+                font-size: 11.5px;
+                font-weight: 800;
+                color: var(--text-secondary);
+            }
+
+            .card-action-badge {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                padding: 8px 14px;
+                border-radius: 12px;
+                font-size: 12px;
+                font-weight: 900;
+                transition: 0.2s ease;
+            }
+
+            .card-be .card-action-badge { background: rgba(37, 99, 235, 0.1); color: #2563EB; }
+            .card-have .card-action-badge { background: rgba(16, 185, 129, 0.1); color: #10B981; }
+            .card-do .card-action-badge { background: rgba(245, 158, 11, 0.1); color: #F59E0B; }
+            .card-modals .card-action-badge { background: rgba(139, 92, 246, 0.1); color: #8B5CF6; }
+
+            html.dark-mode .card-be .card-action-badge { color: #60A5FA; }
+            html.dark-mode .card-have .card-action-badge { color: #34D399; }
+            html.dark-mode .card-do .card-action-badge { color: #FBBF24; }
+            html.dark-mode .card-modals .card-action-badge { color: #A78BFA; }
+
+            /* شريط التنقل السفلي */
+            .bottom-nav {
+                position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); width: calc(100% - 28px); max-width: 500px; background: var(--header-bg); backdrop-filter: blur(15px); display: flex; justify-content: space-around; align-items: center; padding: 8px 10px; border: 1.5px solid var(--header-border); border-radius: 22px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15); z-index: 999;
+            }
+            .bottom-nav a { color: var(--text-secondary); text-decoration: none; font-size: 11px; text-align: center; font-weight: 800; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 6px 12px; border-radius: 16px; flex: 1; }
+            .bottom-nav a span { font-size: 18px; line-height: 1; }
+            .bottom-nav a.active { color: var(--heading-pure-color); background: var(--light-bg); border: 1.5px solid var(--border-glow); }
+        </style>
+    </head>
+    <body>
+
+        <div class="top-progress-bar"><div class="top-progress-fill" id="progressFill"></div></div>
+
+        <div class="container">
+            <!-- شريط الهيدر -->
+            <div class="nav-bar">
+                <div class="nav-right-group">
+                    <a href="fundamentals-path.html" class="home-icon-btn" title="الرجوع للقائمة">🏠</a>
+                </div>
+                
+                <div class="nav-titles-box">
+                    <h1 class="nav-main-title">Auxiliary Verbs</h1>
+                    <p class="nav-sub-title">الأفعال المساعدة</p>
+                    <p class="nav-academy-title">أكاديمية العلوم التطبيقية</p>
+                </div>
+
+                <div class="nav-left-group">
+                    <button class="nav-icon-btn" id="themeToggleBtn" title="تغيير الثيم">🌙</button>
+                    <button class="nav-icon-btn" title="بحث">🔍</button>
+                    <button class="nav-icon-btn" title="القائمة">☰</button>
+                </div>
+            </div>
+
+            <!-- كارت الترحيب (يحتوي على الأيقونات الصامتة للعرض فقط) -->
+            <div class="hero-card">
+                <div class="hero-header-row">
+                    <h1 class="hero-title-en">Auxiliary Verbs</h1>
+                    <h2 class="hero-title-ar">الأفعال المساعدة</h2>
+                </div>
+
+                <div class="sub-lessons-list">
+                    <div class="sub-lesson-item item-be">
+                        <span class="sub-lesson-text"><span class="sub-lesson-dot"></span>Verb To Be (am, is, are, was, were)</span>
+                        <span class="sub-lesson-label">عائلة يكون</span>
+                    </div>
+                    <div class="sub-lesson-item item-have">
+                        <span class="sub-lesson-text"><span class="sub-lesson-dot"></span>Verb To Have (Have, Has, Had)</span>
+                        <span class="sub-lesson-label">عائلة الامتلاك</span>
+                    </div>
+                    <div class="sub-lesson-item item-do">
+                        <span class="sub-lesson-text"><span class="sub-lesson-dot"></span>Verb To Do (Do, Does, Did)</span>
+                        <span class="sub-lesson-label">عائلة الأداء</span>
+                    </div>
+                    <div class="sub-lesson-item item-modals">
+                        <span class="sub-lesson-text"><span class="sub-lesson-dot"></span>Modals (Will, Should, May, Can)</span>
+                        <span class="sub-lesson-label">الأفعال الناقصة</span>
+                    </div>
+                </div>
+
+                <div class="hero-description-box">
+                    تعتبر هذه العائلات بمثابة "مفاتيح التشغيل" للجملة الإنجليزية؛ فمن خلالها نستطيع تحويل أي فعل رئيسي إلى زمن مضارع أو ماضي، أو نفيه، أو الاستفهام عنه بدقة ودون تعقيد.
+                </div>
+            </div>
+
+            <!-- كروت النيون الزجاجية الكبيرة تحت الكارت (التي تفتح الدروس بفعالية) -->
+            <div class="neon-cards-container">
+                <a href="lesson-be.html" class="neon-lesson-card card-be">
+                    <div class="card-content-group">
+                        <span class="card-title-main">Verb To Be (am, is, are, was, were)</span>
+                        <span class="card-title-sub">عائلة يكون • الكينونة والأزمنة</span>
+                    </div>
+                    <div class="card-action-badge"><span>ابدأ الدرس</span><span>➔</span></div>
+                </a>
+
+                <a href="lesson-have.html" class="neon-lesson-card card-have">
+                    <div class="card-content-group">
+                        <span class="card-title-main">Verb To Have (Have, Has, Had)</span>
+                        <span class="card-title-sub">عائلة الامتلاك • الأفعال التامة</span>
+                    </div>
+                    <div class="card-action-badge"><span>ابدأ الدرس</span><span>➔</span></div>
+                </a>
+
+                <a href="lesson-do.html" class="neon-lesson-card card-do">
+                    <div class="card-content-group">
+                        <span class="card-title-main">Verb To Do (Do, Does, Did)</span>
+                        <span class="card-title-sub">عائلة الأداء • النفي والاستفهام</span>
+                    </div>
+                    <div class="card-action-badge"><span>ابدأ الدرس</span><span>➔</span></div>
+                </a>
+
+                <a href="lesson-modals.html" class="neon-lesson-card card-modals">
+                    <div class="card-content-group">
+                        <span class="card-title-main">Modals (Will, Should, May, Can)</span>
+                        <span class="card-title-sub">الأفعال الناقصة • الإلزام والقدرة</span>
+                    </div>
+                    <div class="card-action-badge"><span>ابدأ الدرس</span><span>➔</span></div>
+                </a>
+            </div>
+
+        </div>
+
+        <div class="bottom-nav">
+            <a href="index.html"><span>🏠</span>الرئيسية</a>
+            <a href="fundamentals-path.html" class="active"><span>🇬🇧</span>القواعد</a>
+            <a href="surveying.html"><span>📐</span>المساحة</a>
+            <a href="programming.html"><span>💻</span>البرمجة</a>
+        </div>
+
+        <script>
+            let themeBtn = document.getElementById("themeToggleBtn");
+            function applyTheme(isDark) {
+                if (isDark) {
+                    document.documentElement.classList.add("dark-mode");
+                    localStorage.setItem("em_theme", "dark");
+                    if (themeBtn) themeBtn.innerHTML = "☀️";
+                } else {
+                    document.documentElement.classList.remove("dark-mode");
+                    localStorage.setItem("em_theme", "light");
+                    if (themeBtn) themeBtn.innerHTML = "🌙";
+                }
+            }
+            applyTheme(localStorage.getItem("em_theme") === "dark");
+            if (themeBtn) {
+                themeBtn.addEventListener("click", () => {
+                    applyTheme(!document.documentElement.classList.contains("dark-mode"));
+                });
+            }
+
+            window.onscroll = function() {
+                let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                let scrolled = (winScroll / height) * 100;
+                let progressFill = document.getElementById("progressFill");
+                if (progressFill) progressFill.style.width = scrolled + "%";
+            };
+        </script>
+    </body>
+</html>

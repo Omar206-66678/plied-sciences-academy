@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <title>ضمائر الفاعل والمفعول - أكاديمية العلوم التطبيقية</title>
+        <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+        
+        <script>
+            let savedTheme = localStorage.getItem("em_theme");
+            if (savedTheme === "dark") {
+                document.documentElement.classList.add("dark-mode");
+            }
+        </script>
+        
+        <style>
+            :root {
+                --bg-main: #F4F6F9;
+                --card-bg: #FFFFFF;
+                --card-border: #E2E8F0;
+                --text-primary: #0F172A;
+                --text-secondary: #64748B;
+                
+                --header-bg: rgba(255, 255, 255, 0.85);
+                --header-border: rgba(37, 99, 235, 0.15);
+                --header-shadow: 0 10px 30px rgba(37, 99, 235, 0.05);
+                
+                --primary: #2563EB;
+                --primary-dark: #1D4ED8;
+                --accent: #8B5CF6; 
+                --light-bg: rgba(139, 92, 246, 0.05);
+                --border-glow: rgba(139, 92, 246, 0.25);
+
+                --subject-highlight: #2563EB; 
+                --object-highlight: #059669; 
+                --heading-pure-color: #0F172A; 
+            }
+
+            html.dark-mode, body.dark-mode {
+                --bg-main: #06080F;
+                --card-bg: #0B0F19;
+                --card-border: rgba(255, 255, 255, 0.07);
+                --text-primary: #F3F4F6;
+                --text-secondary: #9CA3AF;
+                
+                --header-bg: rgba(11, 15, 25, 0.85);
+                --header-border: rgba(139, 92, 246, 0.3);
+                --header-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+                
+                --primary: #3B82F6;
+                --primary-dark: #2563EB;
+                --accent: #A78BFA;
+                --light-bg: rgba(139, 92, 246, 0.08);
+                --border-glow: rgba(139, 92, 246, 0.35);
+
+                --subject-highlight: #60A5FA;
+                --object-highlight: #34D399;
+                --heading-pure-color: #FFFFFF; 
+            }
+
+            body {
+                background-color: var(--bg-main);
+                color: var(--text-primary);
+                font-family: 'Cairo', system-ui, -apple-system, sans-serif;
+                margin: 0;
+                padding: 16px 14px 90px 14px;
+                min-height: 100vh;
+                box-sizing: border-box;
+                transition: background-color 0.3s ease, color 0.3s ease;
+            }
+
+            .container { max-width: 680px; margin: auto; }
+
+            .top-progress-bar { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: transparent; z-index: 9999; }
+            .top-progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--primary)); }
+
+            /* شريط الهيدر */
+            .nav-bar {
+                display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
+                background: var(--header-bg); backdrop-filter: blur(12px); border: 1.5px solid var(--header-border); padding: 10px 16px;
+                border-radius: 24px; box-shadow: var(--header-shadow);
+            }
+            .nav-right-group { display: flex; align-items: center; gap: 8px; text-align: right; }
+            .nav-left-group { display: flex; align-items: center; gap: 6px; }
+            
+            .nav-titles-box { display: flex; flex-direction: column; align-items: flex-start; gap: 0px; }
+            .nav-main-title { font-size: 12.5px; font-weight: 950; color: var(--text-primary); margin: 0; line-height: 1.2; font-family: 'Cairo', sans-serif; }
+            .nav-sub-title { font-size: 9.5px; font-weight: 800; color: var(--accent); margin: 0; line-height: 1.2; }
+            .nav-academy-title { font-size: 8.5px; font-weight: 700; color: var(--text-secondary); margin: 0; line-height: 1.2; }
+
+            .home-icon-btn, .nav-icon-btn {
+                background: var(--light-bg); border: 1.5px solid var(--border-glow);
+                width: 36px; height: 36px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
+                color: var(--text-primary); font-size: 15px; text-decoration: none; cursor: pointer; transition: 0.25s; border: none; flex-shrink: 0;
+            }
+            .home-icon-btn:hover, .nav-icon-btn:hover { transform: scale(1.05); border-color: var(--accent); color: var(--accent); }
+
+            /* الكارت العلوي الهندسي */
+            .hero-card {
+                background: var(--card-bg); 
+                border: 2px solid transparent;
+                background-image: linear-gradient(var(--card-bg), var(--card-bg)), linear-gradient(135deg, var(--accent), var(--primary));
+                background-origin: border-box;
+                background-clip: padding-box, border-box;
+                border-radius: 28px;
+                padding: 24px; 
+                margin-bottom: 24px; 
+                box-shadow: 0 10px 30px var(--border-glow); 
+                display: flex; 
+                flex-direction: column; 
+                align-items: center;
+                text-align: center;
+                gap: 16px;
+                position: relative; 
+                overflow: hidden;
+            }
+            
+            .hero-title-en { margin: 0; font-size: 21px; font-weight: 950; color: var(--heading-pure-color); letter-spacing: -0.3px; }
+            .hero-title-ar { margin: 0; font-size: 14px; font-weight: 800; color: var(--accent); background: var(--light-bg); padding: 4px 16px; border-radius: 12px; border: 1px solid var(--border-glow); }
+
+            /* الجدول الهندسي المدمج */
+            .table-container { width: 100%; overflow-x: auto; margin-top: 4px; border-radius: 16px; border: 1.5px solid var(--card-border); text-align: right; }
+            .styled-master-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+            .styled-master-table th, .styled-master-table td { padding: 10px 14px; border-bottom: 1px solid var(--card-border); border-left: 1px solid var(--card-border); }
+            .styled-master-table th:last-child, .styled-master-table td:last-child { border-left: none; }
+            .styled-master-table th { background: var(--light-bg); color: var(--heading-pure-color); font-weight: 950; font-size: 13px; }
+            .styled-master-table td { background: var(--card-bg); color: var(--text-primary); font-weight: 800; }
+            .styled-master-table tr:last-child td { border-bottom: none; }
+
+            .th-subject { color: var(--subject-highlight) !important; background: rgba(37, 99, 235, 0.08) !important; font-weight: 950 !important; }
+            .th-object { color: var(--object-highlight) !important; background: rgba(5, 150, 105, 0.08) !important; font-weight: 950 !important; }
+
+            /* كارت الشرح الشامل الرئيسي */
+            .lesson-card-full {
+                background: var(--card-bg); 
+                border: 2px solid transparent;
+                background-image: linear-gradient(var(--card-bg), var(--card-bg)), linear-gradient(135deg, var(--current-border-color, #2563EB), var(--accent));
+                background-origin: border-box;
+                background-clip: padding-box, border-box;
+                border-radius: 28px;
+                padding: 26px; 
+                margin-bottom: 24px; 
+                box-shadow: 0 20px 45px rgba(37, 99, 235, 0.1); 
+                display: flex; 
+                flex-direction: column; 
+                gap: 20px;
+                position: relative; 
+                overflow: hidden;
+                transition: background-image 0.5s ease;
+            }
+            
+            .lesson-header { display: flex; flex-direction: column; gap: 14px; }
+            .app-title-wrapper { display: flex; flex-direction: column; gap: 8px; position: relative; padding-right: 14px; border-right: 4px solid #2563EB; }
+            .app-main-heading { margin: 0; font-size: 20px; font-weight: 950; color: var(--heading-pure-color); letter-spacing: -0.4px; font-family: 'Cairo', sans-serif; direction: ltr; text-align: right; }
+            .app-sub-pill { display: inline-flex; align-items: center; gap: 6px; background: var(--light-bg); border: 1.5px solid var(--border-glow); color: var(--heading-pure-color); padding: 6px 14px; border-radius: 12px; font-size: 12px; font-weight: 850; width: fit-content; }
+
+            .glass-glow-card {
+                background: var(--card-bg);
+                backdrop-filter: blur(16px);
+                border-radius: 22px;
+                padding: 24px 22px 22px 22px;
+                display: flex;
+                flex-direction: column;
+                gap: 16px;
+                position: relative;
+                overflow: hidden;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .glass-glow-card.subject-card { border: 1.5px solid rgba(37, 99, 235, 0.3); }
+            .glass-glow-card.subject-card::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 4px; background: linear-gradient(90deg, #2563EB, #60A5FA); width: 100%; }
+
+            .glass-glow-card.object-card { border: 1.5px solid rgba(5, 150, 105, 0.35); }
+            .glass-glow-card.object-card::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 4px; background: linear-gradient(90deg, #059669, #34D399); width: 100%; }
+
+            /* تصميم الكارت المستطيل الداخلي للعنوان (بديل الأيقونة) */
+            .card-title-box {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 8px 14px;
+                border-radius: 14px;
+                font-size: 14px;
+                font-weight: 950;
+                width: fit-content;
+                gap: 8px;
+            }
+            .subject-title-box {
+                background: rgba(37, 99, 235, 0.1);
+                border: 1.5px solid rgba(37, 99, 235, 0.3);
+                color: #2563EB;
+            }
+            html.dark-mode .subject-title-box {
+                color: #60A5FA;
+            }
+
+            .object-title-box {
+                background: rgba(5, 150, 105, 0.1);
+                border: 1.5px solid rgba(5, 150, 105, 0.3);
+                color: #059669;
+            }
+            html.dark-mode .object-title-box {
+                color: #34D399;
+            }
+
+            .usage-content { font-size: 13.5px; font-weight: 700; color: var(--text-secondary); line-height: 1.8; }
+
+            .subject-highlight { color: var(--subject-highlight); font-weight: 950; }
+            .object-highlight { color: var(--object-highlight); font-weight: 950; }
+
+            .method-box { background: var(--light-bg); border: 1.5px solid var(--border-glow); padding: 14px; border-radius: 16px; margin: 12px 0; display: flex; flex-direction: column; gap: 8px; }
+
+            .inner-practice-title-wrapper {
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+                position: relative;
+                padding-right: 14px;
+                border-right: 4px solid var(--accent);
+                margin: 12px 0 8px 0;
+            }
+            .inner-practice-heading {
+                margin: 0;
+                font-size: 16px;
+                font-weight: 950;
+                color: var(--heading-pure-color);
+                font-family: 'Cairo', sans-serif;
+            }
+
+            .icon-cards-list { display: flex; flex-direction: column; gap: 12px; margin-top: 8px; }
+            
+            .icon-single-card {
+                background: var(--light-bg);
+                border: 1.5px solid var(--border-glow);
+                border-radius: 18px;
+                padding: 14px 18px;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                transition: 0.3s ease;
+                position: relative;
+                overflow: hidden;
+                box-shadow: 0 4px 15px rgba(139, 92, 246, 0.05);
+            }
+            .icon-single-card:hover {
+                border-color: var(--accent);
+                transform: translateY(-2px);
+                box-shadow: 0 8px 25px var(--border-glow);
+            }
+
+            @keyframes laserScan {
+                0% { border-color: var(--accent); box-shadow: 0 0 15px var(--accent); }
+                50% { border-color: var(--primary); box-shadow: 0 0 25px var(--primary); }
+                100% { border-color: var(--accent); box-shadow: 0 0 15px var(--accent); }
+            }
+
+            .icon-single-card.scanning {
+                animation: laserScan 1.2s infinite ease-in-out;
+                border-color: var(--accent) !important;
+                background: var(--card-bg) !important;
+            }
+
+            .sentence-row {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 10px;
+                direction: ltr;
+            }
+
+            .line-en-1, .line-en-2 { 
+                font-family: system-ui, -apple-system, sans-serif; 
+                font-size: 13.5px; 
+                font-weight: 900; 
+                color: var(--heading-pure-color); 
+                text-align: left; 
+                direction: ltr; 
+                flex: 1;
+            }
+
+            .line-ar-1, .line-ar-2 { 
+                font-family: 'Cairo', sans-serif; 
+                font-size: 13px; 
+                font-weight: 800; 
+                color: var(--heading-pure-color); 
+                text-align: right; 
+                direction: rtl;
+                margin-top: -2px;
+            }
+
+            .sentence-group {
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .speak-btn {
+                background: var(--card-bg);
+                border: 1.5px solid var(--border-glow);
+                width: 30px;
+                height: 30px;
+                border-radius: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                font-size: 13px;
+                transition: 0.2s;
+                flex-shrink: 0;
+                color: var(--accent);
+            }
+            .speak-btn:hover {
+                background: var(--accent);
+                color: #FFFFFF;
+                transform: scale(1.1);
+            }
+
+            .speak-btn.playing {
+                background: var(--accent);
+                color: #FFFFFF;
+                transform: scale(1.1);
+            }
+
+            /* كارت تشغيل التحدي اليومي بشكل أنيق */
+            .quiz-launch-card {
+                background: linear-gradient(135deg, var(--light-bg), rgba(139, 92, 246, 0.15));
+                border: 2px dashed var(--accent);
+                border-radius: 22px;
+                padding: 20px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                cursor: pointer;
+                transition: 0.3s ease;
+                margin-top: 20px;
+                box-shadow: 0 10px 25px rgba(139, 92, 246, 0.1);
+            }
+            .quiz-launch-card:hover {
+                transform: scale(1.02);
+                border-color: var(--primary);
+                box-shadow: 0 15px 35px var(--border-glow);
+            }
+            .quiz-launch-info { display: flex; flex-direction: column; gap: 4px; }
+            .quiz-launch-title { font-size: 15px; font-weight: 950; color: var(--heading-pure-color); display: flex; align-items: center; gap: 8px; }
+            .quiz-launch-desc { font-size: 11.5px; font-weight: 700; color: var(--text-secondary); }
+            .quiz-launch-btn {
+                background: var(--accent);
+                color: #FFFFFF;
+                border: none;
+                padding: 10px 18px;
+                border-radius: 14px;
+                font-family: 'Cairo', sans-serif;
+                font-size: 12.5px;
+                font-weight: 950;
+                cursor: pointer;
+                box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+                transition: 0.2s;
+            }
+            .quiz-launch-btn:hover { background: var(--primary); transform: scale(1.05); }
+
+            /* نافذة الاختبار التفاعلية (خلفية موف) */
+            .modal-overlay { 
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+                background: rgba(139, 92, 246, 0.45); backdrop-filter: blur(14px); 
+                display: none; align-items: center; justify-content: center; z-index: 10000; padding: 16px; box-sizing: border-box; 
+            }
+            .modal-overlay.active { display: flex; }
+            
+            .quiz-modal-card { 
+                background: var(--card-bg); 
+                border: 2px solid var(--accent); 
+                border-radius: 28px; 
+                padding: 22px; 
+                width: 100%; 
+                max-width: 500px; 
+                max-height: 85vh;
+                overflow-y: auto;
+                box-shadow: 0 25px 60px rgba(139, 92, 246, 0.3); 
+                display: flex; 
+                flex-direction: column; 
+                gap: 16px; 
+                position: relative; 
+            }
+            
+            .quiz-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--card-border); padding-bottom: 12px; }
+            .quiz-title { font-size: 15px; font-weight: 950; color: var(--heading-pure-color); display: flex; align-items: center; gap: 8px; }
+            .quiz-close-btn { background: var(--light-bg); border: 1.5px solid var(--border-glow); width: 32px; height: 32px; border-radius: 10px; color: var(--text-primary); cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; }
+
+            .quiz-body { display: flex; flex-direction: column; gap: 14px; }
+            
+            /* كارت السؤال المنفصل */
+            .quiz-question-card {
+                background: var(--card-bg);
+                border: 1.5px solid var(--border-glow);
+                border-radius: 20px;
+                padding: 18px;
+                display: flex;
+                flex-direction: column;
+                gap: 14px;
+                box-shadow: 0 8px 25px rgba(139, 92, 246, 0.06);
+                transition: 0.3s ease;
+            }
+            
+            @keyframes bluePulse {
+                0% { transform: scale(1); border-color: #2563EB; box-shadow: 0 0 25px rgba(37, 99, 235, 0.45); }
+                50% { transform: scale(1.02); border-color: #3B82F6; box-shadow: 0 0 35px rgba(59, 130, 246, 0.65); }
+                100% { transform: scale(1); border-color: #2563EB; box-shadow: 0 0 25px rgba(37, 99, 235, 0.45); }
+            }
+            .quiz-question-card.subject-success-fx {
+                animation: bluePulse 0.6s ease infinite alternate;
+                background: rgba(37, 99, 235, 0.04);
+            }
+
+            @keyframes greenPulse {
+                0% { transform: scale(1); border-color: #059669; box-shadow: 0 0 25px rgba(5, 150, 105, 0.45); }
+                50% { transform: scale(1.02); border-color: #34D399; box-shadow: 0 0 35px rgba(52, 211, 153, 0.65); }
+                100% { transform: scale(1); border-color: #059669; box-shadow: 0 0 25px rgba(5, 150, 105, 0.45); }
+            }
+            .quiz-question-card.object-success-fx {
+                animation: greenPulse 0.6s ease infinite alternate;
+                background: rgba(5, 150, 105, 0.04);
+            }
+
+            .quiz-question-text { 
+                font-family: system-ui, -apple-system, sans-serif;
+                font-size: 14.5px; 
+                font-weight: 900; 
+                color: var(--heading-pure-color); 
+                text-align: left;
+                direction: ltr;
+                line-height: 1.6; 
+            }
+            
+            .quiz-options-grid { display: flex; gap: 8px; justify-content: center; margin-top: 4px; }
+            .quiz-option-btn {
+                background: var(--bg-main);
+                border: 1.5px solid var(--card-border);
+                padding: 10px 20px;
+                border-radius: 14px;
+                font-family: system-ui, -apple-system, sans-serif;
+                font-size: 13.5px;
+                font-weight: 900;
+                color: var(--text-primary);
+                cursor: pointer;
+                transition: 0.2s;
+                flex: 1;
+                text-align: center;
+            }
+            .quiz-option-btn:hover { border-color: var(--accent); background: var(--light-bg); color: var(--accent); }
+            
+            .quiz-option-btn.correct-subject { background: rgba(37, 99, 235, 0.15) !important; border-color: #2563EB !important; color: #2563EB !important; transform: scale(1.05); }
+            .quiz-option-btn.correct-object { background: rgba(5, 150, 105, 0.15) !important; border-color: #059669 !important; color: #059669 !important; transform: scale(1.05); }
+            .quiz-option-btn.wrong { background: rgba(239, 68, 68, 0.15) !important; border-color: #EF4444 !important; color: #EF4444 !important; }
+
+            .quiz-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; border-top: 1px solid var(--card-border); padding-top: 12px; font-size: 12px; font-weight: 800; color: var(--text-secondary); }
+            .quiz-next-btn {
+                background: var(--primary);
+                color: #FFFFFF;
+                border: none;
+                padding: 8px 18px;
+                border-radius: 12px;
+                font-family: 'Cairo', sans-serif;
+                font-weight: 900;
+                cursor: pointer;
+                display: none;
+            }
+            .quiz-next-btn.active { display: block; }
+
+            /* نافذة البحث والقائمة الجانبية */
+            .search-modal-card { background: var(--card-bg); border: 1.5px solid var(--border-glow); border-radius: 26px; padding: 22px; width: 100%; max-width: 500px; box-shadow: 0 25px 50px rgba(0,0,0,0.5); display: flex; flex-direction: column; gap: 16px; }
+            .lesson-modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--card-border); padding-bottom: 12px; }
+            .lesson-modal-title-box { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 950; color: var(--heading-pure-color); }
+            .close-modal-btn { background: var(--light-bg); border: 1.5px solid var(--border-glow); width: 34px; height: 34px; border-radius: 10px; color: var(--text-primary); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+            .search-input-wrapper { background: var(--bg-main); border: 1.5px solid var(--border-glow); border-radius: 16px; padding: 10px 14px; display: flex; align-items: center; }
+            .search-input-field { width: 100%; background: transparent; border: none; outline: none; color: var(--text-primary); font-family: 'Cairo', sans-serif; font-size: 13px; font-weight: 700; }
+            .search-results-list { display: flex; flex-direction: column; gap: 10px; max-height: 320px; overflow-y: auto; scrollbar-width: none; }
+            .search-result-item { background: var(--bg-main); border: 1.5px solid var(--card-border); border-radius: 16px; padding: 12px 14px; display: flex; flex-direction: column; gap: 3px; text-decoration: none; }
+            .search-result-title { font-size: 13px; font-weight: 950; color: var(--heading-pure-color); margin: 0; }
+            .search-result-desc { font-size: 11px; font-weight: 700; color: var(--text-secondary); margin: 0; }
+
+            .side-menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 8, 17, 0.82); backdrop-filter: blur(10px); display: none; justify-content: flex-start; z-index: 10001; }
+            .side-menu-overlay.active { display: flex; }
+            .side-menu-drawer { background: var(--card-bg); border-left: 2px solid var(--border-glow); width: 85%; max-width: 320px; height: 100%; box-shadow: -15px 0 40px rgba(0,0,0,0.6); display: flex; flex-direction: column; padding: 22px; box-sizing: border-box; }
+            .drawer-top-box { background: var(--light-bg); border: 1.5px solid var(--border-glow); border-radius: 20px; padding: 14px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+            .drawer-brand-info { display: flex; flex-direction: column; gap: 2px; }
+            .drawer-brand-title { font-size: 14px; font-weight: 950; color: var(--heading-pure-color); margin: 0; }
+            .drawer-brand-sub { font-size: 10px; font-weight: 800; color: var(--text-secondary); margin: 0; }
+            .drawer-brand-icon { width: 42px; height: 42px; background: var(--card-bg); border: 1.5px solid var(--border-glow); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+            .drawer-links-list { display: flex; flex-direction: column; gap: 8px; flex-grow: 1; }
+            .drawer-link-item { display: flex; align-items: center; justify-content: space-between; background: var(--bg-main); border: 1.5px solid var(--card-border); padding: 12px 16px; border-radius: 16px; color: var(--text-primary); text-decoration: none; font-size: 12px; font-weight: 900; }
+            .drawer-link-item.active { border-color: var(--accent); background: var(--light-bg); color: var(--heading-pure-color); }
+            .drawer-link-left { display: flex; align-items: center; gap: 10px; }
+            .drawer-footer { text-align: center; font-size: 10px; font-weight: 800; color: var(--text-secondary); border-top: 1px solid var(--card-border); padding-top: 14px; margin-top: auto; }
+
+            .bottom-nav {
+                position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); width: calc(100% - 28px); max-width: 500px; background: var(--header-bg); backdrop-filter: blur(15px); display: flex; justify-content: space-around; align-items: center; padding: 8px 10px; border: 1.5px solid var(--header-border); border-radius: 22px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15); z-index: 999;
+            }
+            .bottom-nav a { color: var(--text-secondary); text-decoration: none; font-size: 11px; text-align: center; font-weight: 800; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 6px 12px; border-radius: 16px; flex: 1; }
+            .bottom-nav a span { font-size: 18px; line-height: 1; }
+            .bottom-nav a.active { color: var(--heading-pure-color); background: var(--light-bg); border: 1.5px solid var(--border-glow); }
+        </style>
+    </head>
+    <body>
+
+        <div class="top-progress-bar"><div class="top-progress-fill" id="progressFill"></div></div>
+
+        <!-- نافذة البحث -->
+        <div class="modal-overlay" id="searchModal" style="background: rgba(5, 8, 17, 0.82);">
+            <div class="search-modal-card">
+                <div class="lesson-modal-header">
+                    <div class="lesson-modal-title-box"><span>🔍</span><span>البحث في ضمائر الفاعل والمفعول</span></div>
+                    <button class="close-modal-btn" id="closeSearchBtn">✕</button>
+                </div>
+                <div class="search-input-wrapper"><input type="text" class="search-input-field" placeholder="ابحث عن: Subject, Object..."></div>
+                <div class="search-results-list">
+                    <a href="#" class="search-result-item" onclick="document.getElementById('searchModal').classList.remove('active');">
+                        <span class="search-result-title">👤 ضمائر الفاعل والمفعول</span>
+                        <span class="search-result-desc">دليل شامل وتطبيقات عملية متسلسلة.</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- نافذة اختبار التحدي اليومي -->
+        <div class="modal-overlay" id="quizModal">
+            <div class="quiz-modal-card">
+                <div class="quiz-header">
+                    <div class="quiz-title"><span>⚡</span><span>التحدي اليومي السريع</span></div>
+                    <button class="quiz-close-btn" id="closeQuizBtn">✕</button>
+                </div>
+                <div class="quiz-body" id="quizBody">
+                    <!-- محتوى كارت السؤال -->
+                </div>
+                <div class="quiz-footer">
+                    <span id="quizScoreIndicator">النتيجة: 0 / 4</span>
+                    <button class="quiz-next-btn" id="quizNextBtn" onclick="nextQuestion()">السؤال التالي ➔</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- القائمة الجانبية -->
+        <div class="side-menu-overlay" id="sideMenu" style="background: rgba(5, 8, 17, 0.82);">
+            <div class="side-menu-drawer">
+                <div class="drawer-top-box">
+                    <div class="drawer-brand-info"><h3 class="drawer-brand-title">أكاديمية العلوم التطبيقية</h3><p class="drawer-brand-sub">قسم قواعد اللغة الإنجليزية</p></div>
+                    <div class="drawer-brand-icon">🎓</div>
+                </div>
+                <div class="drawer-links-list">
+                    <a href="index.html" class="drawer-link-item"><span class="drawer-link-left"><span>🏠</span> الرئيسية</span><span>➔</span></a>
+                    <a href="english.html" class="drawer-link-item"><span class="drawer-link-left"><span>🇬🇧</span> الإنجليزي</span><span>➔</span></a>
+                    <a href="fundamentals-path.html" class="drawer-link-item active"><span class="drawer-link-left"><span>📖</span> القواعد والأساسيات</span><span>➔</span></a>
+                    <a href="surveying.html" class="drawer-link-item"><span class="drawer-link-left"><span>📐</span> المساحة</span><span>➔</span></a>
+                    <a href="programming.html" class="drawer-link-item"><span class="drawer-link-left"><span>💻</span> البرمجة</span><span>➔</span></a>
+                </div>
+                <div class="drawer-footer">English Master v2.1 • Pro Edition</div>
+            </div>
+        </div>
+
+        <div class="container">
+            <!-- شريط الهيدر -->
+            <div class="nav-bar">
+                <div class="nav-right-group">
+                    <a href="fundamentals-path.html" class="home-icon-btn" title="الرجوع للقائمة">🏠</a>
+                    <div class="nav-titles-box">
+                        <h1 class="nav-main-title">ضمائر الفاعل والمفعول</h1>
+                        <p class="nav-sub-title">Subject & Object Pronouns</p>
+                        <p class="nav-academy-title">أكاديمية العلوم التطبيقية</p>
+                    </div>
+                </div>
+                <div class="nav-left-group">
+                    <button class="nav-icon-btn" id="themeToggleBtn" title="تغيير الثيم">🌙</button>
+                    <button class="nav-icon-btn" id="searchBtn" title="بحث">🔍</button>
+                    <button class="nav-icon-btn" id="menuBtn" title="القائمة">☰</button>
+                </div>
+            </div>
+
+            <!-- الكارت العلوي الهندسي -->
+            <div class="hero-card">
+                <h1 class="hero-title-en">Subject & Object Pronouns</h1>
+                <h2 class="hero-title-ar">ضمائر الفاعل والمفعول</h2>
+
+                <div class="table-container">
+                    <table class="styled-master-table">
+                        <thead>
+                            <tr>
+                                <th>الدلالة بالعربية</th>
+                                <th class="th-subject">ضمير الفاعل (Subject)</th>
+                                <th class="th-object">ضمير المفعول (Object)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>أنا</td><td><strong class="subject-highlight">I</strong></td><td><strong class="object-highlight">me</strong></td></tr>
+                            <tr><td>هو</td><td><strong class="subject-highlight">He</strong></td><td><strong class="object-highlight">him</strong></td></tr>
+                            <tr><td>هي</td><td><strong class="subject-highlight">She</strong></td><td><strong class="object-highlight">her</strong></td></tr>
+                            <tr><td>هو / هي (لغير العاقل)</td><td><strong class="subject-highlight">It</strong></td><td><strong class="object-highlight">it</strong></td></tr>
+                            <tr><td>نحن</td><td><strong class="subject-highlight">We</strong></td><td><strong class="object-highlight">us</strong></td></tr>
+                            <tr><td>أنت / أنتم</td><td><strong class="subject-highlight">You</strong></td><td><strong class="object-highlight">you</strong></td></tr>
+                            <tr><td>هم / هن</td><td><strong class="subject-highlight">They</strong></td><td><strong class="object-highlight">them</strong></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- كارت الشرح الشامل الرئيسي -->
+            <div class="lesson-card-full" id="mainLessonCard">
+                <div class="lesson-header">
+                    <div class="app-title-wrapper" style="border-right-color: #2563EB;">
+                        <h2 class="app-main-heading">
+                            <span class="subject-highlight">Subject</span> & <span class="object-highlight">Object</span> Pronouns
+                        </h2>
+                        <div class="app-sub-pill"><span>دليلك المنهجي لإتقان استخدام الضمائر بدون تعقيد 🎯</span></div>
+                    </div>
+                </div>
+
+                <!-- 1. كارت ضمائر الفاعل -->
+                <div class="glass-glow-card subject-card" id="sectionSubject">
+                    <div class="card-title-box subject-title-box">
+                        <span>ضمائر الفاعل</span>
+                        <span style="font-size: 11px; opacity: 0.85;">Subject</span>
+                    </div>
+                    <div class="usage-content">
+                        تأتي ضمائر الفاعل دائماً في <strong>مقدمة الجملة قبل الفعل الرئيسي</strong> لتدل على الشخص أو الشيء الذي قام بالفعل.
+
+                        <div class="method-box" style="border-color: var(--primary); background: var(--bg-main); margin-top: 12px;">
+                            <div class="method-box-title" style="color: var(--primary);">🔍 تكوين الجملة</div>
+                            <div style="font-size: 12.5px; font-weight: 800; color: var(--text-primary); display: flex; flex-direction: column; gap: 6px; margin-top: 4px;">
+                                <div>👤 <strong>الطرف الأول (<span class="subject-highlight">Subject</span> - الفاعل):</strong> الضمير الذي يبدأ الجملة (<span class="subject-highlight">I, He, She, It, We, You, They</span>).</div>
+                                <div>🔗 <strong>الفعل (Verb):</strong> يأتي ملتصقاً بالفاعل مباشرة ليصف الحدث.</div>
+                                <div>🎯 <strong>الهدف (Object/Complement):</strong> ما يكمل المعنى.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. كارت ضمائر المفعول -->
+                <div class="glass-glow-card object-card" id="sectionObject">
+                    <div class="card-title-box object-title-box">
+                        <span>ضمائر المفعول</span>
+                        <span style="font-size: 11px; opacity: 0.85;">Object</span>
+                    </div>
+                    <div class="usage-content">
+                        تأتي ضمائر المفعول دائماً <strong>بعد الفعل أو بعد حرف الجر</strong> لتوضح من وقع عليه الحدث.
+
+                        <div class="method-box" style="border-color: #059669; background: var(--bg-main); margin-top: 12px;">
+                            <div class="method-box-title" style="color: #059669;">🔍 تكوين الجملة</div>
+                            <div style="font-size: 12.5px; font-weight: 800; color: var(--text-primary); display: flex; flex-direction: column; gap: 6px; margin-top: 4px;">
+                                <div>👤 <strong>الفاعل:</strong> الشخص الذي يقوم بالعمل.</div>
+                                <div>🔗 <strong>الفعل أو حرف الجر:</strong> يليه مباشرة ضمير المفعول.</div>
+                                <div>🎯 <strong>الطرف الثاني (<span class="object-highlight">Object</span>):</strong> ضمير المفعول المتلقي (<span class="object-highlight">me, him, her, it, us, you, them</span>).</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. قسم التطبيقات -->
+                <div style="margin-top: 12px; display: flex; flex-direction: column; gap: 12px;" id="sectionPractice">
+                    
+                    <div class="inner-practice-title-wrapper">
+                        <h3 class="inner-practice-heading">🔍 جمل وتطبيقات شاملة</h3>
+                    </div>
+                    
+                    <div class="icon-cards-list">
+                        
+                        <!-- 1. سارة -->
+                        <div class="icon-single-card" id="card-1">
+                            <div class="sentence-group">
+                                <div class="sentence-row">
+                                    <div class="line-en-1"><strong class="subject-highlight">I</strong> saw Sarah yesterday.</div>
+                                    <button class="speak-btn" onclick="speakText('I saw Sarah yesterday.', 'card-1', this)" title="استمع للنطق البطيء">🔊</button>
+                                </div>
+                                <div class="line-ar-1"><strong class="subject-highlight">أنا</strong> رأيت سارة بالأمس.</div>
+                            </div>
+                            
+                            <div class="sentence-group" style="margin-top: 8px;">
+                                <div class="sentence-row">
+                                    <div class="line-en-2">Sarah saw <strong class="object-highlight">me</strong> yesterday.</div>
+                                    <button class="speak-btn" onclick="speakText('Sarah saw me yesterday.', 'card-1', this)" title="استمع للنطق البطيء">🔊</button>
+                                </div>
+                                <div class="line-ar-2">سارة رأَتْ<strong class="object-highlight">ني</strong> بالأمس.</div>
+                            </div>
+                        </div>
+
+                        <!-- 2. أحمد -->
+                        <div class="icon-single-card" id="card-2">
+                            <div class="sentence-group">
+                                <div class="sentence-row">
+                                    <div class="line-en-1"><strong class="subject-highlight">He</strong> called Ahmed.</div>
+                                    <button class="speak-btn" onclick="speakText('He called Ahmed.', 'card-2', this)" title="استمع للنطق البطيء">🔊</button>
+                                </div>
+                                <div class="line-ar-1"><strong class="subject-highlight">هو</strong> اتصل بأحمد.</div>
+                            </div>
+                            
+                            <div class="sentence-group" style="margin-top: 8px;">
+                                <div class="sentence-row">
+                                    <div class="line-en-2">Ahmed called <strong class="object-highlight">him</strong>.</div>
+                                    <button class="speak-btn" onclick="speakText('Ahmed called him.', 'card-2', this)" title="استمع للنطق البطيء">🔊</button>
+                                </div>
+                                <div class="line-ar-2">أحمد اتصل ب<strong class="object-highlight">ه</strong>.</div>
+                            </div>
+                        </div>
+
+                        <!-- 3. المعلم -->
+                        <div class="icon-single-card" id="card-3">
+                            <div class="sentence-group">
+                                <div class="sentence-row">
+                                    <div class="line-en-1"><strong class="subject-highlight">She</strong> respects the teacher.</div>
+                                    <button class="speak-btn" onclick="speakText('She respects the teacher.', 'card-3', this)" title="استمع للنطق البطيء">🔊</button>
+                                </div>
+                                <div class="line-ar-1"><strong class="subject-highlight">هي</strong> تحترم المعلم.</div>
+                            </div>
+                            
+                            <div class="sentence-group" style="margin-top: 8px;">
+                                <div class="sentence-row">
+                                    <div class="line-en-2">The teacher respects <strong class="object-highlight">her</strong>.</div>
+                                    <button class="speak-btn" onclick="speakText('The teacher respects her.', 'card-3', this)" title="استمع للنطق البطيء">🔊</button>
+                                </div>
+                                <div class="line-ar-2">المعلم يحترم<strong class="object-highlight">ها</strong>.</div>
+                            </div>
+                        </div>
+
+                        <!-- 4. اللغة الإنجليزية -->
+                        <div class="icon-single-card" id="card-4">
+                            <div class="sentence-group">
+                                <div class="sentence-row">
+                                    <div class="line-en-1"><strong class="subject-highlight">You</strong> speak English well.</div>
+                                    <button class="speak-btn" onclick="speakText('You speak English well.', 'card-4', this)" title="استمع للنطق البطيء">🔊</button>
+                                </div>
+                                <div class="line-ar-1"><strong class="subject-highlight">أنت</strong> تتحدث الإنجليزية بطلاقة.</div>
+                            </div>
+                            
+                            <div class="sentence-group" style="margin-top: 8px;">
+                                <div class="sentence-row">
+                                    <div class="line-en-2">I understand <strong class="object-highlight">you</strong>.</div>
+                                    <button class="speak-btn" onclick="speakText('I understand you.', 'card-4', this)" title="استمع للنطق البطيء">🔊</button>
+                                </div>
+                                <div class="line-ar-2">أنا أفهم<strong class="object-highlight">ك</strong>.</div>
+                            </div>
+                        </div>
+
+                        <!-- 5. الطبيب -->
+                        <div class="icon-single-card" id="card-5">
+                            <div class="sentence-group">
+                                <div class="sentence-row">
+                                    <div class="line-en-1"><strong class="subject-highlight">They</strong> helped the doctor.</div>
+                                    <button class="speak-btn" onclick="speakText('They helped the doctor.', 'card-5', this)" title="استمع للنطق البطيء">🔊</button>
+                                </div>
+                                <div class="line-ar-1"><strong class="subject-highlight">هم</strong> ساعدوا الطبيب.</div>
+                            </div>
+                            
+                            <div class="sentence-group" style="margin-top: 8px;">
+                                <div class="sentence-row">
+                                    <div class="line-en-2">The doctor helped <strong class="object-highlight">them</strong>.</div>
+                                    <button class="speak-btn" onclick="speakText('The doctor helped them.', 'card-5', this)" title="استمع للنطق البطيء">🔊</button>
+                                </div>
+                                <div class="line-ar-2">الطبيب ساعد<strong class="object-highlight">هم</strong>.</div>
+                            </div>
+                        </div>
+
+                        <!-- 6. الدعوة -->
+                        <div class="icon-single-card" id="card-6">
+                            <div class="sentence-group">
+                                <div class="sentence-row">
+                                    <div class="line-en-1"><strong class="subject-highlight">We</strong> invited them.</div>
+                                    <button class="speak-btn" onclick="speakText('We invited them.', 'card-6', this)" title="استمع للنطق البطيء">🔊</button>
+                                </div>
+                                <div class="line-ar-1"><strong class="subject-highlight">نحن</strong> دعوناهم.</div>
+                            </div>
+                            
+                            <div class="sentence-group" style="margin-top: 8px;">
+                                <div class="sentence-row">
+                                    <div class="line-en-2">They invited <strong class="object-highlight">us</strong>.</div>
+                                    <button class="speak-btn" onclick="speakText('They invited us.', 'card-6', this)" title="استمع للنطق البطيء">🔊</button>
+                                </div>
+                                <div class="line-ar-2">هم دعو<strong class="object-highlight">نا</strong>.</div>
+                            </div>
+                        </div>
+
+                        <!-- 7. غير العاقل -->
+                        <div class="icon-single-card" id="card-7">
+                            <div class="sentence-group">
+                                <div class="sentence-row">
+                                    <div class="line-en-1"><strong class="subject-highlight">It</strong> works very fast.</div>
+                                    <button class="speak-btn" onclick="speakText('It works very fast.', 'card-7', this)" title="استمع للنطق البطيء">🔊</button>
+                                </div>
+                                <div class="line-ar-1"><strong class="subject-highlight">هو/إنه</strong> يعمل بسرعة كبيرة.</div>
+                            </div>
+                            
+                            <div class="sentence-group" style="margin-top: 8px;">
+                                <div class="sentence-row">
+                                    <div class="line-en-2">I fixed <strong class="object-highlight">it</strong>.</div>
+                                    <button class="speak-btn" onclick="speakText('I fixed it.', 'card-7', this)" title="استمع للنطق البطيء">🔊</button>
+                                </div>
+                                <div class="line-ar-2">أنا أصلحت<strong class="object-highlight">ه</strong>.</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- كارت تشغيل التحدي اليومي بشكل أنيق -->
+                <div class="quiz-launch-card" id="launchQuizBtn">
+                    <div class="quiz-launch-info">
+                        <div class="quiz-launch-title">🎯 اختبار تحدي المهارات السريع</div>
+                        <div class="quiz-launch-desc" id="quizLaunchDesc">اختبر استيعابك وتحدى نفسك الآن لاكتساب النقاط!</div>
+                    </div>
+                    <button class="quiz-launch-btn" id="launchBtnText">ابدأ التحدي ➔</button>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="bottom-nav">
+            <a href="index.html"><span>🏠</span>الرئيسية</a>
+            <a href="fundamentals-path.html" class="active"><span>🇬🇧</span>القواعد</a>
+            <a href="surveying.html"><span>📐</span>المساحة</a>
+            <a href="programming.html"><span>💻</span>البرمجة</a>
+        </div>
+
+        <script>
+            /* دالة النطق الصوتي */
+            function speakText(text, cardId, buttonElement) {
+                if ('speechSynthesis' in window) {
+                    window.speechSynthesis.cancel();
+
+                    document.querySelectorAll('.icon-single-card').forEach(card => card.classList.remove('scanning'));
+                    document.querySelectorAll('.speak-btn').forEach(btn => btn.classList.remove('playing'));
+
+                    let utterance = new SpeechSynthesisUtterance(text);
+                    utterance.lang = 'en-US';
+                    utterance.rate = 0.7;
+
+                    let targetCard = document.getElementById(cardId);
+                    if (targetCard) targetCard.classList.add('scanning');
+                    if (buttonElement) buttonElement.classList.add('playing');
+
+                    utterance.onend = function() {
+                        if (targetCard) targetCard.classList.remove('scanning');
+                        if (buttonElement) buttonElement.classList.remove('playing');
+                    };
+                    utterance.onerror = function() {
+                        if (targetCard) targetCard.classList.remove('scanning');
+                        if (buttonElement) buttonElement.classList.remove('playing');
+                    };
+
+                    window.speechSynthesis.speak(utterance);
+                } else {
+                    alert("متصفحك لا يدعم خاصية النطق الصوتي.");
+                }
+            }
+
+            /* مولد الصوت التفاعلي الموسيقي المطور */
+            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+            function playSound(type) {
+                if (!audioCtx) return;
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+
+                let now = audioCtx.currentTime;
+
+                if (type === 'success') {
+                    let notes = [523.25, 659.25, 783.99]; 
+                    notes.forEach((freq, index) => {
+                        let osc = audioCtx.createOscillator();
+                        let gain = audioCtx.createGain();
+
+                        osc.type = 'triangle';
+                        osc.frequency.setValueAtTime(freq, now + (index * 0.08));
+
+                        gain.gain.setValueAtTime(0.12, now + (index * 0.08));
+                        gain.gain.exponentialRampToValueAtTime(0.001, now + (index * 0.08) + 0.3);
+
+                        osc.connect(gain);
+                        gain.connect(audioCtx.destination);
+
+                        osc.start(now + (index * 0.08));
+                        osc.stop(now + (index * 0.08) + 0.3);
+                    });
+                } else if (type === 'wrong') {
+                    let osc = audioCtx.createOscillator();
+                    let gain = audioCtx.createGain();
+
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(160, now);
+                    osc.frequency.linearRampToValueAtTime(110, now + 0.2);
+
+                    gain.gain.setValueAtTime(0.1, now);
+                    gain.gain.exponentialRampToValueAtTime(0.01, now + 0.2);
+
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+
+                    osc.start(now);
+                    osc.stop(now + 0.2);
+                }
+            }
+
+            /* بنك الأسئلة الشامل (40 سؤالاً مقسمة على 10 أيام تلقائياً) */
+            const masterQuizBank = [
+                // اليوم 1
+                { q: "( &nbsp;......&nbsp; ) saw Sarah yesterday.", options: ["me", "I", "him"], correct: 1, type: "subject" },
+                { q: "Sarah saw ( &nbsp;......&nbsp; ) yesterday.", options: ["I", "me", "He"], correct: 1, type: "object" },
+                { q: "He called ( &nbsp;......&nbsp; ) at night.", options: ["she", "her", "they"], correct: 1, type: "object" },
+                { q: "( &nbsp;......&nbsp; ) speak English well.", options: ["You", "them", "him"], correct: 0, type: "subject" },
+                // اليوم 2
+                { q: "( &nbsp;......&nbsp; ) helped the teacher.", options: ["She", "her", "them"], correct: 0, type: "subject" },
+                { q: "The teacher helped ( &nbsp;......&nbsp; ) today.", options: ["she", "her", "he"], correct: 1, type: "object" },
+                { q: "( &nbsp;......&nbsp; ) went to the store.", options: ["They", "them", "their"], correct: 0, type: "subject" },
+                { q: "I gave a gift to ( &nbsp;......&nbsp; ).", options: ["they", "them", "their"], correct: 1, type: "object" },
+                // اليوم 3
+                { q: "( &nbsp;......&nbsp; ) fixed the broken car.", options: ["He", "him", "his"], correct: 0, type: "subject" },
+                { q: "Everybody likes ( &nbsp;......&nbsp; ) very much.", options: ["he", "him", "his"], correct: 1, type: "object" },
+                { q: "( &nbsp;......&nbsp; ) are studying hard.", options: ["We", "us", "our"], correct: 0, type: "subject" },
+                { q: "The manager invited ( &nbsp;......&nbsp; ) for dinner.", options: ["we", "us", "our"], correct: 1, type: "object" },
+                // اليوم 4
+                { q: "( &nbsp;......&nbsp; ) is a very fast computer.", options: ["It", "its", "they"], correct: 0, type: "subject" },
+                { q: "I bought a new laptop and tested ( &nbsp;......&nbsp; ).", options: ["it", "its", "they"], correct: 0, type: "object" },
+                { q: "( &nbsp;......&nbsp; ) visited Cairo last week.", options: ["I", "me", "my"], correct: 0, type: "subject" },
+                { q: "My friends visited ( &nbsp;......&nbsp; ) yesterday.", options: ["I", "me", "my"], correct: 1, type: "object" },
+                // اليوم 5
+                { q: "( &nbsp;......&nbsp; ) know the answer.", options: ["You", "your", "yours"], correct: 0, type: "subject" },
+                { q: "The teacher asked ( &nbsp;......&nbsp; ) a difficult question.", options: ["you", "your", "yours"], correct: 0, type: "object" },
+                { q: "( &nbsp;......&nbsp; ) played football together.", options: ["They", "them", "their"], correct: 0, type: "subject" },
+                { q: "I met ( &nbsp;......&nbsp; ) at the club.", options: ["they", "them", "their"], correct: 1, type: "object" },
+                // اليوم 6
+                { q: "( &nbsp;......&nbsp; ) reads books every night.", options: ["She", "her", "hers"], correct: 0, type: "subject" },
+                { q: "I lent my book to ( &nbsp;......&nbsp; ).", options: ["she", "her", "hers"], correct: 1, type: "object" },
+                { q: "( &nbsp;......&nbsp; ) cooked a delicious meal.", options: ["He", "him", "his"], correct: 0, type: "subject" },
+                { q: "We thanked ( &nbsp;......&nbsp; ) for the dinner.", options: ["he", "him", "his"], correct: 1, type: "object" },
+                // اليوم 7
+                { q: "( &nbsp;......&nbsp; ) live in a big house.", options: ["We", "us", "our"], correct: 0, type: "subject" },
+                { q: "The neighbors invited ( &nbsp;......&nbsp; ) over.", options: ["we", "us", "our"], correct: 1, type: "object" },
+                { q: "( &nbsp;......&nbsp; ) arrived late to class.", options: ["They", "them", "their"], correct: 0, type: "subject" },
+                { q: "The principal scolded ( &nbsp;......&nbsp; ).", options: ["they", "them", "their"], correct: 1, type: "object" },
+                // اليوم 8
+                { q: "( &nbsp;......&nbsp; ) started raining suddenly.", options: ["It", "its", "he"], correct: 0, type: "subject" },
+                { q: "I saw a cat and fed ( &nbsp;......&nbsp; ).", options: ["it", "its", "he"], correct: 0, type: "object" },
+                { q: "( &nbsp;......&nbsp; ) passed the final exam.", options: ["I", "me", "my"], correct: 0, type: "subject" },
+                { q: "The exam surprised ( &nbsp;......&nbsp; ).", options: ["I", "me", "my"], correct: 1, type: "object" },
+                // اليوم 9
+                { q: "( &nbsp;......&nbsp; ) wrote a great poem.", options: ["He", "him", "his"], correct: 0, type: "subject" },
+                { q: "Everyone applauded ( &nbsp;......&nbsp; ).", options: ["he", "him", "his"], correct: 1, type: "object" },
+                { q: "( &nbsp;......&nbsp; ) cleaned the whole room.", options: ["She", "her", "hers"], correct: 0, type: "subject" },
+                { q: "Her mother praised ( &nbsp;......&nbsp; ).", options: ["she", "her", "hers"], correct: 1, type: "object" },
+                // اليوم 10
+                { q: "( &nbsp;......&nbsp; ) solved the complex puzzle.", options: ["We", "us", "our"], correct: 0, type: "subject" },
+                { q: "The teacher congratulated ( &nbsp;......&nbsp; ).", options: ["we", "us", "our"], correct: 1, type: "object" },
+                { q: "( &nbsp;......&nbsp; ) won the championship.", options: ["They", "them", "their"], correct: 0, type: "subject" },
+                { q: "Fans cheered for ( &nbsp;......&nbsp; ).", options: ["they", "them", "their"], correct: 1, type: "object" }
+            ];
+
+            let userXp = parseInt(localStorage.getItem("em_user_xp") || "0");
+            let currentDailyQuestions = [];
+            let currentQuizIndex = 0;
+            let currentScore = 0;
+            let answered = false;
+
+            function getTodayQuestions() {
+                let now = new Date().getTime();
+                let savedTimestamp = parseInt(localStorage.getItem("em_quiz_timestamp") || "0");
+                let dayIndex = parseInt(localStorage.getItem("em_quiz_day_index") || "0");
+                
+                let twentyFourHours = 24 * 60 * 60 * 1000;
+
+                if (now - savedTimestamp > twentyFourHours || savedTimestamp === 0) {
+                    if (savedTimestamp !== 0) {
+                        dayIndex = (dayIndex + 1) % 10; 
+                    }
+                    localStorage.setItem("em_quiz_timestamp", now);
+                    localStorage.setItem("em_quiz_day_index", dayIndex);
+                    localStorage.setItem("em_quiz_completed_today", "false");
+                }
+
+                let startIndex = dayIndex * 4;
+                return masterQuizBank.slice(startIndex, startIndex + 4);
+            }
+
+            function checkQuizAvailability() {
+                let isCompleted = localStorage.getItem("em_quiz_completed_today") === "true";
+                let descEl = document.getElementById("quizLaunchDesc");
+                let btnEl = document.getElementById("launchBtnText");
+
+                if (isCompleted) {
+                    descEl.innerText = "🎉 لقد أكملت تحدي اليوم بنجاح! عد غداً للمزيد من التحديات.";
+                    btnEl.innerText = "عرض النتيجة ➔";
+                } else {
+                    descEl.innerText = "اختبر استيعابك وتحدى نفسك الآن لاكتساب النقاط!";
+                    btnEl.innerText = "ابدأ التحدي ➔";
+                }
+            }
+
+            function loadQuizQuestion() {
+                answered = false;
+                let q = currentDailyQuestions[currentQuizIndex];
+                let body = document.getElementById('quizBody');
+                let nextBtn = document.getElementById('quizNextBtn');
+                nextBtn.classList.remove('active');
+
+                let html = `<div class="quiz-question-card" id="activeQuestionCard">
+                    <div class="quiz-question-text">السؤال (${currentQuizIndex + 1}/4):<br>${q.q}</div>
+                    <div class="quiz-options-grid">`;
+                
+                q.options.forEach((opt, idx) => {
+                    html += `<button class="quiz-option-btn" onclick="checkAnswer(${idx}, this)">${opt}</button>`;
+                });
+
+                html += `</div></div>`;
+                body.innerHTML = html;
+                document.getElementById('quizScoreIndicator').innerText = `السؤال (${currentQuizIndex + 1}/4) • النقاط المكتسبة`;
+            }
+
+            function checkAnswer(selectedIndex, btnElement) {
+                if (answered) return;
+                answered = true;
+                let q = currentDailyQuestions[currentQuizIndex];
+                let optionButtons = document.querySelectorAll('.quiz-option-btn');
+                let cardElement = document.getElementById('activeQuestionCard');
+
+                if (selectedIndex === q.correct) {
+                    currentScore++;
+                    userXp += 10; 
+                    localStorage.setItem("em_user_xp", userXp);
+
+                    playSound('success'); 
+
+                    if (cardElement) {
+                        if (q.type === 'subject') {
+                            btnElement.classList.add('correct-subject');
+                            cardElement.classList.add('subject-success-fx');
+                        } else {
+                            btnElement.classList.add('correct-object');
+                            cardElement.classList.add('object-success-fx');
+                        }
+                    }
+                } else {
+                    btnElement.classList.add('wrong');
+                    if (q.type === 'subject') {
+                        optionButtons[q.correct].classList.add('correct-subject');
+                    } else {
+                        optionButtons[q.correct].classList.add('correct-object');
+                    }
+                    playSound('wrong'); 
+                }
+
+                document.getElementById('quizNextBtn').classList.add('active');
+            }
+
+            function nextQuestion() {
+                currentQuizIndex++;
+                if (currentQuizIndex < currentDailyQuestions.length) {
+                    loadQuizQuestion();
+                } else {
+                    localStorage.setItem("em_quiz_completed_today", "true");
+                    checkQuizAvailability();
+
+                    let body = document.getElementById('quizBody');
+                    document.getElementById('quizNextBtn').classList.remove('active');
+                    body.innerHTML = `<div class="quiz-question-card subject-success-fx" style="text-align:center; padding: 24px; gap: 14px;">
+                        <h3 style="margin:0; font-size: 18px; color: var(--heading-pure-color);">🎉 ممتاز جداً! أنهيت تحدي اليوم</h3>
+                        <p style="margin:0; font-size: 14px; color: var(--text-secondary);">لقد أجبت بشكل صحيح وحصلت على رصيد إجمالي ممتاز من النقاط!</p>
+                        <p style="margin:0; font-size: 15px; color: var(--accent); font-weight: 950;">إجمالي رصيدك الحالي: ${userXp} XP ⭐</p>
+                        <button onclick="document.getElementById('quizModal').classList.remove('active')" style="background:var(--accent); color:#fff; border:none; padding:10px 20px; border-radius:12px; font-weight:900; cursor:pointer; font-family:'Cairo'; margin-top:6px;">إغلاق والعودة للدراسة ➔</button>
+                    </div>`;
+                    playSound('success');
+                }
+            }
+
+            function restartQuiz() {
+                currentDailyQuestions = getTodayQuestions();
+                currentQuizIndex = 0;
+                currentScore = 0;
+                loadQuizQuestion();
+            }
+
+            document.addEventListener("DOMContentLoaded", function() {
+                checkQuizAvailability();
+                let launchBtn = document.getElementById("launchQuizBtn");
+                let quizModal = document.getElementById("quizModal");
+                let closeQuizBtn = document.getElementById("closeQuizBtn");
+
+                if (launchBtn && quizModal) {
+                    launchBtn.addEventListener("click", () => {
+                        quizModal.classList.add("active");
+                        restartQuiz();
+                    });
+                }
+                if (closeQuizBtn && quizModal) {
+                    closeQuizBtn.addEventListener("click", () => {
+                        quizModal.classList.remove("active");
+                        checkQuizAvailability();
+                    });
+                }
+
+                /* تفاعل حدود الكارت الخارجي مع التمرير (Scroll) */
+                window.addEventListener('scroll', function() {
+                    let sectionSubject = document.getElementById('sectionSubject');
+                    let sectionObject = document.getElementById('sectionObject');
+                    let sectionPractice = document.getElementById('sectionPractice');
+                    let mainCard = document.getElementById('mainLessonCard');
+
+                    if (!mainCard || !sectionSubject || !sectionObject || !sectionPractice) return;
+
+                    let scrollPosition = window.scrollY + window.innerHeight / 2;
+
+                    let subTop = sectionSubject.offsetTop + mainCard.offsetTop;
+                    let objTop = sectionObject.offsetTop + mainCard.offsetTop;
+                    let pracTop = sectionPractice.offsetTop + mainCard.offsetTop;
+
+                    if (scrollPosition >= pracTop) {
+                        mainCard.style.setProperty('--current-border-color', '#8B5CF6'); 
+                    } else if (scrollPosition >= objTop) {
+                        mainCard.style.setProperty('--current-border-color', '#059669'); 
+                    } else {
+                        mainCard.style.setProperty('--current-border-color', '#2563EB'); 
+                    }
+                });
+
+                let themeBtn = document.getElementById("themeToggleBtn");
+                function applyTheme(isDark) {
+                    if (isDark) {
+                        document.documentElement.classList.add("dark-mode");
+                        localStorage.setItem("em_theme", "dark");
+                        if (themeBtn) themeBtn.innerHTML = "☀️";
+                    } else {
+                        document.documentElement.classList.remove("dark-mode");
+                        localStorage.setItem("em_theme", "light");
+                        if (themeBtn) themeBtn.innerHTML = "🌙";
+                    }
+                }
+
+                applyTheme(localStorage.getItem("em_theme") === "dark");
+
+                if (themeBtn) {
+                    themeBtn.addEventListener("click", () => {
+                        applyTheme(!document.documentElement.classList.contains("dark-mode"));
+                    });
+                }
+
+                let searchBtn = document.getElementById("searchBtn");
+                let searchModal = document.getElementById("searchModal");
+                let closeSearchBtn = document.getElementById("closeSearchBtn");
+                if (searchBtn && searchModal) {
+                    searchBtn.addEventListener("click", () => { searchModal.classList.add("active"); });
+                }
+                if (closeSearchBtn && searchModal) {
+                    closeSearchBtn.addEventListener("click", () => { searchModal.classList.remove("active"); });
+                }
+
+                let menuBtn = document.getElementById("menuBtn");
+                let sideMenu = document.getElementById("sideMenu");
+                if (menuBtn && sideMenu) {
+                    menuBtn.addEventListener("click", () => { sideMenu.classList.add("active"); });
+                }
+                if (sideMenu) {
+                    sideMenu.addEventListener("click", (e) => { if (e.target === sideMenu) sideMenu.classList.remove("active"); });
+                }
+            });
+
+            window.onscroll = function() {
+                let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                let scrolled = (winScroll / height) * 100;
+                let progressFill = document.getElementById("progressFill");
+                if (progressFill) progressFill.style.width = scrolled + "%";
+            };
+        </script>
+    </body>
+</html>
