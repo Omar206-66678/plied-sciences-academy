@@ -69,6 +69,7 @@
                 min-height: 100vh;
                 box-sizing: border-box;
                 transition: background-color 0.3s ease, color 0.3s ease;
+                -webkit-overflow-scrolling: touch; /* تمرير سلس جداً على أجهزة الموبايل */
             }
 
             .container { max-width: 680px; margin: auto; }
@@ -174,6 +175,14 @@
                 border: 1.5px solid var(--card-border); border-radius: 26px; padding: 24px 20px; margin-bottom: 24px;
                 box-shadow: var(--card-glow); position: relative; overflow: hidden; transition: all 0.3s ease;
                 scroll-margin-top: 20px;
+                
+                /* التعديلات البرمجية الحاسمة لمنع التقطيع والكروت المطبوعة أثناء السكرول */
+                transform: translateZ(0);
+                -webkit-transform: translateZ(0);
+                will-change: transform;
+                contain: layout paint;
+                backface-visibility: hidden;
+                -webkit-backface-visibility: hidden;
             }
 
             .glass-section-card[data-track="1"] { --track-primary: #2563EB; --track-light: rgba(37, 99, 235, 0.08); --track-border: rgba(37, 99, 235, 0.3); --track-glow: rgba(37, 99, 235, 0.35); }
@@ -522,7 +531,7 @@
                 <a href="tenses-path/tenses-path.html" class="glass-action-btn"><span>⏳ استعرض مسار الأزمنة الشاملة</span><div class="cta-btn-icon-wrapper">➔</div></a>
             </div>
 
-            <!-- 🎮 المسار 3: ردهة الألعاب التعليمية (مربوط بالمسار الجديد gaming/gaming-hub.html) -->
+            <!-- 🎮 المسار 3: ردهة الألعاب التعليمية -->
             <div class="glass-section-card" id="section-3" data-track="3" data-nav-color="#7C3AED" data-nav-glow="rgba(124, 58, 237, 0.35)">
                 <div class="glass-card-header">
                     <div class="glass-header-right">
@@ -754,7 +763,7 @@
                 searchBtn.addEventListener("click", () => { searchModal.classList.add("active"); });
             }
             if (closeSearchBtn && searchModal) {
-                searchModal.classList.remove("active");
+                closeSearchBtn.addEventListener("click", () => { searchModal.classList.remove("active"); });
             }
 
             let menuBtn = document.getElementById("menuBtn");
