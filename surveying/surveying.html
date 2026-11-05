@@ -307,15 +307,15 @@
             }
             .info-toast.show { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
 
-            /* الشريط السفلي المتفاعل مع ألوان الأقسام */
+            /* شريط التنقل السفلي بخلفية صلبة ونظيفة (بيضاء في الفاتح / داكنة في الليلي) */
             .bottom-nav {
                 position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); 
                 width: calc(100% - 32px); max-width: 460px;
-                background: linear-gradient(135deg, var(--nav-glow-color) 0%, var(--header-bg) 100%);
+                background: var(--header-bg);
                 display: flex; justify-content: space-around; align-items: center;
                 padding: 6px 10px; border-radius: 24px; 
                 border: 1.5px solid var(--card-border);
-                box-shadow: 0 8px 24px var(--nav-glow-color); 
+                box-shadow: 0 8px 24px rgba(0,0,0,0.25); 
                 z-index: 999; box-sizing: border-box;
                 transition: all 0.4s ease;
             }
@@ -395,12 +395,12 @@
                     <a href="../programming/programming.html" class="drawer-link-item"><span>💻 قسم البرمجة و AI</span><span>➔</span></a>
                 </div>
 
-                <div class="drawer-footer-text">Clean Surveying Edition v6.6</div>
+                <div class="drawer-footer-text">Clean Surveying Edition v6.7</div>
             </div>
         </div>
 
         <div class="container">
-            <!-- الهيدر العلوي بالأيقونات الكاملة -->
+            <!-- الهيدر العلوي -->
             <div class="nav-bar">
                 <div class="nav-right-group">
                     <a href="../index.html" class="home-icon-btn" title="الرئيسية">🏠</a>
@@ -559,7 +559,7 @@
             </div>
         </div>
 
-        <!-- شريط التنقل السفلي المتفاعل مع الأقسام -->
+        <!-- شريط التنقل السفلي بخلفية صلبة ونظيفة -->
         <div class="bottom-nav" id="bottomNav">
             <a href="../index.html"><span class="nav-icon">🏠</span>الرئيسية</a>
             <a href="surveying.html" class="active"><span class="nav-icon">📐</span>المساحة</a>
@@ -638,7 +638,6 @@
                 });
             }
 
-            // تفاعل شريط التنقل السفلي ولون السكرول مع الأقسام بدقة عالية
             let sections = document.querySelectorAll("[data-nav-color]");
             let docMax = Math.max(1, document.documentElement.scrollHeight - document.documentElement.clientHeight);
             let ticking = false;
