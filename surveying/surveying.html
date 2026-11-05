@@ -18,14 +18,14 @@
         <style>
             :root {
                 --bg-main: #030712;
-                --card-bg: rgba(15, 23, 42, 0.75);
+                --card-bg: #0F172A;
                 --card-border: rgba(30, 144, 255, 0.25);
                 --text-primary: #F8FAFC;
                 --text-secondary: #94A3B8;
                 
-                --header-bg: rgba(15, 23, 42, 0.85);
+                --header-bg: #0F172A;
                 --header-border: rgba(30, 144, 255, 0.3);
-                --header-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3), 0 10px 25px rgba(0, 0, 0, 0.2);
+                --header-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
                 
                 --primary: #38BDF8;
                 --primary-dark: #0284C7;
@@ -38,46 +38,46 @@
 
                 /* المسار الثاني: المساحة التصويرية */
                 --photo-color: #4F46E5;
-                --photo-bg: rgba(238, 242, 255, 0.95);
+                --photo-bg: #EEF2FF;
                 --photo-border: rgba(79, 70, 229, 0.35);
 
                 /* المسار الثالث: علوم الأرض */
                 --earth-color: #059669;
-                --earth-bg: rgba(236, 253, 245, 0.95);
+                --earth-bg: #ECFDF5;
                 --earth-border: rgba(5, 150, 105, 0.35);
 
                 --nav-theme-color: #EA580C;
-                --nav-glow-color: rgba(234, 88, 12, 0.3);
+                --nav-glow-color: rgba(234, 88, 12, 0.2);
             }
 
             html.dark-mode {
-                --survey-bg: rgba(251, 146, 60, 0.1);
+                --survey-bg: rgba(251, 146, 60, 0.12);
                 --survey-color: #FB923C;
-                --survey-border: rgba(251, 146, 60, 0.45);
+                --survey-border: rgba(251, 146, 60, 0.35);
 
-                --photo-bg: rgba(129, 140, 248, 0.1);
+                --photo-bg: rgba(129, 140, 248, 0.12);
                 --photo-color: #818CF8;
-                --photo-border: rgba(129, 140, 248, 0.45);
+                --photo-border: rgba(129, 140, 248, 0.35);
 
-                --earth-bg: rgba(52, 211, 153, 0.1);
+                --earth-bg: rgba(52, 211, 153, 0.12);
                 --earth-color: #34D399;
-                --earth-border: rgba(52, 211, 153, 0.45);
+                --earth-border: rgba(52, 211, 153, 0.35);
 
                 --nav-theme-color: #FB923C;
-                --nav-glow-color: rgba(251, 146, 60, 0.35);
+                --nav-glow-color: rgba(251, 146, 60, 0.25);
             }
 
             html:not(.dark-mode) {
                 --bg-main: #F1F5F9;
-                --card-bg: rgba(255, 255, 255, 0.85);
+                --card-bg: #FFFFFF;
                 --card-border: rgba(203, 213, 225, 0.8);
                 --text-primary: #0F172A;
                 --text-secondary: #475569;
-                --header-bg: rgba(255, 255, 255, 0.90);
+                --header-bg: #FFFFFF;
                 --header-border: rgba(30, 144, 255, 0.2);
 
                 --nav-theme-color: #EA580C;
-                --nav-glow-color: rgba(234, 88, 12, 0.25);
+                --nav-glow-color: rgba(234, 88, 12, 0.15);
             }
 
             body {
@@ -88,13 +88,14 @@
                 padding: 16px 14px 95px 14px;
                 min-height: 100vh;
                 box-sizing: border-box;
-                transition: background-color 0.4s ease, color 0.4s ease;
+                transition: background-color 0.3s ease, color 0.3s ease;
+                -webkit-overflow-scrolling: touch;
             }
 
             .container { max-width: 680px; margin: auto; }
 
             .top-progress-bar { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: transparent; z-index: 9999; }
-            .top-progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--survey-color), var(--accent)); }
+            .top-progress-fill { height: 100%; width: 0%; transform-origin: right; background: linear-gradient(90deg, var(--survey-color), var(--accent)); }
 
             /* الهيدر العلوي */
             .nav-bar {
@@ -103,8 +104,6 @@
                 align-items: center;
                 margin-bottom: 22px;
                 background: var(--header-bg);
-                backdrop-filter: blur(15px);
-                -webkit-backdrop-filter: blur(15px);
                 border: 1px solid var(--card-border);
                 padding: 8px 14px;
                 border-radius: 18px;
@@ -130,28 +129,31 @@
                 border: 1.5px solid var(--survey-border);
                 width: 33px; height: 33px; border-radius: 12px; 
                 display: flex; align-items: center; justify-content: center;
-                color: var(--text-primary); font-size: 13.5px; text-decoration: none; cursor: pointer; transition: 0.3s;
+                color: var(--text-primary); font-size: 13.5px; text-decoration: none; cursor: pointer;
                 box-sizing: border-box;
             }
             .home-icon-btn { color: var(--survey-color); }
-            .home-icon-btn:hover, .nav-icon-btn:hover { transform: scale(1.08); border-color: var(--survey-color); }
+
+            @media (hover: hover) {
+                .home-icon-btn:hover, .nav-icon-btn:hover { transform: scale(1.05); border-color: var(--survey-color); }
+            }
 
             /* نافذة البحث */
-            .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(3, 7, 18, 0.85); backdrop-filter: blur(16px); display: none; align-items: center; justify-content: center; z-index: 10000; padding: 16px; box-sizing: border-box; }
+            .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(3, 7, 18, 0.85); display: none; align-items: center; justify-content: center; z-index: 10000; padding: 16px; box-sizing: border-box; }
             .modal-overlay.active { display: flex; }
-            .search-modal-card { background: var(--card-bg); backdrop-filter: blur(20px); border: 2px solid var(--survey-border); border-radius: 30px; padding: 24px; width: 100%; max-width: 500px; box-shadow: 0 25px 60px rgba(0,0,0,0.8); display: flex; flex-direction: column; gap: 16px; }
+            .search-modal-card { background: var(--card-bg); border: 2px solid var(--survey-border); border-radius: 30px; padding: 24px; width: 100%; max-width: 500px; box-shadow: 0 15px 40px rgba(0,0,0,0.5); display: flex; flex-direction: column; gap: 16px; }
             .modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--card-border); padding-bottom: 12px; }
             .modal-title-box { display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 950; color: var(--text-primary); }
             .close-modal-btn { background: var(--survey-bg); border: 1.5px solid var(--survey-border); width: 36px; height: 36px; border-radius: 12px; color: var(--text-primary); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
             .search-input-wrapper { background: var(--bg-main); border: 2px solid var(--survey-color); border-radius: 18px; padding: 12px 16px; display: flex; align-items: center; }
             .search-input-field { width: 100%; background: transparent; border: none; outline: none; color: var(--text-primary); font-family: 'Cairo', sans-serif; font-size: 14px; font-weight: 800; }
             .search-results-list { display: flex; flex-direction: column; gap: 10px; max-height: 320px; overflow-y: auto; }
-            .search-result-card { background: var(--bg-main); border: 1.5px solid var(--card-border); padding: 14px 16px; border-radius: 20px; text-decoration: none; color: var(--text-primary); display: flex; align-items: center; justify-content: space-between; transition: 0.3s; }
+            .search-result-card { background: var(--bg-main); border: 1.5px solid var(--card-border); padding: 14px 16px; border-radius: 20px; text-decoration: none; color: var(--text-primary); display: flex; align-items: center; justify-content: space-between; }
             
             /* القائمة الجانبية */
-            .side-menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(3, 7, 18, 0.85); backdrop-filter: blur(16px); display: none; justify-content: flex-start; z-index: 10001; }
+            .side-menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(3, 7, 18, 0.85); display: none; justify-content: flex-start; z-index: 10001; }
             .side-menu-overlay.active { display: flex; }
-            .side-menu-drawer { background: var(--card-bg); backdrop-filter: blur(20px); border-left: 2px solid var(--survey-border); width: 88%; max-width: 330px; height: 100%; box-shadow: -20px 0 50px rgba(0,0,0,0.8); display: flex; flex-direction: column; padding: 24px; box-sizing: border-box; overflow-y: auto; }
+            .side-menu-drawer { background: var(--card-bg); border-left: 2px solid var(--survey-border); width: 88%; max-width: 330px; height: 100%; box-shadow: -15px 0 30px rgba(0,0,0,0.5); display: flex; flex-direction: column; padding: 24px; box-sizing: border-box; overflow-y: auto; }
             .drawer-top-box { background: var(--survey-bg); border: 1.5px solid var(--survey-border); border-radius: 20px; padding: 16px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
             .drawer-brand-title { font-size: 14.5px; font-weight: 950; color: var(--survey-color); margin: 0; }
             .drawer-brand-sub { font-size: 10.5px; font-weight: 800; color: var(--text-secondary); margin: 0; }
@@ -159,26 +161,24 @@
             .drawer-theme-label { font-size: 12px; font-weight: 900; color: var(--text-primary); display: flex; align-items: center; gap: 8px; }
             .switch-toggle { position: relative; display: inline-block; width: 48px; height: 26px; }
             .switch-toggle input { opacity: 0; width: 0; height: 0; }
-            .slider-round { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #475569; transition: .3s; border-radius: 34px; }
-            .slider-round:before { position: absolute; content: ""; height: 20px; width: 20px; left: 3px; bottom: 3px; background-color: white; transition: .3s; border-radius: 50%; }
+            .slider-round { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #475569; transition: background-color .2s; border-radius: 34px; }
+            .slider-round:before { position: absolute; content: ""; height: 20px; width: 20px; left: 3px; bottom: 3px; background-color: white; transition: transform .2s; border-radius: 50%; }
             input:checked + .slider-round { background-color: var(--survey-color); }
             input:checked + .slider-round:before { transform: translateX(22px); }
             .drawer-links-title { font-size: 11px; font-weight: 900; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; }
             .drawer-links-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: auto; }
-            .drawer-link-item { display: flex; align-items: center; justify-content: space-between; background: var(--bg-main); border: 1.5px solid var(--card-border); padding: 13px 16px; border-radius: 16px; color: var(--text-primary); text-decoration: none; font-size: 13px; font-weight: 900; transition: 0.3s; }
+            .drawer-link-item { display: flex; align-items: center; justify-content: space-between; background: var(--bg-main); border: 1.5px solid var(--card-border); padding: 13px 16px; border-radius: 16px; color: var(--text-primary); text-decoration: none; font-size: 13px; font-weight: 900; }
             .drawer-link-item.active { border-color: var(--survey-color); background: var(--survey-bg); color: var(--survey-color); }
             .drawer-footer-text { margin-top: 20px; text-align: center; font-size: 10.5px; font-weight: 800; color: var(--text-secondary); border-top: 1px solid var(--card-border); padding-top: 14px; }
 
             /* كارت الترحيب الهندسي الشامل */
             .hero-welcome-card {
                 background: var(--card-bg);
-                backdrop-filter: blur(25px);
-                -webkit-backdrop-filter: blur(25px);
                 border: 2px solid var(--survey-border);
                 border-radius: 28px;
                 padding: 24px 20px;
                 margin-bottom: 24px;
-                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
                 display: flex;
                 flex-direction: column;
                 align-items: center;
@@ -200,13 +200,12 @@
                 padding: 6px 16px; border-radius: 20px;
                 display: inline-flex; align-items: center; gap: 7px;
                 margin-bottom: 16px;
-                box-shadow: 0 4px 12px rgba(234, 88, 12, 0.12);
             }
             .hero-title {
                 font-size: 22px; font-weight: 950; color: var(--text-primary);
                 line-height: 1.35; margin: 0 0 12px 0; letter-spacing: -0.2px;
             }
-            .hero-title span { color: var(--survey-color); text-shadow: 0 0 20px rgba(234, 88, 12, 0.2); }
+            .hero-title span { color: var(--survey-color); }
             .hero-description {
                 font-size: 12.5px; font-weight: 700; color: var(--text-secondary);
                 line-height: 1.8; margin: 0 0 20px 0; max-width: 560px; text-align: center; padding: 0 4px;
@@ -214,32 +213,27 @@
             .hero-image-container {
                 width: 100%; height: 210px; border-radius: 20px; overflow: hidden;
                 position: relative; border: 1.5px solid var(--survey-border);
-                box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+                box-shadow: 0 6px 16px rgba(0,0,0,0.2);
             }
-            .hero-image-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
-            .hero-image-container:hover img { transform: scale(1.02); }
+            .hero-image-container img { width: 100%; height: 100%; object-fit: cover; display: block; }
             .hero-image-overlay-badge {
                 position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
-                background: rgba(3, 7, 18, 0.86); backdrop-filter: blur(10px);
+                background: rgba(3, 7, 18, 0.9);
                 border: 1.5px solid var(--survey-border); color: var(--survey-color);
                 padding: 7px 18px; border-radius: 16px; font-size: 11.5px; font-weight: 900;
                 white-space: nowrap; display: flex; align-items: center; gap: 7px;
-                box-shadow: 0 5px 15px rgba(0,0,0,0.6);
             }
 
             /* الكروت والهندسة البصرية الموحدة للأقسام الثلاثة */
             .practical-course-card, .survey-style-card {
                 background: var(--card-bg);
-                backdrop-filter: blur(20px);
-                -webkit-backdrop-filter: blur(20px);
                 border: 2px solid var(--sec-border);
                 border-radius: 28px;
                 padding: 22px 18px;
                 margin-bottom: 24px;
-                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+                box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
                 position: relative;
                 overflow: hidden;
-                transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             }
             .practical-course-card::before, .survey-style-card::before {
                 content: '';
@@ -247,13 +241,12 @@
                 background: var(--sec-color, var(--survey-color));
             }
 
-            .card-survey { --sec-color: var(--survey-color); --sec-bg: var(--survey-bg); --sec-border: var(--survey-border); --glow-shadow: rgba(234, 88, 12, 0.35); }
-            .card-photo { --sec-color: var(--photo-color); --sec-bg: var(--photo-bg); --sec-border: var(--photo-border); --glow-shadow: rgba(79, 70, 229, 0.35); }
-            .card-earth { --sec-color: var(--earth-color); --sec-bg: var(--earth-bg); --sec-border: var(--earth-border); --glow-shadow: rgba(5, 150, 105, 0.35); }
+            .card-survey { --sec-color: var(--survey-color); --sec-bg: var(--survey-bg); --sec-border: var(--survey-border); }
+            .card-photo { --sec-color: var(--photo-color); --sec-bg: var(--photo-bg); --sec-border: var(--photo-border); }
+            .card-earth { --sec-color: var(--earth-color); --sec-bg: var(--earth-bg); --sec-border: var(--earth-border); }
 
             .card-header-banner, .survey-inner-header {
                 background: var(--sec-bg);
-                backdrop-filter: blur(12px);
                 border: 1.5px solid var(--sec-border);
                 border-radius: 20px;
                 padding: 14px 18px;
@@ -267,11 +260,10 @@
 
             .banner-icon-box, .survey-header-icon-box {
                 width: 50px; height: 50px;
-                background: var(--card-bg); backdrop-filter: blur(10px);
+                background: var(--card-bg);
                 border: 1.5px solid var(--sec-border); border-radius: 16px;
                 display: flex; align-items: center; justify-content: center; font-size: 24px;
-                box-shadow: 0 0 15px var(--glow-shadow), inset 0 0 10px var(--glow-shadow);
-                transition: transform 0.3s ease;
+                flex-shrink: 0;
             }
 
             .card-description-text, .survey-desc {
@@ -283,18 +275,21 @@
                 display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px;
             }
             .chip-item-btn, .survey-sub-chip {
-                background: var(--sec-bg); backdrop-filter: blur(12px);
+                background: var(--sec-bg);
                 border: 1.5px solid var(--sec-border); border-radius: 16px;
                 padding: 12px 14px; height: 48px; box-sizing: border-box;
                 display: flex; align-items: center; justify-content: space-between;
                 color: var(--sec-color); font-size: 11.5px; font-weight: 900;
-                cursor: pointer; transition: all 0.3s ease;
+                cursor: pointer;
             }
-            .chip-item-btn:hover, .survey-sub-chip:hover { filter: brightness(1.1); transform: translateY(-2px); box-shadow: 0 0 12px var(--glow-shadow); }
             .chip-icon, .survey-chip-icon { font-size: 15px; flex-shrink: 0; }
 
+            @media (hover: hover) {
+                .chip-item-btn:hover, .survey-sub-chip:hover { filter: brightness(1.05); transform: translateY(-1px); }
+            }
+
             .modern-cta-box {
-                background: var(--sec-bg); backdrop-filter: blur(12px);
+                background: var(--sec-bg);
                 border: 1.5px solid var(--sec-border); border-radius: 20px;
                 padding: 14px 16px; display: flex; flex-direction: column; gap: 10px;
             }
@@ -303,16 +298,18 @@
                 background: linear-gradient(135deg, var(--sec-color) 0%, var(--primary-dark) 100%);
                 color: #FFFFFF; text-decoration: none; padding: 11px 18px; border-radius: 14px;
                 font-size: 12.5px; font-weight: 950; display: flex; align-items: center; justify-content: space-between;
-                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); transition: all 0.3s ease;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             }
-            .modern-cta-button:hover { transform: translateY(-2px); filter: brightness(1.12); box-shadow: 0 6px 20px var(--glow-shadow); }
-            .modern-cta-button:hover span.arrow-icon { transform: translateX(-4px); }
+            @media (hover: hover) {
+                .modern-cta-button:hover { transform: translateY(-1px); filter: brightness(1.08); }
+            }
+            .modern-cta-button:active { transform: scale(0.99); }
 
             .info-toast {
                 position: fixed; bottom: 85px; left: 50%; transform: translateX(-50%) translateY(40px);
-                background: var(--card-bg); backdrop-filter: blur(16px); border: 2px solid var(--survey-color);
+                background: var(--card-bg); border: 2px solid var(--survey-color);
                 color: var(--text-primary); padding: 12px 22px; border-radius: 16px; font-size: 12.5px; font-weight: 900;
-                box-shadow: 0 10px 30px rgba(0,0,0,0.5); opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 20000; text-align: center; max-width: 90%;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3); opacity: 0; visibility: hidden; transition: all 0.25s ease; z-index: 20000; text-align: center; max-width: 90%;
             }
             .info-toast.show { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
 
@@ -320,15 +317,12 @@
             .bottom-nav {
                 position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); 
                 width: calc(100% - 32px); max-width: 460px;
-                background: linear-gradient(135deg, var(--nav-glow-color) 0%, rgba(3, 7, 18, 0.85) 100%);
-                backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+                background: var(--header-bg);
                 display: flex; justify-content: space-around; align-items: center;
                 padding: 6px 10px; border-radius: 24px; 
-                box-shadow: 0 12px 35px var(--nav-glow-color), inset 0 1px 1px rgba(255, 255, 255, 0.2); 
+                border: 1.5px solid var(--card-border);
+                box-shadow: 0 8px 24px rgba(0,0,0,0.2); 
                 z-index: 999; box-sizing: border-box;
-            }
-            html:not(.dark-mode) .bottom-nav {
-                background: linear-gradient(135deg, var(--nav-glow-color) 0%, rgba(255, 255, 255, 0.92) 100%);
             }
             .bottom-nav a { 
                 color: var(--text-secondary); text-decoration: none; font-size: 10px; text-align: center; font-weight: 800; 
@@ -337,7 +331,7 @@
             }
             .bottom-nav a span { font-size: 16px; line-height: 1; }
             .bottom-nav a:hover { color: var(--nav-theme-color); border-color: var(--nav-theme-color); background: rgba(128, 128, 128, 0.1); }
-            .bottom-nav a.active { color: #FFFFFF; background: var(--nav-theme-color); border-color: var(--nav-theme-color); box-shadow: 0 4px 15px var(--nav-glow-color); }
+            .bottom-nav a.active { color: #FFFFFF; background: var(--nav-theme-color); border-color: var(--nav-theme-color); }
         </style>
     </head>
     <body>
@@ -397,7 +391,7 @@
                     <a href="../programming/programming.html" class="drawer-link-item"><span>💻 قسم البرمجة و AI</span><span>➔</span></a>
                 </div>
 
-                <div class="drawer-footer-text">Clean Surveying Edition v6.4</div>
+                <div class="drawer-footer-text">Clean Surveying Edition v6.5</div>
             </div>
         </div>
 
@@ -434,7 +428,7 @@
                 </p>
 
                 <div class="hero-image-container">
-                    <img src="../images/surveyor.jpg" alt="مهندس مساحة وجهاز Total Station">
+                    <img src="../images/surveyor.jpg" alt="مهندس مساحة وجهاز Total Station" loading="lazy" decoding="async">
                     <div class="hero-image-overlay-badge">
                         <span>🔭</span>
                         <span>الهندسة المساحية الميدانية ورفع المواقع</span>
@@ -442,7 +436,7 @@
                 </div>
             </div>
 
-            <!-- المسار الأول: المساحة العملية (مربوط بالمجلد الصحيح practical-surveying) -->
+            <!-- المسار الأول: المساحة العملية -->
             <div class="practical-course-card card-survey">
                 <div class="card-header-banner">
                     <div class="banner-text-side">
@@ -484,7 +478,7 @@
                 </div>
             </div>
 
-            <!-- المسار الثاني: المساحة التصويرية (مربوط بالمجلد الصحيح photogrammetry) -->
+            <!-- المسار الثاني: المساحة التصويرية -->
             <div class="survey-style-card card-photo">
                 <div class="survey-inner-header">
                     <div class="banner-text-side">
@@ -522,7 +516,7 @@
                 </div>
             </div>
 
-            <!-- المسار الثالث: علوم الأرض والجيولوجيا (مربوط بالمجلد الصحيح earth-science) -->
+            <!-- المسار الثالث: علوم الأرض والجيولوجيا -->
             <div class="survey-style-card card-earth">
                 <div class="survey-inner-header">
                     <div class="banner-text-side">
@@ -582,7 +576,7 @@
                         clearTimeout(toastTimeout);
                         toastTimeout = setTimeout(() => {
                             toast.classList.remove("show");
-                        }, 3000);
+                        }, 2500);
                     }
                 });
             });
@@ -609,7 +603,7 @@
 
             if (themeBtn) {
                 themeBtn.addEventListener("click", () => {
-                    applyTheme(!document.documentElement.classList.contains("dark-mode"));
+                    applyTheme(!document.documentElement.classList.2500 ? true : !document.documentElement.classList.contains("dark-mode"));
                 });
             }
             if (themeSwitchCheckbox) {
@@ -638,13 +632,22 @@
                 });
             }
 
-            window.onscroll = function() {
-                let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-                let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                let scrolled = (winScroll / height) * 100;
-                let progressFill = document.getElementById("progressFill");
-                if (progressFill) progressFill.style.width = scrolled + "%";
-            };
+            // تحسين أداء السكرول باستخدام requestAnimationFrame
+            let ticking = false;
+            const progressFill = document.getElementById("progressFill");
+            const docMax = Math.max(1, document.documentElement.scrollHeight - document.documentElement.clientHeight);
+
+            window.addEventListener("scroll", () => {
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        let winScroll = window.scrollY;
+                        let scrolled = Math.min(1, winScroll / docMax);
+                        if (progressFill) progressFill.style.transform = `scaleX(${scrolled})`;
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            }, { passive: true });
         </script>
     </body>
 </html>
