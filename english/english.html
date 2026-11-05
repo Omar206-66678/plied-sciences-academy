@@ -1,779 +1,431 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        <title>اللغة الإنجليزية - أكاديمية العلوم التطبيقية</title>
-        <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-        
-        <script>
-            let savedTheme = localStorage.getItem("em_theme");
-            if (savedTheme === "dark") {
-                document.documentElement.classList.add("dark-mode");
-            }
-        </script>
-        
-        <style>
-            :root {
-                --bg-main: #F4F7FA;
-                --card-bg: rgba(255, 255, 255, 0.90);
-                --card-border: rgba(30, 144, 255, 0.25);
-                --text-primary: #0A2540;
-                --text-secondary: #516079;
-                
-                --header-bg: rgba(255, 255, 255, 0.92);
-                --header-border: rgba(30, 144, 255, 0.2);
-                --header-shadow: 0 10px 30px rgba(30, 144, 255, 0.06);
-                
-                --primary: #1E90FF;
-                --primary-dark: #0066CC;
-                --accent: #00BFFF;
-                --light-bg: rgba(30, 144, 255, 0.06);
-                --border-glow: rgba(30, 144, 255, 0.35);
-                --card-glow: 0 20px 45px rgba(30, 144, 255, 0.08);
-
-                --nav-theme-color: #1E90FF;
-                --nav-glow-color: rgba(30, 144, 255, 0.25);
-            }
-
-            html.dark-mode, body.dark-mode {
-                --bg-main: #060913;
-                --card-bg: rgba(13, 19, 34, 0.85);
-                --card-border: rgba(30, 144, 255, 0.22);
-                --text-primary: #F0F4F8;
-                --text-secondary: #93A4BC;
-                
-                --header-bg: rgba(13, 19, 34, 0.95);
-                --header-border: rgba(30, 144, 255, 0.25);
-                --header-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-                
-                --primary: #1E90FF;
-                --primary-dark: #0066CC;
-                --accent: #00BFFF;
-                --light-bg: rgba(30, 144, 255, 0.1);
-                --border-glow: rgba(0, 191, 255, 0.35);
-                --card-glow: 0 25px 50px rgba(0, 0, 0, 0.6);
-
-                --nav-theme-color: #1E90FF;
-                --nav-glow-color: rgba(30, 144, 255, 0.3);
-            }
-
-            html { scroll-behavior: smooth; }
-
-            body {
-                background-color: var(--bg-main);
-                color: var(--text-primary);
-                font-family: 'Cairo', system-ui, -apple-system, sans-serif;
-                margin: 0;
-                padding: 16px 14px 95px 14px;
-                min-height: 100vh;
-                box-sizing: border-box;
-                transition: background-color 0.3s ease, color 0.3s ease;
-                -webkit-overflow-scrolling: touch; /* تمرير سلس جداً على أجهزة الموبايل */
-            }
-
-            .container { max-width: 680px; margin: auto; }
-
-            .top-progress-bar { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: transparent; z-index: 9999; }
-            .top-progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--primary), var(--accent)); }
-
-            .scroll-to-top-btn {
-                position: fixed; bottom: 80px; left: 20px; width: 44px; height: 44px;
-                background: var(--card-bg); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-                border: 1.5px solid var(--border-glow); border-radius: 14px; color: var(--primary); font-size: 18px;
-                display: flex; align-items: center; justify-content: center; cursor: pointer;
-                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); z-index: 998; opacity: 0; visibility: hidden;
-                transform: translateY(15px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            }
-            .scroll-to-top-btn.show { opacity: 1; visibility: visible; transform: translateY(0); }
-            .scroll-to-top-btn:hover { background: var(--primary); color: #FFFFFF; border-color: var(--primary); transform: translateY(-3px); }
-
-            .nav-bar {
-                display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
-                background: var(--header-bg); backdrop-filter: blur(14px); border: 1.5px solid var(--header-border); padding: 9px 14px;
-                border-radius: 20px; box-shadow: var(--header-shadow);
-            }
-            .nav-right-group { display: flex; align-items: center; gap: 8px; text-align: right; }
-            .nav-left-group { display: flex; align-items: center; gap: 6px; }
-            
-            .nav-titles-box { display: flex; flex-direction: column; align-items: flex-start; gap: 0px; }
-            .nav-main-title { font-size: 13px; font-weight: 950; color: var(--primary); margin: 0; line-height: 1.2; }
-            .nav-sub-title { font-size: 9.5px; font-weight: 800; color: var(--text-secondary); margin: 0; line-height: 1.2; }
-
-            .home-icon-btn, .nav-icon-btn {
-                background: var(--light-bg); border: 1.5px solid var(--border-glow);
-                width: 34px; height: 34px; border-radius: 10px; display: flex; align-items: center; justify-content: center;
-                color: var(--primary); font-size: 15px; text-decoration: none; cursor: pointer; transition: 0.25s; border: none; flex-shrink: 0;
-            }
-            .nav-icon-btn { color: var(--text-primary); }
-            .home-icon-btn:hover, .nav-icon-btn:hover { transform: scale(1.05); border-color: var(--primary); color: var(--primary); }
-
-            .hero-welcome-card {
-                background: var(--card-bg); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
-                border: 2px solid var(--border-glow); border-radius: 28px; padding: 24px 20px; margin-bottom: 20px;
-                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-                display: flex; flex-direction: column; position: relative; overflow: hidden;
-            }
-            .hero-welcome-card::before {
-                content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
-                background: linear-gradient(90deg, var(--primary), var(--accent), var(--primary-dark));
-            }
-
-            .hero-card-top-row { display: flex; align-items: center; margin-bottom: 14px; width: 100%; }
-            .hero-badge {
-                background: var(--light-bg); border: 1.5px solid var(--border-glow); color: var(--primary);
-                font-size: 11.5px; font-weight: 900; padding: 6px 18px; border-radius: 18px;
-                display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 12px var(--border-glow); width: 100%; justify-content: center;
-            }
-
-            .hero-title { font-size: 21px; font-weight: 950; color: var(--text-primary); line-height: 1.35; margin: 0 0 10px 0; text-align: right; }
-            .hero-title span { color: var(--primary); text-shadow: 0 0 20px rgba(30, 144, 255, 0.3); }
-            .hero-description { font-size: 12.5px; font-weight: 700; color: var(--text-secondary); line-height: 1.8; margin: 0 0 18px 0; text-align: right; }
-
-            .hero-image-container {
-                width: 100%; height: 200px; border-radius: 20px; overflow: hidden; position: relative;
-                border: 2px solid rgba(255, 255, 255, 0.15);
-                box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.25), inset 0 -3px 6px rgba(0, 0, 0, 0.6), 0 10px 25px rgba(0, 0, 0, 0.4);
-            }
-            .hero-image-container img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
-            .hero-image-container:hover img { transform: scale(1.02); }
-
-            .hero-image-overlay-badge {
-                position: absolute; bottom: 12px; left: 50%; transform: translateX(-50%);
-                background: rgba(13, 37, 70, 0.65); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-                border: 1.5px solid rgba(30, 144, 255, 0.45); color: #FFFFFF; padding: 6px 14px; border-radius: 14px;
-                font-size: 10px; font-weight: 900; display: flex; align-items: center; gap: 6px; white-space: nowrap;
-                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4); width: max-content; max-width: calc(100% - 20px);
-            }
-            .hero-image-overlay-badge .badge-text { color: #60A5FA; letter-spacing: -0.2px; }
-
-            .global-tabs-container { width: 100%; margin-bottom: 24px; overflow-x: auto; scrollbar-width: none; padding: 4px 2px; }
-            .global-tabs-container::-webkit-scrollbar { display: none; }
-            .tabs-scroll-wrapper { display: flex; gap: 10px; width: max-content; padding: 2px; }
-
-            .global-tab-item {
-                display: flex; align-items: center; gap: 8px; background: var(--card-bg); backdrop-filter: blur(16px);
-                border: 1.5px solid var(--card-border); padding: 10px 16px; border-radius: 16px; text-decoration: none;
-                color: var(--text-secondary); font-size: 11.5px; font-weight: 900; white-space: nowrap;
-                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            }
-            .tab-number {
-                font-size: 10px; font-weight: 950; color: var(--primary); background: var(--light-bg);
-                border: 1.5px solid var(--border-glow); padding: 2px 6px; border-radius: 8px;
-            }
-            .tab-text { color: var(--text-primary); transition: color 0.3s ease; }
-            .global-tab-item:hover { border-color: var(--primary); background: var(--light-bg); transform: translateY(-2px); }
-            .global-tab-item.active {
-                background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-                border-color: var(--primary); color: #FFFFFF; box-shadow: 0 8px 22px var(--border-glow);
-            }
-            .global-tab-item.active .tab-number { background: rgba(255, 255, 255, 0.25); color: #FFFFFF; border-color: rgba(255, 255, 255, 0.4); }
-            .global-tab-item.active .tab-text { color: #FFFFFF; }
-
-            .glass-section-card {
-                background: var(--card-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-                border: 1.5px solid var(--card-border); border-radius: 26px; padding: 24px 20px; margin-bottom: 24px;
-                box-shadow: var(--card-glow); position: relative; overflow: hidden; transition: all 0.3s ease;
-                scroll-margin-top: 20px;
-                
-                /* التعديلات البرمجية الحاسمة لمنع التقطيع والكروت المطبوعة أثناء السكرول */
-                transform: translateZ(0);
-                -webkit-transform: translateZ(0);
-                will-change: transform;
-                contain: layout paint;
-                backface-visibility: hidden;
-                -webkit-backface-visibility: hidden;
-            }
-
-            .glass-section-card[data-track="1"] { --track-primary: #2563EB; --track-light: rgba(37, 99, 235, 0.08); --track-border: rgba(37, 99, 235, 0.3); --track-glow: rgba(37, 99, 235, 0.35); }
-            .glass-section-card[data-track="2"] { --track-primary: #0284C7; --track-light: rgba(2, 132, 199, 0.08); --track-border: rgba(2, 132, 199, 0.3); --track-glow: rgba(2, 132, 199, 0.35); }
-            .glass-section-card[data-track="3"] { --track-primary: #7C3AED; --track-light: rgba(124, 58, 237, 0.08); --track-border: rgba(124, 58, 237, 0.3); --track-glow: rgba(124, 58, 237, 0.35); }
-            .glass-section-card[data-track="4"] { --track-primary: #0EA5E9; --track-light: rgba(14, 165, 233, 0.08); --track-border: rgba(14, 165, 233, 0.3); --track-glow: rgba(14, 165, 233, 0.35); }
-            .glass-section-card[data-track="5"] { --track-primary: #3B82F6; --track-light: rgba(59, 130, 246, 0.08); --track-border: rgba(59, 130, 246, 0.3); --track-glow: rgba(59, 130, 246, 0.35); }
-            .glass-section-card[data-track="6"] { --track-primary: #1E40AF; --track-light: rgba(30, 64, 175, 0.08); --track-border: rgba(30, 64, 175, 0.3); --track-glow: rgba(30, 64, 175, 0.35); }
-            .glass-section-card[data-track="7"] { --track-primary: #0D9488; --track-light: rgba(13, 148, 136, 0.08); --track-border: rgba(13, 148, 136, 0.3); --track-glow: rgba(13, 148, 136, 0.35); }
-            .glass-section-card[data-track="8"] { --track-primary: #DC2626; --track-light: rgba(220, 38, 38, 0.08); --track-border: rgba(220, 38, 38, 0.3); --track-glow: rgba(220, 38, 38, 0.35); }
-
-            .glass-section-card:hover { border-color: var(--track-primary); transform: translateY(-3px); box-shadow: 0 25px 50px var(--track-border); }
-            
-            .glass-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
-            .glass-header-right { display: flex; align-items: center; gap: 14px; }
-            
-            .glass-icon-box {
-                width: 56px; height: 56px;
-                background: linear-gradient(135deg, var(--track-primary) 0%, var(--card-bg) 100%);
-                border: 2px solid var(--track-border); border-radius: 18px;
-                display: flex; align-items: center; justify-content: center; font-size: 26px; flex-shrink: 0;
-                position: relative; overflow: hidden;
-                box-shadow: 0 10px 25px var(--track-glow), inset 0 2px 4px rgba(255, 255, 255, 0.4), inset 0 -2px 4px rgba(0, 0, 0, 0.2);
-                transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-            }
-            .glass-icon-box::before {
-                content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
-                background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
-                opacity: 0; transition: opacity 0.3s ease;
-            }
-            .glass-section-card:hover .glass-icon-box::before { opacity: 1; }
-            .glass-section-card:hover .glass-icon-box {
-                transform: scale(1.12) rotate(6deg) translateY(-2px);
-                border-color: var(--track-primary);
-                box-shadow: 0 15px 35px var(--track-primary), inset 0 0 15px rgba(255, 255, 255, 0.5);
-            }
-            .glass-icon-box span, .glass-icon-box { filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.2)); transition: transform 0.3s ease; }
-            .glass-section-card:hover .glass-icon-box span { transform: scale(1.1); }
-            
-            .glass-title-group { display: flex; flex-direction: column; gap: 2px; }
-            .glass-path-tag { font-size: 10px; font-weight: 900; color: var(--track-primary); letter-spacing: 0.5px; text-transform: uppercase; }
-            .glass-title { font-size: 18px; font-weight: 950; color: var(--text-primary); margin: 0; }
-            .glass-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.8; font-weight: 700; margin-bottom: 18px; text-align: justify; }
-
-            .glass-links-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 18px; }
-
-            .glass-link-chip {
-                display: flex; align-items: center; justify-content: space-between;
-                background: var(--track-light); border: 1.5px solid var(--track-border);
-                padding: 12px 14px; border-radius: 16px; color: var(--text-primary);
-                font-size: 11px; font-weight: 900; backdrop-filter: blur(10px);
-                cursor: pointer; transition: 0.25s ease; box-shadow: 0 4px 12px rgba(0,0,0,0.02);
-            }
-            .glass-link-chip:hover {
-                border-color: var(--track-primary); background: var(--track-primary); color: #FFFFFF;
-                transform: translateY(-2px); box-shadow: 0 8px 20px var(--track-border);
-            }
-            .glass-link-chip:hover .glass-chip-icon { filter: brightness(10); }
-            .glass-chip-icon { font-size: 14px; flex-shrink: 0; }
-
-            .glass-action-btn {
-                display: flex; align-items: center; justify-content: space-between;
-                background: linear-gradient(135deg, var(--track-primary) 0%, var(--text-primary) 100%);
-                color: #FFFFFF; text-decoration: none; padding: 15px 22px; border-radius: 20px;
-                font-size: 13.5px; font-weight: 950;
-                box-shadow: 0 10px 25px var(--track-border), inset 0 1px 0 rgba(255, 255, 255, 0.25);
-                transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-                border: 1.5px solid rgba(255, 255, 255, 0.2);
-                position: relative; overflow: hidden;
-            }
-            .glass-action-btn::after {
-                content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
-                background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-                transition: 0.5s;
-            }
-            .glass-action-btn:hover::after { left: 100%; }
-            .glass-action-btn:hover {
-                transform: translateY(-3px) scale(1.01);
-                box-shadow: 0 18px 35px var(--track-primary);
-                border-color: rgba(255, 255, 255, 0.4);
-            }
-            .glass-action-btn:active { transform: translateY(1px) scale(0.99); }
-            
-            .cta-btn-icon-wrapper {
-                width: 34px; height: 34px; background: rgba(255, 255, 255, 0.22); backdrop-filter: blur(8px);
-                border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px;
-                transition: transform 0.3s ease, background 0.3s ease; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            }
-            .glass-action-btn:hover .cta-btn-icon-wrapper {
-                transform: translateX(-50px);
-                background: rgba(255, 255, 255, 0.38);
-            }
-
-            .lesson-modal-overlay {
-                position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 8, 17, 0.82);
-                backdrop-filter: blur(12px); display: none; align-items: center; justify-content: center; z-index: 10002; padding: 16px;
-                box-sizing: border-box;
-            }
-            .lesson-modal-overlay.active { display: flex; }
-            .lesson-modal-card {
-                background: var(--card-bg); border: 2px solid var(--modal-track-color, var(--border-glow)); border-radius: 28px; padding: 24px; width: 100%; max-width: 440px;
-                box-shadow: 0 25px 60px rgba(0,0,0,0.6), 0 0 30px var(--modal-track-glow, rgba(30,144,255,0.25)); display: flex; flex-direction: column; gap: 16px; position: relative;
-                animation: scaleUp 0.3s ease;
-            }
-            @keyframes scaleUp { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-
-            .lesson-modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--card-border); padding-bottom: 12px; }
-            .lesson-modal-title-box { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 950; color: var(--modal-track-color, var(--primary)); }
-            .close-modal-btn { background: var(--light-bg); border: 1.5px solid var(--modal-track-color, var(--border-glow)); width: 34px; height: 34px; border-radius: 10px; color: var(--text-primary); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.2s; }
-            .close-modal-btn:hover { border-color: var(--modal-track-color, var(--primary)); color: var(--modal-track-color, var(--primary)); }
-
-            .lesson-section-box { background: var(--bg-main); border: 1.5px solid var(--card-border); border-radius: 16px; padding: 14px; display: flex; flex-direction: column; gap: 6px; box-shadow: inset 0 2px 5px rgba(0,0,0,0.02); }
-            .lesson-section-label { font-size: 10.5px; font-weight: 900; color: var(--modal-track-color, var(--accent)); text-transform: uppercase; }
-            .lesson-section-text { font-size: 12.5px; font-weight: 800; color: var(--text-primary); line-height: 1.6; margin: 0; }
-
-            .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 8, 17, 0.82); backdrop-filter: blur(10px); display: none; align-items: center; justify-content: center; z-index: 10000; padding: 16px; box-sizing: border-box; }
-            .modal-overlay.active { display: flex; }
-            .search-modal-card { background: var(--card-bg); border: 1.5px solid var(--border-glow); border-radius: 26px; padding: 22px; width: 100%; max-width: 500px; box-shadow: 0 25px 50px rgba(0,0,0,0.5); display: flex; flex-direction: column; gap: 16px; }
-            .search-input-wrapper { background: var(--bg-main); border: 1.5px solid var(--border-glow); border-radius: 16px; padding: 10px 14px; display: flex; align-items: center; }
-            .search-input-field { width: 100%; background: transparent; border: none; outline: none; color: var(--text-primary); font-family: 'Cairo', sans-serif; font-size: 13px; font-weight: 700; }
-            .search-results-list { display: flex; flex-direction: column; gap: 10px; max-height: 320px; overflow-y: auto; scrollbar-width: none; }
-            .search-result-item { background: var(--bg-main); border: 1.5px solid var(--card-border); border-radius: 16px; padding: 12px 14px; display: flex; flex-direction: column; gap: 3px; text-decoration: none; transition: 0.25s; }
-            .search-result-item:hover { border-color: var(--primary); background: var(--light-bg); }
-            .search-result-title { font-size: 13px; font-weight: 950; color: var(--primary); margin: 0; }
-            .search-result-desc { font-size: 11px; font-weight: 700; color: var(--text-secondary); margin: 0; }
-
-            .side-menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 8, 17, 0.82); backdrop-filter: blur(10px); display: none; justify-content: flex-start; z-index: 10001; }
-            .side-menu-overlay.active { display: flex; }
-            .side-menu-drawer { background: var(--card-bg); border-left: 2px solid var(--border-glow); width: 85%; max-width: 320px; height: 100%; box-shadow: -15px 0 40px rgba(0,0,0,0.6); display: flex; flex-direction: column; padding: 22px; box-sizing: border-box; }
-            .drawer-top-box { background: var(--light-bg); border: 1.5px solid var(--border-glow); border-radius: 20px; padding: 14px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
-            .drawer-brand-info { display: flex; flex-direction: column; gap: 2px; }
-            .drawer-brand-title { font-size: 14px; font-weight: 950; color: var(--primary); margin: 0; }
-            .drawer-brand-sub { font-size: 10px; font-weight: 800; color: var(--text-secondary); margin: 0; }
-            .drawer-brand-icon { width: 42px; height: 42px; background: var(--card-bg); border: 1.5px solid var(--border-glow); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
-            .drawer-theme-switch-box { background: var(--bg-main); border: 1.5px solid var(--card-border); border-radius: 18px; padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
-            .drawer-theme-label { font-size: 12px; font-weight: 900; color: var(--text-primary); display: flex; align-items: center; gap: 8px; }
-            .switch-toggle { position: relative; display: inline-block; width: 48px; height: 26px; }
-            .switch-toggle input { opacity: 0; width: 0; height: 0; }
-            .slider-round { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #CBD5E1; transition: .3s; border-radius: 34px; }
-            .slider-round:before { position: absolute; content: ""; height: 20px; width: 20px; left: 3px; bottom: 3px; background-color: white; transition: .3s; border-radius: 50%; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
-            input:checked + .slider-round { background-color: var(--primary); }
-            input:checked + .slider-round:before { transform: translateX(22px); }
-            .drawer-links-list { display: flex; flex-direction: column; gap: 8px; flex-grow: 1; }
-            .drawer-link-item { display: flex; align-items: center; justify-content: space-between; background: var(--bg-main); border: 1.5px solid var(--card-border); padding: 12px 16px; border-radius: 16px; color: var(--text-primary); text-decoration: none; font-size: 12px; font-weight: 900; transition: 0.25s; }
-            .drawer-link-item:hover { border-color: var(--primary); background: var(--light-bg); color: var(--primary); }
-            .drawer-link-item.active { border-color: var(--primary); background: var(--light-bg); color: var(--primary); }
-            .drawer-link-left { display: flex; align-items: center; gap: 10px; }
-            .drawer-footer { text-align: center; font-size: 10px; font-weight: 800; color: var(--text-secondary); border-top: 1px solid var(--card-border); padding-top: 14px; margin-top: auto; }
-
-            .bottom-nav {
-                position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); 
-                width: calc(100% - 32px); max-width: 460px;
-                background: linear-gradient(135deg, var(--nav-glow-color) 0%, rgba(13, 19, 34, 0.85) 100%);
-                backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
-                display: flex; justify-content: space-around; align-items: center;
-                padding: 6px 10px; 
-                border: none; 
-                border-radius: 24px; 
-                box-shadow: 0 12px 35px var(--nav-glow-color), inset 0 1px 1px rgba(255, 255, 255, 0.2); 
-                z-index: 999; box-sizing: border-box;
-                transition: all 0.4s ease;
-            }
-
-            html:not(.dark-mode) .bottom-nav {
-                background: linear-gradient(135deg, var(--nav-glow-color) 0%, rgba(255, 255, 255, 0.92) 100%);
-                box-shadow: 0 12px 35px var(--nav-glow-color), inset 0 1px 1px rgba(255, 255, 255, 0.9);
-            }
-
-            .bottom-nav a { 
-                color: var(--text-secondary); 
-                text-decoration: none; 
-                font-size: 10px; 
-                text-align: center; 
-                font-weight: 800; 
-                display: flex; 
-                flex-direction: column; 
-                align-items: center; 
-                gap: 2px; 
-                padding: 6px 12px; 
-                border-radius: 16px; 
-                flex: 1; 
-                border: 1px solid rgba(128, 128, 128, 0.18);
-                background: rgba(128, 128, 128, 0.05);
-                transition: all 0.3s ease;
-            }
-
-            .bottom-nav a span { 
-                font-size: 16px; 
-                line-height: 1; 
-            }
-
-            .bottom-nav a:hover {
-                color: var(--nav-theme-color);
-                border-color: var(--nav-theme-color);
-                background: rgba(128, 128, 128, 0.1);
-            }
-
-            .bottom-nav a.active { 
-                color: #FFFFFF; 
-                background: var(--nav-theme-color); 
-                border-color: var(--nav-theme-color);
-                box-shadow: 0 4px 15px var(--nav-glow-color);
-            }
-        </style>
-    </head>
-    <body>
-
-        <button class="scroll-to-top-btn" id="scrollToTopBtn" title="العودة للأعلى">↑</button>
-
-        <div class="top-progress-bar"><div class="top-progress-fill" id="progressFill"></div></div>
-
-        <div class="lesson-modal-overlay" id="lessonModal">
-            <div class="lesson-modal-card" id="lessonModalCard">
-                <div class="lesson-modal-header">
-                    <div class="lesson-modal-title-box">
-                        <span id="lessonModalIcon">📖</span>
-                        <span id="lessonModalTitle">عنوان الدرس</span>
-                    </div>
-                    <button class="close-modal-btn" id="closeLessonModalBtn">✕</button>
-                </div>
-                <div class="lesson-section-box">
-                    <span class="lesson-section-label">📌 الخلاصة الذهبية (Quick Rule)</span>
-                    <p class="lesson-section-text" id="lessonModalRule">قاعدة الدرس...</p>
-                </div>
-                <div class="lesson-section-box">
-                    <span class="lesson-section-label">✍️ مثال حي مترجم (Live Example)</span>
-                    <p class="lesson-section-text" id="lessonModalExample">مثال توضيحي...</p>
-                </div>
-                <div class="lesson-section-box">
-                    <span class="lesson-section-label">⚡ تنبيه أو خدعة ذكية (Pro Tip)</span>
-                    <p class="lesson-section-text" id="lessonModalTip">ملحوظة لتجنب الأخطاء...</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="modal-overlay" id="searchModal">
-            <div class="search-modal-card">
-                <div class="lesson-modal-header">
-                    <div class="lesson-modal-title-box"><span>🔍</span><span>البحث في القسم</span></div>
-                    <button class="close-modal-btn" id="closeSearchBtn">✕</button>
-                </div>
-                <div class="search-input-wrapper"><input type="text" class="search-input-field" placeholder="ابحث عن: القواعد، الأزمنة..."></div>
-                <div class="search-results-list">
-                    <a href="#section-1" class="search-result-item" onclick="document.getElementById('searchModal').classList.remove('active');">
-                        <span class="search-result-title">📖 الأساسيات والقواعد</span>
-                        <span class="search-result-desc">ضمائر الفاعل والمفعول، أدوات النكرة والتعريف.</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-
-        <div class="side-menu-overlay" id="sideMenu">
-            <div class="side-menu-drawer">
-                <div class="drawer-top-box">
-                    <div class="drawer-brand-info"><h3 class="drawer-brand-title">أكاديمية العلوم التطبيقية</h3><p class="drawer-brand-sub">قسم اللغة الإنجليزية</p></div>
-                    <div class="drawer-brand-icon">🎓</div>
-                </div>
-                <div class="drawer-theme-switch-box">
-                    <span class="drawer-theme-label"><span>🌙</span> الوضع الليلي</span>
-                    <label class="switch-toggle"><input type="checkbox" id="themeSwitchCheckbox"><span class="slider-round"></span></label>
-                </div>
-                <div class="drawer-links-list">
-                    <a href="../index.html" class="drawer-link-item"><span class="drawer-link-left"><span>🏠</span> الرئيسية</span><span>➔</span></a>
-                    <a href="english.html" class="drawer-link-item active"><span class="drawer-link-left"><span>🇬🇧</span> الإنجليزي</span><span>➔</span></a>
-                    <a href="../surveying/surveying.html" class="drawer-link-item"><span class="drawer-link-left"><span>📐</span> المساحة</span><span>➔</span></a>
-                    <a href="../programming/programming.html" class="drawer-link-item"><span class="drawer-link-left"><span>💻</span> البرمجة</span><span>➔</span></a>
-                </div>
-                <div class="drawer-footer">English Master v2.1 • Pro Edition</div>
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="nav-bar">
-                <div class="nav-right-group">
-                    <a href="../index.html" class="home-icon-btn" title="الرئيسية">🏠</a>
-                    <div class="nav-titles-box">
-                        <h1 class="nav-main-title">اللغة الإنجليزية</h1>
-                        <p class="nav-sub-title">أكاديمية العلوم التطبيقية</p>
-                    </div>
-                </div>
-                <div class="nav-left-group">
-                    <button class="nav-icon-btn" id="themeToggleBtn" title="تغيير الثيم">☀️</button>
-                    <button class="nav-icon-btn" id="searchBtn" title="بحث">🔍</button>
-                    <button class="nav-icon-btn" id="menuBtn" title="القائمة">☰</button>
-                </div>
-            </div>
-
-            <div class="hero-welcome-card" data-nav-color="#1E90FF" data-nav-glow="rgba(30, 144, 255, 0.35)">
-                <div class="hero-card-top-row">
-                    <div class="hero-badge"><span>🇬🇧</span><span>أكاديمية العلوم التطبيقية</span></div>
-                </div>
-                <h2 class="hero-title">المرجع الشامل في قواعد اللغة,<br><span>من الصفر حتى الطلاقة الأكاديمية</span>.</h2>
-                <p class="hero-description">منظومة تعليمية متكاملة مصممة خصيصاً لبناء قاعدة قوية في القواعد، الأزمنة، والمفردات.</p>
-                <div class="hero-image-container">
-                    <img src="../images/english-board.jpg" alt="سبورة قواعد الإنجليزية" onerror="this.src='https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1000&q=80'">
-                    <div class="hero-image-overlay-badge"><span>✨</span><span class="badge-text">المرجع الرقمي الأول ▪ دليلك الشامل لإتقان الإنجليزية</span></div>
-                </div>
-            </div>
-
-            <div class="global-tabs-container">
-                <div class="tabs-scroll-wrapper" id="tabsWrapper">
-                    <a href="#section-1" class="global-tab-item active" onclick="setActiveTab(this)"><span class="tab-number">01</span><span class="tab-text">الأساسيات والقواعد</span></a>
-                    <a href="#section-2" class="global-tab-item" onclick="setActiveTab(this)"><span class="tab-number">02</span><span class="tab-text">الأزمنة الشاملة</span></a>
-                    <a href="#section-3" class="global-tab-item" onclick="setActiveTab(this)"><span class="tab-number">03</span><span class="tab-text">ردهة الألعاب</span></a>
-                    <a href="#section-4" class="global-tab-item" onclick="setActiveTab(this)"><span class="tab-number">04</span><span class="tab-text">تكوين الأسئلة</span></a>
-                    <a href="#section-5" class="global-tab-item" onclick="setActiveTab(this)"><span class="tab-number">05</span><span class="tab-text">المفردات والاصطلاحات</span></a>
-                    <a href="#section-6" class="global-tab-item" onclick="setActiveTab(this)"><span class="tab-number">06</span><span class="tab-text">إنجليزي الأعمال</span></a>
-                    <a href="#section-7" class="global-tab-item" onclick="setActiveTab(this)"><span class="tab-number">07</span><span class="tab-text">الاستماع والطلاقة</span></a>
-                    <a href="#section-8" class="global-tab-item" onclick="setActiveTab(this)"><span class="tab-number">08</span><span class="tab-text">الأخطاء الشائعة</span></a>
-                </div>
-            </div>
-
-            <!-- 📖 المسار 1: الأساسيات والقواعد -->
-            <div class="glass-section-card" id="section-1" data-track="1" data-nav-color="#2563EB" data-nav-glow="rgba(37, 99, 235, 0.35)">
-                <div class="glass-card-header">
-                    <div class="glass-header-right">
-                        <div class="glass-icon-box">📖</div>
-                        <div class="glass-title-group"><span class="glass-path-tag">المسار الأول • القواعد وبناء الجملة</span><h2 class="glass-title">الأساسيات والقواعد</h2></div>
-                    </div>
-                </div>
-                <p class="glass-desc">دليلك الشامل لتعلم ضمائر الفاعل والمفعول، أدوات النكرة والتعريف، أسماء الإشارة، وصفات وضمائر الملكية بدقة عالية.</p>
-                <div class="glass-links-grid">
-                    <div class="glass-link-chip" onclick="openLessonModal('ضمائر الفاعل والمفعول', '👤', 'تُستخدم ضمائر الفاعل ليحل محل الفاعل في أول الجملة، بينما ضمائر المفعول تأتي بعد الفعل.', 'He helped me yesterday.', 'تأكد من عدم الخلط بين ضمير الفاعل والمفعول.', '1')"><span>ضمائر الفاعل والمفعول</span> <span class="glass-chip-icon">👤</span></div>
-                    <div class="glass-link-chip" onclick="openLessonModal('أدوات النكرة والتعريف', '🏷️', 'تُستخدم (a/an) قبل الاسم المفرد النكرة و (the) للشيء المحدود والمعروف.', 'I saw an apple on the table.', 'لا تستخدم أدوات النكرة قبل الأسماء الجمع.', '1')"><span>أدوات النكرة والتعريف</span> <span class="glass-chip-icon">🏷️</span></div>
-                    <div class="glass-link-chip" onclick="openLessonModal('أسماء الإشارة', '👉', 'تُستخدم الإشارة للقريب (This/These) وللبعيد (That/Those) بناءً على العدد.', 'This is my new car.', 'انتبه لحالة الجمع والمفرد.', '1')"><span>أسماء الإشارة</span> <span class="glass-chip-icon">👉</span></div>
-                    <div class="glass-link-chip" onclick="openLessonModal('صفات وضمائر الملكية', '👑', 'صفات الملكية يتبعها اسم، بينما ضمائر الملكية تأتي مستقلة تماماً.', 'This is her pen, it is hers.', 'ضمير الملكية لا يتبعه اسم أبداً.', '1')"><span>صفات وضمائر الملكية</span> <span class="glass-chip-icon">👑</span></div>
-                </div>
-                <a href="fundamentals-path/fundamentals-path.html" class="glass-action-btn"><span>📖 استعرض مسار القواعد والأساسيات</span><div class="cta-btn-icon-wrapper">➔</div></a>
-            </div>
-
-            <!-- ⏳ المسار 2: الأزمنة الشاملة -->
-            <div class="glass-section-card" id="section-2" data-track="2" data-nav-color="#0284C7" data-nav-glow="rgba(2, 132, 199, 0.35)">
-                <div class="glass-card-header">
-                    <div class="glass-header-right">
-                        <div class="glass-icon-box">⏳</div>
-                        <div class="glass-title-group"><span class="glass-path-tag">المسار الثاني • الأزمنة المتسلسلة</span><h2 class="glass-title">الأزمنة الشاملة (Tenses)</h2></div>
-                    </div>
-                </div>
-                <p class="glass-desc">اتقن جميع أزمنة اللغة الإنجليزية (المضارع، الماضي) والأفعال الشاذة والقصص التطبيقية بطريقة مبسطة.</p>
-                <div class="glass-links-grid">
-                    <div class="glass-link-chip" onclick="openLessonModal('المضارع البسيط', '⏱️', 'يُعبر عن الحقائق والعادات اليومية.', 'He plays football every Friday.', 'لا تنسَ إضافة s مع المفرد.', '2')"><span>المضارع البسيط</span> <span class="glass-chip-icon">⏱️</span></div>
-                    <div class="glass-link-chip" onclick="openLessonModal('المضارع المستمر', '⏳', 'يُعبر عن حدث يحدث الآن وقت الكلام.', 'They are studying English now.', 'فعل be أساسي قبل ing.', '2')"><span>المضارع المستمر</span> <span class="glass-chip-icon">⏳</span></div>
-                    <div class="glass-link-chip" onclick="openLessonModal('الأفعال الشاذة', '📜', 'الأفعال التي تتغير كلياً في التصريف الثاني والثالث.', 'Go - Went - Gone', 'يجب حفظ الأفعال الشاذة جيداً.', '2')"><span>الأفعال الشاذة</span> <span class="glass-chip-icon">📜</span></div>
-                    <div class="glass-link-chip" onclick="openLessonModal('قصص وتطبيقات الأزمنة', '📚', 'تطبيق عملي على الأزمنة من خلال قصص قصيرة.', 'Read short stories in past tense.', 'فهم الزمن من خلال السياق.', '2')"><span>قصص وتطبيقات الأزمنة</span> <span class="glass-chip-icon">📚</span></div>
-                </div>
-                <a href="tenses-path/tenses-path.html" class="glass-action-btn"><span>⏳ استعرض مسار الأزمنة الشاملة</span><div class="cta-btn-icon-wrapper">➔</div></a>
-            </div>
-
-            <!-- 🎮 المسار 3: ردهة الألعاب التعليمية -->
-            <div class="glass-section-card" id="section-3" data-track="3" data-nav-color="#7C3AED" data-nav-glow="rgba(124, 58, 237, 0.35)">
-                <div class="glass-card-header">
-                    <div class="glass-header-right">
-                        <div class="glass-icon-box">🎮</div>
-                        <div class="glass-title-group"><span class="glass-path-tag">المسار الثالث • التحديات والألعاب</span><h2 class="glass-title">ردهة الألعاب التعليمية</h2></div>
-                    </div>
-                </div>
-                <p class="glass-desc">ردهة مخصصة لألعاب وتحديات اللغة الإنجليزية (صائد الكلمات، تركيب الجمل، سباق الأزمنة) لتعلم ممتع وتفاعلي.</p>
-                <div class="glass-links-grid">
-                    <div class="glass-link-chip" onclick="openLessonModal('صائد الكلمات السريع', '🏃‍♂️', 'التقط الكلمات ومعانيها الصحيحة وهي تتحرك.', 'Match fall words quickly.', 'السرعة تقوي الذاكرة.', '3')"><span>صائد الكلمات السريع</span> <span class="glass-chip-icon">🏃‍♂️</span></div>
-                    <div class="glass-link-chip" onclick="openLessonModal('تحدي ترتيب الجمل', '🧩', 'رتب الكلمات المبعثرة لتكوين جمل صحيحة.', 'Sentence puzzle builder game.', 'انتبه لترتيب الفاعل والفعل.', '3')"><span>تحدي ترتيب الجمل</span> <span class="glass-chip-icon">🧩</span></div>
-                    <div class="glass-link-chip" onclick="openLessonModal('سباق الأزمنة السريع', '⚡', 'اختبار تنافسي بنظام الوقت لتحديد الأزمنة الـ 12.', 'Tenses speed quiz challenge.', 'اختبر سرعة بديهتك.', '3')"><span>سباق الأزمنة السريع</span> <span class="glass-chip-icon">⚡</span></div>
-                    <div class="glass-link-chip" onclick="openLessonModal('توصيل الأزمنة والأمثلة', '🔗', 'ربط الأزمنة بقواعدها والكلمات الدالة.', 'Tenses connect grid puzzle.', 'فهم الروابط الزمنية.', '3')"><span>توصيل الأزمنة والأمثلة</span> <span class="glass-chip-icon">🔗</span></div>
-                </div>
-                <a href="gaming/gaming-hub.html" class="glass-action-btn"><span>🎮 استعرض ردهة الألعاب والتحديات</span><div class="cta-btn-icon-wrapper">➔</div></a>
-            </div>
-
-            <!-- 🧩 المسار 4: تكوين الأسئلة -->
-            <div class="glass-section-card" id="section-4" data-track="4" data-nav-color="#0EA5E9" data-nav-glow="rgba(14, 165, 233, 0.35)">
-                <div class="glass-card-header">
-                    <div class="glass-header-right">
-                        <div class="glass-icon-box">🧩</div>
-                        <div class="glass-title-group"><span class="glass-path-tag">المسار الرابع • بناء الجمل والأسئلة</span><h2 class="glass-title">تكوين الأسئلة والربط</h2></div>
-                    </div>
-                </div>
-                <p class="glass-desc">تعلم كيفية صياغة الأسئلة المركبة باستخدام أدوات الاستفهام، الأسئلة المغلقة، وأدوات الربط.</p>
-                <div class="glass-links-grid">
-                    <div class="glass-link-chip" onclick="openLessonModal('أدوات الاستفهام (Wh-)', '❓', 'تُستخدم للسؤال عن معلومات محددة.', 'Where do you live?', 'دائماً يتبعها الفعل المساعد.', '4')"><span>أدوات الاستفهام (Wh-)</span> <span class="glass-chip-icon">❓</span></div>
-                    <div class="glass-link-chip" onclick="openLessonModal('الأسئلة المغلقة', '💬', 'أسئلة تبدأ بفعل مساعد إجابتها بـ Yes أو No.', 'Are you ready? Yes, I am.', 'ابدأ بالفعل المساعد المناسب.', '4')"><span>الأسئلة المغلقة</span> <span class="glass-chip-icon">💬</span></div>
-                    <div class="glass-link-chip" onclick="openLessonModal('أدوات الربط والوصل', '🔗', 'لربط الجمل والأفكار ببعضها.', 'I was tired, but I kept working.', 'اختر أداة الربط حسب المعنى.', '4')"><span>أدوات الربط والوصل</span> <span class="glass-chip-icon">🔗</span></div>
-                    <div class="glass-link-chip" onclick="openLessonModal('جمل الوصل النسبية', '🪢', 'لإعطاء معلومات إضافية عن الاسم.', 'The man who helped me is kind.', 'استخدم who للأشخاص.', '4')"><span>جمل الوصل النسبية</span> <span class="glass-chip-icon">🪢</span></div>
-                </div>
-                <a href="Configure questions and link/questions-path.html" class="glass-action-btn"><span>🧩 استعرض مسار صياغة الأسئلة والربط</span><div class="cta-btn-icon-wrapper">➔</div></a>
-            </div>
-
-            <!-- 📚 المسار 5: المفردات والاصطلاحات -->
-            <div class="glass-section-card" id="section-5" data-track="5" data-nav-color="#3B82F6" data-nav-glow="rgba(59, 130, 246, 0.35)">
-                <div class="glass-card-header">
-                    <div class="glass-header-right">
-                        <div class="glass-icon-box">📚</div>
-                        <div class="glass-title-group"><span class="glass-path-tag">المسار الخامس • الحصيلة اللغوية والكلمات</span><h2 class="glass-title">المفردات والاصطلاحات</h2></div>
-                    </div>
-                </div>
-                <p class="glass-desc">ارفع حصيلتك اللغوية بأهم 1000 كلمة شائعة، التعابير المجازية الشهيرة، والأفعال المركبة.</p>
-                <div class="glass-links-grid">
-                    <div class="glass-link-chip" onclick="openLessonModal('أهم 1000 كلمة شائعة', '📖', 'الكلمات الأكثر استخدماً في الحياة اليومية.', 'Understand common vocabulary.', 'احفظ الكلمات مع سياق الجملة.', '5')"><span>أهم 1000 كلمة شائعة</span> <span class="glass-chip-icon">📖</span></div>
-                    <div class="glass-link-chip" onclick="openLessonModal('التعابير المجازية (Idioms)', '🎨', 'تعابير لا يُفهم معناها حرفياً.', 'Break a leg! (حظاً طيباً)', 'لا تترجم التعابير حرفياً أبداً.', '5')"><span>التعابير المجازية (Idioms)</span> <span class="glass-chip-icon">🎨</span></div>
-                    <div class="glass-link-chip" onclick="openLessonModal('الأفعال المركبة', '⚡', 'فعل + حرف جر يغير المعنى تماماً.', 'Give up means to stop trying.', 'احفظ الفعل المركب كقطعة واحدة.', '5')"><span>الأفعال المركبة</span> <span class="glass-chip-icon">⚡</span></div>
-                    <div class="glass-link-chip" onclick="openLessonModal('الكلمات المتشابهة', '🔀', 'كلمات تتشابه في النطق وتختلف في المعنى.', 'Their vs There pronunciation.', 'انتبه للإملاء والسياق.', '5')"><span>الكلمات المتشابهة</span> <span class="glass-chip-icon">🔀</span></div>
-                </div>
-                <a href="Vocabulary and Terminology/vocabulary-path.html" class="glass-action-btn"><span>📚 استعرض مسار المفردات والاصطلاحات</span><div class="cta-btn-icon-wrapper">➔</div></a>
-            </div>
-
-            <!-- 💼 المسار 6: إنجليزي الأعمال -->
-            <div class="glass-section-card" id="section-6" data-track="6" data-nav-color="#1E40AF" data-nav-glow="rgba(30, 64, 175, 0.35)">
-                <div class="glass-card-header">
-                    <div class="glass-header-right">
-                        <div class="glass-icon-box">💼</div>
-                        <div class="glass-title-group"><span class="glass-path-tag">المسار السادس • التطوير المهني</span><h2 class="glass-title">إنجليزي الأعمال والمقابلات</h2></div>
-                    </div>
-                </div>
-                <p class="glass-desc">استعد لسوق العمل بكتابة السيرة الذاتية الاحترافية، تكتيكات المقابلات، وصياغة الإيميلات.</p>
-                <div class="glass-links-grid">
-                    <div class="glass-link-chip" onclick="openLessonModal('كتابة السيرة الذاتية', '📄', 'تصميم سيرة ذاتية احترافية وخالية من الأخطاء.', 'Highlight your key skills.', 'اجعل سيرتك الذاتية في صفحة واحدة.', '6')"><span>كتابة السيرة الذاتية</span> <span class="glass-chip-icon">📄</span></div>
-                    <div class="glass-link-chip" onclick="openLessonModal('أسئلة المقابلات الشخصية', '👔', 'أهم الأسئلة الشائعة في المقابلات وكيفية الإجابة.', 'Tell me about yourself.', 'دعم إجاباتك بأمثلة واقعية.', '6')"><span>أسئلة المقابلات الشخصية</span> <span class="glass-chip-icon">👔</span></div>
-                    <div class="glass-link-chip" onclick="openLessonModal('الإيميلات الرسمية', '✉️', 'قواعد صياغة المراسلات الرسمية للشركات.', 'Dear Sir / Madam...', 'احرص على الوضوح والاختصار.', '6')"><span>الإيميلات الرسمية</span> <span class="glass-chip-icon">✉️</span></div>
-                    <div class="glass-link-chip" onclick="openLessonModal('مصطلحات الاجتماعات', '📊', 'عبارات مستخدمة بكثرة في الاجتماعات العمالية.', 'Let us move to the next item.', 'استخدم عبارات مهذبة دائماً.', '6')"><span>مصطلحات الاجتماعات</span> <span class="glass-chip-icon">📊</span></div>
-                </div>
-                <a href="Business English and Interviews/business-path.html" class="glass-action-btn"><span>💼 استعرض مسار إنجليزي الأعمال والمقابلات</span><div class="cta-btn-icon-wrapper">➔</div></a>
-            </div>
-
-            <!-- 🎧 المسار 7: الاستماع والطلاقة -->
-            <div class="glass-section-card" id="section-7" data-track="7" data-nav-color="#0D9488" data-nav-glow="rgba(13, 148, 136, 0.35)">
-                <div class="glass-card-header">
-                    <div class="glass-header-right">
-                        <div class="glass-icon-box">🎧</div>
-                        <div class="glass-title-group"><span class="glass-path-tag">المسار السابع • الطلاقة والنطق الصوتي</span><h2 class="glass-title">الاستماع والمحادثة بطلاقة</h2></div>
-                    </div>
-                </div>
-                <p class="glass-desc">تعلم الرموز الصوتية الدولية (IPA)، قواعد الوصل في الكلام السريع، والفرق بين اللهجات.</p>
-                <div class="glass-links-grid">
-                    <div class="glass-link-chip" onclick="openLessonModal('الصوتيات والرموز (IPA)', '🗣️', 'فهم الرموز الصوتية ونطق كل صوت بدقة.', 'Master the IPA phonetic alphabet.', 'الاستماع النشط يسبق النطق.', '7')"><span>الصوتيات والرموز (IPA)</span> <span class="glass-chip-icon">🗣️</span></div>
-                    <div class="glass-link-chip" onclick="openLessonModal('قواعد الوصل في الكلام', '🌊', 'كيف يدمج المتحدث الكلمات أثناء الكلام السريع.', 'Cup of tea sounds like cuppa tea.', 'لا تنطق كل كلمة منفصلة.', '7')"><span>قواعد الوصل في الكلام</span> <span class="glass-chip-icon">🌊</span></div>
-                    <div class="glass-link-chip" onclick="openLessonModal('اللهجات الأمريكية والبريطانية', '🇺🇸', 'أبرز الفروق في النطق والهجاء.', 'Color vs Colour', 'اختر لهجة واحدة وتدرب عليها.', '7')"><span>اللهجات الأمريكية والبريطانية</span> <span class="glass-chip-icon">🇺🇸</span></div>
-                    <div class="glass-link-chip" onclick="openLessonModal('تدريبات الطلاقة والحديث', '🔥', 'تمرينات لكسر حاجز الخوف والحديث بثقة.', 'Practice speaking daily.', 'الاستمرارية أهم من القواعد.', '7')"><span>تدريبات الطلاقة والحديث</span> <span class="glass-chip-icon">🔥</span></div>
-                </div>
-                <a href="Listen and talk fluently/phonetics-path.html" class="glass-action-btn"><span>🎧 استعرض مسار الاستماع والمحادثة (IPA)</span><div class="cta-btn-icon-wrapper">➔</div></a>
-            </div>
-
-            <!-- ⚠️ المسار 8: الأخطاء الشائعة -->
-            <div class="glass-section-card" id="section-8" data-track="8" data-nav-color="#DC2626" data-nav-glow="rgba(220, 38, 38, 0.35)">
-                <div class="glass-card-header">
-                    <div class="glass-header-right">
-                        <div class="glass-icon-box">⚠️</div>
-                        <div class="glass-title-group"><span class="glass-path-tag">المسار الثامن • التصحيح الفوري للقواعد</span><h2 class="glass-title">الأخطاء الشائعة والتصحيح</h2></div>
-                    </div>
-                </div>
-                <p class="glass-desc">تجنب أشهر الأخطاء القواعدية واللغوية التي يقع فيها العرب، مع تصحيح أخطاء حروف الجر والفرق بين Make و Do.</p>
-                <div class="glass-links-grid">
-                    <div class="glass-link-chip" onclick="openLessonModal('أشهر 50 خطأ شائعاً', '❌', 'قائمة بأبرز الأخطاء المتكررة وكيفية تصحيحها.', 'Avoid literal translation mistakes.', 'صحح أخطاءك أول بأول.', '8')"><span>أشهر 50 خطأ شائعاً</span> <span class="glass-chip-icon">❌</span></div>
-                    <div class="glass-link-chip" onclick="openLessonModal('أخطاء حروف الجر الشائعة', '📍', 'التصحيح السليم لحروف الجر (in, on, at).', 'At night, in the morning, on Monday.', 'حروف الجر تُحفظ بالسياق.', '8')"><span>أخطاء حروف الجر الشائعة</span> <span class="glass-chip-icon">📍</span></div>
-                    <div class="glass-link-chip" onclick="openLessonModal('الفرق بين Make و Do', '⚖️', 'متى تستخدم Make ومتى تستخدم Do.', 'Make a cake vs Do homework.', 'Make للصنع و Do للأداء.', '8')"><span>الفرق بين Make و Do</span> <span class="glass-chip-icon">⚖️</span></div>
-                    <div class="glass-link-chip" onclick="openLessonModal('اختبار تصحيح الأخطاء', '🎯', 'تمارين لاكتشاف الأخطاء واختبار استيعابك.', 'Test your grammar correction skills.', 'راجع إجاباتك جيداً.', '8')"><span>اختبار تصحيح الأخطاء</span> <span class="glass-chip-icon">🎯</span></div>
-                </div>
-                <a href="Common Mistakes and Correction/mistakes-path.html" class="glass-action-btn"><span>⚠️ استعرض مسار الأخطاء الشائعة والتصحيح</span><div class="cta-btn-icon-wrapper">➔</div></a>
-            </div>
-
-        </div>
-
-        <div class="bottom-nav" id="bottomNav">
-            <a href="../index.html"><span class="nav-icon">🏠</span>الرئيسية</a>
-            <a href="english.html" class="active"><span class="nav-icon">🇬🇧</span>الإنجليزي</a>
-            <a href="../surveying/surveying.html"><span class="nav-icon">📐</span>المساحة</a>
-            <a href="../programming/programming.html"><span class="nav-icon">💻</span>البرمجة</a>
-        </div>
-
-        <script>
-            let themeBtn = document.getElementById("themeToggleBtn");
-            let themeSwitchCheckbox = document.getElementById("themeSwitchCheckbox");
-            let scrollToTopBtn = document.getElementById("scrollToTopBtn");
-            let bottomNav = document.getElementById("bottomNav");
-
-            function applyTheme(isDark) {
-                if (isDark) {
-                    document.documentElement.classList.add("dark-mode");
-                    localStorage.setItem("em_theme", "dark");
-                    if (themeBtn) themeBtn.innerHTML = "☀️";
-                    if (themeSwitchCheckbox) themeSwitchCheckbox.checked = true;
-                } else {
-                    document.documentElement.classList.remove("dark-mode");
-                    localStorage.setItem("em_theme", "light");
-                    if (themeBtn) themeBtn.innerHTML = "🌙";
-                    if (themeSwitchCheckbox) themeSwitchCheckbox.checked = false;
-                }
-            }
-
-            let isDarkNow = localStorage.getItem("em_theme") === "dark";
-            applyTheme(isDarkNow);
-
-            if (themeBtn) {
-                themeBtn.addEventListener("click", () => {
-                    applyTheme(!document.documentElement.classList.contains("dark-mode"));
-                });
-            }
-
-            if (themeSwitchCheckbox) {
-                themeSwitchCheckbox.addEventListener("change", () => {
-                    applyTheme(themeSwitchCheckbox.checked);
-                });
-            }
-
-            function setActiveTab(clickedElement) {
-                let items = document.querySelectorAll('.global-tab-item');
-                items.forEach(item => item.classList.remove('active'));
-                clickedElement.classList.add('active');
-            }
-
-            let sections = document.querySelectorAll("[data-nav-color]");
-            function updateBottomNavColor() {
-                let scrollPosition = window.scrollY + window.innerHeight / 2;
-                sections.forEach(section => {
-                    let top = section.offsetTop;
-                    let height = section.offsetHeight;
-                    if (scrollPosition >= top && scrollPosition < top + height) {
-                        let color = section.getAttribute("data-nav-color");
-                        let glow = section.getAttribute("data-nav-glow");
-                        if (bottomNav) {
-                            bottomNav.style.setProperty("--nav-theme-color", color);
-                            bottomNav.style.setProperty("--nav-glow-color", glow);
-                        }
-                    }
-                });
-            }
-            window.addEventListener("scroll", updateBottomNavColor);
-            updateBottomNavColor();
-
-            window.addEventListener('scroll', function() {
-                let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-                let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                let scrolled = (winScroll / height) * 100;
-                let progressFill = document.getElementById("progressFill");
-                if (progressFill) progressFill.style.width = scrolled + "%";
-
-                if (window.scrollY > 300) {
-                    scrollToTopBtn.classList.add("show");
-                } else {
-                    scrollToTopBtn.classList.remove("show");
-                }
-            });
-
-            if (scrollToTopBtn) {
-                scrollToTopBtn.addEventListener("click", () => {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                });
-            }
-
-            function openLessonModal(title, icon, rule, example, tip, trackNum) {
-                document.getElementById("lessonModalIcon").innerText = icon;
-                document.getElementById("lessonModalTitle").innerText = title;
-                document.getElementById("lessonModalRule").innerText = rule;
-                document.getElementById("lessonModalExample").innerText = example;
-                document.getElementById("lessonModalTip").innerText = tip;
-
-                let targetCard = document.querySelector(`.glass-section-card[data-track="${trackNum}"]`);
-                let modalCard = document.getElementById("lessonModalCard");
-                
-                if (targetCard && modalCard) {
-                    let trackColor = window.getComputedStyle(targetCard).getPropertyValue('--track-primary').trim();
-                    let trackGlow = window.getComputedStyle(targetCard).getPropertyValue('--track-glow').trim();
-                    
-                    modalCard.style.setProperty('--modal-track-color', trackColor);
-                    modalCard.style.setProperty('--modal-track-glow', trackGlow);
-                }
-
-                document.getElementById("lessonModal").classList.add("active");
-            }
-
-            let closeLessonModalBtn = document.getElementById("closeLessonModalBtn");
-            let lessonModal = document.getElementById("lessonModal");
-            if (closeLessonModalBtn && lessonModal) {
-                closeLessonModalBtn.addEventListener("click", () => { lessonModal.classList.remove("active"); });
-                lessonModal.addEventListener("click", (e) => { if (e.target === lessonModal) lessonModal.classList.remove("active"); });
-            }
-
-            let searchBtn = document.getElementById("searchBtn");
-            let searchModal = document.getElementById("searchModal");
-            let closeSearchBtn = document.getElementById("closeSearchBtn");
-            if (searchBtn && searchModal) {
-                searchBtn.addEventListener("click", () => { searchModal.classList.add("active"); });
-            }
-            if (closeSearchBtn && searchModal) {
-                closeSearchBtn.addEventListener("click", () => { searchModal.classList.remove("active"); });
-            }
-
-            let menuBtn = document.getElementById("menuBtn");
-            let sideMenu = document.getElementById("sideMenu");
-            if (menuBtn && sideMenu) {
-                menuBtn.addEventListener("click", () => { sideMenu.classList.add("active"); });
-            }
-            if (sideMenu) {
-                sideMenu.addEventListener("click", (e) => { if (e.target === sideMenu) sideMenu.classList.remove("active"); });
-            }
-        </script>
-    </body>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>اللغة الإنجليزية - أكاديمية العلوم التطبيقية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+<script>
+try { if (localStorage.getItem("em_theme") === "dark") document.documentElement.classList.add("dark-mode"); } catch (e) {}
+</script>
+<style>
+:root{
+  --bg:#F4F7FA; --card:#FFFFFF; --card-border:rgba(30,144,255,.25);
+  --text:#0A2540; --text2:#516079;
+  --primary:#1E90FF; --primary-dark:#0066CC; --accent:#00BFFF;
+  --light:rgba(30,144,255,.07); --glow:rgba(30,144,255,.35);
+  --shadow:0 8px 24px rgba(30,144,255,.08);
+  --nav-bg:rgba(255,255,255,.97);
+  --nav-color:#1E90FF; --nav-glow:rgba(30,144,255,.3);
+}
+html.dark-mode{
+  --bg:#060913; --card:#0D1322; --card-border:rgba(30,144,255,.22);
+  --text:#F0F4F8; --text2:#93A4BC;
+  --light:rgba(30,144,255,.12); --glow:rgba(0,191,255,.35);
+  --shadow:0 8px 24px rgba(0,0,0,.45);
+  --nav-bg:rgba(13,19,34,.97);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; padding:16px 14px 95px; min-height:100vh;
+  background:var(--bg); color:var(--text);
+  font-family:'Cairo',system-ui,-apple-system,sans-serif;
+}
+.container{max-width:680px;margin:auto}
+button{font-family:inherit}
+
+/* progress + scroll top */
+.progress{position:fixed;top:0;left:0;right:0;height:3px;z-index:9999}
+.progress i{display:block;height:100%;width:100%;transform-origin:right;transform:scaleX(0);
+  background:linear-gradient(90deg,var(--primary),var(--accent))}
+.to-top{position:fixed;bottom:84px;left:20px;width:44px;height:44px;border-radius:14px;
+  background:var(--card);border:1.5px solid var(--glow);color:var(--primary);font-size:18px;cursor:pointer;
+  box-shadow:0 6px 18px rgba(0,0,0,.15);z-index:998;opacity:0;visibility:hidden;transition:opacity .2s}
+.to-top.show{opacity:1;visibility:visible}
+
+/* top bar */
+.nav-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;
+  background:var(--card);border:1.5px solid var(--card-border);padding:9px 14px;border-radius:20px;box-shadow:var(--shadow)}
+.nav-right,.nav-left{display:flex;align-items:center;gap:8px}
+.nav-left{gap:6px}
+.nav-titles h1{font-size:13px;font-weight:900;color:var(--primary);margin:0;line-height:1.2}
+.nav-titles p{font-size:9.5px;font-weight:700;color:var(--text2);margin:0}
+.icon-btn{width:34px;height:34px;border-radius:10px;border:0;background:var(--light);color:var(--text);
+  display:flex;align-items:center;justify-content:center;font-size:15px;text-decoration:none;cursor:pointer;flex-shrink:0}
+
+/* hero */
+.hero{background:var(--card);border:2px solid var(--glow);border-radius:28px;padding:24px 20px;margin-bottom:20px;
+  box-shadow:var(--shadow);position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;
+  background:linear-gradient(90deg,var(--primary),var(--accent),var(--primary-dark))}
+.badge{background:var(--light);border:1.5px solid var(--glow);color:var(--primary);font-size:11.5px;font-weight:900;
+  padding:6px 18px;border-radius:18px;display:flex;justify-content:center;gap:8px;margin-bottom:14px}
+.hero h2{font-size:21px;font-weight:900;line-height:1.35;margin:0 0 10px}
+.hero h2 span{color:var(--primary)}
+.hero p{font-size:12.5px;font-weight:700;color:var(--text2);line-height:1.8;margin:0 0 18px}
+.hero-img{position:relative;height:200px;border-radius:20px;overflow:hidden;border:2px solid rgba(255,255,255,.15)}
+.hero-img img{width:100%;height:100%;object-fit:cover;display:block}
+.hero-img b{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);background:rgba(13,37,70,.8);
+  border:1.5px solid rgba(30,144,255,.45);color:#fff;padding:6px 14px;border-radius:14px;font-size:10px;font-weight:900;
+  white-space:nowrap;max-width:calc(100% - 20px);overflow:hidden;text-overflow:ellipsis}
+
+/* tabs */
+.tabs{overflow-x:auto;scrollbar-width:none;margin-bottom:24px;padding:4px 2px}
+.tabs::-webkit-scrollbar{display:none}
+.tabs-row{display:flex;gap:10px;width:max-content;padding:2px}
+.tab{display:flex;align-items:center;gap:8px;background:var(--card);border:1.5px solid var(--card-border);
+  padding:10px 16px;border-radius:16px;text-decoration:none;color:var(--text);font-size:11.5px;font-weight:900;white-space:nowrap}
+.tab em{font-style:normal;font-size:10px;font-weight:900;color:var(--primary);background:var(--light);
+  border:1.5px solid var(--glow);padding:2px 6px;border-radius:8px}
+.tab.active{background:linear-gradient(135deg,var(--primary),var(--primary-dark));border-color:var(--primary);color:#fff}
+.tab.active em{background:rgba(255,255,255,.25);color:#fff;border-color:rgba(255,255,255,.4)}
+
+/* section cards */
+.card{background:var(--card);border:1.5px solid var(--card-border);border-radius:26px;padding:24px 20px;margin-bottom:24px;
+  box-shadow:var(--shadow);scroll-margin-top:20px}
+.card-head{display:flex;align-items:center;gap:14px;margin-bottom:14px}
+.card-icon{width:56px;height:56px;border-radius:18px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:26px;
+  background:linear-gradient(135deg,var(--tp),var(--card));border:2px solid var(--tb);box-shadow:0 6px 16px var(--tg)}
+.card-tag{display:block;font-size:10px;font-weight:900;color:var(--tp)}
+.card-title{font-size:18px;font-weight:900;margin:2px 0 0}
+.card-desc{font-size:13px;color:var(--text2);line-height:1.8;font-weight:700;margin:0 0 18px;text-align:justify}
+.chips{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:18px}
+.chip{display:flex;align-items:center;justify-content:space-between;gap:6px;text-align:right;
+  background:var(--tl);border:1.5px solid var(--tb);padding:12px 14px;border-radius:16px;color:var(--text);
+  font-size:11px;font-weight:900;cursor:pointer}
+.cta{display:flex;align-items:center;justify-content:space-between;gap:10px;color:#fff;text-decoration:none;
+  background:linear-gradient(135deg,var(--tp),#0A2540);padding:15px 22px;border-radius:20px;font-size:13.5px;font-weight:900;
+  box-shadow:0 6px 16px var(--tb);border:1.5px solid rgba(255,255,255,.2)}
+.cta i{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.22);display:flex;align-items:center;justify-content:center;
+  font-style:normal;flex-shrink:0}
+.cta:active{transform:scale(.99)}
+
+/* hover فقط للأجهزة التي تدعمه */
+@media (hover:hover){
+  .icon-btn:hover,.tab:hover{color:var(--primary)}
+  .tab:hover{border-color:var(--primary)}
+  .tab.active:hover{color:#fff}
+  .card{transition:border-color .2s,box-shadow .2s}
+  .card:hover{border-color:var(--tp);box-shadow:0 14px 30px var(--tb)}
+  .chip{transition:background .2s,color .2s}
+  .chip:hover{background:var(--tp);color:#fff;border-color:var(--tp)}
+  .cta:hover{box-shadow:0 10px 24px var(--tp)}
+  .to-top:hover{background:var(--primary);color:#fff}
+}
+
+/* modals */
+.overlay{position:fixed;inset:0;background:rgba(5,8,17,.85);display:none;align-items:center;justify-content:center;
+  z-index:10000;padding:16px}
+.overlay.active{display:flex}
+.modal{background:var(--card);border:2px solid var(--mc,var(--glow));border-radius:28px;padding:24px;width:100%;max-width:440px;
+  display:flex;flex-direction:column;gap:14px;box-shadow:0 20px 50px rgba(0,0,0,.5)}
+.modal-head{display:flex;justify-content:space-between;align-items:center;gap:10px;border-bottom:1px solid var(--card-border);padding-bottom:12px}
+.modal-title{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:900;color:var(--mc,var(--primary))}
+.box{background:var(--bg);border:1.5px solid var(--card-border);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:6px}
+.box small{font-size:10.5px;font-weight:900;color:var(--mc,var(--accent))}
+.box p{font-size:12.5px;font-weight:700;line-height:1.6;margin:0}
+.search-input{width:100%;background:var(--bg);border:1.5px solid var(--glow);border-radius:16px;padding:12px 14px;
+  color:var(--text);font-family:inherit;font-size:13px;font-weight:700;outline:none}
+.results{display:flex;flex-direction:column;gap:10px;max-height:320px;overflow-y:auto}
+.result{background:var(--bg);border:1.5px solid var(--card-border);border-radius:16px;padding:12px 14px;text-decoration:none;display:flex;flex-direction:column;gap:3px}
+.result b{font-size:13px;font-weight:900;color:var(--primary)}
+.result span{font-size:11px;font-weight:700;color:var(--text2)}
+
+/* side menu */
+.side{position:fixed;inset:0;background:rgba(5,8,17,.85);display:none;justify-content:flex-start;z-index:10001}
+.side.active{display:flex}
+.drawer{background:var(--card);border-left:2px solid var(--glow);width:85%;max-width:320px;height:100%;display:flex;flex-direction:column;padding:22px}
+.drawer-top{background:var(--light);border:1.5px solid var(--glow);border-radius:20px;padding:14px;display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.drawer-top h3{font-size:14px;font-weight:900;color:var(--primary);margin:0}
+.drawer-top p{font-size:10px;font-weight:700;color:var(--text2);margin:2px 0 0}
+.theme-row{background:var(--bg);border:1.5px solid var(--card-border);border-radius:18px;padding:12px 16px;display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;font-size:12px;font-weight:900}
+.switch{position:relative;width:48px;height:26px}
+.switch input{opacity:0;width:0;height:0}
+.slider{position:absolute;inset:0;background:#CBD5E1;border-radius:34px;cursor:pointer;transition:background .2s}
+.slider::before{content:"";position:absolute;height:20px;width:20px;right:3px;bottom:3px;background:#fff;border-radius:50%;transition:transform .2s}
+.switch input:checked + .slider{background:var(--primary)}
+.switch input:checked + .slider::before{transform:translateX(-22px)}
+.drawer-links{display:flex;flex-direction:column;gap:8px;flex-grow:1}
+.drawer-links a{display:flex;justify-content:space-between;background:var(--bg);border:1.5px solid var(--card-border);padding:12px 16px;
+  border-radius:16px;color:var(--text);text-decoration:none;font-size:12px;font-weight:900}
+.drawer-links a.active{border-color:var(--primary);background:var(--light);color:var(--primary)}
+.drawer-foot{text-align:center;font-size:10px;font-weight:700;color:var(--text2);border-top:1px solid var(--card-border);padding-top:14px}
+
+/* bottom nav */
+.bottom-nav{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);width:calc(100% - 32px);max-width:460px;
+  background:var(--nav-bg);border:1.5px solid var(--nav-glow);border-radius:24px;padding:6px 10px;
+  display:flex;gap:6px;z-index:999;box-shadow:0 8px 24px var(--nav-glow)}
+.bottom-nav a{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 8px;border-radius:16px;
+  color:var(--text2);text-decoration:none;font-size:10px;font-weight:700;border:1px solid rgba(128,128,128,.18);background:rgba(128,128,128,.05)}
+.bottom-nav a span{font-size:16px;line-height:1}
+.bottom-nav a.active{color:#fff;background:var(--nav-color);border-color:var(--nav-color)}
+
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<button class="to-top" id="toTop" title="العودة للأعلى">↑</button>
+<div class="progress"><i id="progress"></i></div>
+
+<!-- نافذة الدرس -->
+<div class="overlay" id="lessonModal">
+  <div class="modal" id="lessonCard">
+    <div class="modal-head">
+      <div class="modal-title"><span id="lIcon"></span><span id="lTitle"></span></div>
+      <button class="icon-btn" data-close>✕</button>
+    </div>
+    <div class="box"><small>📌 الخلاصة الذهبية (Quick Rule)</small><p id="lRule"></p></div>
+    <div class="box"><small>✍️ مثال حي مترجم (Live Example)</small><p id="lExample"></p></div>
+    <div class="box"><small>⚡ تنبيه أو خدعة ذكية (Pro Tip)</small><p id="lTip"></p></div>
+  </div>
+</div>
+
+<!-- نافذة البحث -->
+<div class="overlay" id="searchModal">
+  <div class="modal">
+    <div class="modal-head">
+      <div class="modal-title"><span>🔍</span><span>البحث في القسم</span></div>
+      <button class="icon-btn" data-close>✕</button>
+    </div>
+    <input type="text" class="search-input" id="searchInput" placeholder="ابحث عن: القواعد، الأزمنة...">
+    <div class="results" id="results"></div>
+  </div>
+</div>
+
+<!-- القائمة الجانبية -->
+<div class="side" id="sideMenu">
+  <div class="drawer">
+    <div class="drawer-top">
+      <div><h3>أكاديمية العلوم التطبيقية</h3><p>قسم اللغة الإنجليزية</p></div>
+      <span style="font-size:24px">🎓</span>
+    </div>
+    <div class="theme-row"><span>🌙 الوضع الليلي</span>
+      <label class="switch"><input type="checkbox" id="themeSwitch"><span class="slider"></span></label>
+    </div>
+    <div class="drawer-links">
+      <a href="../index.html"><span>🏠 الرئيسية</span><span>➔</span></a>
+      <a href="english.html" class="active"><span>🇬🇧 الإنجليزي</span><span>➔</span></a>
+      <a href="../surveying/surveying.html"><span>📐 المساحة</span><span>➔</span></a>
+      <a href="../programming/programming.html"><span>💻 البرمجة</span><span>➔</span></a>
+    </div>
+    <div class="drawer-foot">English Master v2.1 • Pro Edition</div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="nav-bar">
+    <div class="nav-right">
+      <a href="../index.html" class="icon-btn" title="الرئيسية">🏠</a>
+      <div class="nav-titles"><h1>اللغة الإنجليزية</h1><p>أكاديمية العلوم التطبيقية</p></div>
+    </div>
+    <div class="nav-left">
+      <button class="icon-btn" id="themeBtn" title="تغيير الثيم">☀️</button>
+      <button class="icon-btn" id="searchBtn" title="بحث">🔍</button>
+      <button class="icon-btn" id="menuBtn" title="القائمة">☰</button>
+    </div>
+  </div>
+
+  <div class="hero">
+    <div class="badge"><span>🇬🇧</span><span>أكاديمية العلوم التطبيقية</span></div>
+    <h2>المرجع الشامل في قواعد اللغة،<br><span>من الصفر حتى الطلاقة الأكاديمية</span>.</h2>
+    <p>منظومة تعليمية متكاملة مصممة خصيصاً لبناء قاعدة قوية في القواعد، الأزمنة، والمفردات.</p>
+    <div class="hero-img">
+      <img src="../images/english-board.jpg" alt="سبورة قواعد الإنجليزية" width="1000" height="400" decoding="async"
+           onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=800&q=70'">
+      <b>✨ المرجع الرقمي الأول ▪ دليلك الشامل لإتقان الإنجليزية</b>
+    </div>
+  </div>
+
+  <div class="tabs"><div class="tabs-row" id="tabs"></div></div>
+  <div id="sections"></div>
+</div>
+
+<nav class="bottom-nav" id="bottomNav">
+  <a href="../index.html"><span>🏠</span>الرئيسية</a>
+  <a href="english.html" class="active"><span>🇬🇧</span>الإنجليزي</a>
+  <a href="../surveying/surveying.html"><span>📐</span>المساحة</a>
+  <a href="../programming/programming.html"><span>💻</span>البرمجة</a>
+</nav>
+
+<script>
+/* ========= البيانات: عدّلي هنا فقط ========= */
+const TRACKS = [
+ {icon:"📖",color:"#2563EB",tab:"الأساسيات والقواعد",tag:"المسار الأول • القواعد وبناء الجملة",title:"الأساسيات والقواعد",
+  desc:"دليلك الشامل لتعلم ضمائر الفاعل والمفعول، أدوات النكرة والتعريف، أسماء الإشارة، وصفات وضمائر الملكية بدقة عالية.",
+  href:"fundamentals-path/fundamentals-path.html",btn:"استعرض مسار القواعد والأساسيات",
+  lessons:[
+   ["ضمائر الفاعل والمفعول","👤","تُستخدم ضمائر الفاعل ليحل محل الفاعل في أول الجملة، بينما ضمائر المفعول تأتي بعد الفعل.","He helped me yesterday.","تأكد من عدم الخلط بين ضمير الفاعل والمفعول."],
+   ["أدوات النكرة والتعريف","🏷️","تُستخدم (a/an) قبل الاسم المفرد النكرة و (the) للشيء المحدود والمعروف.","I saw an apple on the table.","لا تستخدم أدوات النكرة قبل الأسماء الجمع."],
+   ["أسماء الإشارة","👉","تُستخدم الإشارة للقريب (This/These) وللبعيد (That/Those) بناءً على العدد.","This is my new car.","انتبه لحالة الجمع والمفرد."],
+   ["صفات وضمائر الملكية","👑","صفات الملكية يتبعها اسم، بينما ضمائر الملكية تأتي مستقلة تماماً.","This is her pen, it is hers.","ضمير الملكية لا يتبعه اسم أبداً."]]},
+ {icon:"⏳",color:"#0284C7",tab:"الأزمنة الشاملة",tag:"المسار الثاني • الأزمنة المتسلسلة",title:"الأزمنة الشاملة (Tenses)",
+  desc:"اتقن جميع أزمنة اللغة الإنجليزية (المضارع، الماضي) والأفعال الشاذة والقصص التطبيقية بطريقة مبسطة.",
+  href:"tenses-path/tenses-path.html",btn:"استعرض مسار الأزمنة الشاملة",
+  lessons:[
+   ["المضارع البسيط","⏱️","يُعبر عن الحقائق والعادات اليومية.","He plays football every Friday.","لا تنسَ إضافة s مع المفرد."],
+   ["المضارع المستمر","⏳","يُعبر عن حدث يحدث الآن وقت الكلام.","They are studying English now.","فعل be أساسي قبل ing."],
+   ["الأفعال الشاذة","📜","الأفعال التي تتغير كلياً في التصريف الثاني والثالث.","Go - Went - Gone","يجب حفظ الأفعال الشاذة جيداً."],
+   ["قصص وتطبيقات الأزمنة","📚","تطبيق عملي على الأزمنة من خلال قصص قصيرة.","Read short stories in past tense.","فهم الزمن من خلال السياق."]]},
+ {icon:"🎮",color:"#7C3AED",tab:"ردهة الألعاب",tag:"المسار الثالث • التحديات والألعاب",title:"ردهة الألعاب التعليمية",
+  desc:"ردهة مخصصة لألعاب وتحديات اللغة الإنجليزية (صائد الكلمات، تركيب الجمل، سباق الأزمنة) لتعلم ممتع وتفاعلي.",
+  href:"gaming/gaming-hub.html",btn:"استعرض ردهة الألعاب والتحديات",
+  lessons:[
+   ["صائد الكلمات السريع","🏃‍♂️","التقط الكلمات ومعانيها الصحيحة وهي تتحرك.","Match fall words quickly.","السرعة تقوي الذاكرة."],
+   ["تحدي ترتيب الجمل","🧩","رتب الكلمات المبعثرة لتكوين جمل صحيحة.","Sentence puzzle builder game.","انتبه لترتيب الفاعل والفعل."],
+   ["سباق الأزمنة السريع","⚡","اختبار تنافسي بنظام الوقت لتحديد الأزمنة الـ 12.","Tenses speed quiz challenge.","اختبر سرعة بديهتك."],
+   ["توصيل الأزمنة والأمثلة","🔗","ربط الأزمنة بقواعدها والكلمات الدالة.","Tenses connect grid puzzle.","فهم الروابط الزمنية."]]},
+ {icon:"🧩",color:"#0EA5E9",tab:"تكوين الأسئلة",tag:"المسار الرابع • بناء الجمل والأسئلة",title:"تكوين الأسئلة والربط",
+  desc:"تعلم كيفية صياغة الأسئلة المركبة باستخدام أدوات الاستفهام، الأسئلة المغلقة، وأدوات الربط.",
+  href:"Configure questions and link/questions-path.html",btn:"استعرض مسار صياغة الأسئلة والربط",
+  lessons:[
+   ["أدوات الاستفهام (Wh-)","❓","تُستخدم للسؤال عن معلومات محددة.","Where do you live?","دائماً يتبعها الفعل المساعد."],
+   ["الأسئلة المغلقة","💬","أسئلة تبدأ بفعل مساعد إجابتها بـ Yes أو No.","Are you ready? Yes, I am.","ابدأ بالفعل المساعد المناسب."],
+   ["أدوات الربط والوصل","🔗","لربط الجمل والأفكار ببعضها.","I was tired, but I kept working.","اختر أداة الربط حسب المعنى."],
+   ["جمل الوصل النسبية","🪢","لإعطاء معلومات إضافية عن الاسم.","The man who helped me is kind.","استخدم who للأشخاص."]]},
+ {icon:"📚",color:"#3B82F6",tab:"المفردات والاصطلاحات",tag:"المسار الخامس • الحصيلة اللغوية والكلمات",title:"المفردات والاصطلاحات",
+  desc:"ارفع حصيلتك اللغوية بأهم 1000 كلمة شائعة، التعابير المجازية الشهيرة، والأفعال المركبة.",
+  href:"Vocabulary and Terminology/vocabulary-path.html",btn:"استعرض مسار المفردات والاصطلاحات",
+  lessons:[
+   ["أهم 1000 كلمة شائعة","📖","الكلمات الأكثر استخداماً في الحياة اليومية.","Understand common vocabulary.","احفظ الكلمات مع سياق الجملة."],
+   ["التعابير المجازية (Idioms)","🎨","تعابير لا يُفهم معناها حرفياً.","Break a leg! (حظاً طيباً)","لا تترجم التعابير حرفياً أبداً."],
+   ["الأفعال المركبة","⚡","فعل + حرف جر يغير المعنى تماماً.","Give up means to stop trying.","احفظ الفعل المركب كقطعة واحدة."],
+   ["الكلمات المتشابهة","🔀","كلمات تتشابه في النطق وتختلف في المعنى.","Their vs There pronunciation.","انتبه للإملاء والسياق."]]},
+ {icon:"💼",color:"#1E40AF",tab:"إنجليزي الأعمال",tag:"المسار السادس • التطوير المهني",title:"إنجليزي الأعمال والمقابلات",
+  desc:"استعد لسوق العمل بكتابة السيرة الذاتية الاحترافية، تكتيكات المقابلات، وصياغة الإيميلات.",
+  href:"Business English and Interviews/business-path.html",btn:"استعرض مسار إنجليزي الأعمال والمقابلات",
+  lessons:[
+   ["كتابة السيرة الذاتية","📄","تصميم سيرة ذاتية احترافية وخالية من الأخطاء.","Highlight your key skills.","اجعل سيرتك الذاتية في صفحة واحدة."],
+   ["أسئلة المقابلات الشخصية","👔","أهم الأسئلة الشائعة في المقابلات وكيفية الإجابة.","Tell me about yourself.","دعم إجاباتك بأمثلة واقعية."],
+   ["الإيميلات الرسمية","✉️","قواعد صياغة المراسلات الرسمية للشركات.","Dear Sir / Madam...","احرص على الوضوح والاختصار."],
+   ["مصطلحات الاجتماعات","📊","عبارات مستخدمة بكثرة في الاجتماعات العمالية.","Let us move to the next item.","استخدم عبارات مهذبة دائماً."]]},
+ {icon:"🎧",color:"#0D9488",tab:"الاستماع والطلاقة",tag:"المسار السابع • الطلاقة والنطق الصوتي",title:"الاستماع والمحادثة بطلاقة",
+  desc:"تعلم الرموز الصوتية الدولية (IPA)، قواعد الوصل في الكلام السريع، والفرق بين اللهجات.",
+  href:"Listen and talk fluently/phonetics-path.html",btn:"استعرض مسار الاستماع والمحادثة (IPA)",
+  lessons:[
+   ["الصوتيات والرموز (IPA)","🗣️","فهم الرموز الصوتية ونطق كل صوت بدقة.","Master the IPA phonetic alphabet.","الاستماع النشط يسبق النطق."],
+   ["قواعد الوصل في الكلام","🌊","كيف يدمج المتحدث الكلمات أثناء الكلام السريع.","Cup of tea sounds like cuppa tea.","لا تنطق كل كلمة منفصلة."],
+   ["اللهجات الأمريكية والبريطانية","🇺🇸","أبرز الفروق في النطق والهجاء.","Color vs Colour","اختر لهجة واحدة وتدرب عليها."],
+   ["تدريبات الطلاقة والحديث","🔥","تمرينات لكسر حاجز الخوف والحديث بثقة.","Practice speaking daily.","الاستمرارية أهم من القواعد."]]},
+ {icon:"⚠️",color:"#DC2626",tab:"الأخطاء الشائعة",tag:"المسار الثامن • التصحيح الفوري للقواعد",title:"الأخطاء الشائعة والتصحيح",
+  desc:"تجنب أشهر الأخطاء القواعدية واللغوية التي يقع فيها العرب، مع تصحيح أخطاء حروف الجر والفرق بين Make و Do.",
+  href:"Common Mistakes and Correction/mistakes-path.html",btn:"استعرض مسار الأخطاء الشائعة والتصحيح",
+  lessons:[
+   ["أشهر 50 خطأ شائعاً","❌","قائمة بأبرز الأخطاء المتكررة وكيفية تصحيحها.","Avoid literal translation mistakes.","صحح أخطاءك أول بأول."],
+   ["أخطاء حروف الجر الشائعة","📍","التصحيح السليم لحروف الجر (in, on, at).","At night, in the morning, on Monday.","حروف الجر تُحفظ بالسياق."],
+   ["الفرق بين Make و Do","⚖️","متى تستخدم Make ومتى تستخدم Do.","Make a cake vs Do homework.","Make للصنع و Do للأداء."],
+   ["اختبار تصحيح الأخطاء","🎯","تمارين لاكتشاف الأخطاء واختبار استيعابك.","Test your grammar correction skills.","راجع إجاباتك جيداً."]]}
+];
+
+/* ========= أدوات ========= */
+const $ = id => document.getElementById(id);
+const esc = s => s.replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const rgba = (hex, a) => {
+  const n = parseInt(hex.slice(1), 16);
+  return `rgba(${n >> 16},${(n >> 8) & 255},${n & 255},${a})`;
+};
+const store = {
+  get(k){ try { return localStorage.getItem(k); } catch (e) { return null; } },
+  set(k,v){ try { localStorage.setItem(k, v); } catch (e) {} }
+};
+
+/* ========= بناء الصفحة مرة واحدة ========= */
+$("tabs").innerHTML = TRACKS.map((t, i) =>
+  `<a href="#section-${i+1}" class="tab${i ? "" : " active"}"><em>${String(i+1).padStart(2,"0")}</em><span>${esc(t.tab)}</span></a>`
+).join("");
+
+$("sections").innerHTML = TRACKS.map((t, i) => {
+  const style = `--tp:${t.color};--tl:${rgba(t.color,.08)};--tb:${rgba(t.color,.3)};--tg:${rgba(t.color,.35)}`;
+  const chips = t.lessons.map((l, j) =>
+    `<button class="chip" data-t="${i}" data-l="${j}"><span>${esc(l[0])}</span><span>${l[1]}</span></button>`).join("");
+  return `<section class="card" id="section-${i+1}" style="${style}" data-color="${t.color}">
+    <div class="card-head">
+      <div class="card-icon">${t.icon}</div>
+      <div><span class="card-tag">${esc(t.tag)}</span><h2 class="card-title">${esc(t.title)}</h2></div>
+    </div>
+    <p class="card-desc">${esc(t.desc)}</p>
+    <div class="chips">${chips}</div>
+    <a href="${t.href}" class="cta"><span>${t.icon} ${esc(t.btn)}</span><i>➔</i></a>
+  </section>`;
+}).join("");
+
+/* ========= الثيم ========= */
+const root = document.documentElement;
+function applyTheme(dark){
+  root.classList.toggle("dark-mode", dark);
+  store.set("em_theme", dark ? "dark" : "light");
+  $("themeBtn").textContent = dark ? "☀️" : "🌙";
+  $("themeSwitch").checked = dark;
+}
+applyTheme(store.get("em_theme") === "dark");
+$("themeBtn").onclick = () => applyTheme(!root.classList.contains("dark-mode"));
+$("themeSwitch").onchange = e => applyTheme(e.target.checked);
+
+/* ========= النوافذ ========= */
+const lessonModal = $("lessonModal"), searchModal = $("searchModal"), sideMenu = $("sideMenu");
+document.addEventListener("click", e => {
+  const chip = e.target.closest(".chip");
+  if (chip) {
+    const t = +chip.dataset.t, l = TRACKS[t].lessons[+chip.dataset.l];
+    $("lIcon").textContent = l[1]; $("lTitle").textContent = l[0];
+    $("lRule").textContent = l[2]; $("lExample").textContent = l[3]; $("lTip").textContent = l[4];
+    $("lessonCard").style.setProperty("--mc", TRACKS[t].color);
+    lessonModal.classList.add("active");
+    return;
+  }
+  if (e.target.closest("[data-close]") || e.target === lessonModal || e.target === searchModal)
+    lessonModal.classList.remove("active"), searchModal.classList.remove("active");
+  if (e.target === sideMenu) sideMenu.classList.remove("active");
+});
+$("menuBtn").onclick = () => sideMenu.classList.add("active");
+$("searchBtn").onclick = () => { searchModal.classList.add("active"); renderResults(""); $("searchInput").focus(); };
+
+/* ========= البحث ========= */
+function renderResults(q){
+  q = q.trim().toLowerCase();
+  const list = TRACKS.map((t, i) => ({t, i})).filter(({t}) =>
+    !q || (t.title + t.desc + t.tab + t.lessons.map(l => l[0]).join(" ")).toLowerCase().includes(q));
+  $("results").innerHTML = list.length
+    ? list.map(({t, i}) => `<a href="#section-${i+1}" class="result" data-close><b>${t.icon} ${esc(t.title)}</b><span>${esc(t.desc)}</span></a>`).join("")
+    : `<div class="result"><span>لا توجد نتائج</span></div>`;
+}
+$("searchInput").addEventListener("input", e => renderResults(e.target.value));
+
+/* ========= التمرير: مستمع واحد + rAF ========= */
+const cards = [...document.querySelectorAll(".card")];
+const tabEls = [...document.querySelectorAll(".tab")];
+const bottomNav = $("bottomNav"), toTop = $("toTop"), progress = $("progress");
+let tops = [], docMax = 1, ticking = false, current = -1;
+
+function measure(){
+  tops = cards.map(c => ({top: c.offsetTop, bottom: c.offsetTop + c.offsetHeight}));
+  docMax = Math.max(1, root.scrollHeight - root.clientHeight);
+}
+function update(){
+  ticking = false;
+  const y = window.scrollY, mid = y + innerHeight / 2;
+  progress.style.transform = `scaleX(${Math.min(1, y / docMax)})`;
+  toTop.classList.toggle("show", y > 300);
+
+  const idx = tops.findIndex(s => mid >= s.top && mid < s.bottom);
+  if (idx !== -1 && idx !== current) {
+    current = idx;
+    const color = cards[idx].dataset.color;
+    bottomNav.style.setProperty("--nav-color", color);
+    bottomNav.style.setProperty("--nav-glow", rgba(color, .35));
+    tabEls.forEach((t, i) => t.classList.toggle("active", i === idx));
+  }
+}
+addEventListener("scroll", () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, {passive: true});
+addEventListener("resize", () => { measure(); update(); });
+addEventListener("load", () => { measure(); update(); });
+document.fonts && document.fonts.ready.then(() => { measure(); update(); });
+measure(); update();
+
+toTop.onclick = () => scrollTo({top: 0, behavior: "smooth"});
+</script>
+</body>
 </html>
