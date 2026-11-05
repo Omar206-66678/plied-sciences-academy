@@ -47,7 +47,7 @@
                 --earth-border: rgba(5, 150, 105, 0.35);
 
                 --nav-theme-color: #EA580C;
-                --nav-glow-color: rgba(234, 88, 12, 0.2);
+                --nav-glow-color: rgba(234, 88, 12, 0.3);
             }
 
             html.dark-mode {
@@ -64,7 +64,7 @@
                 --earth-border: rgba(52, 211, 153, 0.35);
 
                 --nav-theme-color: #FB923C;
-                --nav-glow-color: rgba(251, 146, 60, 0.25);
+                --nav-glow-color: rgba(251, 146, 60, 0.35);
             }
 
             html:not(.dark-mode) {
@@ -77,7 +77,7 @@
                 --header-border: rgba(30, 144, 255, 0.2);
 
                 --nav-theme-color: #EA580C;
-                --nav-glow-color: rgba(234, 88, 12, 0.15);
+                --nav-glow-color: rgba(234, 88, 12, 0.25);
             }
 
             body {
@@ -97,6 +97,15 @@
             .top-progress-bar { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: transparent; z-index: 9999; }
             .top-progress-fill { height: 100%; width: 0%; transform-origin: right; background: linear-gradient(90deg, var(--survey-color), var(--accent)); }
 
+            .scroll-to-top-btn {
+                position: fixed; bottom: 80px; left: 20px; width: 44px; height: 44px;
+                background: var(--card-bg); border: 1.5px solid var(--survey-border); border-radius: 14px; color: var(--survey-color); font-size: 18px;
+                display: flex; align-items: center; justify-content: center; cursor: pointer;
+                box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15); z-index: 998; opacity: 0; visibility: hidden;
+                transform: translateY(15px); transition: opacity 0.2s, transform 0.2s;
+            }
+            .scroll-to-top-btn.show { opacity: 1; visibility: visible; transform: translateY(0); }
+
             /* الهيدر العلوي */
             .nav-bar {
                 display: flex;
@@ -109,34 +118,26 @@
                 border-radius: 18px;
                 box-shadow: var(--header-shadow);
             }
-            .nav-right-group { display: flex; align-items: center; }
+            .nav-right-group { display: flex; align-items: center; gap: 8px; text-align: right; }
             .nav-left-group { display: flex; align-items: center; gap: 6px; }
             
             .nav-titles-box { 
                 display: flex; 
                 flex-direction: column; 
-                align-items: center; 
-                text-align: center;
-                gap: 1px; 
-                flex: 1;
-                padding: 0 8px;
+                align-items: flex-start; 
+                gap: 0px; 
             }
-            .nav-main-title { font-size: 13.5px; font-weight: 950; color: var(--text-primary); margin: 0; line-height: 1.2; }
-            .nav-sub-title { font-size: 9.5px; font-weight: 800; color: var(--survey-color); margin: 0; line-height: 1.2; }
+            .nav-main-title { font-size: 13px; font-weight: 950; color: var(--survey-color); margin: 0; line-height: 1.2; }
+            .nav-sub-title { font-size: 9.5px; font-weight: 800; color: var(--text-secondary); margin: 0; line-height: 1.2; }
 
             .home-icon-btn, .nav-icon-btn {
                 background: var(--survey-bg); 
                 border: 1.5px solid var(--survey-border);
-                width: 33px; height: 33px; border-radius: 12px; 
+                width: 34px; height: 34px; border-radius: 10px; 
                 display: flex; align-items: center; justify-content: center;
-                color: var(--text-primary); font-size: 13.5px; text-decoration: none; cursor: pointer;
-                box-sizing: border-box;
+                color: var(--survey-color); font-size: 15px; text-decoration: none; cursor: pointer; border: none; flex-shrink: 0;
             }
-            .home-icon-btn { color: var(--survey-color); }
-
-            @media (hover: hover) {
-                .home-icon-btn:hover, .nav-icon-btn:hover { transform: scale(1.05); border-color: var(--survey-color); }
-            }
+            .nav-icon-btn { color: var(--text-primary); }
 
             /* نافذة البحث */
             .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(3, 7, 18, 0.85); display: none; align-items: center; justify-content: center; z-index: 10000; padding: 16px; box-sizing: border-box; }
@@ -224,7 +225,7 @@
                 white-space: nowrap; display: flex; align-items: center; gap: 7px;
             }
 
-            /* الكروت والهندسة البصرية الموحدة للأقسام الثلاثة */
+            /* الكروت والهندسة البصرية للأقسام */
             .practical-course-card, .survey-style-card {
                 background: var(--card-bg);
                 border: 2px solid var(--sec-border);
@@ -234,6 +235,7 @@
                 box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
                 position: relative;
                 overflow: hidden;
+                scroll-margin-top: 20px;
             }
             .practical-course-card::before, .survey-style-card::before {
                 content: '';
@@ -284,10 +286,6 @@
             }
             .chip-icon, .survey-chip-icon { font-size: 15px; flex-shrink: 0; }
 
-            @media (hover: hover) {
-                .chip-item-btn:hover, .survey-sub-chip:hover { filter: brightness(1.05); transform: translateY(-1px); }
-            }
-
             .modern-cta-box {
                 background: var(--sec-bg);
                 border: 1.5px solid var(--sec-border); border-radius: 20px;
@@ -300,10 +298,6 @@
                 font-size: 12.5px; font-weight: 950; display: flex; align-items: center; justify-content: space-between;
                 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             }
-            @media (hover: hover) {
-                .modern-cta-button:hover { transform: translateY(-1px); filter: brightness(1.08); }
-            }
-            .modern-cta-button:active { transform: scale(0.99); }
 
             .info-toast {
                 position: fixed; bottom: 85px; left: 50%; transform: translateX(-50%) translateY(40px);
@@ -313,29 +307,39 @@
             }
             .info-toast.show { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
 
-            /* الشريط السفلي */
+            /* الشريط السفلي المتفاعل مع ألوان الأقسام */
             .bottom-nav {
                 position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); 
                 width: calc(100% - 32px); max-width: 460px;
-                background: var(--header-bg);
+                background: linear-gradient(135deg, var(--nav-glow-color) 0%, var(--header-bg) 100%);
                 display: flex; justify-content: space-around; align-items: center;
                 padding: 6px 10px; border-radius: 24px; 
                 border: 1.5px solid var(--card-border);
-                box-shadow: 0 8px 24px rgba(0,0,0,0.2); 
+                box-shadow: 0 8px 24px var(--nav-glow-color); 
                 z-index: 999; box-sizing: border-box;
+                transition: all 0.4s ease;
             }
             .bottom-nav a { 
                 color: var(--text-secondary); text-decoration: none; font-size: 10px; text-align: center; font-weight: 800; 
                 display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 12px; border-radius: 16px; flex: 1; 
                 border: 1px solid rgba(128, 128, 128, 0.18); background: rgba(128, 128, 128, 0.05);
+                transition: all 0.3s ease;
             }
             .bottom-nav a span { font-size: 16px; line-height: 1; }
             .bottom-nav a:hover { color: var(--nav-theme-color); border-color: var(--nav-theme-color); background: rgba(128, 128, 128, 0.1); }
-            .bottom-nav a.active { color: #FFFFFF; background: var(--nav-theme-color); border-color: var(--nav-theme-color); }
+            .bottom-nav a.active { color: #FFFFFF; background: var(--nav-theme-color); border-color: var(--nav-theme-color); box-shadow: 0 4px 15px var(--nav-glow-color); }
+
+            @media (hover: hover) {
+                .home-icon-btn:hover, .nav-icon-btn:hover { transform: scale(1.05); border-color: var(--survey-color); color: var(--survey-color); }
+                .chip-item-btn:hover, .survey-sub-chip:hover { filter: brightness(1.05); transform: translateY(-1px); }
+                .modern-cta-button:hover { transform: translateY(-1px); filter: brightness(1.08); }
+                .scroll-to-top-btn:hover { background: var(--survey-color); color: #FFFFFF; border-color: var(--survey-color); }
+            }
         </style>
     </head>
     <body>
 
+        <button class="scroll-to-top-btn" id="scrollToTopBtn" title="العودة للأعلى">↑</button>
         <div class="top-progress-bar"><div class="top-progress-fill" id="progressFill"></div></div>
         <div class="info-toast" id="infoToast">هذا العنصر وصفي وتوضيحي. للدخول للقسم بالكامل، اضغط على زر الاستعراض بالأسفل 🚀</div>
 
@@ -376,9 +380,9 @@
                 </div>
 
                 <div class="drawer-theme-switch-box">
-                    <span class="drawer-theme-label"><span>🌙</span> الوضع الهادئ</span>
+                    <span class="drawer-theme-label"><span>🌙</span> الوضع الليلي</span>
                     <label class="switch-toggle">
-                        <input type="checkbox" id="themeSwitchCheckbox" checked>
+                        <input type="checkbox" id="themeSwitchCheckbox">
                         <span class="slider-round"></span>
                     </label>
                 </div>
@@ -391,19 +395,19 @@
                     <a href="../programming/programming.html" class="drawer-link-item"><span>💻 قسم البرمجة و AI</span><span>➔</span></a>
                 </div>
 
-                <div class="drawer-footer-text">Clean Surveying Edition v6.5</div>
+                <div class="drawer-footer-text">Clean Surveying Edition v6.6</div>
             </div>
         </div>
 
         <div class="container">
-            <!-- الهيدر العلوي -->
+            <!-- الهيدر العلوي بالأيقونات الكاملة -->
             <div class="nav-bar">
                 <div class="nav-right-group">
                     <a href="../index.html" class="home-icon-btn" title="الرئيسية">🏠</a>
-                </div>
-                <div class="nav-titles-box">
-                    <h1 class="nav-main-title">قسم المساحة</h1>
-                    <p class="nav-sub-title">الهندسة الميدانية والعلوم</p>
+                    <div class="nav-titles-box">
+                        <h1 class="nav-main-title">قسم المساحة</h1>
+                        <p class="nav-sub-title">أكاديمية العلوم التطبيقية</p>
+                    </div>
                 </div>
                 <div class="nav-left-group">
                     <button class="nav-icon-btn" id="themeToggleBtn" title="تغيير الثيم">🌙</button>
@@ -413,7 +417,7 @@
             </div>
 
             <!-- كارت الترحيب الهندسي الشامل -->
-            <div class="hero-welcome-card">
+            <div class="hero-welcome-card" data-nav-color="#EA580C" data-nav-glow="rgba(234, 88, 12, 0.3)">
                 <div class="hero-badge">
                     <span>📐</span>
                     <span>الهندسة المساحية والعلوم الأرضية</span>
@@ -437,7 +441,7 @@
             </div>
 
             <!-- المسار الأول: المساحة العملية -->
-            <div class="practical-course-card card-survey">
+            <div class="practical-course-card card-survey" id="section-1" data-nav-color="#EA580C" data-nav-glow="rgba(234, 88, 12, 0.3)">
                 <div class="card-header-banner">
                     <div class="banner-text-side">
                         <span class="banner-sub-tag">المسار الأول ▪ التطبيق الحقلي</span>
@@ -479,7 +483,7 @@
             </div>
 
             <!-- المسار الثاني: المساحة التصويرية -->
-            <div class="survey-style-card card-photo">
+            <div class="survey-style-card card-photo" id="section-2" data-nav-color="#4F46E5" data-nav-glow="rgba(79, 70, 229, 0.3)">
                 <div class="survey-inner-header">
                     <div class="banner-text-side">
                         <span class="survey-path-num">المسار الثاني • التصوير الجوي</span>
@@ -517,7 +521,7 @@
             </div>
 
             <!-- المسار الثالث: علوم الأرض والجيولوجيا -->
-            <div class="survey-style-card card-earth">
+            <div class="survey-style-card card-earth" id="section-3" data-nav-color="#059669" data-nav-glow="rgba(5, 150, 105, 0.3)">
                 <div class="survey-inner-header">
                     <div class="banner-text-side">
                         <span class="survey-path-num">المسار الثالث • طبقات وتضاريس القشرة</span>
@@ -555,7 +559,7 @@
             </div>
         </div>
 
-        <!-- شريط التنقل السفلي -->
+        <!-- شريط التنقل السفلي المتفاعل مع الأقسام -->
         <div class="bottom-nav" id="bottomNav">
             <a href="../index.html"><span class="nav-icon">🏠</span>الرئيسية</a>
             <a href="surveying.html" class="active"><span class="nav-icon">📐</span>المساحة</a>
@@ -583,6 +587,8 @@
 
             let themeBtn = document.getElementById("themeToggleBtn");
             let themeSwitchCheckbox = document.getElementById("themeSwitchCheckbox");
+            let scrollToTopBtn = document.getElementById("scrollToTopBtn");
+            let bottomNav = document.getElementById("bottomNav");
 
             function applyTheme(isDark) {
                 if (isDark) {
@@ -603,7 +609,7 @@
 
             if (themeBtn) {
                 themeBtn.addEventListener("click", () => {
-                    applyTheme(!document.documentElement.classList.2500 ? true : !document.documentElement.classList.contains("dark-mode"));
+                    applyTheme(!document.documentElement.classList.contains("dark-mode"));
                 });
             }
             if (themeSwitchCheckbox) {
@@ -632,22 +638,52 @@
                 });
             }
 
-            // تحسين أداء السكرول باستخدام requestAnimationFrame
+            // تفاعل شريط التنقل السفلي ولون السكرول مع الأقسام بدقة عالية
+            let sections = document.querySelectorAll("[data-nav-color]");
+            let docMax = Math.max(1, document.documentElement.scrollHeight - document.documentElement.clientHeight);
             let ticking = false;
-            const progressFill = document.getElementById("progressFill");
-            const docMax = Math.max(1, document.documentElement.scrollHeight - document.documentElement.clientHeight);
+            let progressFill = document.getElementById("progressFill");
+
+            function updateScrollEffects() {
+                ticking = false;
+                let y = window.scrollY;
+                let mid = y + innerHeight / 2;
+
+                if (progressFill) {
+                    progressFill.style.transform = `scaleX(${Math.min(1, y / docMax)})`;
+                }
+                if (scrollToTopBtn) {
+                    scrollToTopBtn.classList.toggle("show", y > 300);
+                }
+
+                sections.forEach(section => {
+                    let top = section.offsetTop;
+                    let height = section.offsetHeight;
+                    if (mid >= top && mid < top + height) {
+                        let color = section.getAttribute("data-nav-color");
+                        let glow = section.getAttribute("data-nav-glow");
+                        if (bottomNav) {
+                            bottomNav.style.setProperty("--nav-theme-color", color);
+                            bottomNav.style.setProperty("--nav-glow-color", glow);
+                        }
+                    }
+                });
+            }
 
             window.addEventListener("scroll", () => {
                 if (!ticking) {
-                    window.requestAnimationFrame(() => {
-                        let winScroll = window.scrollY;
-                        let scrolled = Math.min(1, winScroll / docMax);
-                        if (progressFill) progressFill.style.transform = `scaleX(${scrolled})`;
-                        ticking = false;
-                    });
                     ticking = true;
+                    requestAnimationFrame(updateScrollEffects);
                 }
             }, { passive: true });
+
+            updateScrollEffects();
+
+            if (scrollToTopBtn) {
+                scrollToTopBtn.addEventListener("click", () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
         </script>
     </body>
 </html>
