@@ -76,7 +76,14 @@ const CFG=[
  {k:'pattern',t:'نقش الخلفية',o:()=>[['none','سادة'],['dots','نقاط'],['stripes','خطوط'],['circles','دوائر'],['stars','نجوم'],['waves','أمواج'],['grid','شبكة'],['rays','أشعة']]}
 ];
 const DEF={gender:'boy',face:0,body:1,skin:SKIN[2],hair:'short',hairColor:HAIR[1],brows:'normal',eyes:'round',mouth:'smile',extra:'none',glasses:'none',outfit:'tee',outfitColor:CLOTH[0],acc:'none',bg:BG[0],pattern:'none'};
-let S={...DEF},tab=0;
+
+// استرجاع الأفاتار المحفوظ إن وجد، لعدم ضياع التعديلات السابقة
+let S = {...DEF};
+const savedAvatarConfig = localStorage.getItem("em_user_config");
+if(savedAvatarConfig) {
+  try { S = JSON.parse(savedAvatarConfig); } catch(e) {}
+}
+let tab = 0;
 
 const mir=t=>`${t}<g transform="translate(200 0) scale(-1 1)">${t}</g>`;
 const star=(x,y,k,f)=>`<polygon fill="${f}" points="${[[0,-7],[2,-2],[7,-2],[3,1.5],[4.5,7],[0,3.5],[-4.5,7],[-3,1.5],[-7,-2],[-2,-2]].map(p=>(x+p[0]*k).toFixed(1)+','+(y+p[1]*k).toFixed(1)).join(' ')}"/>`;
@@ -221,12 +228,12 @@ const pick=a=>a[Math.floor(Math.random()*a.length)];
 document.getElementById('rnd').onclick=()=>{CFG.forEach(c=>{S[c.k]=pick(opts(c))[0]});render()};
 document.getElementById('rst').onclick=()=>{S={...DEF};render()};
 
-// زر موافق: يحفظ الأفاتار (SVG كـ Data URI) وينتقل لصفحة البروفايل تلقائياً
+// زر موافق: حفظ الإعدادات والصورة والانتقال الفوري للبروفايل بدون رسائل مزعجة
 document.getElementById('okBtn').onclick=()=>{
  const svgString = draw(S);
  const encodedSvg = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgString);
  localStorage.setItem("em_user_avatar", encodedSvg);
- alert("تم حفظ الأفاتار بنجاح! 🎉");
+ localStorage.setItem("em_user_config", JSON.stringify(S));
  window.location.href = "profile.html";
 };
 
