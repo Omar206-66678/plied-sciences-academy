@@ -17,53 +17,56 @@
             :root {
                 --bg-main: #F4F6F9;
                 --card-bg: #FFFFFF;
-                --card-border: #E2E8F0;
+                --card-border: #93C5FD;
                 --text-primary: #0F172A;
-                --text-secondary: #64748B;
+                --text-secondary: #334155;
                 
                 --header-bg: #FFFFFF;
-                --header-border: rgba(245, 158, 11, 0.15);
-                --header-shadow: 0 10px 30px rgba(245, 158, 11, 0.05);
+                --header-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
                 
-                --primary: #F59E0B;
-                --primary-dark: #D97706;
-                --accent: #F59E0B; 
-                --light-bg: rgba(245, 158, 11, 0.05);
-                --border-glow: rgba(245, 158, 11, 0.25);
+                --primary: #475569;
+                
+                /* لون الهيكل العام الموحد للكروت والحدود */
+                --accent: #0284C7; 
+                --light-bg: rgba(2, 132, 199, 0.04);
 
-                --comp-short: #2563EB; 
-                --comp-long: #059669; 
-                --comp-irreg: #D97706;
+                /* ألوان الكلمات والرموز المميزة الخاصة بكل قاعدة داخل الجمل فقط */
+                --word-c1: #0284C7;  /* القاعدة الأولى: أزرق */
+                --word-c2: #10B981;  /* القاعدة الثانية: أخضر */
+                --word-c3: #F59E0B;  /* القاعدة الثالثة: أصفر/برتقالي */
+
                 --heading-pure-color: #0F172A; 
-
-                --nav-theme-color: #F59E0B;
-                --nav-glow-color: rgba(245, 158, 11, 0.25);
+                --nav-theme-color: #0284C7;
+                --nav-glow-color: rgba(2, 132, 199, 0.25);
             }
 
             html.dark-mode, body.dark-mode {
                 --bg-main: #06080F;
                 --card-bg: #0B0F19;
-                --card-border: rgba(255, 255, 255, 0.07);
-                --text-primary: #F3F4F6;
-                --text-secondary: #9CA3AF;
+                --card-border: rgba(56, 189, 248, 0.3);
+                --text-primary: #FFFFFF;
+                --text-secondary: #94A3B8;
                 
                 --header-bg: #0B0F19;
-                --header-border: rgba(245, 158, 11, 0.3);
                 --header-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
                 
-                --primary: #FBBF24;
-                --primary-dark: #F59E0B;
-                --accent: #FBBF24;
-                --light-bg: rgba(245, 158, 11, 0.09);
-                --border-glow: rgba(245, 158, 11, 0.35);
+                --primary: #94A3B8;
+                --accent: #38BDF8;
+                --light-bg: rgba(56, 189, 248, 0.06);
 
-                --comp-short: #60A5FA;
-                --comp-long: #34D399;
-                --comp-irreg: #FBBF24;
+                --word-c1: #38BDF8;
+                --word-c2: #34D399;
+                --word-c3: #FBBF24;
+
                 --heading-pure-color: #FFFFFF; 
+                --nav-theme-color: #38BDF8;
+                --nav-glow-color: rgba(56, 189, 248, 0.3);
+            }
 
-                --nav-theme-color: #FBBF24;
-                --nav-glow-color: rgba(251, 191, 36, 0.35);
+            body, * {
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                text-rendering: optimizeLegibility;
             }
 
             body {
@@ -80,12 +83,12 @@
             .container { max-width: 680px; margin: auto; }
 
             .top-progress-bar { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: transparent; z-index: 9999; }
-            .top-progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--primary-dark)); }
+            .top-progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--primary)); }
 
             .scroll-to-top-btn {
                 position: fixed; bottom: 80px; left: 20px; width: 44px; height: 44px;
                 background: var(--card-bg); backdrop-filter: blur(16px);
-                border: 1.5px solid var(--border-glow); border-radius: 14px; color: var(--accent); font-size: 18px;
+                border: 2px solid var(--card-border); border-radius: 22px; color: var(--accent); font-size: 18px;
                 display: flex; align-items: center; justify-content: center; cursor: pointer;
                 box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); z-index: 998; opacity: 0; visibility: hidden;
                 transform: translateY(15px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -93,34 +96,32 @@
             .scroll-to-top-btn.show { opacity: 1; visibility: visible; transform: translateY(0); }
             .scroll-to-top-btn:hover { background: var(--accent); color: #FFFFFF; border-color: var(--accent); transform: translateY(-3px); }
 
-            /* شريط الهيدر */
+            /* شريط الهيدر العلوي */
             .nav-bar {
                 display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
-                background: var(--header-bg); border: 1.5px solid var(--header-border); padding: 10px 16px;
-                border-radius: 24px; box-shadow: var(--header-shadow); gap: 10px;
+                background: var(--header-bg); border: 2.5px solid var(--card-border); padding: 12px 20px;
+                border-radius: 40px; box-shadow: var(--header-shadow); gap: 10px;
             }
             .brand-minimalist-box { display: flex; flex-direction: column; align-items: center; text-align: center; flex: 1; padding: 0 4px; min-width: 0; }
-            .brand-main-title { font-size: 13.5px; font-weight: 900; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
-            .brand-subtitle-text { font-size: 10px; font-weight: 800; color: var(--accent); letter-spacing: 0.5px; text-transform: uppercase; margin-top: 2px; }
+            .brand-main-title { font-size: 14px; font-weight: 900; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
+            .brand-subtitle-text { font-size: 10.5px; font-weight: 800; color: var(--accent); letter-spacing: 0.5px; text-transform: uppercase; margin-top: 2px; }
 
             .nav-actions-group { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
             .back-btn, .theme-btn {
-                background: var(--light-bg); border: 1.5px solid var(--border-glow);
-                width: 36px; height: 36px; border-radius: 14px; display: flex; align-items: center; justify-content: center;
+                background: var(--light-bg); border: 2px solid var(--card-border);
+                width: 40px; height: 40px; border-radius: 20px; display: flex; align-items: center; justify-content: center;
                 color: var(--text-primary); font-size: 16px; text-decoration: none; cursor: pointer; transition: 0.25s; flex-shrink: 0;
             }
             .back-btn:hover, .theme-btn:hover { transform: scale(1.05); border-color: var(--accent); color: var(--accent); }
 
+            /* الكارت العلوي الهندسي */
             .hero-card {
                 background: var(--card-bg); 
-                border: 2px solid transparent;
-                background-image: linear-gradient(var(--card-bg), var(--card-bg)), linear-gradient(135deg, var(--accent), var(--primary-dark));
-                background-origin: border-box;
-                background-clip: padding-box, border-box;
-                border-radius: 28px;
-                padding: 24px; 
+                border: 2.5px solid var(--card-border);
+                border-radius: 36px;
+                padding: 26px; 
                 margin-bottom: 24px; 
-                box-shadow: 0 10px 30px var(--border-glow); 
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03); 
                 display: flex; 
                 flex-direction: column; 
                 align-items: center;
@@ -131,11 +132,11 @@
             }
             
             .hero-title-en { margin: 0; font-size: 21px; font-weight: 950; color: var(--heading-pure-color); letter-spacing: -0.3px; }
-            .hero-title-ar { margin: 0; font-size: 14px; font-weight: 800; color: var(--accent); background: var(--light-bg); padding: 4px 16px; border-radius: 12px; border: 1px solid var(--border-glow); }
+            .hero-title-ar { margin: 0; font-size: 14px; font-weight: 800; color: var(--accent); background: var(--light-bg); padding: 6px 18px; border-radius: 20px; border: 2px solid var(--card-border); }
 
-            .table-container { width: 100%; overflow-x: auto; margin-top: 4px; border-radius: 16px; border: 1.5px solid var(--card-border); text-align: right; }
+            .table-container { width: 100%; overflow-x: auto; margin-top: 4px; border-radius: 22px; border: 2px solid var(--card-border); text-align: right; }
             .styled-master-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
-            .styled-master-table th, .styled-master-table td { padding: 10px 14px; border-bottom: 1px solid var(--card-border); border-left: 1px solid var(--card-border); }
+            .styled-master-table th, .styled-master-table td { padding: 10px 14px; border-bottom: 1.5px solid var(--card-border); border-left: 1.5px solid var(--card-border); }
             .styled-master-table th:last-child, .styled-master-table td:last-child { border-left: none; }
             .styled-master-table th { background: var(--light-bg); color: var(--heading-pure-color); font-weight: 950; font-size: 13px; }
             .styled-master-table td { background: var(--card-bg); color: var(--text-primary); font-weight: 800; }
@@ -143,57 +144,50 @@
 
             .th-comp { color: var(--accent) !important; background: var(--light-bg) !important; font-weight: 950 !important; }
 
-            /* كارت الشرح الشامل الرئيسي مع تفاعل حدود ديناميكي سلس ومضمون */
+            /* كارت الشرح الشامل الرئيسي */
             .lesson-card-full {
                 background: var(--card-bg); 
-                border: 2px solid transparent;
-                background-image: linear-gradient(var(--card-bg), var(--card-bg)), linear-gradient(135deg, var(--current-border-color, #2563EB), var(--primary-dark));
-                background-origin: border-box;
-                background-clip: padding-box, border-box;
-                border-radius: 28px;
-                padding: 26px; 
+                border: 2.5px solid var(--card-border);
+                border-radius: 40px;
+                padding: 28px; 
                 margin-bottom: 24px; 
-                box-shadow: 0 20px 45px rgba(245, 158, 11, 0.1); 
+                box-shadow: 0 20px 45px rgba(0, 0, 0, 0.04); 
                 display: flex; 
                 flex-direction: column; 
                 gap: 20px;
                 position: relative; 
                 overflow: hidden;
-                transition: background-image 0.5s ease;
             }
             
             .lesson-header { display: flex; flex-direction: column; gap: 14px; }
             .app-title-wrapper { display: flex; flex-direction: column; gap: 8px; position: relative; padding-right: 14px; border-right: 4px solid var(--accent); }
             .app-main-heading { margin: 0; font-size: 20px; font-weight: 950; color: var(--heading-pure-color); letter-spacing: -0.4px; font-family: 'Cairo', sans-serif; direction: ltr; text-align: right; }
-            .app-sub-pill { display: inline-flex; align-items: center; gap: 6px; background: var(--light-bg); border: 1.5px solid var(--border-glow); color: var(--heading-pure-color); padding: 6px 14px; border-radius: 12px; font-size: 12px; font-weight: 850; width: fit-content; }
+            .app-sub-pill { display: inline-flex; align-items: center; gap: 6px; background: var(--light-bg); border: 2px solid var(--card-border); color: var(--heading-pure-color); padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 850; width: fit-content; }
 
+            /* تعريف متغيرات الكلمات لكل قاعدة */
+            .rule-card-1 { --word-color: var(--word-c1); }
+            .rule-card-2 { --word-color: var(--word-c2); }
+            .rule-card-3 { --word-color: var(--word-c3); }
+
+            /* الكروت الداخلية للشرح */
             .glass-glow-card {
                 background: var(--card-bg);
                 backdrop-filter: blur(16px);
-                border-radius: 22px;
+                border-radius: 28px;
                 padding: 24px 22px 22px 22px;
                 display: flex;
                 flex-direction: column;
                 gap: 16px;
                 position: relative;
                 overflow: hidden;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
                 width: 100%;
                 box-sizing: border-box;
+                border: 2px solid var(--card-border);
             }
 
-            .card-top-header { display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 4px; }
+            .玻璃-glow-card::before, .glass-glow-card::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--accent), var(--primary)); width: 100%; }
 
-            .glass-glow-card.short-card { border: 1.5px solid rgba(37, 99, 235, 0.3); }
-            .glass-glow-card.short-card::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 4px; background: linear-gradient(90deg, #2563EB, #60A5FA); width: 100%; }
-
-            .glass-glow-card.long-card { border: 1.5px solid rgba(5, 150, 105, 0.35); }
-            .glass-glow-card.long-card::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 4px; background: linear-gradient(90deg, #059669, #34D399); width: 100%; }
-
-            .glass-glow-card.irreg-card { border: 1.5px solid rgba(217, 119, 6, 0.35); }
-            .glass-glow-card.irreg-card::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 4px; background: linear-gradient(90deg, #D97706, #FBBF24); width: 100%; }
-
-            /* تنسيق العناوين الجديدة (سلسلة الأسطر الثلاثة المنظمة) */
             .usage-title-centered {
                 display: flex;
                 flex-direction: column;
@@ -203,116 +197,185 @@
                 width: 100%;
                 margin-bottom: 8px;
             }
-            .usage-title-ar {
-                font-size: 16px;
-                font-weight: 950;
-                color: var(--heading-pure-color);
-            }
-            .usage-title-bracket {
-                font-size: 14px;
-                font-weight: 950;
-                direction: ltr;
-                unicode-bidi: embed;
-            }
-            .usage-title-en {
-                font-size: 12px;
-                font-weight: 850;
-                color: var(--text-secondary);
-                letter-spacing: 0.3px;
-            }
+            .usage-title-ar { font-size: 16px; font-weight: 950; color: var(--heading-pure-color); }
+            .usage-title-bracket { font-size: 14px; font-weight: 950; direction: ltr; unicode-bidi: embed; color: var(--accent); }
+            .usage-title-en { font-size: 12px; font-weight: 850; color: var(--text-secondary); letter-spacing: 0.3px; }
 
             .usage-content { font-size: 13.5px; font-weight: 700; color: var(--text-secondary); line-height: 1.8; }
-            .method-box { background: var(--light-bg); border: 1.5px solid var(--border-glow); padding: 14px; border-radius: 16px; margin: 12px 0; display: flex; flex-direction: column; gap: 8px; }
+            
+            .method-box { 
+                background: var(--card-bg); 
+                border: 2px solid var(--card-border); 
+                padding: 14px 16px; 
+                border-radius: 20px; 
+                margin: 14px 0; 
+                display: flex; 
+                flex-direction: column; 
+                gap: 8px; 
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+            }
 
             .prep-practice-group { display: flex; flex-direction: column; gap: 12px; margin-top: 8px; }
             .icon-cards-list { display: flex; flex-direction: column; gap: 12px; }
             
+            /* حدود كروت التطبيق أصبحت موحدة وهادئة تماماً */
             .icon-single-card {
-                background: var(--light-bg); border: 1.5px solid var(--border-glow); border-radius: 18px; padding: 14px 18px;
-                display: flex; flex-direction: column; gap: 10px; transition: 0.3s ease; position: relative; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+                background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 22px; padding: 14px 18px;
+                display: flex; flex-direction: column; gap: 10px; transition: 0.3s ease; position: relative; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
             }
-            .icon-single-card.short-practice-card { border-color: rgba(37, 99, 235, 0.3); background: rgba(37, 99, 235, 0.04); }
-            .icon-single-card.short-practice-card:hover { border-color: #2563EB; box-shadow: 0 8px 25px rgba(37, 99, 235, 0.15); }
-            .short-speak { color: #2563EB !important; border-color: rgba(37, 99, 235, 0.3) !important; background: rgba(37, 99, 235, 0.08) !important; }
-            .short-speak:hover, .short-speak.playing { background: #2563EB !important; color: #FFFFFF !important; }
+            .icon-single-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.04); }
 
-            .icon-single-card.long-practice-card { border-color: rgba(5, 150, 105, 0.3); background: rgba(5, 150, 105, 0.04); }
-            .icon-single-card.long-practice-card:hover { border-color: #059669; box-shadow: 0 8px 25px rgba(5, 150, 105, 0.15); }
-            .long-speak { color: #059669 !important; border-color: rgba(5, 150, 105, 0.3) !important; background: rgba(5, 150, 105, 0.08) !important; }
-            .long-speak:hover, .long-speak.playing { background: #059669 !important; color: #FFFFFF !important; }
-
-            .icon-single-card.irreg-practice-card { border-color: rgba(217, 119, 6, 0.3); background: rgba(217, 119, 6, 0.04); }
-            .icon-single-card.irreg-practice-card:hover { border-color: #D97706; box-shadow: 0 8px 25px rgba(217, 119, 6, 0.15); }
-            .irreg-speak { color: #D97706 !important; border-color: rgba(217, 119, 6, 0.3) !important; background: rgba(217, 119, 6, 0.08) !important; }
-            .irreg-speak:hover, .irreg-speak.playing { background: #D97706 !important; color: #FFFFFF !important; }
+            .unified-speak { color: var(--accent) !important; border-color: var(--card-border) !important; background: var(--light-bg) !important; }
+            .unified-speak:hover, .unified-speak.playing { background: var(--accent) !important; color: #FFFFFF !important; transform: scale(1.1); }
 
             @keyframes laserScan {
-                0% { box-shadow: 0 0 15px currentColor; }
-                50% { box-shadow: 0 0 25px currentColor; }
-                100% { box-shadow: 0 0 15px currentColor; }
+                0% { border-color: var(--accent); box-shadow: 0 0 15px rgba(0, 0, 0, 0.05); }
+                50% { border-color: var(--primary); box-shadow: 0 0 25px rgba(0, 0, 0, 0.08); }
+                100% { border-color: var(--accent); box-shadow: 0 0 15px rgba(0, 0, 0, 0.05); }
             }
-            .icon-single-card.scanning { animation: laserScan 1.2s infinite ease-in-out; background: var(--card-bg) !important; }
+            .icon-single-card.scanning { animation: laserScan 1.2s infinite ease-in-out; border-color: var(--accent) !important; background: var(--card-bg) !important; }
 
             .sentence-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; direction: ltr; }
             .line-en-1 { font-family: system-ui, -apple-system, sans-serif; font-size: 13.5px; font-weight: 900; color: var(--heading-pure-color); text-align: left; direction: ltr; flex: 1; }
-            .line-ar-1 { font-family: 'Cairo', sans-serif; font-size: 13px; font-weight: 800; color: var(--heading-pure-color); text-align: right; direction: rtl; margin-top: -2px; }
+            .line-ar-1 { font-family: 'Cairo', sans-serif; font-size: 13px; font-weight: 800; color: var(--text-secondary); text-align: right; direction: rtl; margin-top: -2px; display: flex; flex-direction: column; gap: 3px; align-items: flex-start; }
             .sentence-group { display: flex; flex-direction: column; gap: 4px; }
-            .speak-btn { width: 30px; height: 30px; border-radius: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 13px; transition: 0.2s; flex-shrink: 0; border: 1.5px solid; }
+            .speak-btn { width: 32px; height: 32px; border-radius: 14px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 13px; transition: 0.2s; flex-shrink: 0; border: 2px solid; }
 
-            .quiz-banner-card {
-                background: var(--card-bg); border: 2px solid rgba(147, 51, 234, 0.25); border-radius: 26px; padding: 24px;
-                display: flex; flex-direction: column; gap: 18px; margin-top: 24px; box-shadow: 0 15px 35px rgba(147, 51, 234, 0.08); position: relative; overflow: hidden;
+            .reason-badge {
+                color: var(--word-color); font-weight: 900; background: var(--light-bg);
+                padding: 4px 12px; border-radius: 14px; border: 2px solid var(--card-border);
+                display: inline-block; margin-top: 4px; font-size: 12px;
             }
-            .quiz-banner-top { display: flex; flex-direction: column; align-items: flex-end; text-align: right; gap: 6px; }
-            .quiz-banner-title { font-size: 16px; font-weight: 950; color: var(--heading-pure-color); line-height: 1.5; }
-            .quiz-banner-desc { font-size: 12.5px; font-weight: 800; color: var(--text-secondary); line-height: 1.4; }
-            .quiz-banner-btn {
-                background: linear-gradient(135deg, #9333EA, #7E22CE); color: #FFFFFF; border: none; padding: 14px 22px; border-radius: 18px;
-                font-family: 'Cairo', sans-serif; font-size: 14px; font-weight: 950; cursor: pointer; box-shadow: 0 8px 25px rgba(147, 51, 234, 0.35);
-                transition: 0.25s ease; display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%;
-            }
-            .quiz-banner-btn:hover { transform: scale(1.02); box-shadow: 0 12px 30px rgba(147, 51, 234, 0.5); }
 
+            /* تمييز الكلمات المستهدفة وحدها باللون الخاص بكل قاعدة */
+            .highlight-word {
+                color: var(--word-color);
+                font-weight: 950;
+            }
+
+            /* كارت تشغيل التحدي اليومي وقاموس الجمل الخارجي */
+            .quiz-launch-card {
+                background: var(--card-bg);
+                border: 2px solid var(--card-border);
+                border-radius: 30px;
+                padding: 24px 20px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 16px;
+                transition: 0.3s ease;
+                margin-top: 15px;
+                box-shadow: 0 12px 30px rgba(0, 0, 0, 0.03);
+                position: relative;
+                overflow: hidden;
+            }
+            .quiz-launch-card:hover { transform: scale(1.01); border-color: var(--accent); box-shadow: 0 18px 40px rgba(0, 0, 0, 0.05); }
+            
+            .quiz-launch-header-row { display: flex; align-items: center; gap: 8px; justify-content: center; }
+            .quiz-launch-title { font-size: 17.5px; font-weight: 950; color: var(--heading-pure-color); white-space: nowrap; }
+            .quiz-launch-desc-top { font-size: 13px; font-weight: 800; color: var(--text-secondary); background: var(--light-bg); padding: 10px 14px; border-radius: 18px; border: 2px solid var(--card-border); width: 100%; box-sizing: border-box; }
+            
+            .quiz-launch-main-btn {
+                background: var(--accent); color: #FFFFFF; border: none;
+                width: 100%; padding: 14px; border-radius: 20px;
+                font-family: 'Cairo', sans-serif; font-size: 15px; font-weight: 950;
+                cursor: pointer; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05); transition: 0.25s;
+                display: flex; align-items: center; justify-content: center; gap: 8px;
+            }
+            .quiz-launch-main-btn:hover { opacity: 0.9; transform: scale(1.02); }
+
+            .dict-launch-btn {
+                background: var(--card-bg); color: var(--accent); border: 2px solid var(--card-border);
+                width: 100%; padding: 14px; border-radius: 20px;
+                font-family: 'Cairo', sans-serif; font-size: 15px; font-weight: 950;
+                cursor: pointer; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.02); transition: 0.25s;
+                display: flex; align-items: center; justify-content: center; gap: 8px;
+                white-space: nowrap;
+            }
+            .dict-launch-btn:hover { background: var(--light-bg); border-color: var(--accent); transform: scale(1.02); }
+
+            /* نافذة قاموس الجمل المنبثقة */
+            .dict-modal-overlay {
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                background: rgba(0, 0, 0, 0.65); backdrop-filter: blur(16px);
+                display: none; align-items: center; justify-content: center; z-index: 10001; padding: 16px; box-sizing: border-box;
+            }
+            .dict-modal-overlay.active { display: flex; }
+
+            .dict-modal-card {
+                background: var(--card-bg); border: 2.5px solid var(--card-border); border-radius: 36px; padding: 22px 20px;
+                width: 100%; max-width: 540px; max-height: 88vh; overflow-y: auto;
+                box-shadow: 0 30px 70px rgba(0, 0, 0, 0.2); display: flex; flex-direction: column; gap: 16px; position: relative;
+            }
+
+            .dict-modal-header {
+                display: flex; justify-content: space-between; align-items: center;
+                background: var(--light-bg); border: 2px solid var(--card-border);
+                padding: 10px 16px; border-radius: 24px;
+            }
+            .dict-modal-title { font-size: 15px; font-weight: 950; color: var(--heading-pure-color); display: flex; align-items: center; gap: 8px; }
+
+            /* نافذة الاختبار التفاعلية */
             .modal-overlay { 
-                position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(147, 51, 234, 0.35); backdrop-filter: blur(14px); 
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+                background: rgba(0, 0, 0, 0.65); backdrop-filter: blur(16px); 
                 display: none; align-items: center; justify-content: center; z-index: 10000; padding: 16px; box-sizing: border-box; 
             }
             .modal-overlay.active { display: flex; }
             
             .quiz-modal-card { 
-                background: var(--card-bg); border: 2px solid #9333EA; border-radius: 28px; padding: 22px; width: 100%; max-width: 500px; max-height: 85vh;
-                overflow-y: auto; box-shadow: 0 25px 60px rgba(147, 51, 234, 0.3); display: flex; flex-direction: column; gap: 16px; position: relative; 
+                background: var(--card-bg); border: 2.5px solid var(--card-border); border-radius: 34px; padding: 22px; width: 100%; max-width: 500px; max-height: 85vh;
+                overflow-y: auto; box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2); display: flex; flex-direction: column; gap: 16px; position: relative; 
             }
             
-            .quiz-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--card-border); padding-bottom: 12px; }
-            .quiz-title { font-size: 15px; font-weight: 950; color: var(--heading-pure-color); display: flex; align-items: center; gap: 8px; }
-            .quiz-close-btn { background: var(--light-bg); border: 1.5px solid var(--border-glow); width: 32px; height: 32px; border-radius: 10px; color: var(--text-primary); cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; }
+            .game-hud-bar {
+                display: flex; justify-content: space-between; align-items: center;
+                background: var(--bg-main); border: 2px solid var(--card-border);
+                padding: 8px 14px; border-radius: 24px; gap: 8px;
+            }
+            .hud-item { display: flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 950; color: var(--heading-pure-color); }
+            .hud-close-btn {
+                background: var(--light-bg); border: 2px solid var(--card-border); width: 36px; height: 36px; border-radius: 18px;
+                color: var(--text-primary); cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; transition: 0.2s;
+            }
+            .hud-close-btn:hover { background: #EF4444; color: #fff; border-color: #EF4444; }
+
+            .quiz-top-status {
+                display: flex; justify-content: center; align-items: center;
+                background: var(--light-bg); border: 2px solid var(--card-border);
+                padding: 10px 18px; border-radius: 24px;
+            }
+            .quiz-counter-badge {
+                font-size: 14px; font-weight: 950; color: var(--heading-pure-color);
+                background: var(--card-bg); padding: 6px 18px; border-radius: 18px; border: 2px solid var(--card-border);
+            }
 
             .quiz-body { display: flex; flex-direction: column; gap: 14px; }
             .quiz-question-card {
-                background: var(--card-bg); border: 1.5px solid var(--border-glow); border-radius: 20px; padding: 18px;
-                display: flex; flex-direction: column; gap: 14px; box-shadow: 0 8px 25px rgba(147, 51, 234, 0.06); transition: 0.3s ease;
+                background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 26px; padding: 18px;
+                display: flex; flex-direction: column; gap: 14px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.02); transition: 0.3s ease;
             }
             
             @keyframes successPulse {
-                0% { transform: scale(1); border-color: #059669; box-shadow: 0 0 25px rgba(5, 150, 105, 0.45); }
-                50% { transform: scale(1.02); border-color: #34D399; box-shadow: 0 0 35px rgba(52, 211, 153, 0.65); }
-                100% { transform: scale(1); border-color: #059669; box-shadow: 0 0 25px rgba(5, 150, 105, 0.45); }
+                0% { transform: scale(1); border-color: var(--accent); box-shadow: 0 0 25px rgba(0, 0, 0, 0.05); }
+                50% { transform: scale(1.02); border-color: var(--primary); box-shadow: 0 0 35px rgba(0, 0, 0, 0.08); }
+                100% { transform: scale(1); border-color: var(--accent); box-shadow: 0 0 25px rgba(0, 0, 0, 0.05); }
             }
-            .quiz-question-card.success-fx { animation: successPulse 0.6s ease infinite alternate; background: rgba(5, 150, 105, 0.04); }
+            .quiz-question-card.success-fx { animation: successPulse 0.6s ease infinite alternate; background: var(--light-bg); }
 
             .quiz-question-text { font-family: system-ui, -apple-system, sans-serif; font-size: 14.5px; font-weight: 900; color: var(--heading-pure-color); text-align: left; direction: ltr; line-height: 1.6; }
             .quiz-options-grid { display: flex; gap: 8px; justify-content: center; margin-top: 4px; }
             .quiz-option-btn {
-                background: var(--bg-main); border: 1.5px solid var(--card-border); padding: 10px 16px; border-radius: 14px;
+                background: var(--bg-main); border: 2px solid var(--card-border); padding: 10px 16px; border-radius: 18px;
                 font-family: system-ui, -apple-system, sans-serif; font-size: 13px; font-weight: 900; color: var(--text-primary); cursor: pointer; transition: 0.2s; flex: 1; text-align: center;
             }
-            .quiz-option-btn:hover { border-color: #9333EA; background: rgba(147, 51, 234, 0.05); color: #9333EA; }
-            .quiz-option-btn.correct { background: rgba(5, 150, 105, 0.15) !important; border-color: #059669 !important; color: #059669 !important; transform: scale(1.05); }
+            .quiz-option-btn:hover { border-color: var(--accent); background: var(--light-bg); color: var(--accent); }
+            .quiz-option-btn.correct { background: var(--light-bg) !important; border-color: var(--accent) !important; color: var(--accent) !important; transform: scale(1.05); }
             .quiz-option-btn.wrong { background: rgba(239, 68, 68, 0.15) !important; border-color: #EF4444 !important; color: #EF4444 !important; }
 
-            .quiz-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; border-top: 1px solid var(--card-border); padding-top: 12px; font-size: 12px; font-weight: 800; color: var(--text-secondary); }
-            .quiz-next-btn { background: #9333EA; color: #FFFFFF; border: none; padding: 8px 18px; border-radius: 12px; font-family: 'Cairo', sans-serif; font-weight: 900; cursor: pointer; display: none; }
+            .quiz-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; border-top: 2px solid var(--card-border); padding-top: 12px; font-size: 12px; font-weight: 800; color: var(--text-secondary); }
+            .quiz-next-btn { background: var(--accent); color: #FFFFFF; border: none; padding: 8px 18px; border-radius: 16px; font-family: 'Cairo', sans-serif; font-weight: 900; cursor: pointer; display: none; }
             .quiz-next-btn.active { display: block; }
 
             /* شريط التنقل السفلي */
@@ -321,16 +384,16 @@
                 width: calc(100% - 32px); max-width: 460px;
                 background: var(--header-bg);
                 display: flex; justify-content: space-around; align-items: center;
-                padding: 6px 10px; border-radius: 24px; 
-                border: 1.5px solid var(--card-border);
+                padding: 6px 10px; border-radius: 30px; 
+                border: 2.5px solid var(--card-border);
                 box-shadow: 0 8px 24px rgba(0,0,0,0.25); 
                 z-index: 999; box-sizing: border-box;
                 transition: all 0.4s ease;
             }
             .bottom-nav a { 
                 color: var(--text-secondary); text-decoration: none; font-size: 10px; text-align: center; font-weight: 800; 
-                display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 12px; border-radius: 16px; flex: 1; 
-                border: 1px solid rgba(128, 128, 128, 0.18); background: rgba(128, 128, 128, 0.05);
+                display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 12px; border-radius: 20px; flex: 1; 
+                border: 1.5px solid var(--card-border); background: var(--light-bg);
                 transition: all 0.3s ease;
             }
             .bottom-nav a span { font-size: 16px; line-height: 1; }
@@ -344,16 +407,36 @@
 
         <div class="top-progress-bar"><div class="top-progress-fill" id="progressFill"></div></div>
 
+        <!-- نافذة قاموس الجمل المنبثقة -->
+        <div class="dict-modal-overlay" id="dictModal">
+            <div class="dict-modal-card">
+                <div class="dict-modal-header">
+                    <div class="dict-modal-title"><span>📖</span><span>قاموس الجمل المُكتسبة</span></div>
+                    <button class="hud-close-btn" onclick="document.getElementById('dictModal').classList.remove('active')">✕</button>
+                </div>
+                <div style="font-size: 12.5px; font-weight: 800; color: var(--text-secondary); text-align: center;" id="dictSubtitleCount">
+                    أكمل تحديات الأسئلة لإضافة الجمل إلى قاموسك الشخصي!
+                </div>
+                <div class="icon-cards-list" id="dictCardsContainer">
+                    <!-- تُعبأ الجمل تلقائياً عند إنهاء التحديات -->
+                </div>
+            </div>
+        </div>
+
         <!-- نافذة اختبار التحدي اليومي -->
         <div class="modal-overlay" id="quizModal">
             <div class="quiz-modal-card">
-                <div class="quiz-header">
-                    <div class="quiz-title"><span>⚡</span><span>التحدي اليومي (4 أسئلة / 24 ساعة)</span></div>
-                    <button class="quiz-close-btn" id="closeQuizBtn">✕</button>
+                <div class="game-hud-bar">
+                    <div class="hud-item"><span>⚡</span><span id="hudXpDisplay">0</span> XP</div>
+                    <div class="hud-item"><span>🎯</span><span>تحدي المقارنة</span></div>
+                    <button class="hud-close-btn" id="closeQuizBtn" title="إغلاق">✕</button>
+                </div>
+                <div class="quiz-top-status">
+                    <div class="quiz-counter-badge" id="quizScoreIndicator">السؤال 1 من 4</div>
                 </div>
                 <div class="quiz-body" id="quizBody"></div>
                 <div class="quiz-footer">
-                    <span id="quizScoreIndicator">النتيجة: 0 / 4</span>
+                    <span id="quizScoreText">النتيجة: 0 / 4</span>
                     <button class="quiz-next-btn" id="quizNextBtn" onclick="nextQuestion()">السؤال التالي ➔</button>
                 </div>
             </div>
@@ -388,80 +471,92 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td><strong style="color:var(--comp-short);">قصيرة (Short)</strong></td><td>Tall (طويل)</td><td>Taller <span style="color:var(--comp-short);">than</span></td><td><span style="color:var(--comp-short);">The</span> tallest</td></tr>
-                            <tr><td><strong style="color:var(--comp-long);">طويلة (Long)</strong></td><td>Modern (حديث)</td><td><span style="color:var(--comp-long);">More</span> modern <span style="color:var(--comp-long);">than</span></td><td><span style="color:var(--comp-long);">The</span> <span style="color:var(--comp-long);">most</span> modern</td></tr>
-                            <tr><td><strong style="color:var(--comp-irreg);">شاذة (Irregular)</strong></td><td>Good (جيد)</td><td>Better <span style="color:var(--comp-irreg);">than</span></td><td><span style="color:var(--comp-irreg);">The</span> best</td></tr>
+                            <tr><td><strong style="color:var(--word-c1);">قصيرة (Short)</strong></td><td>Tall (طويل)</td><td>Taller <span style="color:var(--word-c1);">than</span></td><td><span style="color:var(--word-c1);">The</span> tallest</td></tr>
+                            <tr><td><strong style="color:var(--word-c2);">طويلة (Long)</strong></td><td>Modern (حديث)</td><td><span style="color:var(--word-c2);">More</span> modern <span style="color:var(--word-c2);">than</span></td><td><span style="color:var(--word-c2);">The</span> <span style="color:var(--word-c2);">most</span> modern</td></tr>
+                            <tr><td><strong style="color:var(--word-c3);">شاذة (Irregular)</strong></td><td>Good (جيد)</td><td>Better <span style="color:var(--word-c3);">than</span></td><td><span style="color:var(--word-c3);">The</span> best</td></tr>
                         </tbody>
                     </table>
                 </div>
             </div>
 
             <!-- كارت الشرح الشامل الرئيسي -->
-            <div class="lesson-card-full" id="mainLessonCard" style="--current-border-color: #2563EB;">
+            <div class="lesson-card-full" id="mainLessonCard">
                 <div class="lesson-header">
-                    <div class="app-title-wrapper" style="border-right-color: var(--accent);">
+                    <div class="app-title-wrapper">
                         <h2 class="app-main-heading">
-                            Mastering <span style="color:var(--comp-short);">Comparatives</span> & <span style="color:var(--comp-long);">Superlatives</span>
+                            Mastering <span style="color:var(--word-c1);">Comparatives</span> & <span style="color:var(--word-c2);">Superlatives</span>
                         </h2>
                         <div class="app-sub-pill"><span>دليلك الشامل لاحتراف درجات الصفات والظروف ⚖️</span></div>
                     </div>
                 </div>
 
-                <!-- 1. الصفات القصيرة (Short Adjectives) -->
-                <div class="glass-glow-card short-card" id="sectionShort" data-border-color="#2563EB">
+                <!-- 1. القاعدة الأولى: الصفات القصيرة (أزرق) -->
+                <div class="glass-glow-card rule-card-1" id="sectionShort">
                     <div class="usage-title-centered">
                         <span class="usage-title-ar">قاعدة الصفات القصيرة</span>
-                        <span class="usage-title-bracket" style="color: var(--comp-short);">(+er / +est)</span>
+                        <span class="usage-title-bracket">(+er / +est)</span>
                         <span class="usage-title-en">Short Adjectives</span>
                     </div>
                     <div class="usage-content">
-                        عند مقارنة شيء قصير بآخر، نضيف للنهاية <strong style="color:var(--comp-short);">(+er)</strong> يليه <strong style="color:var(--comp-short);">than</strong>، وللتفضيل على مجموعة نضيف <strong style="color:var(--comp-short);">(+est)</strong> مسبوقة بـ <strong style="color:var(--comp-short);">The</strong>.
-                        <div class="method-box" style="border-color: #2563EB; background: var(--bg-main); margin-top: 12px;">
-                            <div class="method-box-title" style="color: #2563EB;">💡 أمثلة توضيحية</div>
+                        عند مقارنة شيء قصير بآخر، نضيف للنهاية <span class="highlight-word">(+er)</span> يليه <span class="highlight-word">than</span>، وللتفضيل على مجموعة نضيف <span class="highlight-word">(+est)</span> مسبوقة بـ <span class="highlight-word">The</span>.
+                        <div class="method-box">
+                            <div class="method-box-title" style="color: var(--word-c1); font-weight: 950;">💡 أمثلة توضيحية</div>
                             <div style="font-size: 12.5px; font-weight: 800; color: var(--text-primary); display: flex; flex-direction: column; gap: 6px; margin-top: 4px;">
-                                <div>📏 <strong>مقارنة:</strong> <span dir="ltr">Ali is <strong style="color:var(--comp-short);">taller than</strong> Ahmed.</span> (علي أطول من أحمد).</div>
-                                <div>🏆 <strong>تفضيل:</strong> <span dir="ltr">He is <strong style="color:var(--comp-short);">the tallest</strong> in class.</span> (هو الأطول في الفصل).</div>
+                                <div>📏 <strong>مقارنة:</strong> <span dir="ltr">Ali is <span class="highlight-word">taller than</span> Ahmed.</span> (علي أطول من أحمد).</div>
+                                <div>🏆 <strong>تفضيل:</strong> <span dir="ltr">He is <span class="highlight-word">the tallest</span> in class.</span> (هو الأطول في الفصل).</div>
                             </div>
                         </div>
 
                         <!-- 4 كروت التطبيق العملي للقصيرة -->
                         <div class="prep-practice-group">
-                            <div style="font-size: 12px; font-weight: 900; color: #2563EB; margin-top: 4px;">🎯 التطبيق العملي (4 أمثلة للصفات القصيرة):</div>
+                            <div style="font-size: 12px; font-weight: 900; color: var(--word-c1); margin-top: 4px;">🎯 التطبيق العملي (4 أمثلة للصفات القصيرة):</div>
                             <div class="icon-cards-list">
-                                <div class="icon-single-card short-practice-card" id="card-short-1">
+                                <div class="icon-single-card rule-card-1" id="card-short-1">
                                     <div class="sentence-group">
                                         <div class="sentence-row">
-                                            <div class="line-en-1">My car is <strong style="color:var(--comp-short);">faster than</strong> yours.</div>
-                                            <button class="speak-btn short-speak" onclick="speakText('My car is faster than yours.', 'card-short-1', this)" title="استمع للنطق">🔊</button>
+                                            <div class="line-en-1">My car is <span class="highlight-word">faster than</span> yours.</div>
+                                            <button class="speak-btn unified-speak" onclick="speakText('My car is faster than yours.', 'card-short-1', this)" title="استمع للنطق">🔊</button>
                                         </div>
-                                        <div class="line-ar-1">سيارتي <strong style="color:var(--comp-short);">أسرع من</strong> سيارتك.</div>
+                                        <div class="line-ar-1">
+                                            <span>سيارتي <span class="highlight-word">أسرع من</span> سيارتك.</span>
+                                            <span class="reason-badge">صفة قصيرة مقارنة</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="icon-single-card short-practice-card" id="card-short-2">
+                                <div class="icon-single-card rule-card-1" id="card-short-2">
                                     <div class="sentence-group">
                                         <div class="sentence-row">
-                                            <div class="line-en-1">This box is <strong style="color:var(--comp-short);">heavier than</strong> that one.</div>
-                                            <button class="speak-btn short-speak" onclick="speakText('This box is heavier than that one.', 'card-short-2', this)" title="استمع للنطق">🔊</button>
+                                            <div class="line-en-1">This box is <span class="highlight-word">heavier than</span> that one.</div>
+                                            <button class="speak-btn unified-speak" onclick="speakText('This box is heavier than that one.', 'card-short-2', this)" title="استمع للنطق">🔊</button>
                                         </div>
-                                        <div class="line-ar-1">هذا الصندوق <strong style="color:var(--comp-short);">أثقل من</strong> ذاك.</div>
+                                        <div class="line-ar-1">
+                                            <span>هذا الصندوق <span class="highlight-word">أثقل من</span> ذاك.</span>
+                                            <span class="reason-badge">صفة قصيرة مقارنة</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="icon-single-card short-practice-card" id="card-short-3">
+                                <div class="icon-single-card rule-card-1" id="card-short-3">
                                     <div class="sentence-group">
                                         <div class="sentence-row">
-                                            <div class="line-en-1">Today is <strong style="color:var(--comp-short);">hotter than</strong> yesterday.</div>
-                                            <button class="speak-btn short-speak" onclick="speakText('Today is hotter than yesterday.', 'card-short-3', this)" title="استمع للنطق">🔊</button>
+                                            <div class="line-en-1">Today is <span class="highlight-word">hotter than</span> yesterday.</div>
+                                            <button class="speak-btn unified-speak" onclick="speakText('Today is hotter than yesterday.', 'card-short-3', this)" title="استمع للنطق">🔊</button>
                                         </div>
-                                        <div class="line-ar-1">اليوم <strong style="color:var(--comp-short);">أحر من</strong> أمس.</div>
+                                        <div class="line-ar-1">
+                                            <span>اليوم <span class="highlight-word">أحر من</span> أمس.</span>
+                                            <span class="reason-badge">مضاعفة الحرف الأخير</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="icon-single-card short-practice-card" id="card-short-4">
+                                <div class="icon-single-card rule-card-1" id="card-short-4">
                                     <div class="sentence-group">
                                         <div class="sentence-row">
-                                            <div class="line-en-1">He is <strong style="color:var(--comp-short);">the smartest</strong> boy.</div>
-                                            <button class="speak-btn short-speak" onclick="speakText('He is the smartest boy.', 'card-short-4', this)" title="استمع للنطق">🔊</button>
+                                            <div class="line-en-1">He is <span class="highlight-word">the smartest</span> boy.</div>
+                                            <button class="speak-btn unified-speak" onclick="speakText('He is the smartest boy.', 'card-short-4', this)" title="استمع للنطق">🔊</button>
                                         </div>
-                                        <div class="line-ar-1">هو الولد <strong style="color:var(--comp-short);">الأكثر ذكاءً</strong>.</div>
+                                        <div class="line-ar-1">
+                                            <span>هو الولد <span class="highlight-word">الأكثر ذكاءً</span>.</span>
+                                            <span class="reason-badge">تفضيل صفة قصيرة</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -470,61 +565,73 @@
                     </div>
                 </div>
 
-                <!-- 2. الصفات الطويلة (Long Adjectives) -->
-                <div class="glass-glow-card long-card" id="sectionLong" data-border-color="#059669">
+                <!-- 2. القاعدة الثانية: الصفات الطويلة (أخضر) -->
+                <div class="glass-glow-card rule-card-2" id="sectionLong">
                     <div class="usage-title-centered">
                         <span class="usage-title-ar">قاعدة الصفات الطويلة</span>
-                        <span class="usage-title-bracket" style="color: var(--comp-long);">(More / Most)</span>
+                        <span class="usage-title-bracket">(More / Most)</span>
                         <span class="usage-title-en">Long Adjectives</span>
                     </div>
                     <div class="usage-content">
-                        الصفات التي تتكون من مقطعين أو أكثر نستخدم قبلها <strong style="color:var(--comp-long);">more</strong> (متبوعة بـ <strong style="color:var(--comp-long);">than</strong>) للمقارنة و <strong style="color:var(--comp-long);">the most</strong> للتفضيل دون تغيير أصل الصفة.
-                        <div class="method-box" style="border-color: #059669; background: var(--bg-main); margin-top: 12px;">
-                            <div class="method-box-title" style="color: #059669;">💡 أمثلة توضيحية</div>
+                        الصفات التي تتكون من مقطعين أو أكثر نستخدم قبلها <span class="highlight-word">more</span> (متبوعة بـ <span class="highlight-word">than</span>) للمقارنة و <span class="highlight-word">the most</span> للتفضيل دون تغيير أصل الصفة.
+                        <div class="method-box">
+                            <div class="method-box-title" style="color: var(--word-c2); font-weight: 950;">💡 أمثلة توضيحية</div>
                             <div style="font-size: 12.5px; font-weight: 800; color: var(--text-primary); display: flex; flex-direction: column; gap: 6px; margin-top: 4px;">
-                                <div>💎 <strong>مقارنة:</strong> <span dir="ltr">Gold is <strong style="color:var(--comp-long);">more expensive than</strong> silver.</span> (الذهب أغلى من الفضة).</div>
-                                <div>🌟 <strong>تفضيل:</strong> <span dir="ltr">It is <strong style="color:var(--comp-long);">the most expensive</strong> watch.</span> (هذه أغلى ساعة).</div>
+                                <div>💎 <strong>مقارنة:</strong> <span dir="ltr">Gold is <span class="highlight-word">more expensive than</span> silver.</span> (الذهب أغلى من الفضة).</div>
+                                <div>🌟 <strong>تفضيل:</strong> <span dir="ltr">It is <span class="highlight-word">the most expensive</span> watch.</span> (هذه أغلى ساعة).</div>
                             </div>
                         </div>
 
                         <!-- 4 كروت التطبيق العملي للطويلة -->
                         <div class="prep-practice-group">
-                            <div style="font-size: 12px; font-weight: 900; color: #059669; margin-top: 4px;">🎯 التطبيق العملي (4 أمثلة للصفات الطويلة):</div>
+                            <div style="font-size: 12px; font-weight: 900; color: var(--word-c2); margin-top: 4px;">🎯 التطبيق العملي (4 أمثلة للصفات الطويلة):</div>
                             <div class="icon-cards-list">
-                                <div class="icon-single-card long-practice-card" id="card-long-1">
+                                <div class="icon-single-card rule-card-2" id="card-long-1">
                                     <div class="sentence-group">
                                         <div class="sentence-row">
-                                            <div class="line-en-1">Science is <strong style="color:var(--comp-long);">more interesting than</strong> history.</div>
-                                            <button class="speak-btn long-speak" onclick="speakText('Science is more interesting than history.', 'card-long-1', this)" title="استمع للنطق">🔊</button>
+                                            <div class="line-en-1">Science is <span class="highlight-word">more interesting than</span> history.</div>
+                                            <button class="speak-btn unified-speak" onclick="speakText('Science is more interesting than history.', 'card-long-1', this)" title="استمع للنطق">🔊</button>
                                         </div>
-                                        <div class="line-ar-1">العلوم <strong style="color:var(--comp-long);">أكثر إثارة من</strong> التاريخ.</div>
+                                        <div class="line-ar-1">
+                                            <span>العلوم <span class="highlight-word">أكثر إثارة من</span> التاريخ.</span>
+                                            <span class="reason-badge">صفة طويلة مقارنة</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="icon-single-card long-practice-card" id="card-long-2">
+                                <div class="icon-single-card rule-card-2" id="card-long-2">
                                     <div class="sentence-group">
                                         <div class="sentence-row">
-                                            <div class="line-en-1">This test is <strong style="color:var(--comp-long);">more difficult than</strong> the last one.</div>
-                                            <button class="speak-btn long-speak" onclick="speakText('This test is more difficult than the last one.', 'card-long-2', this)" title="استمع للنطق">🔊</button>
+                                            <div class="line-en-1">This test is <span class="highlight-word">more difficult than</span> the last one.</div>
+                                            <button class="speak-btn unified-speak" onclick="speakText('This test is more difficult than the last one.', 'card-long-2', this)" title="استمع للنطق">🔊</button>
                                         </div>
-                                        <div class="line-ar-1">هذا الاختبار <strong style="color:var(--comp-long);">أصعب من</strong> السابق.</div>
+                                        <div class="line-ar-1">
+                                            <span>هذا الاختبار <span class="highlight-word">أصعب من</span> السابق.</span>
+                                            <span class="reason-badge">صفة طويلة مقارنة</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="icon-single-card long-practice-card" id="card-long-3">
+                                <div class="icon-single-card rule-card-2" id="card-long-3">
                                     <div class="sentence-group">
                                         <div class="sentence-row">
-                                            <div class="line-en-1">This villa is <strong style="color:var(--comp-long);">more modern than</strong> that house.</div>
-                                            <button class="speak-btn long-speak" onclick="speakText('This villa is more modern than that house.', 'card-long-3', this)" title="استمع للنطق">🔊</button>
+                                            <div class="line-en-1">This villa is <span class="highlight-word">more modern than</span> that house.</div>
+                                            <button class="speak-btn unified-speak" onclick="speakText('This villa is more modern than that house.', 'card-long-3', this)" title="استمع للنطق">🔊</button>
                                         </div>
-                                        <div class="line-ar-1">هذه الفيلا <strong style="color:var(--comp-long);">أحدث من</strong> ذلك المنزل.</div>
+                                        <div class="line-ar-1">
+                                            <span>هذه الفيلا <span class="highlight-word">أحدث من</span> ذلك المنزل.</span>
+                                            <span class="reason-badge">صفة طويلة مقارنة</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="icon-single-card long-practice-card" id="card-long-4">
+                                <div class="icon-single-card rule-card-2" id="card-long-4">
                                     <div class="sentence-group">
                                         <div class="sentence-row">
-                                            <div class="line-en-1">She is <strong style="color:var(--comp-long);">the most beautiful</strong> girl.</div>
-                                            <button class="speak-btn long-speak" onclick="speakText('She is the most beautiful girl.', 'card-long-4', this)" title="استمع للنطق">🔊</button>
+                                            <div class="line-en-1">She is <span class="highlight-word">the most beautiful</span> girl.</div>
+                                            <button class="speak-btn unified-speak" onclick="speakText('She is the most beautiful girl.', 'card-long-4', this)" title="استمع للنطق">🔊</button>
                                         </div>
-                                        <div class="line-ar-1">هي الفتاة <strong style="color:var(--comp-long);">الأكثر جمالاً</strong>.</div>
+                                        <div class="line-ar-1">
+                                            <span>هي الفتاة <span class="highlight-word">الأكثر جمالاً</span>.</span>
+                                            <span class="reason-badge">تفضيل صفة طويلة</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -533,61 +640,73 @@
                     </div>
                 </div>
 
-                <!-- 3. الصفات الشاذة (Irregular Adjectives) -->
-                <div class="glass-glow-card irreg-card" id="sectionIrreg" data-border-color="#D97706">
+                <!-- 3. القاعدة الثالثة: الصفات الشاذة (أصفر/برتقالي) -->
+                <div class="glass-glow-card rule-card-3" id="sectionIrreg">
                     <div class="usage-title-centered">
                         <span class="usage-title-ar">قاعدة الصفات الشاذة</span>
-                        <span class="usage-title-bracket" style="color: var(--comp-irreg);">(Good / Bad / Far)</span>
+                        <span class="usage-title-bracket">(Good / Bad / Far)</span>
                         <span class="usage-title-en">Irregular Adjectives</span>
                     </div>
                     <div class="usage-content">
-                        صفات لا تتبع قواعد `er` أو `more` بل يتغير شكلها كلياً في المقارنة (متبوعة بـ <strong style="color:var(--comp-irreg);">than</strong>) والتفضيل (مسبوقة بـ <strong style="color:var(--comp-irreg);">The</strong>) ويجب حفظها كما هي.
-                        <div class="method-box" style="border-color: #D97706; background: var(--bg-main); margin-top: 12px;">
-                            <div class="method-box-title" style="color: #D97706;">💡 أمثلة توضيحية</div>
+                        صفات لا تتبع قواعد <span class="highlight-word">er</span> أو <span class="highlight-word">more</span> بل يتغير شكلها كلياً في المقارنة (متبوعة بـ <span class="highlight-word">than</span>) والتفضيل (مسبوقة بـ <span class="highlight-word">The</span>) ويجب حفظها كما هي.
+                        <div class="method-box">
+                            <div class="method-box-title" style="color: var(--word-c3); font-weight: 950;">💡 أمثلة توضيحية</div>
                             <div style="font-size: 12.5px; font-weight: 800; color: var(--text-primary); display: flex; flex-direction: column; gap: 6px; margin-top: 4px;">
-                                <div>⭐ <strong>مقارنة:</strong> <span dir="ltr">Your English is <strong style="color:var(--comp-irreg);">better than</strong> mine.</span> (إنجليزيك أفضل من إنجليزي).</div>
-                                <div>🏆 <strong>تفضيل:</strong> <span dir="ltr">This is <strong style="color:var(--comp-irreg);">the best</strong> choice.</span> (هذا أفضل خيار).</div>
+                                <div>⭐ <strong>مقارنة:</strong> <span dir="ltr">Your English is <span class="highlight-word">better than</span> mine.</span> (إنجليزيك أفضل من إنجليزي).</div>
+                                <div>🏆 <strong>تفضيل:</strong> <span dir="ltr">This is <span class="highlight-word">the best</span> choice.</span> (هذا أفضل خيار).</div>
                             </div>
                         </div>
 
                         <!-- 4 كروت التطبيق العملي للشاذة -->
                         <div class="prep-practice-group" id="sectionPractice">
-                            <div style="font-size: 12px; font-weight: 900; color: #D97706; margin-top: 4px;">🎯 التطبيق العملي (4 أمثلة للصفات الشاذة):</div>
+                            <div style="font-size: 12px; font-weight: 900; color: var(--word-c3); margin-top: 4px;">🎯 التطبيق العملي (4 أمثلة للصفات الشاذة):</div>
                             <div class="icon-cards-list">
-                                <div class="icon-single-card irreg-practice-card" id="card-irreg-1">
+                                <div class="icon-single-card rule-card-3" id="card-irreg-1">
                                     <div class="sentence-group">
                                         <div class="sentence-row">
-                                            <div class="line-en-1">His health is <strong style="color:var(--comp-irreg);">better today</strong>.</div>
-                                            <button class="speak-btn irreg-speak" onclick="speakText('His health is better today.', 'card-irreg-1', this)" title="استمع للنطق">🔊</button>
+                                            <div class="line-en-1">His health is <span class="highlight-word">better</span> today.</div>
+                                            <button class="speak-btn unified-speak" onclick="speakText('His health is better today.', 'card-irreg-1', this)" title="استمع للنطق">🔊</button>
                                         </div>
-                                        <div class="line-ar-1">صحيته <strong style="color:var(--comp-irreg);">أفضل اليوم</strong>.</div>
+                                        <div class="line-ar-1">
+                                            <span>صحيته <span class="highlight-word">أفضل</span> اليوم.</span>
+                                            <span class="reason-badge">صفة شاذة</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="icon-single-card irreg-practice-card" id="card-irreg-2">
+                                <div class="icon-single-card rule-card-3" id="card-irreg-2">
                                     <div class="sentence-group">
                                         <div class="sentence-row">
-                                            <div class="line-en-1">That was <strong style="color:var(--comp-irreg);">the best</strong> meal ever.</div>
-                                            <button class="speak-btn irreg-speak" onclick="speakText('That was the best meal ever.', 'card-irreg-2', this)" title="استمع للنطق">🔊</button>
+                                            <div class="line-en-1">That was <span class="highlight-word">the best</span> meal ever.</div>
+                                            <button class="speak-btn unified-speak" onclick="speakText('That was the best meal ever.', 'card-irreg-2', this)" title="استمع للنطق">🔊</button>
                                         </div>
-                                        <div class="line-ar-1">تلك كانت <strong style="color:var(--comp-irreg);">أفضل</strong> وجبة على الإطلاق.</div>
+                                        <div class="line-ar-1">
+                                            <span>تلك كانت <span class="highlight-word">أفضل</span> وجبة على الإطلاق.</span>
+                                            <span class="reason-badge">تفضيل شاذة</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="icon-single-card irreg-practice-card" id="card-irreg-3">
+                                <div class="icon-single-card rule-card-3" id="card-irreg-3">
                                     <div class="sentence-group">
                                         <div class="sentence-row">
-                                            <div class="line-en-1">Yesterday's weather was <strong style="color:var(--comp-irreg);">worse than</strong> today.</div>
-                                            <button class="speak-btn irreg-speak" onclick="speakText('Yesterdays weather was worse than today.', 'card-irreg-3', this)" title="استمع للنطق">🔊</button>
+                                            <div class="line-en-1">Yesterday's weather was <span class="highlight-word">worse than</span> today.</div>
+                                            <button class="speak-btn unified-speak" onclick="speakText('Yesterdays weather was worse than today.', 'card-irreg-3', this)" title="استمع للنطق">🔊</button>
                                         </div>
-                                        <div class="line-ar-1">طقس الأمس كان <strong style="color:var(--comp-irreg);">أسوأ من</strong> اليوم.</div>
+                                        <div class="line-ar-1">
+                                            <span>طقس الأمس كان <span class="highlight-word">أسوأ من</span> اليوم.</span>
+                                            <span class="reason-badge">مقارنة شاذة</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="icon-single-card irreg-practice-card" id="card-irreg-4">
+                                <div class="icon-single-card rule-card-3" id="card-irreg-4">
                                     <div class="sentence-group">
                                         <div class="sentence-row">
-                                            <div class="line-en-1">This is <strong style="color:var(--comp-irreg);">the worst</strong> movie.</div>
-                                            <button class="speak-btn irreg-speak" onclick="speakText('This is the worst movie.', 'card-irreg-4', this)" title="استمع للنطق">🔊</button>
+                                            <div class="line-en-1">This is <span class="highlight-word">the worst</span> movie.</div>
+                                            <button class="speak-btn unified-speak" onclick="speakText('This is the worst movie.', 'card-irreg-4', this)" title="استمع للنطق">🔊</button>
                                         </div>
-                                        <div class="line-ar-1">هذا هو الفيلم <strong style="color:var(--comp-irreg);">الأسوأ</strong>.</div>
+                                        <div class="line-ar-1">
+                                            <span>هذا هو الفيلم <span class="highlight-word">الأسوأ</span>.</span>
+                                            <span class="reason-badge">تفضيل شاذة</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -596,13 +715,22 @@
                     </div>
                 </div>
 
-                <!-- كارت التحدي اليومي -->
-                <div class="quiz-banner-card" id="launchQuizBtn" data-border-color="#D97706">
-                    <div class="quiz-banner-top">
-                        <div class="quiz-banner-title">افهم، استمع، وتحدى نفسك يومياً 🎯</div>
-                        <div class="quiz-banner-desc" id="quizLaunchDesc">ابدأ التحدي اليومي لتعزيز مهاراتك 🧠</div>
+                <!-- كارت تشغيل التحدي اليومي وقاموس الجمل الخارجي -->
+                <div class="quiz-launch-card" id="launchQuizCardBtn">
+                    <div class="quiz-launch-header-row">
+                        <span class="quiz-launch-title">تحدي المقارنة 🎯</span>
                     </div>
-                    <button class="quiz-banner-btn" id="launchBtnText">ابدأ التحدي اليومي ➔</button>
+                    <div class="quiz-launch-desc-top" id="quizLaunchDesc">
+                        40 سؤالاً في بنك التحديات • اختبر استيعابك في 4 أسئلة يومية متجددة واكسب 10 XP لكل إجابة صحيحة!
+                    </div>
+                    <button class="quiz-launch-main-btn" id="launchBtnText" onclick="launchQuizAction()">
+                        <span>ابدأ التحدي اليومي</span>
+                        <span>➔</span>
+                    </button>
+                    <!-- زر قاموس الجمل بعرض الكارت في سطر واحد -->
+                    <button class="dict-launch-btn" onclick="openDictionaryModal(event)">
+                        📖 قاموس الجمل المُكتسبة
+                    </button>
                 </div>
 
             </div>
@@ -613,12 +741,71 @@
         <div class="bottom-nav" id="bottomNav">
             <a href="../../index.html"><span class="nav-icon">🏠</span>الرئيسية</a>
             <a href="../english.html"><span class="nav-icon">🇬🇧</span>الإنجليزي</a>
-            <a href="fundamentals-path.html" class="active"><span class="nav-icon">📖</span>القواعد</a>
             <a href="../../surveying/surveying.html"><span class="nav-icon">📐</span>المساحة</a>
             <a href="../../programming/programming.html"><span class="nav-icon">💻</span>البرمجة</a>
         </div>
 
         <script>
+            const quizSentencesPool = [
+                { en: "My car is faster than yours.", ar: "سيارتي أسرع من سيارتك.", badge: "صفة قصيرة مقارنة", ruleClass: "rule-card-1" },
+                { en: "This box is heavier than that one.", ar: "هذا الصندوق أثقل من ذاك.", badge: "صفة قصيرة مقارنة", ruleClass: "rule-card-1" },
+                { en: "Today is hotter than yesterday.", ar: "اليوم أحر من أمس.", badge: "مضاعفة الحرف الأخير", ruleClass: "rule-card-1" },
+                { en: "He is the smartest boy.", ar: "هو الولد الأكثر ذكاءً.", badge: "تفضيل صفة قصيرة", ruleClass: "rule-card-1" },
+
+                { en: "Science is more interesting than history.", ar: "العلوم أكثر إثارة من التاريخ.", badge: "صفة طويلة مقارنة", ruleClass: "rule-card-2" },
+                { en: "This test is more difficult than the last one.", ar: "هذا الاختبار أصعب من السابق.", badge: "صفة طويلة مقارنة", ruleClass: "rule-card-2" },
+                { en: "This villa is more modern than that house.", ar: "هذه الفيلا أحدث من ذلك المنزل.", badge: "صفة طويلة مقارنة", ruleClass: "rule-card-2" },
+                { en: "She is the most beautiful girl.", ar: "هي الفتاة الأكثر جمالاً.", badge: "تفضيل صفة طويلة", ruleClass: "rule-card-2" },
+
+                { en: "His health is better today.", ar: "صحيته أفضل اليوم.", badge: "صفة شاذة", ruleClass: "rule-card-3" },
+                { en: "That was the best meal ever.", ar: "تلك كانت أفضل وجبة على الإطلاق.", badge: "تفضيل شاذة", ruleClass: "rule-card-3" },
+                { en: "Yesterday's weather was worse than today.", ar: "طقس الأمس كان أسوأ من اليوم.", badge: "مقارنة شاذة", ruleClass: "rule-card-3" },
+                { en: "This is the worst movie.", ar: "هذا هو الفيلم الأسوأ.", badge: "تفضيل شاذة", ruleClass: "rule-card-3" }
+            ];
+
+            function getUnlockedSentences() {
+                return JSON.parse(localStorage.getItem("em_comp_unlocked_sentences") || "[]");
+            }
+
+            function openDictionaryModal(event) {
+                if(event) event.stopPropagation();
+                let unlocked = getUnlockedSentences();
+                let container = document.getElementById('dictCardsContainer');
+                let subtitle = document.getElementById('dictSubtitleCount');
+
+                if (unlocked.length === 0) {
+                    subtitle.innerText = "قاموسك فارغ حالياً! أكمل تحدي الأسئلة لإضافة أول جمل لقاموسك.";
+                    container.innerHTML = `
+                        <div style="text-align:center; padding: 30px; color: var(--text-secondary); font-weight: 800; font-size: 14px;">
+                            🔒 لا توجد جمل مكتسبة بعد. ابدأ التحدي الآن واكسب جمل جديدة!
+                        </div>
+                    `;
+                } else {
+                    subtitle.innerText = `إليك الجمل التي أتقنتها وأضفتها لقاموسك (${unlocked.length} جملة):`;
+                    let html = '';
+                    unlocked.forEach((item, index) => {
+                        let cardId = 'unlocked-card-' + index;
+                        let rClass = item.ruleClass || 'rule-card-1';
+                        html += `
+                            <div class="icon-single-card ${rClass}" id="${cardId}">
+                                <div class="sentence-group">
+                                    <div class="sentence-row">
+                                        <div class="line-en-1">${item.en}</div>
+                                        <button class="speak-btn unified-speak" onclick="speakText('${item.en}', '${cardId}', this)" title="استمع للنطق">🔊</button>
+                                    </div>
+                                    <div class="line-ar-1">
+                                        <span>${item.ar}</span>
+                                        <span class="reason-badge">${item.badge}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    container.innerHTML = html;
+                }
+                document.getElementById('dictModal').classList.add('active');
+            }
+
             function speakText(text, cardId, buttonElement) {
                 if ('speechSynthesis' in window) {
                     window.speechSynthesis.cancel();
@@ -702,66 +889,55 @@
                 { q: "Action movies are ( &nbsp;......&nbsp; ) than documentaries for me.", options: ["exciting", "more exciting", "most exciting"], correct: 1 },
                 { q: "That was ( &nbsp;......&nbsp; ) mistake I have ever made.", options: ["worse than", "the worst", "bad"], correct: 1 },
                 { q: "Is a smartphone ( &nbsp;......&nbsp; ) than a traditional watch?", options: ["useful", "more useful", "most useful"], correct: 1 },
-                { q: "Whales are ( &nbsp;......&nbsp; ) animals living on Earth.", options: ["the largest", "larger than", "large"], correct: 0 },
-
-                { q: "My laptop runs ( &nbsp;......&nbsp; ) than my old desktop computer.", options: ["fast", "faster", "fastest"], correct: 1 },
-                { q: "Mount Kilimanjaro is ( &nbsp;......&nbsp; ) than most people expect.", options: ["high", "higher", "highest"], correct: 1 },
-                { q: "She is ( &nbsp;......&nbsp; ) student in our graduating class.", options: ["smart", "smarter than", "the smartest"], correct: 2 },
-                { q: "Walking is ( &nbsp;......&nbsp; ) for your health than sitting all day.", options: ["better", "good", "best"], correct: 0 },
-
-                { q: "This smartphone has ( &nbsp;......&nbsp; ) camera quality on the market.", options: ["the best", "better than", "good"], correct: 0 },
-                { q: "Physics is often considered ( &nbsp;......&nbsp; ) subject by students.", options: ["harder than", "the hardest", "hard"], correct: 1 },
-                { q: "My bag is ( &nbsp;......&nbsp; ) than your luggage.", options: ["heavy", "heaviest", "heavier"], correct: 2 },
-                { q: "China is ( &nbsp;......&nbsp; ) populated than Canada.", options: ["more densely", "densely", "most densely"], correct: 0 },
-
-                { q: "He arrived at the meeting ( &nbsp;......&nbsp; ) than expected.", options: ["earlier", "early", "earliest"], correct: 0 },
-                { q: "This museum holds ( &nbsp;......&nbsp; ) collection of artifacts.", options: ["richer than", "the richest", "rich"], correct: 1 },
-                { q: "Gold is definitely ( &nbsp;......&nbsp; ) than copper.", options: ["valuable", "more valuable", "most valuable"], correct: 1 },
-                { q: "That comedian told ( &nbsp;......&nbsp; ) joke of the entire night.", options: ["the funniest", "funnier than", "funny"], correct: 0 },
-
-                { q: "Winter nights are ( &nbsp;......&nbsp; ) than summer nights.", options: ["long", "longest", "longer"], correct: 2 },
-                { q: "Who is ( &nbsp;......&nbsp; ) runner in the national marathon?", options: ["fastest", "the fastest", "faster than"], correct: 1 },
-                { q: "My new office is ( &nbsp;......&nbsp; ) from home than the old one.", options: ["further", "far", "farthest"], correct: 0 },
-                { q: "This software program is ( &nbsp;......&nbsp; ) to use than the previous version.", options: ["simpler", "simple", "simplest"], correct: 0 },
-
-                { q: "She felt ( &nbsp;......&nbsp; ) after taking a short nap.", options: ["well", "better", "best"], correct: 1 },
-                { q: "Mount Blanc is ( &nbsp;......&nbsp; ) peak in the Alps mountain range.", options: ["the highest", "higher than", "high"], correct: 0 },
-                { q: "Driving in heavy traffic is ( &nbsp;......&nbsp; ) than taking the subway.", options: ["stressful", "more stressful", "most stressful"], correct: 1 },
-                { q: "This is ( &nbsp;......&nbsp; ) sculpture created by the famous artist.", options: ["the finest", "finer than", "fine"], correct: 0 },
-
-                { q: "Your plan sounds ( &nbsp;......&nbsp; ) than my original idea.", options: ["good", "better", "best"], correct: 1 },
-                { q: "The Sahara is ( &nbsp;......&nbsp; ) hot desert in the world.", options: ["the hottest", "hotter than", "hot"], correct: 0 },
-                { q: "Learning coding is ( &nbsp;......&nbsp; ) than learning basic typing.", options: ["complex", "more complex", "most complex"], correct: 1 },
-                { q: "A modern electric vehicle is ( &nbsp;......&nbsp; ) than a diesel car.", options: ["quieter", "quiet", "quietest"], correct: 0 }
+                { q: "Whales are ( &nbsp;......&nbsp; ) animals living on Earth.", options: ["the largest", "larger than", "large"], correct: 0 }
             ];
 
             let userXp = parseInt(localStorage.getItem("em_user_xp") || "0");
-            let currentDayIndex = parseInt(localStorage.getItem("em_current_day") || "0");
-            let lastQuizTimestamp = parseInt(localStorage.getItem("em_last_quiz_time") || "0");
+            let currentDayIndex = parseInt(localStorage.getItem("em_comp_day") || "0");
+            let lastQuizTimestamp = parseInt(localStorage.getItem("em_comp_last_quiz_time") || "0");
             let currentDayQuestionOffset = currentDayIndex * 4;
             let currentSubQuestionIndex = 0;
             let answered = false;
+            let sessionXpEarned = 0;
+            let countdownInterval = null;
 
-            function checkQuizAvailability() {
-                let now = Date.now();
+            function updateCountdownTimer() {
                 let twentyFourHours = 24 * 60 * 60 * 1000;
-                let desc = document.getElementById("quizLaunchDesc");
-                let btnText = document.getElementById("launchBtnText");
+                let now = Date.now();
+                let timeLeft = twentyFourHours - (now - lastQuizTimestamp);
 
-                if (currentDayQuestionOffset >= masterQuizBank.length) {
-                    if (desc) desc.innerText = "لقد أكملت جميع الـ 40 سؤالاً بنجاح تام! أسطورة القواعد الخارقة ⭐";
-                    if (btnText) btnText.innerText = "مكتملة 🎉";
+                let btnEl = document.getElementById("launchBtnText");
+                let descEl = document.getElementById("quizLaunchDesc");
+                if (!btnEl) return;
+
+                if (timeLeft <= 0) {
+                    localStorage.setItem("em_comp_completed_today", "false");
+                    checkQuizAvailability();
+                    if (countdownInterval) clearInterval(countdownInterval);
                     return;
                 }
 
-                if (lastQuizTimestamp > 0 && (now - lastQuizTimestamp < twentyFourHours)) {
-                    let remainingTime = twentyFourHours - (now - lastQuizTimestamp);
-                    let hoursLeft = Math.ceil(remainingTime / (1000 * 60 * 60));
-                    if (desc) desc.innerText = `مجموعة الأسئلة الخارجية تفتح خلال ${hoursLeft} ساعة تقريباً ⏳`;
-                    if (btnText) btnText.innerText = "انتظار 🔒";
+                let hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                let minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                let seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                btnEl.innerHTML = `<span>⏳ المتبقي للتحدي القادم: ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}</span>`;
+                if (descEl) descEl.innerText = "لقد أكملت تحدي اليوم بنجاح. انتظر فتح المجموعة التالية!";
+            }
+
+            function checkQuizAvailability() {
+                let isCompleted = localStorage.getItem("em_comp_completed_today") === "true";
+                let btnEl = document.getElementById("launchBtnText");
+                let descEl = document.getElementById("quizLaunchDesc");
+
+                if (isCompleted) {
+                    if (countdownInterval) clearInterval(countdownInterval);
+                    updateCountdownTimer();
+                    countdownInterval = setInterval(updateCountdownTimer, 1000);
                 } else {
-                    if (desc) desc.innerText = `ابدأ التحدي اليومي لتعزيز مهاراتك 🧠 (متاحة 4 أسئلة جديدة)`;
-                    if (btnText) btnText.innerText = "ابدأ التحدي اليومي ➔";
+                    if (countdownInterval) clearInterval(countdownInterval);
+                    if (btnEl) btnEl.innerHTML = `<span>ابدأ التحدي اليومي</span><span>➔</span>`;
+                    if (descEl) descEl.innerText = "40 سؤالاً في بنك التحديات • اختبر استيعابك في 4 أسئلة يومية متجددة واكسب 10 XP لكل إجابة صحيحة!";
                 }
             }
 
@@ -779,7 +955,7 @@
                 nextBtn.classList.remove('active');
 
                 let html = `<div class="quiz-question-card" id="activeQuestionCard">
-                    <div class="quiz-question-text">السؤال (${currentSubQuestionIndex + 1}/4) [المجموع: ${globalIndex + 1}/40]:<br>${q.q}</div>
+                    <div class="quiz-question-text">السؤال (${currentSubQuestionIndex + 1}/4):<br>${q.q}</div>
                     <div class="quiz-options-grid">`;
                 
                 q.options.forEach((opt, idx) => {
@@ -788,7 +964,8 @@
 
                 html += `</div></div>`;
                 body.innerHTML = html;
-                document.getElementById('quizScoreIndicator').innerText = `اليوم (${currentDayIndex + 1}/10) • السؤال (${currentSubQuestionIndex + 1}/4)`;
+                document.getElementById('quizScoreIndicator').innerText = `السؤال ${currentSubQuestionIndex + 1} من 4`;
+                document.getElementById('hudXpDisplay').innerText = sessionXpEarned;
             }
 
             function checkAnswer(selectedIndex, btnElement) {
@@ -800,8 +977,11 @@
                 let cardElement = document.getElementById('activeQuestionCard');
 
                 if (selectedIndex === q.correct) {
+                    sessionXpEarned += 10;
                     userXp += 10;
                     localStorage.setItem("em_user_xp", userXp);
+                    document.getElementById('hudXpDisplay').innerText = sessionXpEarned;
+
                     playSound('success');
                     btnElement.classList.add('correct');
                     if (cardElement) cardElement.classList.add('success-fx');
@@ -818,11 +998,25 @@
                 if (currentSubQuestionIndex < 4 && (currentDayQuestionOffset + currentSubQuestionIndex) < masterQuizBank.length) {
                     loadQuizQuestion();
                 } else {
-                    localStorage.setItem("em_last_quiz_time", Date.now());
-                    currentDayIndex++;
-                    localStorage.setItem("em_current_day", currentDayIndex);
+                    localStorage.setItem("em_comp_last_quiz_time", Date.now());
+                    localStorage.setItem("em_comp_completed_today", "true");
+
+                    let startPoolIdx = (currentDayIndex * 4) % quizSentencesPool.length;
+                    let newlyEarnedSentences = quizSentencesPool.slice(startPoolIdx, startPoolIdx + 4);
+
+                    let unlocked = getUnlockedSentences();
+                    newlyEarnedSentences.forEach(newSent => {
+                        if (!unlocked.some(item => item.en === newSent.en)) {
+                            unlocked.push(newSent);
+                        }
+                    });
+                    localStorage.setItem("em_comp_unlocked_sentences", JSON.stringify(unlocked));
+
+                    currentDayIndex = (currentDayIndex + 1) % 10;
+                    localStorage.setItem("em_comp_day", currentDayIndex);
                     currentDayQuestionOffset = currentDayIndex * 4;
                     currentSubQuestionIndex = 0;
+
                     showQuizCompletion();
                 }
             }
@@ -832,60 +1026,44 @@
                 document.getElementById('quizNextBtn').classList.remove('active');
                 body.innerHTML = `<div class="quiz-question-card success-fx" style="text-align:center; padding: 24px; gap: 14px;">
                     <h3 style="margin:0; font-size: 18px; color: var(--heading-pure-color);">🎉 ممتاز جداً! أنهيت تحدي اليوم</h3>
-                    <p style="margin:0; font-size: 14px; color: var(--text-secondary);">تم إضافة نقاط التحدي الخارجي لرصيدك بنجاح.</p>
-                    <p style="margin:0; font-size: 15px; color: var(--accent); font-weight: 950;">رصيدك الحالي: ${userXp} XP ⭐</p>
-                    <p style="margin:0; font-size: 12px; color: var(--text-secondary);">المجموعة التالية ستفتح بعد 24 ساعة.</p>
-                    <button onclick="document.getElementById('quizModal').classList.remove('active'); checkQuizAvailability();" style="background:#9333EA; color:#fff; border:none; padding:10px 20px; border-radius:12px; font-weight:900; cursor:pointer; font-family:'Cairo'; margin-top:6px;">إغلاق والعودة للدراسة ➔</button>
+                    <p style="margin:0; font-size: 14px; color: var(--text-secondary);">تم إضافة 4 جمل جديدة إلى <strong>قاموس الجمل المُكتسبة</strong> واكسبت ${sessionXpEarned} نقطة XP!</p>
+                    <button onclick="document.getElementById('quizModal').classList.remove('active'); location.reload();" style="background:var(--accent); color:#fff; border:none; padding:10px 20px; border-radius:18px; font-weight:900; cursor:pointer; font-family:'Cairo'; margin-top:6px;">إغلاق وعرض القاموس ➔</button>
                 </div>`;
                 playSound('success');
                 checkQuizAvailability();
             }
 
+            function launchQuizAction() {
+                let isCompleted = localStorage.getItem("em_comp_completed_today") === "true";
+                if (isCompleted) {
+                    if (confirm("هل تريد إعادة تعيين التحدي والبدء من جديد للتجربة؟")) {
+                        localStorage.removeItem("em_comp_completed_today");
+                        localStorage.removeItem("em_comp_last_quiz_time");
+                        location.reload();
+                    }
+                    return;
+                }
+
+                let quizModal = document.getElementById("quizModal");
+                if (quizModal) {
+                    quizModal.classList.add("active");
+                    sessionXpEarned = 0;
+                    currentSubQuestionIndex = 0;
+                    loadQuizQuestion();
+                }
+            }
+
             document.addEventListener("DOMContentLoaded", function() {
                 checkQuizAvailability();
-                let launchBtn = document.getElementById("launchQuizBtn");
-                let quizModal = document.getElementById("quizModal");
+
                 let closeQuizBtn = document.getElementById("closeQuizBtn");
+                let quizModal = document.getElementById("quizModal");
 
-                if (launchBtn && quizModal) {
-                    launchBtn.addEventListener("click", () => {
-                        let now = Date.now();
-                        let twentyFourHours = 24 * 60 * 60 * 1000;
-                        if (lastQuizTimestamp > 0 && (now - lastQuizTimestamp < twentyFourHours) && currentSubQuestionIndex === 0) {
-                            let remainingTime = twentyFourHours - (now - lastQuizTimestamp);
-                            let hoursLeft = Math.ceil(remainingTime / (1000 * 60 * 60));
-                            alert(`عذراً يا باشمهندس، مجموعة التحدي الخارجي الجديدة تفتح بعد ${hoursLeft} ساعة تقريباً بنظام الـ 24 ساعة! ⏳`);
-                            return;
-                        }
-                        quizModal.classList.add("active");
-                        currentSubQuestionIndex = 0;
-                        loadQuizQuestion();
-                    });
-                }
                 if (closeQuizBtn && quizModal) {
-                    closeQuizBtn.addEventListener("click", () => { quizModal.classList.remove("active"); checkQuizAvailability(); });
-                }
-
-                /* نظام رصد دقيق لتفاعل حدود الكارت الرئيسي مع الكروت الداخلية */
-                let mainCard = document.getElementById('mainLessonCard');
-                let sections = document.querySelectorAll('.glass-glow-card, .quiz-banner-card');
-
-                if ('IntersectionObserver' in window && mainCard) {
-                    let observer = new IntersectionObserver((entries) => {
-                        entries.forEach(entry => {
-                            if (entry.isIntersecting) {
-                                let color = entry.target.getAttribute('data-border-color');
-                                if (color) {
-                                    mainCard.style.setProperty('--current-border-color', color);
-                                }
-                            }
-                        });
-                    }, {
-                        root: null,
-                        threshold: 0.35 
+                    closeQuizBtn.addEventListener("click", () => {
+                        quizModal.classList.remove("active");
+                        checkQuizAvailability();
                     });
-
-                    sections.forEach(sec => observer.observe(sec));
                 }
 
                 let themeBtn = document.getElementById("themeToggleBtn");
@@ -933,4 +1111,4 @@
             }
         </script>
     </body>
-</html>
+</html>ة
