@@ -34,6 +34,7 @@
                 --a-highlight: #F59E0B; 
                 --the-highlight: #059669; 
                 --zero-highlight: #D97706;
+                --vowel-indigo: #4F46E5; /* اللون النيلي لحروف العلة */
                 --heading-pure-color: #0F172A; 
 
                 --nav-theme-color: #F59E0B;
@@ -60,6 +61,7 @@
                 --a-highlight: #FCD34D;
                 --the-highlight: #34D399;
                 --zero-highlight: #FBBF24;
+                --vowel-indigo: #818CF8; /* اللون النيلي المضيء للوضع الليلي */
                 --heading-pure-color: #FFFFFF; 
 
                 --nav-theme-color: #FBBF24;
@@ -222,6 +224,7 @@
             .a-highlight { color: var(--a-highlight); font-weight: 950; }
             .the-highlight { color: var(--the-highlight); font-weight: 950; }
             .zero-highlight { color: var(--zero-highlight); font-weight: 950; }
+            .vowel-highlight { color: var(--vowel-indigo); font-weight: 950; } /* تنسيق حروف العلة باللون النيلي */
 
             .method-box { background: var(--light-bg); border: 1.5px solid var(--border-glow); padding: 14px; border-radius: 16px; margin: 12px 0; display: flex; flex-direction: column; gap: 8px; }
 
@@ -498,17 +501,17 @@
                 <div class="glass-glow-card a-card" id="sectionA">
                     <div class="usage-title-centered">
                         <span class="usage-title-ar">أدوات النكرة</span>
-                        <span class="usage-title-bracket" style="color: var(--a-highlight);">(A / An)</span>
+                        <span class="usage-title-bracket" style="color: var(--a-highlight);">(<span class="a-highlight">A</span> / <span class="a-highlight">An</span>)</span>
                         <span class="usage-title-en">Indefinite Articles</span>
                     </div>
                     <div class="usage-content">
-                        نستخدم <strong>A</strong> مع الاسم المفرد الذي يبدأ بصوت حرف ساكن، بينما نستخدم <strong>An</strong> قبل الاسم المفرد الذي يبدأ بصوت متحرك (a, e, i, o, u).
+                        نستخدم <strong class="a-highlight">A</strong> مع الاسم المفرد الذي يبدأ بصوت حرف ساكن، بينما نستخدم <strong class="a-highlight">An</strong> قبل الاسم المفرد الذي يبدأ بصوت متحرك (<span class="vowel-highlight">a</span>, <span class="vowel-highlight">e</span>, <span class="vowel-highlight">i</span>, <span class="vowel-highlight">o</span>, <span class="vowel-highlight">u</span>).
 
                         <div class="method-box" style="border-color: var(--primary); background: var(--bg-main); margin-top: 12px;">
                             <div class="method-box-title" style="color: var(--primary);">🔍 الفارق الهندسي للصوتيات</div>
                             <div style="font-size: 12.5px; font-weight: 800; color: var(--text-primary); display: flex; flex-direction: column; gap: 6px; margin-top: 4px;">
-                                <div>🔤 <strong>A:</strong> تُستخدم قبل الصوت الساكن (مثل: <span class="a-highlight">a</span> car, <span class="a-highlight">a</span> book).</div>
-                                <div>🔤 <strong>An:</strong> تُستخدم قبل الصوت المتحرك (مثل: <span class="a-highlight">an</span> apple, <span class="a-highlight">an</span> hour).</div>
+                                <div>🔤 <strong class="a-highlight">A:</strong> تُستخدم قبل الصوت الساكن (مثل: <span class="a-highlight">a</span> car, <span class="a-highlight">a</span> book).</div>
+                                <div>🔤 <strong class="a-highlight">An:</strong> تُستخدم قبل الصوت المتحرك (<span class="vowel-highlight">a</span>, <span class="vowel-highlight">e</span>, <span class="vowel-highlight">i</span>, <span class="vowel-highlight">o</span>, <span class="vowel-highlight">u</span>) مثل: <span class="a-highlight">an</span> apple, <span class="a-highlight">an</span> hour.</div>
                             </div>
                         </div>
                     </div>
@@ -518,7 +521,7 @@
                 <div class="glass-glow-card the-card" id="sectionThe">
                     <div class="usage-title-centered">
                         <span class="usage-title-ar">أداة المعرفة</span>
-                        <span class="usage-title-bracket" style="color: var(--the-highlight);">(The)</span>
+                        <span class="usage-title-bracket" style="color: var(--the-highlight);">(<span class="the-highlight">The</span>)</span>
                         <span class="usage-title-en">Definite Article</span>
                     </div>
                     <div class="usage-content">
