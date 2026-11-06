@@ -19,53 +19,57 @@
                 --card-bg: #FFFFFF;
                 --card-border: #E2E8F0;
                 --text-primary: #0F172A;
-                --text-secondary: #64748B;
+                --text-secondary: #334155;
                 
                 --header-bg: #FFFFFF;
-                --header-border: rgba(245, 158, 11, 0.15);
-                --header-shadow: 0 10px 30px rgba(245, 158, 11, 0.05);
+                --header-border: rgba(2, 132, 199, 0.15);
+                --header-shadow: 0 10px 30px rgba(2, 132, 199, 0.05);
                 
-                --primary: #F59E0B;
-                --primary-dark: #D97706;
-                --accent: #F59E0B; 
-                --light-bg: rgba(245, 158, 11, 0.06);
-                --border-glow: rgba(245, 158, 11, 0.25);
+                --theme-active: #0284C7;
+                --theme-active-dark: #0369A1;
+                --theme-glow: rgba(2, 132, 199, 0.25);
+                --theme-light: rgba(2, 132, 199, 0.08);
 
-                --a-highlight: #F59E0B; 
+                --primary: var(--theme-active);
+                --primary-dark: var(--theme-active-dark);
+                --accent: var(--theme-active); 
+                --light-bg: var(--theme-light);
+                --border-glow: var(--theme-glow);
+
+                --a-highlight: var(--theme-active); 
                 --the-highlight: #059669; 
                 --zero-highlight: #D97706;
-                --vowel-indigo: #4F46E5; /* اللون النيلي لحروف العلة */
+                --vowel-indigo: #DB2777; 
                 --heading-pure-color: #0F172A; 
 
-                --nav-theme-color: #F59E0B;
-                --nav-glow-color: rgba(245, 158, 11, 0.25);
+                --nav-theme-color: var(--theme-active);
+                --nav-glow-color: var(--theme-glow);
             }
 
             html.dark-mode, body.dark-mode {
                 --bg-main: #06080F;
                 --card-bg: #0B0F19;
-                --card-border: rgba(255, 255, 255, 0.07);
-                --text-primary: #F3F4F6;
-                --text-secondary: #9CA3AF;
+                --card-border: rgba(255, 255, 255, 0.12);
+                --text-primary: #FFFFFF;
+                --text-secondary: #CBD5E1;
                 
                 --header-bg: #0B0F19;
-                --header-border: rgba(245, 158, 11, 0.3);
+                --header-border: var(--theme-glow);
                 --header-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
                 
-                --primary: #FBBF24;
-                --primary-dark: #F59E0B;
-                --accent: #FBBF24;
-                --light-bg: rgba(245, 158, 11, 0.09);
-                --border-glow: rgba(245, 158, 11, 0.35);
+                --theme-active: #38BDF8;
+                --theme-active-dark: #0284C7;
+                --theme-glow: rgba(56, 189, 248, 0.3);
+                --theme-light: rgba(56, 189, 248, 0.09);
 
-                --a-highlight: #FCD34D;
-                --the-highlight: #34D399;
-                --zero-highlight: #FBBF24;
-                --vowel-indigo: #818CF8; /* اللون النيلي المضيء للوضع الليلي */
+                --vowel-indigo: #F472B6;
                 --heading-pure-color: #FFFFFF; 
+            }
 
-                --nav-theme-color: #FBBF24;
-                --nav-glow-color: rgba(251, 191, 36, 0.35);
+            body, * {
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                text-rendering: optimizeLegibility;
             }
 
             body {
@@ -82,43 +86,35 @@
             .container { max-width: 680px; margin: auto; }
 
             .top-progress-bar { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: transparent; z-index: 9999; }
-            .top-progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--primary), var(--primary-dark)); }
+            .top-progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--theme-active), var(--theme-active-dark)); }
 
-            /* شريط الهيدر المُعدل */
+            /* شريط الهيدر */
             .nav-bar {
                 display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
-                background: var(--header-bg); border: 1.5px solid var(--header-border); padding: 10px 16px;
+                background: var(--header-bg); border: 1.5px solid var(--theme-active); padding: 10px 16px;
                 border-radius: 24px; box-shadow: var(--header-shadow); gap: 10px;
             }
             .brand-minimalist-box { display: flex; flex-direction: column; align-items: center; text-align: center; flex: 1; padding: 0 4px; min-width: 0; }
             .brand-main-title { font-size: 13.5px; font-weight: 900; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
-            .brand-subtitle-text { font-size: 10px; font-weight: 800; color: var(--primary); letter-spacing: 0.5px; text-transform: uppercase; margin-top: 2px; }
+            .brand-subtitle-text { font-size: 10px; font-weight: 800; color: var(--theme-active); letter-spacing: 0.5px; text-transform: uppercase; margin-top: 2px; }
 
-            .nav-actions-group {
-                display: flex;
-                align-items: center;
-                gap: 6px;
-                flex-shrink: 0;
-            }
+            .nav-actions-group { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
 
             .back-btn, .theme-btn {
-                background: var(--light-bg); border: 1.5px solid var(--border-glow);
+                background: var(--theme-light); border: 1.5px solid var(--theme-glow);
                 width: 36px; height: 36px; border-radius: 14px; display: flex; align-items: center; justify-content: center;
                 color: var(--text-primary); font-size: 16px; text-decoration: none; cursor: pointer; transition: 0.25s; flex-shrink: 0;
             }
-            .back-btn:hover, .theme-btn:hover { transform: scale(1.05); border-color: var(--primary); color: var(--primary); }
+            .back-btn:hover, .theme-btn:hover { transform: scale(1.05); border-color: var(--theme-active); color: var(--theme-active); }
 
             /* الكارت العلوي الهندسي */
             .hero-card {
                 background: var(--card-bg); 
-                border: 2px solid transparent;
-                background-image: linear-gradient(var(--card-bg), var(--card-bg)), linear-gradient(135deg, var(--primary), var(--primary-dark));
-                background-origin: border-box;
-                background-clip: padding-box, border-box;
+                border: 2px solid var(--theme-active);
                 border-radius: 28px;
                 padding: 24px; 
                 margin-bottom: 24px; 
-                box-shadow: 0 10px 30px var(--border-glow); 
+                box-shadow: 0 10px 30px var(--theme-glow); 
                 display: flex; 
                 flex-direction: column; 
                 align-items: center;
@@ -129,44 +125,40 @@
             }
             
             .hero-title-en { margin: 0; font-size: 21px; font-weight: 950; color: var(--heading-pure-color); letter-spacing: -0.3px; }
-            .hero-title-ar { margin: 0; font-size: 14px; font-weight: 800; color: var(--primary); background: var(--light-bg); padding: 4px 16px; border-radius: 12px; border: 1px solid var(--border-glow); }
+            .hero-title-ar { margin: 0; font-size: 14px; font-weight: 800; color: var(--theme-active); background: var(--theme-light); padding: 4px 16px; border-radius: 12px; border: 1px solid var(--theme-glow); }
 
-            /* الجدول الهندسي المدمج */
+            /* الجدول */
             .table-container { width: 100%; overflow-x: auto; margin-top: 4px; border-radius: 16px; border: 1.5px solid var(--card-border); text-align: right; }
-            .styled-master-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+            .styled-master-table { width: 100%; border-collapse: collapse; font-size: 13px; }
             .styled-master-table th, .styled-master-table td { padding: 10px 14px; border-bottom: 1px solid var(--card-border); border-left: 1px solid var(--card-border); }
             .styled-master-table th:last-child, .styled-master-table td:last-child { border-left: none; }
-            .styled-master-table th { background: var(--light-bg); color: var(--heading-pure-color); font-weight: 950; font-size: 13px; }
+            .styled-master-table th { background: var(--theme-light); color: var(--heading-pure-color); font-weight: 950; font-size: 13.5px; }
             .styled-master-table td { background: var(--card-bg); color: var(--text-primary); font-weight: 800; }
             .styled-master-table tr:last-child td { border-bottom: none; }
 
-            .th-a { color: var(--a-highlight) !important; background: rgba(245, 158, 11, 0.08) !important; font-weight: 950 !important; }
-            .th-the { color: var(--the-highlight) !important; background: rgba(5, 150, 105, 0.08) !important; font-weight: 950 !important; }
+            .th-a { color: var(--theme-active) !important; background: var(--theme-light) !important; font-weight: 950 !important; }
 
             /* كارت الشرح الشامل الرئيسي */
             .lesson-card-full {
                 background: var(--card-bg); 
-                border: 2px solid transparent;
-                background-image: linear-gradient(var(--card-bg), var(--card-bg)), linear-gradient(135deg, var(--current-border-color, #F59E0B), var(--primary-dark));
-                background-origin: border-box;
-                background-clip: padding-box, border-box;
+                border: 2px solid var(--theme-active);
                 border-radius: 28px;
                 padding: 26px; 
                 margin-bottom: 24px; 
-                box-shadow: 0 20px 45px rgba(245, 158, 11, 0.1); 
+                box-shadow: 0 20px 45px var(--theme-glow); 
                 display: flex; 
                 flex-direction: column; 
                 gap: 20px;
                 position: relative; 
                 overflow: hidden;
-                transition: background-image 0.5s ease;
             }
             
             .lesson-header { display: flex; flex-direction: column; gap: 14px; }
-            .app-title-wrapper { display: flex; flex-direction: column; gap: 8px; position: relative; padding-right: 14px; border-right: 4px solid var(--primary); }
+            .app-title-wrapper { display: flex; flex-direction: column; gap: 8px; position: relative; padding-right: 14px; border-right: 4px solid var(--theme-active); }
             .app-main-heading { margin: 0; font-size: 20px; font-weight: 950; color: var(--heading-pure-color); letter-spacing: -0.4px; font-family: 'Cairo', sans-serif; direction: ltr; text-align: right; }
-            .app-sub-pill { display: inline-flex; align-items: center; gap: 6px; background: var(--light-bg); border: 1.5px solid var(--border-glow); color: var(--heading-pure-color); padding: 6px 14px; border-radius: 12px; font-size: 12px; font-weight: 850; width: fit-content; }
+            .app-sub-pill { display: inline-flex; align-items: center; gap: 6px; background: var(--theme-light); border: 1.5px solid var(--theme-glow); color: var(--heading-pure-color); padding: 6px 14px; border-radius: 12px; font-size: 12px; font-weight: 850; width: fit-content; }
 
+            /* الكروت الداخلية بالشرح */
             .glass-glow-card {
                 background: var(--card-bg);
                 backdrop-filter: blur(16px);
@@ -180,233 +172,279 @@
                 box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
                 width: 100%;
                 box-sizing: border-box;
+                border: 1.5px solid var(--theme-glow);
             }
 
-            .glass-glow-card.a-card { border: 1.5px solid rgba(245, 158, 11, 0.3); }
-            .glass-glow-card.a-card::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 4px; background: linear-gradient(90deg, #F59E0B, #FBBF24); width: 100%; }
+            .glass-glow-card::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 4px; background: linear-gradient(90deg, var(--theme-active), var(--theme-active-dark)); width: 100%; }
 
-            .glass-glow-card.the-card { border: 1.5px solid rgba(5, 150, 105, 0.35); }
-            .glass-glow-card.the-card::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 4px; background: linear-gradient(90deg, #059669, #34D399); width: 100%; }
+            .usage-title-centered { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 4px; width: 100%; margin-bottom: 8px; }
+            .usage-title-ar { font-size: 16.5px; font-weight: 950; color: var(--heading-pure-color); }
+            .usage-title-bracket { font-size: 14.5px; font-weight: 950; direction: ltr; unicode-bidi: embed; color: var(--theme-active); }
+            .usage-title-en { font-size: 12px; font-weight: 850; color: var(--text-secondary); letter-spacing: 0.3px; }
 
-            .glass-glow-card.zero-card { border: 1.5px solid rgba(217, 119, 6, 0.35); }
-            .glass-glow-card.zero-card::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 4px; background: linear-gradient(90deg, #D97706, #F59E0B); width: 100%; }
+            .usage-content { font-size: 14px; font-weight: 750; color: var(--text-secondary); line-height: 1.85; }
 
-            /* تنسيق العناوين الثلاثية المنسقة */
-            .usage-title-centered {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-                gap: 4px;
-                width: 100%;
-                margin-bottom: 8px;
-            }
-            .usage-title-ar {
-                font-size: 16px;
-                font-weight: 950;
-                color: var(--heading-pure-color);
-            }
-            .usage-title-bracket {
-                font-size: 14px;
-                font-weight: 950;
-                direction: ltr;
-                unicode-bidi: embed;
-            }
-            .usage-title-en {
+            /* تمييز الكلمات */
+            .a-highlight { color: var(--theme-active); font-weight: 950; }
+            .the-highlight { color: #059669; font-weight: 950; }
+            .zero-highlight { color: #D97706; font-weight: 950; }
+            .vowel-highlight { color: var(--vowel-indigo); font-weight: 950; }
+
+            /* شارات الأسباب */
+            .reason-badge {
+                color: var(--theme-active);
+                font-weight: 900;
+                background: var(--theme-light);
+                padding: 3px 10px;
+                border-radius: 10px;
+                border: 1px solid var(--theme-glow);
+                display: inline-block;
+                margin-top: 4px;
                 font-size: 12px;
-                font-weight: 850;
-                color: var(--text-secondary);
-                letter-spacing: 0.3px;
             }
 
-            .usage-content { font-size: 13.5px; font-weight: 700; color: var(--text-secondary); line-height: 1.8; }
-
-            .a-highlight { color: var(--a-highlight); font-weight: 950; }
-            .the-highlight { color: var(--the-highlight); font-weight: 950; }
-            .zero-highlight { color: var(--zero-highlight); font-weight: 950; }
-            .vowel-highlight { color: var(--vowel-indigo); font-weight: 950; } /* تنسيق حروف العلة باللون النيلي */
-
-            .method-box { background: var(--light-bg); border: 1.5px solid var(--border-glow); padding: 14px; border-radius: 16px; margin: 12px 0; display: flex; flex-direction: column; gap: 8px; }
-
-            .inner-practice-title-wrapper {
-                display: flex;
-                flex-direction: column;
-                gap: 6px;
-                position: relative;
-                padding-right: 14px;
-                border-right: 4px solid var(--primary);
-                margin: 12px 0 8px 0;
+            .reason-badge-the {
+                color: #059669;
+                font-weight: 900;
+                background: rgba(5, 150, 105, 0.08);
+                padding: 3px 10px;
+                border-radius: 10px;
+                border: 1px solid rgba(5, 150, 105, 0.2);
+                display: inline-block;
+                margin-top: 4px;
+                font-size: 12px;
             }
-            .inner-practice-heading {
-                margin: 0;
-                font-size: 16px;
-                font-weight: 950;
+
+            .reason-badge-zero {
+                color: #D97706;
+                font-weight: 900;
+                background: rgba(217, 119, 6, 0.08);
+                padding: 3px 10px;
+                border-radius: 10px;
+                border: 1px solid rgba(217, 119, 6, 0.2);
+                display: inline-block;
+                margin-top: 4px;
+                font-size: 12px;
+            }
+
+            .method-box { background: var(--theme-light); border: 1.5px solid var(--theme-glow); padding: 16px; border-radius: 16px; margin: 12px 0 16px 0; display: flex; flex-direction: column; gap: 10px; }
+
+            .inline-examples-title {
+                font-size: 13.5px;
+                font-weight: 900;
                 color: var(--heading-pure-color);
-                font-family: 'Cairo', sans-serif;
+                margin: 6px 0 10px 0;
+                display: flex;
+                align-items: center;
+                gap: 6px;
             }
 
-            .icon-cards-list { display: flex; flex-direction: column; gap: 12px; margin-top: 8px; }
+            .icon-cards-list { display: flex; flex-direction: column; gap: 10px; }
             
             .icon-single-card {
-                background: var(--light-bg);
-                border: 1.5px solid var(--border-glow);
-                border-radius: 18px;
-                padding: 14px 18px;
+                background: var(--card-bg);
+                border: 1.5px solid var(--theme-glow);
+                border-radius: 16px;
+                padding: 12px 16px;
                 display: flex;
                 flex-direction: column;
-                gap: 10px;
+                gap: 8px;
                 transition: 0.3s ease;
                 position: relative;
                 overflow: hidden;
-                box-shadow: 0 4px 15px rgba(245, 158, 11, 0.05);
+                box-shadow: 0 4px 15px var(--theme-light);
             }
             .icon-single-card:hover {
-                border-color: var(--primary);
+                border-color: var(--theme-active);
                 transform: translateY(-2px);
-                box-shadow: 0 8px 25px var(--border-glow);
+                box-shadow: 0 8px 25px var(--theme-glow);
             }
 
             @keyframes laserScan {
-                0% { border-color: var(--primary); box-shadow: 0 0 15px var(--primary); }
-                50% { border-color: var(--primary-dark); box-shadow: 0 0 25px var(--primary-dark); }
-                100% { border-color: var(--primary); box-shadow: 0 0 15px var(--primary); }
+                0% { border-color: var(--theme-active); box-shadow: 0 0 15px var(--theme-active); }
+                50% { border-color: var(--theme-active-dark); box-shadow: 0 0 25px var(--theme-active-dark); }
+                100% { border-color: var(--theme-active); box-shadow: 0 0 15px var(--theme-active); }
             }
 
             .icon-single-card.scanning {
                 animation: laserScan 1.2s infinite ease-in-out;
-                border-color: var(--primary) !important;
+                border-color: var(--theme-active) !important;
                 background: var(--card-bg) !important;
             }
 
-            .sentence-row {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                gap: 10px;
-                direction: ltr;
-            }
+            .sentence-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; direction: ltr; }
 
-            .line-en-1 { 
-                font-family: system-ui, -apple-system, sans-serif; 
-                font-size: 13.5px; 
-                font-weight: 900; 
-                color: var(--heading-pure-color); 
-                text-align: left; 
-                direction: ltr; 
-                flex: 1;
-            }
-
-            .line-ar-1 { 
-                font-family: 'Cairo', sans-serif; 
-                font-size: 13px; 
-                font-weight: 800; 
-                color: var(--heading-pure-color); 
-                text-align: right; 
-                direction: rtl;
-                margin-top: -2px;
-            }
+            .line-en-1 { font-family: system-ui, -apple-system, sans-serif; font-size: 14px; font-weight: 900; color: var(--heading-pure-color); text-align: left; direction: ltr; flex: 1; }
+            .line-ar-1 { font-family: 'Cairo', sans-serif; font-size: 13px; font-weight: 800; color: var(--text-secondary); text-align: right; direction: rtl; margin-top: -2px; display: flex; flex-direction: column; gap: 3px; align-items: flex-start; }
 
             .sentence-group { display: flex; flex-direction: column; gap: 4px; }
 
             .speak-btn {
                 background: var(--card-bg);
-                border: 1.5px solid var(--border-glow);
-                width: 30px;
-                height: 30px;
-                border-radius: 10px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                cursor: pointer;
-                font-size: 13px;
-                transition: 0.2s;
-                flex-shrink: 0;
-                color: var(--primary);
+                border: 1.5px solid var(--theme-glow);
+                width: 30px; height: 30px; border-radius: 10px;
+                display: flex; align-items: center; justify-content: center;
+                cursor: pointer; font-size: 13px; transition: 0.2s; flex-shrink: 0;
+                color: var(--theme-active);
             }
-            .speak-btn:hover { background: var(--primary); color: #FFFFFF; transform: scale(1.1); }
-            .speak-btn.playing { background: var(--primary); color: #FFFFFF; transform: scale(1.1); }
+            .speak-btn:hover, .speak-btn.playing { background: var(--theme-active); color: #FFFFFF; transform: scale(1.1); }
 
-            /* كارت تشغيل التحدي اليومي */
+            /* كارت تشغيل التحدي اليومي الخارجي */
             .quiz-launch-card {
-                background: linear-gradient(135deg, var(--light-bg), rgba(245, 158, 11, 0.15));
-                border: 2px dashed var(--primary);
-                border-radius: 22px;
-                padding: 20px;
+                background: linear-gradient(135deg, var(--card-bg), var(--theme-light));
+                border: 2px solid var(--theme-active);
+                border-radius: 24px;
+                padding: 24px 20px;
                 display: flex;
+                flex-direction: column;
                 align-items: center;
-                justify-content: space-between;
-                cursor: pointer;
+                text-align: center;
+                gap: 16px;
                 transition: 0.3s ease;
-                margin-top: 20px;
-                box-shadow: 0 10px 25px rgba(245, 158, 11, 0.1);
+                margin-top: 15px;
+                box-shadow: 0 12px 30px var(--theme-glow);
+                position: relative;
+                overflow: hidden;
             }
-            .quiz-launch-card:hover { transform: scale(1.02); border-color: var(--primary-dark); box-shadow: 0 15px 35px var(--border-glow); }
-            .quiz-launch-info { display: flex; flex-direction: column; gap: 4px; }
-            .quiz-launch-title { font-size: 15px; font-weight: 950; color: var(--heading-pure-color); display: flex; align-items: center; gap: 8px; }
-            .quiz-launch-desc { font-size: 11.5px; font-weight: 700; color: var(--text-secondary); }
-            .quiz-launch-btn {
-                background: var(--primary); color: #FFFFFF; border: none; padding: 10px 18px; border-radius: 14px;
-                font-family: 'Cairo', sans-serif; font-size: 12.5px; font-weight: 950; cursor: pointer;
-                box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3); transition: 0.2s;
+            .quiz-launch-card:hover { transform: scale(1.01); border-color: var(--theme-active-dark); box-shadow: 0 18px 40px var(--theme-glow); }
+            
+            .quiz-launch-header-row { display: flex; align-items: center; gap: 8px; justify-content: center; }
+            .quiz-launch-title { font-size: 17.5px; font-weight: 950; color: var(--heading-pure-color); white-space: nowrap; }
+            
+            .quiz-launch-desc-top { font-size: 13px; font-weight: 800; color: var(--text-secondary); background: var(--card-bg); padding: 8px 14px; border-radius: 14px; border: 1.5px solid var(--card-border); width: 100%; box-sizing: border-box; }
+            
+            .quiz-launch-main-btn {
+                background: var(--theme-active); color: #FFFFFF; border: none;
+                width: 100%; padding: 14px; border-radius: 18px;
+                font-family: 'Cairo', sans-serif; font-size: 15px; font-weight: 950;
+                cursor: pointer; box-shadow: 0 6px 20px var(--theme-glow); transition: 0.25s;
+                display: flex; align-items: center; justify-content: center; gap: 8px;
             }
-            .quiz-launch-btn:hover { background: var(--primary-dark); transform: scale(1.05); }
+            .quiz-launch-main-btn:hover { background: var(--theme-active-dark); transform: scale(1.02); }
+
+            /* زر قاموس الجمل الجديد بعرض الكارت في سطر واحد وبدون عدد الجمل */
+            .dict-launch-btn {
+                background: var(--card-bg); color: var(--theme-active); border: 2px solid var(--theme-active);
+                width: 100%; padding: 14px; border-radius: 18px;
+                font-family: 'Cairo', sans-serif; font-size: 15px; font-weight: 950;
+                cursor: pointer; box-shadow: 0 6px 20px var(--theme-light); transition: 0.25s;
+                display: flex; align-items: center; justify-content: center; gap: 8px;
+                white-space: nowrap;
+            }
+            .dict-launch-btn:hover { background: var(--theme-light); transform: scale(1.02); }
+
+            /* نافذة قاموس الجمل المنبثقة (تصميم مطابق لكروت التطبيق العملي) */
+            .dict-modal-overlay {
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                background: rgba(0, 0, 0, 0.65); backdrop-filter: blur(16px);
+                display: none; align-items: center; justify-content: center; z-index: 10001; padding: 16px; box-sizing: border-box;
+            }
+            .dict-modal-overlay.active { display: flex; }
+
+            .dict-modal-card {
+                background: var(--card-bg); border: 2.5px solid var(--theme-active); border-radius: 32px; padding: 22px 20px;
+                width: 100%; max-width: 540px; max-height: 88vh; overflow-y: auto;
+                box-shadow: 0 30px 70px var(--theme-glow); display: flex; flex-direction: column; gap: 16px; position: relative;
+            }
+
+            .dict-modal-header {
+                display: flex; justify-content: space-between; align-items: center;
+                background: var(--theme-light); border: 1.5px solid var(--theme-glow);
+                padding: 10px 16px; border-radius: 20px;
+            }
+            .dict-modal-title { font-size: 15px; font-weight: 950; color: var(--heading-pure-color); display: flex; align-items: center; gap: 8px; }
 
             /* نافذة الاختبار التفاعلية */
             .modal-overlay { 
                 position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-                background: rgba(245, 158, 11, 0.4); backdrop-filter: blur(14px); 
+                background: rgba(0, 0, 0, 0.65); backdrop-filter: blur(16px); 
                 display: none; align-items: center; justify-content: center; z-index: 10000; padding: 16px; box-sizing: border-box; 
             }
             .modal-overlay.active { display: flex; }
             
             .quiz-modal-card { 
-                background: var(--card-bg); border: 2px solid var(--primary); border-radius: 28px; padding: 22px; 
-                width: 100%; max-width: 500px; max-height: 85vh; overflow-y: auto;
-                box-shadow: 0 25px 60px rgba(245, 158, 11, 0.3); display: flex; flex-direction: column; gap: 16px; position: relative; 
+                background: var(--card-bg); border: 2.5px solid var(--theme-active); border-radius: 32px; padding: 22px 20px; 
+                width: 100%; max-width: 520px; max-height: 92vh; overflow-y: auto;
+                box-shadow: 0 30px 70px var(--theme-glow); display: flex; flex-direction: column; gap: 16px; position: relative; 
             }
             
-            .quiz-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--card-border); padding-bottom: 12px; }
-            .quiz-title { font-size: 15px; font-weight: 950; color: var(--heading-pure-color); display: flex; align-items: center; gap: 8px; }
-            .quiz-close-btn { background: var(--light-bg); border: 1.5px solid var(--border-glow); width: 32px; height: 32px; border-radius: 10px; color: var(--text-primary); cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; }
+            /* شريط الـ XP العلوي بنمط الألعاب الفاخر */
+            .game-hud-bar {
+                display: flex; justify-content: space-between; align-items: center;
+                background: var(--bg-main); border: 1.5px solid var(--card-border);
+                padding: 8px 14px; border-radius: 20px; gap: 8px;
+            }
+            .hud-item { display: flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 950; color: var(--heading-pure-color); }
+            .hud-close-btn {
+                background: var(--theme-light); border: 1.5px solid var(--theme-glow); width: 32px; height: 32px; border-radius: 12px;
+                color: var(--text-primary); cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; transition: 0.2s;
+            }
+            .hud-close-btn:hover { background: #EF4444; color: #fff; border-color: #EF4444; }
 
-            .quiz-body { display: flex; flex-direction: column; gap: 14px; }
-            
-            .quiz-question-card {
-                background: var(--card-bg); border: 1.5px solid var(--border-glow); border-radius: 20px; padding: 18px;
-                display: flex; flex-direction: column; gap: 14px; box-shadow: 0 8px 25px rgba(245, 158, 11, 0.06); transition: 0.3s ease;
+            /* كارت العداد البسيط */
+            .quiz-top-status {
+                display: flex; justify-content: center; align-items: center;
+                background: var(--theme-light); border: 1.5px solid var(--theme-glow);
+                padding: 10px 18px; border-radius: 20px;
             }
-            
+            .quiz-counter-badge {
+                font-size: 14px; font-weight: 950; color: var(--heading-pure-color);
+                background: var(--card-bg); padding: 6px 18px; border-radius: 14px; border: 1px solid var(--card-border);
+            }
+
+            /* كارت التعليمات الفراغي */
+            .quiz-instruction-box {
+                background: var(--card-bg); border: 1.5px solid var(--theme-glow);
+                padding: 14px 16px; border-radius: 20px; text-align: center;
+                font-size: 14px; font-weight: 900; color: var(--heading-pure-color);
+                box-shadow: 0 4px 15px var(--theme-light); display: flex; flex-direction: column; gap: 6px;
+            }
+            .quiz-instruction-ar { display: flex; align-items: center; justify-content: center; gap: 6px; }
+            .quiz-instruction-tr { font-size: 12.5px; font-weight: 800; color: var(--text-secondary); background: var(--theme-light); padding: 4px 10px; border-radius: 10px; width: fit-content; margin: auto; border: 1px solid var(--theme-glow); }
+
+            /* كارت السؤال البارز في المنتصف */
+            .quiz-main-question-card {
+                background: var(--card-bg); border: 2px solid var(--theme-active);
+                border-radius: 24px; padding: 24px 20px; text-align: center;
+                box-shadow: 0 10px 30px var(--theme-glow); display: flex; flex-direction: column; gap: 12px;
+                min-height: 110px; justify-content: center; align-items: center;
+            }
+            .quiz-question-text-en { font-family: system-ui, -apple-system, sans-serif; font-size: 19px; font-weight: 950; color: var(--heading-pure-color); direction: ltr; }
+
             @keyframes amberPulse {
-                0% { transform: scale(1); border-color: #F59E0B; box-shadow: 0 0 25px rgba(245, 158, 11, 0.45); }
-                50% { transform: scale(1.02); border-color: #FBBF24; box-shadow: 0 0 35px rgba(251, 191, 36, 0.65); }
-                100% { transform: scale(1); border-color: #F59E0B; box-shadow: 0 0 25px rgba(245, 158, 11, 0.45); }
+                0% { transform: scale(1); border-color: var(--theme-active); box-shadow: 0 0 25px var(--theme-glow); }
+                50% { transform: scale(1.02); border-color: var(--theme-active-dark); box-shadow: 0 0 35px var(--theme-glow); }
+                100% { transform: scale(1); border-color: var(--theme-active); box-shadow: 0 0 25px var(--theme-glow); }
             }
-            .quiz-question-card.a-success-fx { animation: amberPulse 0.6s ease infinite alternate; background: rgba(245, 158, 11, 0.04); }
+            .quiz-main-question-card.a-success-fx { animation: amberPulse 0.6s ease infinite alternate; background: var(--theme-light); }
 
-            @keyframes greenPulse {
-                0% { transform: scale(1); border-color: #059669; box-shadow: 0 0 25px rgba(5, 150, 105, 0.45); }
-                50% { transform: scale(1.02); border-color: #34D399; box-shadow: 0 0 35px rgba(52, 211, 153, 0.65); }
-                100% { transform: scale(1); border-color: #059669; box-shadow: 0 0 25px rgba(5, 150, 105, 0.45); }
+            /* شبكة الخيارات (2×2 مربعات منسقة) */
+            .quiz-options-grid-2x2 {
+                display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
             }
-            .quiz-question-card.the-success-fx { animation: greenPulse 0.6s ease infinite alternate; background: rgba(5, 150, 105, 0.04); }
-
-            .quiz-question-text { font-family: system-ui, -apple-system, sans-serif; font-size: 14.5px; font-weight: 900; color: var(--heading-pure-color); text-align: left; direction: ltr; line-height: 1.6; }
+            .quiz-option-card-btn {
+                background: var(--card-bg); border: 2px solid var(--card-border);
+                padding: 16px 14px; border-radius: 20px; text-align: center;
+                font-family: system-ui, -apple-system, sans-serif; font-size: 15px; font-weight: 950;
+                color: var(--text-primary); cursor: pointer; transition: 0.25s ease;
+                box-shadow: 0 4px 15px rgba(0,0,0,0.03); display: flex; align-items: center; justify-content: center;
+            }
+            .quiz-option-card-btn:hover { border-color: var(--theme-active); background: var(--theme-light); color: var(--theme-active); transform: translateY(-2px); box-shadow: 0 6px 20px var(--theme-glow); }
             
-            .quiz-options-grid { display: flex; gap: 8px; justify-content: center; margin-top: 4px; }
-            .quiz-option-btn {
-                background: var(--bg-main); border: 1.5px solid var(--card-border); padding: 10px 20px; border-radius: 14px;
-                font-family: system-ui, -apple-system, sans-serif; font-size: 13.5px; font-weight: 900; color: var(--text-primary);
-                cursor: pointer; transition: 0.2s; flex: 1; text-align: center;
-            }
-            .quiz-option-btn:hover { border-color: var(--primary); background: var(--light-bg); color: var(--primary); }
-            
-            .quiz-option-btn.correct-a { background: rgba(245, 158, 11, 0.15) !important; border-color: #F59E0B !important; color: #F59E0B !important; transform: scale(1.05); }
-            .quiz-option-btn.correct-the { background: rgba(5, 150, 105, 0.15) !important; border-color: #059669 !important; color: #059669 !important; transform: scale(1.05); }
-            .quiz-option-btn.wrong { background: rgba(239, 68, 68, 0.15) !important; border-color: #EF4444 !important; color: #EF4444 !important; }
+            .quiz-option-card-btn.correct-a { background: var(--theme-light) !important; border-color: var(--theme-active) !important; color: var(--theme-active) !important; transform: scale(1.03); }
+            .quiz-option-card-btn.wrong { background: rgba(239, 68, 68, 0.15) !important; border-color: #EF4444 !important; color: #EF4444 !important; }
 
-            .quiz-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; border-top: 1px solid var(--card-border); padding-top: 12px; font-size: 12px; font-weight: 800; color: var(--text-secondary); }
-            .quiz-next-btn { background: var(--primary); color: #FFFFFF; border: none; padding: 8px 18px; border-radius: 12px; font-family: 'Cairo', sans-serif; font-weight: 900; cursor: pointer; display: none; }
-            .quiz-next-btn.active { display: block; }
+            /* زر السؤال التالي العريض */
+            .quiz-next-btn {
+                background: var(--theme-active); color: #FFFFFF; border: none;
+                width: 100%; padding: 14px; border-radius: 20px;
+                font-family: 'Cairo', sans-serif; font-size: 15px; font-weight: 950;
+                cursor: pointer; display: none; align-items: center; justify-content: center; gap: 8px;
+                box-shadow: 0 8px 25px var(--theme-glow); transition: 0.25s ease;
+                margin-top: 4px; box-sizing: border-box;
+            }
+            .quiz-next-btn:hover { background: var(--theme-active-dark); transform: scale(1.02); }
+            .quiz-next-btn.active { display: flex; }
 
             /* شريط التنقل السفلي */
             .bottom-nav {
@@ -421,7 +459,7 @@
                 transition: all 0.4s ease;
             }
             .bottom-nav a { 
-                color: var(--text-secondary); text-decoration: none; font-size: 10px; text-align: center; font-weight: 800; 
+                color: var(--text-secondary); text-decoration: none; font-size: 10.5px; text-align: center; font-weight: 850; 
                 display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 12px; border-radius: 16px; flex: 1; 
                 border: 1px solid rgba(128, 128, 128, 0.18); background: rgba(128, 128, 128, 0.05);
                 transition: all 0.3s ease;
@@ -435,23 +473,64 @@
 
         <div class="top-progress-bar"><div class="top-progress-fill" id="progressFill"></div></div>
 
-        <!-- نافذة اختبار التحدي اليومي -->
-        <div class="modal-overlay" id="quizModal">
-            <div class="quiz-modal-card">
-                <div class="quiz-header">
-                    <div class="quiz-title"><span>⚡</span><span>التحدي اليومي لأدوات النكرة والمعرفة</span></div>
-                    <button class="quiz-close-btn" id="closeQuizBtn">✕</button>
+        <!-- نافذة قاموس الجمل المنبثقة -->
+        <div class="dict-modal-overlay" id="dictModal">
+            <div class="dict-modal-card">
+                <div class="dict-modal-header">
+                    <div class="dict-modal-title"><span>📖</span><span>قاموس الجمل المُكتسبة</span></div>
+                    <button class="hud-close-btn" onclick="document.getElementById('dictModal').classList.remove('active')">✕</button>
                 </div>
-                <div class="quiz-body" id="quizBody"></div>
-                <div class="quiz-footer">
-                    <span id="quizScoreIndicator">النتيجة: 0 / 4</span>
-                    <button class="quiz-next-btn" id="quizNextBtn" onclick="nextQuestion()">السؤال التالي ➔</button>
+                <div style="font-size: 12.5px; font-weight: 800; color: var(--text-secondary); text-align: center;" id="dictSubtitleCount">
+                    أكمل تحديات الأسئلة لإضافة الجمل إلى قاموسك الشخصي!
+                </div>
+                <div class="icon-cards-list" id="dictCardsContainer">
+                    <!-- تُعبأ الجمل تلقائياً عند إنهاء التحديات -->
                 </div>
             </div>
         </div>
 
+        <!-- نافذة اختبار التحدي اليومي -->
+        <div class="modal-overlay" id="quizModal">
+            <div class="quiz-modal-card">
+                
+                <!-- شريط الـ XP العلوي بنمط الألعاب الفاخر -->
+                <div class="game-hud-bar">
+                    <div class="hud-item"><span>⚡</span><span id="hudXpDisplay">0</span> XP</div>
+                    <div class="hud-item"><span>🎯</span><span>تحدي الأدوات</span></div>
+                    <button class="hud-close-btn" id="closeQuizBtn" title="إغلاق">✕</button>
+                </div>
+
+                <!-- كارت العداد -->
+                <div class="quiz-top-status">
+                    <div class="quiz-counter-badge" id="quizScoreIndicator">السؤال 1 من 4</div>
+                </div>
+
+                <!-- صندوق التعليمات -->
+                <div class="quiz-instruction-box">
+                    <div class="quiz-instruction-ar"><span>🔍</span><span>اختر الكلمة المناسبة لسد الفراغ في الجملة التالية:</span></div>
+                    <div class="quiz-instruction-tr" id="quizArabicTranslation">الترجمة: ...</div>
+                </div>
+
+                <!-- كارت السؤال البارز في المنتصف -->
+                <div class="quiz-main-question-card" id="activeQuestionCard">
+                    <div class="quiz-question-text-en" id="quizQuestionText">I _____ English every day.</div>
+                </div>
+
+                <!-- شبكة الخيارات (2×2 مربعات منسقة) -->
+                <div class="quiz-options-grid-2x2" id="quizOptionsGrid"></div>
+
+                <!-- زر السؤال التالي العريض -->
+                <button class="quiz-next-btn" id="quizNextBtn" onclick="nextQuestion()">
+                    <span>السؤال التالي</span>
+                    <span>➔</span>
+                </button>
+
+            </div>
+        </div>
+
         <div class="container">
-            <!-- شريط الهيدر المُعدل -->
+            
+            <!-- شريط الهيدر -->
             <div class="nav-bar">
                 <a href="fundamentals-path.html" class="back-btn" title="الرجوع للقائمة">←</a>
                 <div class="brand-minimalist-box">
@@ -489,7 +568,7 @@
             <!-- كارت الشرح الشامل الرئيسي -->
             <div class="lesson-card-full" id="mainLessonCard">
                 <div class="lesson-header">
-                    <div class="app-title-wrapper" style="border-right-color: var(--primary);">
+                    <div class="app-title-wrapper">
                         <h2 class="app-main-heading">
                             <span class="a-highlight">A / An</span> & <span class="the-highlight">The</span> Master Guide
                         </h2>
@@ -498,218 +577,264 @@
                 </div>
 
                 <!-- 1. أداة النكرة A و An -->
-                <div class="glass-glow-card a-card" id="sectionA">
+                <div class="glass-glow-card" id="sectionA">
                     <div class="usage-title-centered">
                         <span class="usage-title-ar">أدوات النكرة</span>
-                        <span class="usage-title-bracket" style="color: var(--a-highlight);">(<span class="a-highlight">A</span> / <span class="a-highlight">An</span>)</span>
+                        <span class="usage-title-bracket">(<span class="a-highlight">A</span> / <span class="a-highlight">An</span>)</span>
                         <span class="usage-title-en">Indefinite Articles</span>
                     </div>
                     <div class="usage-content">
                         نستخدم <strong class="a-highlight">A</strong> مع الاسم المفرد الذي يبدأ بصوت حرف ساكن، بينما نستخدم <strong class="a-highlight">An</strong> قبل الاسم المفرد الذي يبدأ بصوت متحرك (<span class="vowel-highlight">a</span>, <span class="vowel-highlight">e</span>, <span class="vowel-highlight">i</span>, <span class="vowel-highlight">o</span>, <span class="vowel-highlight">u</span>).
 
-                        <div class="method-box" style="border-color: var(--primary); background: var(--bg-main); margin-top: 12px;">
-                            <div class="method-box-title" style="color: var(--primary);">⚡ قاعدة التناغم الصوتي</div>
-                            <div style="font-size: 12.5px; font-weight: 800; color: var(--text-primary); display: flex; flex-direction: column; gap: 6px; margin-top: 4px;">
+                        <div class="method-box">
+                            <div class="method-box-title" style="color: var(--theme-active); font-weight: 950;">⚡ قاعدة التناغم الصوتي</div>
+                            <div style="font-size: 13px; font-weight: 850; color: var(--text-primary); display: flex; flex-direction: column; gap: 6px; margin-top: 4px;">
                                 <div>🎵 نختار الأداة بناءً على نطق الحرف الأول من الاسم المفرد:</div>
                                 <div>🔹 إذا بدأ بنطق ساكن نضع <strong class="a-highlight">A</strong> (مثل: <span class="a-highlight">a</span> car, <span class="a-highlight">a</span> book).</div>
                                 <div>🔹 إذا بدأ بنطق متحرك (<span class="vowel-highlight">a</span>, <span class="vowel-highlight">e</span>, <span class="vowel-highlight">i</span>, <span class="vowel-highlight">o</span>, <span class="vowel-highlight">u</span>) نضع <strong class="a-highlight">An</strong> لمنع التباعد الصوتي (مثل: <span class="a-highlight">an</span> apple, <span class="a-highlight">an</span> hour).</div>
+                            </div>
+                        </div>
+
+                        <div class="inline-examples-title">✨ أمثلة تطبيقية على (A / An):</div>
+                        <div class="icon-cards-list">
+                            <div class="icon-single-card" id="card-1">
+                                <div class="sentence-group">
+                                    <div class="sentence-row">
+                                        <div class="line-en-1">I saw <strong class="a-highlight">a</strong> cat in the street.</div>
+                                        <button class="speak-btn" onclick="speakText('I saw a cat in the street.', 'card-1', this)" title="استمع للنطق">🔊</button>
+                                    </div>
+                                    <div class="line-ar-1">
+                                        <span>رأيت قطة في الشارع</span>
+                                        <span class="reason-badge">نكرة لأول مرة</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="icon-single-card" id="card-2">
+                                <div class="sentence-group">
+                                    <div class="sentence-row">
+                                        <div class="line-en-1">She is eating <strong class="a-highlight">an</strong> apple.</div>
+                                        <button class="speak-btn" onclick="speakText('She is eating an apple.', 'card-2', this)" title="استمع للنطق">🔊</button>
+                                    </div>
+                                    <div class="line-ar-1">
+                                        <span>هي تأكل تفاحة</span>
+                                        <span class="reason-badge">بدأت بحرف متحرك</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="icon-single-card" id="card-3">
+                                <div class="sentence-group">
+                                    <div class="sentence-row">
+                                        <div class="line-en-1">He drives <strong class="a-highlight">a</strong> fast car.</div>
+                                        <button class="speak-btn" onclick="speakText('He drives a fast car.', 'card-3', this)" title="استمع للنطق">🔊</button>
+                                    </div>
+                                    <div class="line-ar-1">
+                                        <span>هو يقود سيارة سريعة</span>
+                                        <span class="reason-badge">مفرد معدود نكرة</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="icon-single-card" id="card-4">
+                                <div class="sentence-group">
+                                    <div class="sentence-row">
+                                        <div class="line-en-1">She waited for <strong class="a-highlight">an</strong> hour.</div>
+                                        <button class="speak-btn" onclick="speakText('She waited for an hour.', 'card-4', this)" title="استمع للنطق">🔊</button>
+                                    </div>
+                                    <div class="line-ar-1">
+                                        <span>هي انتظرت لمدة ساعة</span>
+                                        <span class="reason-badge">حرف صامت، صوت متحرك</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="icon-single-card" id="card-5">
+                                <div class="sentence-group">
+                                    <div class="sentence-row">
+                                        <div class="line-en-1">My father is <strong class="a-highlight">an</strong> honest man.</div>
+                                        <button class="speak-btn" onclick="speakText('My father is an honest man.', 'card-5', this)" title="استمع للنطق">🔊</button>
+                                    </div>
+                                    <div class="line-ar-1">
+                                        <span>والدي رجل أمين</span>
+                                        <span class="reason-badge">بدأت بحرف H الصامت</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- 2. أداة المعرفة The -->
-                <div class="glass-glow-card the-card" id="sectionThe">
+                <div class="glass-glow-card" id="sectionThe">
                     <div class="usage-title-centered">
                         <span class="usage-title-ar">أداة المعرفة</span>
                         <span class="usage-title-bracket" style="color: var(--the-highlight);">(<span class="the-highlight">The</span>)</span>
                         <span class="usage-title-en">Definite Article</span>
                     </div>
                     <div class="usage-content">
-                        تُستخدم عندما يكون الشيء <strong>معروفاً، محدداً، أو تم ذكره مسبقاً</strong>، أو عندما يكون فريداً من نوعه في الكون (مثل الشمس والقمر).
+                        <div class="method-box" style="border-color: #059669; margin-top: 0;">
+                            <div class="method-box-title" style="color: #059669; font-weight: 950; margin-bottom: 6px;">🎯 سر التحول من النكرة إلى المعرفة</div>
+                            <div style="font-size: 13.5px; font-weight: 850; color: var(--text-primary); display: flex; flex-direction: column; gap: 8px;">
+                                <div>• <strong>أول مرة:</strong> نستخدم النكرة <strong class="a-highlight">(a)</strong> لأن المستمع لا يعرف الشيء بعد (مثل: I bought <strong class="a-highlight">a</strong> new car).</div>
+                                <div>• <strong>ثاني مرة:</strong> نحولها إلى معرفة بـ <strong class="the-highlight">(The)</strong> لأننا أصبحنا نعرفها وتحدثنا عنها قبل قليل (مثل: <strong class="the-highlight">The</strong> car is fast).</div>
+                            </div>
+                        </div>
 
-                        <div class="method-box" style="border-color: #059669; background: var(--bg-main); margin-top: 12px;">
-                            <div class="method-box-title" style="color: #059669;">🔍 القاعدة الهندسية للاستخدام</div>
-                            <div style="font-size: 12.5px; font-weight: 800; color: var(--text-primary); display: flex; flex-direction: column; gap: 6px; margin-top: 4px;">
-                                <div>🧱 <strong>المعادلة:</strong> التخصيص أو الفرادة = استخدام <span class="the-highlight">The</span>.</div>
-                                <div>📌 <strong>مثال:</strong> I bought <span class="a-highlight">a</span> car. <span class="the-highlight">The</span> car is fast. (اشتريت سيارة - النكرة أول مرة، ثم صارت معرفة لأننا عرفناها).</div>
+                        <div class="inline-examples-title">✨ أمثلة تطبيقية على (The):</div>
+                        <div class="icon-cards-list">
+                            <div class="icon-single-card" id="card-6">
+                                <div class="sentence-group">
+                                    <div class="sentence-row">
+                                        <div class="line-en-1">Look at <strong class="the-highlight">the</strong> sun in <strong class="the-highlight">the</strong> sky.</div>
+                                        <button class="speak-btn" onclick="speakText('Look at the sun in the sky.', 'card-6', this)" title="استمع للنطق">🔊</button>
+                                    </div>
+                                    <div class="line-ar-1">
+                                        <span>انظر إلى الشمس في السماء</span>
+                                        <span class="reason-badge-the">أشياء فريدة من نوعها</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="icon-single-card" id="card-7">
+                                <div class="sentence-group">
+                                    <div class="sentence-row">
+                                        <div class="line-en-1">Please close <strong class="the-highlight">the</strong> door.</div>
+                                        <button class="speak-btn" onclick="speakText('Please close the door.', 'card-7', this)" title="استمع للنطق">🔊</button>
+                                    </div>
+                                    <div class="line-ar-1">
+                                        <span>من فضلك اغلق الباب</span>
+                                        <span class="reason-badge-the">معروف ومحدد للمستمع</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="icon-single-card" id="card-8">
+                                <div class="sentence-group">
+                                    <div class="sentence-row">
+                                        <div class="line-en-1">I visited <strong class="the-highlight">the</strong> Pyramids last week.</div>
+                                        <button class="speak-btn" onclick="speakText('I visited the Pyramids last week.', 'card-8', this)" title="استمع للنطق">🔊</button>
+                                    </div>
+                                    <div class="line-ar-1">
+                                        <span>زرت الأهرامات الأسبوع الماضي</span>
+                                        <span class="reason-badge-the">معالم تاريخية معروفة</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="icon-single-card" id="card-9">
+                                <div class="sentence-group">
+                                    <div class="sentence-row">
+                                        <div class="line-en-1">He plays <strong class="the-highlight">the</strong> guitar very well.</div>
+                                        <button class="speak-btn" onclick="speakText('He plays the guitar very well.', 'card-9', this)" title="استمع للنطق">🔊</button>
+                                    </div>
+                                    <div class="line-ar-1">
+                                        <span>هو يعزف على الجيتار بمهارة</span>
+                                        <span class="reason-badge-the">الآلات الموسيقية</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="icon-single-card" id="card-10">
+                                <div class="sentence-group">
+                                    <div class="sentence-row">
+                                        <div class="line-en-1">This is <strong class="the-highlight">the</strong> best movie I ever saw.</div>
+                                        <button class="speak-btn" onclick="speakText('This is the best movie I ever saw.', 'card-10', this)" title="استمع للنطق">🔊</button>
+                                    </div>
+                                    <div class="line-ar-1">
+                                        <span>هذا هو أفضل فيلم شاهدته على الإطلاق</span>
+                                        <span class="reason-badge-the">صيغة التفضيل</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- 3. عدم استخدام أداة Zero Article -->
-                <div class="glass-glow-card zero-card" id="sectionZero">
+                <!-- 3. حالات عدم استخدام الأداة Zero Article -->
+                <div class="glass-glow-card" id="sectionZero">
                     <div class="usage-title-centered">
                         <span class="usage-title-ar">حالات عدم استخدام الأداة</span>
                         <span class="usage-title-bracket" style="color: var(--zero-highlight);">(Zero Article)</span>
                         <span class="usage-title-en">No Article</span>
                     </div>
                     <div class="usage-content">
-                        لا نضع أي أداة قبل الأسماء <strong>الجمع أو غير المعدودة</strong> عندما نتحدث عنها بشكل عام وعام.
+                        لا نضع أي أداة قبل الأسماء <strong>الجمع، غير المعدودة، واللغات</strong> عندما نتحدث عنها بشكل عام.
 
-                        <div class="method-box" style="border-color: var(--primary); background: var(--bg-main); margin-top: 12px;">
-                            <div class="method-box-title" style="color: var(--primary);">🔍 القاعدة الهندسية للاستخدام</div>
-                            <div style="font-size: 12.5px; font-weight: 800; color: var(--text-primary); display: flex; flex-direction: column; gap: 6px; margin-top: 4px;">
-                                <div>🧱 <strong>المعادلة:</strong> تعميم الأسماء غير المعدودة أو الجمع = لا أداة (-).</div>
-                                <div>📌 <strong>مثال:</strong> I like <span class="zero-highlight">dogs</span>. / Water is essential.</div>
+                        <div class="inline-examples-title" style="margin-top: 14px;">✨ أمثلة تطبيقية على عدم استخدام الأداة:</div>
+                        <div class="icon-cards-list">
+                            <div class="icon-single-card" id="card-11">
+                                <div class="sentence-group">
+                                    <div class="sentence-row">
+                                        <div class="line-en-1">I love <strong class="zero-highlight">music</strong> and reading.</div>
+                                        <button class="speak-btn" onclick="speakText('I love music and reading.', 'card-11', this)" title="استمع للنطق">🔊</button>
+                                    </div>
+                                    <div class="line-ar-1">
+                                        <span>أنا أحب الموسيقى والقراءة</span>
+                                        <span class="reason-badge-zero">أسماء غير معدودة عامة</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="icon-single-card" id="card-12">
+                                <div class="sentence-group">
+                                    <div class="sentence-row">
+                                        <div class="line-en-1">Cats chase <strong class="zero-highlight">mice</strong>.</div>
+                                        <button class="speak-btn" onclick="speakText('Cats chase mice.', 'card-12', this)" title="استمع للنطق">🔊</button>
+                                    </div>
+                                    <div class="line-ar-1">
+                                        <span>القطط تطارد الفئران</span>
+                                        <span class="reason-badge-zero">أسماء جمع عامة بدون أداة</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="icon-single-card" id="card-13">
+                                <div class="sentence-group">
+                                    <div class="sentence-row">
+                                        <div class="line-en-1">They speak <strong class="zero-highlight">English</strong> fluently.</div>
+                                        <button class="speak-btn" onclick="speakText('They speak English fluently.', 'card-13', this)" title="استمع للنطق">🔊</button>
+                                    </div>
+                                    <div class="line-ar-1">
+                                        <span>هم يتحدثون الإنجليزية بطلاقة</span>
+                                        <span class="reason-badge-zero">أسماء اللغات بدون أداة</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="icon-single-card" id="card-14">
+                                <div class="sentence-group">
+                                    <div class="sentence-row">
+                                        <div class="line-en-1">Water is essential for life.</div>
+                                        <button class="speak-btn" onclick="speakText('Water is essential for life.', 'card-14', this)" title="استمع للنطق">🔊</button>
+                                    </div>
+                                    <div class="line-ar-1">
+                                        <span>الماء ضروري للحياة</span>
+                                        <span class="reason-badge-zero">اسم غير معدود عام</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="icon-single-card" id="card-15">
+                                <div class="sentence-group">
+                                    <div class="sentence-row">
+                                        <div class="line-en-1">Birds can fly high.</div>
+                                        <button class="speak-btn" onclick="speakText('Birds can fly high.', 'card-15', this)" title="استمع للنطق">🔊</button>
+                                    </div>
+                                    <div class="line-ar-1">
+                                        <span>الطيور تستطيع الطيران عالياً</span>
+                                        <span class="reason-badge-zero">أسماء جمع عامة بدون أداة</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- 4. قسم التطبيقات العملية -->
-                <div style="margin-top: 12px; display: flex; flex-direction: column; gap: 12px;" id="sectionPractice">
-                    
-                    <div class="inner-practice-title-wrapper">
-                        <h3 class="inner-practice-heading">✨ التطبيق العملي المتسلسل لأدوات النكرة والمعرفة</h3>
-                        <div class="app-sub-pill"><span>12 مثالاً عملياً منسقاً مع النطق الصوتي 🎯</span></div>
-                    </div>
-                    
-                    <div class="icon-cards-list">
-                        
-                        <!-- 1 -->
-                        <div class="icon-single-card" id="card-1">
-                            <div class="sentence-group">
-                                <div class="sentence-row">
-                                    <div class="line-en-1">I saw <strong class="a-highlight">a</strong> cat in the street.</div>
-                                    <button class="speak-btn" onclick="speakText('I saw a cat in the street.', 'card-1', this)" title="استمع للنطق">🔊</button>
-                                </div>
-                                <div class="line-ar-1">رأيت قطة في الشارع (نكرة لأول مرة).</div>
-                            </div>
-                        </div>
-
-                        <!-- 2 -->
-                        <div class="icon-single-card" id="card-2">
-                            <div class="sentence-group">
-                                <div class="sentence-row">
-                                    <div class="line-en-1">She is eating <strong class="a-highlight">an</strong> apple.</div>
-                                    <button class="speak-btn" onclick="speakText('She is eating an apple.', 'card-2', this)" title="استمع للنطق">🔊</button>
-                                </div>
-                                <div class="line-ar-1">هي تأكل تفاحة (بدأت بحرف متحرك).</div>
-                            </div>
-                        </div>
-
-                        <!-- 3 -->
-                        <div class="icon-single-card" id="card-3">
-                            <div class="sentence-group">
-                                <div class="sentence-row">
-                                    <div class="line-en-1">Look at <strong class="the-highlight">the</strong> sun in <strong class="the-highlight">the</strong> sky.</div>
-                                    <button class="speak-btn" onclick="speakText('Look at the sun in the sky.', 'card-3', this)" title="استمع للنطق">🔊</button>
-                                </div>
-                                <div class="line-ar-1">انظر إلى الشمس في السماء (أشياء فريدة).</div>
-                            </div>
-                        </div>
-
-                        <!-- 4 -->
-                        <div class="icon-single-card" id="card-4">
-                            <div class="sentence-group">
-                                <div class="sentence-row">
-                                    <div class="line-en-1">I love <strong class="zero-highlight">music</strong> and reading.</div>
-                                    <button class="speak-btn" onclick="speakText('I love music and reading.', 'card-4', this)" title="استمع للنطق">🔊</button>
-                                </div>
-                                <div class="line-ar-1">أنا أحب الموسيقى والقراءة (أسماء غير معدودة عامة).</div>
-                            </div>
-                        </div>
-
-                        <!-- 5 -->
-                        <div class="icon-single-card" id="card-5">
-                            <div class="sentence-group">
-                                <div class="sentence-row">
-                                    <div class="line-en-1">He drives <strong class="a-highlight">a</strong> fast car.</div>
-                                    <button class="speak-btn" onclick="speakText('He drives a fast car.', 'card-5', this)" title="استمع للنطق">🔊</button>
-                                </div>
-                                <div class="line-ar-1">هو يقود سيارة سريعة (مفرد معدود نكرة).</div>
-                            </div>
-                        </div>
-
-                        <!-- 6 -->
-                        <div class="icon-single-card" id="card-6">
-                            <div class="sentence-group">
-                                <div class="sentence-row">
-                                    <div class="line-en-1">She waited for <strong class="a-highlight">an</strong> hour.</div>
-                                    <button class="speak-btn" onclick="speakText('She waited for an hour.', 'card-6', this)" title="استمع للنطق">🔊</button>
-                                </div>
-                                <div class="line-ar-1">هي انتظرت لمدة ساعة (حرف صامت، صوت متحرك).</div>
-                            </div>
-                        </div>
-
-                        <!-- 7 -->
-                        <div class="icon-single-card" id="card-7">
-                            <div class="sentence-group">
-                                <div class="sentence-row">
-                                    <div class="line-en-1">Please close <strong class="the-highlight">the</strong> door.</div>
-                                    <button class="speak-btn" onclick="speakText('Please close the door.', 'card-7', this)" title="استمع للنطق">🔊</button>
-                                </div>
-                                <div class="line-ar-1">من فضلك اغلق الباب (معروف ومحدد بيننا).</div>
-                            </div>
-                        </div>
-
-                        <!-- 8 -->
-                        <div class="icon-single-card" id="card-8">
-                            <div class="sentence-group">
-                                <div class="sentence-row">
-                                    <div class="line-en-1">Cats chase <strong class="zero-highlight">mice</strong>.</div>
-                                    <button class="speak-btn" onclick="speakText('Cats chase mice.', 'card-8', this)" title="استمع للنطق">🔊</button>
-                                </div>
-                                <div class="line-ar-1">القطط تطارد الفئران (أسماء جمع عامة بدون أداة).</div>
-                            </div>
-                        </div>
-
-                        <!-- 9 -->
-                        <div class="icon-single-card" id="card-9">
-                            <div class="sentence-group">
-                                <div class="sentence-row">
-                                    <div class="line-en-1">My father is <strong class="a-highlight">an</strong> honest man.</div>
-                                    <button class="speak-btn" onclick="speakText('My father is an honest man.', 'card-9', this)" title="استمع للنطق">🔊</button>
-                                </div>
-                                <div class="line-ar-1">والدي رجل أمين (بدأت بحرف H الصامت).</div>
-                            </div>
-                        </div>
-
-                        <!-- 10 -->
-                        <div class="icon-single-card" id="card-10">
-                            <div class="sentence-group">
-                                <div class="sentence-row">
-                                    <div class="line-en-1">I visited <strong class="the-highlight">the</strong> Pyramids last week.</div>
-                                    <button class="speak-btn" onclick="speakText('I visited the Pyramids last week.', 'card-10', this)" title="استمع للنطق">🔊</button>
-                                </div>
-                                <div class="line-ar-1">زرت الأهرامات الأسبوع الماضي (معالم شهيرة ومعروفة).</div>
-                            </div>
-                        </div>
-
-                        <!-- 11 -->
-                        <div class="icon-single-card" id="card-11">
-                            <div class="sentence-group">
-                                <div class="sentence-row">
-                                    <div class="line-en-1">They speak <strong class="zero-highlight">English</strong> fluently.</div>
-                                    <button class="speak-btn" onclick="speakText('They speak English fluently.', 'card-11', this)" title="استمع للنطق">🔊</button>
-                                </div>
-                                <div class="line-ar-1">هم يتحدثون الإنجليزية بطلاقة (أسماء اللغات بدون أداة).</div>
-                            </div>
-                        </div>
-
-                        <!-- 12 -->
-                        <div class="icon-single-card" id="card-12">
-                            <div class="sentence-group">
-                                <div class="sentence-row">
-                                    <div class="line-en-1">He plays <strong class="the-highlight">the</strong> guitar very well.</div>
-                                    <button class="speak-btn" onclick="speakText('He plays the guitar very well.', 'card-12', this)" title="استمع للنطق">🔊</button>
-                                </div>
-                                <div class="line-ar-1">هو يعزف على الجيتار بمهارة (الآلات الموسيقية تأخذ The).</div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- كارت تشغيل التحدي اليومي -->
+                <!-- كارت تشغيل التحدي اليومي وقاموس الجمل الخارجي -->
                 <div class="quiz-launch-card" id="launchQuizCardBtn">
-                    <div class="quiz-launch-info">
-                        <div class="quiz-launch-title">🎯 تحدي أدوات النكرة والمعرفة</div>
-                        <div class="quiz-launch-desc" id="quizLaunchDesc">اختبر استيعابك وتحدى نفسك الآن لاكتساب النقاط!</div>
+                    <div class="quiz-launch-header-row">
+                        <span class="quiz-launch-title">تحدي الأدوات 🎯</span>
                     </div>
-                    <button class="quiz-launch-btn" id="launchBtnText">ابدأ التحدي ➔</button>
+                    <div class="quiz-launch-desc-top">
+                        40 سؤالاً في بنك التحديات • اختبر استيعابك في 4 أسئلة يومية متجددة واكسب 10 XP لكل إجابة صحيحة!
+                    </div>
+                    <button class="quiz-launch-main-btn" id="launchBtnText" onclick="launchQuizAction()">
+                        <span>ابدأ التحدي</span>
+                        <span>➔</span>
+                    </button>
+                    <!-- زر قاموس الجمل بعرض الكارت في سطر واحد -->
+                    <button class="dict-launch-btn" onclick="openDictionaryModal(event)">
+                        📖 قاموس الجمل المُكتسبة
+                    </button>
                 </div>
 
             </div>
@@ -720,16 +845,79 @@
         <div class="bottom-nav" id="bottomNav">
             <a href="../../index.html"><span class="nav-icon">🏠</span>الرئيسية</a>
             <a href="../english.html"><span class="nav-icon">🇬🇧</span>الإنجليزي</a>
-            <a href="fundamentals-path.html" class="active"><span class="nav-icon">📖</span>القواعد</a>
             <a href="../../surveying/surveying.html"><span class="nav-icon">📐</span>المساحة</a>
             <a href="../../programming/programming.html"><span class="nav-icon">💻</span>البرمجة</a>
         </div>
 
         <script>
+            const quizSentencesPool = [
+                { en: "He bought a new laptop yesterday.", ar: "هو اشترى لابتوب جديد بالأمس.", badge: "نكرة مفرد" },
+                { en: "She ate an orange for breakfast.", ar: "هي أكلت برتقالة على الإفطار.", badge: "يبدأ بحرف متحرك" },
+                { en: "Look at the moon tonight; it's bright.", ar: "انظر إلى القمر الليلة؛ إنه مضيء.", badge: "فريد من نوعه" },
+                { en: "I need water after the long run.", ar: "أنا بحاجة إلى الماء بعد الركض الطويل.", badge: "اسم غير معدود" },
+
+                { en: "They live in a big house near Cairo.", ar: "هم يعيشون في منزل كبير قرب القاهرة.", badge: "نكرة مفرد" },
+                { en: "He is an honest engineer.", ar: "إنه مهندس أمين.", badge: "حرف H صامت" },
+                { en: "The Pyramids are amazing structures.", ar: "الأهرامات هياكل مذهلة.", badge: "معلم تاريخي معروف" },
+                { en: "Cats are very smart animals.", ar: "القطط حيوانات ذكية جداً.", badge: "اسم جمع عام" },
+
+                { en: "I saw a cat in the garden.", ar: "رأيت قطة في الحديقة.", badge: "نكرة لأول مرة" },
+                { en: "She wants to be an architect.", ar: "هي تريد أن تصبح مهندسة معمارية.", badge: "يبدأ بحرف متحرك" },
+                { en: "The sun rises in the east.", ar: "الشمس تشرق من الشرق.", badge: "فريد من نوعه" },
+                { en: "We love music.", ar: "نحن نحب الموسيقى.", badge: "اسم غير معدود" },
+
+                { en: "He has a fast bicycle.", ar: "لديه دراجة سريعة.", badge: "نكرة مفرد معدود" },
+                { en: "It takes an hour to get there.", ar: "يستغرق الأمر ساعة للوصول إلى هناك.", badge: "صوت متحرك" },
+                { en: "Please pass me the salt.", ar: "من فضلك ناولني الملح.", badge: "محدد ومعروف" },
+                { en: "Children like toys.", ar: "الأطفال يحبون الألعاب.", badge: "أسماء جمع عامة" }
+            ];
+
+            function getUnlockedSentences() {
+                let unlocked = JSON.parse(localStorage.getItem("em_art_unlocked_sentences") || "[]");
+                return unlocked;
+            }
+
+            function openDictionaryModal(event) {
+                if(event) event.stopPropagation();
+                let unlocked = getUnlockedSentences();
+                let container = document.getElementById('dictCardsContainer');
+                let subtitle = document.getElementById('dictSubtitleCount');
+
+                if (unlocked.length === 0) {
+                    subtitle.innerText = "قاموسك فارغ حالياً! أكمل تحدي الأسئلة لإضافة أول 4 جمل لقاموسك.";
+                    container.innerHTML = `
+                        <div style="text-align:center; padding: 30px; color: var(--text-secondary); font-weight: 800; font-size: 14px;">
+                            🔒 لا توجد جمل مكتسبة بعد. ابدأ التحدي الآن واكسب جمل جديدة!
+                        </div>
+                    `;
+                } else {
+                    subtitle.innerText = `إليك الجمل التي أتقنتها وأضفتها لقاموسك (${unlocked.length} جملة):`;
+                    let html = '';
+                    unlocked.forEach((item, index) => {
+                        let cardId = 'unlocked-card-' + index;
+                        html += `
+                            <div class="icon-single-card" id="${cardId}">
+                                <div class="sentence-group">
+                                    <div class="sentence-row">
+                                        <div class="line-en-1">${item.en}</div>
+                                        <button class="speak-btn" onclick="speakText('${item.en}', '${cardId}', this)" title="استمع للنطق">🔊</button>
+                                    </div>
+                                    <div class="line-ar-1">
+                                        <span>${item.ar}</span>
+                                        <span class="reason-badge">${item.badge}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    container.innerHTML = html;
+                }
+                document.getElementById('dictModal').classList.add('active');
+            }
+
             function speakText(text, cardId, buttonElement) {
                 if ('speechSynthesis' in window) {
                     window.speechSynthesis.cancel();
-
                     document.querySelectorAll('.icon-single-card').forEach(card => card.classList.remove('scanning'));
                     document.querySelectorAll('.speak-btn').forEach(btn => btn.classList.remove('playing'));
 
@@ -789,105 +977,97 @@
             }
 
             const masterQuizBank = [
-                { q: "He bought ( &nbsp;......&nbsp; ) new laptop yesterday.", options: ["a", "an", "the"], correct: 0, type: "a" },
-                { q: "She ate ( &nbsp;......&nbsp; ) orange for breakfast.", options: ["a", "an", "the"], correct: 1, type: "a" },
-                { q: "Look at ( &nbsp;......&nbsp; ) moon tonight; it's bright.", options: ["a", "an", "the"], correct: 2, type: "the" },
-                { q: "I need (- &nbsp;......&nbsp; ) water after the long run.", options: ["a", "an", "-"], correct: 2, type: "a" },
-                { q: "They live in ( &nbsp;......&nbsp; ) big house near Cairo.", options: ["a", "an", "the"], correct: 0, type: "a" },
-                { q: "He is ( &nbsp;......&nbsp; ) honest engineer.", options: ["a", "an", "the"], correct: 1, type: "a" },
-                { q: "( &nbsp;......&nbsp; ) Pyramids are amazing structures.", options: ["A", "An", "The"], correct: 2, type: "the" },
-                { q: "Cats are very smart (- &nbsp;......&nbsp; ) animals.", options: ["a", "an", "-"], correct: 2, type: "a" }
+                { q: "He bought ...... new laptop yesterday.", ar: "هو اشترى لابتوب جديد بالأمس.", options: ["a", "an", "the"], correct: 0 },
+                { q: "She ate ...... orange for breakfast.", ar: "هي أكلت برتقالة على الإفطار.", options: ["a", "an", "the"], correct: 1 },
+                { q: "Look at ...... moon tonight; it's bright.", ar: "انظر إلى القمر الليلة؛ إنه مضيء.", options: ["a", "an", "the"], correct: 2 },
+                { q: "I need ...... water after the long run.", ar: "أنا بحاجة إلى الماء بعد الركض الطويل.", options: ["a", "an", "-"], correct: 2 },
+                { q: "They live in ...... big house near Cairo.", ar: "هم يعيشون في منزل كبير قرب القاهرة.", options: ["a", "an", "the"], correct: 0 },
+                { q: "He is ...... honest engineer.", ar: "إنه مهندس أمين.", options: ["a", "an", "the"], correct: 1 },
+                { q: "...... Pyramids are amazing structures.", ar: "الأهرامات هياكل مذهلة.", options: ["A", "An", "The"], correct: 2 },
+                { q: "Cats are very smart ...... animals.", ar: "القطط حيوانات ذكية جداً.", options: ["a", "an", "-"], correct: 2 },
+                { q: "I saw ...... cat in the garden.", ar: "رأيت قطة في الحديقة.", options: ["a", "an", "the"], correct: 0 },
+                { q: "She wants to be ...... architect.", ar: "هي تريد أن تصبح مهندسة معمارية.", options: ["a", "an", "the"], correct: 1 },
+                { q: "...... sun rises in the east.", ar: "الشمس تشرق من الشرق.", options: ["A", "An", "The"], correct: 2 },
+                { q: "We love ...... music.", ar: "نحن نحب الموسيقى.", options: ["a", "an", "-"], correct: 2 },
+                { q: "He has ...... fast bicycle.", ar: "لديه دراجة سريعة.", options: ["a", "an", "the"], correct: 0 },
+                { q: "It takes ...... hour to get there.", ar: "يستغرق الأمر ساعة للوصول إلى هناك.", options: ["a", "an", "the"], correct: 1 },
+                { q: "Please pass me ...... salt.", ar: "من فضلك ناولني الملح.", options: ["a", "an", "the"], correct: 2 },
+                { q: "Children like ...... toys.", ar: "الأطفال يحبون الألعاب.", options: ["a", "an", "-"], correct: 2 },
+                { q: "My brother drives ...... blue car.", ar: "أخي يقود سيارة زرقاء.", options: ["a", "an", "the"], correct: 0 },
+                { q: "This is ...... excellent book.", ar: "هذا كتاب ممتاز.", options: ["a", "an", "the"], correct: 1 },
+                { q: "...... sky is clear today.", ar: "السماء صافية اليوم.", options: ["A", "An", "The"], correct: 2 },
+                { q: "They speak ...... Arabic at home.", ar: "هم يتحدثون العربية في البيت.", options: ["a", "an", "-"], correct: 2 },
+                { q: "I need to buy ...... new phone.", ar: "أحتاج لشراء هاتف جديد.", options: ["a", "an", "the"], correct: 0 },
+                { q: "He ate ...... egg for breakfast.", ar: "أكل بيضة على الإفطار.", options: ["a", "an", "the"], correct: 1 },
+                { q: "Who is ...... manager of this company?", ar: "من هو مدير هذه الشركة؟", options: ["a", "an", "the"], correct: 2 },
+                { q: "Lions eat ...... meat.", ar: "الأسود تأكل اللحم.", options: ["a", "an", "-"], correct: 2 },
+                { q: "She met ...... famous actor yesterday.", ar: "قابلت ممثلاً مشهوراً بالأمس.", options: ["a", "an", "the"], correct: 0 },
+                { q: "It was ...... unusual day.", ar: "لقد كان يوماً غير معتاد.", options: ["a", "an", "the"], correct: 1 },
+                { q: "I left my keys on ...... kitchen table.", ar: "تركت مفاتيحي على طاولة المطبخ.", options: ["a", "an", "the"], correct: 2 },
+                { q: "Gold is ...... precious metal.", ar: "الذهب معدن نفيس.", options: ["a", "an", "-"], correct: 2 },
+                { q: "He works as ...... teacher in London.", ar: "يعمل كمعلم في لندن.", options: ["a", "an", "the"], correct: 0 },
+                { q: "She is reading ...... old manuscript.", ar: "هي تقرأ مخطوطة قديمة.", options: ["a", "an", "the"], correct: 1 },
+                { q: "Cairo is ...... capital of Egypt.", ar: "القاهرة هي عاصمة مصر.", options: ["A", "An", "The"], correct: 2 },
+                { q: "Do you like ...... coffee?", ar: "هل تحب القهوة؟", options: ["a", "an", "-"], correct: 2 },
+                { q: "They live in ...... quiet village.", ar: "هم يعيشون في قرية هادئة.", options: ["a", "an", "the"], correct: 0 },
+                { q: "He has ...... umbrella with him.", ar: "معه مظلة.", options: ["a", "an", "the"], correct: 1 },
+                { q: "Open ...... door, please.", ar: "افتح الباب من فضلك.", options: ["a", "an", "the"], correct: 2 },
+                { q: "Birds can ...... fly.", ar: "الطيور تستطيع الطيران.", options: ["a", "an", "-"], correct: 2 },
+                { q: "She bought ...... pair of shoes.", ar: "اشترت حذاءً (زوجاً من الأحذية).", options: ["a", "an", "the"], correct: 0 },
+                { q: "He is ...... honorable man.", ar: "إنه رجل شريف.", options: ["a", "an", "the"], correct: 1 },
+                { q: "Where is ...... nearest hospital?", ar: "أين أقرب مستشفى؟", options: ["a", "an", "the"], correct: 2 },
+                { q: "History is ...... fascinating subject.", ar: "التاريخ مادة مذهلة.", options: ["a", "an", "-"], correct: 2 }
             ];
 
-            let userXp = parseInt(localStorage.getItem("em_user_xp") || "0");
+            let sessionXpEarned = 0;
             let currentDailyQuestions = [];
             let currentQuizIndex = 0;
             let currentScore = 0;
             let answered = false;
 
             function getTodayQuestions() {
-                let now = new Date().getTime();
-                let savedTimestamp = parseInt(localStorage.getItem("em_art_timestamp") || "0");
                 let dayIndex = parseInt(localStorage.getItem("em_art_day_index") || "0");
-                let twentyFourHours = 24 * 60 * 60 * 1000;
-
-                if (now - savedTimestamp > twentyFourHours || savedTimestamp === 0) {
-                    if (savedTimestamp !== 0) {
-                        dayIndex = (dayIndex + 1) % 10; 
-                    }
-                    localStorage.setItem("em_art_timestamp", now);
-                    localStorage.setItem("em_art_day_index", dayIndex);
-                    localStorage.setItem("em_art_completed_today", "false");
-                }
-
                 let startIndex = (dayIndex * 4) % masterQuizBank.length;
                 return masterQuizBank.slice(startIndex, startIndex + 4);
-            }
-
-            function checkQuizAvailability() {
-                let isCompleted = localStorage.getItem("em_art_completed_today") === "true";
-                let descEl = document.getElementById("quizLaunchDesc");
-                let btnEl = document.getElementById("launchBtnText");
-
-                if (isCompleted) {
-                    descEl.innerText = "🎉 لقد أكملت تحدي اليوم بنجاح! عد غداً للمزيد من التحديات.";
-                    btnEl.innerText = "عرض النتيجة ➔";
-                } else {
-                    descEl.innerText = "اختبر استيعابك وتحدى نفسك الآن لاكتساب النقاط!";
-                    btnEl.innerText = "ابدأ التحدي ➔";
-                }
             }
 
             function loadQuizQuestion() {
                 answered = false;
                 let q = currentDailyQuestions[currentQuizIndex];
-                let body = document.getElementById('quizBody');
+                let optionsGrid = document.getElementById('quizOptionsGrid');
                 let nextBtn = document.getElementById('quizNextBtn');
                 nextBtn.classList.remove('active');
 
-                let html = `<div class="quiz-question-card" id="activeQuestionCard">
-                    <div class="quiz-question-text">السؤال (${currentQuizIndex + 1}/4):<br>${q.q}</div>
-                    <div class="quiz-options-grid">`;
-                
-                q.options.forEach((opt, idx) => {
-                    html += `<button class="quiz-option-btn" onclick="checkAnswer(${idx}, this)">${opt}</button>`;
-                });
+                document.getElementById('quizQuestionText').innerHTML = q.q;
+                document.getElementById('quizArabicTranslation').innerText = "الترجمة: " + q.ar;
+                document.getElementById('quizScoreIndicator').innerText = `السؤال ${currentQuizIndex + 1} من 4`;
+                document.getElementById('hudXpDisplay').innerText = sessionXpEarned;
 
-                html += `</div></div>`;
-                body.innerHTML = html;
-                document.getElementById('quizScoreIndicator').innerText = `السؤال (${currentQuizIndex + 1}/4) • النقاط المكتسبة`;
+                let html = '';
+                q.options.forEach((opt, idx) => {
+                    html += `<button class="quiz-option-card-btn" onclick="checkAnswer(${idx}, this)">${opt}</button>`;
+                });
+                optionsGrid.innerHTML = html;
             }
 
             function checkAnswer(selectedIndex, btnElement) {
                 if (answered) return;
                 answered = true;
                 let q = currentDailyQuestions[currentQuizIndex];
-                let optionButtons = document.querySelectorAll('.quiz-option-btn');
+                let optionButtons = document.querySelectorAll('.quiz-option-card-btn');
                 let cardElement = document.getElementById('activeQuestionCard');
 
                 if (selectedIndex === q.correct) {
                     currentScore++;
-                    userXp += 10; 
-                    localStorage.setItem("em_user_xp", userXp);
+                    sessionXpEarned += 10; 
+                    document.getElementById('hudXpDisplay').innerText = sessionXpEarned;
 
                     playSound('success'); 
-
-                    if (cardElement) {
-                        if (q.type === 'a') {
-                            btnElement.classList.add('correct-a');
-                            cardElement.classList.add('a-success-fx');
-                        } else {
-                            btnElement.classList.add('correct-the');
-                            cardElement.classList.add('the-success-fx');
-                        }
-                    }
+                    btnElement.classList.add('correct-a');
+                    if (cardElement) cardElement.classList.add('a-success-fx');
                 } else {
                     btnElement.classList.add('wrong');
-                    if (q.type === 'a') {
-                        optionButtons[q.correct].classList.add('correct-a');
-                    } else {
-                        optionButtons[q.correct].classList.add('correct-the');
-                    }
+                    optionButtons[q.correct].classList.add('correct-a');
                     playSound('wrong'); 
                 }
 
@@ -899,74 +1079,63 @@
                 if (currentQuizIndex < currentDailyQuestions.length) {
                     loadQuizQuestion();
                 } else {
-                    localStorage.setItem("em_art_completed_today", "true");
-                    checkQuizAvailability();
+                    let dayIndex = parseInt(localStorage.getItem("em_art_day_index") || "0");
+                    let startPoolIdx = (dayIndex * 4) % quizSentencesPool.length;
+                    let newlyEarnedSentences = quizSentencesPool.slice(startPoolIdx, startPoolIdx + 4);
 
-                    let body = document.getElementById('quizBody');
-                    document.getElementById('quizNextBtn').classList.remove('active');
-                    body.innerHTML = `<div class="quiz-question-card a-success-fx" style="text-align:center; padding: 24px; gap: 14px;">
-                        <h3 style="margin:0; font-size: 18px; color: var(--heading-pure-color);">🎉 ممتاز جداً! أنهيت تحدي اليوم</h3>
-                        <p style="margin:0; font-size: 14px; color: var(--text-secondary);">لقد أجبت بشكل صحيح وحصلت على رصيد إجمالي ممتاز من النقاط!</p>
-                        <p style="margin:0; font-size: 15px; color: var(--primary); font-weight: 950;">إجمالي رصيدك الحالي: ${userXp} XP ⭐</p>
-                        <button onclick="document.getElementById('quizModal').classList.remove('active')" style="background:var(--primary); color:#fff; border:none; padding:10px 20px; border-radius:12px; font-weight:900; cursor:pointer; font-family:'Cairo'; margin-top:6px;">إغلاق والعودة للدراسة ➔</button>
-                    </div>`;
+                    let unlocked = getUnlockedSentences();
+                    newlyEarnedSentences.forEach(newSent => {
+                        if (!unlocked.some(item => item.en === newSent.en)) {
+                            unlocked.push(newSent);
+                        }
+                    });
+                    localStorage.setItem("em_art_unlocked_sentences", JSON.stringify(unlocked));
+
+                    localStorage.setItem("em_art_day_index", (dayIndex + 1) % 10);
+
+                    let totalFundamentalsXp = parseInt(localStorage.getItem("em_fundamentals_total_xp") || "0");
+                    totalFundamentalsXp += sessionXpEarned;
+                    localStorage.setItem("em_fundamentals_total_xp", totalFundamentalsXp);
+                    localStorage.setItem("em_lesson_articles_done", "true");
+
+                    let modalBody = document.querySelector('.quiz-modal-card');
+                    modalBody.innerHTML = `
+                        <div class="game-hud-bar">
+                            <div class="hud-item"><span>⚡</span><span>+${sessionXpEarned} XP</span></div>
+                            <div class="hud-item"><span>🏆</span><span>تم حفظ الجمل</span></div>
+                            <button class="hud-close-btn" onclick="document.getElementById('quizModal').classList.remove('active'); location.reload();">✕</button>
+                        </div>
+                        <div class="quiz-main-question-card a-success-fx" style="text-align:center; padding: 26px; gap: 14px; margin-top: 10px;">
+                            <h3 style="margin:0; font-size: 19px; color: var(--heading-pure-color);">🎉 رائع جداً! أنهيت التحدي بنجاح</h3>
+                            <p style="margin:0; font-size: 13.5px; color: var(--text-secondary);">تم إضافة 4 جمل جديدة إلى <strong>قاموس الجمل المُكتسبة</strong> بنجاح واكتسبت ${sessionXpEarned} نقطة XP!</p>
+                            <button onclick="document.getElementById('quizModal').classList.remove('active'); location.reload();" style="background:var(--theme-active); color:#fff; border:none; padding:12px 24px; border-radius:16px; font-weight:900; cursor:pointer; font-family:'Cairo'; margin-top:6px; box-shadow: 0 6px 20px var(--theme-glow);">إغلاق وعرض القاموس ➔</button>
+                        </div>
+                    `;
                     playSound('success');
                 }
             }
 
-            function restartQuiz() {
-                currentDailyQuestions = getTodayQuestions();
-                currentQuizIndex = 0;
-                currentScore = 0;
-                loadQuizQuestion();
+            function launchQuizAction() {
+                let quizModal = document.getElementById("quizModal");
+                if (quizModal) {
+                    quizModal.classList.add("active");
+                    sessionXpEarned = 0;
+                    currentDailyQuestions = getTodayQuestions();
+                    currentQuizIndex = 0;
+                    currentScore = 0;
+                    loadQuizQuestion();
+                }
             }
 
             document.addEventListener("DOMContentLoaded", function() {
-                checkQuizAvailability();
-
-                let launchBtn = document.getElementById("launchQuizCardBtn");
-                let quizModal = document.getElementById("quizModal");
                 let closeQuizBtn = document.getElementById("closeQuizBtn");
+                let quizModal = document.getElementById("quizModal");
 
-                if (launchBtn && quizModal) {
-                    launchBtn.addEventListener("click", () => {
-                        quizModal.classList.add("active");
-                        restartQuiz();
-                    });
-                }
                 if (closeQuizBtn && quizModal) {
                     closeQuizBtn.addEventListener("click", () => {
                         quizModal.classList.remove("active");
-                        checkQuizAvailability();
                     });
                 }
-
-                /* تفاعل حدود الكارت الرئيسي مع التمرير */
-                window.addEventListener('scroll', function() {
-                    let sectionA = document.getElementById('sectionA');
-                    let sectionThe = document.getElementById('sectionThe');
-                    let sectionZero = document.getElementById('sectionZero');
-                    let sectionPractice = document.getElementById('sectionPractice');
-                    let mainCard = document.getElementById('mainLessonCard');
-
-                    if (!mainCard || !sectionA || !sectionThe || !sectionZero || !sectionPractice) return;
-                    let scrollPosition = window.scrollY + window.innerHeight / 2;
-
-                    let aTop = sectionA.offsetTop + mainCard.offsetTop;
-                    let theTop = sectionThe.offsetTop + mainCard.offsetTop;
-                    let zeroTop = sectionZero.offsetTop + mainCard.offsetTop;
-                    let pracTop = sectionPractice.offsetTop + mainCard.offsetTop;
-
-                    if (scrollPosition >= pracTop) {
-                        mainCard.style.setProperty('--current-border-color', '#F59E0B'); 
-                    } else if (scrollPosition >= zeroTop) {
-                        mainCard.style.setProperty('--current-border-color', '#D97706'); 
-                    } else if (scrollPosition >= theTop) {
-                        mainCard.style.setProperty('--current-border-color', '#059669'); 
-                    } else {
-                        mainCard.style.setProperty('--current-border-color', '#F59E0B'); 
-                    }
-                });
 
                 let themeBtn = document.getElementById("themeToggleBtn");
                 function applyTheme(isDark) {
