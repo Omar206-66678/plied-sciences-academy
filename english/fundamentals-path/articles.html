@@ -21,7 +21,7 @@
                 --text-primary: #0F172A;
                 --text-secondary: #64748B;
                 
-                --header-bg: rgba(255, 255, 255, 0.85);
+                --header-bg: #FFFFFF;
                 --header-border: rgba(245, 158, 11, 0.15);
                 --header-shadow: 0 10px 30px rgba(245, 158, 11, 0.05);
                 
@@ -34,6 +34,9 @@
                 --a-highlight: #F59E0B; 
                 --the-highlight: #059669; 
                 --heading-pure-color: #0F172A; 
+
+                --nav-theme-color: #F59E0B;
+                --nav-glow-color: rgba(245, 158, 11, 0.25);
             }
 
             html.dark-mode, body.dark-mode {
@@ -43,7 +46,7 @@
                 --text-primary: #F3F4F6;
                 --text-secondary: #9CA3AF;
                 
-                --header-bg: rgba(11, 15, 25, 0.85);
+                --header-bg: #0B0F19;
                 --header-border: rgba(245, 158, 11, 0.3);
                 --header-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
                 
@@ -56,6 +59,9 @@
                 --a-highlight: #FCD34D;
                 --the-highlight: #34D399;
                 --heading-pure-color: #FFFFFF; 
+
+                --nav-theme-color: #FBBF24;
+                --nav-glow-color: rgba(251, 191, 36, 0.35);
             }
 
             body {
@@ -74,26 +80,29 @@
             .top-progress-bar { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: transparent; z-index: 9999; }
             .top-progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--primary), var(--primary-dark)); }
 
-            /* شريط الهيدر */
+            /* شريط الهيدر المُعدل (زر رجوع يمين، عنوان بالمنتصف، زر ثيم يسار) */
             .nav-bar {
                 display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
-                background: var(--header-bg); backdrop-filter: blur(12px); border: 1.5px solid var(--header-border); padding: 10px 16px;
-                border-radius: 24px; box-shadow: var(--header-shadow);
+                background: var(--header-bg); border: 1.5px solid var(--header-border); padding: 10px 16px;
+                border-radius: 24px; box-shadow: var(--header-shadow); gap: 10px;
             }
-            .nav-right-group { display: flex; align-items: center; gap: 8px; text-align: right; }
-            .nav-left-group { display: flex; align-items: center; gap: 6px; }
-            
-            .nav-titles-box { display: flex; flex-direction: column; align-items: flex-start; gap: 0px; }
-            .nav-main-title { font-size: 12.5px; font-weight: 950; color: var(--text-primary); margin: 0; line-height: 1.2; font-family: 'Cairo', sans-serif; }
-            .nav-sub-title { font-size: 9.5px; font-weight: 800; color: var(--primary); margin: 0; line-height: 1.2; }
-            .nav-academy-title { font-size: 8.5px; font-weight: 700; color: var(--text-secondary); margin: 0; line-height: 1.2; }
+            .brand-minimalist-box { display: flex; flex-direction: column; align-items: center; text-align: center; flex: 1; padding: 0 4px; min-width: 0; }
+            .brand-main-title { font-size: 13.5px; font-weight: 900; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
+            .brand-subtitle-text { font-size: 10px; font-weight: 800; color: var(--primary); letter-spacing: 0.5px; text-transform: uppercase; margin-top: 2px; }
 
-            .home-icon-btn, .nav-icon-btn {
-                background: var(--light-bg); border: 1.5px solid var(--border-glow);
-                width: 36px; height: 36px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
-                color: var(--text-primary); font-size: 15px; text-decoration: none; cursor: pointer; transition: 0.25s; border: none; flex-shrink: 0;
+            .nav-actions-group {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                flex-shrink: 0;
             }
-            .home-icon-btn:hover, .nav-icon-btn:hover { transform: scale(1.05); border-color: var(--primary); color: var(--primary); }
+
+            .back-btn, .theme-btn {
+                background: var(--light-bg); border: 1.5px solid var(--border-glow);
+                width: 36px; height: 36px; border-radius: 14px; display: flex; align-items: center; justify-content: center;
+                color: var(--text-primary); font-size: 16px; text-decoration: none; cursor: pointer; transition: 0.25s; flex-shrink: 0;
+            }
+            .back-btn:hover, .theme-btn:hover { transform: scale(1.05); border-color: var(--primary); color: var(--primary); }
 
             /* الكارت العلوي الهندسي */
             .hero-card {
@@ -211,7 +220,6 @@
 
             .icon-cards-list { display: flex; flex-direction: column; gap: 12px; margin-top: 8px; }
             
-            /* كروت الجمل بحدود صفراء/ذهبية متناسقة تماماً مع الخلفية */
             .icon-single-card {
                 background: var(--light-bg);
                 border: 1.5px solid var(--border-glow);
@@ -251,7 +259,7 @@
                 direction: ltr;
             }
 
-            .line-en-1, .line-en-2 { 
+            .line-en-1 { 
                 font-family: system-ui, -apple-system, sans-serif; 
                 font-size: 13.5px; 
                 font-weight: 900; 
@@ -261,7 +269,7 @@
                 flex: 1;
             }
 
-            .line-ar-1, .line-ar-2 { 
+            .line-ar-1 { 
                 font-family: 'Cairo', sans-serif; 
                 font-size: 13px; 
                 font-weight: 800; 
@@ -373,84 +381,32 @@
             .quiz-next-btn { background: var(--primary); color: #FFFFFF; border: none; padding: 8px 18px; border-radius: 12px; font-family: 'Cairo', sans-serif; font-weight: 900; cursor: pointer; display: none; }
             .quiz-next-btn.active { display: block; }
 
-            /* نافذة البحث والقائمة الجانبية */
-            .search-modal-card { background: var(--card-bg); border: 1.5px solid var(--border-glow); border-radius: 26px; padding: 22px; width: 100%; max-width: 500px; box-shadow: 0 25px 50px rgba(0,0,0,0.5); display: flex; flex-direction: column; gap: 16px; }
-            .lesson-modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--card-border); padding-bottom: 12px; }
-            .lesson-modal-title-box { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 950; color: var(--heading-pure-color); }
-            .close-modal-btn { background: var(--light-bg); border: 1.5px solid var(--border-glow); width: 34px; height: 34px; border-radius: 10px; color: var(--text-primary); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-            .search-input-wrapper { background: var(--bg-main); border: 1.5px solid var(--border-glow); border-radius: 16px; padding: 10px 14px; display: flex; align-items: center; }
-            .search-input-field { width: 100%; background: transparent; border: none; outline: none; color: var(--text-primary); font-family: 'Cairo', sans-serif; font-size: 13px; font-weight: 700; }
-            .search-results-list { display: flex; flex-direction: column; gap: 10px; max-height: 320px; overflow-y: auto; scrollbar-width: none; }
-            .search-result-item { background: var(--bg-main); border: 1.5px solid var(--card-border); border-radius: 16px; padding: 12px 14px; display: flex; flex-direction: column; gap: 3px; text-decoration: none; }
-            .search-result-title { font-size: 13px; font-weight: 950; color: var(--heading-pure-color); margin: 0; }
-            .search-result-desc { font-size: 11px; font-weight: 700; color: var(--text-secondary); margin: 0; }
-
-            .side-menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 8, 17, 0.82); backdrop-filter: blur(10px); display: none; justify-content: flex-start; z-index: 10001; }
-            .side-menu-overlay.active { display: flex; }
-            .side-menu-drawer { background: var(--card-bg); border-left: 2px solid var(--border-glow); width: 85%; max-width: 320px; height: 100%; box-shadow: -15px 0 40px rgba(0,0,0,0.6); display: flex; flex-direction: column; padding: 22px; box-sizing: border-box; }
-            .drawer-top-box { background: var(--light-bg); border: 1.5px solid var(--border-glow); border-radius: 20px; padding: 14px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
-            .drawer-brand-info { display: flex; flex-direction: column; gap: 2px; }
-            .drawer-brand-title { font-size: 14px; font-weight: 950; color: var(--heading-pure-color); margin: 0; }
-            .drawer-brand-sub { font-size: 10px; font-weight: 800; color: var(--text-secondary); margin: 0; }
-            .drawer-brand-icon { width: 42px; height: 42px; background: var(--card-bg); border: 1.5px solid var(--border-glow); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
-            
-            /* كارت النقاط والتقدم داخل القائمة المنسدلة */
-            .drawer-stats-card {
-                background: linear-gradient(135deg, rgba(245, 158, 11, 0.1), rgba(217, 119, 6, 0.1));
-                border: 1.5px solid var(--border-glow);
-                border-radius: 18px;
-                padding: 14px;
-                margin-bottom: 16px;
-                display: flex;
-                flex-direction: column;
-                gap: 8px;
-            }
-            .drawer-stats-title { font-size: 12px; font-weight: 900; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; }
-            .drawer-stats-value { font-size: 16px; font-weight: 950; color: var(--primary); }
-
-            .drawer-links-list { display: flex; flex-direction: column; gap: 8px; flex-grow: 1; }
-            .drawer-link-item { display: flex; align-items: center; justify-content: space-between; background: var(--bg-main); border: 1.5px solid var(--card-border); padding: 12px 16px; border-radius: 16px; color: var(--text-primary); text-decoration: none; font-size: 12px; font-weight: 900; cursor: pointer; }
-            .drawer-link-item.active { border-color: var(--primary); background: var(--light-bg); color: var(--heading-pure-color); }
-            .drawer-link-left { display: flex; align-items: center; gap: 10px; }
-            
-            /* زر التحدي اليومي داخل القائمة */
-            .drawer-quiz-btn {
-                background: linear-gradient(135deg, var(--light-bg), rgba(245, 158, 11, 0.15));
-                border: 1.5px dashed var(--primary);
-                color: var(--heading-pure-color);
-            }
-            .drawer-quiz-btn:hover { border-color: var(--primary-dark); background: var(--light-bg); }
-
-            .drawer-footer { text-align: center; font-size: 10px; font-weight: 800; color: var(--text-secondary); border-top: 1px solid var(--card-border); padding-top: 14px; margin-top: auto; }
-
+            /* شريط التنقل السفلي المطور بخلفية صلبة تماماً وثيم متناسق */
             .bottom-nav {
-                position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); width: calc(100% - 28px); max-width: 500px; background: var(--header-bg); backdrop-filter: blur(15px); display: flex; justify-content: space-around; align-items: center; padding: 8px 10px; border: 1.5px solid var(--header-border); border-radius: 22px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15); z-index: 999;
+                position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); 
+                width: calc(100% - 32px); max-width: 460px;
+                background: var(--header-bg);
+                display: flex; justify-content: space-around; align-items: center;
+                padding: 6px 10px; border-radius: 24px; 
+                border: 1.5px solid var(--card-border);
+                box-shadow: 0 8px 24px rgba(0,0,0,0.25); 
+                z-index: 999; box-sizing: border-box;
+                transition: all 0.4s ease;
             }
-            .bottom-nav a { color: var(--text-secondary); text-decoration: none; font-size: 11px; text-align: center; font-weight: 800; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 6px 12px; border-radius: 16px; flex: 1; }
-            .bottom-nav a span { font-size: 18px; line-height: 1; }
-            .bottom-nav a.active { color: var(--heading-pure-color); background: var(--light-bg); border: 1.5px solid var(--border-glow); }
+            .bottom-nav a { 
+                color: var(--text-secondary); text-decoration: none; font-size: 10px; text-align: center; font-weight: 800; 
+                display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 12px; border-radius: 16px; flex: 1; 
+                border: 1px solid rgba(128, 128, 128, 0.18); background: rgba(128, 128, 128, 0.05);
+                transition: all 0.3s ease;
+            }
+            .bottom-nav a span { font-size: 16px; line-height: 1; }
+            .bottom-nav a:hover { color: var(--nav-theme-color); border-color: var(--nav-theme-color); background: rgba(128, 128, 128, 0.1); }
+            .bottom-nav a.active { color: #FFFFFF; background: var(--nav-theme-color); border-color: var(--nav-theme-color); box-shadow: 0 4px 15px var(--nav-glow-color); }
         </style>
     </head>
     <body>
 
         <div class="top-progress-bar"><div class="top-progress-fill" id="progressFill"></div></div>
-
-        <!-- نافذة البحث -->
-        <div class="modal-overlay" id="searchModal" style="background: rgba(5, 8, 17, 0.82);">
-            <div class="search-modal-card">
-                <div class="lesson-modal-header">
-                    <div class="lesson-modal-title-box"><span>🔍</span><span>البحث في أدوات النكرة والمعرفة</span></div>
-                    <button class="close-modal-btn" id="closeSearchBtn">✕</button>
-                </div>
-                <div class="search-input-wrapper"><input type="text" class="search-input-field" placeholder="ابحث عن: A, An, The..."></div>
-                <div class="search-results-list">
-                    <a href="#" class="search-result-item" onclick="document.getElementById('searchModal').classList.remove('active');">
-                        <span class="search-result-title">💡 أدوات النكرة والمعرفة (Articles)</span>
-                        <span class="search-result-desc">دليل شامل ومقارنة هندسية بين A, An, The.</span>
-                    </a>
-                </div>
-            </div>
-        </div>
 
         <!-- نافذة اختبار التحدي اليومي -->
         <div class="modal-overlay" id="quizModal">
@@ -467,50 +423,16 @@
             </div>
         </div>
 
-        <!-- القائمة الجانبية -->
-        <div class="side-menu-overlay" id="sideMenu" style="background: rgba(5, 8, 17, 0.82);">
-            <div class="side-menu-drawer">
-                <div class="drawer-top-box">
-                    <div class="drawer-brand-info"><h3 class="drawer-brand-title">أكاديمية العلوم التطبيقية</h3><p class="drawer-brand-sub">قسم قواعد اللغة الإنجليزية</p></div>
-                    <div class="drawer-brand-icon">🎓</div>
-                </div>
-
-                <!-- كارت النقاط والتقدم المخصص داخل القائمة -->
-                <div class="drawer-stats-card">
-                    <div class="drawer-stats-title"><span>⭐ نقاط إنجازك (XP)</span><span id="drawerXpDisplay" class="drawer-stats-value">0 XP</span></div>
-                    <div class="drawer-stats-title" style="margin-top: 4px;"><span>📅 التقدم في التحدي</span><span id="drawerProgressDisplay" style="color: var(--heading-pure-color); font-weight: 900;">اليوم 1 من 10</span></div>
-                </div>
-
-                <div class="drawer-links-list">
-                    <div class="drawer-link-item drawer-quiz-btn" id="menuQuizTrigger">
-                        <span class="drawer-link-left"><span>⚡</span> ابدأ تحدي اليوم</span><span>➔</span>
-                    </div>
-
-                    <a href="index.html" class="drawer-link-item"><span class="drawer-link-left"><span>🏠</span> الرئيسية</span><span>➔</span></a>
-                    <a href="english.html" class="drawer-link-item"><span class="drawer-link-left"><span>🇬🇧</span> الإنجليزي</span><span>➔</span></a>
-                    <a href="fundamentals-path.html" class="drawer-link-item active"><span class="drawer-link-left"><span>📖</span> القواعد والأساسيات</span><span>➔</span></a>
-                    <a href="surveying.html" class="drawer-link-item"><span class="drawer-link-left"><span>📐</span> المساحة</span><span>➔</span></a>
-                    <a href="programming.html" class="drawer-link-item"><span class="drawer-link-left"><span>💻</span> البرمجة</span><span>➔</span></a>
-                </div>
-                <div class="drawer-footer">English Master v2.1 • Pro Edition</div>
-            </div>
-        </div>
-
         <div class="container">
-            <!-- شريط الهيدر -->
+            <!-- شريط الهيدر المُعدل (زر رجوع، عنوان بالمنتصف، زر ثيم أقصى اليسار) -->
             <div class="nav-bar">
-                <div class="nav-right-group">
-                    <a href="fundamentals-path.html" class="home-icon-btn" title="الرجوع للقائمة">🏠</a>
-                    <div class="nav-titles-box">
-                        <h1 class="nav-main-title">أدوات النكرة والمعرفة</h1>
-                        <p class="nav-sub-title">Articles (A, An, The)</p>
-                        <p class="nav-academy-title">أكاديمية العلوم التطبيقية</p>
-                    </div>
+                <a href="fundamentals-path.html" class="back-btn" title="الرجوع للقائمة">←</a>
+                <div class="brand-minimalist-box">
+                    <span class="brand-main-title">أدوات النكرة والمعرفة</span>
+                    <span class="brand-subtitle-text">أكاديمية العلوم التطبيقية</span>
                 </div>
-                <div class="nav-left-group">
-                    <button class="nav-icon-btn" id="themeToggleBtn" title="تغيير الثيم">🌙</button>
-                    <button class="nav-icon-btn" id="searchBtn" title="بحث">🔍</button>
-                    <button class="nav-icon-btn" id="menuBtn" title="القائمة">☰</button>
+                <div class="nav-actions-group">
+                    <button class="theme-btn" id="themeToggleBtn" title="تغيير الثيم">🌙</button>
                 </div>
             </div>
 
@@ -697,7 +619,7 @@
                             </div>
                         </div>
 
-                        <!-- 9 (إضافي جديد) -->
+                        <!-- 9 -->
                         <div class="icon-single-card" id="card-9">
                             <div class="sentence-group">
                                 <div class="sentence-row">
@@ -708,7 +630,7 @@
                             </div>
                         </div>
 
-                        <!-- 10 (إضافي جديد) -->
+                        <!-- 10 -->
                         <div class="icon-single-card" id="card-10">
                             <div class="sentence-group">
                                 <div class="sentence-row">
@@ -719,7 +641,7 @@
                             </div>
                         </div>
 
-                        <!-- 11 (إضافي جديد) -->
+                        <!-- 11 -->
                         <div class="icon-single-card" id="card-11">
                             <div class="sentence-group">
                                 <div class="sentence-row">
@@ -730,7 +652,7 @@
                             </div>
                         </div>
 
-                        <!-- 12 (إضافي جديد) -->
+                        <!-- 12 -->
                         <div class="icon-single-card" id="card-12">
                             <div class="sentence-group">
                                 <div class="sentence-row">
@@ -757,11 +679,13 @@
 
         </div>
 
-        <div class="bottom-nav">
-            <a href="index.html"><span>🏠</span>الرئيسية</a>
-            <a href="fundamentals-path.html" class="active"><span>🇬🇧</span>القواعد</a>
-            <a href="surveying.html"><span>📐</span>المساحة</a>
-            <a href="programming.html"><span>💻</span>البرمجة</a>
+        <!-- شريط التنقل السفلي المطور (مسارات دقيقة تخرج للمجلدات الرئيسية) -->
+        <div class="bottom-nav" id="bottomNav">
+            <a href="../../index.html"><span class="nav-icon">🏠</span>الرئيسية</a>
+            <a href="../english.html"><span class="nav-icon">🇬🇧</span>الإنجليزي</a>
+            <a href="fundamentals-path.html" class="active"><span class="nav-icon">📖</span>القواعد</a>
+            <a href="../../surveying/surveying.html"><span class="nav-icon">📐</span>المساحة</a>
+            <a href="../../programming/programming.html"><span class="nav-icon">💻</span>البرمجة</a>
         </div>
 
         <script>
@@ -829,58 +753,16 @@
                 }
             }
 
-            /* بنك أسئلة أدوات النكرة والمعرفة (40 سؤالاً خارجياً ومنسقاً على 10 أيام تلقائياً) */
+            /* بنك أسئلة أدوات النكرة والمعرفة */
             const masterQuizBank = [
-                // اليوم 1
                 { q: "He bought ( &nbsp;......&nbsp; ) new laptop yesterday.", options: ["a", "an", "the"], correct: 0, type: "a" },
                 { q: "She ate ( &nbsp;......&nbsp; ) orange for breakfast.", options: ["a", "an", "the"], correct: 1, type: "a" },
                 { q: "Look at ( &nbsp;......&nbsp; ) moon tonight; it's bright.", options: ["a", "an", "the"], correct: 2, type: "the" },
                 { q: "I need (- &nbsp;......&nbsp; ) water after the long run.", options: ["a", "an", "-"], correct: 2, type: "a" },
-                // اليوم 2
                 { q: "They live in ( &nbsp;......&nbsp; ) big house near Cairo.", options: ["a", "an", "the"], correct: 0, type: "a" },
                 { q: "He is ( &nbsp;......&nbsp; ) honest engineer.", options: ["a", "an", "the"], correct: 1, type: "a" },
                 { q: "( &nbsp;......&nbsp; ) Pyramids are amazing structures.", options: ["A", "An", "The"], correct: 2, type: "the" },
-                { q: "Cats are very smart (- &nbsp;......&nbsp; ) animals.", options: ["a", "an", "-"], correct: 2, type: "a" },
-                // اليوم 3
-                { q: "I read ( &nbsp;......&nbsp; ) interesting book last week.", options: ["a", "an", "the"], correct: 1, type: "a" },
-                { q: "( &nbsp;......&nbsp; ) book I read was very thrilling.", options: ["A", "An", "The"], correct: 2, type: "the" },
-                { q: "My brother wants to be ( &nbsp;......&nbsp; ) pilot.", options: ["a", "an", "the"], correct: 0, type: "a" },
-                { q: "Do you like (- &nbsp;......&nbsp; ) coffee in the morning?", options: ["a", "an", "-"], correct: 2, type: "a" },
-                // اليوم 4
-                { q: "She arrived at ( &nbsp;......&nbsp; ) airport on time.", options: ["a", "an", "the"], correct: 2, type: "the" },
-                { q: "He gave me ( &nbsp;......&nbsp; ) useful piece of advice.", options: ["a", "an", "the"], correct: 0, type: "a" },
-                { q: "( &nbsp;......&nbsp; ) Nile is the longest river in Africa.", options: ["A", "An", "The"], correct: 2, type: "the" },
-                { q: "Children love (- &nbsp;......&nbsp; ) playing football.", options: ["a", "an", "-"], correct: 2, type: "a" },
-                // اليوم 5
-                { q: "We stayed at ( &nbsp;......&nbsp; ) nice hotel downtown.", options: ["a", "an", "the"], correct: 0, type: "a" },
-                { q: "( &nbsp;......&nbsp; ) hotel we stayed at was luxurious.", options: ["A", "An", "The"], correct: 2, type: "the" },
-                { q: "She waited for her friend for ( &nbsp;......&nbsp; ) hour.", options: ["a", "an", "the"], correct: 1, type: "a" },
-                { q: "Gold is (- &nbsp;......&nbsp; ) precious metal.", options: ["a", "an", "-"], correct: 0, type: "a" },
-                // اليوم 6
-                { q: "He plays ( &nbsp;......&nbsp; ) piano very skillfully.", options: ["a", "an", "the"], correct: 2, type: "the" },
-                { q: "I saw ( &nbsp;......&nbsp; ) old man crossing the street.", options: ["a", "an", "the"], correct: 1, type: "a" },
-                { q: "They traveled to (- &nbsp;......&nbsp; ) France last summer.", options: ["a", "an", "-"], correct: 2, type: "a" },
-                { q: "Please turn off ( &nbsp;......&nbsp; ) lights before leaving.", options: ["a", "an", "the"], correct: 2, type: "the" },
-                // اليوم 7
-                { q: "This is ( &nbsp;......&nbsp; ) unique opportunity for us.", options: ["a", "an", "the"], correct: 0, type: "a" },
-                { q: "( &nbsp;......&nbsp; ) earth revolves around the sun.", options: ["A", "An", "The"], correct: 2, type: "the" },
-                { q: "She drinks (- &nbsp;......&nbsp; ) milk every single night.", options: ["a", "an", "-"], correct: 2, type: "a" },
-                { q: "He bought ( &nbsp;......&nbsp; ) pair of new shoes.", options: ["a", "an", "the"], correct: 0, type: "a" },
-                // اليوم 8
-                { q: "Who is ( &nbsp;......&nbsp; ) manager of this department?", options: ["a", "an", "the"], correct: 2, type: "the" },
-                { q: "I found ( &nbsp;......&nbsp; ) umbrella in the hallway.", options: ["a", "an", "the"], correct: 1, type: "a" },
-                { q: "(- &nbsp;......&nbsp; ) Lions are dangerous wild animals.", options: ["A", "An", "-"], correct: 2, type: "a" },
-                { q: "We had ( &nbsp;......&nbsp; ) wonderful dinner together.", options: ["a", "an", "the"], correct: 0, type: "a" },
-                // اليوم 9
-                { q: "He is studying at ( &nbsp;......&nbsp; ) university in London.", options: ["a", "an", "the"], correct: 0, type: "a" },
-                { q: "( &nbsp;......&nbsp; ) Pacific Ocean is the largest ocean.", options: ["A", "An", "The"], correct: 2, type: "the" },
-                { q: "Do you speak (- &nbsp;......&nbsp; ) English fluently?", options: ["a", "an", "-"], correct: 2, type: "a" },
-                { q: "She has ( &nbsp;......&nbsp; ) cat and two cute dogs.", options: ["a", "an", "the"], correct: 0, type: "a" },
-                // اليوم 10
-                { q: "( &nbsp;......&nbsp; ) weather is fantastic today.", options: ["A", "An", "The"], correct: 2, type: "the" },
-                { q: "My father is ( &nbsp;......&nbsp; ) honest businessman.", options: ["a", "an", "the"], correct: 1, type: "a" },
-                { q: "They arrived late in (- &nbsp;......&nbsp; ) winter.", options: ["a", "an", "-"], correct: 2, type: "a" },
-                { q: "Can you pass me ( &nbsp;......&nbsp; ) salt, please?", options: ["a", "an", "the"], correct: 2, type: "the" }
+                { q: "Cats are very smart (- &nbsp;......&nbsp; ) animals.", options: ["a", "an", "-"], correct: 2, type: "a" }
             ];
 
             let userXp = parseInt(localStorage.getItem("em_user_xp") || "0");
@@ -904,19 +786,8 @@
                     localStorage.setItem("em_art_completed_today", "false");
                 }
 
-                let startIndex = dayIndex * 4;
+                let startIndex = (dayIndex * 4) % masterQuizBank.length;
                 return masterQuizBank.slice(startIndex, startIndex + 4);
-            }
-
-            function updateMenuStats() {
-                let userXp = parseInt(localStorage.getItem("em_user_xp") || "0");
-                let dayIndex = parseInt(localStorage.getItem("em_art_day_index") || "0");
-                if (document.getElementById("drawerXpDisplay")) {
-                    document.getElementById("drawerXpDisplay").innerText = userXp + " XP";
-                }
-                if (document.getElementById("drawerProgressDisplay")) {
-                    document.getElementById("drawerProgressDisplay").innerText = `اليوم ${dayIndex + 1} من 10`;
-                }
             }
 
             function checkQuizAvailability() {
@@ -964,7 +835,6 @@
                     currentScore++;
                     userXp += 10; 
                     localStorage.setItem("em_user_xp", userXp);
-                    updateMenuStats();
 
                     playSound('success'); 
 
@@ -997,7 +867,6 @@
                 } else {
                     localStorage.setItem("em_art_completed_today", "true");
                     checkQuizAvailability();
-                    updateMenuStats();
 
                     let body = document.getElementById('quizBody');
                     document.getElementById('quizNextBtn').classList.remove('active');
@@ -1019,24 +888,14 @@
             }
 
             document.addEventListener("DOMContentLoaded", function() {
-                updateMenuStats();
                 checkQuizAvailability();
 
                 let launchBtn = document.getElementById("launchQuizCardBtn");
-                let menuQuizTrigger = document.getElementById("menuQuizTrigger");
                 let quizModal = document.getElementById("quizModal");
                 let closeQuizBtn = document.getElementById("closeQuizBtn");
-                let sideMenu = document.getElementById("sideMenu");
 
                 if (launchBtn && quizModal) {
                     launchBtn.addEventListener("click", () => {
-                        quizModal.classList.add("active");
-                        restartQuiz();
-                    });
-                }
-                if (menuQuizTrigger && quizModal) {
-                    menuQuizTrigger.addEventListener("click", () => {
-                        if (sideMenu) sideMenu.classList.remove("active");
                         quizModal.classList.add("active");
                         restartQuiz();
                     });
@@ -1045,7 +904,6 @@
                     closeQuizBtn.addEventListener("click", () => {
                         quizModal.classList.remove("active");
                         checkQuizAvailability();
-                        updateMenuStats();
                     });
                 }
 
@@ -1094,21 +952,6 @@
                         applyTheme(!document.documentElement.classList.contains("dark-mode"));
                     });
                 }
-
-                let searchBtn = document.getElementById("searchBtn");
-                let searchModal = document.getElementById("searchModal");
-                let closeSearchBtn = document.getElementById("closeSearchBtn");
-                if (searchBtn && searchModal) { searchBtn.addEventListener("click", () => { searchModal.classList.add("active"); }); }
-                if (closeSearchBtn && searchModal) { closeSearchBtn.addEventListener("click", () => { searchModal.classList.remove("active"); }); }
-
-                let menuBtn = document.getElementById("menuBtn");
-                if (menuBtn && sideMenu) {
-                    menuBtn.addEventListener("click", () => {
-                        updateMenuStats();
-                        sideMenu.classList.add("active");
-                    });
-                }
-                if (sideMenu) { sideMenu.addEventListener("click", (e) => { if (e.target === sideMenu) sideMenu.classList.remove("active"); }); }
             });
 
             window.onscroll = function() {
