@@ -33,6 +33,7 @@
 
                 --a-highlight: #F59E0B; 
                 --the-highlight: #059669; 
+                --zero-highlight: #D97706;
                 --heading-pure-color: #0F172A; 
 
                 --nav-theme-color: #F59E0B;
@@ -58,6 +59,7 @@
 
                 --a-highlight: #FCD34D;
                 --the-highlight: #34D399;
+                --zero-highlight: #FBBF24;
                 --heading-pure-color: #FFFFFF; 
 
                 --nav-theme-color: #FBBF24;
@@ -80,7 +82,7 @@
             .top-progress-bar { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: transparent; z-index: 9999; }
             .top-progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--primary), var(--primary-dark)); }
 
-            /* شريط الهيدر المُعدل (زر رجوع يمين، عنوان بالمنتصف، زر ثيم يسار) */
+            /* شريط الهيدر المُعدل */
             .nav-bar {
                 display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
                 background: var(--header-bg); border: 1.5px solid var(--header-border); padding: 10px 16px;
@@ -178,12 +180,7 @@
                 box-sizing: border-box;
             }
 
-            .time-badge { position: absolute; top: 18px; left: 18px; padding: 5px 12px; border-radius: 10px; font-size: 10.5px; font-weight: 950; color: #FFFFFF; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 2; }
-            .badge-a { background: linear-gradient(135deg, #F59E0B, #FBBF24); }
-            .badge-the { background: linear-gradient(135deg, #059669, #34D399); }
-            .badge-zero { background: linear-gradient(135deg, #D97706, #F59E0B); }
-
-            .glass-glow-card.a-card { border: 1.5px solid rgba(245, 158, 11, 0.3); }
+            .玻璃-glow-card.a-card { border: 1.5px solid rgba(245, 158, 11, 0.3); }
             .glass-glow-card.a-card::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 4px; background: linear-gradient(90deg, #F59E0B, #FBBF24); width: 100%; }
 
             .glass-glow-card.the-card { border: 1.5px solid rgba(5, 150, 105, 0.35); }
@@ -192,12 +189,39 @@
             .glass-glow-card.zero-card { border: 1.5px solid rgba(217, 119, 6, 0.35); }
             .glass-glow-card.zero-card::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 4px; background: linear-gradient(90deg, #D97706, #F59E0B); width: 100%; }
 
-            .usage-title { font-size: 15px; font-weight: 950; color: var(--heading-pure-color); display: flex; align-items: center; gap: 8px; padding-left: 90px; }
+            /* تنسيق العناوين الجديدة (سلسلة الأسطر الثلاثة المنظمة بدون أيقونات جانبية) */
+            .usage-title-centered {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 4px;
+                width: 100%;
+                margin-bottom: 8px;
+            }
+            .usage-title-ar {
+                font-size: 16px;
+                font-weight: 950;
+                color: var(--heading-pure-color);
+            }
+            .usage-title-bracket {
+                font-size: 14px;
+                font-weight: 950;
+                direction: ltr;
+                unicode-bidi: embed;
+            }
+            .usage-title-en {
+                font-size: 12px;
+                font-weight: 850;
+                color: var(--text-secondary);
+                letter-spacing: 0.3px;
+            }
+
             .usage-content { font-size: 13.5px; font-weight: 700; color: var(--text-secondary); line-height: 1.8; }
 
             .a-highlight { color: var(--a-highlight); font-weight: 950; }
             .the-highlight { color: var(--the-highlight); font-weight: 950; }
-            .zero-highlight { color: var(--primary); font-weight: 950; }
+            .zero-highlight { color: var(--zero-highlight); font-weight: 950; }
 
             .method-box { background: var(--light-bg); border: 1.5px solid var(--border-glow); padding: 14px; border-radius: 16px; margin: 12px 0; display: flex; flex-direction: column; gap: 8px; }
 
@@ -381,7 +405,7 @@
             .quiz-next-btn { background: var(--primary); color: #FFFFFF; border: none; padding: 8px 18px; border-radius: 12px; font-family: 'Cairo', sans-serif; font-weight: 900; cursor: pointer; display: none; }
             .quiz-next-btn.active { display: block; }
 
-            /* شريط التنقل السفلي المطور بخلفية صلبة تماماً وثيم متناسق */
+            /* شريط التنقل السفلي */
             .bottom-nav {
                 position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); 
                 width: calc(100% - 32px); max-width: 460px;
@@ -424,7 +448,7 @@
         </div>
 
         <div class="container">
-            <!-- شريط الهيدر المُعدل (زر رجوع، عنوان بالمنتصف، زر ثيم أقصى اليسار) -->
+            <!-- شريط الهيدر المُعدل -->
             <div class="nav-bar">
                 <a href="fundamentals-path.html" class="back-btn" title="الرجوع للقائمة">←</a>
                 <div class="brand-minimalist-box">
@@ -472,8 +496,11 @@
 
                 <!-- 1. أداة النكرة A و An -->
                 <div class="glass-glow-card a-card" id="sectionA">
-                    <div class="time-badge badge-a">النكرة • Indefinite</div>
-                    <div class="usage-title">💡 أدوات النكرة (A / An)</div>
+                    <div class="usage-title-centered">
+                        <span class="usage-title-ar">أدوات النكرة</span>
+                        <span class="usage-title-bracket" style="color: var(--a-highlight);">(A / An)</span>
+                        <span class="usage-title-en">Indefinite Articles</span>
+                    </div>
                     <div class="usage-content">
                         تُستخدم حصرياً مع الأسماء <strong>المفردة المعدودة</strong> التي تبدأ بصوت ساكن (تأخذ <strong>A</strong>) أو صوت متحرك (تأخذ <strong>An</strong>).
 
@@ -489,8 +516,11 @@
 
                 <!-- 2. أداة المعرفة The -->
                 <div class="glass-glow-card the-card" id="sectionThe">
-                    <div class="time-badge badge-the">المعرفة • Definite</div>
-                    <div class="usage-title">🌟 أداة المعرفة (The)</div>
+                    <div class="usage-title-centered">
+                        <span class="usage-title-ar">أداة المعرفة</span>
+                        <span class="usage-title-bracket" style="color: var(--the-highlight);">(The)</span>
+                        <span class="usage-title-en">Definite Article</span>
+                    </div>
                     <div class="usage-content">
                         تُستخدم عندما يكون الشيء <strong>معروفاً، محدداً، أو تم ذكره مسبقاً</strong>، أو عندما يكون فريداً من نوعه في الكون (مثل الشمس والقمر).
 
@@ -506,8 +536,11 @@
 
                 <!-- 3. عدم استخدام أداة Zero Article -->
                 <div class="glass-glow-card zero-card" id="sectionZero">
-                    <div class="time-badge badge-zero">بدون أداة • Zero Article</div>
-                    <div class="usage-title">🚫 حالات عدم استخدام الأداة (-)</div>
+                    <div class="usage-title-centered">
+                        <span class="usage-title-ar">حالات عدم استخدام الأداة</span>
+                        <span class="usage-title-bracket" style="color: var(--zero-highlight);">(Zero Article)</span>
+                        <span class="usage-title-en">No Article</span>
+                    </div>
                     <div class="usage-content">
                         لا نضع أي أداة قبل الأسماء <strong>الجمع أو غير المعدودة</strong> عندما نتحدث عنها بشكل عام وعام.
 
@@ -521,7 +554,7 @@
                     </div>
                 </div>
 
-                <!-- 4. قسم التطبيقات العملية (12 كارت شامل ومتسلسل) -->
+                <!-- 4. قسم التطبيقات العملية -->
                 <div style="margin-top: 12px; display: flex; flex-direction: column; gap: 12px;" id="sectionPractice">
                     
                     <div class="inner-practice-title-wrapper">
@@ -679,7 +712,7 @@
 
         </div>
 
-        <!-- شريط التنقل السفلي المطور (مسارات دقيقة تخرج للمجلدات الرئيسية) -->
+        <!-- شريط التنقل السفلي -->
         <div class="bottom-nav" id="bottomNav">
             <a href="../../index.html"><span class="nav-icon">🏠</span>الرئيسية</a>
             <a href="../english.html"><span class="nav-icon">🇬🇧</span>الإنجليزي</a>
@@ -689,7 +722,6 @@
         </div>
 
         <script>
-            /* دالة النطق الصوتي */
             function speakText(text, cardId, buttonElement) {
                 if ('speechSynthesis' in window) {
                     window.speechSynthesis.cancel();
@@ -720,7 +752,6 @@
                 }
             }
 
-            /* مولد الصوت التفاعلي الموسيقي */
             const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
             function playSound(type) {
@@ -753,7 +784,6 @@
                 }
             }
 
-            /* بنك أسئلة أدوات النكرة والمعرفة */
             const masterQuizBank = [
                 { q: "He bought ( &nbsp;......&nbsp; ) new laptop yesterday.", options: ["a", "an", "the"], correct: 0, type: "a" },
                 { q: "She ate ( &nbsp;......&nbsp; ) orange for breakfast.", options: ["a", "an", "the"], correct: 1, type: "a" },
