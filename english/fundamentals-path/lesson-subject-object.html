@@ -25,14 +25,11 @@
                 --header-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
                 
                 --primary: #475569;
-                
-                /* لون الهيكل العام الموحد للكروت والحدود */
                 --accent: #0284C7; 
                 --light-bg: rgba(2, 132, 199, 0.04);
 
-                /* ألوان الكلمات والرموز المميزة داخل الجمل */
-                --subject-color: #0284C7;  /* Fael: أزرق */
-                --object-color: #059669;   /* Mafool: أخضر */
+                --subject-color: #0284C7;  
+                --object-color: #059669;   
 
                 --heading-pure-color: #0F172A; 
                 --nav-theme-color: #0284C7;
@@ -163,7 +160,6 @@
             .app-main-heading { margin: 0; font-size: 20px; font-weight: 950; color: var(--heading-pure-color); letter-spacing: -0.4px; font-family: 'Cairo', sans-serif; direction: ltr; text-align: right; }
             .app-sub-pill { display: inline-flex; align-items: center; gap: 6px; background: var(--light-bg); border: 2px solid var(--card-border); color: var(--heading-pure-color); padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 850; width: fit-content; }
 
-            /* الكروت الداخلية للشرح */
             .glass-glow-card {
                 background: var(--card-bg);
                 backdrop-filter: blur(16px);
@@ -179,17 +175,10 @@
                 box-sizing: border-box;
                 border: 2px solid var(--card-border);
             }
-
             .glass-glow-card::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--accent), var(--primary)); width: 100%; }
 
             .usage-title-centered {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-                gap: 4px;
-                width: 100%;
-                margin-bottom: 8px;
+                display: flex; flex-direction: column; align-items: center; text-align: center; gap: 4px; width: 100%; margin-bottom: 8px;
             }
             .usage-title-ar { font-size: 16px; font-weight: 950; color: var(--heading-pure-color); }
             .usage-title-bracket { font-size: 14px; font-weight: 950; direction: ltr; unicode-bidi: embed; color: var(--accent); }
@@ -198,21 +187,12 @@
             .usage-content { font-size: 13.5px; font-weight: 700; color: var(--text-secondary); line-height: 1.8; }
             
             .method-box { 
-                background: var(--card-bg); 
-                border: 2px solid var(--card-border); 
-                padding: 14px 16px; 
-                border-radius: 20px; 
-                margin: 14px 0; 
-                display: flex; 
-                flex-direction: column; 
-                gap: 8px; 
-                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
+                background: var(--card-bg); border: 2px solid var(--card-border); padding: 14px 16px; border-radius: 20px; margin: 14px 0; display: flex; flex-direction: column; gap: 8px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
             }
 
             .prep-practice-group { display: flex; flex-direction: column; gap: 12px; margin-top: 8px; }
             .icon-cards-list { display: flex; flex-direction: column; gap: 12px; }
             
-            /* كروت التطبيق الموحدة الهادئة */
             .icon-single-card {
                 background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 22px; padding: 14px 18px;
                 display: flex; flex-direction: column; gap: 10px; transition: 0.3s ease; position: relative; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
@@ -251,20 +231,9 @@
 
             /* كارت تشغيل التحدي اليومي وقاموس الجمل الخارجي */
             .quiz-launch-card {
-                background: var(--card-bg);
-                border: 2px solid var(--card-border);
-                border-radius: 30px;
-                padding: 24px 20px;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                text-align: center;
-                gap: 16px;
-                transition: 0.3s ease;
-                margin-top: 15px;
-                box-shadow: 0 12px 30px rgba(0, 0, 0, 0.03);
-                position: relative;
-                overflow: hidden;
+                background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 30px; padding: 24px 20px;
+                display: flex; flex-direction: column; align-items: center; text-align: center; gap: 16px;
+                transition: 0.3s ease; margin-top: 15px; box-shadow: 0 12px 30px rgba(0, 0, 0, 0.03); position: relative; overflow: hidden;
             }
             .quiz-launch-card:hover { transform: scale(1.01); border-color: var(--accent); box-shadow: 0 18px 40px rgba(0, 0, 0, 0.05); }
             
@@ -273,21 +242,16 @@
             .quiz-launch-desc-top { font-size: 13px; font-weight: 800; color: var(--text-secondary); background: var(--light-bg); padding: 10px 14px; border-radius: 18px; border: 2px solid var(--card-border); width: 100%; box-sizing: border-box; }
             
             .quiz-launch-main-btn {
-                background: var(--accent); color: #FFFFFF; border: none;
-                width: 100%; padding: 14px; border-radius: 20px;
-                font-family: 'Cairo', sans-serif; font-size: 15px; font-weight: 950;
-                cursor: pointer; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05); transition: 0.25s;
+                background: var(--accent); color: #FFFFFF; border: none; width: 100%; padding: 14px; border-radius: 20px;
+                font-family: 'Cairo', sans-serif; font-size: 15px; font-weight: 950; cursor: pointer; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05); transition: 0.25s;
                 display: flex; align-items: center; justify-content: center; gap: 8px;
             }
             .quiz-launch-main-btn:hover { opacity: 0.9; transform: scale(1.02); }
 
             .dict-launch-btn {
-                background: var(--card-bg); color: var(--accent); border: 2px solid var(--card-border);
-                width: 100%; padding: 14px; border-radius: 20px;
-                font-family: 'Cairo', sans-serif; font-size: 15px; font-weight: 950;
-                cursor: pointer; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.02); transition: 0.25s;
-                display: flex; align-items: center; justify-content: center; gap: 8px;
-                white-space: nowrap;
+                background: var(--card-bg); color: var(--accent); border: 2px solid var(--card-border); width: 100%; padding: 14px; border-radius: 20px;
+                font-family: 'Cairo', sans-serif; font-size: 15px; font-weight: 950; cursor: pointer; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.02); transition: 0.25s;
+                display: flex; align-items: center; justify-content: center; gap: 8px; white-space: nowrap;
             }
             .dict-launch-btn:hover { background: var(--light-bg); border-color: var(--accent); transform: scale(1.02); }
 
@@ -307,12 +271,11 @@
 
             .dict-modal-header {
                 display: flex; justify-content: space-between; align-items: center;
-                background: var(--light-bg); border: 2px solid var(--card-border);
-                padding: 10px 16px; border-radius: 24px;
+                background: var(--light-bg); border: 2px solid var(--card-border); padding: 10px 16px; border-radius: 24px;
             }
             .dict-modal-title { font-size: 15px; font-weight: 950; color: var(--heading-pure-color); display: flex; align-items: center; gap: 8px; }
 
-            /* نافذة الاختبار التفاعلية */
+            /* نافذة الاختبار التفاعلية (مطابقة للصورة تماماً)[span_1](start_span)[span_1](end_span) */
             .modal-overlay { 
                 position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
                 background: rgba(0, 0, 0, 0.65); backdrop-filter: blur(16px); 
@@ -321,16 +284,17 @@
             .modal-overlay.active { display: flex; }
             
             .quiz-modal-card { 
-                background: var(--card-bg); border: 2.5px solid var(--card-border); border-radius: 34px; padding: 22px; width: 100%; max-width: 500px; max-height: 85vh;
-                overflow-y: auto; box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2); display: flex; flex-direction: column; gap: 16px; position: relative; 
+                background: var(--card-bg); border: 2.5px solid var(--card-border); border-radius: 36px; padding: 22px; width: 100%; max-width: 480px; max-height: 90vh;
+                overflow-y: auto; box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25); display: flex; flex-direction: column; gap: 16px; position: relative; 
             }
             
+            /* شريط الـ HUD العلوي داخل نافذة التحدي (مطابق للصورة)[span_2](start_span)[span_2](end_span) */
             .game-hud-bar {
                 display: flex; justify-content: space-between; align-items: center;
-                background: var(--bg-main); border: 2px solid var(--card-border);
-                padding: 8px 14px; border-radius: 24px; gap: 8px;
+                background: var(--card-bg); border: 2px solid var(--card-border);
+                padding: 10px 18px; border-radius: 28px; gap: 10px;
             }
-            .hud-item { display: flex; align-items: center; gap: 6px; font-size: 13.5px; font-weight: 950; color: var(--heading-pure-color); }
+            .hud-item { display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 950; color: var(--heading-pure-color); }
             .hud-close-btn {
                 background: var(--light-bg); border: 2px solid var(--card-border); width: 36px; height: 36px; border-radius: 18px;
                 color: var(--text-primary); cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; transition: 0.2s;
@@ -339,20 +303,46 @@
 
             .quiz-top-status {
                 display: flex; justify-content: center; align-items: center;
-                background: var(--light-bg); border: 2px solid var(--card-border);
-                padding: 10px 18px; border-radius: 24px;
+                background: var(--card-bg); border: 2px solid var(--card-border);
+                padding: 12px; border-radius: 24px;
             }
             .quiz-counter-badge {
-                font-size: 14px; font-weight: 950; color: var(--heading-pure-color);
-                background: var(--card-bg); padding: 6px 18px; border-radius: 18px; border: 2px solid var(--card-border);
+                font-size: 15px; font-weight: 950; color: var(--heading-pure-color);
+                background: var(--card-bg); padding: 6px 24px; border-radius: 18px; border: 2px solid var(--card-border);
             }
 
             .quiz-body { display: flex; flex-direction: column; gap: 14px; }
-            .quiz-question-card {
-                background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 26px; padding: 18px;
-                display: flex; flex-direction: column; gap: 14px; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.02); transition: 0.3s ease;
-            }
             
+            /* كارت السؤال المدمج المطابق للصورة تماماً[span_3](start_span)[span_3](end_span) */
+            .quiz-question-card {
+                background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 28px; padding: 20px;
+                display: flex; flex-direction: column; gap: 14px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.02); transition: 0.3s ease;
+            }
+
+            .quiz-question-instruction {
+                font-size: 14.5px; font-weight: 950; color: var(--heading-pure-color); text-align: center; display: flex; align-items: center; justify-content: center; gap: 8px;
+            }
+
+            /* صندوق الترجمة المنسدل داخل السؤال (مطابق للصورة)[span_4](start_span)[span_4](end_span) */
+            .quiz-translation-box {
+                background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 20px; padding: 12px 16px;
+                font-size: 13px; font-weight: 800; color: var(--text-secondary); text-align: center; display: flex; align-items: center; justify-content: center; gap: 6px;
+            }
+
+            .quiz-sentence-display {
+                font-family: system-ui, -apple-system, sans-serif; font-size: 16px; font-weight: 950; color: var(--heading-pure-color); text-align: center; direction: ltr; margin: 10px 0;
+            }
+
+            /* شبكة الاختيارات (أزرار 2x2 مطابقة للصورة)[span_5](start_span)[span_5](end_span) */
+            .quiz-options-grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 6px; }
+            .quiz-option-btn-box {
+                background: var(--card-bg); border: 2px solid var(--card-border); padding: 14px; border-radius: 20px;
+                font-family: system-ui, -apple-system, sans-serif; font-size: 15px; font-weight: 950; color: var(--text-primary); cursor: pointer; transition: 0.2s; text-align: center;
+            }
+            .quiz-option-btn-box:hover { border-color: var(--accent); background: var(--light-bg); color: var(--accent); transform: scale(1.02); }
+            .quiz-option-btn-box.correct { background: var(--light-bg) !important; border-color: var(--accent) !important; color: var(--accent) !important; }
+            .quiz-option-btn-box.wrong { background: rgba(239, 68, 68, 0.15) !important; border-color: #EF4444 !important; color: #EF4444 !important; }
+
             @keyframes successPulse {
                 0% { transform: scale(1); border-color: var(--accent); box-shadow: 0 0 25px rgba(0, 0, 0, 0.05); }
                 50% { transform: scale(1.02); border-color: var(--primary); box-shadow: 0 0 35px rgba(0, 0, 0, 0.08); }
@@ -360,37 +350,21 @@
             }
             .quiz-question-card.success-fx { animation: successPulse 0.6s ease infinite alternate; background: var(--light-bg); }
 
-            .quiz-question-text { font-family: system-ui, -apple-system, sans-serif; font-size: 14.5px; font-weight: 900; color: var(--heading-pure-color); text-align: left; direction: ltr; line-height: 1.6; }
-            .quiz-options-grid { display: flex; gap: 8px; justify-content: center; margin-top: 4px; }
-            .quiz-option-btn {
-                background: var(--bg-main); border: 2px solid var(--card-border); padding: 10px 16px; border-radius: 18px;
-                font-family: system-ui, -apple-system, sans-serif; font-size: 13px; font-weight: 900; color: var(--text-primary); cursor: pointer; transition: 0.2s; flex: 1; text-align: center;
-            }
-            .quiz-option-btn:hover { border-color: var(--accent); background: var(--light-bg); color: var(--accent); }
-            .quiz-option-btn.correct { background: var(--light-bg) !important; border-color: var(--accent) !important; color: var(--accent) !important; transform: scale(1.05); }
-            .quiz-option-btn.wrong { background: rgba(239, 68, 68, 0.15) !important; border-color: #EF4444 !important; color: #EF4444 !important; }
-
-            .quiz-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; border-top: 2px solid var(--card-border); padding-top: 12px; font-size: 12px; font-weight: 800; color: var(--text-secondary); }
-            .quiz-next-btn { background: var(--accent); color: #FFFFFF; border: none; padding: 8px 18px; border-radius: 16px; font-family: 'Cairo', sans-serif; font-weight: 900; cursor: pointer; display: none; }
+            .quiz-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 6px; border-top: 2px solid var(--card-border); padding-top: 12px; font-size: 13px; font-weight: 900; color: var(--text-secondary); }
+            .quiz-next-btn { background: var(--accent); color: #FFFFFF; border: none; padding: 10px 20px; border-radius: 18px; font-family: 'Cairo', sans-serif; font-weight: 950; cursor: pointer; display: none; }
             .quiz-next-btn.active { display: block; }
 
             /* شريط التنقل السفلي */
             .bottom-nav {
                 position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); 
-                width: calc(100% - 32px); max-width: 460px;
-                background: var(--header-bg);
-                display: flex; justify-content: space-around; align-items: center;
-                padding: 6px 10px; border-radius: 30px; 
-                border: 2.5px solid var(--card-border);
-                box-shadow: 0 8px 24px rgba(0,0,0,0.25); 
-                z-index: 999; box-sizing: border-box;
-                transition: all 0.4s ease;
+                width: calc(100% - 32px); max-width: 460px; background: var(--header-bg);
+                display: flex; justify-content: space-around; align-items: center; padding: 6px 10px; border-radius: 30px; 
+                border: 2.5px solid var(--card-border); box-shadow: 0 8px 24px rgba(0,0,0,0.25); z-index: 999; box-sizing: border-box; transition: all 0.4s ease;
             }
             .bottom-nav a { 
                 color: var(--text-secondary); text-decoration: none; font-size: 10px; text-align: center; font-weight: 800; 
                 display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 12px; border-radius: 20px; flex: 1; 
-                border: 1.5px solid var(--card-border); background: var(--light-bg);
-                transition: all 0.3s ease;
+                border: 1.5px solid var(--card-border); background: var(--light-bg); transition: all 0.3s ease;
             }
             .bottom-nav a span { font-size: 16px; line-height: 1; }
             .bottom-nav a:hover { color: var(--nav-theme-color); border-color: var(--nav-theme-color); background: rgba(128, 128, 128, 0.1); }
@@ -413,17 +387,15 @@
                 <div style="font-size: 12.5px; font-weight: 800; color: var(--text-secondary); text-align: center;" id="dictSubtitleCount">
                     أكمل تحديات الأسئلة لإضافة الجمل إلى قاموسك الشخصي!
                 </div>
-                <div class="icon-cards-list" id="dictCardsContainer">
-                    <!-- تُعبأ الجمل تلقائياً عند إنهاء التحديات -->
-                </div>
+                <div class="icon-cards-list" id="dictCardsContainer"></div>
             </div>
         </div>
 
-        <!-- نافذة اختبار التحدي اليومي -->
+        <!-- نافذة اختبار التحدي اليومي (المطابقة للشورة تماماً)[span_6](start_span)[span_6](end_span) -->
         <div class="modal-overlay" id="quizModal">
             <div class="quiz-modal-card">
                 <div class="game-hud-bar">
-                    <div class="hud-item"><span>⚡</span><span id="hudXpDisplay">0</span> XP</div>
+                    <div class="hud-item"><span>⚡</span><span>XP <span id="hudXpDisplay">0</span></span></div>
                     <div class="hud-item"><span>🎯</span><span>تحدي الضمائر</span></div>
                     <button class="hud-close-btn" id="closeQuizBtn" title="إغلاق">✕</button>
                 </div>
@@ -850,15 +822,14 @@
             }
 
             const masterQuizBank = [
-                { q: "( ...... ) saw Sarah yesterday.", options: ["me", "I", "him"], correct: 1 },
-                { q: "Sarah saw ( ...... ) yesterday.", options: ["I", "me", "He"], correct: 1 },
-                { q: "He called ( ...... ) at night.", options: ["she", "her", "they"], correct: 1 },
-                { q: "( ...... ) speak English well.", options: ["You", "them", "him"], correct: 0 },
-
-                { q: "( ...... ) helped the teacher.", options: ["She", "her", "them"], correct: 0 },
-                { q: "The teacher helped ( ...... ) today.", options: ["she", "her", "he"], correct: 1 },
-                { q: "( ...... ) went to the store.", options: ["They", "them", "their"], correct: 0 },
-                { q: "I gave a gift to ( ...... ).", options: ["they", "them", "their"], correct: 1 }
+                { q: "( ...... ) saw Sarah yesterday.", arTrans: "الترجمة: أنا رأيت سارة بالأمس.", options: ["me", "I", "him", "them"], correct: 1 },
+                { q: "Sarah saw ( ...... ) yesterday.", arTrans: "الترجمة: سارة رأَتْني بالأمس.", options: ["I", "me", "He", "she"], correct: 1 },
+                { q: "He called ( ...... ) at night.", arTrans: "الترجمة: هو اتصل بها ليلاً.", options: ["she", "her", "they", "him"], correct: 1 },
+                { q: "( ...... ) speak English well.", arTrans: "الترجمة: أنت تتحدث الإنجليزية بطلاقة.", options: ["You", "them", "him", "us"], correct: 0 },
+                { q: "( ...... ) helped the teacher.", arTrans: "الترجمة: هي ساعدت المعلم.", options: ["She", "her", "them", "he"], correct: 0 },
+                { q: "The teacher helped ( ...... ) today.", arTrans: "الترجمة: المعلم ساعدها اليوم.", options: ["she", "her", "he", "they"], correct: 1 },
+                { q: "( ...... ) went to the store.", arTrans: "الترجمة: هم ذهبوا إلى المتجر.", options: ["They", "them", "their", "we"], correct: 0 },
+                { q: "I gave a gift to ( ...... ).", arTrans: "الترجمة: أنا أعطيت هدية لهم.", options: ["they", "them", "their", "us"], correct: 1 }
             ];
 
             let userXp = parseInt(localStorage.getItem("em_user_xp") || "0");
@@ -923,12 +894,20 @@
                 let nextBtn = document.getElementById('quizNextBtn');
                 nextBtn.classList.remove('active');
 
+                // تصميم الكارت المطابق لصورة التطبيق تماماً (سؤال + كارت الترجمة بـ 🔍 + خيارات 2x2)[span_7](start_span)[span_7](end_span)
                 let html = `<div class="quiz-question-card" id="activeQuestionCard">
-                    <div class="quiz-question-text">السؤال (${currentSubQuestionIndex + 1}/4):<br>${q.q}</div>
-                    <div class="quiz-options-grid">`;
+                    <div class="quiz-question-instruction">
+                        <span>اختر الضمير المناسب لسد الفراغ في الجملة التالية:</span>
+                        <span>🔍</span>
+                    </div>
+                    <div class="quiz-translation-box">
+                        <span>${q.arTrans}</span>
+                    </div>
+                    <div class="quiz-sentence-display">${q.q}</div>
+                    <div class="quiz-options-grid-2x2">`;
                 
                 q.options.forEach((opt, idx) => {
-                    html += `<button class="quiz-option-btn" onclick="checkAnswer(${idx}, this)">${opt}</button>`;
+                    html += `<button class="quiz-option-btn-box" onclick="checkAnswer(${idx}, this)">${opt}</button>`;
                 });
 
                 html += `</div></div>`;
@@ -942,7 +921,7 @@
                 answered = true;
                 let globalIndex = currentDayQuestionOffset + currentSubQuestionIndex;
                 let q = masterQuizBank[globalIndex];
-                let optionButtons = document.querySelectorAll('.quiz-option-btn');
+                let optionButtons = document.querySelectorAll('.quiz-option-btn-box');
                 let cardElement = document.getElementById('activeQuestionCard');
 
                 if (selectedIndex === q.correct) {
