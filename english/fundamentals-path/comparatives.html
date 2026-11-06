@@ -22,11 +22,11 @@
                 --text-secondary: #64748B;
                 
                 --header-bg: #FFFFFF;
-                --header-border: rgba(37, 99, 235, 0.15);
-                --header-shadow: 0 10px 30px rgba(37, 99, 235, 0.05);
+                --header-border: rgba(245, 158, 11, 0.15);
+                --header-shadow: 0 10px 30px rgba(245, 158, 11, 0.05);
                 
-                --primary: #2563EB;
-                --primary-dark: #1D4ED8;
+                --primary: #F59E0B;
+                --primary-dark: #D97706;
                 --accent: #F59E0B; 
                 --light-bg: rgba(245, 158, 11, 0.05);
                 --border-glow: rgba(245, 158, 11, 0.25);
@@ -36,8 +36,8 @@
                 --comp-irreg: #D97706;
                 --heading-pure-color: #0F172A; 
 
-                --nav-theme-color: #2563EB;
-                --nav-glow-color: rgba(37, 99, 235, 0.25);
+                --nav-theme-color: #F59E0B;
+                --nav-glow-color: rgba(245, 158, 11, 0.25);
             }
 
             html.dark-mode, body.dark-mode {
@@ -51,10 +51,10 @@
                 --header-border: rgba(245, 158, 11, 0.3);
                 --header-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
                 
-                --primary: #3B82F6;
-                --primary-dark: #2563EB;
+                --primary: #FBBF24;
+                --primary-dark: #F59E0B;
                 --accent: #FBBF24;
-                --light-bg: rgba(245, 158, 11, 0.08);
+                --light-bg: rgba(245, 158, 11, 0.09);
                 --border-glow: rgba(245, 158, 11, 0.35);
 
                 --comp-short: #60A5FA;
@@ -62,8 +62,8 @@
                 --comp-irreg: #FBBF24;
                 --heading-pure-color: #FFFFFF; 
 
-                --nav-theme-color: #3B82F6;
-                --nav-glow-color: rgba(59, 130, 246, 0.35);
+                --nav-theme-color: #FBBF24;
+                --nav-glow-color: rgba(251, 191, 36, 0.35);
             }
 
             body {
@@ -80,7 +80,7 @@
             .container { max-width: 680px; margin: auto; }
 
             .top-progress-bar { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: transparent; z-index: 9999; }
-            .top-progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--primary)); }
+            .top-progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--primary-dark)); }
 
             .scroll-to-top-btn {
                 position: fixed; bottom: 80px; left: 20px; width: 44px; height: 44px;
@@ -93,7 +93,7 @@
             .scroll-to-top-btn.show { opacity: 1; visibility: visible; transform: translateY(0); }
             .scroll-to-top-btn:hover { background: var(--accent); color: #FFFFFF; border-color: var(--accent); transform: translateY(-3px); }
 
-            /* شريط الهيدر المُعدل (Minimalist) */
+            /* شريط الهيدر (Minimalist) */
             .nav-bar {
                 display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
                 background: var(--header-bg); border: 1.5px solid var(--header-border); padding: 10px 16px;
@@ -103,13 +103,7 @@
             .brand-main-title { font-size: 13.5px; font-weight: 900; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
             .brand-subtitle-text { font-size: 10px; font-weight: 800; color: var(--accent); letter-spacing: 0.5px; text-transform: uppercase; margin-top: 2px; }
 
-            .nav-actions-group {
-                display: flex;
-                align-items: center;
-                gap: 6px;
-                flex-shrink: 0;
-            }
-
+            .nav-actions-group { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
             .back-btn, .theme-btn {
                 background: var(--light-bg); border: 1.5px solid var(--border-glow);
                 width: 36px; height: 36px; border-radius: 14px; display: flex; align-items: center; justify-content: center;
@@ -120,7 +114,7 @@
             .hero-card {
                 background: var(--card-bg); 
                 border: 2px solid transparent;
-                background-image: linear-gradient(var(--card-bg), var(--card-bg)), linear-gradient(135deg, var(--accent), var(--primary));
+                background-image: linear-gradient(var(--card-bg), var(--card-bg)), linear-gradient(135deg, var(--accent), var(--primary-dark));
                 background-origin: border-box;
                 background-clip: padding-box, border-box;
                 border-radius: 28px;
@@ -149,10 +143,11 @@
 
             .th-comp { color: var(--accent) !important; background: var(--light-bg) !important; font-weight: 950 !important; }
 
+            /* كارت الشرح الشامل الرئيسي مع تفاعل الحدود ديناميكياً */
             .lesson-card-full {
                 background: var(--card-bg); 
                 border: 2px solid transparent;
-                background-image: linear-gradient(var(--card-bg), var(--card-bg)), linear-gradient(135deg, #F59E0B, var(--primary));
+                background-image: linear-gradient(var(--card-bg), var(--card-bg)), linear-gradient(135deg, var(--current-border-color, #2563EB), var(--primary-dark));
                 background-origin: border-box;
                 background-clip: padding-box, border-box;
                 border-radius: 28px;
@@ -164,6 +159,7 @@
                 gap: 20px;
                 position: relative; 
                 overflow: hidden;
+                transition: background-image 0.5s ease;
             }
             
             .lesson-header { display: flex; flex-direction: column; gap: 14px; }
@@ -186,23 +182,9 @@
                 box-sizing: border-box;
             }
 
-            .card-top-header {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                width: 100%;
-                margin-bottom: 4px;
-            }
+            .card-top-header { display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 4px; }
 
-            .time-badge { 
-                position: static; 
-                padding: 5px 12px; 
-                border-radius: 10px; 
-                font-size: 10.5px; 
-                font-weight: 950; 
-                color: #FFFFFF; 
-                box-shadow: 0 4px 12px rgba(0,0,0,0.15); 
-            }
+            .time-badge { padding: 5px 12px; border-radius: 10px; font-size: 10.5px; font-weight: 950; color: #FFFFFF; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
             .badge-short { background: linear-gradient(135deg, #2563EB, #60A5FA); }
             .badge-long { background: linear-gradient(135deg, #059669, #34D399); }
             .badge-irreg { background: linear-gradient(135deg, #D97706, #FBBF24); }
@@ -216,236 +198,71 @@
             .glass-glow-card.irreg-card { border: 1.5px solid rgba(217, 119, 6, 0.35); }
             .glass-glow-card.irreg-card::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 4px; background: linear-gradient(90deg, #D97706, #FBBF24); width: 100%; }
 
-            .usage-title { 
-                font-size: 15px; 
-                font-weight: 950; 
-                color: var(--heading-pure-color); 
-                display: flex; 
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 4px; 
-                margin-top: 4px;
-                direction: rtl;
-            }
+            .usage-title { font-size: 15px; font-weight: 950; color: var(--heading-pure-color); display: flex; flex-direction: column; align-items: flex-start; gap: 4px; margin-top: 4px; direction: rtl; }
             .title-line-1 { font-size: 15px; font-weight: 950; color: var(--heading-pure-color); display: flex; align-items: center; gap: 6px; }
             .title-line-2 { font-size: 13.5px; font-weight: 900; color: var(--text-secondary); margin-right: 24px; }
 
             .usage-content { font-size: 13.5px; font-weight: 700; color: var(--text-secondary); line-height: 1.8; }
-
             .method-box { background: var(--light-bg); border: 1.5px solid var(--border-glow); padding: 14px; border-radius: 16px; margin: 12px 0; display: flex; flex-direction: column; gap: 8px; }
 
-            .prep-practice-group {
-                display: flex;
-                flex-direction: column;
-                gap: 12px;
-                margin-top: 8px;
-            }
-
+            .prep-practice-group { display: flex; flex-direction: column; gap: 12px; margin-top: 8px; }
             .icon-cards-list { display: flex; flex-direction: column; gap: 12px; }
             
             .icon-single-card {
-                background: var(--light-bg);
-                border: 1.5px solid var(--border-glow);
-                border-radius: 18px;
-                padding: 14px 18px;
-                display: flex;
-                flex-direction: column;
-                gap: 10px;
-                transition: 0.3s ease;
-                position: relative;
-                overflow: hidden;
-                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+                background: var(--light-bg); border: 1.5px solid var(--border-glow); border-radius: 18px; padding: 14px 18px;
+                display: flex; flex-direction: column; gap: 10px; transition: 0.3s ease; position: relative; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
             }
-            
-            .icon-single-card.short-practice-card {
-                border-color: rgba(37, 99, 235, 0.3);
-                background: rgba(37, 99, 235, 0.04);
-            }
-            .icon-single-card.short-practice-card:hover {
-                border-color: #2563EB;
-                box-shadow: 0 8px 25px rgba(37, 99, 235, 0.15);
-            }
-            .short-speak {
-                color: #2563EB !important;
-                border-color: rgba(37, 99, 235, 0.3) !important;
-                background: rgba(37, 99, 235, 0.08) !important;
-            }
-            .short-speak:hover, .short-speak.playing {
-                background: #2563EB !important;
-                color: #FFFFFF !important;
-            }
+            .icon-single-card.short-practice-card { border-color: rgba(37, 99, 235, 0.3); background: rgba(37, 99, 235, 0.04); }
+            .icon-single-card.short-practice-card:hover { border-color: #2563EB; box-shadow: 0 8px 25px rgba(37, 99, 235, 0.15); }
+            .short-speak { color: #2563EB !important; border-color: rgba(37, 99, 235, 0.3) !important; background: rgba(37, 99, 235, 0.08) !important; }
+            .short-speak:hover, .short-speak.playing { background: #2563EB !important; color: #FFFFFF !important; }
 
-            .icon-single-card.long-practice-card {
-                border-color: rgba(5, 150, 105, 0.3);
-                background: rgba(5, 150, 105, 0.04);
-            }
-            .icon-single-card.long-practice-card:hover {
-                border-color: #059669;
-                box-shadow: 0 8px 25px rgba(5, 150, 105, 0.15);
-            }
-            .long-speak {
-                color: #059669 !important;
-                border-color: rgba(5, 150, 105, 0.3) !important;
-                background: rgba(5, 150, 105, 0.08) !important;
-            }
-            .long-speak:hover, .long-speak.playing {
-                background: #059669 !important;
-                color: #FFFFFF !important;
-            }
+            .icon-single-card.long-practice-card { border-color: rgba(5, 150, 105, 0.3); background: rgba(5, 150, 105, 0.04); }
+            .icon-single-card.long-practice-card:hover { border-color: #059669; box-shadow: 0 8px 25px rgba(5, 150, 105, 0.15); }
+            .long-speak { color: #059669 !important; border-color: rgba(5, 150, 105, 0.3) !important; background: rgba(5, 150, 105, 0.08) !important; }
+            .long-speak:hover, .long-speak.playing { background: #059669 !important; color: #FFFFFF !important; }
 
-            .icon-single-card.irreg-practice-card {
-                border-color: rgba(217, 119, 6, 0.3);
-                background: rgba(217, 119, 6, 0.04);
-            }
-            .icon-single-card.irreg-practice-card:hover {
-                border-color: #D97706;
-                box-shadow: 0 8px 25px rgba(217, 119, 6, 0.15);
-            }
-            .irreg-speak {
-                color: #D97706 !important;
-                border-color: rgba(217, 119, 6, 0.3) !important;
-                background: rgba(217, 119, 6, 0.08) !important;
-            }
-            .irreg-speak:hover, .irreg-speak.playing {
-                background: #D97706 !important;
-                color: #FFFFFF !important;
-            }
+            .icon-single-card.irreg-practice-card { border-color: rgba(217, 119, 6, 0.3); background: rgba(217, 119, 6, 0.04); }
+            .icon-single-card.irreg-practice-card:hover { border-color: #D97706; box-shadow: 0 8px 25px rgba(217, 119, 6, 0.15); }
+            .irreg-speak { color: #D97706 !important; border-color: rgba(217, 119, 6, 0.3) !important; background: rgba(217, 119, 6, 0.08) !important; }
+            .irreg-speak:hover, .irreg-speak.playing { background: #D97706 !important; color: #FFFFFF !important; }
 
             @keyframes laserScan {
                 0% { box-shadow: 0 0 15px currentColor; }
                 50% { box-shadow: 0 0 25px currentColor; }
                 100% { box-shadow: 0 0 15px currentColor; }
             }
+            .icon-single-card.scanning { animation: laserScan 1.2s infinite ease-in-out; background: var(--card-bg) !important; }
 
-            .icon-single-card.scanning {
-                animation: laserScan 1.2s infinite ease-in-out;
-                background: var(--card-bg) !important;
-            }
-
-            .sentence-row {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                gap: 10px;
-                direction: ltr;
-            }
-
-            .line-en-1 { 
-                font-family: system-ui, -apple-system, sans-serif; 
-                font-size: 13.5px; 
-                font-weight: 900; 
-                color: var(--heading-pure-color); 
-                text-align: left; 
-                direction: ltr; 
-                flex: 1;
-            }
-
-            .line-ar-1 { 
-                font-family: 'Cairo', sans-serif; 
-                font-size: 13px; 
-                font-weight: 800; 
-                color: var(--heading-pure-color); 
-                text-align: right; 
-                direction: rtl;
-                margin-top: -2px;
-            }
-
-            .sentence-group {
-                display: flex;
-                flex-direction: column;
-                gap: 4px;
-            }
-
-            .speak-btn {
-                width: 30px;
-                height: 30px;
-                border-radius: 10px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                cursor: pointer;
-                font-size: 13px;
-                transition: 0.2s;
-                flex-shrink: 0;
-                border: 1.5px solid;
-            }
+            .sentence-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; direction: ltr; }
+            .line-en-1 { font-family: system-ui, -apple-system, sans-serif; font-size: 13.5px; font-weight: 900; color: var(--heading-pure-color); text-align: left; direction: ltr; flex: 1; }
+            .line-ar-1 { font-family: 'Cairo', sans-serif; font-size: 13px; font-weight: 800; color: var(--heading-pure-color); text-align: right; direction: rtl; margin-top: -2px; }
+            .sentence-group { display: flex; flex-direction: column; gap: 4px; }
+            .speak-btn { width: 30px; height: 30px; border-radius: 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 13px; transition: 0.2s; flex-shrink: 0; border: 1.5px solid; }
 
             .quiz-banner-card {
-                background: var(--card-bg);
-                border: 2px solid rgba(147, 51, 234, 0.25);
-                border-radius: 26px;
-                padding: 24px;
-                display: flex;
-                flex-direction: column;
-                gap: 18px;
-                margin-top: 24px;
-                box-shadow: 0 15px 35px rgba(147, 51, 234, 0.08);
-                position: relative;
-                overflow: hidden;
+                background: var(--card-bg); border: 2px solid rgba(147, 51, 234, 0.25); border-radius: 26px; padding: 24px;
+                display: flex; flex-direction: column; gap: 18px; margin-top: 24px; box-shadow: 0 15px 35px rgba(147, 51, 234, 0.08); position: relative; overflow: hidden;
             }
-            .quiz-banner-top {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-end;
-                text-align: right;
-                gap: 6px;
-            }
-            .quiz-banner-title {
-                font-size: 16px;
-                font-weight: 950;
-                color: var(--heading-pure-color);
-                line-height: 1.5;
-            }
-            .quiz-banner-desc {
-                font-size: 12.5px;
-                font-weight: 800;
-                color: var(--text-secondary);
-                line-height: 1.4;
-            }
+            .quiz-banner-top { display: flex; flex-direction: column; align-items: flex-end; text-align: right; gap: 6px; }
+            .quiz-banner-title { font-size: 16px; font-weight: 950; color: var(--heading-pure-color); line-height: 1.5; }
+            .quiz-banner-desc { font-size: 12.5px; font-weight: 800; color: var(--text-secondary); line-height: 1.4; }
             .quiz-banner-btn {
-                background: linear-gradient(135deg, #9333EA, #7E22CE);
-                color: #FFFFFF;
-                border: none;
-                padding: 14px 22px;
-                border-radius: 18px;
-                font-family: 'Cairo', sans-serif;
-                font-size: 14px;
-                font-weight: 950;
-                cursor: pointer;
-                box-shadow: 0 8px 25px rgba(147, 51, 234, 0.35);
-                transition: 0.25s ease;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 8px;
-                width: 100%;
+                background: linear-gradient(135deg, #9333EA, #7E22CE); color: #FFFFFF; border: none; padding: 14px 22px; border-radius: 18px;
+                font-family: 'Cairo', sans-serif; font-size: 14px; font-weight: 950; cursor: pointer; box-shadow: 0 8px 25px rgba(147, 51, 234, 0.35);
+                transition: 0.25s ease; display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%;
             }
-            .quiz-banner-btn:hover {
-                transform: scale(1.02);
-                box-shadow: 0 12px 30px rgba(147, 51, 234, 0.5);
-            }
+            .quiz-banner-btn:hover { transform: scale(1.02); box-shadow: 0 12px 30px rgba(147, 51, 234, 0.5); }
 
             .modal-overlay { 
-                position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-                background: rgba(147, 51, 234, 0.35); backdrop-filter: blur(14px); 
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(147, 51, 234, 0.35); backdrop-filter: blur(14px); 
                 display: none; align-items: center; justify-content: center; z-index: 10000; padding: 16px; box-sizing: border-box; 
             }
             .modal-overlay.active { display: flex; }
             
             .quiz-modal-card { 
-                background: var(--card-bg); 
-                border: 2px solid #9333EA; 
-                border-radius: 28px; 
-                padding: 22px; 
-                width: 100%; 
-                max-width: 500px; 
-                max-height: 85vh;
-                overflow-y: auto;
-                box-shadow: 0 25px 60px rgba(147, 51, 234, 0.3); 
-                display: flex; 
-                flex-direction: column; 
-                gap: 16px; 
-                position: relative; 
+                background: var(--card-bg); border: 2px solid #9333EA; border-radius: 28px; padding: 22px; width: 100%; max-width: 500px; max-height: 85vh;
+                overflow-y: auto; box-shadow: 0 25px 60px rgba(147, 51, 234, 0.3); display: flex; flex-direction: column; gap: 16px; position: relative; 
             }
             
             .quiz-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--card-border); padding-bottom: 12px; }
@@ -453,17 +270,9 @@
             .quiz-close-btn { background: var(--light-bg); border: 1.5px solid var(--border-glow); width: 32px; height: 32px; border-radius: 10px; color: var(--text-primary); cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; }
 
             .quiz-body { display: flex; flex-direction: column; gap: 14px; }
-            
             .quiz-question-card {
-                background: var(--card-bg);
-                border: 1.5px solid var(--border-glow);
-                border-radius: 20px;
-                padding: 18px;
-                display: flex;
-                flex-direction: column;
-                gap: 14px;
-                box-shadow: 0 8px 25px rgba(147, 51, 234, 0.06);
-                transition: 0.3s ease;
+                background: var(--card-bg); border: 1.5px solid var(--border-glow); border-radius: 20px; padding: 18px;
+                display: flex; flex-direction: column; gap: 14px; box-shadow: 0 8px 25px rgba(147, 51, 234, 0.06); transition: 0.3s ease;
             }
             
             @keyframes successPulse {
@@ -471,56 +280,23 @@
                 50% { transform: scale(1.02); border-color: #34D399; box-shadow: 0 0 35px rgba(52, 211, 153, 0.65); }
                 100% { transform: scale(1); border-color: #059669; box-shadow: 0 0 25px rgba(5, 150, 105, 0.45); }
             }
-            .quiz-question-card.success-fx {
-                animation: successPulse 0.6s ease infinite alternate;
-                background: rgba(5, 150, 105, 0.04);
-            }
+            .quiz-question-card.success-fx { animation: successPulse 0.6s ease infinite alternate; background: rgba(5, 150, 105, 0.04); }
 
-            .quiz-question-text { 
-                font-family: system-ui, -apple-system, sans-serif;
-                font-size: 14.5px; 
-                font-weight: 900; 
-                color: var(--heading-pure-color); 
-                text-align: left;
-                direction: ltr;
-                line-height: 1.6; 
-            }
-            
+            .quiz-question-text { font-family: system-ui, -apple-system, sans-serif; font-size: 14.5px; font-weight: 900; color: var(--heading-pure-color); text-align: left; direction: ltr; line-height: 1.6; }
             .quiz-options-grid { display: flex; gap: 8px; justify-content: center; margin-top: 4px; }
             .quiz-option-btn {
-                background: var(--bg-main);
-                border: 1.5px solid var(--card-border);
-                padding: 10px 16px;
-                border-radius: 14px;
-                font-family: system-ui, -apple-system, sans-serif;
-                font-size: 13px;
-                font-weight: 900;
-                color: var(--text-primary);
-                cursor: pointer;
-                transition: 0.2s;
-                flex: 1;
-                text-align: center;
+                background: var(--bg-main); border: 1.5px solid var(--card-border); padding: 10px 16px; border-radius: 14px;
+                font-family: system-ui, -apple-system, sans-serif; font-size: 13px; font-weight: 900; color: var(--text-primary); cursor: pointer; transition: 0.2s; flex: 1; text-align: center;
             }
             .quiz-option-btn:hover { border-color: #9333EA; background: rgba(147, 51, 234, 0.05); color: #9333EA; }
-            
             .quiz-option-btn.correct { background: rgba(5, 150, 105, 0.15) !important; border-color: #059669 !important; color: #059669 !important; transform: scale(1.05); }
             .quiz-option-btn.wrong { background: rgba(239, 68, 68, 0.15) !important; border-color: #EF4444 !important; color: #EF4444 !important; }
 
             .quiz-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; border-top: 1px solid var(--card-border); padding-top: 12px; font-size: 12px; font-weight: 800; color: var(--text-secondary); }
-            .quiz-next-btn {
-                background: #9333EA;
-                color: #FFFFFF;
-                border: none;
-                padding: 8px 18px;
-                border-radius: 12px;
-                font-family: 'Cairo', sans-serif;
-                font-weight: 900;
-                cursor: pointer;
-                display: none;
-            }
+            .quiz-next-btn { background: #9333EA; color: #FFFFFF; border: none; padding: 8px 18px; border-radius: 12px; font-family: 'Cairo', sans-serif; font-weight: 900; cursor: pointer; display: none; }
             .quiz-next-btn.active { display: block; }
 
-            /* شريط التنقل السفلي المطور بخلفية صلبة تماماً وثيم متناسق */
+            /* شريط التنقل السفلي المطور باللون الذهبي/الأصفر المتناسق */
             .bottom-nav {
                 position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); 
                 width: calc(100% - 32px); max-width: 460px;
@@ -545,7 +321,6 @@
     </head>
     <body>
 
-        <!-- زر العودة للأعلى -->
         <button class="scroll-to-top-btn" id="scrollToTopBtn" title="العودة للأعلى">↑</button>
 
         <div class="top-progress-bar"><div class="top-progress-fill" id="progressFill"></div></div>
@@ -557,9 +332,7 @@
                     <div class="quiz-title"><span>⚡</span><span>التحدي اليومي (4 أسئلة / 24 ساعة)</span></div>
                     <button class="quiz-close-btn" id="closeQuizBtn">✕</button>
                 </div>
-                <div class="quiz-body" id="quizBody">
-                    <!-- محتوى كارت السؤال -->
-                </div>
+                <div class="quiz-body" id="quizBody"></div>
                 <div class="quiz-footer">
                     <span id="quizScoreIndicator">النتيجة: 0 / 4</span>
                     <button class="quiz-next-btn" id="quizNextBtn" onclick="nextQuestion()">السؤال التالي ➔</button>
@@ -568,7 +341,7 @@
         </div>
 
         <div class="container">
-            <!-- شريط الهيدر المُعدل (Minimalist) -->
+            <!-- شريط الهيدر -->
             <div class="nav-bar">
                 <a href="fundamentals-path.html" class="back-btn" title="الرجوع للقائمة">←</a>
                 <div class="brand-minimalist-box">
@@ -634,7 +407,7 @@
                             </div>
                         </div>
 
-                        <!-- 4 كروت التطبيق العملي الخاصة بالصفات القصيرة -->
+                        <!-- 4 كروت التطبيق العملي للقصيرة -->
                         <div class="prep-practice-group">
                             <div style="font-size: 12px; font-weight: 900; color: #2563EB; margin-top: 4px;">🎯 التطبيق العملي (4 أمثلة للصفات القصيرة):</div>
                             <div class="icon-cards-list">
@@ -699,7 +472,7 @@
                             </div>
                         </div>
 
-                        <!-- 4 كروت التطبيق العملي الخاصة بالصفات الطويلة -->
+                        <!-- 4 كروت التطبيق العملي للطويلة -->
                         <div class="prep-practice-group">
                             <div style="font-size: 12px; font-weight: 900; color: #059669; margin-top: 4px;">🎯 التطبيق العملي (4 أمثلة للصفات الطويلة):</div>
                             <div class="icon-cards-list">
@@ -764,8 +537,8 @@
                             </div>
                         </div>
 
-                        <!-- 4 كروت التطبيق العملي الخاصة بالصفات الشاذة -->
-                        <div class="prep-practice-group">
+                        <!-- 4 كروت التطبيق العملي للشاذة -->
+                        <div class="prep-practice-group" id="sectionPractice">
                             <div style="font-size: 12px; font-weight: 900; color: #D97706; margin-top: 4px;">🎯 التطبيق العملي (4 أمثلة للصفات الشاذة):</div>
                             <div class="icon-cards-list">
                                 <div class="icon-single-card irreg-practice-card" id="card-irreg-1">
@@ -810,7 +583,7 @@
                     </div>
                 </div>
 
-                <!-- كارت التحدي اليومي بالمواصفات المطابقة للصورة -->
+                <!-- كارت التحدي اليومي -->
                 <div class="quiz-banner-card" id="launchQuizBtn">
                     <div class="quiz-banner-top">
                         <div class="quiz-banner-title">افهم، استمع، وتحدى نفسك يومياً 🎯</div>
@@ -823,7 +596,7 @@
 
         </div>
 
-        <!-- شريط التنقل السفلي المطور بخلفية صلبة ومسارات تخرج خطوتين للخارج -->
+        <!-- شريط التنقل السفلي المطور (مسارات دقيقة تخرج خطوتين للخارج) -->
         <div class="bottom-nav" id="bottomNav">
             <a href="../../index.html"><span class="nav-icon">🏠</span>الرئيسية</a>
             <a href="../english.html"><span class="nav-icon">🇬🇧</span>الإنجليزي</a>
@@ -1079,6 +852,31 @@
                 if (closeQuizBtn && quizModal) {
                     closeQuizBtn.addEventListener("click", () => { quizModal.classList.remove("active"); checkQuizAvailability(); });
                 }
+
+                /* تفاعل حدود الكارت الرئيسي ديناميكياً مع التمرير */
+                window.addEventListener('scroll', function() {
+                    let sectionShort = document.getElementById('sectionShort');
+                    let sectionLong = document.getElementById('sectionLong');
+                    let sectionIrreg = document.getElementById('sectionIrreg');
+                    let sectionPractice = document.getElementById('sectionPractice');
+                    let mainCard = document.getElementById('mainLessonCard');
+
+                    if (!mainCard || !sectionShort || !sectionLong || !sectionIrreg || !sectionPractice) return;
+                    let scrollPosition = window.scrollY + window.innerHeight / 2;
+
+                    let shortTop = sectionShort.offsetTop + mainCard.offsetTop;
+                    let longTop = sectionLong.offsetTop + mainCard.offsetTop;
+                    let irregTop = sectionIrreg.offsetTop + mainCard.offsetTop;
+                    let pracTop = sectionPractice.offsetTop + mainCard.offsetTop;
+
+                    if (scrollPosition >= pracTop || scrollPosition >= irregTop) {
+                        mainCard.style.setProperty('--current-border-color', '#D97706'); 
+                    } else if (scrollPosition >= longTop) {
+                        mainCard.style.setProperty('--current-border-color', '#059669'); 
+                    } else {
+                        mainCard.style.setProperty('--current-border-color', '#2563EB'); 
+                    }
+                });
 
                 let themeBtn = document.getElementById("themeToggleBtn");
                 function applyTheme(isDark) {
