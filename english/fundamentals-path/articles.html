@@ -322,7 +322,7 @@
             }
             .quiz-launch-main-btn:hover { background: var(--theme-active-dark); transform: scale(1.02); }
 
-            /* زر قاموس الجمل الجديد بعرض الكارت في سطر واحد وبدون عدد الجمل */
+            /* زر قاموس الجمل الجديد بعرض الكارت في سطر واحد */
             .dict-launch-btn {
                 background: var(--card-bg); color: var(--theme-active); border: 2px solid var(--theme-active);
                 width: 100%; padding: 14px; border-radius: 18px;
@@ -333,7 +333,7 @@
             }
             .dict-launch-btn:hover { background: var(--theme-light); transform: scale(1.02); }
 
-            /* نافذة قاموس الجمل المنبثقة (تصميم مطابق لكروت التطبيق العملي) */
+            /* نافذة قاموس الجمل المنبثقة */
             .dict-modal-overlay {
                 position: fixed; top: 0; left: 0; width: 100%; height: 100%;
                 background: rgba(0, 0, 0, 0.65); backdrop-filter: blur(16px);
@@ -877,6 +877,45 @@
                 return unlocked;
             }
 
+            let countdownInterval = null;
+
+            function updateCountdownTimer() {
+                let savedTimestamp = parseInt(localStorage.getItem("em_art_timestamp") || "0");
+                let twentyFourHours = 24 * 60 * 60 * 1000;
+                let now = new Date().getTime();
+                let timeLeft = twentyFourHours - (now - savedTimestamp);
+
+                let btnEl = document.getElementById("launchBtnText");
+                if (!btnEl) return;
+
+                if (timeLeft <= 0) {
+                    localStorage.setItem("em_art_completed_today", "false");
+                    checkQuizAvailability();
+                    if (countdownInterval) clearInterval(countdownInterval);
+                    return;
+                }
+
+                let hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                let minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                let seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                btnEl.innerHTML = `<span>⏳ المتبقي: ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}</span>`;
+            }
+
+            function checkQuizAvailability() {
+                let isCompleted = localStorage.getItem("em_art_completed_today") === "true";
+                let btnEl = document.getElementById("launchBtnText");
+
+                if (isCompleted) {
+                    if (countdownInterval) clearInterval(countdownInterval);
+                    updateCountdownTimer();
+                    countdownInterval = setInterval(updateCountdownTimer, 1000);
+                } else {
+                    if (countdownInterval) clearInterval(countdownInterval);
+                    btnEl.innerHTML = `<span>ابدأ التحدي</span><span>➔</span>`;
+                }
+            }
+
             function openDictionaryModal(event) {
                 if(event) event.stopPropagation();
                 let unlocked = getUnlockedSentences();
@@ -1079,6 +1118,10 @@
                 if (currentQuizIndex < currentDailyQuestions.length) {
                     loadQuizQuestion();
                 } else {
+                    // تسجيل وقت الإتمام وتفعيل حالة القفل لمدة 24 ساعة
+                    localStorage.setItem("em_art_timestamp", new Date().getTime());
+                    localStorage.setItem("em_art_completed_today", "true");
+
                     let dayIndex = parseInt(localStorage.getItem("em_art_day_index") || "0");
                     let startPoolIdx = (dayIndex * 4) % quizSentencesPool.length;
                     let newlyEarnedSentences = quizSentencesPool.slice(startPoolIdx, startPoolIdx + 4);
@@ -1090,7 +1133,6 @@
                         }
                     });
                     localStorage.setItem("em_art_unlocked_sentences", JSON.stringify(unlocked));
-
                     localStorage.setItem("em_art_day_index", (dayIndex + 1) % 10);
 
                     let totalFundamentalsXp = parseInt(localStorage.getItem("em_fundamentals_total_xp") || "0");
@@ -1116,6 +1158,16 @@
             }
 
             function launchQuizAction() {
+                let isCompleted = localStorage.getItem("em_art_completed_today") === "true";
+                if (isCompleted) {
+                    if (confirm("لقد أكملت تحدي اليوم بالفعل. هل تريد إعادة تعيين التحدي والبدء من جديد للتجربة؟")) {
+                        localStorage.removeItem("em_art_completed_today");
+                        localStorage.removeItem("em_art_timestamp");
+                        location.reload();
+                    }
+                    return;
+                }
+
                 let quizModal = document.getElementById("quizModal");
                 if (quizModal) {
                     quizModal.classList.add("active");
@@ -1128,12 +1180,15 @@
             }
 
             document.addEventListener("DOMContentLoaded", function() {
+                checkQuizAvailability();
+
                 let closeQuizBtn = document.getElementById("closeQuizBtn");
                 let quizModal = document.getElementById("quizModal");
 
                 if (closeQuizBtn && quizModal) {
                     closeQuizBtn.addEventListener("click", () => {
                         quizModal.classList.remove("active");
+                        checkQuizAvailability();
                     });
                 }
 
