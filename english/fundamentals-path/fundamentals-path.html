@@ -21,7 +21,7 @@
                 --text-primary: #0A2540;
                 --text-secondary: #516079;
                 
-                --header-bg: rgba(255, 255, 255, 0.92);
+                --header-bg: #FFFFFF;
                 --header-border: rgba(37, 99, 235, 0.2);
                 --header-shadow: 0 10px 30px rgba(37, 99, 235, 0.06);
                 
@@ -31,6 +31,9 @@
                 --light-bg: rgba(37, 99, 235, 0.06);
                 --border-glow: rgba(37, 99, 235, 0.35);
                 --card-glow: 0 20px 45px rgba(37, 99, 235, 0.08);
+
+                --nav-theme-color: #2563EB;
+                --nav-glow-color: rgba(37, 99, 235, 0.25);
             }
 
             html.dark-mode, body.dark-mode {
@@ -40,7 +43,7 @@
                 --text-primary: #F0F4F8;
                 --text-secondary: #93A4BC;
                 
-                --header-bg: rgba(13, 19, 34, 0.95);
+                --header-bg: #0D1322;
                 --header-border: rgba(59, 130, 246, 0.25);
                 --header-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
                 
@@ -50,6 +53,9 @@
                 --light-bg: rgba(59, 130, 246, 0.1);
                 --border-glow: rgba(96, 165, 250, 0.35);
                 --card-glow: 0 25px 50px rgba(0, 0, 0, 0.6);
+
+                --nav-theme-color: #3B82F6;
+                --nav-glow-color: rgba(59, 130, 246, 0.35);
             }
 
             html { scroll-behavior: smooth; }
@@ -83,7 +89,7 @@
 
             .nav-bar {
                 display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
-                background: var(--header-bg); backdrop-filter: blur(14px); border: 1.5px solid var(--header-border); padding: 9px 14px;
+                background: var(--header-bg); border: 1.5px solid var(--header-border); padding: 9px 14px;
                 border-radius: 20px; box-shadow: var(--header-shadow);
             }
             .nav-right-group { display: flex; align-items: center; gap: 8px; text-align: right; }
@@ -204,15 +210,27 @@
             .drawer-link-left { display: flex; align-items: center; gap: 10px; }
             .drawer-footer { text-align: center; font-size: 10px; font-weight: 800; color: var(--text-secondary); border-top: 1px solid var(--card-border); padding-top: 14px; margin-top: auto; }
 
+            /* شريط التنقل السفلي بخلفية صلبة وثيم متناسق تماماً */
             .bottom-nav {
-                position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); width: calc(100% - 28px); max-width: 500px;
-                background: var(--header-bg); backdrop-filter: blur(15px); display: flex; justify-content: space-around; align-items: center;
-                padding: 8px 10px; border: 1.5px solid var(--header-border); border-radius: 22px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15); z-index: 999;
+                position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); 
+                width: calc(100% - 32px); max-width: 460px;
+                background: var(--header-bg);
+                display: flex; justify-content: space-around; align-items: center;
+                padding: 6px 10px; border-radius: 24px; 
+                border: 1.5px solid var(--card-border);
+                box-shadow: 0 8px 24px rgba(0,0,0,0.25); 
+                z-index: 999; box-sizing: border-box;
+                transition: all 0.4s ease;
             }
-            .bottom-nav a { color: var(--text-secondary); text-decoration: none; font-size: 11px; text-align: center; font-weight: 800; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 6px 12px; border-radius: 16px; flex: 1; transition: 0.25s; }
-            .bottom-nav a span { font-size: 18px; line-height: 1; }
-            .bottom-nav a:hover { color: var(--primary); }
-            .bottom-nav a.active { color: var(--primary); background: var(--light-bg); border: 1.5px solid var(--border-glow); }
+            .bottom-nav a { 
+                color: var(--text-secondary); text-decoration: none; font-size: 10px; text-align: center; font-weight: 800; 
+                display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 12px; border-radius: 16px; flex: 1; 
+                border: 1px solid rgba(128, 128, 128, 0.18); background: rgba(128, 128, 128, 0.05);
+                transition: all 0.3s ease;
+            }
+            .bottom-nav a span { font-size: 16px; line-height: 1; }
+            .bottom-nav a:hover { color: var(--nav-theme-color); border-color: var(--nav-theme-color); background: rgba(128, 128, 128, 0.1); }
+            .bottom-nav a.active { color: #FFFFFF; background: var(--nav-theme-color); border-color: var(--nav-theme-color); box-shadow: 0 4px 15px var(--nav-glow-color); }
         </style>
     </head>
     <body>
@@ -261,7 +279,7 @@
         </div>
 
         <div class="container">
-            <!-- شريط الهيدر القياسي الموحد (تم تحديث مسار الرجوع لصفحة english.html) -->
+            <!-- شريط الهيدر القياسي الموحد -->
             <div class="nav-bar">
                 <div class="nav-right-group">
                     <a href="../english.html" class="home-icon-btn" title="الرجوع للإنجليزي">🏠</a>
@@ -374,7 +392,7 @@
                 </a>
             </div>
 
-            <!-- 📌 بطاقة الدرس السادس (حروف الجر) -->
+            <!-- 📌 بطاقة الدرس السادس -->
             <div class="lesson-path-card">
                 <div class="lesson-card-header">
                     <div class="lesson-header-right">
@@ -392,7 +410,7 @@
                 </a>
             </div>
 
-            <!-- 📌 بطاقة الدرس السابع (الصفات والمقارنة - Comparatives) -->
+            <!-- 📌 بطاقة الدرس السابع -->
             <div class="lesson-path-card">
                 <div class="lesson-card-header">
                     <div class="lesson-header-right">
@@ -412,12 +430,12 @@
 
         </div>
 
-        <!-- شريط التنقل السفلي (محدث بالمسارات الصحيحة للرجوع للجذر) -->
-        <div class="bottom-nav">
-            <a href="../index.html"><span>🏠</span>الرئيسية</a>
-            <a href="../english.html" class="active"><span>🇬🇧</span>الإنجليزي</a>
-            <a href="../../surveying/surveying.html"><span>📐</span>المساحة</a>
-            <a href="../../programming/programming.html"><span>💻</span>البرمجة</a>
+        <!-- شريط التنقل السفلي المطور (مسارات دقيقة ومضبوطة) -->
+        <div class="bottom-nav" id="bottomNav">
+            <a href="../../index.html"><span class="nav-icon">🏠</span>الرئيسية</a>
+            <a href="../english.html" class="active"><span class="nav-icon">🇬🇧</span>الإنجليزي</a>
+            <a href="../../surveying/surveying.html"><span class="nav-icon">📐</span>المساحة</a>
+            <a href="../../programming/programming.html"><span class="nav-icon">💻</span>البرمجة</a>
         </div>
 
         <script>
