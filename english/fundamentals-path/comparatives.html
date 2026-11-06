@@ -184,11 +184,6 @@
 
             .card-top-header { display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 4px; }
 
-            .time-badge { padding: 5px 12px; border-radius: 10px; font-size: 10.5px; font-weight: 950; color: #FFFFFF; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
-            .badge-short { background: linear-gradient(135deg, #2563EB, #60A5FA); }
-            .badge-long { background: linear-gradient(135deg, #059669, #34D399); }
-            .badge-irreg { background: linear-gradient(135deg, #D97706, #FBBF24); }
-
             .glass-glow-card.short-card { border: 1.5px solid rgba(37, 99, 235, 0.3); }
             .glass-glow-card.short-card::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 4px; background: linear-gradient(90deg, #2563EB, #60A5FA); width: 100%; }
 
@@ -198,9 +193,27 @@
             .glass-glow-card.irreg-card { border: 1.5px solid rgba(217, 119, 6, 0.35); }
             .glass-glow-card.irreg-card::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 4px; background: linear-gradient(90deg, #D97706, #FBBF24); width: 100%; }
 
-            .usage-title { font-size: 15px; font-weight: 950; color: var(--heading-pure-color); display: flex; flex-direction: column; align-items: flex-start; gap: 4px; margin-top: 4px; direction: rtl; }
-            .title-line-1 { font-size: 15px; font-weight: 950; color: var(--heading-pure-color); display: flex; align-items: center; gap: 6px; }
-            .title-line-2 { font-size: 13.5px; font-weight: 900; color: var(--text-secondary); margin-right: 24px; }
+            /* تنسيق العناوين الجديدة داخل الكروت الداخلية (سطر عربي وتحته إنجليزي في المنتصف) */
+            .usage-title-centered {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 4px;
+                width: 100%;
+                margin-bottom: 8px;
+            }
+            .usage-title-ar {
+                font-size: 16px;
+                font-weight: 950;
+                color: var(--heading-pure-color);
+            }
+            .usage-title-en {
+                font-size: 12px;
+                font-weight: 850;
+                color: var(--text-secondary);
+                letter-spacing: 0.3px;
+            }
 
             .usage-content { font-size: 13.5px; font-weight: 700; color: var(--text-secondary); line-height: 1.8; }
             .method-box { background: var(--light-bg); border: 1.5px solid var(--border-glow); padding: 14px; border-radius: 16px; margin: 12px 0; display: flex; flex-direction: column; gap: 8px; }
@@ -296,7 +309,7 @@
             .quiz-next-btn { background: #9333EA; color: #FFFFFF; border: none; padding: 8px 18px; border-radius: 12px; font-family: 'Cairo', sans-serif; font-weight: 900; cursor: pointer; display: none; }
             .quiz-next-btn.active { display: block; }
 
-            /* شريط التنقل السفلي المطور */
+            /* شريط التنقل السفلي */
             .bottom-nav {
                 position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); 
                 width: calc(100% - 32px); max-width: 460px;
@@ -390,12 +403,9 @@
 
                 <!-- 1. الصفات القصيرة (Short Adjectives) -->
                 <div class="glass-glow-card short-card" id="sectionShort" data-border-color="#2563EB">
-                    <div class="card-top-header">
-                        <div class="usage-title" style="margin: 0;">
-                            <div class="title-line-1"><span class="dot-icon">🔵</span>قاعدة الصفات القصيرة</div>
-                            <div class="title-line-2"><strong style="color:var(--comp-short);">(<span style="color:var(--comp-short);">+er</span> / <span style="color:var(--comp-short);">+est</span>)</strong></div>
-                        </div>
-                        <div class="time-badge badge-short">Short Adjectives</div>
+                    <div class="usage-title-centered">
+                        <span class="usage-title-ar">قاعدة الصفات القصيرة (er / +est+)</span>
+                        <span class="usage-title-en">Short Adjectives</span>
                     </div>
                     <div class="usage-content">
                         عند مقارنة شيء قصير بآخر، نضيف للنهاية <strong style="color:var(--comp-short);">(+er)</strong> يليه <strong style="color:var(--comp-short);">than</strong>، وللتفضيل على مجموعة نضيف <strong style="color:var(--comp-short);">(+est)</strong> مسبوقة بـ <strong style="color:var(--comp-short);">The</strong>.
@@ -455,12 +465,9 @@
 
                 <!-- 2. الصفات الطويلة (Long Adjectives) -->
                 <div class="glass-glow-card long-card" id="sectionLong" data-border-color="#059669">
-                    <div class="card-top-header">
-                        <div class="usage-title" style="margin: 0;">
-                            <div class="title-line-1"><span class="dot-icon">🟢</span>قاعدة الصفات الطويلة</div>
-                            <div class="title-line-2"><strong style="color:var(--comp-long);">(<span style="color:var(--comp-long);">More</span> / <span style="color:var(--comp-long);">Most</span>)</strong></div>
-                        </div>
-                        <div class="time-badge badge-long">Long Adjectives</div>
+                    <div class="usage-title-centered">
+                        <span class="usage-title-ar">قاعدة الصفات الطويلة (More / Most)</span>
+                        <span class="usage-title-en">Long Adjectives</span>
                     </div>
                     <div class="usage-content">
                         الصفات التي تتكون من مقطعين أو أكثر نستخدم قبلها <strong style="color:var(--comp-long);">more</strong> (متبوعة بـ <strong style="color:var(--comp-long);">than</strong>) للمقارنة و <strong style="color:var(--comp-long);">the most</strong> للتفضيل دون تغيير أصل الصفة.
@@ -520,12 +527,9 @@
 
                 <!-- 3. الصفات الشاذة (Irregular Adjectives) -->
                 <div class="glass-glow-card irreg-card" id="sectionIrreg" data-border-color="#D97706">
-                    <div class="card-top-header">
-                        <div class="usage-title" style="margin: 0;">
-                            <div class="title-line-1"><span class="dot-icon">🟠</span>قاعدة الصفات الشاذة</div>
-                            <div class="title-line-2"><strong style="color:var(--comp-irreg);">(Good / Bad / Far)</strong></div>
-                        </div>
-                        <div class="time-badge badge-irreg">Irregular</div>
+                    <div class="usage-title-centered">
+                        <span class="usage-title-ar">قاعدة الصفات الشاذة (Good / Bad / Far)</span>
+                        <span class="usage-title-en">Irregular Adjectives</span>
                     </div>
                     <div class="usage-content">
                         صفات لا تتبع قواعد `er` أو `more` بل يتغير شكلها كلياً في المقارنة (متبوعة بـ <strong style="color:var(--comp-irreg);">than</strong>) والتفضيل (مسبوقة بـ <strong style="color:var(--comp-irreg);">The</strong>) ويجب حفظها كما هي.
@@ -853,7 +857,7 @@
                     closeQuizBtn.addEventListener("click", () => { quizModal.classList.remove("active"); checkQuizAvailability(); });
                 }
 
-                /* نظام رصد دقيق لتفاعل حدود الكارت الرئيسي مع الكروت الداخلية باستخدام IntersectionObserver */
+                /* نظام رصد دقيق لتفاعل حدود الكارت الرئيسي مع الكروت الداخلية */
                 let mainCard = document.getElementById('mainLessonCard');
                 let sections = document.querySelectorAll('.glass-glow-card, .quiz-banner-card');
 
@@ -869,7 +873,7 @@
                         });
                     }, {
                         root: null,
-                        threshold: 0.35 // يتحول اللون أول ما يدخل الكارت بنسبة 35% في الشاشة
+                        threshold: 0.35 
                     });
 
                     sections.forEach(sec => observer.observe(sec));
