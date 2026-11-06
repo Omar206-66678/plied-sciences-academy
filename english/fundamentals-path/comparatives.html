@@ -93,7 +93,7 @@
             .scroll-to-top-btn.show { opacity: 1; visibility: visible; transform: translateY(0); }
             .scroll-to-top-btn:hover { background: var(--accent); color: #FFFFFF; border-color: var(--accent); transform: translateY(-3px); }
 
-            /* شريط الهيدر (Minimalist) */
+            /* شريط الهيدر */
             .nav-bar {
                 display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
                 background: var(--header-bg); border: 1.5px solid var(--header-border); padding: 10px 16px;
@@ -143,7 +143,7 @@
 
             .th-comp { color: var(--accent) !important; background: var(--light-bg) !important; font-weight: 950 !important; }
 
-            /* كارت الشرح الشامل الرئيسي مع تفاعل الحدود ديناميكياً */
+            /* كارت الشرح الشامل الرئيسي مع تفاعل حدود ديناميكي سلس ومضمون */
             .lesson-card-full {
                 background: var(--card-bg); 
                 border: 2px solid transparent;
@@ -296,7 +296,7 @@
             .quiz-next-btn { background: #9333EA; color: #FFFFFF; border: none; padding: 8px 18px; border-radius: 12px; font-family: 'Cairo', sans-serif; font-weight: 900; cursor: pointer; display: none; }
             .quiz-next-btn.active { display: block; }
 
-            /* شريط التنقل السفلي المطور باللون الذهبي/الأصفر المتناسق */
+            /* شريط التنقل السفلي المطور */
             .bottom-nav {
                 position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); 
                 width: calc(100% - 32px); max-width: 460px;
@@ -378,7 +378,7 @@
             </div>
 
             <!-- كارت الشرح الشامل الرئيسي -->
-            <div class="lesson-card-full" id="mainLessonCard">
+            <div class="lesson-card-full" id="mainLessonCard" style="--current-border-color: #2563EB;">
                 <div class="lesson-header">
                     <div class="app-title-wrapper" style="border-right-color: var(--accent);">
                         <h2 class="app-main-heading">
@@ -389,7 +389,7 @@
                 </div>
 
                 <!-- 1. الصفات القصيرة (Short Adjectives) -->
-                <div class="glass-glow-card short-card" id="sectionShort">
+                <div class="glass-glow-card short-card" id="sectionShort" data-border-color="#2563EB">
                     <div class="card-top-header">
                         <div class="usage-title" style="margin: 0;">
                             <div class="title-line-1"><span class="dot-icon">🔵</span>قاعدة الصفات القصيرة</div>
@@ -454,7 +454,7 @@
                 </div>
 
                 <!-- 2. الصفات الطويلة (Long Adjectives) -->
-                <div class="glass-glow-card long-card" id="sectionLong">
+                <div class="glass-glow-card long-card" id="sectionLong" data-border-color="#059669">
                     <div class="card-top-header">
                         <div class="usage-title" style="margin: 0;">
                             <div class="title-line-1"><span class="dot-icon">🟢</span>قاعدة الصفات الطويلة</div>
@@ -519,7 +519,7 @@
                 </div>
 
                 <!-- 3. الصفات الشاذة (Irregular Adjectives) -->
-                <div class="glass-glow-card irreg-card" id="sectionIrreg">
+                <div class="glass-glow-card irreg-card" id="sectionIrreg" data-border-color="#D97706">
                     <div class="card-top-header">
                         <div class="usage-title" style="margin: 0;">
                             <div class="title-line-1"><span class="dot-icon">🟠</span>قاعدة الصفات الشاذة</div>
@@ -584,7 +584,7 @@
                 </div>
 
                 <!-- كارت التحدي اليومي -->
-                <div class="quiz-banner-card" id="launchQuizBtn">
+                <div class="quiz-banner-card" id="launchQuizBtn" data-border-color="#D97706">
                     <div class="quiz-banner-top">
                         <div class="quiz-banner-title">افهم، استمع، وتحدى نفسك يومياً 🎯</div>
                         <div class="quiz-banner-desc" id="quizLaunchDesc">ابدأ التحدي اليومي لتعزيز مهاراتك 🧠</div>
@@ -596,7 +596,7 @@
 
         </div>
 
-        <!-- شريط التنقل السفلي المطور (مسارات دقيقة تخرج خطوتين للخارج) -->
+        <!-- شريط التنقل السفلي -->
         <div class="bottom-nav" id="bottomNav">
             <a href="../../index.html"><span class="nav-icon">🏠</span>الرئيسية</a>
             <a href="../english.html"><span class="nav-icon">🇬🇧</span>الإنجليزي</a>
@@ -853,30 +853,27 @@
                     closeQuizBtn.addEventListener("click", () => { quizModal.classList.remove("active"); checkQuizAvailability(); });
                 }
 
-                /* تفاعل حدود الكارت الرئيسي ديناميكياً مع التمرير */
-                window.addEventListener('scroll', function() {
-                    let sectionShort = document.getElementById('sectionShort');
-                    let sectionLong = document.getElementById('sectionLong');
-                    let sectionIrreg = document.getElementById('sectionIrreg');
-                    let sectionPractice = document.getElementById('sectionPractice');
-                    let mainCard = document.getElementById('mainLessonCard');
+                /* نظام رصد دقيق لتفاعل حدود الكارت الرئيسي مع الكروت الداخلية باستخدام IntersectionObserver */
+                let mainCard = document.getElementById('mainLessonCard');
+                let sections = document.querySelectorAll('.glass-glow-card, .quiz-banner-card');
 
-                    if (!mainCard || !sectionShort || !sectionLong || !sectionIrreg || !sectionPractice) return;
-                    let scrollPosition = window.scrollY + window.innerHeight / 2;
+                if ('IntersectionObserver' in window && mainCard) {
+                    let observer = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                let color = entry.target.getAttribute('data-border-color');
+                                if (color) {
+                                    mainCard.style.setProperty('--current-border-color', color);
+                                }
+                            }
+                        });
+                    }, {
+                        root: null,
+                        threshold: 0.35 // يتحول اللون أول ما يدخل الكارت بنسبة 35% في الشاشة
+                    });
 
-                    let shortTop = sectionShort.offsetTop + mainCard.offsetTop;
-                    let longTop = sectionLong.offsetTop + mainCard.offsetTop;
-                    let irregTop = sectionIrreg.offsetTop + mainCard.offsetTop;
-                    let pracTop = sectionPractice.offsetTop + mainCard.offsetTop;
-
-                    if (scrollPosition >= pracTop || scrollPosition >= irregTop) {
-                        mainCard.style.setProperty('--current-border-color', '#D97706'); 
-                    } else if (scrollPosition >= longTop) {
-                        mainCard.style.setProperty('--current-border-color', '#059669'); 
-                    } else {
-                        mainCard.style.setProperty('--current-border-color', '#2563EB'); 
-                    }
-                });
+                    sections.forEach(sec => observer.observe(sec));
+                }
 
                 let themeBtn = document.getElementById("themeToggleBtn");
                 function applyTheme(isDark) {
