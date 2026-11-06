@@ -193,7 +193,7 @@
             .glass-glow-card.irreg-card { border: 1.5px solid rgba(217, 119, 6, 0.35); }
             .glass-glow-card.irreg-card::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 4px; background: linear-gradient(90deg, #D97706, #FBBF24); width: 100%; }
 
-            /* تنسيق العناوين الجديدة داخل الكروت الداخلية (سطر عربي وتحته إنجليزي في المنتصف) */
+            /* تنسيق العناوين الجديدة (سلسلة الأسطر الثلاثة المنظمة) */
             .usage-title-centered {
                 display: flex;
                 flex-direction: column;
@@ -207,6 +207,12 @@
                 font-size: 16px;
                 font-weight: 950;
                 color: var(--heading-pure-color);
+            }
+            .usage-title-bracket {
+                font-size: 14px;
+                font-weight: 950;
+                direction: ltr;
+                unicode-bidi: embed;
             }
             .usage-title-en {
                 font-size: 12px;
@@ -404,7 +410,8 @@
                 <!-- 1. الصفات القصيرة (Short Adjectives) -->
                 <div class="glass-glow-card short-card" id="sectionShort" data-border-color="#2563EB">
                     <div class="usage-title-centered">
-                        <span class="usage-title-ar">قاعدة الصفات القصيرة (er / +est+)</span>
+                        <span class="usage-title-ar">قاعدة الصفات القصيرة</span>
+                        <span class="usage-title-bracket" style="color: var(--comp-short);">(+er / +est)</span>
                         <span class="usage-title-en">Short Adjectives</span>
                     </div>
                     <div class="usage-content">
@@ -466,7 +473,8 @@
                 <!-- 2. الصفات الطويلة (Long Adjectives) -->
                 <div class="glass-glow-card long-card" id="sectionLong" data-border-color="#059669">
                     <div class="usage-title-centered">
-                        <span class="usage-title-ar">قاعدة الصفات الطويلة (More / Most)</span>
+                        <span class="usage-title-ar">قاعدة الصفات الطويلة</span>
+                        <span class="usage-title-bracket" style="color: var(--comp-long);">(More / Most)</span>
                         <span class="usage-title-en">Long Adjectives</span>
                     </div>
                     <div class="usage-content">
@@ -528,7 +536,8 @@
                 <!-- 3. الصفات الشاذة (Irregular Adjectives) -->
                 <div class="glass-glow-card irreg-card" id="sectionIrreg" data-border-color="#D97706">
                     <div class="usage-title-centered">
-                        <span class="usage-title-ar">قاعدة الصفات الشاذة (Good / Bad / Far)</span>
+                        <span class="usage-title-ar">قاعدة الصفات الشاذة</span>
+                        <span class="usage-title-bracket" style="color: var(--comp-irreg);">(Good / Bad / Far)</span>
                         <span class="usage-title-en">Irregular Adjectives</span>
                     </div>
                     <div class="usage-content">
