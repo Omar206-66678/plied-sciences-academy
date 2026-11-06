@@ -17,47 +17,53 @@
             :root {
                 --bg-main: #F4F6F9;
                 --card-bg: #FFFFFF;
-                --card-border: #E2E8F0;
+                --card-border: #93C5FD;
                 --text-primary: #0F172A;
-                --text-secondary: #64748B;
+                --text-secondary: #334155;
                 
-                --header-bg: rgba(255, 255, 255, 0.85);
-                --header-border: rgba(37, 99, 235, 0.15);
-                --header-shadow: 0 10px 30px rgba(37, 99, 235, 0.05);
+                --header-bg: #FFFFFF;
+                --header-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
                 
-                --primary: #2563EB;
-                --primary-dark: #1D4ED8;
-                --accent: #F59E0B; 
-                --light-bg: rgba(245, 158, 11, 0.05);
-                --border-glow: rgba(245, 158, 11, 0.25);
+                --primary: #475569;
+                --accent: #0284C7; 
+                --light-bg: rgba(2, 132, 199, 0.04);
 
-                --prep-in: #2563EB; 
-                --prep-on: #059669; 
-                --prep-at: #D97706;
+                --prep-in: #2563EB;     /* In: أزرق */
+                --prep-on: #059669;     /* On: أخضر */
+                --prep-at: #7C3AED;     /* At: بنفسجي مميز وواضح بعيداً عن الأصفر */
+
                 --heading-pure-color: #0F172A; 
+                --nav-theme-color: #0284C7;
+                --nav-glow-color: rgba(2, 132, 199, 0.25);
             }
 
             html.dark-mode, body.dark-mode {
                 --bg-main: #06080F;
                 --card-bg: #0B0F19;
-                --card-border: rgba(255, 255, 255, 0.07);
-                --text-primary: #F3F4F6;
-                --text-secondary: #9CA3AF;
+                --card-border: rgba(56, 189, 248, 0.3);
+                --text-primary: #FFFFFF;
+                --text-secondary: #94A3B8;
                 
-                --header-bg: rgba(11, 15, 25, 0.85);
-                --header-border: rgba(245, 158, 11, 0.3);
+                --header-bg: #0B0F19;
                 --header-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
                 
-                --primary: #3B82F6;
-                --primary-dark: #2563EB;
-                --accent: #FBBF24;
-                --light-bg: rgba(245, 158, 11, 0.08);
-                --border-glow: rgba(245, 158, 11, 0.35);
+                --primary: #94A3B8;
+                --accent: #38BDF8;
+                --light-bg: rgba(56, 189, 248, 0.06);
 
                 --prep-in: #60A5FA;
                 --prep-on: #34D399;
-                --prep-at: #FBBF24;
+                --prep-at: #A78BFA;     /* بنفسجي فاتح في الثيم المظلم */
+
                 --heading-pure-color: #FFFFFF; 
+                --nav-theme-color: #38BDF8;
+                --nav-glow-color: rgba(56, 189, 248, 0.3);
+            }
+
+            body, * {
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                text-rendering: optimizeLegibility;
             }
 
             body {
@@ -76,11 +82,10 @@
             .top-progress-bar { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: transparent; z-index: 9999; }
             .top-progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--primary)); }
 
-            /* زر العودة للأعلى */
             .scroll-to-top-btn {
                 position: fixed; bottom: 80px; left: 20px; width: 44px; height: 44px;
                 background: var(--card-bg); backdrop-filter: blur(16px);
-                border: 1.5px solid var(--border-glow); border-radius: 14px; color: var(--accent); font-size: 18px;
+                border: 2px solid var(--card-border); border-radius: 22px; color: var(--accent); font-size: 18px;
                 display: flex; align-items: center; justify-content: center; cursor: pointer;
                 box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); z-index: 998; opacity: 0; visibility: hidden;
                 transform: translateY(15px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -88,38 +93,32 @@
             .scroll-to-top-btn.show { opacity: 1; visibility: visible; transform: translateY(0); }
             .scroll-to-top-btn:hover { background: var(--accent); color: #FFFFFF; border-color: var(--accent); transform: translateY(-3px); }
 
-            /* شريط الهيدر */
+            /* شريط الهيدر العلوي */
             .nav-bar {
                 display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
-                background: var(--header-bg); backdrop-filter: blur(12px); border: 1.5px solid var(--header-border); padding: 10px 16px;
-                border-radius: 24px; box-shadow: var(--header-shadow);
+                background: var(--header-bg); border: 2.5px solid var(--card-border); padding: 12px 20px;
+                border-radius: 40px; box-shadow: var(--header-shadow); gap: 10px;
             }
-            .nav-right-group { display: flex; align-items: center; gap: 8px; text-align: right; }
-            .nav-left-group { display: flex; align-items: center; gap: 6px; }
-            
-            .nav-titles-box { display: flex; flex-direction: column; align-items: flex-start; gap: 0px; }
-            .nav-main-title { font-size: 12.5px; font-weight: 950; color: var(--text-primary); margin: 0; line-height: 1.2; font-family: 'Cairo', sans-serif; }
-            .nav-sub-title { font-size: 9.5px; font-weight: 800; color: var(--accent); margin: 0; line-height: 1.2; }
-            .nav-academy-title { font-size: 8.5px; font-weight: 700; color: var(--text-secondary); margin: 0; line-height: 1.2; }
+            .brand-minimalist-box { display: flex; flex-direction: column; align-items: center; text-align: center; flex: 1; padding: 0 4px; min-width: 0; }
+            .brand-main-title { font-size: 14px; font-weight: 900; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
+            .brand-subtitle-text { font-size: 10.5px; font-weight: 800; color: var(--accent); letter-spacing: 0.5px; text-transform: uppercase; margin-top: 2px; }
 
-            .home-icon-btn, .nav-icon-btn {
-                background: var(--light-bg); border: 1.5px solid var(--border-glow);
-                width: 36px; height: 36px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
-                color: var(--text-primary); font-size: 15px; text-decoration: none; cursor: pointer; transition: 0.25s; border: none; flex-shrink: 0;
+            .nav-actions-group { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+            .back-btn, .theme-btn {
+                background: var(--light-bg); border: 2px solid var(--card-border);
+                width: 40px; height: 40px; border-radius: 20px; display: flex; align-items: center; justify-content: center;
+                color: var(--text-primary); font-size: 16px; text-decoration: none; cursor: pointer; transition: 0.25s; flex-shrink: 0;
             }
-            .home-icon-btn:hover, .nav-icon-btn:hover { transform: scale(1.05); border-color: var(--accent); color: var(--accent); }
+            .back-btn:hover, .theme-btn:hover { transform: scale(1.05); border-color: var(--accent); color: var(--accent); }
 
             /* الكارت العلوي الهندسي */
             .hero-card {
                 background: var(--card-bg); 
-                border: 2px solid transparent;
-                background-image: linear-gradient(var(--card-bg), var(--card-bg)), linear-gradient(135deg, var(--accent), var(--primary));
-                background-origin: border-box;
-                background-clip: padding-box, border-box;
-                border-radius: 28px;
-                padding: 24px; 
+                border: 2.5px solid var(--card-border);
+                border-radius: 36px;
+                padding: 26px; 
                 margin-bottom: 24px; 
-                box-shadow: 0 10px 30px var(--border-glow); 
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03); 
                 display: flex; 
                 flex-direction: column; 
                 align-items: center;
@@ -130,12 +129,11 @@
             }
             
             .hero-title-en { margin: 0; font-size: 21px; font-weight: 950; color: var(--heading-pure-color); letter-spacing: -0.3px; }
-            .hero-title-ar { margin: 0; font-size: 14px; font-weight: 800; color: var(--accent); background: var(--light-bg); padding: 4px 16px; border-radius: 12px; border: 1px solid var(--border-glow); }
+            .hero-title-ar { margin: 0; font-size: 14px; font-weight: 800; color: var(--accent); background: var(--light-bg); padding: 6px 18px; border-radius: 20px; border: 2px solid var(--card-border); }
 
-            /* الجدول الهندسي المدمج */
-            .table-container { width: 100%; overflow-x: auto; margin-top: 4px; border-radius: 16px; border: 1.5px solid var(--card-border); text-align: right; }
+            .table-container { width: 100%; overflow-x: auto; margin-top: 4px; border-radius: 22px; border: 2px solid var(--card-border); text-align: right; }
             .styled-master-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
-            .styled-master-table th, .styled-master-table td { padding: 10px 14px; border-bottom: 1px solid var(--card-border); border-left: 1px solid var(--card-border); }
+            .styled-master-table th, .styled-master-table td { padding: 10px 14px; border-bottom: 1.5px solid var(--card-border); border-left: 1.5px solid var(--card-border); }
             .styled-master-table th:last-child, .styled-master-table td:last-child { border-left: none; }
             .styled-master-table th { background: var(--light-bg); color: var(--heading-pure-color); font-weight: 950; font-size: 13px; }
             .styled-master-table td { background: var(--card-bg); color: var(--text-primary); font-weight: 800; }
@@ -146,417 +144,285 @@
             /* كارت الشرح الشامل الرئيسي */
             .lesson-card-full {
                 background: var(--card-bg); 
-                border: 2px solid transparent;
-                background-image: linear-gradient(var(--card-bg), var(--card-bg)), linear-gradient(135deg, var(--current-border-color, #F59E0B), var(--primary));
-                background-origin: border-box;
-                background-clip: padding-box, border-box;
-                border-radius: 28px;
-                padding: 26px; 
+                border: 2.5px solid var(--card-border);
+                border-radius: 40px;
+                padding: 28px; 
                 margin-bottom: 24px; 
-                box-shadow: 0 20px 45px rgba(245, 158, 11, 0.1); 
+                box-shadow: 0 20px 45px rgba(0, 0, 0, 0.04); 
                 display: flex; 
                 flex-direction: column; 
                 gap: 20px;
                 position: relative; 
                 overflow: hidden;
-                transition: background-image 0.5s ease;
             }
             
             .lesson-header { display: flex; flex-direction: column; gap: 14px; }
             .app-title-wrapper { display: flex; flex-direction: column; gap: 8px; position: relative; padding-right: 14px; border-right: 4px solid var(--accent); }
             .app-main-heading { margin: 0; font-size: 20px; font-weight: 950; color: var(--heading-pure-color); letter-spacing: -0.4px; font-family: 'Cairo', sans-serif; direction: ltr; text-align: right; }
-            .app-sub-pill { display: inline-flex; align-items: center; gap: 6px; background: var(--light-bg); border: 1.5px solid var(--border-glow); color: var(--heading-pure-color); padding: 6px 14px; border-radius: 12px; font-size: 12px; font-weight: 850; width: fit-content; }
+            .app-sub-pill { display: inline-flex; align-items: center; gap: 6px; background: var(--light-bg); border: 2px solid var(--card-border); color: var(--heading-pure-color); padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 850; width: fit-content; }
 
             .glass-glow-card {
                 background: var(--card-bg);
                 backdrop-filter: blur(16px);
-                border-radius: 22px;
-                padding: 42px 22px 22px 22px;
+                border-radius: 28px;
+                padding: 24px 22px 22px 22px;
                 display: flex;
                 flex-direction: column;
                 gap: 16px;
                 position: relative;
                 overflow: hidden;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
                 width: 100%;
                 box-sizing: border-box;
+                border: 2px solid var(--card-border);
             }
 
-            .time-badge { position: absolute; top: 18px; left: 18px; padding: 5px 12px; border-radius: 10px; font-size: 10.5px; font-weight: 950; color: #FFFFFF; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 2; }
-            .badge-in { background: linear-gradient(135deg, #2563EB, #60A5FA); }
-            .badge-on { background: linear-gradient(135deg, #059669, #34D399); }
-            .badge-at { background: linear-gradient(135deg, #D97706, #FBBF24); }
+            .glass-glow-card::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--accent), var(--primary)); width: 100%; }
 
-            .glass-glow-card.in-card { border: 1.5px solid rgba(37, 99, 235, 0.3); }
-            .glass-glow-card.in-card::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 4px; background: linear-gradient(90deg, #2563EB, #60A5FA); width: 100%; }
-
-            .glass-glow-card.on-card { border: 1.5px solid rgba(5, 150, 105, 0.35); }
-            .glass-glow-card.on-card::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 4px; background: linear-gradient(90deg, #059669, #34D399); width: 100%; }
-
-            .glass-glow-card.at-card { border: 1.5px solid rgba(217, 119, 6, 0.35); }
-            .glass-glow-card.at-card::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 4px; background: linear-gradient(90deg, #D97706, #FBBF24); width: 100%; }
-
-            .usage-title { 
-                font-size: 15px; 
-                font-weight: 950; 
-                color: var(--heading-pure-color); 
-                display: flex; 
-                align-items: center; 
-                gap: 8px; 
-                margin-top: 4px;
-                flex-wrap: nowrap;
-                direction: rtl;
-            }
-            .usage-title span.dot-icon { flex-shrink: 0; }
-            .usage-title span.title-text { white-space: nowrap; }
-
-            .usage-content { font-size: 13.5px; font-weight: 700; color: var(--text-secondary); line-height: 1.8; }
-
-            .method-box { background: var(--light-bg); border: 1.5px solid var(--border-glow); padding: 14px; border-radius: 16px; margin: 12px 0; display: flex; flex-direction: column; gap: 8px; }
-
-            /* مجموعة كروت التطبيق لكل حرف */
-            .prep-practice-group {
+            .usage-title-centered {
                 display: flex;
                 flex-direction: column;
-                gap: 12px;
-                margin-top: 8px;
+                align-items: center;
+                text-align: center;
+                gap: 4px;
+                width: 100%;
+                margin-bottom: 8px;
+            }
+            .usage-title-ar { font-size: 16px; font-weight: 950; color: var(--heading-pure-color); }
+            .usage-title-bracket { font-size: 14px; font-weight: 950; direction: ltr; unicode-bidi: embed; color: var(--accent); }
+            .usage-title-en { font-size: 12px; font-weight: 850; color: var(--text-secondary); letter-spacing: 0.3px; }
+
+            .usage-content { font-size: 13.5px; font-weight: 700; color: var(--text-secondary); line-height: 1.8; }
+            
+            .method-box { 
+                background: var(--card-bg); 
+                border: 2px solid var(--card-border); 
+                padding: 14px 16px; 
+                border-radius: 20px; 
+                margin: 14px 0; 
+                display: flex; 
+                flex-direction: column; 
+                gap: 8px; 
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
             }
 
+            .prep-practice-group { display: flex; flex-direction: column; gap: 12px; margin-top: 8px; }
             .icon-cards-list { display: flex; flex-direction: column; gap: 12px; }
             
             .icon-single-card {
-                background: var(--light-bg);
-                border: 1.5px solid var(--border-glow);
-                border-radius: 18px;
-                padding: 14px 18px;
-                display: flex;
-                flex-direction: column;
-                gap: 10px;
-                transition: 0.3s ease;
-                position: relative;
-                overflow: hidden;
-                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+                background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 22px; padding: 14px 18px;
+                display: flex; flex-direction: column; gap: 10px; transition: 0.3s ease; position: relative; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
             }
-            
-            .icon-single-card.in-practice-card {
-                border-color: rgba(37, 99, 235, 0.3);
-                background: rgba(37, 99, 235, 0.04);
-            }
-            .icon-single-card.in-practice-card:hover {
-                border-color: #2563EB;
-                box-shadow: 0 8px 25px rgba(37, 99, 235, 0.15);
-            }
-            .in-speak {
-                color: #2563EB !important;
-                border-color: rgba(37, 99, 235, 0.3) !important;
-                background: rgba(37, 99, 235, 0.08) !important;
-            }
-            .in-speak:hover, .in-speak.playing {
-                background: #2563EB !important;
-                color: #FFFFFF !important;
-            }
+            .icon-single-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.04); }
 
-            .icon-single-card.on-practice-card {
-                border-color: rgba(5, 150, 105, 0.3);
-                background: rgba(5, 150, 105, 0.04);
-            }
-            .icon-single-card.on-practice-card:hover {
-                border-color: #059669;
-                box-shadow: 0 8px 25px rgba(5, 150, 105, 0.15);
-            }
-            .on-speak {
-                color: #059669 !important;
-                border-color: rgba(5, 150, 105, 0.3) !important;
-                background: rgba(5, 150, 105, 0.08) !important;
-            }
-            .on-speak:hover, .on-speak.playing {
-                background: #059669 !important;
-                color: #FFFFFF !important;
-            }
-
-            .icon-single-card.at-practice-card {
-                border-color: rgba(217, 119, 6, 0.3);
-                background: rgba(217, 119, 6, 0.04);
-            }
-            .icon-single-card.at-practice-card:hover {
-                border-color: #D97706;
-                box-shadow: 0 8px 25px rgba(217, 119, 6, 0.15);
-            }
-            .at-speak {
-                color: #D97706 !important;
-                border-color: rgba(217, 119, 6, 0.3) !important;
-                background: rgba(217, 119, 6, 0.08) !important;
-            }
-            .at-speak:hover, .at-speak.playing {
-                background: #D97706 !important;
-                color: #FFFFFF !important;
-            }
+            .unified-speak { color: var(--accent) !important; border-color: var(--card-border) !important; background: var(--light-bg) !important; }
+            .unified-speak:hover, .unified-speak.playing { background: var(--accent) !important; color: #FFFFFF !important; transform: scale(1.1); }
 
             @keyframes laserScan {
-                0% { box-shadow: 0 0 15px currentColor; }
-                50% { box-shadow: 0 0 25px currentColor; }
-                100% { box-shadow: 0 0 15px currentColor; }
+                0% { border-color: var(--accent); box-shadow: 0 0 15px rgba(0, 0, 0, 0.05); }
+                50% { border-color: var(--primary); box-shadow: 0 0 25px rgba(0, 0, 0, 0.08); }
+                100% { border-color: var(--accent); box-shadow: 0 0 15px rgba(0, 0, 0, 0.05); }
             }
+            .icon-single-card.scanning { animation: laserScan 1.2s infinite ease-in-out; border-color: var(--accent) !important; background: var(--card-bg) !important; }
 
-            .icon-single-card.scanning {
-                animation: laserScan 1.2s infinite ease-in-out;
-                background: var(--card-bg) !important;
-            }
+            .sentence-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; direction: ltr; }
+            .line-en-1 { font-family: system-ui, -apple-system, sans-serif; font-size: 13.5px; font-weight: 900; color: var(--heading-pure-color); text-align: left; direction: ltr; flex: 1; }
+            .line-ar-1 { font-family: 'Cairo', sans-serif; font-size: 13px; font-weight: 800; color: var(--text-secondary); text-align: right; direction: rtl; margin-top: -2px; display: flex; flex-direction: column; gap: 3px; align-items: flex-start; }
+            .sentence-group { display: flex; flex-direction: column; gap: 4px; }
+            .speak-btn { width: 32px; height: 32px; border-radius: 14px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 13px; transition: 0.2s; flex-shrink: 0; border: 2px solid; }
 
-            .sentence-row {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                gap: 10px;
-                direction: ltr;
-            }
+            /* ألوان مخصصة لكل حرف جر (عناوين، كلمات، وbadges خاصة به بالكامل) */
+            .in-word { color: var(--prep-in); font-weight: 950; }
+            .on-word { color: var(--prep-on); font-weight: 950; }
+            .at-word { color: var(--prep-at); font-weight: 950; }
 
-            .line-en-1 { 
-                font-family: system-ui, -apple-system, sans-serif; 
-                font-size: 13.5px; 
-                font-weight: 900; 
-                color: var(--heading-pure-color); 
-                text-align: left; 
-                direction: ltr; 
-                flex: 1;
-            }
+            .in-title-color { color: var(--prep-in) !important; }
+            .on-title-color { color: var(--prep-on) !important; }
+            .at-title-color { color: var(--prep-at) !important; }
 
-            .line-ar-1 { 
-                font-family: 'Cairo', sans-serif; 
-                font-size: 13px; 
-                font-weight: 800; 
-                color: var(--heading-pure-color); 
-                text-align: right; 
-                direction: rtl;
-                margin-top: -2px;
-            }
+            .reason-badge-in { color: var(--prep-in); font-weight: 900; background: var(--light-bg); padding: 4px 12px; border-radius: 14px; border: 2px solid var(--card-border); display: inline-block; margin-top: 4px; font-size: 12px; }
+            .reason-badge-on { color: var(--prep-on); font-weight: 900; background: var(--light-bg); padding: 4px 12px; border-radius: 14px; border: 2px solid var(--card-border); display: inline-block; margin-top: 4px; font-size: 12px; }
+            .reason-badge-at { color: var(--prep-at); font-weight: 900; background: var(--light-bg); padding: 4px 12px; border-radius: 14px; border: 2px solid var(--card-border); display: inline-block; margin-top: 4px; font-size: 12px; }
 
-            .sentence-group {
-                display: flex;
-                flex-direction: column;
-                gap: 4px;
-            }
-
-            .speak-btn {
-                width: 30px;
-                height: 30px;
-                border-radius: 10px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                cursor: pointer;
-                font-size: 13px;
-                transition: 0.2s;
-                flex-shrink: 0;
-                border: 1.5px solid;
-            }
-
-            /* تصميم كارت التحدي الجديد تماماً طبقاً للصورة رقم 2 */
-            .quiz-banner-card {
+            /* كارت تشغيل التحدي اليومي وقاموس الجمل الخارجي */
+            .quiz-launch-card {
                 background: var(--card-bg);
-                border: 2px solid rgba(147, 51, 234, 0.25);
-                border-radius: 26px;
-                padding: 24px;
+                border: 2.5px solid var(--card-border);
+                border-radius: 36px;
+                padding: 24px 20px;
                 display: flex;
                 flex-direction: column;
-                gap: 18px;
-                margin-top: 24px;
-                box-shadow: 0 15px 35px rgba(147, 51, 234, 0.08);
+                align-items: center;
+                text-align: center;
+                gap: 16px;
+                transition: 0.3s ease;
+                margin-top: 15px;
+                box-shadow: 0 12px 30px rgba(0, 0, 0, 0.03);
                 position: relative;
                 overflow: hidden;
             }
-            .quiz-banner-top {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-end;
-                text-align: right;
-                gap: 6px;
+            .quiz-launch-card:hover { transform: scale(1.01); border-color: var(--accent); box-shadow: 0 18px 40px rgba(0, 0, 0, 0.05); }
+            
+            .quiz-launch-header-row { display: flex; align-items: center; gap: 8px; justify-content: center; }
+            .quiz-launch-title { font-size: 17.5px; font-weight: 950; color: var(--heading-pure-color); white-space: nowrap; }
+            .quiz-launch-desc-top { font-size: 13px; font-weight: 800; color: var(--text-secondary); background: var(--light-bg); padding: 10px 14px; border-radius: 18px; border: 2px solid var(--card-border); width: 100%; box-sizing: border-box; }
+            
+            .quiz-launch-main-btn {
+                background: var(--accent); color: #FFFFFF; border: none;
+                width: 100%; padding: 14px; border-radius: 20px;
+                font-family: 'Cairo', sans-serif; font-size: 15px; font-weight: 950;
+                cursor: pointer; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05); transition: 0.25s;
+                display: flex; align-items: center; justify-content: center; gap: 8px;
             }
-            .quiz-banner-title {
-                font-size: 16px;
-                font-weight: 950;
-                color: var(--heading-pure-color);
-                line-height: 1.5;
+            .quiz-launch-main-btn:hover { opacity: 0.9; transform: scale(1.02); }
+
+            .dict-launch-btn {
+                background: var(--card-bg); color: var(--accent); border: 2.5px solid var(--card-border);
+                width: 100%; padding: 14px; border-radius: 20px;
+                font-family: 'Cairo', sans-serif; font-size: 15px; font-weight: 950;
+                cursor: pointer; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.02); transition: 0.25s;
+                display: flex; align-items: center; justify-content: center; gap: 8px;
+                white-space: nowrap;
             }
-            .quiz-banner-desc {
-                font-size: 12.5px;
-                font-weight: 800;
-                color: var(--text-secondary);
-                line-height: 1.4;
+            .dict-launch-btn:hover { background: var(--light-bg); border-color: var(--accent); transform: scale(1.02); }
+
+            /* نافذة قاموس الجمل المنبثقة */
+            .dict-modal-overlay {
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                background: rgba(0, 0, 0, 0.65); backdrop-filter: blur(16px);
+                display: none; align-items: center; justify-content: center; z-index: 10001; padding: 16px; box-sizing: border-box;
             }
-            .quiz-banner-btn {
-                background: linear-gradient(135deg, #9333EA, #7E22CE);
-                color: #FFFFFF;
-                border: none;
-                padding: 14px 22px;
-                border-radius: 18px;
-                font-family: 'Cairo', sans-serif;
-                font-size: 14px;
-                font-weight: 950;
-                cursor: pointer;
-                box-shadow: 0 8px 25px rgba(147, 51, 234, 0.35);
-                transition: 0.25s ease;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 8px;
-                width: 100%;
+            .dict-modal-overlay.active { display: flex; }
+
+            .dict-modal-card {
+                background: var(--card-bg); border: 2.5px solid var(--card-border); border-radius: 36px; padding: 22px 20px;
+                width: 100%; max-width: 540px; max-height: 88vh; overflow-y: auto;
+                box-shadow: 0 30px 70px rgba(0, 0, 0, 0.2); display: flex; flex-direction: column; gap: 16px; position: relative;
             }
-            .quiz-banner-btn:hover {
-                transform: scale(1.02);
-                box-shadow: 0 12px 30px rgba(147, 51, 234, 0.5);
+
+            .dict-modal-header {
+                display: flex; justify-content: space-between; align-items: center;
+                background: var(--light-bg); border: 2px solid var(--card-border);
+                padding: 10px 16px; border-radius: 24px;
             }
+            .dict-modal-title { font-size: 15px; font-weight: 950; color: var(--heading-pure-color); display: flex; align-items: center; gap: 8px; }
 
             /* نافذة الاختبار التفاعلية */
             .modal-overlay { 
                 position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-                background: rgba(147, 51, 234, 0.35); backdrop-filter: blur(14px); 
+                background: rgba(0, 0, 0, 0.65); backdrop-filter: blur(16px); 
                 display: none; align-items: center; justify-content: center; z-index: 10000; padding: 16px; box-sizing: border-box; 
             }
             .modal-overlay.active { display: flex; }
             
             .quiz-modal-card { 
-                background: var(--card-bg); 
-                border: 2px solid #9333EA; 
-                border-radius: 28px; 
-                padding: 22px; 
-                width: 100%; 
-                max-width: 500px; 
-                max-height: 85vh;
-                overflow-y: auto;
-                box-shadow: 0 25px 60px rgba(147, 51, 234, 0.3); 
-                display: flex; 
-                flex-direction: column; 
-                gap: 16px; 
-                position: relative; 
+                background: var(--card-bg); border: 2.5px solid var(--card-border); border-radius: 36px; padding: 22px; width: 100%; max-width: 480px; max-height: 90vh;
+                overflow-y: auto; box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25); display: flex; flex-direction: column; gap: 16px; position: relative; 
             }
             
-            .quiz-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--card-border); padding-bottom: 12px; }
-            .quiz-title { font-size: 15px; font-weight: 950; color: var(--heading-pure-color); display: flex; align-items: center; gap: 8px; }
-            .quiz-close-btn { background: var(--light-bg); border: 1.5px solid var(--border-glow); width: 32px; height: 32px; border-radius: 10px; color: var(--text-primary); cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; }
+            .game-hud-bar {
+                display: flex; justify-content: space-between; align-items: center;
+                background: var(--card-bg); border: 2px solid var(--card-border);
+                padding: 10px 18px; border-radius: 28px; gap: 10px;
+            }
+            .hud-item { display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 950; color: var(--heading-pure-color); }
+            .hud-close-btn {
+                background: var(--light-bg); border: 2px solid var(--card-border); width: 36px; height: 36px; border-radius: 18px;
+                color: var(--text-primary); cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; transition: 0.2s;
+            }
+            .hud-close-btn:hover { background: #EF4444; color: #fff; border-color: #EF4444; }
+
+            .quiz-top-status {
+                display: flex; justify-content: center; align-items: center;
+                background: var(--card-bg); border: 2px solid var(--card-border);
+                padding: 12px; border-radius: 24px;
+            }
+            .quiz-counter-badge {
+                font-size: 15px; font-weight: 950; color: var(--heading-pure-color);
+                background: var(--card-bg); padding: 6px 24px; border-radius: 18px; border: 2px solid var(--card-border);
+            }
 
             .quiz-body { display: flex; flex-direction: column; gap: 14px; }
             
             .quiz-question-card {
-                background: var(--card-bg);
-                border: 1.5px solid var(--border-glow);
-                border-radius: 20px;
-                padding: 18px;
-                display: flex;
-                flex-direction: column;
-                gap: 14px;
-                box-shadow: 0 8px 25px rgba(147, 51, 234, 0.06);
-                transition: 0.3s ease;
+                background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 28px; padding: 20px;
+                display: flex; flex-direction: column; gap: 14px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.02); transition: 0.3s ease;
             }
-            
+
+            .quiz-question-instruction {
+                font-size: 14.5px; font-weight: 950; color: var(--heading-pure-color); text-align: center; display: flex; align-items: center; justify-content: center; gap: 8px;
+            }
+
+            .quiz-translation-box {
+                background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 20px; padding: 12px 16px;
+                font-size: 13px; font-weight: 800; color: var(--text-secondary); text-align: center; display: flex; align-items: center; justify-content: center; gap: 6px;
+            }
+
+            .quiz-sentence-display {
+                font-family: system-ui, -apple-system, sans-serif; font-size: 16px; font-weight: 950; color: var(--heading-pure-color); text-align: center; direction: ltr; margin: 10px 0;
+            }
+
+            .quiz-options-grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 6px; }
+            .quiz-option-btn-box {
+                background: var(--card-bg); border: 2px solid var(--card-border); padding: 14px; border-radius: 20px;
+                font-family: system-ui, -apple-system, sans-serif; font-size: 15px; font-weight: 950; color: var(--text-primary); cursor: pointer; transition: 0.2s; text-align: center;
+            }
+            .quiz-option-btn-box:hover { border-color: var(--accent); background: var(--light-bg); color: var(--accent); transform: scale(1.02); }
+            .quiz-option-btn-box.correct { background: var(--light-bg) !important; border-color: var(--accent) !important; color: var(--accent) !important; }
+            .quiz-option-btn-box.wrong { background: rgba(239, 68, 68, 0.15) !important; border-color: #EF4444 !important; color: #EF4444 !important; }
+
             @keyframes successPulse {
-                0% { transform: scale(1); border-color: #059669; box-shadow: 0 0 25px rgba(5, 150, 105, 0.45); }
-                50% { transform: scale(1.02); border-color: #34D399; box-shadow: 0 0 35px rgba(52, 211, 153, 0.65); }
-                100% { transform: scale(1); border-color: #059669; box-shadow: 0 0 25px rgba(5, 150, 105, 0.45); }
+                0% { transform: scale(1); border-color: var(--accent); box-shadow: 0 0 25px rgba(0, 0, 0, 0.05); }
+                50% { transform: scale(1.02); border-color: var(--primary); box-shadow: 0 0 35px rgba(0, 0, 0, 0.08); }
+                100% { transform: scale(1); border-color: var(--accent); box-shadow: 0 0 25px rgba(0, 0, 0, 0.05); }
             }
-            .quiz-question-card.success-fx {
-                animation: successPulse 0.6s ease infinite alternate;
-                background: rgba(5, 150, 105, 0.04);
-            }
+            .quiz-question-card.success-fx { animation: successPulse 0.6s ease infinite alternate; background: var(--light-bg); }
 
-            .quiz-question-text { 
-                font-family: system-ui, -apple-system, sans-serif;
-                font-size: 14.5px; 
-                font-weight: 900; 
-                color: var(--heading-pure-color); 
-                text-align: left;
-                direction: ltr;
-                line-height: 1.6; 
-            }
-            
-            .quiz-options-grid { display: flex; gap: 8px; justify-content: center; margin-top: 4px; }
-            .quiz-option-btn {
-                background: var(--bg-main);
-                border: 1.5px solid var(--card-border);
-                padding: 10px 16px;
-                border-radius: 14px;
-                font-family: system-ui, -apple-system, sans-serif;
-                font-size: 13px;
-                font-weight: 900;
-                color: var(--text-primary);
-                cursor: pointer;
-                transition: 0.2s;
-                flex: 1;
-                text-align: center;
-            }
-            .quiz-option-btn:hover { border-color: #9333EA; background: rgba(147, 51, 234, 0.05); color: #9333EA; }
-            
-            .quiz-option-btn.correct { background: rgba(5, 150, 105, 0.15) !important; border-color: #059669 !important; color: #059669 !important; transform: scale(1.05); }
-            .quiz-option-btn.wrong { background: rgba(239, 68, 68, 0.15) !important; border-color: #EF4444 !important; color: #EF4444 !important; }
-
-            .quiz-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; border-top: 1px solid var(--card-border); padding-top: 12px; font-size: 12px; font-weight: 800; color: var(--text-secondary); }
-            .quiz-next-btn {
-                background: #9333EA;
-                color: #FFFFFF;
-                border: none;
-                padding: 8px 18px;
-                border-radius: 12px;
-                font-family: 'Cairo', sans-serif;
-                font-weight: 900;
-                cursor: pointer;
-                display: none;
-            }
+            .quiz-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 6px; border-top: 2px solid var(--card-border); padding-top: 12px; font-size: 13px; font-weight: 900; color: var(--text-secondary); }
+            .quiz-next-btn { background: var(--accent); color: #FFFFFF; border: none; padding: 10px 20px; border-radius: 18px; font-family: 'Cairo', sans-serif; font-weight: 950; cursor: pointer; display: none; }
             .quiz-next-btn.active { display: block; }
 
-            /* نافذة البحث والقائمة الجانبية */
-            .search-modal-card { background: var(--card-bg); border: 1.5px solid var(--border-glow); border-radius: 26px; padding: 22px; width: 100%; max-width: 500px; box-shadow: 0 25px 50px rgba(0,0,0,0.5); display: flex; flex-direction: column; gap: 16px; }
-            .lesson-modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--card-border); padding-bottom: 12px; }
-            .lesson-modal-title-box { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 950; color: var(--heading-pure-color); }
-            .close-modal-btn { background: var(--light-bg); border: 1.5px solid var(--border-glow); width: 34px; height: 34px; border-radius: 10px; color: var(--text-primary); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-            .search-input-wrapper { background: var(--bg-main); border: 1.5px solid var(--border-glow); border-radius: 16px; padding: 10px 14px; display: flex; align-items: center; }
-            .search-input-field { width: 100%; background: transparent; border: none; outline: none; color: var(--text-primary); font-family: 'Cairo', sans-serif; font-size: 13px; font-weight: 700; }
-            .search-results-list { display: flex; flex-direction: column; gap: 10px; max-height: 320px; overflow-y: auto; scrollbar-width: none; }
-            .search-result-item { background: var(--bg-main); border: 1.5px solid var(--card-border); border-radius: 16px; padding: 12px 14px; display: flex; flex-direction: column; gap: 3px; text-decoration: none; }
-            .search-result-title { font-size: 13px; font-weight: 950; color: var(--heading-pure-color); margin: 0; }
-            .search-result-desc { font-size: 11px; font-weight: 700; color: var(--text-secondary); margin: 0; }
-
-            .side-menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 8, 17, 0.82); backdrop-filter: blur(10px); display: none; justify-content: flex-start; z-index: 10001; }
-            .side-menu-overlay.active { display: flex; }
-            .side-menu-drawer { background: var(--card-bg); border-left: 2px solid var(--border-glow); width: 85%; max-width: 320px; height: 100%; box-shadow: -15px 0 40px rgba(0,0,0,0.6); display: flex; flex-direction: column; padding: 22px; box-sizing: border-box; }
-            .drawer-top-box { background: var(--light-bg); border: 1.5px solid var(--border-glow); border-radius: 20px; padding: 14px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
-            .drawer-brand-info { display: flex; flex-direction: column; gap: 2px; }
-            .drawer-brand-title { font-size: 14px; font-weight: 950; color: var(--heading-pure-color); margin: 0; }
-            .drawer-brand-sub { font-size: 10px; font-weight: 800; color: var(--text-secondary); margin: 0; }
-            .drawer-brand-icon { width: 42px; height: 42px; background: var(--card-bg); border: 1.5px solid var(--border-glow); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
-            .drawer-links-list { display: flex; flex-direction: column; gap: 8px; flex-grow: 1; }
-            .drawer-link-item { display: flex; align-items: center; justify-content: space-between; background: var(--bg-main); border: 1.5px solid var(--card-border); padding: 12px 16px; border-radius: 16px; color: var(--text-primary); text-decoration: none; font-size: 12px; font-weight: 900; }
-            .drawer-link-item.active { border-color: var(--accent); background: var(--light-bg); color: var(--heading-pure-color); }
-            .drawer-link-left { display: flex; align-items: center; gap: 10px; }
-            .drawer-footer { text-align: center; font-size: 10px; font-weight: 800; color: var(--text-secondary); border-top: 1px solid var(--card-border); padding-top: 14px; margin-top: auto; }
-
+            /* شريط التنقل السفلي */
             .bottom-nav {
-                position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); width: calc(100% - 28px); max-width: 500px; background: var(--header-bg); backdrop-filter: blur(15px); display: flex; justify-content: space-around; align-items: center; padding: 8px 10px; border: 1.5px solid var(--header-border); border-radius: 22px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15); z-index: 999;
+                position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); 
+                width: calc(100% - 32px); max-width: 460px;
+                background: var(--header-bg);
+                display: flex; justify-content: space-around; align-items: center;
+                padding: 6px 10px; border-radius: 30px; 
+                border: 2.5px solid var(--card-border);
+                box-shadow: 0 8px 24px rgba(0,0,0,0.25); 
+                z-index: 999; box-sizing: border-box;
+                transition: all 0.4s ease;
             }
-            .bottom-nav a { color: var(--text-secondary); text-decoration: none; font-size: 11px; text-align: center; font-weight: 800; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 6px 12px; border-radius: 16px; flex: 1; }
-            .bottom-nav a span { font-size: 18px; line-height: 1; }
-            .bottom-nav a.active { color: var(--heading-pure-color); background: var(--light-bg); border: 1.5px solid var(--border-glow); }
+            .bottom-nav a { 
+                color: var(--text-secondary); text-decoration: none; font-size: 10px; text-align: center; font-weight: 800; 
+                display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 12px; border-radius: 20px; flex: 1; 
+                border: 1.5px solid var(--card-border); background: var(--light-bg);
+                transition: all 0.3s ease;
+            }
+            .bottom-nav a span { font-size: 16px; line-height: 1; }
+            .bottom-nav a:hover { color: var(--nav-theme-color); border-color: var(--nav-theme-color); background: rgba(128, 128, 128, 0.1); }
+            .bottom-nav a.active { color: #FFFFFF; background: var(--nav-theme-color); border-color: var(--nav-theme-color); box-shadow: 0 4px 15px var(--nav-glow-color); }
         </style>
     </head>
     <body>
 
-        <!-- زر العودة للأعلى -->
         <button class="scroll-to-top-btn" id="scrollToTopBtn" title="العودة للأعلى">↑</button>
 
         <div class="top-progress-bar"><div class="top-progress-fill" id="progressFill"></div></div>
 
-        <!-- نافذة البحث -->
-        <div class="modal-overlay" id="searchModal" style="background: rgba(5, 8, 17, 0.82);">
-            <div class="search-modal-card">
-                <div class="lesson-modal-header">
-                    <div class="lesson-modal-title-box"><span>🔍</span><span>البحث في حروف الجر</span></div>
-                    <button class="close-modal-btn" id="closeSearchBtn">✕</button>
+        <!-- نافذة قاموس الجمل المنبثقة -->
+        <div class="dict-modal-overlay" id="dictModal">
+            <div class="dict-modal-card">
+                <div class="dict-modal-header">
+                    <div class="dict-modal-title"><span>📖</span><span>قاموس الجمل المُكتسبة</span></div>
+                    <button class="hud-close-btn" onclick="document.getElementById('dictModal').classList.remove('active')">✕</button>
                 </div>
-                <div class="search-input-wrapper"><input type="text" class="search-input-field" placeholder="ابحث عن: In, On, At..."></div>
-                <div class="search-results-list">
-                    <a href="#" class="search-result-item" onclick="document.getElementById('searchModal').classList.remove('active');">
-                        <span class="search-result-title">📍 حروف الجر الأساسية (Prepositions)</span>
-                        <span class="search-result-desc">دليل شامل لاستخدام In, On, At للزمان والمكان.</span>
-                    </a>
+                <div style="font-size: 12.5px; font-weight: 800; color: var(--text-secondary); text-align: center;" id="dictSubtitleCount">
+                    أكمل تحديات الأسئلة لإضافة الجمل إلى قاموسك الشخصي!
+                </div>
+                <div class="icon-cards-list" id="dictCardsContainer">
+                    <!-- تُعبأ الجمل تلقائياً عند إنهاء التحديات -->
                 </div>
             </div>
         </div>
@@ -564,60 +430,39 @@
         <!-- نافذة اختبار التحدي اليومي -->
         <div class="modal-overlay" id="quizModal">
             <div class="quiz-modal-card">
-                <div class="quiz-header">
-                    <div class="quiz-title"><span>⚡</span><span>التحدي اليومي (4 أسئلة / 24 ساعة)</span></div>
-                    <button class="quiz-close-btn" id="closeQuizBtn">✕</button>
+                <div class="game-hud-bar">
+                    <div class="hud-item"><span>⚡</span><span>XP <span id="hudXpDisplay">0</span></span></div>
+                    <div class="hud-item"><span>🎯</span><span>تحدي حروف الجر</span></div>
+                    <button class="hud-close-btn" id="closeQuizBtn" title="إغلاق">✕</button>
                 </div>
-                <div class="quiz-body" id="quizBody">
-                    <!-- محتوى كارت السؤال -->
+                <div class="quiz-top-status">
+                    <div class="quiz-counter-badge" id="quizScoreIndicator">السؤال 1 من 4</div>
                 </div>
+                <div class="quiz-body" id="quizBody"></div>
                 <div class="quiz-footer">
-                    <span id="quizScoreIndicator">النتيجة: 0 / 4</span>
+                    <span id="quizScoreText">النتيجة: 0 / 4</span>
                     <button class="quiz-next-btn" id="quizNextBtn" onclick="nextQuestion()">السؤال التالي ➔</button>
                 </div>
-            </div>
-        </div>
-
-        <!-- القائمة الجانبية -->
-        <div class="side-menu-overlay" id="sideMenu" style="background: rgba(5, 8, 17, 0.82);">
-            <div class="side-menu-drawer">
-                <div class="drawer-top-box">
-                    <div class="drawer-brand-info"><h3 class="drawer-brand-title">أكاديمية العلوم التطبيقية</h3><p class="drawer-brand-sub">قسم قواعد اللغة الإنجليزية</p></div>
-                    <div class="drawer-brand-icon">🎓</div>
-                </div>
-                <div class="drawer-links-list">
-                    <a href="index.html" class="drawer-link-item"><span class="drawer-link-left"><span>🏠</span> الرئيسية</span><span>➔</span></a>
-                    <a href="english.html" class="drawer-link-item"><span class="drawer-link-left"><span>🇬🇧</span> الإنجليزي</span><span>➔</span></a>
-                    <a href="fundamentals-path.html" class="drawer-link-item active"><span class="drawer-link-left"><span>📖</span> القواعد والأساسيات</span><span>➔</span></a>
-                    <a href="surveying.html" class="drawer-link-item"><span class="drawer-link-left"><span>📐</span> المساحة</span><span>➔</span></a>
-                    <a href="programming.html" class="drawer-link-item"><span class="drawer-link-left"><span>💻</span> البرمجة</span><span>➔</span></a>
-                </div>
-                <div class="drawer-footer">English Master v2.1 • Pro Edition</div>
             </div>
         </div>
 
         <div class="container">
             <!-- شريط الهيدر -->
             <div class="nav-bar">
-                <div class="nav-right-group">
-                    <a href="fundamentals-path.html" class="home-icon-btn" title="الرجوع للقائمة">🏠</a>
-                    <div class="nav-titles-box">
-                        <h1 class="nav-main-title">حروف الجر الأساسية</h1>
-                        <p class="nav-sub-title">Prepositions (In, On, At)</p>
-                        <p class="nav-academy-title">أكاديمية العلوم التطبيقية</p>
-                    </div>
+                <a href="fundamentals-path.html" class="back-btn" title="الرجوع للقائمة">←</a>
+                <div class="brand-minimalist-box">
+                    <span class="brand-main-title">حروف الجر (Prepositions)</span>
+                    <span class="brand-subtitle-text">أكاديمية العلوم التطبيقية</span>
                 </div>
-                <div class="nav-left-group">
-                    <button class="nav-icon-btn" id="themeToggleBtn" title="تغيير الثيم">🌙</button>
-                    <button class="nav-icon-btn" id="searchBtn" title="بحث">🔍</button>
-                    <button class="nav-icon-btn" id="menuBtn" title="القائمة">☰</button>
+                <div class="nav-actions-group">
+                    <button class="theme-btn" id="themeToggleBtn" title="تغيير الثيم">🌙</button>
                 </div>
             </div>
 
             <!-- الكارت العلوي الهندسي -->
             <div class="hero-card">
                 <h1 class="hero-title-en">Prepositions of Time & Place</h1>
-                <h2 class="hero-title-ar">حروف الجر للزمان والمكان</h2>
+                <h2 class="hero-title-ar">حروف الجر للزمان والمكان (In, On, At)</h2>
 
                 <div class="table-container">
                     <table class="styled-master-table">
@@ -629,9 +474,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td><strong style="color:var(--prep-in);">In</strong></td><td>الشهور، السنوات، الفصول، الفترات</td><td>الدول، المدن، الأماكن المغلقة</td></tr>
-                            <tr><td><strong style="color:var(--prep-on);">On</strong></td><td>أيام الأسبوع، التواريخ المحددة</td><td>الأسطح، الشوارع (بدون أرقام)</td></tr>
-                            <tr><td><strong style="color:var(--prep-at);">At</strong></td><td>الساعات المحددة، الأوقات الدقيقة</td><td>العناوين الدقيقة، الأماكن المحددة</td></tr>
+                            <tr><td><strong class="in-word">In</strong></td><td>الشهور، السنوات، الفصول، الفترات</td><td>الدول، المدن، الأماكن المغلقة</td></tr>
+                            <tr><td><strong class="on-word">On</strong></td><td>أيام الأسبوع، التواريخ المحددة</td><td>الأسطح، الشوارع (بدون أرقام)</td></tr>
+                            <tr><td><strong class="at-word">At</strong></td><td>الساعات المحددة، الأوقات الدقيقة</td><td>العناوين الدقيقة، الأماكن المحددة</td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -640,225 +485,316 @@
             <!-- كارت الشرح الشامل الرئيسي -->
             <div class="lesson-card-full" id="mainLessonCard">
                 <div class="lesson-header">
-                    <div class="app-title-wrapper" style="border-right-color: var(--accent);">
+                    <div class="app-title-wrapper">
                         <h2 class="app-main-heading">
-                            Mastering <span style="color:var(--prep-in);">In</span>, <span style="color:var(--prep-on);">On</span>, & <span style="color:var(--prep-at);">At</span>
+                            Mastering <span class="in-word">In</span>, <span class="on-word">On</span>, & <span class="at-word">At</span>
                         </h2>
-                        <div class="app-sub-pill"><span>دليلك المنهجي لإتقان حروف الجر بدقة متناهية 🎯</span></div>
+                        <div class="app-sub-pill"><span>دليلك الشامل لإتقان حروف الجر بـ 4 كروت تطبيقية لكل حرف 🎯</span></div>
                     </div>
                 </div>
 
-                <!-- 1. حرف الجر In -->
-                <div class="glass-glow-card in-card" id="sectionIn">
-                    <div class="time-badge badge-in">للزمان الطويل والمكان الواسع • In</div>
-                    <div class="usage-title">
-                        <span class="dot-icon">🔵</span>
-                        <span class="title-text">استخدام حرف الجر (<strong style="color:var(--prep-in);">In</strong>)</span>
+                <!-- 1. حرف الجر In (4 كروت تطبيقية - اللون الأزرق الخاص بـ In) -->
+                <div class="glass-glow-card" id="sectionIn">
+                    <div class="usage-title-centered">
+                        <span class="usage-title-ar in-title-color">حرف الجر In</span>
+                        <span class="usage-title-bracket">(للزمان الطويل والمكان الواسع)</span>
+                        <span class="usage-title-en">Preposition: In</span>
                     </div>
                     <div class="usage-content">
-                        يُستخدم مع الفترات الزمنية الكبيرة (الشهور، السنوات، القرون، فصول السنة) ومع الأماكن الواسعة مثل الدول والمدن والأحياء.
-                        <div class="method-box" style="border-color: #2563EB; background: var(--bg-main); margin-top: 12px;">
-                            <div class="method-box-title" style="color: #2563EB;">💡 أمثلة توضيحية</div>
-                            <div style="font-size: 12.5px; font-weight: 800; color: var(--text-primary); display: flex; flex-direction: column; gap: 6px; margin-top: 4px;">
-                                <div>🌍 <strong>مكان:</strong> <span dir="ltr">I live <strong style="color:var(--prep-in);">in</strong> Cairo.</span> (أنا أعيش في القاهرة).</div>
-                                <div>⏳ <strong>زمان:</strong> <span dir="ltr">She was born <strong style="color:var(--prep-in);">in</strong> 2005.</span> (ولدت عام 2005).</div>
+                        يُستخدم مع الفترات الزمنية الكبيرة (الشهور، السنوات، الفصول) ومع الأماكن الواسعة مثل الدول والمدن.
+                        <div class="method-box">
+                            <div class="method-box-title" style="color: var(--prep-in); font-weight: 950;">💡 مثال توضيحي</div>
+                            <div style="font-size: 12.5px; font-weight: 800; color: var(--text-primary); margin-top: 4px;">
+                                📍 <span dir="ltr">I live <strong class="in-word">in</strong> Cairo.</span> (أنا أعيش في القاهرة).
                             </div>
                         </div>
 
-                        <!-- 4 كروت التطبيق العملي الخاصة بحرف In -->
+                        <!-- 4 كروت التطبيق العملي لـ In -->
                         <div class="prep-practice-group">
-                            <div style="font-size: 12px; font-weight: 900; color: #2563EB; margin-top: 4px;">🎯 التطبيق العملي المتسلسل لـ (<strong style="color:var(--prep-in);">In</strong>):</div>
+                            <div style="font-size: 12px; font-weight: 900; color: var(--prep-in); margin-top: 4px;">🎯 4 أمثلة تطبيقية على In:</div>
                             <div class="icon-cards-list">
-                                <div class="icon-single-card in-practice-card" id="card-in-1">
+                                <div class="icon-single-card" id="card-in-1">
                                     <div class="sentence-group">
                                         <div class="sentence-row">
-                                            <div class="line-en-1">I live <strong style="color:var(--prep-in);">in</strong> Egypt.</div>
-                                            <button class="speak-btn in-speak" onclick="speakText('I live in Egypt.', 'card-in-1', this)" title="استمع للنطق">🔊</button>
+                                            <div class="line-en-1">I live <strong class="in-word">in</strong> Egypt.</div>
+                                            <button class="speak-btn unified-speak" onclick="speakText('I live in Egypt.', 'card-in-1', this)" title="استمع للنطق">🔊</button>
                                         </div>
-                                        <div class="line-ar-1">أنا أعيش <strong style="color:var(--prep-in);">في</strong> مصر.</div>
+                                        <div class="line-ar-1">
+                                            <span>أنا أعيش في مصر.</span>
+                                            <span class="reason-badge-in">حرف الجر: In</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="icon-single-card in-practice-card" id="card-in-2">
+                                <div class="icon-single-card" id="card-in-2">
                                     <div class="sentence-group">
                                         <div class="sentence-row">
-                                            <div class="line-en-1">It rains <strong style="color:var(--prep-in);">in</strong> winter.</div>
-                                            <button class="speak-btn in-speak" onclick="speakText('It rains in winter.', 'card-in-2', this)" title="استمع للنطق">🔊</button>
+                                            <div class="line-en-1">It rains <strong class="in-word">in</strong> winter.</div>
+                                            <button class="speak-btn unified-speak" onclick="speakText('It rains in winter.', 'card-in-2', this)" title="استمع للنطق">🔊</button>
                                         </div>
-                                        <div class="line-ar-1">تهطل الأمطار <strong style="color:var(--prep-in);">في</strong> الشتاء.</div>
+                                        <div class="line-ar-1">
+                                            <span>تهطل الأمطار في الشتاء.</span>
+                                            <span class="reason-badge-in">حرف الجر: In</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="icon-single-card in-practice-card" id="card-in-3">
+                                <div class="icon-single-card" id="card-in-3">
                                     <div class="sentence-group">
                                         <div class="sentence-row">
-                                            <div class="line-en-1">The meeting is <strong style="color:var(--prep-in);">in</strong> May.</div>
-                                            <button class="speak-btn in-speak" onclick="speakText('The meeting is in May.', 'card-in-3', this)" title="استمع للنطق">🔊</button>
+                                            <div class="line-en-1">The meeting is <strong class="in-word">in</strong> May.</div>
+                                            <button class="speak-btn unified-speak" onclick="speakText('The meeting is in May.', 'card-in-3', this)" title="استمع للنطق">🔊</button>
                                         </div>
-                                        <div class="line-ar-1">الاجتماع <strong style="color:var(--prep-in);">في</strong> شهر مايو.</div>
+                                        <div class="line-ar-1">
+                                            <span>الاجتماع في شهر مايو.</span>
+                                            <span class="reason-badge-in">حرف الجر: In</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="icon-single-card in-practice-card" id="card-in-4">
+                                <div class="icon-single-card" id="card-in-4">
                                     <div class="sentence-group">
                                         <div class="sentence-row">
-                                            <div class="line-en-1">He works <strong style="color:var(--prep-in);">in</strong> an office.</div>
-                                            <button class="speak-btn in-speak" onclick="speakText('He works in an office.', 'card-in-4', this)" title="استمع للنطق">🔊</button>
+                                            <div class="line-en-1">He works <strong class="in-word">in</strong> an office.</div>
+                                            <button class="speak-btn unified-speak" onclick="speakText('He works in an office.', 'card-in-4', this)" title="استمع للنطق">🔊</button>
                                         </div>
-                                        <div class="line-ar-1">هو يعمل <strong style="color:var(--prep-in);">في</strong> مكتب.</div>
+                                        <div class="line-ar-1">
+                                            <span>هو يعمل في مكتب.</span>
+                                            <span class="reason-badge-in">حرف الجر: In</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
 
-                <!-- 2. حرف الجر On -->
-                <div class="glass-glow-card on-card" id="sectionOn">
-                    <div class="time-badge badge-on">للأيام والأسطح • On</div>
-                    <div class="usage-title">
-                        <span class="dot-icon">🟢</span>
-                        <span class="title-text">استخدام حرف الجر (<strong style="color:var(--prep-on);">On</strong>)</span>
+                <!-- 2. حرف الجر On (4 كروت تطبيقية - اللون الأخضر الخاص بـ On) -->
+                <div class="glass-glow-card" id="sectionOn">
+                    <div class="usage-title-centered">
+                        <span class="usage-title-ar on-title-color">حرف الجر On</span>
+                        <span class="usage-title-bracket">(للأيام والأسطح)</span>
+                        <span class="usage-title-en">Preposition: On</span>
                     </div>
                     <div class="usage-content">
-                        يُستخدم مع الأيام المحددة وتواريخ الأيام، وكذلك مع الأسطح التي يلامسها الشيء ووسائل النقل العامة والشوارع.
-                        <div class="method-box" style="border-color: #059669; background: var(--bg-main); margin-top: 12px;">
-                            <div class="method-box-title" style="color: #059669;">💡 أمثلة توضيحية</div>
-                            <div style="font-size: 12.5px; font-weight: 800; color: var(--text-primary); display: flex; flex-direction: column; gap: 6px; margin-top: 4px;">
-                                <div>📅 <strong>زمان:</strong> <span dir="ltr">See you <strong style="color:var(--prep-on);">on</strong> Monday.</span> (أراك يوم الإثنين).</div>
-                                <div>🪑 <strong>مكان:</strong> <span dir="ltr">The book is <strong style="color:var(--prep-on);">on</strong> the desk.</span> (الكتاب على المكتب).</div>
+                        يُستخدم مع الأيام المحددة وتواريخ الأيام، وكذلك مع الأسطح التي يلامسها الشيء.
+                        <div class="method-box">
+                            <div class="method-box-title" style="color: var(--prep-on); font-weight: 950;">💡 مثال توضيحي</div>
+                            <div style="font-size: 12.5px; font-weight: 800; color: var(--text-primary); margin-top: 4px;">
+                                📍 <span dir="ltr">The book is <strong class="on-word">on</strong> the desk.</span> (الكتاب على المكتب).
                             </div>
                         </div>
 
-                        <!-- 4 كروت التطبيق العملي الخاصة بحرف On -->
+                        <!-- 4 كروت التطبيق العملي لـ On -->
                         <div class="prep-practice-group">
-                            <div style="font-size: 12px; font-weight: 900; color: #059669; margin-top: 4px;">🎯 التطبيق العملي المتسلسل لـ (<strong style="color:var(--prep-on);">On</strong>):</div>
+                            <div style="font-size: 12px; font-weight: 900; color: var(--prep-on); margin-top: 4px;">🎯 4 أمثلة تطبيقية على On:</div>
                             <div class="icon-cards-list">
-                                <div class="icon-single-card on-practice-card" id="card-on-1">
+                                <div class="icon-single-card" id="card-on-1">
                                     <div class="sentence-group">
                                         <div class="sentence-row">
-                                            <div class="line-en-1">The meeting is <strong style="color:var(--prep-on);">on</strong> Monday.</div>
-                                            <button class="speak-btn on-speak" onclick="speakText('The meeting is on Monday.', 'card-on-1', this)" title="استمع للنطق">🔊</button>
+                                            <div class="line-en-1">The meeting is <strong class="on-word">on</strong> Monday.</div>
+                                            <button class="speak-btn unified-speak" onclick="speakText('The meeting is on Monday.', 'card-on-1', this)" title="استمع للنطق">🔊</button>
                                         </div>
-                                        <div class="line-ar-1">الاجتماع <strong style="color:var(--prep-on);">يوم</strong> الإثنين.</div>
+                                        <div class="line-ar-1">
+                                            <span>الاجتماع يوم الإثنين.</span>
+                                            <span class="reason-badge-on">حرف الجر: On</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="icon-single-card on-practice-card" id="card-on-2">
+                                <div class="icon-single-card" id="card-on-2">
                                     <div class="sentence-group">
                                         <div class="sentence-row">
-                                            <div class="line-en-1">Your keys are <strong style="color:var(--prep-on);">on</strong> the table.</div>
-                                            <button class="speak-btn on-speak" onclick="speakText('Your keys are on the table.', 'card-on-2', this)" title="استمع للنطق">🔊</button>
+                                            <div class="line-en-1">Your keys are <strong class="on-word">on</strong> the table.</div>
+                                            <button class="speak-btn unified-speak" onclick="speakText('Your keys are on the table.', 'card-on-2', this)" title="استمع للنطق">🔊</button>
                                         </div>
-                                        <div class="line-ar-1">مفاتيحك <strong style="color:var(--prep-on);">على</strong> الطاولة.</div>
+                                        <div class="line-ar-1">
+                                            <span>مفاتيحك على الطاولة.</span>
+                                            <span class="reason-badge-on">حرف الجر: On</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="icon-single-card on-practice-card" id="card-on-3">
+                                <div class="icon-single-card" id="card-on-3">
                                     <div class="sentence-group">
                                         <div class="sentence-row">
-                                            <div class="line-en-1">I was born <strong style="color:var(--prep-on);">on</strong> July 10th.</div>
-                                            <button class="speak-btn on-speak" onclick="speakText('I was born on July 10th.', 'card-on-3', this)" title="استمع للنطق">🔊</button>
+                                            <div class="line-en-1">I was born <strong class="on-word">on</strong> July 10th.</div>
+                                            <button class="speak-btn unified-speak" onclick="speakText('I was born on July 10th.', 'card-on-3', this)" title="استمع للنطق">🔊</button>
                                         </div>
-                                        <div class="line-ar-1">ولدت <strong style="color:var(--prep-on);">في</strong> 10 يوليو.</div>
+                                        <div class="line-ar-1">
+                                            <span>ولدت في 10 يوليو.</span>
+                                            <span class="reason-badge-on">حرف الجر: On</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="icon-single-card on-practice-card" id="card-on-4">
+                                <div class="icon-single-card" id="card-on-4">
                                     <div class="sentence-group">
                                         <div class="sentence-row">
-                                            <div class="line-en-1">The picture is <strong style="color:var(--prep-on);">on</strong> the wall.</div>
-                                            <button class="speak-btn on-speak" onclick="speakText('The picture is on the wall.', 'card-on-4', this)" title="استمع للنطق">🔊</button>
+                                            <div class="line-en-1">The picture is <strong class="on-word">on</strong> the wall.</div>
+                                            <button class="speak-btn unified-speak" onclick="speakText('The picture is on the wall.', 'card-on-4', this)" title="استمع للنطق">🔊</button>
                                         </div>
-                                        <div class="line-ar-1">الصورة <strong style="color:var(--prep-on);">على</strong> الحائط.</div>
+                                        <div class="line-ar-1">
+                                            <span>الصورة على الحائط.</span>
+                                            <span class="reason-badge-on">حرف الجر: On</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
 
-                <!-- 3. حرف الجر At -->
-                <div class="glass-glow-card at-card" id="sectionAt">
-                    <div class="time-badge badge-at">للنقاط المحددة والوقت • At</div>
-                    <div class="usage-title">
-                        <span class="dot-icon">🟠</span>
-                        <span class="title-text">استخدام حرف الجر (<strong style="color:var(--prep-at);">At</strong>)</span>
+                <!-- 3. حرف الجر At (4 كروت تطبيقية - اللون المميز الخاص بـ At) -->
+                <div class="glass-glow-card" id="sectionAt">
+                    <div class="usage-title-centered">
+                        <span class="usage-title-ar at-title-color">حرف الجر At</span>
+                        <span class="usage-title-bracket">(للنقاط المحددة والوقت)</span>
+                        <span class="usage-title-en">Preposition: At</span>
                     </div>
                     <div class="usage-content">
-                        يُستخدم لتحديد الساعات بدقة والوقت المحدد في اليوم، وللإشارة إلى العناوين والمواقع المحددة بدقة.
-                        <div class="method-box" style="border-color: #D97706; background: var(--bg-main); margin-top: 12px;">
-                            <div class="method-box-title" style="color: #D97706;">💡 أمثلة توضيحية</div>
-                            <div style="font-size: 12.5px; font-weight: 800; color: var(--text-primary); display: flex; flex-direction: column; gap: 6px; margin-top: 4px;">
-                                <div>⏰ <strong>زمان:</strong> <span dir="ltr">I wake up <strong style="color:var(--prep-at);">at</strong> 6:00 AM.</span> (أستيقظ في السادسة صباحاً).</div>
-                                <div>📍 <strong>مكان:</strong> <span dir="ltr">He is waiting <strong style="color:var(--prep-at);">at</strong> the door.</span> (هو ينتظر عند الباب).</div>
+                        يُستخدم لتحديد الساعات بدقة والوقت المحدد في اليوم، وللإشارة إلى العناوين والمواقع المحددة.
+                        <div class="method-box">
+                            <div class="method-box-title" style="color: var(--prep-at); font-weight: 950;">💡 مثال توضيحي</div>
+                            <div style="font-size: 12.5px; font-weight: 800; color: var(--text-primary); margin-top: 4px;">
+                                📍 <span dir="ltr">I wake up <strong class="at-word">at</strong> 6:00 AM.</span> (أستيقظ في السادسة صباحاً).
                             </div>
                         </div>
 
-                        <!-- 4 كروت التطبيق العملي الخاصة بحرف At -->
+                        <!-- 4 كروت التطبيق العملي لـ At -->
                         <div class="prep-practice-group">
-                            <div style="font-size: 12px; font-weight: 900; color: #D97706; margin-top: 4px;">🎯 التطبيق العملي المتسلسل لـ (<strong style="color:var(--prep-at);">At</strong>):</div>
+                            <div style="font-size: 12px; font-weight: 900; color: var(--prep-at); margin-top: 4px;">🎯 4 أمثلة تطبيقية على At:</div>
                             <div class="icon-cards-list">
-                                <div class="icon-single-card at-practice-card" id="card-at-1">
+                                <div class="icon-single-card" id="card-at-1">
                                     <div class="sentence-group">
                                         <div class="sentence-row">
-                                            <div class="line-en-1">She arrives <strong style="color:var(--prep-at);">at</strong> 5 PM.</div>
-                                            <button class="speak-btn at-speak" onclick="speakText('She arrives at 5 PM.', 'card-at-1', this)" title="استمع للنطق">🔊</button>
+                                            <div class="line-en-1">She arrives <strong class="at-word">at</strong> 5 PM.</div>
+                                            <button class="speak-btn unified-speak" onclick="speakText('She arrives at 5 PM.', 'card-at-1', this)" title="استمع للنطق">🔊</button>
                                         </div>
-                                        <div class="line-ar-1">هي تصل <strong style="color:var(--prep-at);">الساعة</strong> الخامسة مساءً.</div>
+                                        <div class="line-ar-1">
+                                            <span>هي تصل الساعة الخامسة.</span>
+                                            <span class="reason-badge-at">حرف الجر: At</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="icon-single-card at-practice-card" id="card-at-2">
+                                <div class="icon-single-card" id="card-at-2">
                                     <div class="sentence-group">
                                         <div class="sentence-row">
-                                            <div class="line-en-1">We met <strong style="color:var(--prep-at);">at</strong> the station.</div>
-                                            <button class="speak-btn at-speak" onclick="speakText('We met at the station.', 'card-at-2', this)" title="استمع للنطق">🔊</button>
+                                            <div class="line-en-1">We met <strong class="at-word">at</strong> the station.</div>
+                                            <button class="speak-btn unified-speak" onclick="speakText('We met at the station.', 'card-at-2', this)" title="استمع للنطق">🔊</button>
                                         </div>
-                                        <div class="line-ar-1">التقينا <strong style="color:var(--prep-at);">عند</strong> المحطة.</div>
+                                        <div class="line-ar-1">
+                                            <span>التقينا عند المحطة.</span>
+                                            <span class="reason-badge-at">حرف الجر: At</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="icon-single-card at-practice-card" id="card-at-3">
+                                <div class="icon-single-card" id="card-at-3">
                                     <div class="sentence-group">
                                         <div class="sentence-row">
-                                            <div class="line-en-1">He is busy <strong style="color:var(--prep-at);">at</strong> the moment.</div>
-                                            <button class="speak-btn at-speak" onclick="speakText('He is busy at the moment.', 'card-at-3', this)" title="استمع للنطق">🔊</button>
+                                            <div class="line-en-1">He is busy <strong class="at-word">at</strong> the moment.</div>
+                                            <button class="speak-btn unified-speak" onclick="speakText('He is busy at the moment.', 'card-at-3', this)" title="استمع للنطق">🔊</button>
                                         </div>
-                                        <div class="line-ar-1">هو مشغول <strong style="color:var(--prep-at);">في</strong> هذه اللحظة.</div>
+                                        <div class="line-ar-1">
+                                            <span>هو مشغول في هذه اللحظة.</span>
+                                            <span class="reason-badge-at">حرف الجر: At</span>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="icon-single-card at-practice-card" id="card-at-4">
+                                <div class="icon-single-card" id="card-at-4">
                                     <div class="sentence-group">
                                         <div class="sentence-row">
-                                            <div class="line-en-1">See you <strong style="color:var(--prep-at);">at</strong> night.</div>
-                                            <button class="speak-btn at-speak" onclick="speakText('See you at night.', 'card-at-4', this)" title="استمع للنطق">🔊</button>
+                                            <div class="line-en-1">See you <strong class="at-word">at</strong> night.</div>
+                                            <button class="speak-btn unified-speak" onclick="speakText('See you at night.', 'card-at-4', this)" title="استمع للنطق">🔊</button>
                                         </div>
-                                        <div class="line-ar-1">أراك <strong style="color:var(--prep-at);">في</strong> الليل.</div>
+                                        <div class="line-ar-1">
+                                            <span>أراك في الليل.</span>
+                                            <span class="reason-badge-at">حرف الجر: At</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
 
-                <!-- كارت التحدي الجديد بالمواصفات المطابقة للصورة رقم 2 -->
-                <div class="quiz-banner-card" id="launchQuizBtn">
-                    <div class="quiz-banner-top">
-                        <div class="quiz-banner-title">افهم، استمع، وتحدى نفسك يومياً 🎯</div>
-                        <div class="quiz-banner-desc" id="quizLaunchDesc">ابدأ التحدي اليومي لتعزيز مهاراتك 🧠</div>
+                <!-- كارت تشغيل التحدي اليومي وقاموس الجمل الخارجي -->
+                <div class="quiz-launch-card" id="launchQuizCardBtn">
+                    <div class="quiz-launch-header-row">
+                        <span class="quiz-launch-title">تحدي حروف الجر (In, On, At) 🎯</span>
                     </div>
-                    <button class="quiz-banner-btn" id="launchBtnText">ابدأ التحدي اليومي ➔</button>
+                    <div class="quiz-launch-desc-top" id="quizLaunchDesc">
+                        40 سؤالاً في بنك التحديات • اختبر استيعابك في 4 أسئلة يومية متجددة واكسب 10 XP لكل إجابة صحيحة!
+                    </div>
+                    <button class="quiz-launch-main-btn" id="launchBtnText" onclick="launchQuizAction()">
+                        <span>ابدأ التحدي اليومي</span>
+                        <span>➔</span>
+                    </button>
+                    <!-- زر قاموس الجمل -->
+                    <button class="dict-launch-btn" onclick="openDictionaryModal(event)">
+                        📖 قاموس الجمل المُكتسبة
+                    </button>
                 </div>
 
             </div>
 
         </div>
 
-        <div class="bottom-nav">
-            <a href="index.html"><span>🏠</span>الرئيسية</a>
-            <a href="fundamentals-path.html" class="active"><span>🇬🇧</span>القواعد</a>
-            <a href="surveying.html"><span>📐</span>المساحة</a>
-            <a href="programming.html"><span>💻</span>البرمجة</a>
+        <!-- شريط التنقل السفلي -->
+        <div class="bottom-nav" id="bottomNav">
+            <a href="index.html"><span class="nav-icon">🏠</span>الرئيسية</a>
+            <a href="english.html" class="active"><span class="nav-icon">🇬🇧</span>الإنجليزي</a>
+            <a href="surveying.html"><span class="nav-icon">📐</span>المساحة</a>
+            <a href="programming.html"><span class="nav-icon">💻</span>البرمجة</a>
         </div>
 
         <script>
-            /* دالة النطق الصوتي */
+            const quizSentencesPool = [
+                { en: "I live in Egypt.", ar: "أنا أعيش في مصر.", badge: "حرف الجر: In" },
+                { en: "It rains in winter.", ar: "تهطل الأمطار في الشتاء.", badge: "حرف الجر: In" },
+                { en: "The meeting is on Monday.", ar: "الاجتماع يوم الإثنين.", badge: "حرف الجر: On" },
+                { en: "Your keys are on the table.", ar: "مفاتيحك على الطاولة.", badge: "حرف الجر: On" },
+                { en: "She arrives at 5 PM.", ar: "هي تصل الساعة الخامسة.", badge: "حرف الجر: At" },
+                { en: "We met at the station.", ar: "التقينا عند المحطة.", badge: "حرف الجر: At" }
+            ];
+
+            function getUnlockedSentences() {
+                return JSON.parse(localStorage.getItem("em_prep_unlocked_sentences") || "[]");
+            }
+
+            function openDictionaryModal(event) {
+                if(event) event.stopPropagation();
+                let unlocked = getUnlockedSentences();
+                let container = document.getElementById('dictCardsContainer');
+                let subtitle = document.getElementById('dictSubtitleCount');
+
+                if (unlocked.length === 0) {
+                    subtitle.innerText = "قاموسك فارغ حالياً! أكمل تحدي الأسئلة لإضافة أول جمل لقاموسك.";
+                    container.innerHTML = `
+                        <div style="text-align:center; padding: 30px; color: var(--text-secondary); font-weight: 800; font-size: 14px;">
+                            🔒 لا توجد جمل مكتسبة بعد. ابدأ التحدي الآن واكسب جمل جديدة!
+                        </div>
+                    `;
+                } else {
+                    subtitle.innerText = `إليك الجمل التي أتقنتها وأضفتها لقاموسك (${unlocked.length} جملة):`;
+                    let html = '';
+                    unlocked.forEach((item, index) => {
+                        let cardId = 'unlocked-card-' + index;
+                        let badgeClass = item.badge.includes("In") ? "reason-badge-in" : (item.badge.includes("On") ? "reason-badge-on" : "reason-badge-at");
+                        html += `
+                            <div class="icon-single-card" id="${cardId}">
+                                <div class="sentence-group">
+                                    <div class="sentence-row">
+                                        <div class="line-en-1">${item.en}</div>
+                                        <button class="speak-btn unified-speak" onclick="speakText('${item.en}', '${cardId}', this)" title="استمع للنطق">🔊</button>
+                                    </div>
+                                    <div class="line-ar-1">
+                                        <span>${item.ar}</span>
+                                        <span class="${badgeClass}">${item.badge}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    container.innerHTML = html;
+                }
+                document.getElementById('dictModal').classList.add('active');
+            }
+
             function speakText(text, cardId, buttonElement) {
                 if ('speechSynthesis' in window) {
                     window.speechSynthesis.cancel();
@@ -888,7 +824,6 @@
                 }
             }
 
-            /* مولد الصوت التفاعلي */
             const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
             function playSound(type) {
                 if (!audioCtx) return;
@@ -924,86 +859,64 @@
                 }
             }
 
-            /* بنك أسئلة متكامل يحتوي على 40 سؤالاً جديداً تماماً (من خارج الدرس والأمثلة) */
             const masterQuizBank = [
-                { q: "My flight departs ( &nbsp;......&nbsp; ) 6:30 PM.", options: ["in", "on", "at"], correct: 2 },
-                { q: "Ali left his jacket ( &nbsp;......&nbsp; ) the back seat of the car.", options: ["in", "on", "at"], correct: 0 },
-                { q: "We celebrate National Day ( &nbsp;......&nbsp; ) October.", options: ["in", "on", "at"], correct: 0 },
-                { q: "Please meet me ( &nbsp;......&nbsp; ) the reception desk.", options: ["in", "on", "at"], correct: 2 },
+                { q: "My flight departs ( ...... ) 6:30 PM.", arTrans: "الترجمة: رحلة طيراني تغادر في السادسة والنصف مساءً.", options: ["in", "on", "at", "to"], correct: 2 },
+                { q: "Ali left his jacket ( ...... ) the back seat of the car.", arTrans: "الترجمة: ترك علي سترته في المقعد الخلفي للسيارة.", options: ["in", "on", "at", "by"], correct: 0 },
+                { q: "We celebrate National Day ( ...... ) October.", arTrans: "الترجمة: نحن نحتفل باليوم الوطني في أكتوبر.", options: ["in", "on", "at", "for"], correct: 0 },
+                { q: "Please meet me ( ...... ) the reception desk.", arTrans: "الترجمة: من فضلك قابلني عند مكتب الاستقبال.", options: ["in", "on", "at", "by"], correct: 2 },
 
-                { q: "The scientist made his breakthrough ( &nbsp;......&nbsp; ) the nineties.", options: ["in", "on", "at"], correct: 0 },
-                { q: "Whose signature is written ( &nbsp;......&nbsp; ) this document?", options: ["in", "on", "at"], correct: 1 },
-                { q: "The temperature drops significantly ( &nbsp;......&nbsp; ) night.", options: ["in", "on", "at"], correct: 2 },
-                { q: "Paris is situated ( &nbsp;......&nbsp; ) France.", options: ["in", "on", "at"], correct: 0 },
-
-                { q: "Our final exams will take place ( &nbsp;......&nbsp; ) June.", options: ["in", "on", "at"], correct: 0 },
-                { q: "There is a warning sign painted ( &nbsp;......&nbsp; ) the floor.", options: ["in", "on", "at"], correct: 1 },
-                { q: "Can we schedule the interview ( &nbsp;......&nbsp; ) Thursday afternoon?", options: ["in", "on", "at"], correct: 1 },
-                { q: "The historic castle stands proudly ( &nbsp;......&nbsp; ) the top of the hill.", options: ["in", "on", "at"], correct: 2 },
-
-                { q: "Many changes occurred ( &nbsp;......&nbsp; ) the last decade.", options: ["in", "on", "at"], correct: 0 },
-                { q: "She keeps her diary locked ( &nbsp;......&nbsp; ) a drawer.", options: ["in", "on", "at"], correct: 0 },
-                { q: "The children are playing hide and seek ( &nbsp;......&nbsp; ) the garden.", options: ["in", "on", "at"], correct: 0 },
-                { q: "Is there anything interesting ( &nbsp;......&nbsp; ) the newspaper today?", options: ["in", "on", "at"], correct: 0 },
-
-                { q: "The train will arrive ( &nbsp;......&nbsp; ) platform 4.", options: ["in", "on", "at"], correct: 1 },
-                { q: "He prefers to study quietly ( &nbsp;......&nbsp; ) dawn.", options: ["in", "on", "at"], correct: 2 },
-                { q: "The poster was stuck firmly ( &nbsp;......&nbsp; ) the glass window.", options: ["in", "on", "at"], correct: 1 },
-                { q: "Ancient civilizations thrived ( &nbsp;......&nbsp; ) ancient times.", options: ["in", "on", "at"], correct: 2 },
-
-                { q: "My parents got married ( &nbsp;......&nbsp; ) 1998.", options: ["in", "on", "at"], correct: 0 },
-                { q: "Look closely ( &nbsp;......&nbsp; ) the details of this painting.", options: ["in", "on", "at"], correct: 2 },
-                { q: "We usually visit our grandparents ( &nbsp;......&nbsp; ) Eid.", options: ["in", "on", "at"], correct: 2 },
-                { q: "The manager is currently busy ( &nbsp;......&nbsp; ) a phone call.", options: ["in", "on", "at"], correct: 0 },
-
-                { q: "Are you planning to travel abroad ( &nbsp;......&nbsp; ) summer?", options: ["in", "on", "at"], correct: 0 },
-                { q: "The book store is located ( &nbsp;......&nbsp; ) King Street.", options: ["in", "on", "at"], correct: 1 },
-                { q: "Who is that mysterious person standing ( &nbsp;......&nbsp; ) the corner?", options: ["in", "on", "at"], correct: 2 },
-                { q: "She likes to drink hot chocolate ( &nbsp;......&nbsp; ) a cold evening.", options: ["in", "on", "at"], correct: 0 },
-
-                { q: "The package was delivered ( &nbsp;......&nbsp; ) Tuesday morning.", options: ["in", "on", "at"], correct: 1 },
-                { q: "He parked his bicycle safely ( &nbsp;......&nbsp; ) the fence.", options: ["in", "on", "at"], correct: 1 },
-                { q: "Technology advanced rapidly ( &nbsp;......&nbsp; ) modern times.", options: ["in", "on", "at"], correct: 2 },
-                { q: "Do you enjoy walking ( &nbsp;......&nbsp; ) the rain?", options: ["in", "on", "at"], correct: 0 },
-
-                { q: "The pharmacy is right ( &nbsp;......&nbsp; ) the end of this hallway.", options: ["in", "on", "at"], correct: 2 },
-                { q: "My older brother works ( &nbsp;......&nbsp; ) a global tech company.", options: ["in", "on", "at"], correct: 0 },
-                { q: "We heard a loud noise ( &nbsp;......&nbsp; ) the exact same second.", options: ["in", "on", "at"], correct: 2 },
-                { q: "The cat loves sleeping comfortably ( &nbsp;......&nbsp; ) the rooftop.", options: ["in", "on", "at"], correct: 1 },
-
-                { q: "Our team won the championship match ( &nbsp;......&nbsp; ) April 15th.", options: ["in", "on", "at"], correct: 1 },
-                { q: "He prefers staying indoors ( &nbsp;......&nbsp; ) a stormy afternoon.", options: ["in", "on", "at"], correct: 0 },
-                { q: "Please report directly ( &nbsp;......&nbsp; ) the supervisor's office.", options: ["in", "on", "at"], correct: 2 },
-                { q: "The digital clock on the wall glows brightly ( &nbsp;......&nbsp; ) night.", options: ["in", "on", "at"], correct: 2 }
+                { q: "The scientist made his breakthrough ( ...... ) the nineties.", arTrans: "الترجمة: حقق العالم إنجازه في التسعينيات.", options: ["in", "on", "at", "since"], correct: 0 },
+                { q: "Whose signature is written ( ...... ) this document?", arTrans: "الترجمة: لمن التوقيع المكتوب على هذا المستند؟", options: ["in", "on", "at", "over"], correct: 1 },
+                { q: "The temperature drops significantly ( ...... ) night.", arTrans: "الترجمة: تنخفض درجة الحرارة بشكل ملحوظ في الليل.", options: ["in", "on", "at", "during"], correct: 2 },
+                { q: "Paris is situated ( ...... ) France.", arTrans: "الترجمة: تقع باريس في فرنسا.", options: ["in", "on", "at", "near"], correct: 0 }
             ];
 
             let userXp = parseInt(localStorage.getItem("em_user_xp") || "0");
-            let currentDayIndex = parseInt(localStorage.getItem("em_current_day") || "0");
-            let lastQuizTimestamp = parseInt(localStorage.getItem("em_last_quiz_time") || "0");
+            let currentDayIndex = parseInt(localStorage.getItem("em_prep_day") || "0");
+            let lastQuizTimestamp = parseInt(localStorage.getItem("em_prep_last_quiz_time") || "0");
             let currentDayQuestionOffset = currentDayIndex * 4;
             let currentSubQuestionIndex = 0;
             let answered = false;
+            let sessionXpEarned = 0;
+            let countdownInterval = null;
 
-            function checkQuizAvailability() {
-                let now = Date.now();
+            function updateCountdownTimer() {
                 let twentyFourHours = 24 * 60 * 60 * 1000;
-                let desc = document.getElementById("quizLaunchDesc");
-                let btnText = document.getElementById("launchBtnText");
+                let now = Date.now();
+                let timeLeft = twentyFourHours - (now - lastQuizTimestamp);
 
-                if (currentDayQuestionOffset >= masterQuizBank.length) {
-                    if (desc) desc.innerText = "لقد أكملت جميع الـ 40 سؤالاً بنجاح تام! أسطورة القواعد الخارقة ⭐";
-                    if (btnText) btnText.innerText = "مكتملة 🎉";
+                let btnEl = document.getElementById("launchBtnText");
+                let descEl = document.getElementById("quizLaunchDesc");
+                if (!btnEl) return;
+
+                if (timeLeft <= 0) {
+                    localStorage.setItem("em_prep_completed_today", "false");
+                    checkQuizAvailability();
+                    if (countdownInterval) clearInterval(countdownInterval);
                     return;
                 }
 
-                if (lastQuizTimestamp > 0 && (now - lastQuizTimestamp < twentyFourHours)) {
-                    let remainingTime = twentyFourHours - (now - lastQuizTimestamp);
-                    let hoursLeft = Math.ceil(remainingTime / (1000 * 60 * 60));
-                    if (desc) desc.innerText = `مجموعة الأسئلة الخارجية تفتح خلال ${hoursLeft} ساعة تقريباً ⏳`;
-                    if (btnText) btnText.innerText = "انتظار 🔒";
+                let hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                let minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                let seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                btnEl.innerHTML = `<span>⏳ المتبقي للتحدي القادم: ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}</span>`;
+                if (descEl) descEl.innerText = "لقد أكملت تحدي اليوم بنجاح. انتظر فتح المجموعة التالية!";
+            }
+
+            function checkQuizAvailability() {
+                let isCompleted = localStorage.getItem("em_prep_completed_today") === "true";
+                let btnEl = document.getElementById("launchBtnText");
+                let descEl = document.getElementById("quizLaunchDesc");
+
+                if (isCompleted) {
+                    if (countdownInterval) clearInterval(countdownInterval);
+                    updateCountdownTimer();
+                    countdownInterval = setInterval(updateCountdownTimer, 1000);
                 } else {
-                    if (desc) desc.innerText = `ابدأ التحدي اليومي لتعزيز مهاراتك 🧠 (متاحة 4 أسئلة جديدة)`;
-                    if (btnText) btnText.innerText = "ابدأ التحدي اليومي ➔";
+                    if (countdownInterval) clearInterval(countdownInterval);
+                    if (btnEl) btnEl.innerHTML = `<span>ابدأ التحدي اليومي</span><span>➔</span>`;
+                    if (descEl) descEl.innerText = "40 سؤالاً في بنك التحديات • اختبر استيعابك في 4 أسئلة يومية متجددة واكسب 10 XP لكل إجابة صحيحة!";
                 }
             }
 
@@ -1021,16 +934,24 @@
                 nextBtn.classList.remove('active');
 
                 let html = `<div class="quiz-question-card" id="activeQuestionCard">
-                    <div class="quiz-question-text">السؤال (${currentSubQuestionIndex + 1}/4) [المجموع: ${globalIndex + 1}/40]:<br>${q.q}</div>
-                    <div class="quiz-options-grid">`;
+                    <div class="quiz-question-instruction">
+                        <span>اختر حرف الجر المناسب لسد الفراغ في الجملة التالية:</span>
+                        <span>🔍</span>
+                    </div>
+                    <div class="quiz-translation-box">
+                        <span>${q.arTrans}</span>
+                    </div>
+                    <div class="quiz-sentence-display">${q.q}</div>
+                    <div class="quiz-options-grid-2x2">`;
                 
                 q.options.forEach((opt, idx) => {
-                    html += `<button class="quiz-option-btn" onclick="checkAnswer(${idx}, this)">${opt}</button>`;
+                    html += `<button class="quiz-option-btn-box" onclick="checkAnswer(${idx}, this)">${opt}</button>`;
                 });
 
                 html += `</div></div>`;
                 body.innerHTML = html;
-                document.getElementById('quizScoreIndicator').innerText = `اليوم (${currentDayIndex + 1}/10) • السؤال (${currentSubQuestionIndex + 1}/4)`;
+                document.getElementById('quizScoreIndicator').innerText = `السؤال ${currentSubQuestionIndex + 1} من 4`;
+                document.getElementById('hudXpDisplay').innerText = sessionXpEarned;
             }
 
             function checkAnswer(selectedIndex, btnElement) {
@@ -1038,12 +959,15 @@
                 answered = true;
                 let globalIndex = currentDayQuestionOffset + currentSubQuestionIndex;
                 let q = masterQuizBank[globalIndex];
-                let optionButtons = document.querySelectorAll('.quiz-option-btn');
+                let optionButtons = document.querySelectorAll('.quiz-option-btn-box');
                 let cardElement = document.getElementById('activeQuestionCard');
 
                 if (selectedIndex === q.correct) {
+                    sessionXpEarned += 10;
                     userXp += 10;
                     localStorage.setItem("em_user_xp", userXp);
+                    document.getElementById('hudXpDisplay').innerText = sessionXpEarned;
+
                     playSound('success');
                     btnElement.classList.add('correct');
                     if (cardElement) cardElement.classList.add('success-fx');
@@ -1060,11 +984,25 @@
                 if (currentSubQuestionIndex < 4 && (currentDayQuestionOffset + currentSubQuestionIndex) < masterQuizBank.length) {
                     loadQuizQuestion();
                 } else {
-                    localStorage.setItem("em_last_quiz_time", Date.now());
-                    currentDayIndex++;
-                    localStorage.setItem("em_current_day", currentDayIndex);
+                    localStorage.setItem("em_prep_last_quiz_time", Date.now());
+                    localStorage.setItem("em_prep_completed_today", "true");
+
+                    let startPoolIdx = (currentDayIndex * 4) % quizSentencesPool.length;
+                    let newlyEarnedSentences = quizSentencesPool.slice(startPoolIdx, startPoolIdx + 2);
+
+                    let unlocked = getUnlockedSentences();
+                    newlyEarnedSentences.forEach(newSent => {
+                        if (!unlocked.some(item => item.en === newSent.en)) {
+                            unlocked.push(newSent);
+                        }
+                    });
+                    localStorage.setItem("em_prep_unlocked_sentences", JSON.stringify(unlocked));
+
+                    currentDayIndex = (currentDayIndex + 1) % 10;
+                    localStorage.setItem("em_prep_day", currentDayIndex);
                     currentDayQuestionOffset = currentDayIndex * 4;
                     currentSubQuestionIndex = 0;
+
                     showQuizCompletion();
                 }
             }
@@ -1074,38 +1012,44 @@
                 document.getElementById('quizNextBtn').classList.remove('active');
                 body.innerHTML = `<div class="quiz-question-card success-fx" style="text-align:center; padding: 24px; gap: 14px;">
                     <h3 style="margin:0; font-size: 18px; color: var(--heading-pure-color);">🎉 ممتاز جداً! أنهيت تحدي اليوم</h3>
-                    <p style="margin:0; font-size: 14px; color: var(--text-secondary);">تم إضافة نقاط التحدي الخارجي لرصيدك بنجاح.</p>
-                    <p style="margin:0; font-size: 15px; color: var(--accent); font-weight: 950;">رصيدك الحالي: ${userXp} XP ⭐</p>
-                    <p style="margin:0; font-size: 12px; color: var(--text-secondary);">المجموعة التالية ستفتح بعد 24 ساعة.</p>
-                    <button onclick="document.getElementById('quizModal').classList.remove('active'); checkQuizAvailability();" style="background:#9333EA; color:#fff; border:none; padding:10px 20px; border-radius:12px; font-weight:900; cursor:pointer; font-family:'Cairo'; margin-top:6px;">إغلاق والعودة للدراسة ➔</button>
+                    <p style="margin:0; font-size: 14px; color: var(--text-secondary);">تم إضافة جمل جديدة إلى <strong>قاموس الجمل المُكتسبة</strong> واكسبت ${sessionXpEarned} نقطة XP!</p>
+                    <button onclick="document.getElementById('quizModal').classList.remove('active'); location.reload();" style="background:var(--accent); color:#fff; border:none; padding:10px 20px; border-radius:18px; font-weight:900; cursor:pointer; font-family:'Cairo'; margin-top:6px;">إغلاق وعرض القاموس ➔</button>
                 </div>`;
                 playSound('success');
                 checkQuizAvailability();
             }
 
+            function launchQuizAction() {
+                let isCompleted = localStorage.getItem("em_prep_completed_today") === "true";
+                if (isCompleted) {
+                    if (confirm("هل تريد إعادة تعيين التحدي والبدء من جديد للتجربة؟")) {
+                        localStorage.removeItem("em_prep_completed_today");
+                        localStorage.removeItem("em_prep_last_quiz_time");
+                        location.reload();
+                    }
+                    return;
+                }
+
+                let quizModal = document.getElementById("quizModal");
+                if (quizModal) {
+                    quizModal.classList.add("active");
+                    sessionXpEarned = 0;
+                    currentSubQuestionIndex = 0;
+                    loadQuizQuestion();
+                }
+            }
+
             document.addEventListener("DOMContentLoaded", function() {
                 checkQuizAvailability();
-                let launchBtn = document.getElementById("launchQuizBtn");
-                let quizModal = document.getElementById("quizModal");
-                let closeQuizBtn = document.getElementById("closeQuizBtn");
 
-                if (launchBtn && quizModal) {
-                    launchBtn.addEventListener("click", () => {
-                        let now = Date.now();
-                        let twentyFourHours = 24 * 60 * 60 * 1000;
-                        if (lastQuizTimestamp > 0 && (now - lastQuizTimestamp < twentyFourHours) && currentSubQuestionIndex === 0) {
-                            let remainingTime = twentyFourHours - (now - lastQuizTimestamp);
-                            let hoursLeft = Math.ceil(remainingTime / (1000 * 60 * 60));
-                            alert(`عذراً يا باشمهندس، مجموعة التحدي الخارجي الجديدة تفتح بعد ${hoursLeft} ساعة تقريباً بنظام الـ 24 ساعة! ⏳`);
-                            return;
-                        }
-                        quizModal.classList.add("active");
-                        currentSubQuestionIndex = 0;
-                        loadQuizQuestion();
-                    });
-                }
+                let closeQuizBtn = document.getElementById("closeQuizBtn");
+                let quizModal = document.getElementById("quizModal");
+
                 if (closeQuizBtn && quizModal) {
-                    closeQuizBtn.addEventListener("click", () => { quizModal.classList.remove("active"); checkQuizAvailability(); });
+                    closeQuizBtn.addEventListener("click", () => {
+                        quizModal.classList.remove("active");
+                        checkQuizAvailability();
+                    });
                 }
 
                 let themeBtn = document.getElementById("themeToggleBtn");
@@ -1125,25 +1069,6 @@
                     themeBtn.addEventListener("click", () => {
                         applyTheme(!document.documentElement.classList.contains("dark-mode"));
                     });
-                }
-
-                let searchBtn = document.getElementById("searchBtn");
-                let searchModal = document.getElementById("searchModal");
-                let closeSearchBtn = document.getElementById("closeSearchBtn");
-                if (searchBtn && searchModal) {
-                    searchBtn.addEventListener("click", () => { searchModal.classList.add("active"); });
-                }
-                if (closeSearchBtn && searchModal) {
-                    closeSearchBtn.addEventListener("click", () => { searchModal.classList.remove("active"); });
-                }
-
-                let menuBtn = document.getElementById("menuBtn");
-                let sideMenu = document.getElementById("sideMenu");
-                if (menuBtn && sideMenu) {
-                    menuBtn.addEventListener("click", () => { sideMenu.classList.add("active"); });
-                }
-                if (sideMenu) {
-                    sideMenu.addEventListener("click", (e) => { if (e.target === sideMenu) sideMenu.classList.remove("active"); });
                 }
             });
 
