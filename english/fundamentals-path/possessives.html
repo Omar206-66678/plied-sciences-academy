@@ -17,45 +17,51 @@
             :root {
                 --bg-main: #F4F6F9;
                 --card-bg: #FFFFFF;
-                --card-border: #E2E8F0;
+                --card-border: #93C5FD;
                 --text-primary: #0F172A;
-                --text-secondary: #64748B;
+                --text-secondary: #334155;
                 
-                --header-bg: rgba(255, 255, 255, 0.85);
-                --header-border: rgba(217, 70, 239, 0.15);
-                --header-shadow: 0 10px 30px rgba(217, 70, 239, 0.05);
+                --header-bg: #FFFFFF;
+                --header-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
                 
-                --primary: #D946EF;
-                --primary-dark: #C026D3;
-                --accent: #8B5CF6; 
-                --light-bg: rgba(217, 70, 239, 0.05);
-                --border-glow: rgba(217, 70, 239, 0.25);
+                --primary: #475569;
+                --accent: #0284C7; 
+                --light-bg: rgba(2, 132, 199, 0.04);
 
-                --adj-highlight: #D946EF; 
-                --pronoun-highlight: #059669; 
+                --adj-color: #0284C7;     /* لون الصفات: أزرق */
+                --pronoun-color: #10B981; /* لون الضمائر: أخضر */
+
                 --heading-pure-color: #0F172A; 
+                --nav-theme-color: #0284C7;
+                --nav-glow-color: rgba(2, 132, 199, 0.25);
             }
 
             html.dark-mode, body.dark-mode {
                 --bg-main: #06080F;
                 --card-bg: #0B0F19;
-                --card-border: rgba(255, 255, 255, 0.07);
-                --text-primary: #F3F4F6;
-                --text-secondary: #9CA3AF;
+                --card-border: rgba(56, 189, 248, 0.3);
+                --text-primary: #FFFFFF;
+                --text-secondary: #94A3B8;
                 
-                --header-bg: rgba(11, 15, 25, 0.85);
-                --header-border: rgba(217, 70, 239, 0.3);
+                --header-bg: #0B0F19;
                 --header-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
                 
-                --primary: #E879F9;
-                --primary-dark: #D946EF;
-                --accent: #A78BFA;
-                --light-bg: rgba(217, 70, 239, 0.08);
-                --border-glow: rgba(217, 70, 239, 0.35);
+                --primary: #94A3B8;
+                --accent: #38BDF8;
+                --light-bg: rgba(56, 189, 248, 0.06);
 
-                --adj-highlight: #F472B6;
-                --pronoun-highlight: #34D399;
+                --adj-color: #38BDF8;     /* لون الصفات في الثيم المظلم */
+                --pronoun-color: #34D399; /* لون الضمائر في الثيم المظلم */
+
                 --heading-pure-color: #FFFFFF; 
+                --nav-theme-color: #38BDF8;
+                --nav-glow-color: rgba(56, 189, 248, 0.3);
+            }
+
+            body, * {
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                text-rendering: optimizeLegibility;
             }
 
             body {
@@ -74,38 +80,43 @@
             .top-progress-bar { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: transparent; z-index: 9999; }
             .top-progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--primary)); }
 
-            /* شريط الهيدر */
+            .scroll-to-top-btn {
+                position: fixed; bottom: 80px; left: 20px; width: 44px; height: 44px;
+                background: var(--card-bg); backdrop-filter: blur(16px);
+                border: 2px solid var(--card-border); border-radius: 22px; color: var(--accent); font-size: 18px;
+                display: flex; align-items: center; justify-content: center; cursor: pointer;
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); z-index: 998; opacity: 0; visibility: hidden;
+                transform: translateY(15px); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            .scroll-to-top-btn.show { opacity: 1; visibility: visible; transform: translateY(0); }
+            .scroll-to-top-btn:hover { background: var(--accent); color: #FFFFFF; border-color: var(--accent); transform: translateY(-3px); }
+
+            /* شريط الهيدر العلوي */
             .nav-bar {
                 display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
-                background: var(--header-bg); backdrop-filter: blur(12px); border: 1.5px solid var(--header-border); padding: 10px 16px;
-                border-radius: 24px; box-shadow: var(--header-shadow);
+                background: var(--header-bg); border: 2.5px solid var(--card-border); padding: 12px 20px;
+                border-radius: 40px; box-shadow: var(--header-shadow); gap: 10px;
             }
-            .nav-right-group { display: flex; align-items: center; gap: 8px; text-align: right; }
-            .nav-left-group { display: flex; align-items: center; gap: 6px; }
-            
-            .nav-titles-box { display: flex; flex-direction: column; align-items: flex-start; gap: 0px; }
-            .nav-main-title { font-size: 12.5px; font-weight: 950; color: var(--text-primary); margin: 0; line-height: 1.2; font-family: 'Cairo', sans-serif; }
-            .nav-sub-title { font-size: 9.5px; font-weight: 800; color: var(--accent); margin: 0; line-height: 1.2; }
-            .nav-academy-title { font-size: 8.5px; font-weight: 700; color: var(--text-secondary); margin: 0; line-height: 1.2; }
+            .brand-minimalist-box { display: flex; flex-direction: column; align-items: center; text-align: center; flex: 1; padding: 0 4px; min-width: 0; }
+            .brand-main-title { font-size: 14px; font-weight: 900; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
+            .brand-subtitle-text { font-size: 10.5px; font-weight: 800; color: var(--accent); letter-spacing: 0.5px; text-transform: uppercase; margin-top: 2px; }
 
-            .home-icon-btn, .nav-icon-btn {
-                background: var(--light-bg); border: 1.5px solid var(--border-glow);
-                width: 36px; height: 36px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
-                color: var(--text-primary); font-size: 15px; text-decoration: none; cursor: pointer; transition: 0.25s; border: none; flex-shrink: 0;
+            .nav-actions-group { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+            .back-btn, .theme-btn {
+                background: var(--light-bg); border: 2px solid var(--card-border);
+                width: 40px; height: 40px; border-radius: 20px; display: flex; align-items: center; justify-content: center;
+                color: var(--text-primary); font-size: 16px; text-decoration: none; cursor: pointer; transition: 0.25s; flex-shrink: 0;
             }
-            .home-icon-btn:hover, .nav-icon-btn:hover { transform: scale(1.05); border-color: var(--accent); color: var(--accent); }
+            .back-btn:hover, .theme-btn:hover { transform: scale(1.05); border-color: var(--accent); color: var(--accent); }
 
             /* الكارت العلوي الهندسي */
             .hero-card {
                 background: var(--card-bg); 
-                border: 2px solid transparent;
-                background-image: linear-gradient(var(--card-bg), var(--card-bg)), linear-gradient(135deg, var(--accent), var(--primary));
-                background-origin: border-box;
-                background-clip: padding-box, border-box;
-                border-radius: 28px;
-                padding: 24px; 
+                border: 2.5px solid var(--card-border);
+                border-radius: 36px;
+                padding: 26px; 
                 margin-bottom: 24px; 
-                box-shadow: 0 10px 30px var(--border-glow); 
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03); 
                 display: flex; 
                 flex-direction: column; 
                 align-items: center;
@@ -116,332 +127,308 @@
             }
             
             .hero-title-en { margin: 0; font-size: 21px; font-weight: 950; color: var(--heading-pure-color); letter-spacing: -0.3px; }
-            .hero-title-ar { margin: 0; font-size: 14px; font-weight: 800; color: var(--accent); background: var(--light-bg); padding: 4px 16px; border-radius: 12px; border: 1px solid var(--border-glow); }
+            .hero-title-ar { margin: 0; font-size: 14px; font-weight: 800; color: var(--accent); background: var(--light-bg); padding: 6px 18px; border-radius: 20px; border: 2px solid var(--card-border); }
 
-            /* الجدول الهندسي المدمج */
-            .table-container { width: 100%; overflow-x: auto; margin-top: 4px; border-radius: 16px; border: 1.5px solid var(--card-border); text-align: right; }
+            .table-container { width: 100%; overflow-x: auto; margin-top: 4px; border-radius: 22px; border: 2px solid var(--card-border); text-align: right; }
             .styled-master-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
-            .styled-master-table th, .styled-master-table td { padding: 10px 14px; border-bottom: 1px solid var(--card-border); border-left: 1px solid var(--card-border); }
+            .styled-master-table th, .styled-master-table td { padding: 10px 14px; border-bottom: 1.5px solid var(--card-border); border-left: 1.5px solid var(--card-border); }
             .styled-master-table th:last-child, .styled-master-table td:last-child { border-left: none; }
             .styled-master-table th { background: var(--light-bg); color: var(--heading-pure-color); font-weight: 950; font-size: 13px; }
             .styled-master-table td { background: var(--card-bg); color: var(--text-primary); font-weight: 800; }
             .styled-master-table tr:last-child td { border-bottom: none; }
 
-            .th-adj { color: var(--adj-highlight) !important; background: rgba(217, 70, 239, 0.08) !important; font-weight: 950 !important; }
-            .th-pronoun { color: var(--pronoun-highlight) !important; background: rgba(5, 150, 105, 0.08) !important; font-weight: 950 !important; }
+            .th-poss { color: var(--accent) !important; background: var(--light-bg) !important; font-weight: 950 !important; }
 
             /* كارت الشرح الشامل الرئيسي */
             .lesson-card-full {
                 background: var(--card-bg); 
-                border: 2px solid transparent;
-                background-image: linear-gradient(var(--card-bg), var(--card-bg)), linear-gradient(135deg, var(--current-border-color, #D946EF), var(--accent));
-                background-origin: border-box;
-                background-clip: padding-box, border-box;
-                border-radius: 28px;
-                padding: 26px; 
+                border: 2.5px solid var(--card-border);
+                border-radius: 40px;
+                padding: 28px; 
                 margin-bottom: 24px; 
-                box-shadow: 0 20px 45px rgba(217, 70, 239, 0.1); 
+                box-shadow: 0 20px 45px rgba(0, 0, 0, 0.04); 
                 display: flex; 
                 flex-direction: column; 
                 gap: 20px;
                 position: relative; 
                 overflow: hidden;
-                transition: background-image 0.5s ease;
             }
             
             .lesson-header { display: flex; flex-direction: column; gap: 14px; }
-            .app-title-wrapper { display: flex; flex-direction: column; gap: 8px; position: relative; padding-right: 14px; border-right: 4px solid var(--primary); }
+            .app-title-wrapper { display: flex; flex-direction: column; gap: 8px; position: relative; padding-right: 14px; border-right: 4px solid var(--accent); }
             .app-main-heading { margin: 0; font-size: 20px; font-weight: 950; color: var(--heading-pure-color); letter-spacing: -0.4px; font-family: 'Cairo', sans-serif; direction: ltr; text-align: right; }
-            .app-sub-pill { display: inline-flex; align-items: center; gap: 6px; background: var(--light-bg); border: 1.5px solid var(--border-glow); color: var(--heading-pure-color); padding: 6px 14px; border-radius: 12px; font-size: 12px; font-weight: 850; width: fit-content; }
+            .app-sub-pill { display: inline-flex; align-items: center; gap: 6px; background: var(--light-bg); border: 2px solid var(--card-border); color: var(--heading-pure-color); padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 850; width: fit-content; }
 
             .glass-glow-card {
                 background: var(--card-bg);
                 backdrop-filter: blur(16px);
-                border-radius: 22px;
+                border-radius: 28px;
                 padding: 24px 22px 22px 22px;
                 display: flex;
                 flex-direction: column;
                 gap: 16px;
                 position: relative;
                 overflow: hidden;
-                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
                 width: 100%;
                 box-sizing: border-box;
+                border: 2px solid var(--card-border);
             }
 
-            .time-badge { position: absolute; top: 18px; left: 18px; padding: 5px 12px; border-radius: 10px; font-size: 10.5px; font-weight: 950; color: #FFFFFF; box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 2; }
-            .badge-adj { background: linear-gradient(135deg, #D946EF, #F472B6); }
-            .badge-pronoun { background: linear-gradient(135deg, #059669, #34D399); }
+            .glass-glow-card::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 3px; background: linear-gradient(90deg, var(--accent), var(--primary)); width: 100%; }
 
-            .glass-glow-card.adj-card { border: 1.5px solid rgba(217, 70, 239, 0.3); }
-            .glass-glow-card.adj-card::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 4px; background: linear-gradient(90deg, #D946EF, #F472B6); width: 100%; }
-
-            .glass-glow-card.pronoun-card { border: 1.5px solid rgba(5, 150, 105, 0.35); }
-            .glass-glow-card.pronoun-card::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 4px; background: linear-gradient(90deg, #059669, #34D399); width: 100%; }
-
-            .usage-title { font-size: 15px; font-weight: 950; color: var(--heading-pure-color); display: flex; align-items: center; gap: 8px; padding-left: 90px; }
-            .usage-content { font-size: 13.5px; font-weight: 700; color: var(--text-secondary); line-height: 1.8; }
-
-            .adj-highlight { color: var(--adj-highlight); font-weight: 950; }
-            .pronoun-highlight { color: var(--pronoun-highlight); font-weight: 950; }
-
-            .method-box { background: var(--light-bg); border: 1.5px solid var(--border-glow); padding: 14px; border-radius: 16px; margin: 12px 0; display: flex; flex-direction: column; gap: 8px; }
-
-            .inner-practice-title-wrapper {
+            .usage-title-centered {
                 display: flex;
                 flex-direction: column;
-                gap: 6px;
-                position: relative;
-                padding-right: 14px;
-                border-right: 4px solid var(--accent);
-                margin: 12px 0 8px 0;
+                align-items: center;
+                text-align: center;
+                gap: 4px;
+                width: 100%;
+                margin-bottom: 8px;
             }
-            .inner-practice-heading {
-                margin: 0;
-                font-size: 16px;
-                font-weight: 950;
-                color: var(--heading-pure-color);
-                font-family: 'Cairo', sans-serif;
+            .usage-title-ar { font-size: 16px; font-weight: 950; color: var(--heading-pure-color); }
+            .usage-title-bracket { font-size: 14px; font-weight: 950; direction: ltr; unicode-bidi: embed; color: var(--accent); }
+            .usage-title-en { font-size: 12px; font-weight: 850; color: var(--text-secondary); letter-spacing: 0.3px; }
+
+            .usage-content { font-size: 13.5px; font-weight: 700; color: var(--text-secondary); line-height: 1.8; }
+            
+            .method-box { 
+                background: var(--card-bg); 
+                border: 2px solid var(--card-border); 
+                padding: 14px 16px; 
+                border-radius: 20px; 
+                margin: 14px 0; 
+                display: flex; 
+                flex-direction: column; 
+                gap: 8px; 
+                box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
             }
 
-            .icon-cards-list { display: flex; flex-direction: column; gap: 12px; margin-top: 8px; }
+            .prep-practice-group { display: flex; flex-direction: column; gap: 12px; margin-top: 8px; }
+            .icon-cards-list { display: flex; flex-direction: column; gap: 12px; }
             
             .icon-single-card {
-                background: var(--light-bg);
-                border: 1.5px solid var(--border-glow);
-                border-radius: 18px;
-                padding: 14px 18px;
-                display: flex;
-                flex-direction: column;
-                gap: 10px;
-                transition: 0.3s ease;
-                position: relative;
-                overflow: hidden;
-                box-shadow: 0 4px 15px rgba(139, 92, 246, 0.05);
+                background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 22px; padding: 14px 18px;
+                display: flex; flex-direction: column; gap: 10px; transition: 0.3s ease; position: relative; overflow: hidden; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.02);
             }
-            .icon-single-card:hover {
-                border-color: var(--accent);
-                transform: translateY(-2px);
-                box-shadow: 0 8px 25px var(--border-glow);
-            }
+            .icon-single-card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 25px rgba(0, 0, 0, 0.04); }
+
+            .unified-speak { color: var(--accent) !important; border-color: var(--card-border) !important; background: var(--light-bg) !important; }
+            .unified-speak:hover, .unified-speak.playing { background: var(--accent) !important; color: #FFFFFF !important; transform: scale(1.1); }
 
             @keyframes laserScan {
-                0% { border-color: var(--accent); box-shadow: 0 0 15px var(--accent); }
-                50% { border-color: var(--primary); box-shadow: 0 0 25px var(--primary); }
-                100% { border-color: var(--accent); box-shadow: 0 0 15px var(--accent); }
+                0% { border-color: var(--accent); box-shadow: 0 0 15px rgba(0, 0, 0, 0.05); }
+                50% { border-color: var(--primary); box-shadow: 0 0 25px rgba(0, 0, 0, 0.08); }
+                100% { border-color: var(--accent); box-shadow: 0 0 15px rgba(0, 0, 0, 0.05); }
             }
+            .icon-single-card.scanning { animation: laserScan 1.2s infinite ease-in-out; border-color: var(--accent) !important; background: var(--card-bg) !important; }
 
-            .icon-single-card.scanning {
-                animation: laserScan 1.2s infinite ease-in-out;
-                border-color: var(--accent) !important;
-                background: var(--card-bg) !important;
-            }
-
-            .sentence-row {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                gap: 10px;
-                direction: ltr;
-            }
-
-            .line-en-1, .line-en-2 { 
-                font-family: system-ui, -apple-system, sans-serif; 
-                font-size: 13.5px; 
-                font-weight: 900; 
-                color: var(--heading-pure-color); 
-                text-align: left; 
-                direction: ltr; 
-                flex: 1;
-            }
-
-            .line-ar-1, .line-ar-2 { 
-                font-family: 'Cairo', sans-serif; 
-                font-size: 13px; 
-                font-weight: 800; 
-                color: var(--heading-pure-color); 
-                text-align: right; 
-                direction: rtl;
-                margin-top: -2px;
-            }
-
+            .sentence-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; direction: ltr; }
+            .line-en-1 { font-family: system-ui, -apple-system, sans-serif; font-size: 13.5px; font-weight: 900; color: var(--heading-pure-color); text-align: left; direction: ltr; flex: 1; }
+            .line-ar-1 { font-family: 'Cairo', sans-serif; font-size: 13px; font-weight: 800; color: var(--text-secondary); text-align: right; direction: rtl; margin-top: -2px; display: flex; flex-direction: column; gap: 3px; align-items: flex-start; }
             .sentence-group { display: flex; flex-direction: column; gap: 4px; }
+            .speak-btn { width: 32px; height: 32px; border-radius: 14px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 13px; transition: 0.2s; flex-shrink: 0; border: 2px solid; }
 
-            .speak-btn {
-                background: var(--card-bg);
-                border: 1.5px solid var(--border-glow);
-                width: 30px;
-                height: 30px;
-                border-radius: 10px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                cursor: pointer;
-                font-size: 13px;
-                transition: 0.2s;
-                flex-shrink: 0;
-                color: var(--accent);
+            /* تخصيص الألوان بناءً على نوع الكارت */
+            .adj-word {
+                color: var(--adj-color);
+                font-weight: 950;
             }
-            .speak-btn:hover { background: var(--accent); color: #FFFFFF; transform: scale(1.1); }
-            .speak-btn.playing { background: var(--accent); color: #FFFFFF; transform: scale(1.1); }
+            .pronoun-word {
+                color: var(--pronoun-color);
+                font-weight: 950;
+            }
 
-            /* كارت تشغيل التحدي اليومي */
+            .reason-badge-adj {
+                color: var(--adj-color); font-weight: 900; background: var(--light-bg);
+                padding: 4px 12px; border-radius: 14px; border: 2px solid var(--card-border);
+                display: inline-block; margin-top: 4px; font-size: 12px;
+            }
+            .reason-badge-pronoun {
+                color: var(--pronoun-color); font-weight: 900; background: var(--light-bg);
+                padding: 4px 12px; border-radius: 14px; border: 2px solid var(--card-border);
+                display: inline-block; margin-top: 4px; font-size: 12px;
+            }
+
+            /* كارت تشغيل التحدي اليومي وقاموس الجمل الخارجي */
             .quiz-launch-card {
-                background: linear-gradient(135deg, var(--light-bg), rgba(139, 92, 246, 0.15));
-                border: 2px dashed var(--accent);
-                border-radius: 22px;
-                padding: 20px;
+                background: var(--card-bg);
+                border: 2px solid var(--card-border);
+                border-radius: 30px;
+                padding: 24px 20px;
                 display: flex;
+                flex-direction: column;
                 align-items: center;
-                justify-content: space-between;
-                cursor: pointer;
+                text-align: center;
+                gap: 16px;
                 transition: 0.3s ease;
-                margin-top: 20px;
-                box-shadow: 0 10px 25px rgba(139, 92, 246, 0.1);
+                margin-top: 15px;
+                box-shadow: 0 12px 30px rgba(0, 0, 0, 0.03);
+                position: relative;
+                overflow: hidden;
             }
-            .quiz-launch-card:hover { transform: scale(1.02); border-color: var(--primary); box-shadow: 0 15px 35px var(--border-glow); }
-            .quiz-launch-info { display: flex; flex-direction: column; gap: 4px; }
-            .quiz-launch-title { font-size: 15px; font-weight: 950; color: var(--heading-pure-color); display: flex; align-items: center; gap: 8px; }
-            .quiz-launch-desc { font-size: 11.5px; font-weight: 700; color: var(--text-secondary); }
-            .quiz-launch-btn {
-                background: var(--accent); color: #FFFFFF; border: none; padding: 10px 18px; border-radius: 14px;
-                font-family: 'Cairo', sans-serif; font-size: 12.5px; font-weight: 950; cursor: pointer;
-                box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3); transition: 0.2s;
+            .quiz-launch-card:hover { transform: scale(1.01); border-color: var(--accent); box-shadow: 0 18px 40px rgba(0, 0, 0, 0.05); }
+            
+            .quiz-launch-header-row { display: flex; align-items: center; gap: 8px; justify-content: center; }
+            .quiz-launch-title { font-size: 17.5px; font-weight: 950; color: var(--heading-pure-color); white-space: nowrap; }
+            .quiz-launch-desc-top { font-size: 13px; font-weight: 800; color: var(--text-secondary); background: var(--light-bg); padding: 10px 14px; border-radius: 18px; border: 2px solid var(--card-border); width: 100%; box-sizing: border-box; }
+            
+            .quiz-launch-main-btn {
+                background: var(--accent); color: #FFFFFF; border: none;
+                width: 100%; padding: 14px; border-radius: 20px;
+                font-family: 'Cairo', sans-serif; font-size: 15px; font-weight: 950;
+                cursor: pointer; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05); transition: 0.25s;
+                display: flex; align-items: center; justify-content: center; gap: 8px;
             }
-            .quiz-launch-btn:hover { background: var(--primary); transform: scale(1.05); }
+            .quiz-launch-main-btn:hover { opacity: 0.9; transform: scale(1.02); }
+
+            .dict-launch-btn {
+                background: var(--card-bg); color: var(--accent); border: 2px solid var(--card-border);
+                width: 100%; padding: 14px; border-radius: 20px;
+                font-family: 'Cairo', sans-serif; font-size: 15px; font-weight: 950;
+                cursor: pointer; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.02); transition: 0.25s;
+                display: flex; align-items: center; justify-content: center; gap: 8px;
+                white-space: nowrap;
+            }
+            .dict-launch-btn:hover { background: var(--light-bg); border-color: var(--accent); transform: scale(1.02); }
+
+            /* نافذة قاموس الجمل المنبثقة */
+            .dict-modal-overlay {
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                background: rgba(0, 0, 0, 0.65); backdrop-filter: blur(16px);
+                display: none; align-items: center; justify-content: center; z-index: 10001; padding: 16px; box-sizing: border-box;
+            }
+            .dict-modal-overlay.active { display: flex; }
+
+            .dict-modal-card {
+                background: var(--card-bg); border: 2.5px solid var(--card-border); border-radius: 36px; padding: 22px 20px;
+                width: 100%; max-width: 540px; max-height: 88vh; overflow-y: auto;
+                box-shadow: 0 30px 70px rgba(0, 0, 0, 0.2); display: flex; flex-direction: column; gap: 16px; position: relative;
+            }
+
+            .dict-modal-header {
+                display: flex; justify-content: space-between; align-items: center;
+                background: var(--light-bg); border: 2px solid var(--card-border);
+                padding: 10px 16px; border-radius: 24px;
+            }
+            .dict-modal-title { font-size: 15px; font-weight: 950; color: var(--heading-pure-color); display: flex; align-items: center; gap: 8px; }
 
             /* نافذة الاختبار التفاعلية */
             .modal-overlay { 
                 position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-                background: rgba(139, 92, 246, 0.45); backdrop-filter: blur(14px); 
+                background: rgba(0, 0, 0, 0.65); backdrop-filter: blur(16px); 
                 display: none; align-items: center; justify-content: center; z-index: 10000; padding: 16px; box-sizing: border-box; 
             }
             .modal-overlay.active { display: flex; }
             
             .quiz-modal-card { 
-                background: var(--card-bg); border: 2px solid var(--accent); border-radius: 28px; padding: 22px; 
-                width: 100%; max-width: 500px; max-height: 85vh; overflow-y: auto;
-                box-shadow: 0 25px 60px rgba(139, 92, 246, 0.3); display: flex; flex-direction: column; gap: 16px; position: relative; 
+                background: var(--card-bg); border: 2.5px solid var(--card-border); border-radius: 36px; padding: 22px; width: 100%; max-width: 480px; max-height: 90vh;
+                overflow-y: auto; box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25); display: flex; flex-direction: column; gap: 16px; position: relative; 
             }
             
-            .quiz-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--card-border); padding-bottom: 12px; }
-            .quiz-title { font-size: 15px; font-weight: 950; color: var(--heading-pure-color); display: flex; align-items: center; gap: 8px; }
-            .quiz-close-btn { background: var(--light-bg); border: 1.5px solid var(--border-glow); width: 32px; height: 32px; border-radius: 10px; color: var(--text-primary); cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; }
+            .game-hud-bar {
+                display: flex; justify-content: space-between; align-items: center;
+                background: var(--card-bg); border: 2px solid var(--card-border);
+                padding: 10px 18px; border-radius: 28px; gap: 10px;
+            }
+            .hud-item { display: flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 950; color: var(--heading-pure-color); }
+            .hud-close-btn {
+                background: var(--light-bg); border: 2px solid var(--card-border); width: 36px; height: 36px; border-radius: 18px;
+                color: var(--text-primary); cursor: pointer; font-size: 14px; display: flex; align-items: center; justify-content: center; transition: 0.2s;
+            }
+            .hud-close-btn:hover { background: #EF4444; color: #fff; border-color: #EF4444; }
+
+            .quiz-top-status {
+                display: flex; justify-content: center; align-items: center;
+                background: var(--card-bg); border: 2px solid var(--card-border);
+                padding: 12px; border-radius: 24px;
+            }
+            .quiz-counter-badge {
+                font-size: 15px; font-weight: 950; color: var(--heading-pure-color);
+                background: var(--card-bg); padding: 6px 24px; border-radius: 18px; border: 2px solid var(--card-border);
+            }
 
             .quiz-body { display: flex; flex-direction: column; gap: 14px; }
             
             .quiz-question-card {
-                background: var(--card-bg); border: 1.5px solid var(--border-glow); border-radius: 20px; padding: 18px;
-                display: flex; flex-direction: column; gap: 14px; box-shadow: 0 8px 25px rgba(139, 92, 246, 0.06); transition: 0.3s ease;
+                background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 28px; padding: 20px;
+                display: flex; flex-direction: column; gap: 14px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.02); transition: 0.3s ease;
             }
-            
-            @keyframes pinkPulse {
-                0% { transform: scale(1); border-color: #D946EF; box-shadow: 0 0 25px rgba(217, 70, 239, 0.45); }
-                50% { transform: scale(1.02); border-color: #E879F9; box-shadow: 0 0 35px rgba(232, 121, 249, 0.65); }
-                100% { transform: scale(1); border-color: #D946EF; box-shadow: 0 0 25px rgba(217, 70, 239, 0.45); }
-            }
-            .quiz-question-card.adj-success-fx { animation: pinkPulse 0.6s ease infinite alternate; background: rgba(217, 70, 239, 0.04); }
 
-            @keyframes greenPulse {
-                0% { transform: scale(1); border-color: #059669; box-shadow: 0 0 25px rgba(5, 150, 105, 0.45); }
-                50% { transform: scale(1.02); border-color: #34D399; box-shadow: 0 0 35px rgba(52, 211, 153, 0.65); }
-                100% { transform: scale(1); border-color: #059669; box-shadow: 0 0 25px rgba(5, 150, 105, 0.45); }
+            .quiz-question-instruction {
+                font-size: 14.5px; font-weight: 950; color: var(--heading-pure-color); text-align: center; display: flex; align-items: center; justify-content: center; gap: 8px;
             }
-            .quiz-question-card.pronoun-success-fx { animation: greenPulse 0.6s ease infinite alternate; background: rgba(5, 150, 105, 0.04); }
 
-            .quiz-question-text { font-family: system-ui, -apple-system, sans-serif; font-size: 14.5px; font-weight: 900; color: var(--heading-pure-color); text-align: left; direction: ltr; line-height: 1.6; }
-            
-            .quiz-options-grid { display: flex; gap: 8px; justify-content: center; margin-top: 4px; }
-            .quiz-option-btn {
-                background: var(--bg-main); border: 1.5px solid var(--card-border); padding: 10px 20px; border-radius: 14px;
-                font-family: system-ui, -apple-system, sans-serif; font-size: 13.5px; font-weight: 900; color: var(--text-primary);
-                cursor: pointer; transition: 0.2s; flex: 1; text-align: center;
+            .quiz-translation-box {
+                background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 20px; padding: 12px 16px;
+                font-size: 13px; font-weight: 800; color: var(--text-secondary); text-align: center; display: flex; align-items: center; justify-content: center; gap: 6px;
             }
-            .quiz-option-btn:hover { border-color: var(--accent); background: var(--light-bg); color: var(--accent); }
-            
-            .quiz-option-btn.correct-adj { background: rgba(217, 70, 239, 0.15) !important; border-color: #D946EF !important; color: #D946EF !important; transform: scale(1.05); }
-            .quiz-option-btn.correct-pronoun { background: rgba(5, 150, 105, 0.15) !important; border-color: #059669 !important; color: #059669 !important; transform: scale(1.05); }
-            .quiz-option-btn.wrong { background: rgba(239, 68, 68, 0.15) !important; border-color: #EF4444 !important; color: #EF4444 !important; }
 
-            .quiz-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; border-top: 1px solid var(--card-border); padding-top: 12px; font-size: 12px; font-weight: 800; color: var(--text-secondary); }
-            .quiz-next-btn { background: var(--primary); color: #FFFFFF; border: none; padding: 8px 18px; border-radius: 12px; font-family: 'Cairo', sans-serif; font-weight: 900; cursor: pointer; display: none; }
+            .quiz-sentence-display {
+                font-family: system-ui, -apple-system, sans-serif; font-size: 16px; font-weight: 950; color: var(--heading-pure-color); text-align: center; direction: ltr; margin: 10px 0;
+            }
+
+            .quiz-options-grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 6px; }
+            .quiz-option-btn-box {
+                background: var(--card-bg); border: 2px solid var(--card-border); padding: 14px; border-radius: 20px;
+                font-family: system-ui, -apple-system, sans-serif; font-size: 15px; font-weight: 950; color: var(--text-primary); cursor: pointer; transition: 0.2s; text-align: center;
+            }
+            .quiz-option-btn-box:hover { border-color: var(--accent); background: var(--light-bg); color: var(--accent); transform: scale(1.02); }
+            .quiz-option-btn-box.correct { background: var(--light-bg) !important; border-color: var(--accent) !important; color: var(--accent) !important; }
+            .quiz-option-btn-box.wrong { background: rgba(239, 68, 68, 0.15) !important; border-color: #EF4444 !important; color: #EF4444 !important; }
+
+            @keyframes successPulse {
+                0% { transform: scale(1); border-color: var(--accent); box-shadow: 0 0 25px rgba(0, 0, 0, 0.05); }
+                50% { transform: scale(1.02); border-color: var(--primary); box-shadow: 0 0 35px rgba(0, 0, 0, 0.08); }
+                100% { transform: scale(1); border-color: var(--accent); box-shadow: 0 0 25px rgba(0, 0, 0, 0.05); }
+            }
+            .quiz-question-card.success-fx { animation: successPulse 0.6s ease infinite alternate; background: var(--light-bg); }
+
+            .quiz-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 6px; border-top: 2px solid var(--card-border); padding-top: 12px; font-size: 13px; font-weight: 900; color: var(--text-secondary); }
+            .quiz-next-btn { background: var(--accent); color: #FFFFFF; border: none; padding: 10px 20px; border-radius: 18px; font-family: 'Cairo', sans-serif; font-weight: 950; cursor: pointer; display: none; }
             .quiz-next-btn.active { display: block; }
 
-            /* نافذة البحث والقائمة الجانبية */
-            .search-modal-card { background: var(--card-bg); border: 1.5px solid var(--border-glow); border-radius: 26px; padding: 22px; width: 100%; max-width: 500px; box-shadow: 0 25px 50px rgba(0,0,0,0.5); display: flex; flex-direction: column; gap: 16px; }
-            .lesson-modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--card-border); padding-bottom: 12px; }
-            .lesson-modal-title-box { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 950; color: var(--heading-pure-color); }
-            .close-modal-btn { background: var(--light-bg); border: 1.5px solid var(--border-glow); width: 34px; height: 34px; border-radius: 10px; color: var(--text-primary); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-            .search-input-wrapper { background: var(--bg-main); border: 1.5px solid var(--border-glow); border-radius: 16px; padding: 10px 14px; display: flex; align-items: center; }
-            .search-input-field { width: 100%; background: transparent; border: none; outline: none; color: var(--text-primary); font-family: 'Cairo', sans-serif; font-size: 13px; font-weight: 700; }
-            .search-results-list { display: flex; flex-direction: column; gap: 10px; max-height: 320px; overflow-y: auto; scrollbar-width: none; }
-            .search-result-item { background: var(--bg-main); border: 1.5px solid var(--card-border); border-radius: 16px; padding: 12px 14px; display: flex; flex-direction: column; gap: 3px; text-decoration: none; }
-            .search-result-title { font-size: 13px; font-weight: 950; color: var(--heading-pure-color); margin: 0; }
-            .search-result-desc { font-size: 11px; font-weight: 700; color: var(--text-secondary); margin: 0; }
-
-            .side-menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 8, 17, 0.82); backdrop-filter: blur(10px); display: none; justify-content: flex-start; z-index: 10001; }
-            .side-menu-overlay.active { display: flex; }
-            .side-menu-drawer { background: var(--card-bg); border-left: 2px solid var(--border-glow); width: 85%; max-width: 320px; height: 100%; box-shadow: -15px 0 40px rgba(0,0,0,0.6); display: flex; flex-direction: column; padding: 22px; box-sizing: border-box; }
-            .drawer-top-box { background: var(--light-bg); border: 1.5px solid var(--border-glow); border-radius: 20px; padding: 14px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
-            .drawer-brand-info { display: flex; flex-direction: column; gap: 2px; }
-            .drawer-brand-title { font-size: 14px; font-weight: 950; color: var(--heading-pure-color); margin: 0; }
-            .drawer-brand-sub { font-size: 10px; font-weight: 800; color: var(--text-secondary); margin: 0; }
-            .drawer-brand-icon { width: 42px; height: 42px; background: var(--card-bg); border: 1.5px solid var(--border-glow); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
-            
-            /* كارت النقاط والتقدم داخل القائمة المنسدلة */
-            .drawer-stats-card {
-                background: linear-gradient(135deg, rgba(217, 70, 239, 0.1), rgba(139, 92, 246, 0.1));
-                border: 1.5px solid var(--border-glow);
-                border-radius: 18px;
-                padding: 14px;
-                margin-bottom: 16px;
-                display: flex;
-                flex-direction: column;
-                gap: 8px;
-            }
-            .drawer-stats-title { font-size: 12px; font-weight: 900; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; }
-            .drawer-stats-value { font-size: 16px; font-weight: 950; color: var(--primary); }
-
-            .drawer-links-list { display: flex; flex-direction: column; gap: 8px; flex-grow: 1; }
-            .drawer-link-item { display: flex; align-items: center; justify-content: space-between; background: var(--bg-main); border: 1.5px solid var(--card-border); padding: 12px 16px; border-radius: 16px; color: var(--text-primary); text-decoration: none; font-size: 12px; font-weight: 900; cursor: pointer; }
-            .drawer-link-item.active { border-color: var(--accent); background: var(--light-bg); color: var(--heading-pure-color); }
-            .drawer-link-left { display: flex; align-items: center; gap: 10px; }
-            
-            /* زر التحدي اليومي داخل القائمة */
-            .drawer-quiz-btn {
-                background: linear-gradient(135deg, var(--light-bg), rgba(217, 70, 239, 0.15));
-                border: 1.5px dashed var(--primary);
-                color: var(--heading-pure-color);
-            }
-            .drawer-quiz-btn:hover { border-color: var(--accent); background: var(--light-bg); }
-
-            .drawer-footer { text-align: center; font-size: 10px; font-weight: 800; color: var(--text-secondary); border-top: 1px solid var(--card-border); padding-top: 14px; margin-top: auto; }
-
+            /* شريط التنقل السفلي */
             .bottom-nav {
-                position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); width: calc(100% - 28px); max-width: 500px; background: var(--header-bg); backdrop-filter: blur(15px); display: flex; justify-content: space-around; align-items: center; padding: 8px 10px; border: 1.5px solid var(--header-border); border-radius: 22px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15); z-index: 999;
+                position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); 
+                width: calc(100% - 32px); max-width: 460px;
+                background: var(--header-bg);
+                display: flex; justify-content: space-around; align-items: center;
+                padding: 6px 10px; border-radius: 30px; 
+                border: 2.5px solid var(--card-border);
+                box-shadow: 0 8px 24px rgba(0,0,0,0.25); 
+                z-index: 999; box-sizing: border-box;
+                transition: all 0.4s ease;
             }
-            .bottom-nav a { color: var(--text-secondary); text-decoration: none; font-size: 11px; text-align: center; font-weight: 800; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 6px 12px; border-radius: 16px; flex: 1; }
-            .bottom-nav a span { font-size: 18px; line-height: 1; }
-            .bottom-nav a.active { color: var(--heading-pure-color); background: var(--light-bg); border: 1.5px solid var(--border-glow); }
+            .bottom-nav a { 
+                color: var(--text-secondary); text-decoration: none; font-size: 10px; text-align: center; font-weight: 800; 
+                display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 12px; border-radius: 20px; flex: 1; 
+                border: 1.5px solid var(--card-border); background: var(--light-bg);
+                transition: all 0.3s ease;
+            }
+            .bottom-nav a span { font-size: 16px; line-height: 1; }
+            .bottom-nav a:hover { color: var(--nav-theme-color); border-color: var(--nav-theme-color); background: rgba(128, 128, 128, 0.1); }
+            .bottom-nav a.active { color: #FFFFFF; background: var(--nav-theme-color); border-color: var(--nav-theme-color); box-shadow: 0 4px 15px var(--nav-glow-color); }
         </style>
     </head>
     <body>
 
+        <button class="scroll-to-top-btn" id="scrollToTopBtn" title="العودة للأعلى">↑</button>
+
         <div class="top-progress-bar"><div class="top-progress-fill" id="progressFill"></div></div>
 
-        <!-- نافذة البحث -->
-        <div class="modal-overlay" id="searchModal" style="background: rgba(5, 8, 17, 0.82);">
-            <div class="search-modal-card">
-                <div class="lesson-modal-header">
-                    <div class="lesson-modal-title-box"><span>🔍</span><span>البحث في صفات وضمائر الملكية</span></div>
-                    <button class="close-modal-btn" id="closeSearchBtn">✕</button>
+        <!-- نافذة قاموس الجمل المنبثقة -->
+        <div class="dict-modal-overlay" id="dictModal">
+            <div class="dict-modal-card">
+                <div class="dict-modal-header">
+                    <div class="dict-modal-title"><span>📖</span><span>قاموس الجمل المُكتسبة</span></div>
+                    <button class="hud-close-btn" onclick="document.getElementById('dictModal').classList.remove('active')">✕</button>
                 </div>
-                <div class="search-input-wrapper"><input type="text" class="search-input-field" placeholder="ابحث عن: My, Mine, His..."></div>
-                <div class="search-results-list">
-                    <a href="#" class="search-result-item" onclick="document.getElementById('searchModal').classList.remove('active');">
-                        <span class="search-result-title">💎 صفات وضمائر الملكية</span>
-                        <span class="search-result-desc">دليل شامل ومقارنة هندسية بين الصفات والضمائر.</span>
-                    </a>
+                <div style="font-size: 12.5px; font-weight: 800; color: var(--text-secondary); text-align: center;" id="dictSubtitleCount">
+                    أكمل تحديات الأسئلة لإضافة الجمل إلى قاموسك الشخصي!
+                </div>
+                <div class="icon-cards-list" id="dictCardsContainer">
+                    <!-- تُعبأ الجمل تلقائياً عند إنهاء التحديات -->
                 </div>
             </div>
         </div>
@@ -449,87 +436,57 @@
         <!-- نافذة اختبار التحدي اليومي -->
         <div class="modal-overlay" id="quizModal">
             <div class="quiz-modal-card">
-                <div class="quiz-header">
-                    <div class="quiz-title"><span>⚡</span><span>التحدي اليومي لصفات وضمائر الملكية</span></div>
-                    <button class="quiz-close-btn" id="closeQuizBtn">✕</button>
+                <div class="game-hud-bar">
+                    <div class="hud-item"><span>⚡</span><span>XP <span id="hudXpDisplay">0</span></span></div>
+                    <div class="hud-item"><span>🎯</span><span>تحدي الملكية</span></div>
+                    <button class="hud-close-btn" id="closeQuizBtn" title="إغلاق">✕</button>
+                </div>
+                <div class="quiz-top-status">
+                    <div class="quiz-counter-badge" id="quizScoreIndicator">السؤال 1 من 4</div>
                 </div>
                 <div class="quiz-body" id="quizBody"></div>
                 <div class="quiz-footer">
-                    <span id="quizScoreIndicator">النتيجة: 0 / 4</span>
+                    <span id="quizScoreText">النتيجة: 0 / 4</span>
                     <button class="quiz-next-btn" id="quizNextBtn" onclick="nextQuestion()">السؤال التالي ➔</button>
                 </div>
-            </div>
-        </div>
-
-        <!-- القائمة الجانبية -->
-        <div class="side-menu-overlay" id="sideMenu" style="background: rgba(5, 8, 17, 0.82);">
-            <div class="side-menu-drawer">
-                <div class="drawer-top-box">
-                    <div class="drawer-brand-info"><h3 class="drawer-brand-title">أكاديمية العلوم التطبيقية</h3><p class="drawer-brand-sub">قسم قواعد اللغة الإنجليزية</p></div>
-                    <div class="drawer-brand-icon">🎓</div>
-                </div>
-
-                <!-- كارت النقاط والتقدم المخصص داخل القائمة -->
-                <div class="drawer-stats-card">
-                    <div class="drawer-stats-title"><span>⭐ نقاط إنجازك (XP)</span><span id="drawerXpDisplay" class="drawer-stats-value">0 XP</span></div>
-                    <div class="drawer-stats-title" style="margin-top: 4px;"><span>📅 التقدم في التحدي</span><span id="drawerProgressDisplay" style="color: var(--heading-pure-color); font-weight: 900;">اليوم 1 من 10</span></div>
-                </div>
-
-                <div class="drawer-links-list">
-                    <div class="drawer-link-item drawer-quiz-btn" id="menuQuizTrigger">
-                        <span class="drawer-link-left"><span>⚡</span> ابدأ تحدي اليوم</span><span>➔</span>
-                    </div>
-
-                    <a href="index.html" class="drawer-link-item"><span class="drawer-link-left"><span>🏠</span> الرئيسية</span><span>➔</span></a>
-                    <a href="english.html" class="drawer-link-item"><span class="drawer-link-left"><span>🇬🇧</span> الإنجليزي</span><span>➔</span></a>
-                    <a href="fundamentals-path.html" class="drawer-link-item active"><span class="drawer-link-left"><span>📖</span> القواعد والأساسيات</span><span>➔</span></a>
-                    <a href="surveying.html" class="drawer-link-item"><span class="drawer-link-left"><span>📐</span> المساحة</span><span>➔</span></a>
-                    <a href="programming.html" class="drawer-link-item"><span class="drawer-link-left"><span>💻</span> البرمجة</span><span>➔</span></a>
-                </div>
-                <div class="drawer-footer">English Master v2.1 • Pro Edition</div>
             </div>
         </div>
 
         <div class="container">
             <!-- شريط الهيدر -->
             <div class="nav-bar">
-                <div class="nav-right-group">
-                    <a href="fundamentals-path.html" class="home-icon-btn" title="الرجوع للقائمة">🏠</a>
-                    <div class="nav-titles-box">
-                        <h1 class="nav-main-title">صفات وضمائر الملكية</h1>
-                        <p class="nav-sub-title">Possessive Adjectives & Pronouns</p>
-                        <p class="nav-academy-title">أكاديمية العلوم التطبيقية</p>
-                    </div>
+                <a href="fundamentals-path.html" class="back-btn" title="الرجوع للقائمة">←</a>
+                <div class="brand-minimalist-box">
+                    <span class="brand-main-title">صفات وضمائر الملكية (Possessives)</span>
+                    <span class="brand-subtitle-text">أكاديمية العلوم التطبيقية</span>
                 </div>
-                <div class="nav-left-group">
-                    <button class="nav-icon-btn" id="themeToggleBtn" title="تغيير الثيم">🌙</button>
-                    <button class="nav-icon-btn" id="searchBtn" title="بحث">🔍</button>
-                    <button class="nav-icon-btn" id="menuBtn" title="القائمة">☰</button>
+                <div class="nav-actions-group">
+                    <button class="theme-btn" id="themeToggleBtn" title="تغيير الثيم">🌙</button>
                 </div>
             </div>
 
             <!-- الكارت العلوي الهندسي -->
             <div class="hero-card">
                 <h1 class="hero-title-en">Possessive Adjectives & Pronouns</h1>
-                <h2 class="hero-title-ar">صفات وضمائر الملكية</h2>
+                <h2 class="hero-title-ar">صفات وضمائر الملكية في اللغة الإنجليزية</h2>
 
                 <div class="table-container">
                     <table class="styled-master-table">
                         <thead>
                             <tr>
-                                <th>الدلالة بالعربية</th>
-                                <th class="th-adj">صفة الملكية (Adjective)</th>
-                                <th class="th-pronoun">ضمير الملكية (Pronoun)</th>
+                                <th class="th-poss">الدلالة بالعربية</th>
+                                <th>صفة الملكية (Adjective)</th>
+                                <th>ضمير الملكية (Pronoun)</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr><td>ملكي (خاصتي)</td><td><strong class="adj-highlight">my</strong></td><td><strong class="pronoun-highlight">mine</strong></td></tr>
-                            <tr><td>ملكه</td><td><strong class="adj-highlight">his</strong></td><td><strong class="pronoun-highlight">his</strong></td></tr>
-                            <tr><td>ملكها</td><td><strong class="adj-highlight">her</strong></td><td><strong class="pronoun-highlight">hers</strong></td></tr>
-                            <tr><td>ملكه / ملكها (لغير العاقل)</td><td><strong class="adj-highlight">its</strong></td><td><strong class="pronoun-highlight">—</strong></td></tr>
-                            <tr><td>ملكنا</td><td><strong class="adj-highlight">our</strong></td><td><strong class="pronoun-highlight">ours</strong></td></tr>
-                            <tr><td>ملكك / ملككم</td><td><strong class="adj-highlight">your</strong></td><td><strong class="pronoun-highlight">yours</strong></td></tr>
-                            <tr><td>ملكهم / ملكهن</td><td><strong class="adj-highlight">their</strong></td><td><strong class="pronoun-highlight">theirs</strong></td></tr>
+                            <tr><td>ملكي (خاصتي)</td><td><strong class="adj-word">my</strong></td><td><strong class="pronoun-word">mine</strong></td></tr>
+                            <tr><td>ملكه</td><td><strong class="adj-word">his</strong></td><td><strong class="pronoun-word">his</strong></td></tr>
+                            <tr><td>ملكها</td><td><strong class="adj-word">her</strong></td><td><strong class="pronoun-word">hers</strong></td></tr>
+                            <tr><td>ملكه / ملكها (غير عاقل)</td><td><strong class="adj-word">its</strong></td><td><strong class="pronoun-word">—</strong></td></tr>
+                            <tr><td>ملكنا</td><td><strong class="adj-word">our</strong></td><td><strong class="pronoun-word">ours</strong></td></tr>
+                            <tr><td>ملكك / ملككم</td><td><strong class="adj-word">your</strong></td><td><strong class="pronoun-word">yours</strong></td></tr>
+                            <tr><td>ملكهم / ملكهن</td><td><strong class="adj-word">their</strong></td><td><strong class="pronoun-word">theirs</strong></td></tr>
                         </tbody>
                     </table>
                 </div>
@@ -538,163 +495,264 @@
             <!-- كارت الشرح الشامل الرئيسي -->
             <div class="lesson-card-full" id="mainLessonCard">
                 <div class="lesson-header">
-                    <div class="app-title-wrapper" style="border-right-color: var(--primary);">
+                    <div class="app-title-wrapper">
                         <h2 class="app-main-heading">
-                            <span class="adj-highlight">Possessive Adjectives</span> & <span class="pronoun-highlight">Pronouns</span>
+                            Mastering <span style="color:var(--accent);">Possessives</span>
                         </h2>
-                        <div class="app-sub-pill"><span>الفرق الجوهري بين ما يتبع الاسم وما يحل محله 🎯</span></div>
+                        <div class="app-sub-pill"><span>دليلك الشامل لاحتراف 7 صفات و 7 ضمائر للملكية 🎯</span></div>
                     </div>
                 </div>
 
-                <!-- 1. صفات الملكية -->
-                <div class="glass-glow-card adj-card" id="sectionAdj">
-                    <div class="time-badge badge-adj">صفات • Adjectives</div>
-                    <div class="usage-title">💎 صفات الملكية (Possessive Adjectives)</div>
+                <!-- 1. صفات الملكية (Possessive Adjectives) - أزرق -->
+                <div class="glass-glow-card" id="sectionAdj">
+                    <div class="usage-title-centered">
+                        <span class="usage-title-ar">صفات الملكية (السبع)</span>
+                        <span class="usage-title-bracket">(My, Your, His, Her, Its, Our, Their)</span>
+                        <span class="usage-title-en">Possessive Adjectives</span>
+                    </div>
                     <div class="usage-content">
-                        تأتي <strong>دائماً قبل الاسم</strong> لتوضيح من يملك هذا الشيء، ولا يمكن أن تأتي وحدها أبداً بدون اسم بعدها.
-
-                        <div class="method-box" style="border-color: var(--primary); background: var(--bg-main); margin-top: 12px;">
-                            <div class="method-box-title" style="color: var(--primary);">🔍 القاعدة الهندسية للاستخدام</div>
-                            <div style="font-size: 12.5px; font-weight: 800; color: var(--text-primary); display: flex; flex-direction: column; gap: 6px; margin-top: 4px;">
-                                <div>🧱 <strong>المعادلة:</strong> صفة الملكية (<span class="adj-highlight">My, His, Her...</span>) + <strong>الاسم (Noun)</strong>.</div>
-                                <div>📌 <strong>مثال:</strong> This is <span class="adj-highlight">my</span> <span style="color:var(--heading-pure-color)">book</span>. (هذا كتابي).</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 2. ضمائر الملكية -->
-                <div class="glass-glow-card pronoun-card" id="sectionPronoun">
-                    <div class="time-badge badge-pronoun">ضمائر • Pronouns</div>
-                    <div class="usage-title">🎯 ضمائر الملكية (Possessive Pronouns)</div>
-                    <div class="usage-content">
-                        تحل <strong>محل الاسم المالك بالكامل</strong> لتفادي التكرار، وغالباً ما تأتي في نهاية الجملة ولا يأتي بعدها اسم.
-
-                        <div class="method-box" style="border-color: #059669; background: var(--bg-main); margin-top: 12px;">
-                            <div class="method-box-title" style="color: #059669;">🔍 القاعدة الهندسية للاستخدام</div>
-                            <div style="font-size: 12.5px; font-weight: 800; color: var(--text-primary); display: flex; flex-direction: column; gap: 6px; margin-top: 4px;">
-                                <div>🧱 <strong>المعادلة:</strong> الشيء المملوك + الفعل + ضمير الملكية (<span class="pronoun-highlight">Mine, Hers, Theirs...</span>).</div>
-                                <div>📌 <strong>مثال:</strong> This book is <span class="pronoun-highlight">mine</span>. (هذا الكتاب ملكي).</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 3. قسم التطبيقات العملية -->
-                <div style="margin-top: 12px; display: flex; flex-direction: column; gap: 12px;" id="sectionPractice">
-                    
-                    <div class="inner-practice-title-wrapper">
-                        <h3 class="inner-practice-heading">✨ التطبيق العملي المقارن للملكية</h3>
-                        <div class="app-sub-pill"><span>أمثلة عملية توضح الفرق بين الصفة والضمير 🎯</span></div>
-                    </div>
-                    
-                    <div class="icon-cards-list">
+                        تأتي <strong>دائماً قبل الاسم</strong> لتحديد لمن يتبع هذا الشيء، ولا يمكن أن تأتي وحدها في نهاية الجملة بدون اسم بعدها.
                         
-                        <!-- 1. كتابي -->
-                        <div class="icon-single-card" id="card-1">
-                            <div class="sentence-group">
-                                <div class="sentence-row">
-                                    <div class="line-en-1">This is <strong class="adj-highlight">my</strong> car.</div>
-                                    <button class="speak-btn" onclick="speakText('This is my car.', 'card-1', this)" title="استمع للنطق">🔊</button>
+                        <!-- كروت التطبيق العملي لصفات الملكية الـ 7 -->
+                        <div class="prep-practice-group">
+                            <div style="font-size: 12px; font-weight: 900; color: var(--adj-color); margin-top: 4px;">🎯 كروت صفات الملكية الـ 7 (باللون الأزرق):</div>
+                            <div class="icon-cards-list">
+                                <div class="icon-single-card" id="card-adj-1">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1">This is <span class="adj-word">my</span> car.</div>
+                                            <button class="speak-btn unified-speak" onclick="speakText('This is my car.', 'card-adj-1', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1"><span>هذه سيارتي.</span><span class="reason-badge-adj">صفة: My</span></div>
+                                    </div>
                                 </div>
-                                <div class="line-ar-1">هذه سيارتي (<strong class="adj-highlight">صفة</strong>).</div>
-                            </div>
-                            
-                            <div class="sentence-group" style="margin-top: 8px;">
-                                <div class="sentence-row">
-                                    <div class="line-en-2">This car is <strong class="pronoun-highlight">mine</strong>.</div>
-                                    <button class="speak-btn" onclick="speakText('This car is mine.', 'card-1', this)" title="استمع للنطق">🔊</button>
+                                <div class="icon-single-card" id="card-adj-2">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1">That is <span class="adj-word">your</span> book.</div>
+                                            <button class="speak-btn unified-speak" onclick="speakText('That is your book.', 'card-adj-2', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1"><span>ذلك كتابك.</span><span class="reason-badge-adj">صفة: Your</span></div>
+                                    </div>
                                 </div>
-                                <div class="line-ar-2">هذه السيارة ملكي (<strong class="pronoun-highlight">ضمير</strong>).</div>
-                            </div>
-                        </div>
-
-                        <!-- 2. سيارته -->
-                        <div class="icon-single-card" id="card-2">
-                            <div class="sentence-group">
-                                <div class="sentence-row">
-                                    <div class="line-en-1">That is <strong class="adj-highlight">his</strong> jacket.</div>
-                                    <button class="speak-btn" onclick="speakText('That is his jacket.', 'card-2', this)" title="استمع للنطق">🔊</button>
+                                <div class="icon-single-card" id="card-adj-3">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1">He lost <span class="adj-word">his</span> keys.</div>
+                                            <button class="speak-btn unified-speak" onclick="speakText('He lost his keys.', 'card-adj-3', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1"><span>هو فقد مفاتيحه.</span><span class="reason-badge-adj">صفة: His</span></div>
+                                    </div>
                                 </div>
-                                <div class="line-ar-1">تلك سترته (<strong class="adj-highlight">صفة</strong>).</div>
-                            </div>
-                            
-                            <div class="sentence-group" style="margin-top: 8px;">
-                                <div class="sentence-row">
-                                    <div class="line-en-2">That jacket is <strong class="pronoun-highlight">his</strong>.</div>
-                                    <button class="speak-btn" onclick="speakText('That jacket is his.', 'card-2', this)" title="استمع للنطق">🔊</button>
+                                <div class="icon-single-card" id="card-adj-4">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1">She loves <span class="adj-word">her</span> cat.</div>
+                                            <button class="speak-btn unified-speak" onclick="speakText('She loves her cat.', 'card-adj-4', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1"><span>هي تحب قطتها.</span><span class="reason-badge-adj">صفة: Her</span></div>
+                                    </div>
                                 </div>
-                                <div class="line-ar-2">تلك السترة ملكه (<strong class="pronoun-highlight">ضمير</strong>).</div>
-                            </div>
-                        </div>
-
-                        <!-- 3. حقيبتها -->
-                        <div class="icon-single-card" id="card-3">
-                            <div class="sentence-group">
-                                <div class="sentence-row">
-                                    <div class="line-en-1">This is <strong class="adj-highlight">her</strong> bag.</div>
-                                    <button class="speak-btn" onclick="speakText('This is her bag.', 'card-3', this)" title="استمع للنطق">🔊</button>
+                                <div class="icon-single-card" id="card-adj-5">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1">The dog wagged <span class="adj-word">its</span> tail.</div>
+                                            <button class="speak-btn unified-speak" onclick="speakText('The dog wagged its tail.', 'card-adj-5', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1"><span>الكلب هز ذيله.</span><span class="reason-badge-adj">صفة: Its</span></div>
+                                    </div>
                                 </div>
-                                <div class="line-ar-1">هذه حقيبتها (<strong class="adj-highlight">صفة</strong>).</div>
-                            </div>
-                            
-                            <div class="sentence-group" style="margin-top: 8px;">
-                                <div class="sentence-row">
-                                    <div class="line-en-2">This bag is <strong class="pronoun-highlight">hers</strong>.</div>
-                                    <button class="speak-btn" onclick="speakText('This bag is hers.', 'card-3', this)" title="استمع للنطق">🔊</button>
+                                <div class="icon-single-card" id="card-adj-6">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1">This is <span class="adj-word">our</span> house.</div>
+                                            <button class="speak-btn unified-speak" onclick="speakText('This is our house.', 'card-adj-6', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1"><span>هذا منزلنا.</span><span class="reason-badge-adj">صفة: Our</span></div>
+                                    </div>
                                 </div>
-                                <div class="line-ar-2">هذه الحقيبة ملكها (<strong class="pronoun-highlight">ضمير</strong>).</div>
-                            </div>
-                        </div>
-
-                        <!-- 4. منزلنا -->
-                        <div class="icon-single-card" id="card-4">
-                            <div class="sentence-group">
-                                <div class="sentence-row">
-                                    <div class="line-en-1">This is <strong class="adj-highlight">our</strong> house.</div>
-                                    <button class="speak-btn" onclick="speakText('This is our house.', 'card-4', this)" title="استمع للنطق">🔊</button>
+                                <div class="icon-single-card" id="card-adj-7">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1">They parked <span class="adj-word">their</span> car.</div>
+                                            <button class="speak-btn unified-speak" onclick="speakText('They parked their car.', 'card-adj-7', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1"><span>هم أوقفوا سيارتهم.</span><span class="reason-badge-adj">صفة: Their</span></div>
+                                    </div>
                                 </div>
-                                <div class="line-ar-1">هذا منزلنا (<strong class="adj-highlight">صفة</strong>).</div>
-                            </div>
-                            
-                            <div class="sentence-group" style="margin-top: 8px;">
-                                <div class="sentence-row">
-                                    <div class="line-en-2">This house is <strong class="pronoun-highlight">ours</strong>.</div>
-                                    <button class="speak-btn" onclick="speakText('This house is ours.', 'card-4', this)" title="استمع للنطق">🔊</button>
-                                </div>
-                                <div class="line-ar-2">هذا المنزل ملكنا (<strong class="pronoun-highlight">ضمير</strong>).</div>
                             </div>
                         </div>
-
                     </div>
                 </div>
 
-                <!-- كارت تشغيل التحدي اليومي -->
-                <div class="quiz-launch-card" id="launchQuizCardBtn">
-                    <div class="quiz-launch-info">
-                        <div class="quiz-launch-title">🎯 تحدي صفات وضمائر الملكية</div>
-                        <div class="quiz-launch-desc" id="quizLaunchDesc">اختبر فهمك للفرق بين صفات وضمائر الملكية الآن!</div>
+                <!-- 2. ضمائر الملكية (Possessive Pronouns) - أخضر -->
+                <div class="glass-glow-card" id="sectionPronoun">
+                    <div class="usage-title-centered">
+                        <span class="usage-title-ar">ضمائر الملكية (السبع)</span>
+                        <span class="usage-title-bracket">(Mine, Yours, His, Hers, Ours, Theirs)</span>
+                        <span class="usage-title-en">Possessive Pronouns</span>
                     </div>
-                    <button class="quiz-launch-btn" id="launchBtnText">ابدأ التحدي ➔</button>
+                    <div class="usage-content">
+                        تحل <strong>محل الاسم المالك بالكامل</strong> لتفادي التكرار، وعادة ما تأتي في نهاية الجملة ولا يأتي بعدها اسم.
+                        
+                        <!-- كروت التطبيق العملي لضمائر الملكية الـ 7 -->
+                        <div class="prep-practice-group">
+                            <div style="font-size: 12px; font-weight: 900; color: var(--pronoun-color); margin-top: 4px;">🎯 كروت ضمائر الملكية الـ 7 (باللون الأخضر):</div>
+                            <div class="icon-cards-list">
+                                <div class="icon-single-card" id="card-pro-1">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1">This car is <span class="pronoun-word">mine</span>.</div>
+                                            <button class="speak-btn unified-speak" onclick="speakText('This car is mine.', 'card-pro-1', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1"><span>هذه السيارة ملكي.</span><span class="reason-badge-pronoun">ضمير: Mine</span></div>
+                                    </div>
+                                </div>
+                                <div class="icon-single-card" id="card-pro-2">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1">That book is <span class="pronoun-word">yours</span>.</div>
+                                            <button class="speak-btn unified-speak" onclick="speakText('That book is yours.', 'card-pro-2', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1"><span>ذلك الكتاب ملكك.</span><span class="reason-badge-pronoun">ضمير: Yours</span></div>
+                                    </div>
+                                </div>
+                                <div class="icon-single-card" id="card-pro-3">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1">That laptop is <span class="pronoun-word">his</span>.</div>
+                                            <button class="speak-btn unified-speak" onclick="speakText('That laptop is his.', 'card-pro-3', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1"><span>ذلك الحاسوب ملكه.</span><span class="reason-badge-pronoun">ضمير: His</span></div>
+                                    </div>
+                                </div>
+                                <div class="icon-single-card" id="card-pro-4">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1">This bag is <span class="pronoun-word">hers</span>.</div>
+                                            <button class="speak-btn unified-speak" onclick="speakText('This bag is hers.', 'card-pro-4', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1"><span>هذه الحقيبة ملكها.</span><span class="reason-badge-pronoun">ضمير: Hers</span></div>
+                                    </div>
+                                </div>
+                                <div class="icon-single-card" id="card-pro-5">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1">*(لا يوجد ضمير ملكية لـ It)*</div>
+                                        </div>
+                                        <div class="line-ar-1"><span>(يُكتفى بصفة Its فقط).</span><span class="reason-badge-pronoun">بدون ضمير</span></div>
+                                    </div>
+                                </div>
+                                <div class="icon-single-card" id="card-pro-6">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1">This house is <span class="pronoun-word">ours</span>.</div>
+                                            <button class="speak-btn unified-speak" onclick="speakText('This house is ours.', 'card-pro-6', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1"><span>هذا المنزل ملكنا.</span><span class="reason-badge-pronoun">ضمير: Ours</span></div>
+                                    </div>
+                                </div>
+                                <div class="icon-single-card" id="card-pro-7">
+                                    <div class="sentence-group">
+                                        <div class="sentence-row">
+                                            <div class="line-en-1">The victory is <span class="pronoun-word">theirs</span>.</div>
+                                            <button class="speak-btn unified-speak" onclick="speakText('The victory is theirs.', 'card-pro-7', this)" title="استمع للنطق">🔊</button>
+                                        </div>
+                                        <div class="line-ar-1"><span>النصر ملكهم.</span><span class="reason-badge-pronoun">ضمير: Theirs</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- كارت تشغيل التحدي اليومي وقاموس الجمل الخارجي -->
+                <div class="quiz-launch-card" id="launchQuizCardBtn">
+                    <div class="quiz-launch-header-row">
+                        <span class="quiz-launch-title">تحدي صفات وضمائر الملكية 🎯</span>
+                    </div>
+                    <div class="quiz-launch-desc-top" id="quizLaunchDesc">
+                        40 سؤالاً في بنك التحديات • اختبر استيعابك في 4 أسئلة يومية متجددة واكسب 10 XP لكل إجابة صحيحة!
+                    </div>
+                    <button class="quiz-launch-main-btn" id="launchBtnText" onclick="launchQuizAction()">
+                        <span>ابدأ التحدي اليومي</span>
+                        <span>➔</span>
+                    </button>
+                    <!-- زر قاموس الجمل -->
+                    <button class="dict-launch-btn" onclick="openDictionaryModal(event)">
+                        📖 قاموس الجمل المُكتسبة
+                    </button>
                 </div>
 
             </div>
 
         </div>
 
-        <div class="bottom-nav">
-            <a href="index.html"><span>🏠</span>الرئيسية</a>
-            <a href="fundamentals-path.html" class="active"><span>🇬🇧</span>القواعد</a>
-            <a href="surveying.html"><span>📐</span>المساحة</a>
-            <a href="programming.html"><span>💻</span>البرمجة</a>
+        <!-- شريط التنقل السفلي -->
+        <div class="bottom-nav" id="bottomNav">
+            <a href="index.html"><span class="nav-icon">🏠</span>الرئيسية</a>
+            <a href="english.html" class="active"><span class="nav-icon">🇬🇧</span>الإنجليزي</a>
+            <a href="surveying.html"><span class="nav-icon">📐</span>المساحة</a>
+            <a href="programming.html"><span class="nav-icon">💻</span>البرمجة</a>
         </div>
 
         <script>
-            /* دالة النطق الصوتي */
+            const quizSentencesPool = [
+                { en: "This is my car.", ar: "هذه سيارتي.", badge: "صفة: My" },
+                { en: "That is your book.", ar: "ذلك كتابك.", badge: "صفة: Your" },
+                { en: "He lost his keys.", ar: "هو فقد مفاتيحه.", badge: "صفة: His" },
+                { en: "She loves her cat.", ar: "هي تحب قطتها.", badge: "صفة: Her" },
+                { en: "This car is mine.", ar: "هذه السيارة ملكي.", badge: "ضمير: Mine" },
+                { en: "That book is yours.", ar: "ذلك الكتاب ملكك.", badge: "ضمير: Yours" },
+                { en: "This house is ours.", ar: "هذا المنزل ملكنا.", badge: "ضمير: Ours" },
+                { en: "The victory is theirs.", ar: "النصر ملكهم.", badge: "ضمير: Theirs" }
+            ];
+
+            function getUnlockedSentences() {
+                return JSON.parse(localStorage.getItem("em_poss_unlocked_sentences") || "[]");
+            }
+
+            function openDictionaryModal(event) {
+                if(event) event.stopPropagation();
+                let unlocked = getUnlockedSentences();
+                let container = document.getElementById('dictCardsContainer');
+                let subtitle = document.getElementById('dictSubtitleCount');
+
+                if (unlocked.length === 0) {
+                    subtitle.innerText = "قاموسك فارغ حالياً! أكمل تحدي الأسئلة لإضافة أول جمل لقاموسك.";
+                    container.innerHTML = `
+                        <div style="text-align:center; padding: 30px; color: var(--text-secondary); font-weight: 800; font-size: 14px;">
+                            🔒 لا توجد جمل مكتسبة بعد. ابدأ التحدي الآن واكسب جمل جديدة!
+                        </div>
+                    `;
+                } else {
+                    subtitle.innerText = `إليك الجمل التي أتقنتها وأضفتها لقاموسك (${unlocked.length} جملة):`;
+                    let html = '';
+                    unlocked.forEach((item, index) => {
+                        let cardId = 'unlocked-card-' + index;
+                        html += `
+                            <div class="icon-single-card" id="${cardId}">
+                                <div class="sentence-group">
+                                    <div class="sentence-row">
+                                        <div class="line-en-1">${item.en}</div>
+                                        <button class="speak-btn unified-speak" onclick="speakText('${item.en}', '${cardId}', this)" title="استمع للنطق">🔊</button>
+                                    </div>
+                                    <div class="line-ar-1">
+                                        <span>${item.ar}</span>
+                                        <span class="reason-badge-adj">${item.badge}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    container.innerHTML = html;
+                }
+                document.getElementById('dictModal').classList.add('active');
+            }
+
             function speakText(text, cardId, buttonElement) {
                 if ('speechSynthesis' in window) {
                     window.speechSynthesis.cancel();
-
                     document.querySelectorAll('.icon-single-card').forEach(card => card.classList.remove('scanning'));
                     document.querySelectorAll('.speak-btn').forEach(btn => btn.classList.remove('playing'));
 
@@ -721,9 +779,7 @@
                 }
             }
 
-            /* مولد الصوت التفاعلي الموسيقي */
             const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
             function playSound(type) {
                 if (!audioCtx) return;
                 if (audioCtx.state === 'suspended') { audioCtx.resume(); }
@@ -738,8 +794,10 @@
                         osc.frequency.setValueAtTime(freq, now + (index * 0.08));
                         gain.gain.setValueAtTime(0.12, now + (index * 0.08));
                         gain.gain.exponentialRampToValueAtTime(0.001, now + (index * 0.08) + 0.3);
-                        osc.connect(gain); gain.connect(audioCtx.destination);
-                        osc.start(now + (index * 0.08)); osc.stop(now + (index * 0.08) + 0.3);
+                        osc.connect(gain);
+                        gain.connect(audioCtx.destination);
+                        osc.start(now + (index * 0.08));
+                        osc.stop(now + (index * 0.08) + 0.3);
                     });
                 } else if (type === 'wrong') {
                     let osc = audioCtx.createOscillator();
@@ -749,253 +807,205 @@
                     osc.frequency.linearRampToValueAtTime(110, now + 0.2);
                     gain.gain.setValueAtTime(0.1, now);
                     gain.gain.exponentialRampToValueAtTime(0.01, now + 0.2);
-                    osc.connect(gain); gain.connect(audioCtx.destination);
-                    osc.start(now); osc.stop(now + 0.2);
+                    osc.connect(gain);
+                    gain.connect(audioCtx.destination);
+                    osc.start(now);
+                    osc.stop(now + 0.2);
                 }
             }
 
-            /* بنك أسئلة صفات وضمائر الملكية (40 سؤالاً خارجياً ومنسقاً على 10 أيام تلقائياً) */
             const masterQuizBank = [
-                // اليوم 1
-                { q: "Please give me ( &nbsp;......&nbsp; ) notebook.", options: ["my", "mine", "me"], correct: 0, type: "adj" },
-                { q: "That green bicycle is ( &nbsp;......&nbsp; ).", options: ["my", "mine", "I"], correct: 1, type: "pronoun" },
-                { q: "Do you know where ( &nbsp;......&nbsp; ) keys are?", options: ["your", "yours", "you"], correct: 0, type: "adj" },
-                { q: "This wonderful painting is ( &nbsp;......&nbsp; ).", options: ["your", "yours", "you"], correct: 1, type: "pronoun" },
-                // اليوم 2
-                { q: "The dog wagged ( &nbsp;......&nbsp; ) tail happily.", options: ["it", "its", "it's"], correct: 1, type: "adj" },
-                { q: "He fixed ( &nbsp;......&nbsp; ) computer yesterday.", options: ["his", "him", "he"], correct: 0, type: "adj" },
-                { q: "The success of the project is ( &nbsp;......&nbsp; ).", options: ["his", "him", "he"], correct: 0, type: "pronoun" },
-                { q: "She loves wearing ( &nbsp;......&nbsp; ) new shoes.", options: ["her", "hers", "she"], correct: 0, type: "adj" },
-                // اليوم 3
-                { q: "That elegant hat is definitely ( &nbsp;......&nbsp; ).", options: ["her", "hers", "she"], correct: 1, type: "pronoun" },
-                { q: "We invited all ( &nbsp;......&nbsp; ) friends to dinner.", options: ["our", "ours", "us"], correct: 0, type: "adj" },
-                { q: "The victory in the tournament was ( &nbsp;......&nbsp; ).", options: ["our", "ours", "we"], correct: 1, type: "pronoun" },
-                { q: "They parked ( &nbsp;......&nbsp; ) car outside.", options: ["their", "theirs", "them"], correct: 0, type: "adj" },
-                // اليوم 4
-                { q: "Those comfortable seats are ( &nbsp;......&nbsp; ).", options: ["their", "theirs", "them"], correct: 1, type: "pronoun" },
-                { q: "I can't find ( &nbsp;......&nbsp; ) phone anywhere.", options: ["my", "mine", "me"], correct: 0, type: "adj" },
-                { q: "Is this coffee ( &nbsp;......&nbsp; ) or mine?", options: ["your", "yours", "you"], correct: 1, type: "pronoun" },
-                { q: "The cat licked ( &nbsp;......&nbsp; ) paws.", options: ["it", "its", "it's"], correct: 1, type: "adj" },
-                // اليوم 5
-                { q: "Mark lost ( &nbsp;......&nbsp; ) watch at the park.", options: ["his", "him", "he"], correct: 0, type: "adj" },
-                { q: "That laptop on the desk is ( &nbsp;......&nbsp; ).", options: ["his", "him", "he"], correct: 0, type: "pronoun" },
-                { q: "Mary is reading ( &nbsp;......&nbsp; ) favorite novel.", options: ["her", "hers", "she"], correct: 0, type: "adj" },
-                { q: "The award for the best student is ( &nbsp;......&nbsp; ).", options: ["her", "hers", "she"], correct: 1, type: "pronoun" },
-                // اليوم 6
-                { q: "Teacher, we finished ( &nbsp;......&nbsp; ) homework.", options: ["our", "ours", "us"], correct: 0, type: "adj" },
-                { q: "This classroom is fully ( &nbsp;......&nbsp; ).", options: ["our", "ours", "we"], correct: 1, type: "pronoun" },
-                { q: "Students must submit ( &nbsp;......&nbsp; ) projects on time.", options: ["their", "theirs", "them"], correct: 0, type: "adj" },
-                { q: "Those medals on the wall are ( &nbsp;......&nbsp; ).", options: ["their", "theirs", "them"], correct: 1, type: "pronoun" },
-                // اليوم 7
-                { q: "Open ( &nbsp;......&nbsp; ) books to page ten, please.", options: ["your", "yours", "you"], correct: 0, type: "adj" },
-                { q: "I think this umbrella is ( &nbsp;......&nbsp; ).", options: ["my", "mine", "me"], correct: 1, type: "pronoun" },
-                { q: "The bird built ( &nbsp;......&nbsp; ) nest in a tree.", options: ["it", "its", "it's"], correct: 1, type: "adj" },
-                { q: "Paul is washing ( &nbsp;......&nbsp; ) new motorcycle.", options: ["his", "him", "he"], correct: 0, type: "adj" },
-                // اليوم 8
-                { q: "That delicious cake is ( &nbsp;......&nbsp; ) for the party.", options: ["their", "theirs", "them"], correct: 1, type: "pronoun" },
-                { q: "Linda is brushing ( &nbsp;......&nbsp; ) long hair.", options: ["her", "hers", "she"], correct: 0, type: "adj" },
-                { q: "Can we share ( &nbsp;......&nbsp; ) notes together?", options: ["our", "ours", "us"], correct: 0, type: "adj" },
-                { q: "Make sure you clean ( &nbsp;......&nbsp; ) room.", options: ["your", "yours", "you"], correct: 0, type: "adj" },
-                // اليوم 9
-                { q: "The decision was entirely ( &nbsp;......&nbsp; ) to make.", options: ["my", "mine", "me"], correct: 1, type: "pronoun" },
-                { q: "Every nation has ( &nbsp;......&nbsp; ) own traditions.", options: ["it", "its", "it's"], correct: 1, type: "adj" },
-                { q: "The manager checked ( &nbsp;......&nbsp; ) office schedule.", options: ["his", "him", "he"], correct: 0, type: "adj" },
-                { q: "The responsibility is strictly ( &nbsp;......&nbsp; ).", options: ["their", "theirs", "them"], correct: 1, type: "pronoun" },
-                // اليوم 10
-                { q: "We will protect ( &nbsp;......&nbsp; ) local community.", options: ["our", "ours", "us"], correct: 0, type: "adj" },
-                { q: "She wrote ( &nbsp;......&nbsp; ) name at the top.", options: ["her", "hers", "she"], correct: 0, type: "adj" },
-                { q: "Are these tickets ( &nbsp;......&nbsp; ) for tonight?", options: ["your", "yours", "you"], correct: 1, type: "pronoun" },
-                { q: "The company announced ( &nbsp;......&nbsp; ) annual profits.", options: ["its", "it", "their"], correct: 0, type: "adj" }
+                { q: "Please give me ( ...... ) notebook.", arTrans: "الترجمة: من فضلك أعطني دفتر ملاحظاتي.", options: ["my", "mine", "me", "I"], correct: 0 },
+                { q: "That green bicycle is ( ...... ).", arTrans: "الترجمة: تلك الدراجة الخضراء ملكي.", options: ["my", "mine", "I", "me"], correct: 1 },
+                { q: "Do you know where ( ...... ) keys are?", arTrans: "الترجمة: هل تعرف أين مفاتيحك؟", options: ["your", "yours", "you", "them"], correct: 0 },
+                { q: "This wonderful painting is ( ...... ).", arTrans: "الترجمة: هذه اللوحة الرائعة ملكك.", options: ["your", "yours", "you", "their"], correct: 1 },
+
+                { q: "He fixed ( ...... ) computer yesterday.", arTrans: "الترجمة: هو أصلح حاسوبه المحمول أمس.", options: ["his", "him", "he", "hers"], correct: 0 },
+                { q: "The success of the project is ( ...... ).", arTrans: "الترجمة: نجاح المشروع ملكه.", options: ["his", "him", "he", "its"], correct: 0 },
+                { q: "She loves wearing ( ...... ) new shoes.", arTrans: "الترجمة: هي تحب ارتداء حذائها الجديد.", options: ["her", "hers", "she", "they"], correct: 0 },
+                { q: "That elegant hat is definitely ( ...... ).", arTrans: "الترجمة: تلك القبعة الأنيقة ملكها بالتأكيد.", options: ["her", "hers", "she", "our"], correct: 1 }
             ];
 
             let userXp = parseInt(localStorage.getItem("em_user_xp") || "0");
-            let currentDailyQuestions = [];
-            let currentQuizIndex = 0;
-            let currentScore = 0;
+            let currentDayIndex = parseInt(localStorage.getItem("em_poss_day") || "0");
+            let lastQuizTimestamp = parseInt(localStorage.getItem("em_poss_last_quiz_time") || "0");
+            let currentDayQuestionOffset = currentDayIndex * 4;
+            let currentSubQuestionIndex = 0;
             let answered = false;
+            let sessionXpEarned = 0;
+            let countdownInterval = null;
 
-            function getTodayQuestions() {
-                let now = new Date().getTime();
-                let savedTimestamp = parseInt(localStorage.getItem("em_poss_timestamp") || "0");
-                let dayIndex = parseInt(localStorage.getItem("em_poss_day_index") || "0");
+            function updateCountdownTimer() {
                 let twentyFourHours = 24 * 60 * 60 * 1000;
+                let now = Date.now();
+                let timeLeft = twentyFourHours - (now - lastQuizTimestamp);
 
-                if (now - savedTimestamp > twentyFourHours || savedTimestamp === 0) {
-                    if (savedTimestamp !== 0) {
-                        dayIndex = (dayIndex + 1) % 10; 
-                    }
-                    localStorage.setItem("em_poss_timestamp", now);
-                    localStorage.setItem("em_poss_day_index", dayIndex);
+                let btnEl = document.getElementById("launchBtnText");
+                let descEl = document.getElementById("quizLaunchDesc");
+                if (!btnEl) return;
+
+                if (timeLeft <= 0) {
                     localStorage.setItem("em_poss_completed_today", "false");
+                    checkQuizAvailability();
+                    if (countdownInterval) clearInterval(countdownInterval);
+                    return;
                 }
 
-                let startIndex = dayIndex * 4;
-                return masterQuizBank.slice(startIndex, startIndex + 4);
-            }
+                let hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                let minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                let seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-            function updateMenuStats() {
-                let userXp = parseInt(localStorage.getItem("em_user_xp") || "0");
-                let dayIndex = parseInt(localStorage.getItem("em_poss_day_index") || "0");
-                if (document.getElementById("drawerXpDisplay")) {
-                    document.getElementById("drawerXpDisplay").innerText = userXp + " XP";
-                }
-                if (document.getElementById("drawerProgressDisplay")) {
-                    document.getElementById("drawerProgressDisplay").innerText = `اليوم ${dayIndex + 1} من 10`;
-                }
+                btnEl.innerHTML = `<span>⏳ المتبقي للتحدي القادم: ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}</span>`;
+                if (descEl) descEl.innerText = "لقد أكملت تحدي اليوم بنجاح. انتظر فتح المجموعة التالية!";
             }
 
             function checkQuizAvailability() {
                 let isCompleted = localStorage.getItem("em_poss_completed_today") === "true";
-                let descEl = document.getElementById("quizLaunchDesc");
                 let btnEl = document.getElementById("launchBtnText");
+                let descEl = document.getElementById("quizLaunchDesc");
 
                 if (isCompleted) {
-                    descEl.innerText = "🎉 لقد أكملت تحدي اليوم بنجاح! عد غداً للمزيد من التحديات.";
-                    btnEl.innerText = "عرض النتيجة ➔";
+                    if (countdownInterval) clearInterval(countdownInterval);
+                    updateCountdownTimer();
+                    countdownInterval = setInterval(updateCountdownTimer, 1000);
                 } else {
-                    descEl.innerText = "اختبر فهمك للفرق بين صفات وضمائر الملكية الآن!";
-                    btnEl.innerText = "ابدأ التحدي ➔";
+                    if (countdownInterval) clearInterval(countdownInterval);
+                    if (btnEl) btnEl.innerHTML = `<span>ابدأ التحدي اليومي</span><span>➔</span>`;
+                    if (descEl) descEl.innerText = "40 سؤالاً في بنك التحديات • اختبر استيعابك في 4 أسئلة يومية متجددة واكسب 10 XP لكل إجابة صحيحة!";
                 }
             }
 
             function loadQuizQuestion() {
                 answered = false;
-                let q = currentDailyQuestions[currentQuizIndex];
+                let globalIndex = currentDayQuestionOffset + currentSubQuestionIndex;
+                if (globalIndex >= masterQuizBank.length || currentSubQuestionIndex >= 4) {
+                    showQuizCompletion();
+                    return;
+                }
+
+                let q = masterQuizBank[globalIndex];
                 let body = document.getElementById('quizBody');
                 let nextBtn = document.getElementById('quizNextBtn');
                 nextBtn.classList.remove('active');
 
                 let html = `<div class="quiz-question-card" id="activeQuestionCard">
-                    <div class="quiz-question-text">السؤال (${currentQuizIndex + 1}/4):<br>${q.q}</div>
-                    <div class="quiz-options-grid">`;
+                    <div class="quiz-question-instruction">
+                        <span>اختر الأداة المناسبة لسد الفراغ في الجملة التالية:</span>
+                        <span>🔍</span>
+                    </div>
+                    <div class="quiz-translation-box">
+                        <span>${q.arTrans}</span>
+                    </div>
+                    <div class="quiz-sentence-display">${q.q}</div>
+                    <div class="quiz-options-grid-2x2">`;
                 
                 q.options.forEach((opt, idx) => {
-                    html += `<button class="quiz-option-btn" onclick="checkAnswer(${idx}, this)">${opt}</button>`;
+                    html += `<button class="quiz-option-btn-box" onclick="checkAnswer(${idx}, this)">${opt}</button>`;
                 });
 
                 html += `</div></div>`;
                 body.innerHTML = html;
-                document.getElementById('quizScoreIndicator').innerText = `السؤال (${currentQuizIndex + 1}/4) • النقاط المكتسبة`;
+                document.getElementById('quizScoreIndicator').innerText = `السؤال ${currentSubQuestionIndex + 1} من 4`;
+                document.getElementById('hudXpDisplay').innerText = sessionXpEarned;
             }
 
             function checkAnswer(selectedIndex, btnElement) {
                 if (answered) return;
                 answered = true;
-                let q = currentDailyQuestions[currentQuizIndex];
-                let optionButtons = document.querySelectorAll('.quiz-option-btn');
+                let globalIndex = currentDayQuestionOffset + currentSubQuestionIndex;
+                let q = masterQuizBank[globalIndex];
+                let optionButtons = document.querySelectorAll('.quiz-option-btn-box');
                 let cardElement = document.getElementById('activeQuestionCard');
 
                 if (selectedIndex === q.correct) {
-                    currentScore++;
-                    userXp += 10; 
+                    sessionXpEarned += 10;
+                    userXp += 10;
                     localStorage.setItem("em_user_xp", userXp);
-                    updateMenuStats();
+                    document.getElementById('hudXpDisplay').innerText = sessionXpEarned;
 
-                    playSound('success'); 
-
-                    if (cardElement) {
-                        if (q.type === 'adj') {
-                            btnElement.classList.add('correct-adj');
-                            cardElement.classList.add('adj-success-fx');
-                        } else {
-                            btnElement.classList.add('correct-pronoun');
-                            cardElement.classList.add('pronoun-success-fx');
-                        }
-                    }
+                    playSound('success');
+                    btnElement.classList.add('correct');
+                    if (cardElement) cardElement.classList.add('success-fx');
                 } else {
                     btnElement.classList.add('wrong');
-                    if (q.type === 'adj') {
-                        optionButtons[q.correct].classList.add('correct-adj');
-                    } else {
-                        optionButtons[q.correct].classList.add('correct-pronoun');
-                    }
-                    playSound('wrong'); 
+                    optionButtons[q.correct].classList.add('correct');
+                    playSound('wrong');
                 }
-
                 document.getElementById('quizNextBtn').classList.add('active');
             }
 
             function nextQuestion() {
-                currentQuizIndex++;
-                if (currentQuizIndex < currentDailyQuestions.length) {
+                currentSubQuestionIndex++;
+                if (currentSubQuestionIndex < 4 && (currentDayQuestionOffset + currentSubQuestionIndex) < masterQuizBank.length) {
                     loadQuizQuestion();
                 } else {
+                    localStorage.setItem("em_poss_last_quiz_time", Date.now());
                     localStorage.setItem("em_poss_completed_today", "true");
-                    checkQuizAvailability();
-                    updateMenuStats();
 
-                    let body = document.getElementById('quizBody');
-                    document.getElementById('quizNextBtn').classList.remove('active');
-                    body.innerHTML = `<div class="quiz-question-card adj-success-fx" style="text-align:center; padding: 24px; gap: 14px;">
-                        <h3 style="margin:0; font-size: 18px; color: var(--heading-pure-color);">🎉 ممتاز جداً! أنهيت تحدي اليوم</h3>
-                        <p style="margin:0; font-size: 14px; color: var(--text-secondary);">لقد أجبت بشكل صحيح وحصلت على رصيد إجمالي ممتاز من النقاط!</p>
-                        <p style="margin:0; font-size: 15px; color: var(--primary); font-weight: 950;">إجمالي رصيدك الحالي: ${userXp} XP ⭐</p>
-                        <button onclick="document.getElementById('quizModal').classList.remove('active')" style="background:var(--accent); color:#fff; border:none; padding:10px 20px; border-radius:12px; font-weight:900; cursor:pointer; font-family:'Cairo'; margin-top:6px;">إغلاق والعودة للدراسة ➔</button>
-                    </div>`;
-                    playSound('success');
+                    let startPoolIdx = (currentDayIndex * 4) % quizSentencesPool.length;
+                    let newlyEarnedSentences = quizSentencesPool.slice(startPoolIdx, startPoolIdx + 4);
+
+                    let unlocked = getUnlockedSentences();
+                    newlyEarnedSentences.forEach(newSent => {
+                        if (!unlocked.some(item => item.en === newSent.en)) {
+                            unlocked.push(newSent);
+                        }
+                    });
+                    localStorage.setItem("em_poss_unlocked_sentences", JSON.stringify(unlocked));
+
+                    currentDayIndex = (currentDayIndex + 1) % 10;
+                    localStorage.setItem("em_poss_day", currentDayIndex);
+                    currentDayQuestionOffset = currentDayIndex * 4;
+                    currentSubQuestionIndex = 0;
+
+                    showQuizCompletion();
                 }
             }
 
-            function restartQuiz() {
-                currentDailyQuestions = getTodayQuestions();
-                currentQuizIndex = 0;
-                currentScore = 0;
-                loadQuizQuestion();
+            function showQuizCompletion() {
+                let body = document.getElementById('quizBody');
+                document.getElementById('quizNextBtn').classList.remove('active');
+                body.innerHTML = `<div class="quiz-question-card success-fx" style="text-align:center; padding: 24px; gap: 14px;">
+                    <h3 style="margin:0; font-size: 18px; color: var(--heading-pure-color);">🎉 ممتاز جداً! أنهيت تحدي اليوم</h3>
+                    <p style="margin:0; font-size: 14px; color: var(--text-secondary);">تم إضافة جمل جديدة إلى <strong>قاموس الجمل المُكتسبة</strong> واكسبت ${sessionXpEarned} نقطة XP!</p>
+                    <button onclick="document.getElementById('quizModal').classList.remove('active'); location.reload();" style="background:var(--accent); color:#fff; border:none; padding:10px 20px; border-radius:18px; font-weight:900; cursor:pointer; font-family:'Cairo'; margin-top:6px;">إغلاق وعرض القاموس ➔</button>
+                </div>`;
+                playSound('success');
+                checkQuizAvailability();
+            }
+
+            function launchQuizAction() {
+                let isCompleted = localStorage.getItem("em_poss_completed_today") === "true";
+                if (isCompleted) {
+                    if (confirm("هل تريد إعادة تعيين التحدي والبدء من جديد للتجربة؟")) {
+                        localStorage.removeItem("em_poss_completed_today");
+                        localStorage.removeItem("em_poss_last_quiz_time");
+                        location.reload();
+                    }
+                    return;
+                }
+
+                let quizModal = document.getElementById("quizModal");
+                if (quizModal) {
+                    quizModal.classList.add("active");
+                    sessionXpEarned = 0;
+                    currentSubQuestionIndex = 0;
+                    loadQuizQuestion();
+                }
             }
 
             document.addEventListener("DOMContentLoaded", function() {
-                updateMenuStats();
                 checkQuizAvailability();
 
-                let launchBtn = document.getElementById("launchQuizCardBtn");
-                let menuQuizTrigger = document.getElementById("menuQuizTrigger");
-                let quizModal = document.getElementById("quizModal");
                 let closeQuizBtn = document.getElementById("closeQuizBtn");
-                let sideMenu = document.getElementById("sideMenu");
+                let quizModal = document.getElementById("quizModal");
 
-                if (launchBtn && quizModal) {
-                    launchBtn.addEventListener("click", () => {
-                        quizModal.classList.add("active");
-                        restartQuiz();
-                    });
-                }
-                if (menuQuizTrigger && quizModal) {
-                    menuQuizTrigger.addEventListener("click", () => {
-                        if (sideMenu) sideMenu.classList.remove("active");
-                        quizModal.classList.add("active");
-                        restartQuiz();
-                    });
-                }
                 if (closeQuizBtn && quizModal) {
                     closeQuizBtn.addEventListener("click", () => {
                         quizModal.classList.remove("active");
                         checkQuizAvailability();
-                        updateMenuStats();
                     });
                 }
-
-                /* تفاعل حدود الكارت الرئيسي مع التمرير */
-                window.addEventListener('scroll', function() {
-                    let sectionAdj = document.getElementById('sectionAdj');
-                    let sectionPronoun = document.getElementById('sectionPronoun');
-                    let sectionPractice = document.getElementById('sectionPractice');
-                    let mainCard = document.getElementById('mainLessonCard');
-
-                    if (!mainCard || !sectionAdj || !sectionPronoun || !sectionPractice) return;
-                    let scrollPosition = window.scrollY + window.innerHeight / 2;
-
-                    let adjTop = sectionAdj.offsetTop + mainCard.offsetTop;
-                    let proTop = sectionPronoun.offsetTop + mainCard.offsetTop;
-                    let pracTop = sectionPractice.offsetTop + mainCard.offsetTop;
-
-                    if (scrollPosition >= pracTop) {
-                        mainCard.style.setProperty('--current-border-color', '#8B5CF6'); 
-                    } else if (scrollPosition >= proTop) {
-                        mainCard.style.setProperty('--current-border-color', '#059669'); 
-                    } else {
-                        mainCard.style.setProperty('--current-border-color', '#D946EF'); 
-                    }
-                });
 
                 let themeBtn = document.getElementById("themeToggleBtn");
                 function applyTheme(isDark) {
@@ -1015,21 +1025,6 @@
                         applyTheme(!document.documentElement.classList.contains("dark-mode"));
                     });
                 }
-
-                let searchBtn = document.getElementById("searchBtn");
-                let searchModal = document.getElementById("searchModal");
-                let closeSearchBtn = document.getElementById("closeSearchBtn");
-                if (searchBtn && searchModal) { searchBtn.addEventListener("click", () => { searchModal.classList.add("active"); }); }
-                if (closeSearchBtn && searchModal) { closeSearchBtn.addEventListener("click", () => { searchModal.classList.remove("active"); }); }
-
-                let menuBtn = document.getElementById("menuBtn");
-                if (menuBtn && sideMenu) {
-                    menuBtn.addEventListener("click", () => {
-                        updateMenuStats();
-                        sideMenu.classList.add("active");
-                    });
-                }
-                if (sideMenu) { sideMenu.addEventListener("click", (e) => { if (e.target === sideMenu) sideMenu.classList.remove("active"); }); }
             });
 
             window.onscroll = function() {
@@ -1038,7 +1033,23 @@
                 let scrolled = (winScroll / height) * 100;
                 let progressFill = document.getElementById("progressFill");
                 if (progressFill) progressFill.style.width = scrolled + "%";
+
+                let scrollToTopBtn = document.getElementById("scrollToTopBtn");
+                if (scrollToTopBtn) {
+                    if (window.scrollY > 300) {
+                        scrollToTopBtn.classList.add("show");
+                    } else {
+                        scrollToTopBtn.classList.remove("show");
+                    }
+                }
             };
+
+            let scrollToTopBtn = document.getElementById("scrollToTopBtn");
+            if (scrollToTopBtn) {
+                scrollToTopBtn.addEventListener("click", () => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
         </script>
     </body>
 </html>
