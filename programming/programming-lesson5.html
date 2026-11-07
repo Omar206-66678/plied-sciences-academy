@@ -1,1026 +1,1070 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-<title>استخدام وكشف المعلومات - أكاديمية العلوم التطبيقية</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-
-<script>
-    let savedTheme = localStorage.getItem("em_theme");
-    if (savedTheme === "dark") {
-        document.documentElement.classList.add("dark-mode");
-    }
-</script>
-
-<style>
-    :root {
-        --bg-main: #F8FAFC;
-        --card-bg: #FFFFFF;
-        --card-border: #E2E8F0;
-        --text-primary: #0F172A;
-        --text-secondary: #64748B;
-
-        --header-bg: rgba(255, 255, 255, 0.85);
-        --header-border: rgba(79, 70, 229, 0.15);
-        --header-shadow: 0 10px 30px rgba(79, 70, 229, 0.05);
-        --shadow-main: 0 20px 40px -15px rgba(15, 23, 42, 0.05);
-
-        /* 🔷 اللون النيلي (Indigo) الفاخر */
-        --primary: #4F46E5;
-        --primary-dark: #3730A3;
-        --accent: #818CF8;
-        --light-bg: rgba(79, 70, 229, 0.05);
-        --border-glow: rgba(79, 70, 229, 0.25);
-        --card-glow: 0 10px 30px rgba(79, 70, 229, 0.08);
-    }
-
-    html.dark-mode, body.dark-mode {
-        --bg-main: #030712;
-        --card-bg: #0B0F19;
-        --card-border: rgba(255, 255, 255, 0.07);
-        --text-primary: #F8FAFC;
-        --text-secondary: #94A3B8;
-
-        --header-bg: rgba(11, 15, 25, 0.85);
-        --header-border: rgba(129, 140, 248, 0.2);
-        --header-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        --shadow-main: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
-
-        --primary: #6366F1;
-        --primary-dark: #4F46E5;
-        --accent: #A5B4FC;
-        --light-bg: rgba(99, 102, 241, 0.08);
-        --border-glow: rgba(99, 102, 241, 0.35);
-        --card-glow: 0 15px 40px rgba(99, 102, 241, 0.12);
-    }
-
-    body {
-        background-color: var(--bg-main);
-        color: var(--text-primary);
-        font-family: 'Cairo', system-ui, -apple-system, sans-serif;
-        margin: 0;
-        padding: 16px 14px 90px 14px;
-        min-height: 100vh;
-        box-sizing: border-box;
-        transition: background-color 0.3s ease, color 0.3s ease;
-    }
-
-    .container { max-width: 680px; margin: auto; }
-
-    .top-progress-bar { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: transparent; z-index: 9999; }
-    .top-progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--primary), var(--accent)); }
-
-    .nav-bar {
-        display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
-        background: var(--header-bg); backdrop-filter: blur(12px); border: 1.5px solid var(--header-border); padding: 12px 18px;
-        border-radius: 24px; box-shadow: var(--header-shadow);
-    }
-    .brand-minimalist-box { display: flex; flex-direction: column; align-items: center; text-align: center; }
-    .brand-main-title { font-size: 14px; font-weight: 900; color: var(--text-primary); }
-    .brand-subtitle-text { font-size: 10px; font-weight: 800; color: var(--primary); letter-spacing: 0.5px; text-transform: uppercase; }
-
-    .back-btn, .theme-btn {
-        background: var(--light-bg); border: 1.5px solid var(--border-glow);
-        width: 38px; height: 38px; border-radius: 14px; display: flex; align-items: center; justify-content: center;
-        color: var(--text-primary); font-size: 16px; text-decoration: none; cursor: pointer; transition: 0.25s;
-    }
-    .back-btn:hover, .theme-btn:hover { transform: scale(1.05); border-color: var(--primary); }
-
-    .hero-card {
-        background: var(--card-bg); border: 1.5px solid var(--border-glow); border-radius: 28px;
-        padding: 24px; margin-bottom: 20px; box-shadow: var(--card-glow); position: relative; overflow: hidden;
-    }
-    .hero-card::after {
-        content: ''; position: absolute; top: -50px; left: -50px; width: 120px; height: 120px;
-        background: var(--primary); opacity: 0.08; border-radius: 50%; filter: blur(30px);
-    }
-
-    .pro-hero-badge {
-        display: inline-flex; align-items: center; gap: 8px;
-        background: linear-gradient(135deg, var(--light-bg) 0%, rgba(79, 70, 229, 0.1) 100%);
-        border: 1.5px solid var(--border-glow); color: var(--primary);
-        padding: 6px 16px; border-radius: 16px; font-size: 11.5px; font-weight: 950;
-        margin-bottom: 12px; box-shadow: 0 4px 15px rgba(79, 70, 229, 0.08);
-    }
-    .pro-badge-dot { width: 7px; height: 7px; background: var(--primary); border-radius: 50%; box-shadow: 0 0 10px var(--primary); }
-
-    .hero-title { margin: 0 0 8px 0; font-size: 21px; font-weight: 900; letter-spacing: -0.5px; color: var(--primary); }
-    .hero-desc { margin: 0; font-size: 13px; color: var(--text-secondary); line-height: 1.8; font-weight: 600; text-align: justify; }
-
-    .lesson-card {
-        background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 30px;
-        padding: 24px; margin-bottom: 24px; box-shadow: var(--card-glow); display: flex; flex-direction: column; gap: 20px;
-        position: relative; overflow: hidden;
-    }
-    .lesson-card::before { content: ''; display: block; height: 5px; width: 70px; background: linear-gradient(90deg, var(--primary), var(--accent)); border-radius: 10px; }
-
-    .lesson-header { display: flex; align-items: center; justify-content: space-between; border-bottom: 1.5px dashed var(--card-border); padding-bottom: 14px; }
-    .lesson-tag { font-size: 11.5px; font-weight: 900; color: var(--accent); text-transform: uppercase; letter-spacing: 0.5px; }
-    .lesson-heading { margin: 0; font-size: 20px; font-weight: 950; color: var(--primary); line-height: 1.4; }
-    .lesson-icon-badge { width: 48px; height: 48px; border-radius: 16px; background: var(--light-bg); border: 1.5px solid var(--border-glow); display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: inset 0 2px 5px rgba(79, 70, 229, 0.1); }
-
-    .section-block { display: flex; flex-direction: column; gap: 12px; }
-    .block-title { font-size: 14.5px; font-weight: 900; color: var(--text-primary); border-right: 3.5px solid var(--primary); padding-right: 10px; }
-
-    .glass-definition-card {
-        background: var(--light-bg);
-        backdrop-filter: blur(12px);
-        border: 1.5px solid var(--border-glow);
-        border-radius: 20px;
-        padding: 16px 18px;
-        margin: 8px 0;
-        box-shadow: var(--shadow-main);
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
-        transition: 0.25s;
-    }
-    .glass-definition-card:hover {
-        border-color: var(--primary);
-        transform: translateY(-2px);
-        box-shadow: 0 10px 25px rgba(79, 70, 229, 0.12);
-    }
-    .glass-def-title {
-        font-size: 14px;
-        font-weight: 950;
-        color: var(--primary);
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-    }
-    .glass-def-title .en-text {
-        font-size: 14px;
-        font-weight: 950;
-        color: var(--primary);
-        direction: ltr;
-        text-align: right;
-    }
-    .glass-def-text {
-        font-size: 13px;
-        font-weight: 700;
-        color: var(--text-primary);
-        line-height: 1.7;
-        margin: 0;
-    }
-    .glass-def-text strong {
-        color: var(--primary);
-    }
-
-    /* ===== أيقونات تراخيص المشاع الإبداعي ===== */
-    .cc-head {
-        display: flex;
-        align-items: center;
-        gap: 14px;
-    }
-    .cc-icon {
-        flex-shrink: 0;
-        width: 54px;
-        height: 54px;
-        border-radius: 18px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--primary);
-        background: linear-gradient(135deg, var(--light-bg) 0%, rgba(79, 70, 229, 0.16) 100%);
-        border: 1.5px solid var(--border-glow);
-        box-shadow: inset 0 2px 6px rgba(79, 70, 229, 0.12), 0 6px 16px rgba(79, 70, 229, 0.12);
-        transition: 0.3s ease;
-    }
-    .cc-icon svg {
-        width: 34px;
-        height: 34px;
-        display: block;
-    }
-    .glass-definition-card:hover .cc-icon {
-        background: var(--primary);
-        color: #FFFFFF;
-        border-color: var(--primary);
-        transform: rotate(-6deg) scale(1.07);
-        box-shadow: 0 8px 20px var(--border-glow);
-    }
-
-    .main-quote-container {
-        background: var(--light-bg);
-        backdrop-filter: blur(12px);
-        border: 1.5px solid var(--border-glow);
-        border-radius: 20px;
-        padding: 18px;
-        margin: 8px 0;
-        box-shadow: var(--shadow-main);
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-        transition: 0.25s;
-    }
-    .main-quote-container:hover {
-        border-color: var(--primary);
-        box-shadow: 0 10px 25px rgba(79, 70, 229, 0.12);
-    }
-
-    .inner-sub-card {
-        background: var(--card-bg);
-        border: 1.5px solid var(--card-border);
-        border-radius: 16px;
-        padding: 14px;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        transition: 0.2s;
-    }
-    .inner-sub-card:hover {
-        border-color: var(--primary);
-        transform: translateY(-1px);
-        box-shadow: 0 5px 15px rgba(79, 70, 229, 0.08);
-    }
-    .sub-card-header {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-    .sub-card-badge {
-        width: 28px;
-        height: 28px;
-        border-radius: 10px;
-        background: var(--light-bg);
-        border: 1.5px solid var(--border-glow);
-        color: var(--primary);
-        font-size: 12px;
-        font-weight: 950;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: inset 0 2px 4px rgba(79, 70, 229, 0.1);
-    }
-    .sub-card-title {
-        font-size: 13.5px;
-        font-weight: 950;
-        color: var(--primary);
-    }
-    .sub-card-text {
-        font-size: 13px;
-        font-weight: 700;
-        color: var(--text-primary);
-        line-height: 1.7;
-        margin: 0;
-    }
-
-    .modal-trigger-btn {
-        background: var(--card-bg);
-        border: 1.5px solid var(--border-glow);
-        color: var(--text-primary);
-        padding: 14px 18px;
-        border-radius: 20px;
-        font-family: 'Cairo', sans-serif;
-        font-size: 13.5px;
-        font-weight: 900;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-        margin: 14px 0;
-        box-shadow: var(--shadow-main);
-        transition: 0.25s;
-    }
-    .modal-trigger-btn span:first-child { color: var(--primary); }
-    .modal-trigger-btn:hover { background: var(--light-bg); transform: translateY(-2px); border-color: var(--primary); }
-
-    .custom-modal-overlay {
-        position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-        background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(8px);
-        display: flex; align-items: center; justify-content: center;
-        z-index: 99999; opacity: 0; visibility: hidden; transition: 0.3s ease; padding: 16px;
-    }
-    .custom-modal-overlay.active { opacity: 1; visibility: visible; }
-    .custom-modal-box {
-        background: var(--card-bg); border: 2px solid var(--border-glow); border-radius: 28px;
-        width: 100%; max-width: 560px; padding: 24px; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-        transform: scale(0.9); transition: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-        display: flex; flex-direction: column; gap: 16px; position: relative; max-height: 85vh;
-    }
-    .custom-modal-overlay.active .custom-modal-box { transform: scale(1); }
-    .custom-modal-header {
-        display: flex; align-items: center; justify-content: space-between;
-        border-bottom: 1.5px dashed var(--card-border); padding-bottom: 12px;
-    }
-    .custom-modal-title { font-size: 15px; font-weight: 950; color: var(--primary); display: flex; align-items: center; gap: 8px; }
-
-    .xp-counter-badge {
-        background: linear-gradient(135deg, #F59E0B, #D97706); color: #FFF;
-        padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 900;
-        box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
-    }
-
-    .custom-modal-close {
-        background: var(--light-bg); border: 1.5px solid var(--border-glow);
-        width: 36px; height: 36px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
-        color: var(--text-primary); font-size: 16px; font-weight: 900; cursor: pointer; transition: 0.2s;
-    }
-    .custom-modal-close:hover { background: var(--primary); color: #FFFFFF; }
-
-    .custom-modal-body { display: flex; flex-direction: column; gap: 16px; overflow-y: auto; padding-left: 4px; padding-right: 4px; }
-
-    @keyframes screenSuccessPulse {
-        0% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.4), var(--shadow-main); }
-        50% { box-shadow: 0 0 35px 8px rgba(79, 70, 229, 0.3), var(--shadow-main); }
-        100% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0), var(--shadow-main); }
-    }
-
-    @keyframes screenErrorShake {
-        0%, 100% { transform: translateX(0); }
-        20%, 60% { transform: translateX(-6px); }
-        40%, 80% { transform: translateX(6px); }
-    }
-
-    .quiz-container-box { display: flex; flex-direction: column; gap: 16px; }
-    .quiz-section-header { font-size: 14px; font-weight: 900; color: var(--primary); background: var(--light-bg); padding: 8px 14px; border-radius: 12px; border: 1px solid var(--border-glow); }
-
-    .quiz-card-item {
-        background: var(--light-bg);
-        border: 2px solid var(--border-glow);
-        border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 12px;
-        box-shadow: var(--shadow-main);
-        transition: 0.35s ease;
-    }
-
-    .quiz-card-item.correct-card {
-        background: rgba(79, 70, 229, 0.05) !important;
-        border: 2.5px solid #4F46E5 !important;
-        animation: screenSuccessPulse 0.8s ease;
-    }
-
-    .quiz-card-item.wrong-card {
-        background: rgba(239, 68, 68, 0.05) !important;
-        border: 2.5px solid #EF4444 !important;
-        animation: screenErrorShake 0.4s ease;
-    }
-
-    .quiz-question-text { font-size: 13.5px; font-weight: 900; color: var(--text-primary); line-height: 1.7; }
-
-    .quiz-options-grid { display: flex; flex-direction: column; gap: 8px; }
-    .quiz-option-btn {
-        background: var(--card-bg); border: 1.5px solid var(--card-border); color: var(--text-primary);
-        padding: 10px 14px; border-radius: 14px; font-family: 'Cairo', sans-serif; font-size: 13px; font-weight: 700;
-        cursor: pointer; text-align: right; transition: 0.2s;
-    }
-    .quiz-option-btn:hover { border-color: var(--primary); background: var(--light-bg); }
-
-    .quiz-option-btn.correct-choice {
-        background: #4F46E5 !important;
-        color: #FFFFFF !important;
-        border-color: #3730A3 !important;
-    }
-
-    .quiz-option-btn.wrong-choice {
-        background: #EF4444 !important;
-        color: #FFFFFF !important;
-        border-color: #DC2626 !important;
-    }
-
-    .quiz-input-box {
-        width: 100%; padding: 10px 14px; border-radius: 14px; border: 1.5px solid var(--card-border);
-        background: var(--card-bg); color: var(--text-primary); font-family: 'Cairo', sans-serif; font-size: 13px; font-weight: 700;
-        box-sizing: border-box; outline: none; transition: 0.2s;
-    }
-    .quiz-input-box:focus { border-color: var(--primary); }
-
-    .quiz-submit-ans-btn {
-        background: var(--primary); color: #FFF; border: none; padding: 8px 16px; border-radius: 12px;
-        font-family: 'Cairo', sans-serif; font-size: 12.5px; font-weight: 900; cursor: pointer; align-self: flex-start;
-        transition: 0.2s;
-    }
-    .quiz-submit-ans-btn:hover { background: var(--primary-dark); }
-
-    .quiz-feedback-msg { font-size: 12.5px; font-weight: 800; padding: 10px 14px; border-radius: 12px; display: none; line-height: 1.6; }
-    .quiz-feedback-msg.success { background: rgba(79, 70, 229, 0.15); color: #3730A3; border: 1.5px solid rgba(79, 70, 229, 0.4); display: block; }
-    .quiz-feedback-msg.error { background: rgba(239, 68, 68, 0.15); color: #DC2626; border: 1.5px solid rgba(239, 68, 68, 0.4); display: block; }
-
-    .bottom-nav {
-        position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); width: calc(100% - 28px); max-width: 500px;
-        background: var(--header-bg); backdrop-filter: blur(15px); display: flex; justify-content: space-around; align-items: center;
-        padding: 8px 10px; border: 1.5px solid var(--header-border); border-radius: 22px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15); z-index: 999;
-    }
-    .bottom-nav a { color: var(--text-secondary); text-decoration: none; font-size: 11.5px; text-align: center; font-weight: 800; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 6px 12px; border-radius: 16px; flex: 1; transition: 0.25s; }
-    .bottom-nav a span { font-size: 18px; line-height: 1; }
-    .bottom-nav a:hover { color: var(--primary); }
-    .bottom-nav a.active { color: var(--primary); background: var(--light-bg); border: 1.5px solid var(--border-glow); }
-</style>
-</head>
-<body>
-
-<div class="top-progress-bar"><div class="top-progress-fill" id="progressFill"></div></div>
-
-<div class="container">
-    <div class="nav-bar">
-        <a href="programming.html" class="back-btn" title="رجوع لقسم البرمجة">←</a>
-        <div class="brand-minimalist-box">
-            <span class="brand-main-title">استخدام وكشف المعلومات</span>
-            <span class="brand-subtitle-text">أكاديمية العلوم التطبيقية</span>
-        </div>
-        <button class="theme-btn" id="themeToggleBtn" title="تغيير الثيم">🌙</button>
-    </div>
-
-    <!-- كارت الشرح الشامل للدرس الخامس -->
-    <div class="hero-card">
-        <div class="pro-hero-badge">
-            <span class="pro-badge-dot"></span>
-            أكاديمية العلوم التطبيقية • قسم البرمجة وأمن المعلومات
-        </div>
-        <h1 class="hero-title">الدرس الخامس: استخدام وكشف المعلومات</h1>
-        <p class="hero-desc">
-            يغطي هذا الدرس الاستثناءات المتاحة من حقوق المؤلف، الاستخدام العادل (fair use), شروط وقواعد الاقتباس (Quotation)، مدة حماية الحقوق الاقتصادية، وأنواع تراخيص المشاع الإبداعي (Creative Commons License).
-        </p>
-    </div>
-
-    <!-- محتوى الدرس الخامس -->
-    <div class="lesson-card">
-        <div class="lesson-header">
-            <div class="lesson-title-box">
-                <span class="lesson-tag">القوانين والأمن السيبراني</span>
-                <h2 class="lesson-heading">استخدام وكشف المعلومات وحقوق المؤلف</h2>
-            </div>
-            <div class="lesson-icon-badge">📄</div>
-        </div>
-
-        <div class="section-block">
-            <div class="block-title">أ. الغرض من حقوق المؤلف</div>
-            <div class="glass-definition-card">
-                <div class="glass-def-title">
-                    <span>💡 الغرض من حقوق المؤلف</span>
-                    <span class="en-text">Protection of Rights</span>
-                </div>
-                <p class="glass-def-text">تهدف حقوق المؤلف إلى المساهمة في التطور الثقافي من خلال ضمان الاستخدام العادل (fair use) للأعمال المحمية بحقوق المؤلف وحماية الحقوق.</p>
-            </div>
-        </div>
-
-        <div class="section-block">
-            <div class="block-title">ب. الاستثناءات (Exceptions)</div>
-            <div class="glass-definition-card">
-                <div class="glass-def-title">
-                    <span>🔄 الاستثناءات من حقوق المؤلف</span>
-                    <span class="en-text">Exceptions from Copyright</span>
-                </div>
-                <p class="glass-def-text">تحت عرض حقوق المؤلف، هناك استثناءات يمكن فيها الحد من حقوق المؤلف بالسماح بالاستخدام دون الحصول على إذن من صاحب حقوق المؤلف.<br>
-                • مثاله: الاستنساخ للاستخدام الشخصي مع عدم إخلال هذا النسخ بالاستغلال العادل للمصنف، الاستنساخ داخل المؤسسات التعليمية، العروض غير الربحية، إلخ.</p>
-            </div>
-        </div>
-
-        <div class="section-block">
-            <div class="block-title">ج. الاقتباس وقواعده</div>
-            <div class="glass-definition-card">
-                <div class="glass-def-title">
-                    <span>📝 الاقتباس</span>
-                    <span class="en-text">Quotation</span>
-                </div>
-                <p class="glass-def-text">هو عملية استخدام جزء من عمل محمي بحقوق المؤلف لشخص آخر في عملك المحمي بحقوق المؤلف، إذا تم استيفاء متطلبات معينة، يمكن اقتباس أجزاء من عمل محمي بحقوق المؤلف دون الحصول على إذن من المؤلف.</p>
-            </div>
-
-            <div class="block-title">قواعد الاقتباس الصحيح</div>
-
-            <div class="main-quote-container">
-                <div class="inner-sub-card">
-                    <div class="sub-card-header">
-                        <div class="sub-card-badge">1</div>
-                        <div class="sub-card-title">الأساس والتبعية</div>
-                    </div>
-                    <p class="sub-card-text">يجب أن يكون عملك المحمي هو الأساس، بينما يكون العمل المقتبس منه تابعاً له (عملك المحمي يحقوق المؤلف هو الموضوع الرئيسي).</p>
-                </div>
-
-                <div class="inner-sub-card">
-                    <div class="sub-card-header">
-                        <div class="sub-card-badge">2</div>
-                        <div class="sub-card-title">شرط الضرورة</div>
-                    </div>
-                    <p class="sub-card-text">يجب أن تكون هناك ضرورة للاقتباس.</p>
-                </div>
-
-                <div class="inner-sub-card">
-                    <div class="sub-card-header">
-                        <div class="sub-card-badge">3</div>
-                        <div class="sub-card-title">حماية المصالح</div>
-                    </div>
-                    <p class="sub-card-text">ألا يضر بالمصالح المشروعة لمؤلف البرنامج.</p>
-                </div>
-
-                <div class="inner-sub-card">
-                    <div class="sub-card-header">
-                        <div class="sub-card-badge">4</div>
-                        <div class="sub-card-title">علامات التمييز والاقتباس</div>
-                    </div>
-                    <p class="sub-card-text">تأكد من أن المادة المقتبسة يمكن تمييزها بوضوح عن طريق وضعها بين علامات الاقتباس.</p>
-                </div>
-
-                <div class="inner-sub-card">
-                    <div class="sub-card-header">
-                        <div class="sub-card-badge">5</div>
-                        <div class="sub-card-title">تحديد المصدر</div>
-                    </div>
-                    <p class="sub-card-text">يجب تحديد المصدر بوضوح.</p>
-                </div>
-
-                <div class="inner-sub-card">
-                    <div class="sub-card-header">
-                        <div class="sub-card-badge">6</div>
-                        <div class="sub-card-title">ثبات المادة المقتبسة</div>
-                    </div>
-                    <p class="sub-card-text">يجب عدم تغيير المادة المقتبسة.</p>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="section-block">
-            <div class="block-title">د. مدة الحماية وتراخيص المشاع الإبداعي</div>
-            <div class="glass-definition-card">
-                <div class="glass-def-title">
-                    <span>⏳ تحديد مدة الحماية</span>
-                    <span class="en-text">Protection Duration</span>
-                </div>
-                <p class="glass-def-text">تنتهي الحقوق الاقتصادية للمؤلف بعد (50) عاماً من وفاة المبدع.</p>
-            </div>
-
-            <div class="glass-definition-card">
-                <div class="glass-def-title">
-                    <span>🌐 ترخيص المشاع الإبداعي</span>
-                    <span class="en-text">Creative Commons License (CC License)</span>
-                </div>
-                <p class="glass-def-text">علامة تشير إلى شروط استخدام الأعمال المحمية بحقوق النشر.</p>
-            </div>
-
-            <div class="block-title">أنواع تراخيص المشاع الإبداعي</div>
-
-            <!-- 1. الإشارة تفضل المبدع (BY) -->
-            <div class="glass-definition-card">
-                <div class="cc-head">
-                    <div class="cc-icon">
-                        <svg viewBox="0 0 64 64" role="img" aria-label="الإشارة تفضل المبدع">
-                            <title>الإشارة تفضل المبدع (BY)</title>
-                            <circle cx="32" cy="32" r="29" fill="none" stroke="currentColor" stroke-width="4"/>
-                            <circle cx="32" cy="17" r="4.5" fill="currentColor"/>
-                            <rect x="25" y="24" width="14" height="16" rx="2" fill="currentColor"/>
-                            <rect x="28.5" y="40" width="7" height="12" fill="currentColor"/>
-                        </svg>
-                    </div>
-                    <div class="glass-def-title">
-                        <span>الإشارة تفضل المبدع</span>
-                        <span class="en-text">Attribution (BY)</span>
-                    </div>
-                </div>
-                <p class="glass-def-text" style="margin-top: 4px;">
-                    • <strong>الشروط:</strong> الإشارة تفضل المبدع (BY).<br>
-                    • <strong>المحتوى:</strong> اعرض عنوان العمل واسم المؤلف.
-                </p>
-            </div>
-
-            <!-- 2. غير تجاري (NC) -->
-            <div class="glass-definition-card">
-                <div class="cc-head">
-                    <div class="cc-icon">
-                        <svg viewBox="0 0 64 64" role="img" aria-label="غير تجاري">
-                            <title>غير تجاري (NC)</title>
-                            <circle cx="32" cy="32" r="29" fill="none" stroke="currentColor" stroke-width="4"/>
-                            <g fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M21 17 L32 31 L43 17"/>
-                                <path d="M32 31 V49"/>
-                                <path d="M23 36 H41"/>
-                                <path d="M23 43 H41"/>
-                            </g>
-                            <line x1="14" y1="14" x2="50" y2="50" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
-                        </svg>
-                    </div>
-                    <div class="glass-def-title">
-                        <span>غير تجاري</span>
-                        <span class="en-text">Non-commercial (NC)</span>
-                    </div>
-                </div>
-                <p class="glass-def-text" style="margin-top: 4px;">
-                    • <strong>الشروط:</strong> غير تجاري (Non-commercial - NC).<br>
-                    • <strong>المحتوى:</strong> لا تستخدم لأغراض تجارية (commercial).
-                </p>
-            </div>
-
-            <!-- 3. لا مشتقات (ND) -->
-            <div class="glass-definition-card">
-                <div class="cc-head">
-                    <div class="cc-icon">
-                        <svg viewBox="0 0 64 64" role="img" aria-label="لا مشتقات">
-                            <title>لا مشتقات (ND)</title>
-                            <circle cx="32" cy="32" r="29" fill="none" stroke="currentColor" stroke-width="4"/>
-                            <rect x="18" y="22" width="28" height="6.5" fill="currentColor"/>
-                            <rect x="18" y="35.5" width="28" height="6.5" fill="currentColor"/>
-                        </svg>
-                    </div>
-                    <div class="glass-def-title">
-                        <span>لا مشتقات</span>
-                        <span class="en-text">No derivatives (ND)</span>
-                    </div>
-                </div>
-                <p class="glass-def-text" style="margin-top: 4px;">
-                    • <strong>الشروط:</strong> لا مشتقات (No derivatives - ND).<br>
-                    • <strong>المحتوى:</strong> لا تغير العمل المحمي بحقوق المؤلف الأصلي.
-                </p>
-            </div>
-
-            <!-- 4. نفس الشروط (SA) -->
-            <div class="glass-definition-card">
-                <div class="cc-head">
-                    <div class="cc-icon">
-                        <svg viewBox="0 0 64 64" role="img" aria-label="نفس الشروط">
-                            <title>نفس الشروط (SA)</title>
-                            <circle cx="32" cy="32" r="29" fill="none" stroke="currentColor" stroke-width="4"/>
-                            <path d="M32 19 A13 13 0 1 0 45 32" fill="none" stroke="currentColor" stroke-width="6"/>
-                            <polygon points="30,10 43,19 30,28" fill="currentColor"/>
-                        </svg>
-                    </div>
-                    <div class="glass-def-title">
-                        <span>نفس الشروط</span>
-                        <span class="en-text">ShareAlike (SA)</span>
-                    </div>
-                </div>
-                <p class="glass-def-text" style="margin-top: 4px;">
-                    • <strong>الشروط:</strong> نفس الشروط - ShareAlike (SA).<br>
-                    • <strong>المحتوى:</strong> انشر تحت نفس مجموعة التراخيص للعمل الأصلي.
-                </p>
-            </div>
-
-        </div>
-
-        <!-- زر فتح نافذة الأسئلة -->
-        <button class="modal-trigger-btn" onclick="openModal('quizModal')">
-            <span>⚡ بنك الأسئلة والتدريبات التفاعلية (160 XP)</span>
-            <span>←</span>
-        </button>
-    </div>
-</div>
-
-<!-- نافذة الاختبارات التفاعلية -->
-<div class="custom-modal-overlay" id="quizModal">
-    <div class="custom-modal-box">
-        <div class="custom-modal-header">
-            <div class="custom-modal-title"><span>⚡</span><span>اختبار التدريبات التفاعلي</span></div>
-            <div class="xp-counter-badge" id="xpDisplay">⭐ رصيد XP: 0</div>
-            <button class="custom-modal-close" onclick="closeModal('quizModal')">✕</button>
-        </div>
-
-        <div class="custom-modal-body quiz-container-box">
-
-            <!-- القسم الأول: اختر من متعدد (4 أسئلة) -->
-            <div class="quiz-section-header">1. أسئلة الاختيار من متعدد</div>
-
-            <div class="quiz-card-item" id="mcq1">
-                <div class="quiz-question-text">س1: متى تنتهي الحقوق الاقتصادية للمؤلف وفقاً لما ورد في الدرس؟</div>
-                <div class="quiz-options-grid">
-                    <button class="quiz-option-btn" onclick="checkMCQ('mcq1', this, 1, 3, 10)">أ) 10 سنوات من تاريخ النشر</button>
-                    <button class="quiz-option-btn" onclick="checkMCQ('mcq1', this, 2, 3, 10)">ب) 20 سنة من تاريخ التقديم</button>
-                    <button class="quiz-option-btn" onclick="checkMCQ('mcq1', this, 3, 3, 10)">ج) بعد (50) عاماً من وفاة المبدع</button>
-                    <button class="quiz-option-btn" onclick="checkMCQ('mcq1', this, 4, 3, 10)">د) فور نشر المصنف</button>
-                </div>
-                <div class="quiz-feedback-msg" id="feedback_mcq1"></div>
-            </div>
-
-            <div class="quiz-card-item" id="mcq2">
-                <div class="quiz-question-text">س2: ماذا تعني علامة الترخيص (NC) في المشاع الإبداعي؟</div>
-                <div class="quiz-options-grid">
-                    <button class="quiz-option-btn" onclick="checkMCQ('mcq2', this, 1, 2, 10)">أ) لا مشتقات</button>
-                    <button class="quiz-option-btn" onclick="checkMCQ('mcq2', this, 2, 2, 10)">ب) غير تجاري (Non-commercial)</button>
-                    <button class="quiz-option-btn" onclick="checkMCQ('mcq2', this, 3, 2, 10)">ج) نشر تحت نفس الشروط</button>
-                    <button class="quiz-option-btn" onclick="checkMCQ('mcq2', this, 4, 2, 10)">د) الإشارة تفضل المبدع</button>
-                </div>
-                <div class="quiz-feedback-msg" id="feedback_mcq2"></div>
-            </div>
-
-            <div class="quiz-card-item" id="mcq3">
-                <div class="quiz-question-text">س3: أي مما يلي يمثل قاعدة أساسية لصحة عملية الاقتباس؟</div>
-                <div class="quiz-options-grid">
-                    <button class="quiz-option-btn" onclick="checkMCQ('mcq3', this, 1, 1, 10)">أ) أن يكون عملك المحمي هو الأساس والعمل المقتبس تابعاً له</button>
-                    <button class="quiz-option-btn" onclick="checkMCQ('mcq3', this, 2, 1, 10)">ب) إخفاء المصدر الأصلي للمادة</button>
-                    <button class="quiz-option-btn" onclick="checkMCQ('mcq3', this, 3, 1, 10)">ج) تعديل النص المقتبس وتغييره تماماً</button>
-                    <button class="quiz-option-btn" onclick="checkMCQ('mcq3', this, 4, 1, 10)">د) عدم الحاجة لتمييز المادة المقتبسة</button>
-                </div>
-                <div class="quiz-feedback-msg" id="feedback_mcq3"></div>
-            </div>
-
-            <div class="quiz-card-item" id="mcq4">
-                <div class="quiz-question-text">س4: ما هو الرمز الدال على ترخيص "لا مشتقات" (No derivatives)؟</div>
-                <div class="quiz-options-grid">
-                    <button class="quiz-option-btn" onclick="checkMCQ('mcq4', this, 1, 4, 10)">أ) BY</button>
-                    <button class="quiz-option-btn" onclick="checkMCQ('mcq4', this, 2, 4, 10)">ب) NC</button>
-                    <button class="quiz-option-btn" onclick="checkMCQ('mcq4', this, 3, 4, 10)">ج) SA</button>
-                    <button class="quiz-option-btn" onclick="checkMCQ('mcq4', this, 4, 4, 10)">د) ND</button>
-                </div>
-                <div class="quiz-feedback-msg" id="feedback_mcq4"></div>
-            </div>
-
-
-            <!-- القسم الثاني: ما هو المصطلح (4 أسئلة) -->
-            <div class="quiz-section-header">2. ما هو المصطلح الدال على العبارات الآتية؟</div>
-
-            <div class="quiz-card-item" id="term1">
-                <div class="quiz-question-text">س1: عملية استخدام جزء من عمل محمي بحقوق المؤلف لشخص آخر في عملك ضمن شروط وقواعد محددة.</div>
-                <input type="text" class="quiz-input-box" id="input_term1" placeholder="اكتب المصطلح هنا...">
-                <button class="quiz-submit-ans-btn" onclick="checkTerm('term1', 'الاقتباس', 'input_term1', 'feedback_term1')">تحقق من الإجابة</button>
-                <div class="quiz-feedback-msg" id="feedback_term1"></div>
-            </div>
-
-            <div class="quiz-card-item" id="term2">
-                <div class="quiz-question-text">س2: علامة تشير إلى شروط استخدام الأعمال المحمية بحقوق النشر.</div>
-                <input type="text" class="quiz-input-box" id="input_term2" placeholder="اكتب المصطلح هنا...">
-                <button class="quiz-submit-ans-btn" onclick="checkTerm('term2', 'ترخيص المشاع الإبداعي', 'input_term2', 'feedback_term2')">تحقق من الإجابة</button>
-                <div class="quiz-feedback-msg" id="feedback_term2"></div>
-            </div>
-
-            <div class="quiz-card-item" id="term3">
-                <div class="quiz-question-text">س3: الاستثناء الذي يتيح استخدام الأعمال المحمية بدون إذن لأغراض شخصية أو تعليمية غير ربحية.</div>
-                <input type="text" class="quiz-input-box" id="input_term3" placeholder="اكتب المصطلح هنا...">
-                <button class="quiz-submit-ans-btn" onclick="checkTerm('term3', 'الاستخدام العادل', 'input_term3', 'feedback_term3')">تحقق من الإجابة</button>
-                <div class="quiz-feedback-msg" id="feedback_term3"></div>
-            </div>
-
-            <div class="quiz-card-item" id="term4">
-                <div class="quiz-question-text">س4: ترخيص يشترط نشر العمل المشتق تحت نفس مجموعة التراخيص للعمل الأصلي.</div>
-                <input type="text" class="quiz-input-box" id="input_term4" placeholder="اكتب المصطلح هنا...">
-                <button class="quiz-submit-ans-btn" onclick="checkTerm('term4', 'نفس الشروط', 'input_term4', 'feedback_term4')">تحقق من الإجابة</button>
-                <div class="quiz-feedback-msg" id="feedback_term4"></div>
-            </div>
-
-
-            <!-- القسم الثالث: صح أو خطأ (4 أسئلة) -->
-            <div class="quiz-section-header">3. أسئلة صح أو خطأ</div>
-
-            <div class="quiz-card-item" id="tf1">
-                <div class="quiz-question-text">س1: يهدف الاستخدام العادل وحقوق المؤلف إلى المساهمة في التطور الثقافي.</div>
-                <div class="quiz-options-grid">
-                    <button class="quiz-option-btn" onclick="checkTF('tf1', this, 'صح', 'صح', 10)">صح</button>
-                    <button class="quiz-option-btn" onclick="checkTF('tf1', this, 'خطأ', 'صح', 10)">خطأ</button>
-                </div>
-                <div class="quiz-feedback-msg" id="feedback_tf1"></div>
-            </div>
-
-            <div class="quiz-card-item" id="tf2">
-                <div class="quiz-question-text">س2: من قواعد الاقتباس السليمة عدم تحديد المصدر بوضوح.</div>
-                <div class="quiz-options-grid">
-                    <button class="quiz-option-btn" onclick="checkTF('tf2', this, 'صح', 'خطأ', 10)">صح</button>
-                    <button class="quiz-option-btn" onclick="checkTF('tf2', this, 'خطأ', 'خطأ', 10)">خطأ</button>
-                </div>
-                <div class="quiz-feedback-msg" id="feedback_tf2"></div>
-            </div>
-
-            <div class="quiz-card-item" id="tf3">
-                <div class="quiz-question-text">س3: ترخيص (ND) يعني أنه لا يُسمح بتغيير العمل المحمي بحقوق المؤلف الأصلي.</div>
-                <div class="quiz-options-grid">
-                    <button class="quiz-option-btn" onclick="checkTF('tf3', this, 'صح', 'صح', 10)">صح</button>
-                    <button class="quiz-option-btn" onclick="checkTF('tf3', this, 'خطأ', 'صح', 10)">خطأ</button>
-                </div>
-                <div class="quiz-feedback-msg" id="feedback_tf3"></div>
-            </div>
-
-            <div class="quiz-card-item" id="tf4">
-                <div class="quiz-question-text">س4: يُسمح بالاقتباس دون قيود أو شروط ودون الحاجة لأن يكون عملك هو الأساس.</div>
-                <div class="quiz-options-grid">
-                    <button class="quiz-option-btn" onclick="checkTF('tf4', this, 'صح', 'خطأ', 10)">صح</button>
-                    <button class="quiz-option-btn" onclick="checkTF('tf4', this, 'خطأ', 'خطأ', 10)">خطأ</button>
-                </div>
-                <div class="quiz-feedback-msg" id="feedback_tf4"></div>
-            </div>
-
-
-            <!-- القسم الرابع: عرف كل ما يأتي (4 أسئلة) -->
-            <div class="quiz-section-header">4. عرف كل ما يأتي (اكتب باختصار)</div>
-
-            <div class="quiz-card-item" id="def1">
-                <div class="quiz-question-text">س1: عرف الاقتباس (Quotation).</div>
-                <input type="text" class="quiz-input-box" id="input_def1" placeholder="اكتب تعريفاً مختصراً...">
-                <button class="quiz-submit-ans-btn" onclick="checkDefinition('def1', 'input_def1', 'الاقتباس: استخدام جزء من عمل محمي لشخص آخر في عملك بشروط محددة', 'feedback_def1')">تحقق من الإجابة</button>
-                <div class="quiz-feedback-msg" id="feedback_def1"></div>
-            </div>
-
-            <div class="quiz-card-item" id="def2">
-                <div class="quiz-question-text">س2: عرف ترخيص المشاع الإبداعي (CC License).</div>
-                <input type="text" class="quiz-input-box" id="input_def2" placeholder="اكتب تعريفاً مختصراً...">
-                <button class="quiz-submit-ans-btn" onclick="checkDefinition('def2', 'input_def2', 'المشاع الإبداعي: علامة تشير لشروط استخدام الأعمال المحمية', 'feedback_def2')">تحقق من الإجابة</button>
-                <div class="quiz-feedback-msg" id="feedback_def2"></div>
-            </div>
-
-            <div class="quiz-card-item" id="def3">
-                <div class="quiz-question-text">س3: عرف الاستثناءات من حقوق المؤلف.</div>
-                <input type="text" class="quiz-input-box" id="input_def3" placeholder="اكتب تعريفاً مختصراً...">
-                <button class="quiz-submit-ans-btn" onclick="checkDefinition('def3', 'input_def3', 'الاستثناءات: حالات يُسمح فيها باستخدام العمل بدون إذن للاستخدام الشخصي أو التعليمي', 'feedback_def3')">تحقق من الإجابة</button>
-                <div class="quiz-feedback-msg" id="feedback_def3"></div>
-            </div>
-
-            <div class="quiz-card-item" id="def4">
-                <div class="quiz-question-text">س4: ماذا يعني ترخيص الإشارة تفضل المبدع (BY)؟</div>
-                <input type="text" class="quiz-input-box" id="input_def4" placeholder="اكتب تعريفاً مختصراً...">
-                <button class="quiz-submit-ans-btn" onclick="checkDefinition('def4', 'input_def4', 'BY: عرض عنوان العمل واسم المؤلف', 'feedback_def4')">تحقق من الإجابة</button>
-                <div class="quiz-feedback-msg" id="feedback_def4"></div>
-            </div>
-
-        </div>
-    </div>
-</div>
-
-<div class="bottom-nav">
-    <a href="index.html"><span>🏠</span>الرئيسية</a>
-    <a href="surveying.html"><span>📐</span>المساحة</a>
-    <a href="english.html"><span>🇬🇧</span>الإنجليزي</a>
-    <a href="programming.html" class="active"><span>💻</span>البرمجة</a>
-</div>
-
-<script>
-    let currentXP = 0;
-    let answeredQuestions = {};
-
-    const applauseAudio = new Audio('https://www.myinstants.com/media/sounds/applause.mp3');
-    const wrongGroanAudio = new Audio('groan.mp3');
-
-    function playApplauseSound() {
-        try {
-            applauseAudio.currentTime = 0;
-            applauseAudio.play().catch(e => {});
-        } catch(e) {}
-    }
-
-    function playWrongGroanSound() {
-        try {
-            wrongGroanAudio.currentTime = 0;
-            wrongGroanAudio.play().catch(e => {});
-        } catch(e) {}
-    }
-
-    const successMessages = [
-        "عاش يا دحيح العصر! إجابة زي الذهب 🥇",
-        "إبداع وتفوق عالي! استمر يا بطل 🚀",
-        "ضربة معلم صح الصح! إجابة في الصميم 🎯",
-        "الله عليك! دماغ شغال وسريع الفهم 💡"
-    ];
-
-    const errorMessages = [
-        "خطأ صغير، بس الصح قدامك اهو ركز فيه كويس يا بشمهندس 🔍",
-        "معليش يا بطل، اتعلمنا حاجة جديدة النهاردة، والصح هو: ",
-        "مش مشكلة خالص! التجربة بتعلم، وادي الإجابة الصح قدامك 📚",
-        "فووق معايا! ركز في المرة الجاية والإجابة الصحيحة هي: "
-    ];
-
-    function getRandomMsg(arr) {
-        return arr[Math.floor(Math.random() * arr.length)];
-    }
-
-    function updateXP(amount) {
-        currentXP += amount;
-        document.getElementById('xpDisplay').innerText = "⭐ رصيد XP: " + currentXP;
-    }
-
-    function openModal(modalId) {
-        document.getElementById(modalId).classList.add('active');
-    }
-    function closeModal(modalId) {
-        document.getElementById(modalId).classList.remove('active');
-    }
-
-    function checkMCQ(questionId, btnElement, selectedIndex, correctIndex, xpReward) {
-        if (answeredQuestions[questionId]) return;
-
-        let container = document.getElementById(questionId);
-        let buttons = container.querySelectorAll('.quiz-option-btn');
-        let feedback = document.getElementById('feedback_' + questionId);
-
-        answeredQuestions[questionId] = true;
-        buttons.forEach(btn => btn.disabled = true);
-
-        if (selectedIndex === correctIndex) {
-            playApplauseSound();
-            container.classList.add('correct-card');
-            btnElement.classList.add('correct-choice');
-            feedback.className = "quiz-feedback-msg success";
-            feedback.innerText = getRandomMsg(successMessages) + " (+ " + xpReward + " XP)";
-            updateXP(xpReward);
-        } else {
-            playWrongGroanSound();
-            container.classList.add('wrong-card');
-            btnElement.classList.add('wrong-choice');
-            buttons[correctIndex - 1].classList.add('correct-choice');
-            feedback.className = "quiz-feedback-msg error";
-            feedback.innerText = getRandomMsg(errorMessages) + "الخيار رقم (" + correctIndex + ")";
-        }
-    }
-
-    function checkTerm(questionId, correctAnswer, inputId, feedbackId) {
-        if (answeredQuestions[questionId]) return;
-
-        let userVal = document.getElementById(inputId).value.trim();
-        let container = document.getElementById(questionId);
-        let feedback = document.getElementById(feedbackId);
-
-        if (userVal === "") {
-            alert("من فضلك اكتب الإجابة أولاً!");
-            return;
-        }
-
-        answeredQuestions[questionId] = true;
-        document.getElementById(inputId).disabled = true;
-
-        if (userVal.includes(correctAnswer) || correctAnswer.includes(userVal)) {
-            playApplauseSound();
-            container.classList.add('correct-card');
-            feedback.className = "quiz-feedback-msg success";
-            feedback.innerText = getRandomMsg(successMessages) + " (+ 10 XP)";
-            updateXP(10);
-        } else {
-            playWrongGroanSound();
-            container.classList.add('wrong-card');
-            feedback.className = "quiz-feedback-msg error";
-            feedback.innerText = getRandomMsg(errorMessages) + correctAnswer;
-        }
-    }
-
-    function checkTF(questionId, btnElement, selectedAns, correctAns, xpReward) {
-        if (answeredQuestions[questionId]) return;
-
-        let container = document.getElementById(questionId);
-        let buttons = container.querySelectorAll('.quiz-option-btn');
-        let feedback = document.getElementById('feedback_' + questionId);
-
-        answeredQuestions[questionId] = true;
-        buttons.forEach(btn => btn.disabled = true);
-
-        if (selectedAns === correctAns) {
-            playApplauseSound();
-            container.classList.add('correct-card');
-            btnElement.classList.add('correct-choice');
-            feedback.className = "quiz-feedback-msg success";
-            feedback.innerText = getRandomMsg(successMessages) + " (+ " + xpReward + " XP)";
-            updateXP(xpReward);
-        } else {
-            playWrongGroanSound();
-            container.classList.add('wrong-card');
-            btnElement.classList.add('wrong-choice');
-            buttons.forEach(btn => {
-                if (btn.innerText.includes(correctAns)) btn.classList.add('correct-choice');
-            });
-            feedback.className = "quiz-feedback-msg error";
-            feedback.innerText = getRandomMsg(errorMessages) + correctAns;
-        }
-    }
-
-    function checkDefinition(questionId, inputId, correctAnswerText, feedbackId) {
-        if (answeredQuestions[questionId]) return;
-
-        let userVal = document.getElementById(inputId).value.trim();
-        let container = document.getElementById(questionId);
-        let feedback = feedbackId ? document.getElementById(feedbackId) : document.getElementById('feedback_' + questionId);
-
-        if (userVal.length < 3) {
-            alert("يرجى كتابة إجابة صحيحة للتحقق!");
-            return;
-        }
-
-        answeredQuestions[questionId] = true;
-        document.getElementById(inputId).disabled = true;
-
-        playApplauseSound();
-        container.classList.add('correct-card');
-        feedback.className = "quiz-feedback-msg success";
-        feedback.innerText = getRandomMsg(successMessages) + " (+ 10 XP) | الإجابة المثالية: " + correctAnswerText;
-        updateXP(10);
-    }
-
-    window.addEventListener('click', function(e) {
-        if (e.target.classList.contains('custom-modal-overlay')) {
-            e.target.classList.remove('active');
-        }
-    });
-
-    document.addEventListener("DOMContentLoaded", function() {
-        let themeBtn = document.getElementById("themeToggleBtn");
-        function applyTheme(isDark) {
-            if (isDark) {
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+        <title>استخدام وكشف المعلومات - أكاديمية العلوم التطبيقية</title>
+        <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+        
+        <script>
+            let savedTheme = localStorage.getItem("em_theme");
+            if (savedTheme === "dark") {
                 document.documentElement.classList.add("dark-mode");
-                localStorage.setItem("em_theme", "dark");
-                if (themeBtn) themeBtn.innerHTML = "☀️";
-            } else {
-                document.documentElement.classList.remove("dark-mode");
-                localStorage.setItem("em_theme", "light");
-                if (themeBtn) themeBtn.innerHTML = "🌙";
             }
-        }
+        </script>
+        
+        <style>
+            :root {
+                --bg-main: #F4F6F9;
+                --card-bg: #FFFFFF;
+                --card-border: #93C5FD;
+                --text-primary: #0F172A;
+                --text-secondary: #334155;
+                
+                --header-bg: #FFFFFF;
+                --header-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+                
+                --primary: #475569;
+                --accent: #0284C7; 
+                --light-bg: rgba(2, 132, 199, 0.04);
 
-        applyTheme(localStorage.getItem("em_theme") === "dark");
+                --verb-highlight: #0284C7; 
+                --pronoun-highlight: #059669; 
+                --heading-pure-color: #0F172A; 
+                --nav-theme-color: #0284C7;
+                --nav-glow-color: rgba(2, 132, 199, 0.25);
+            }
 
-        if (themeBtn) {
-            themeBtn.addEventListener("click", () => {
-                applyTheme(!document.documentElement.classList.contains("dark-mode"));
+            html.dark-mode, body.dark-mode {
+                --bg-main: #06080F;
+                --card-bg: #0B0F19;
+                --card-border: rgba(56, 189, 248, 0.3);
+                --text-primary: #FFFFFF;
+                --text-secondary: #94A3B8;
+                
+                --header-bg: #0B0F19;
+                --header-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+                
+                --primary: #94A3B8;
+                --accent: #38BDF8;
+                --light-bg: rgba(56, 189, 248, 0.06);
+
+                --verb-highlight: #38BDF8;
+                --pronoun-highlight: #34D399;
+                --heading-pure-color: #FFFFFF; 
+                --nav-theme-color: #38BDF8;
+                --nav-glow-color: rgba(56, 189, 248, 0.3);
+            }
+
+            body, * {
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                text-rendering: optimizeLegibility;
+            }
+
+            body {
+                background-color: var(--bg-main);
+                color: var(--text-primary);
+                font-family: 'Cairo', system-ui, -apple-system, sans-serif;
+                margin: 0;
+                padding: 16px 14px 90px 14px;
+                min-height: 100vh;
+                box-sizing: border-box;
+                transition: background-color 0.3s ease, color 0.3s ease;
+            }
+
+            .container { max-width: 680px; margin: auto; }
+
+            .top-progress-bar { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: transparent; z-index: 9999; }
+            .top-progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--primary)); }
+
+            /* شريط الهيدر العلوي */
+            .nav-bar {
+                display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
+                background: var(--header-bg); border: 2.5px solid var(--card-border); padding: 12px 20px;
+                border-radius: 40px; box-shadow: var(--header-shadow); gap: 10px;
+            }
+            .brand-minimalist-box { display: flex; flex-direction: column; align-items: center; text-align: center; flex: 1; padding: 0 4px; min-width: 0; }
+            .brand-main-title { font-size: 14px; font-weight: 900; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
+            .brand-subtitle-text { font-size: 10.5px; font-weight: 800; color: var(--accent); letter-spacing: 0.5px; text-transform: uppercase; margin-top: 2px; }
+
+            .back-btn, .theme-btn {
+                background: var(--light-bg); border: 2px solid var(--card-border);
+                width: 40px; height: 40px; border-radius: 20px; display: flex; align-items: center; justify-content: center;
+                color: var(--text-primary); font-size: 16px; text-decoration: none; cursor: pointer; transition: 0.25s; flex-shrink: 0;
+            }
+            .back-btn:hover, .theme-btn:hover { transform: scale(1.05); border-color: var(--accent); color: var(--accent); }
+
+            /* كارت الشرح الرئيسي (Hero Card) */
+            .hero-card {
+                background: var(--card-bg); border: 2.5px solid var(--card-border); border-radius: 34px;
+                padding: 24px; margin-bottom: 24px; box-shadow: 0 12px 30px rgba(0, 0, 0, 0.03); position: relative; overflow: hidden;
+            }
+
+            .pro-hero-badge {
+                display: inline-flex; align-items: center; gap: 8px;
+                background: var(--light-bg); border: 2px solid var(--card-border); color: var(--accent);
+                padding: 6px 16px; border-radius: 18px; font-size: 11.5px; font-weight: 950;
+                margin-bottom: 12px;
+            }
+            .pro-badge-dot { width: 7px; height: 7px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 10px var(--accent); }
+
+            .hero-title { margin: 0 0 8px 0; font-size: 21px; font-weight: 950; color: var(--heading-pure-color); letter-spacing: -0.5px; }
+            .hero-desc { margin: 0; font-size: 13.5px; color: var(--text-secondary); line-height: 1.8; font-weight: 800; text-align: justify; }
+
+            /* الكارت الشامل للدرس */
+            .lesson-card {
+                background: var(--card-bg); 
+                border: 2.5px solid var(--card-border);
+                border-radius: 40px;
+                padding: 28px; 
+                margin-bottom: 24px; 
+                box-shadow: 0 20px 45px rgba(0, 0, 0, 0.04); 
+                display: flex; 
+                flex-direction: column; 
+                gap: 20px;
+                position: relative; 
+                overflow: hidden;
+            }
+            
+            .lesson-header { display: flex; align-items: center; justify-content: space-between; border-bottom: 2px dashed var(--card-border); padding-bottom: 16px; }
+            .lesson-tag { font-size: 11.5px; font-weight: 900; color: var(--accent); text-transform: uppercase; letter-spacing: 0.5px; }
+            .lesson-heading { margin: 0; font-size: 19px; font-weight: 950; color: var(--heading-pure-color); line-height: 1.4; }
+            .lesson-icon-badge { width: 48px; height: 48px; border-radius: 20px; background: var(--light-bg); border: 2px solid var(--card-border); display: flex; align-items: center; justify-content: center; font-size: 20px; }
+
+            .section-block { display: flex; flex-direction: column; gap: 14px; }
+            .block-title { font-size: 15px; font-weight: 950; color: var(--heading-pure-color); border-right: 4px solid var(--accent); padding-right: 10px; }
+            
+            /* الكروت الداخلية (Glass Definition Cards) */
+            .glass-definition-card {
+                background: var(--card-bg);
+                backdrop-filter: blur(16px);
+                border: 2px solid var(--card-border);
+                border-radius: 28px;
+                padding: 20px 22px;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+                transition: 0.3s ease;
+            }
+            .glass-definition-card:hover {
+                border-color: var(--accent);
+                transform: translateY(-2px);
+                box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
+            }
+            .glass-def-title {
+                font-size: 14.5px;
+                font-weight: 950;
+                color: var(--accent);
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+            }
+            .glass-def-title .en-text {
+                font-size: 13px;
+                font-weight: 800;
+                color: var(--text-secondary);
+                direction: ltr;
+                text-align: right;
+            }
+            .glass-def-text {
+                font-size: 13.5px;
+                font-weight: 800;
+                color: var(--text-primary);
+                line-height: 1.8;
+                margin: 0;
+            }
+            .glass-def-text strong {
+                color: var(--accent);
+            }
+
+            /* أيقونات تراخيص المشاع الإبداعي */
+            .cc-head {
+                display: flex;
+                align-items: center;
+                gap: 14px;
+            }
+            .cc-icon {
+                flex-shrink: 0;
+                width: 50px;
+                height: 50px;
+                border-radius: 18px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: var(--accent);
+                background: var(--light-bg);
+                border: 2px solid var(--card-border);
+                transition: 0.3s ease;
+            }
+            .cc-icon svg {
+                width: 30px;
+                height: 30px;
+                display: block;
+            }
+            .glass-definition-card:hover .cc-icon {
+                background: var(--accent);
+                color: #FFFFFF;
+                border-color: var(--accent);
+                transform: rotate(-6deg) scale(1.07);
+            }
+
+            .main-quote-container {
+                background: var(--card-bg);
+                border: 2px solid var(--card-border);
+                border-radius: 28px;
+                padding: 20px;
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+            }
+
+            .inner-sub-card {
+                background: var(--bg-main);
+                border: 2px solid var(--card-border);
+                border-radius: 20px;
+                padding: 16px;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                transition: 0.2s;
+            }
+            .inner-sub-card:hover {
+                border-color: var(--accent);
+                transform: translateY(-1px);
+            }
+            .sub-card-header {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            .sub-card-badge {
+                width: 30px;
+                height: 30px;
+                border-radius: 12px;
+                background: var(--light-bg);
+                border: 2px solid var(--card-border);
+                color: var(--accent);
+                font-size: 13px;
+                font-weight: 950;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .sub-card-title {
+                font-size: 14px;
+                font-weight: 950;
+                color: var(--accent);
+            }
+            .sub-card-text {
+                font-size: 13.5px;
+                font-weight: 800;
+                color: var(--text-primary);
+                line-height: 1.8;
+                margin: 0;
+            }
+
+            /* زر فتح نافذة الأسئلة */
+            .modal-trigger-btn {
+                background: var(--accent);
+                color: #FFFFFF;
+                border: none;
+                padding: 15px 20px;
+                border-radius: 22px;
+                font-family: 'Cairo', sans-serif;
+                font-size: 14.5px;
+                font-weight: 950;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+                margin-top: 10px;
+                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+                transition: 0.25s;
+            }
+            .modal-trigger-btn span:first-child { color: #FFFFFF; }
+            .modal-trigger-btn:hover { opacity: 0.9; transform: scale(1.01); }
+
+            /* تصميم النوافذ المنبثقة */
+            .custom-modal-overlay {
+                position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+                background: rgba(0, 0, 0, 0.65); backdrop-filter: blur(16px);
+                display: flex; align-items: center; justify-content: center;
+                z-index: 99999; opacity: 0; visibility: hidden; transition: 0.3s ease; padding: 16px; box-sizing: border-box;
+            }
+            .custom-modal-overlay.active { opacity: 1; visibility: visible; }
+            .custom-modal-box {
+                background: var(--card-bg); border: 2.5px solid var(--card-border); border-radius: 34px;
+                width: 100%; max-width: 500px; padding: 22px; box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
+                transform: scale(0.9); transition: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+                display: flex; flex-direction: column; gap: 16px; position: relative; max-height: 85vh;
+            }
+            .custom-modal-overlay.active .custom-modal-box { transform: scale(1); }
+            .custom-modal-header {
+                display: flex; align-items: center; justify-content: space-between;
+                background: var(--light-bg); border: 2px solid var(--card-border); padding: 10px 16px; border-radius: 24px;
+            }
+            .custom-modal-title { font-size: 15px; font-weight: 950; color: var(--heading-pure-color); display: flex; align-items: center; gap: 8px; }
+            
+            .xp-counter-badge {
+                background: var(--card-bg); border: 2px solid var(--card-border); color: #F59E0B;
+                padding: 6px 14px; border-radius: 16px; font-size: 12.5px; font-weight: 950;
+            }
+
+            .custom-modal-close {
+                background: var(--light-bg); border: 2px solid var(--card-border);
+                width: 36px; height: 36px; border-radius: 18px; display: flex; align-items: center; justify-content: center;
+                color: var(--text-primary); font-size: 14px; font-weight: 950; cursor: pointer; transition: 0.2s;
+            }
+            .custom-modal-close:hover { background: #EF4444; color: #FFFFFF; border-color: #EF4444; }
+            
+            .custom-modal-body { display: flex; flex-direction: column; gap: 14px; overflow-y: auto; }
+
+            @keyframes screenSuccessPulse {
+                0% { transform: scale(1); border-color: var(--accent); box-shadow: 0 0 25px rgba(0, 0, 0, 0.05); }
+                50% { transform: scale(1.02); border-color: var(--primary); box-shadow: 0 0 35px rgba(0, 0, 0, 0.08); }
+                100% { transform: scale(1); border-color: var(--accent); box-shadow: 0 0 25px rgba(0, 0, 0, 0.05); }
+            }
+
+            @keyframes screenErrorShake {
+                0%, 100% { transform: translateX(0); }
+                20%, 60% { transform: translateX(-6px); }
+                40%, 80% { transform: translateX(6px); }
+            }
+
+            .quiz-container-box { display: flex; flex-direction: column; gap: 16px; }
+            .quiz-section-header { font-size: 14px; font-weight: 950; color: var(--heading-pure-color); background: var(--light-bg); padding: 10px 16px; border-radius: 18px; border: 2px solid var(--card-border); text-align: center; }
+            
+            .quiz-card-item {
+                background: var(--card-bg); 
+                border: 2px solid var(--card-border);
+                border-radius: 26px; padding: 18px; display: flex; flex-direction: column; gap: 12px;
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.02);
+                transition: 0.35s ease;
+            }
+            
+            .quiz-card-item.correct-card { 
+                background: var(--light-bg) !important;
+                border: 2.5px solid var(--accent) !important; 
+                animation: screenSuccessPulse 0.6s ease infinite alternate;
+            }
+            
+            .quiz-card-item.wrong-card { 
+                background: rgba(239, 68, 68, 0.08) !important;
+                border: 2.5px solid #EF4444 !important; 
+                animation: screenErrorShake 0.4s ease;
+            }
+
+            .quiz-question-text { font-size: 14px; font-weight: 950; color: var(--heading-pure-color); line-height: 1.7; }
+            
+            .quiz-options-grid { display: flex; flex-direction: column; gap: 8px; }
+            .quiz-option-btn {
+                background: var(--bg-main); border: 2px solid var(--card-border); color: var(--text-primary);
+                padding: 12px 16px; border-radius: 18px; font-family: 'Cairo', sans-serif; font-size: 13.5px; font-weight: 900;
+                cursor: pointer; text-align: right; transition: 0.2s;
+            }
+            .quiz-option-btn:hover { border-color: var(--accent); background: var(--light-bg); color: var(--accent); }
+
+            .quiz-option-btn.correct-choice {
+                background: var(--light-bg) !important;
+                color: var(--accent) !important;
+                border-color: var(--accent) !important;
+                transform: scale(1.02);
+            }
+
+            .quiz-option-btn.wrong-choice {
+                background: rgba(239, 68, 68, 0.15) !important;
+                color: #EF4444 !important;
+                border-color: #EF4444 !important;
+            }
+
+            .quiz-input-box {
+                width: 100%; padding: 12px 16px; border-radius: 18px; border: 2px solid var(--card-border);
+                background: var(--bg-main); color: var(--text-primary); font-family: 'Cairo', sans-serif; font-size: 13.5px; font-weight: 900;
+                box-sizing: border-box; outline: none; transition: 0.2s;
+            }
+            .quiz-input-box:focus { border-color: var(--accent); }
+            
+            .quiz-submit-ans-btn {
+                background: var(--accent); color: #FFF; border: none; padding: 10px 18px; border-radius: 16px;
+                font-family: 'Cairo', sans-serif; font-size: 13px; font-weight: 950; cursor: pointer; align-self: flex-start;
+                transition: 0.2s; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            }
+            .quiz-submit-ans-btn:hover { opacity: 0.9; }
+
+            .quiz-feedback-msg { font-size: 13px; font-weight: 900; padding: 12px 16px; border-radius: 16px; display: none; line-height: 1.6; border: 2px solid; }
+            .quiz-feedback-msg.success { background: var(--light-bg); color: var(--accent); border-color: var(--card-border); display: block; }
+            .quiz-feedback-msg.error { background: rgba(239, 68, 68, 0.1); color: #EF4444; border-color: rgba(239, 68, 68, 0.3); display: block; }
+
+            /* زر العودة لأعلى الصفحة (دائري ممتلئ بلون الثيم الأساسي في الجانب الأيسر) */
+            .scroll-to-top-btn {
+                position: fixed; bottom: 75px; left: 16px; transform: scale(0);
+                background: var(--accent); border: 2.5px solid var(--accent);
+                color: #FFFFFF; width: 42px; height: 42px; border-radius: 50%;
+                display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 900;
+                box-shadow: 0 8px 20px rgba(0,0,0,0.2); cursor: pointer; z-index: 998;
+                transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); opacity: 0; pointer-events: none;
+            }
+            .scroll-to-top-btn.show { transform: scale(1); opacity: 1; pointer-events: auto; }
+            .scroll-to-top-btn:hover { opacity: 0.9; transform: scale(1.1); }
+
+            /* شريط التنقل السفلي */
+            .bottom-nav {
+                position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); 
+                width: calc(100% - 32px); max-width: 460px;
+                background: var(--header-bg);
+                display: flex; justify-content: space-around; align-items: center;
+                padding: 6px 10px; border-radius: 30px; 
+                border: 2.5px solid var(--card-border);
+                box-shadow: 0 8px 24px rgba(0,0,0,0.25); 
+                z-index: 999; box-sizing: border-box;
+                transition: all 0.4s ease;
+            }
+            .bottom-nav a { 
+                color: var(--text-secondary); text-decoration: none; font-size: 10px; text-align: center; font-weight: 800; 
+                display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 12px; border-radius: 20px; flex: 1; 
+                border: 1.5px solid var(--card-border); background: var(--light-bg);
+                transition: all 0.3s ease;
+            }
+            .bottom-nav a span { font-size: 16px; line-height: 1; }
+            .bottom-nav a:hover { color: var(--nav-theme-color); border-color: var(--nav-theme-color); background: rgba(128, 128, 128, 0.1); }
+            .bottom-nav a.active { color: #FFFFFF; background: var(--nav-theme-color); border-color: var(--nav-theme-color); box-shadow: 0 4px 15px var(--nav-glow-color); }
+        </style>
+    </head>
+    <body>
+
+        <div class="top-progress-bar"><div class="top-progress-fill" id="progressFill"></div></div>
+
+        <div class="container">
+            <div class="nav-bar">
+                <a href="programming.html" class="back-btn" title="رجوع لقسم البرمجة">←</a>
+                <div class="brand-minimalist-box">
+                    <span class="brand-main-title">استخدام وكشف المعلومات</span>
+                    <span class="brand-subtitle-text">أكاديمية العلوم التطبيقية</span>
+                </div>
+                <button class="theme-btn" id="themeToggleBtn" title="تغيير الثيم">🌙</button>
+            </div>
+
+            <!-- كارت الشرح الشامل للدرس الخامس -->
+            <div class="hero-card">
+                <div class="pro-hero-badge">
+                    <span class="pro-badge-dot"></span>
+                    أكاديمية العلوم التطبيقية • قسم البرمجة وأمن المعلومات
+                </div>
+                <h1 class="hero-title">الدرس الخامس: استخدام وكشف المعلومات</h1>
+                <p class="hero-desc">
+                    يغطي هذا الدرس الاستثناءات المتاحة من حقوق المؤلف، الاستخدام العادل (fair use)، شروط وقواعد الاقتباس (Quotation)، مدة حماية الحقوق الاقتصادية، وأنواع تراخيص المشاع الإبداعي (Creative Commons License).
+                </p>
+            </div>
+
+            <!-- محتوى الدرس الخامس -->
+            <div class="lesson-card">
+                <div class="lesson-header">
+                    <div class="lesson-title-box">
+                        <span class="lesson-tag">القوانين والأمن السيبراني</span>
+                        <h2 class="lesson-heading">استخدام وكشف المعلومات وحقوق المؤلف</h2>
+                    </div>
+                    <div class="lesson-icon-badge">📄</div>
+                </div>
+
+                <div class="section-block">
+                    <div class="block-title">أ. الغرض من حقوق المؤلف</div>
+                    <div class="glass-definition-card">
+                        <div class="glass-def-title">
+                            <span>💡 الغرض من حقوق المؤلف</span>
+                            <span class="en-text">Protection of Rights</span>
+                        </div>
+                        <p class="glass-def-text">تهدف حقوق المؤلف إلى المساهمة في التطور الثقافي من خلال ضمان الاستخدام العادل (fair use) للأعمال المحمية بحقوق المؤلف وحماية الحقوق.</p>
+                    </div>
+                </div>
+
+                <div class="section-block">
+                    <div class="block-title">ب. الاستثناءات (Exceptions)</div>
+                    <div class="glass-definition-card">
+                        <div class="glass-def-title">
+                            <span>🔄 الاستثناءات من حقوق المؤلف</span>
+                            <span class="en-text">Exceptions from Copyright</span>
+                        </div>
+                        <p class="glass-def-text">تحت نطاق حقوق المؤلف، هناك استثناءات يمكن فيها الحد من حقوق المؤلف بالسماح بالاستخدام دون الحصول على إذن من صاحب حقوق المؤلف.<br>
+                        • <strong>مثاله:</strong> الاستنساخ للاستخدام الشخصي مع عدم إخلال هذا النسخ بالاستغلال العادل للمصنف، الاستنساخ داخل المؤسسات التعليمية، العروض غير الربحية، إلخ.</p>
+                    </div>
+                </div>
+
+                <div class="section-block">
+                    <div class="block-title">ج. الاقتباس وقواعده</div>
+                    <div class="glass-definition-card">
+                        <div class="glass-def-title">
+                            <span>📝 الاقتباس</span>
+                            <span class="en-text">Quotation</span>
+                        </div>
+                        <p class="glass-def-text">هو عملية استخدام جزء من عمل محمي بحقوق المؤلف لشخص آخر في عملك المحمي بحقوق المؤلف، وإذا تم استيفاء متطلبات معينة، يمكن اقتباس أجزاء من عمل محمي بحقوق المؤلف دون الحصول على إذن من المؤلف.</p>
+                    </div>
+
+                    <div class="block-title">قواعد الاقتباس الصحيح</div>
+
+                    <div class="main-quote-container">
+                        <div class="inner-sub-card">
+                            <div class="sub-card-header">
+                                <div class="sub-card-badge">1</div>
+                                <div class="sub-card-title">الأساس والتبعية</div>
+                            </div>
+                            <p class="sub-card-text">يجب أن يكون عملك المحمي هو الأساس، بينما يكون العمل المقتبس منه تابعاً له (عملك المحمي بحقوق المؤلف هو الموضوع الرئيسي).</p>
+                        </div>
+
+                        <div class="inner-sub-card">
+                            <div class="sub-card-header">
+                                <div class="sub-card-badge">2</div>
+                                <div class="sub-card-title">شرط الضرورة</div>
+                            </div>
+                            <p class="sub-card-text">يجب أن تكون هناك ضرورة للاقتباس.</p>
+                        </div>
+
+                        <div class="inner-sub-card">
+                            <div class="sub-card-header">
+                                <div class="sub-card-badge">3</div>
+                                <div class="sub-card-title">حماية المصالح</div>
+                            </div>
+                            <p class="sub-card-text">ألا يضر بالمصالح المشروعة لمؤلف العمل.</p>
+                        </div>
+
+                        <div class="inner-sub-card">
+                            <div class="sub-card-header">
+                                <div class="sub-card-badge">4</div>
+                                <div class="sub-card-title">علامات التمييز والاقتباس</div>
+                            </div>
+                            <p class="sub-card-text">تأكد من أن المادة المقتبسة يمكن تمييزها بوضوح عن طريق وضعها بين علامات الاقتباس.</p>
+                        </div>
+
+                        <div class="inner-sub-card">
+                            <div class="sub-card-header">
+                                <div class="sub-card-badge">5</div>
+                                <div class="sub-card-title">تحديد المصدر</div>
+                            </div>
+                            <p class="sub-card-text">يجب تحديد المصدر بوضوح.</p>
+                        </div>
+
+                        <div class="inner-sub-card">
+                            <div class="sub-card-header">
+                                <div class="sub-card-badge">6</div>
+                                <div class="sub-card-title">ثبات المادة المقتبسة</div>
+                            </div>
+                            <p class="sub-card-text">يجب عدم تغيير المادة المقتبسة.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-block">
+                    <div class="block-title">د. مدة الحماية وتراخيص المشاع الإبداعي</div>
+                    <div class="glass-definition-card">
+                        <div class="glass-def-title">
+                            <span>⏳ تحديد مدة الحماية</span>
+                            <span class="en-text">Protection Duration</span>
+                        </div>
+                        <p class="glass-def-text">تنتهي الحقوق الاقتصادية للمؤلف بعد (50) عاماً من وفاة المبدع.</p>
+                    </div>
+
+                    <div class="glass-definition-card">
+                        <div class="glass-def-title">
+                            <span>🌐 ترخيص المشاع الإبداعي</span>
+                            <span class="en-text">Creative Commons License (CC License)</span>
+                        </div>
+                        <p class="glass-def-text">علامة تشير إلى شروط استخدام الأعمال المحمية بحقوق النشر.</p>
+                    </div>
+
+                    <div class="block-title">أنواع تراخيص المشاع الإبداعي</div>
+
+                    <!-- 1. الإشارة تفضل المبدع (BY) -->
+                    <div class="glass-definition-card">
+                        <div class="cc-head">
+                            <div class="cc-icon">
+                                <svg viewBox="0 0 64 64" role="img" aria-label="الإشارة تفضل المبدع">
+                                    <title>الإشارة تفضل المبدع (BY)</title>
+                                    <circle cx="32" cy="32" r="29" fill="none" stroke="currentColor" stroke-width="4"/>
+                                    <circle cx="32" cy="17" r="4.5" fill="currentColor"/>
+                                    <rect x="25" y="24" width="14" height="16" rx="2" fill="currentColor"/>
+                                    <rect x="28.5" y="40" width="7" height="12" fill="currentColor"/>
+                                </svg>
+                            </div>
+                            <div class="glass-def-title">
+                                <span>الإشارة تفضل المبدع</span>
+                                <span class="en-text">Attribution (BY)</span>
+                            </div>
+                        </div>
+                        <p class="glass-def-text" style="margin-top: 4px;">
+                            • <strong>الشروط:</strong> الإشارة تفضل المبدع (BY).<br>
+                            • <strong>المحتوى:</strong> اعرض عنوان العمل واسم المؤلف.
+                        </p>
+                    </div>
+
+                    <!-- 2. غير تجاري (NC) -->
+                    <div class="glass-definition-card">
+                        <div class="cc-head">
+                            <div class="cc-icon">
+                                <svg viewBox="0 0 64 64" role="img" aria-label="غير تجاري">
+                                    <title>غير تجاري (NC)</title>
+                                    <circle cx="32" cy="32" r="29" fill="none" stroke="currentColor" stroke-width="4"/>
+                                    <g fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M21 17 L32 31 L43 17"/>
+                                        <path d="M32 31 V49"/>
+                                        <path d="M23 36 H41"/>
+                                        <path d="M23 43 H41"/>
+                                    </g>
+                                    <line x1="14" y1="14" x2="50" y2="50" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+                                </svg>
+                            </div>
+                            <div class="glass-def-title">
+                                <span>غير تجاري</span>
+                                <span class="en-text">Non-commercial (NC)</span>
+                            </div>
+                        </div>
+                        <p class="glass-def-text" style="margin-top: 4px;">
+                            • <strong>الشروط:</strong> غير تجاري (Non-commercial - NC).<br>
+                            • <strong>المحتوى:</strong> لا تستخدم لأغراض تجارية (Commercial).
+                        </p>
+                    </div>
+
+                    <!-- 3. لا مشتقات (ND) -->
+                    <div class="glass-definition-card">
+                        <div class="cc-head">
+                            <div class="cc-icon">
+                                <svg viewBox="0 0 64 64" role="img" aria-label="لا مشتقات">
+                                    <title>لا مشتقات (ND)</title>
+                                    <circle cx="32" cy="32" r="29" fill="none" stroke="currentColor" stroke-width="4"/>
+                                    <rect x="18" y="22" width="28" height="6.5" fill="currentColor"/>
+                                    <rect x="18" y="35.5" width="28" height="6.5" fill="currentColor"/>
+                                </svg>
+                            </div>
+                            <div class="glass-def-title">
+                                <span>لا مشتقات</span>
+                                <span class="en-text">No derivatives (ND)</span>
+                            </div>
+                        </div>
+                        <p class="glass-def-text" style="margin-top: 4px;">
+                            • <strong>الشروط:</strong> لا مشتقات (No derivatives - ND).<br>
+                            • <strong>المحتوى:</strong> لا تغير العمل المحمي بحقوق المؤلف الأصلي.
+                        </p>
+                    </div>
+
+                    <!-- 4. نفس الشروط (SA) -->
+                    <div class="glass-definition-card">
+                        <div class="cc-head">
+                            <div class="cc-icon">
+                                <svg viewBox="0 0 64 64" role="img" aria-label="نفس الشروط">
+                                    <title>نفس الشروط (SA)</title>
+                                    <circle cx="32" cy="32" r="29" fill="none" stroke="currentColor" stroke-width="4"/>
+                                    <path d="M32 19 A13 13 0 1 0 45 32" fill="none" stroke="currentColor" stroke-width="6"/>
+                                    <polygon points="30,10 43,19 30,28" fill="currentColor"/>
+                                </svg>
+                            </div>
+                            <div class="glass-def-title">
+                                <span>نفس الشروط</span>
+                                <span class="en-text">ShareAlike (SA)</span>
+                            </div>
+                        </div>
+                        <p class="glass-def-text" style="margin-top: 4px;">
+                            • <strong>الشروط:</strong> نفس الشروط - ShareAlike (SA).<br>
+                            • <strong>المحتوى:</strong> انشر تحت نفس مجموعة التراخيص للعمل الأصلي.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- زر فتح نافذة الأسئلة -->
+                <button class="modal-trigger-btn" onclick="openModal('quizModal')">
+                    <span>⚡ بنك الأسئلة والتدريبات التفاعلية (160 XP)</span>
+                    <span>←</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- نافذة الاختبارات التفاعلية -->
+        <div class="custom-modal-overlay" id="quizModal">
+            <div class="custom-modal-box">
+                <div class="custom-modal-header">
+                    <div class="custom-modal-title"><span>⚡</span><span>اختبار التدريبات التفاعلي</span></div>
+                    <div class="xp-counter-badge" id="xpDisplay">⭐ XP: 0</div>
+                    <button class="custom-modal-close" onclick="closeModal('quizModal')">✕</button>
+                </div>
+                
+                <div class="custom-modal-body quiz-container-box">
+                    
+                    <!-- القسم الأول: اختر من متعدد (4 أسئلة) -->
+                    <div class="quiz-section-header">1. أسئلة الاختيار من متعدد</div>
+                    
+                    <div class="quiz-card-item" id="mcq1">
+                        <div class="quiz-question-text">س1: متى تنتهي الحقوق الاقتصادية للمؤلف وفقاً لما ورد في الدرس؟</div>
+                        <div class="quiz-options-grid">
+                            <button class="quiz-option-btn" onclick="checkMCQ('mcq1', this, 1, 3, 10)">أ) 10 سنوات من تاريخ النشر</button>
+                            <button class="quiz-option-btn" onclick="checkMCQ('mcq1', this, 2, 3, 10)">ب) 20 سنة من تاريخ التقديم</button>
+                            <button class="quiz-option-btn" onclick="checkMCQ('mcq1', this, 3, 3, 10)">ج) بعد (50) عاماً من وفاة المبدع</button>
+                            <button class="quiz-option-btn" onclick="checkMCQ('mcq1', this, 4, 3, 10)">د) فور نشر المصنف</button>
+                        </div>
+                        <div class="quiz-feedback-msg" id="feedback_mcq1"></div>
+                    </div>
+
+                    <div class="quiz-card-item" id="mcq2">
+                        <div class="quiz-question-text">س2: ماذا تعني علامة الترخيص (NC) في المشاع الإبداعي؟</div>
+                        <div class="quiz-options-grid">
+                            <button class="quiz-option-btn" onclick="checkMCQ('mcq2', this, 1, 2, 10)">أ) لا مشتقات</button>
+                            <button class="quiz-option-btn" onclick="checkMCQ('mcq2', this, 2, 2, 10)">ب) غير تجاري (Non-commercial)</button>
+                            <button class="quiz-option-btn" onclick="checkMCQ('mcq2', this, 3, 2, 10)">ج) نشر تحت نفس الشروط</button>
+                            <button class="quiz-option-btn" onclick="checkMCQ('mcq2', this, 4, 2, 10)">د) الإشارة تفضل المبدع</button>
+                        </div>
+                        <div class="quiz-feedback-msg" id="feedback_mcq2"></div>
+                    </div>
+
+                    <div class="quiz-card-item" id="mcq3">
+                        <div class="quiz-question-text">س3: أي مما يلي يمثل قاعدة أساسية لصحة عملية الاقتباس؟</div>
+                        <div class="quiz-options-grid">
+                            <button class="quiz-option-btn" onclick="checkMCQ('mcq3', this, 1, 1, 10)">أ) أن يكون عملك المحمي هو الأساس والعمل المقتبس تابعاً له</button>
+                            <button class="quiz-option-btn" onclick="checkMCQ('mcq3', this, 2, 1, 10)">ب) إخفاء المصدر الأصلي للمادة</button>
+                            <button class="quiz-option-btn" onclick="checkMCQ('mcq3', this, 3, 1, 10)">ج) تعديل النص المقتبس وتغييره تماماً</button>
+                            <button class="quiz-option-btn" onclick="checkMCQ('mcq3', this, 4, 1, 10)">د) عدم الحاجة لتمييز المادة المقتبسة</button>
+                        </div>
+                        <div class="quiz-feedback-msg" id="feedback_mcq3"></div>
+                    </div>
+
+                    <div class="quiz-card-item" id="mcq4">
+                        <div class="quiz-question-text">س4: ما هو الرمز الدال على ترخيص "لا مشتقات" (No derivatives)؟</div>
+                        <div class="quiz-options-grid">
+                            <button class="quiz-option-btn" onclick="checkMCQ('mcq4', this, 1, 4, 10)">أ) BY</button>
+                            <button class="quiz-option-btn" onclick="checkMCQ('mcq4', this, 2, 4, 10)">ب) NC</button>
+                            <button class="quiz-option-btn" onclick="checkMCQ('mcq4', this, 3, 4, 10)">ج) SA</button>
+                            <button class="quiz-option-btn" onclick="checkMCQ('mcq4', this, 4, 4, 10)">د) ND</button>
+                        </div>
+                        <div class="quiz-feedback-msg" id="feedback_mcq4"></div>
+                    </div>
+
+
+                    <!-- القسم الثاني: ما هو المصطلح (4 أسئلة) -->
+                    <div class="quiz-section-header">2. ما هو المصطلح الدال على العبارات الآتية؟</div>
+                    
+                    <div class="quiz-card-item" id="term1">
+                        <div class="quiz-question-text">س1: عملية استخدام جزء من عمل محمي بحقوق المؤلف لشخص آخر في عملك ضمن شروط وقواعد محددة.</div>
+                        <input type="text" class="quiz-input-box" id="input_term1" placeholder="اكتب المصطلح هنا...">
+                        <button class="quiz-submit-ans-btn" onclick="checkTerm('term1', 'الاقتباس', 'input_term1', 'feedback_term1')">تحقق من الإجابة</button>
+                        <div class="quiz-feedback-msg" id="feedback_term1"></div>
+                    </div>
+
+                    <div class="quiz-card-item" id="term2">
+                        <div class="quiz-question-text">س2: علامة تشير إلى شروط استخدام الأعمال المحمية بحقوق النشر.</div>
+                        <input type="text" class="quiz-input-box" id="input_term2" placeholder="اكتب المصطلح هنا...">
+                        <button class="quiz-submit-ans-btn" onclick="checkTerm('term2', 'ترخيص المشاع الإبداعي', 'input_term2', 'feedback_term2')">تحقق من الإجابة</button>
+                        <div class="quiz-feedback-msg" id="feedback_term2"></div>
+                    </div>
+
+                    <div class="quiz-card-item" id="term3">
+                        <div class="quiz-question-text">س3: الاستثناء الذي يتيح استخدام الأعمال المحمية بدون إذن لأغراض شخصية أو تعليمية غير ربحية.</div>
+                        <input type="text" class="quiz-input-box" id="input_term3" placeholder="اكتب المصطلح هنا...">
+                        <button class="quiz-submit-ans-btn" onclick="checkTerm('term3', 'الاستخدام العادل', 'input_term3', 'feedback_term3')">تحقق من الإجابة</button>
+                        <div class="quiz-feedback-msg" id="feedback_term3"></div>
+                    </div>
+
+                    <div class="quiz-card-item" id="term4">
+                        <div class="quiz-question-text">س4: ترخيص يشترط نشر العمل المشتق تحت نفس مجموعة التراخيص للعمل الأصلي.</div>
+                        <input type="text" class="quiz-input-box" id="input_term4" placeholder="اكتب المصطلح هنا...">
+                        <button class="quiz-submit-ans-btn" onclick="checkTerm('term4', 'نفس الشروط', 'input_term4', 'feedback_term4')">تحقق من الإجابة</button>
+                        <div class="quiz-feedback-msg" id="feedback_term4"></div>
+                    </div>
+
+
+                    <!-- القسم الثالث: صح أو خطأ (4 أسئلة) -->
+                    <div class="quiz-section-header">3. أسئلة صح أو خطأ</div>
+
+                    <div class="quiz-card-item" id="tf1">
+                        <div class="quiz-question-text">س1: يهدف الاستخدام العادل وحقوق المؤلف إلى المساهمة في التطور الثقافي.</div>
+                        <div class="quiz-options-grid">
+                            <button class="quiz-option-btn" onclick="checkTF('tf1', this, 'صح', 'صح', 10)">صح</button>
+                            <button class="quiz-option-btn" onclick="checkTF('tf1', this, 'خطأ', 'صح', 10)">خطأ</button>
+                        </div>
+                        <div class="quiz-feedback-msg" id="feedback_tf1"></div>
+                    </div>
+
+                    <div class="quiz-card-item" id="tf2">
+                        <div class="quiz-question-text">س2: من قواعد الاقتباس السليمة عدم تحديد المصدر بوضوح.</div>
+                        <div class="quiz-options-grid">
+                            <button class="quiz-option-btn" onclick="checkTF('tf2', this, 'صح', 'خطأ', 10)">صح</button>
+                            <button class="quiz-option-btn" onclick="checkTF('tf2', this, 'خطأ', 'خطأ', 10)">خطأ</button>
+                        </div>
+                        <div class="quiz-feedback-msg" id="feedback_tf2"></div>
+                    </div>
+
+                    <div class="quiz-card-item" id="tf3">
+                        <div class="quiz-question-text">س3: ترخيص (ND) يعني أنه لا يُسمح بتغيير العمل المحمي بحقوق المؤلف الأصلي.</div>
+                        <div class="quiz-options-grid">
+                            <button class="quiz-option-btn" onclick="checkTF('tf3', this, 'صح', 'صح', 10)">صح</button>
+                            <button class="quiz-option-btn" onclick="checkTF('tf3', this, 'خطأ', 'صح', 10)">خطأ</button>
+                        </div>
+                        <div class="quiz-feedback-msg" id="feedback_tf3"></div>
+                    </div>
+
+                    <div class="quiz-card-item" id="tf4">
+                        <div class="quiz-question-text">س4: يُسمح بالاقتباس دون قيود أو شروط ودون الحاجة لأن يكون عملك هو الأساس.</div>
+                        <div class="quiz-options-grid">
+                            <button class="quiz-option-btn" onclick="checkTF('tf4', this, 'صح', 'خطأ', 10)">صح</button>
+                            <button class="quiz-option-btn" onclick="checkTF('tf4', this, 'خطأ', 'خطأ', 10)">خطأ</button>
+                        </div>
+                        <div class="quiz-feedback-msg" id="feedback_tf4"></div>
+                    </div>
+
+
+                    <!-- القسم الرابع: عرف كل ما يأتي (4 أسئلة) -->
+                    <div class="quiz-section-header">4. عرف كل ما يأتي (اكتب باختصار)</div>
+
+                    <div class="quiz-card-item" id="def1">
+                        <div class="quiz-question-text">س1: عرف الاقتباس (Quotation).</div>
+                        <input type="text" class="quiz-input-box" id="input_def1" placeholder="اكتب تعريفاً مختصراً...">
+                        <button class="quiz-submit-ans-btn" onclick="checkDefinition('def1', 'input_def1', 'الاقتباس: استخدام جزء من عمل محمي لشخص آخر في عملك بشروط محددة', 'feedback_def1')">تحقق من الإجابة</button>
+                        <div class="quiz-feedback-msg" id="feedback_def1"></div>
+                    </div>
+
+                    <div class="quiz-card-item" id="def2">
+                        <div class="quiz-question-text">س2: عرف ترخيص المشاع الإبداعي (CC License).</div>
+                        <input type="text" class="quiz-input-box" id="input_def2" placeholder="اكتب تعريفاً مختصراً...">
+                        <button class="quiz-submit-ans-btn" onclick="checkDefinition('def2', 'input_def2', 'المشاع الإبداعي: علامة تشير لشروط استخدام الأعمال المحمية', 'feedback_def2')">تحقق من الإجابة</button>
+                        <div class="quiz-feedback-msg" id="feedback_def2"></div>
+                    </div>
+
+                    <div class="quiz-card-item" id="def3">
+                        <div class="quiz-question-text">س3: عرف الاستثناءات من حقوق المؤلف.</div>
+                        <input type="text" class="quiz-input-box" id="input_def3" placeholder="اكتب تعريفاً مختصراً...">
+                        <button class="quiz-submit-ans-btn" onclick="checkDefinition('def3', 'input_def3', 'الاستثناءات: حالات يُسمح فيها باستخدام العمل بدون إذن للاستخدام الشخصي أو التعليمي', 'feedback_def3')">تحقق من الإجابة</button>
+                        <div class="quiz-feedback-msg" id="feedback_def3"></div>
+                    </div>
+
+                    <div class="quiz-card-item" id="def4">
+                        <div class="quiz-question-text">س4: ماذا يعني ترخيص الإشارة تفضل المبدع (BY)؟</div>
+                        <input type="text" class="quiz-input-box" id="input_def4" placeholder="اكتب تعريفاً مختصراً...">
+                        <button class="quiz-submit-ans-btn" onclick="checkDefinition('def4', 'input_def4', 'BY: عرض عنوان العمل واسم المؤلف', 'feedback_def4')">تحقق من الإجابة</button>
+                        <div class="quiz-feedback-msg" id="feedback_def4"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- زر الصعود لأعلى الصفحة (دائري ممتلئ بلون الثيم الأساسي في الجانب الأيسر) -->
+        <button class="scroll-to-top-btn" id="scrollToTopBtn" onclick="scrollToTop()" title="الرجوع لأعلى الصفحة">↑</button>
+
+        <!-- شريط التنقل السفلي -->
+        <div class="bottom-nav" id="bottomNav">
+            <a href="../../index.html"><span class="nav-icon">🏠</span>الرئيسية</a>
+            <a href="../english.html"><span class="nav-icon">🇬🇧</span>الإنجليزي</a>
+            <a href="../../surveying/surveying.html"><span class="nav-icon">📐</span>المساحة</a>
+            <a href="../programming.html" class="active"><span class="nav-icon">💻</span>البرمجة</a>
+        </div>
+
+        <script>
+            let currentXP = 0;
+            let answeredQuestions = {};
+
+            const applauseAudio = new Audio('https://www.myinstants.com/media/sounds/applause.mp3');
+            const wrongGroanAudio = new Audio('groan.mp3');
+
+            function playApplauseSound() {
+                try {
+                    applauseAudio.currentTime = 0;
+                    applauseAudio.play().catch(e => {});
+                } catch(e) {}
+            }
+
+            function playWrongGroanSound() {
+                try {
+                    wrongGroanAudio.currentTime = 0;
+                    wrongGroanAudio.play().catch(e => {});
+                } catch(e) {}
+            }
+
+            const successMessages = [
+                "عاش يا دحيح العصر! إجابة زي الذهب 🥇",
+                "إبداع وتفوق عالي! استمر يا بطل 🚀",
+                "ضربة معلم صح الصح! إجابة في الصميم 🎯",
+                "الله عليك! دماغ شغال وسريع الفهم 💡"
+            ];
+
+            const errorMessages = [
+                "خطأ صغير، بس الصح قدامك اهو ركز فيه كويس يا بشمهندس 🔍",
+                "معليش يا بطل، اتعلمنا حاجة جديدة النهاردة، والصح هو: ",
+                "مش مشكلة خالص! التجربة بتعلم، وادي الإجابة الصح قدامك 📚",
+                "فووق معايا! ركز في المرة الجاية والإجابة الصحيحة هي: "
+            ];
+
+            function getRandomMsg(arr) {
+                return arr[Math.floor(Math.random() * arr.length)];
+            }
+
+            function updateXP(amount) {
+                currentXP += amount;
+                document.getElementById('xpDisplay').innerText = "⭐ XP: " + currentXP;
+            }
+
+            function openModal(modalId) {
+                document.getElementById(modalId).classList.add('active');
+            }
+            function closeModal(modalId) {
+                document.getElementById(modalId).classList.remove('active');
+            }
+
+            function checkMCQ(questionId, btnElement, selectedIndex, correctIndex, xpReward) {
+                if (answeredQuestions[questionId]) return;
+                
+                let container = document.getElementById(questionId);
+                let buttons = container.querySelectorAll('.quiz-option-btn');
+                let feedback = document.getElementById('feedback_' + questionId);
+                
+                answeredQuestions[questionId] = true;
+                buttons.forEach(btn => btn.disabled = true);
+
+                if (selectedIndex === correctIndex) {
+                    playApplauseSound();
+                    container.classList.add('correct-card');
+                    btnElement.classList.add('correct-choice');
+                    feedback.className = "quiz-feedback-msg success";
+                    feedback.innerText = getRandomMsg(successMessages) + " (+ " + xpReward + " XP)";
+                    updateXP(xpReward);
+                } else {
+                    playWrongGroanSound();
+                    container.classList.add('wrong-card');
+                    btnElement.classList.add('wrong-choice');
+                    buttons[correctIndex - 1].classList.add('correct-choice');
+                    feedback.className = "quiz-feedback-msg error";
+                    feedback.innerText = getRandomMsg(errorMessages) + "الخيار رقم (" + correctIndex + ")";
+                }
+            }
+
+            function checkTerm(questionId, correctAnswer, inputId, feedbackId) {
+                if (answeredQuestions[questionId]) return;
+
+                let userVal = document.getElementById(inputId).value.trim();
+                let container = document.getElementById(questionId);
+                let feedback = document.getElementById(feedbackId);
+
+                if (userVal === "") {
+                    alert("من فضلك اكتب الإجابة أولاً!");
+                    return;
+                }
+
+                answeredQuestions[questionId] = true;
+                document.getElementById(inputId).disabled = true;
+
+                if (userVal.includes(correctAnswer) || correctAnswer.includes(userVal)) {
+                    playApplauseSound();
+                    container.classList.add('correct-card');
+                    feedback.className = "quiz-feedback-msg success";
+                    feedback.innerText = getRandomMsg(successMessages) + " (+ 10 XP)";
+                    updateXP(10);
+                } else {
+                    playWrongGroanSound();
+                    container.classList.add('wrong-card');
+                    feedback.className = "quiz-feedback-msg error";
+                    feedback.innerText = getRandomMsg(errorMessages) + correctAnswer;
+                }
+            }
+
+            function checkTF(questionId, btnElement, selectedAns, correctAns, xpReward) {
+                if (answeredQuestions[questionId]) return;
+
+                let container = document.getElementById(questionId);
+                let buttons = container.querySelectorAll('.quiz-option-btn');
+                let feedback = document.getElementById('feedback_' + questionId);
+
+                answeredQuestions[questionId] = true;
+                buttons.forEach(btn => btn.disabled = true);
+
+                if (selectedAns === correctAns) {
+                    playApplauseSound();
+                    container.classList.add('correct-card');
+                    btnElement.classList.add('correct-choice');
+                    feedback.className = "quiz-feedback-msg success";
+                    feedback.innerText = getRandomMsg(successMessages) + " (+ " + xpReward + " XP)";
+                    updateXP(xpReward);
+                } else {
+                    playWrongGroanSound();
+                    container.classList.add('wrong-card');
+                    btnElement.classList.add('wrong-choice');
+                    buttons.forEach(btn => {
+                        if (btn.innerText.includes(correctAns)) btn.classList.add('correct-choice');
+                    });
+                    feedback.className = "quiz-feedback-msg error";
+                    feedback.innerText = getRandomMsg(errorMessages) + correctAns;
+                }
+            }
+
+            function checkDefinition(questionId, inputId, correctAnswerText, feedbackId) {
+                if (answeredQuestions[questionId]) return;
+
+                let userVal = document.getElementById(inputId).value.trim();
+                let container = document.getElementById(questionId);
+                let feedback = feedbackId ? document.getElementById(feedbackId) : document.getElementById('feedback_' + questionId);
+
+                if (userVal.length < 3) {
+                    alert("يرجى كتابة إجابة صحيحة للتحقق!");
+                    return;
+                }
+
+                answeredQuestions[questionId] = true;
+                document.getElementById(inputId).disabled = true;
+
+                playApplauseSound();
+                container.classList.add('correct-card');
+                feedback.className = "quiz-feedback-msg success";
+                feedback.innerText = getRandomMsg(successMessages) + " (+ 10 XP) | الإجابة المثالية: " + correctAnswerText;
+                updateXP(10);
+            }
+
+            // وظيفة التمرير لأعلى الصفحة
+            function scrollToTop() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            window.addEventListener('click', function(e) {
+                if (e.target.classList.contains('custom-modal-overlay')) {
+                    e.target.classList.remove('active');
+                }
             });
-        }
-    });
 
-    window.onscroll = function() {
-        let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-        let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        let scrolled = (winScroll / height) * 100;
-        let progressFill = document.getElementById("progressFill");
-        if (progressFill) progressFill.style.width = scrolled + "%";
-    };
-</script>
-</body>
+            document.addEventListener("DOMContentLoaded", function() {
+                let themeBtn = document.getElementById("themeToggleBtn");
+                function applyTheme(isDark) {
+                    if (isDark) {
+                        document.documentElement.classList.add("dark-mode");
+                        localStorage.setItem("em_theme", "dark");
+                        if (themeBtn) themeBtn.innerHTML = "☀️";
+                    } else {
+                        document.documentElement.classList.remove("dark-mode");
+                        localStorage.setItem("em_theme", "light");
+                        if (themeBtn) themeBtn.innerHTML = "🌙";
+                    }
+                }
+
+                applyTheme(localStorage.getItem("em_theme") === "dark");
+
+                if (themeBtn) {
+                    themeBtn.addEventListener("click", () => {
+                        applyTheme(!document.documentElement.classList.contains("dark-mode"));
+                    });
+                }
+            });
+
+            window.onscroll = function() {
+                let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                let scrolled = (winScroll / height) * 100;
+                let progressFill = document.getElementById("progressFill");
+                if (progressFill) progressFill.style.width = scrolled + "%";
+
+                // إظهار أو إخفاء زر الصعود لأعلى بناءً على النزول في الصفحة
+                let scrollToTopBtn = document.getElementById("scrollToTopBtn");
+                if (scrollToTopBtn) {
+                    if (winScroll > 300) {
+                        scrollToTopBtn.classList.add("show");
+                    } else {
+                        scrollToTopBtn.classList.remove("show");
+                    }
+                }
+            };
+        </script>
+    </body>
 </html>
