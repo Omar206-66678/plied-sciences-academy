@@ -301,7 +301,7 @@
             }
             .dict-modal-title { font-size: 15px; font-weight: 950; color: var(--heading-pure-color); display: flex; align-items: center; gap: 8px; }
 
-            /* نافذة الاختبار التفاعلية (مطابقة تماماً للشكل المطلوب) */
+            /* نافذة الاختبار التفاعلية */
             .modal-overlay { 
                 position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
                 background: rgba(0, 0, 0, 0.65); backdrop-filter: blur(16px); 
@@ -376,7 +376,7 @@
             .quiz-next-btn { background: var(--accent); color: #FFFFFF; border: none; padding: 10px 20px; border-radius: 18px; font-family: 'Cairo', sans-serif; font-weight: 950; cursor: pointer; display: none; }
             .quiz-next-btn.active { display: block; }
 
-            /* شريط التنقل السفلي */
+            /* شريط التنقل السفلي - مسارات مصححة للخروج خطوتين للوراء ../../ */
             .bottom-nav {
                 position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); 
                 width: calc(100% - 32px); max-width: 460px;
@@ -706,12 +706,12 @@
 
         </div>
 
-        <!-- شريط التنقل السفلي -->
+        <!-- شريط التنقل السفلي - مسارات مصححة بالخروج خطوتين للخلف ../../ -->
         <div class="bottom-nav" id="bottomNav">
-            <a href="index.html"><span class="nav-icon">🏠</span>الرئيسية</a>
-            <a href="english.html" class="active"><span class="nav-icon">🇬🇧</span>الإنجليزي</a>
-            <a href="surveying.html"><span class="nav-icon">📐</span>المساحة</a>
-            <a href="programming.html"><span class="nav-icon">💻</span>البرمجة</a>
+            <a href="../../index.html"><span class="nav-icon">🏠</span>الرئيسية</a>
+            <a href="../english.html" class="active"><span class="nav-icon">🇬🇧</span>الإنجليزي</a>
+            <a href="../../surveying/surveying.html" href-alt="../../surveying.html"><span class="nav-icon">📐</span>المساحة</a>
+            <a href="../../programming/programming.html" href-alt="../../programming.html"><span class="nav-icon">💻</span>البرمجة</a>
         </div>
 
         <script>
