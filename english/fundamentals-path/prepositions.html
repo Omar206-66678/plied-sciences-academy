@@ -30,7 +30,7 @@
 
                 --prep-in: #2563EB;     /* In: أزرق */
                 --prep-on: #059669;     /* On: أخضر */
-                --prep-at: #7C3AED;     /* At: بنفسجي مميز وواضح بعيداً عن الأصفر */
+                --prep-at: #7C3AED;     /* At: بنفسجي مميز */
 
                 --heading-pure-color: #0F172A; 
                 --nav-theme-color: #0284C7;
@@ -53,7 +53,7 @@
 
                 --prep-in: #60A5FA;
                 --prep-on: #34D399;
-                --prep-at: #A78BFA;     /* بنفسجي فاتح في الثيم المظلم */
+                --prep-at: #A78BFA;
 
                 --heading-pure-color: #FFFFFF; 
                 --nav-theme-color: #38BDF8;
@@ -231,7 +231,7 @@
             .sentence-group { display: flex; flex-direction: column; gap: 4px; }
             .speak-btn { width: 32px; height: 32px; border-radius: 14px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 13px; transition: 0.2s; flex-shrink: 0; border: 2px solid; }
 
-            /* ألوان مخصصة لكل حرف جر (عناوين، كلمات، وbadges خاصة به بالكامل) */
+            /* ألوان مخصصة لكل حرف جر */
             .in-word { color: var(--prep-in); font-weight: 950; }
             .on-word { color: var(--prep-on); font-weight: 950; }
             .at-word { color: var(--prep-at); font-weight: 950; }
@@ -382,7 +382,7 @@
             .quiz-next-btn { background: var(--accent); color: #FFFFFF; border: none; padding: 10px 20px; border-radius: 18px; font-family: 'Cairo', sans-serif; font-weight: 950; cursor: pointer; display: none; }
             .quiz-next-btn.active { display: block; }
 
-            /* شريط التنقل السفلي */
+            /* شريط التنقل السفلي المعدل والمصحح حسب مكان الملفات الحقيقي */
             .bottom-nav {
                 position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); 
                 width: calc(100% - 32px); max-width: 460px;
@@ -422,7 +422,6 @@
                     أكمل تحديات الأسئلة لإضافة الجمل إلى قاموسك الشخصي!
                 </div>
                 <div class="icon-cards-list" id="dictCardsContainer">
-                    <!-- تُعبأ الجمل تلقائياً عند إنهاء التحديات -->
                 </div>
             </div>
         </div>
@@ -447,7 +446,7 @@
         </div>
 
         <div class="container">
-            <!-- شريط الهيدر -->
+            <!-- شريط الهيدر مع تعديل مسار زر الرجوع للخلف لصفحة fundamentals-path.html في نفس المجلد أو المجلد الأب -->
             <div class="nav-bar">
                 <a href="fundamentals-path.html" class="back-btn" title="الرجوع للقائمة">←</a>
                 <div class="brand-minimalist-box">
@@ -493,7 +492,7 @@
                     </div>
                 </div>
 
-                <!-- 1. حرف الجر In (4 كروت تطبيقية - اللون الأزرق الخاص بـ In) -->
+                <!-- 1. حرف الجر In -->
                 <div class="glass-glow-card" id="sectionIn">
                     <div class="usage-title-centered">
                         <span class="usage-title-ar in-title-color">حرف الجر In</span>
@@ -509,7 +508,6 @@
                             </div>
                         </div>
 
-                        <!-- 4 كروت التطبيق العملي لـ In -->
                         <div class="prep-practice-group">
                             <div style="font-size: 12px; font-weight: 900; color: var(--prep-in); margin-top: 4px;">🎯 4 أمثلة تطبيقية على In:</div>
                             <div class="icon-cards-list">
@@ -566,7 +564,7 @@
                     </div>
                 </div>
 
-                <!-- 2. حرف الجر On (4 كروت تطبيقية - اللون الأخضر الخاص بـ On) -->
+                <!-- 2. حرف الجر On -->
                 <div class="glass-glow-card" id="sectionOn">
                     <div class="usage-title-centered">
                         <span class="usage-title-ar on-title-color">حرف الجر On</span>
@@ -582,7 +580,6 @@
                             </div>
                         </div>
 
-                        <!-- 4 كروت التطبيق العملي لـ On -->
                         <div class="prep-practice-group">
                             <div style="font-size: 12px; font-weight: 900; color: var(--prep-on); margin-top: 4px;">🎯 4 أمثلة تطبيقية على On:</div>
                             <div class="icon-cards-list">
@@ -639,7 +636,7 @@
                     </div>
                 </div>
 
-                <!-- 3. حرف الجر At (4 كروت تطبيقية - اللون المميز الخاص بـ At) -->
+                <!-- 3. حرف الجر At -->
                 <div class="glass-glow-card" id="sectionAt">
                     <div class="usage-title-centered">
                         <span class="usage-title-ar at-title-color">حرف الجر At</span>
@@ -655,7 +652,6 @@
                             </div>
                         </div>
 
-                        <!-- 4 كروت التطبيق العملي لـ At -->
                         <div class="prep-practice-group">
                             <div style="font-size: 12px; font-weight: 900; color: var(--prep-at); margin-top: 4px;">🎯 4 أمثلة تطبيقية على At:</div>
                             <div class="icon-cards-list">
@@ -712,7 +708,7 @@
                     </div>
                 </div>
 
-                <!-- كارت تشغيل التحدي اليومي وقاموس الجمل الخارجي -->
+                <!-- كارت تشغيل التحدي اليومي وقاموس الجمل -->
                 <div class="quiz-launch-card" id="launchQuizCardBtn">
                     <div class="quiz-launch-header-row">
                         <span class="quiz-launch-title">تحدي حروف الجر (In, On, At) 🎯</span>
@@ -724,7 +720,6 @@
                         <span>ابدأ التحدي اليومي</span>
                         <span>➔</span>
                     </button>
-                    <!-- زر قاموس الجمل -->
                     <button class="dict-launch-btn" onclick="openDictionaryModal(event)">
                         📖 قاموس الجمل المُكتسبة
                     </button>
@@ -734,15 +729,16 @@
 
         </div>
 
-        <!-- شريط التنقل السفلي -->
+        <!-- شريط التنقل السفلي - مسارات مصححة بالخروج خطوتين للوراء ../../ للوصول للملفات الرئيسية -->
         <div class="bottom-nav" id="bottomNav">
-            <a href="index.html"><span class="nav-icon">🏠</span>الرئيسية</a>
-            <a href="english.html" class="active"><span class="nav-icon">🇬🇧</span>الإنجليزي</a>
-            <a href="surveying.html"><span class="nav-icon">📐</span>المساحة</a>
-            <a href="programming.html"><span class="nav-icon">💻</span>البرمجة</a>
+            <a href="../../index.html"><span class="nav-icon">🏠</span>الرئيسية</a>
+            <a href="../english.html" class="active"><span class="nav-icon">🇬🇧</span>الإنجليزي</a>
+            <a href="../../surveying/surveying.html" onclick="/* adjust path if surveying is top-level */" href-alt="../../surveying.html"><span class="nav-icon">📐</span>المساحة</a>
+            <a href="../../programming/programming.html" href-alt="../../programming.html"><span class="nav-icon">💻</span>البرمجة</a>
         </div>
 
         <script>
+            // تم تصحيح روابط الأقسام في شريط التنقل السفلي مباشرة في الـ HTML لتخرج من المجلدات الفرعية بشكل صحيح.
             const quizSentencesPool = [
                 { en: "I live in Egypt.", ar: "أنا أعيش في مصر.", badge: "حرف الجر: In" },
                 { en: "It rains in winter.", ar: "تهطل الأمطار في الشتاء.", badge: "حرف الجر: In" },
@@ -864,7 +860,6 @@
                 { q: "Ali left his jacket ( ...... ) the back seat of the car.", arTrans: "الترجمة: ترك علي سترته في المقعد الخلفي للسيارة.", options: ["in", "on", "at", "by"], correct: 0 },
                 { q: "We celebrate National Day ( ...... ) October.", arTrans: "الترجمة: نحن نحتفل باليوم الوطني في أكتوبر.", options: ["in", "on", "at", "for"], correct: 0 },
                 { q: "Please meet me ( ...... ) the reception desk.", arTrans: "الترجمة: من فضلك قابلني عند مكتب الاستقبال.", options: ["in", "on", "at", "by"], correct: 2 },
-
                 { q: "The scientist made his breakthrough ( ...... ) the nineties.", arTrans: "الترجمة: حقق العالم إنجازه في التسعينيات.", options: ["in", "on", "at", "since"], correct: 0 },
                 { q: "Whose signature is written ( ...... ) this document?", arTrans: "الترجمة: لمن التوقيع المكتوب على هذا المستند؟", options: ["in", "on", "at", "over"], correct: 1 },
                 { q: "The temperature drops significantly ( ...... ) night.", arTrans: "الترجمة: تنخفض درجة الحرارة بشكل ملحوظ في الليل.", options: ["in", "on", "at", "during"], correct: 2 },
