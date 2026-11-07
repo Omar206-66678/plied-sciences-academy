@@ -21,7 +21,7 @@
                 --text-primary: #0F172A;
                 --text-secondary: #64748B;
                 
-                --header-bg: rgba(255, 255, 255, 0.95);
+                --header-bg: #FFFFFF;
                 --header-border: rgba(37, 99, 235, 0.25);
                 --header-shadow: 0 10px 30px rgba(37, 99, 235, 0.08);
                 
@@ -43,7 +43,7 @@
                 --text-primary: #F3F4F6;
                 --text-secondary: #9CA3AF;
                 
-                --header-bg: rgba(11, 15, 25, 0.95);
+                --header-bg: #0B0F19;
                 --header-border: rgba(59, 130, 246, 0.4);
                 --header-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
                 
@@ -73,6 +73,24 @@
 
             .top-progress-bar { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: transparent; z-index: 9999; }
             .top-progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--primary), var(--accent)); }
+
+            /* شريط الهيدر العلوي الموحد */
+            .nav-bar {
+                display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
+                background: var(--header-bg); border: 2.5px solid var(--card-border); padding: 12px 20px;
+                border-radius: 40px; box-shadow: var(--header-shadow); gap: 10px;
+            }
+            .brand-minimalist-box { display: flex; flex-direction: column; align-items: center; text-align: center; flex: 1; padding: 0 4px; min-width: 0; }
+            .brand-main-title { font-size: 14px; font-weight: 900; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
+            .brand-subtitle-text { font-size: 10.5px; font-weight: 800; color: var(--primary); letter-spacing: 0.5px; text-transform: uppercase; margin-top: 2px; }
+
+            .nav-actions-group { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+            .back-btn, .theme-btn {
+                background: var(--light-bg); border: 2px solid var(--card-border);
+                width: 40px; height: 40px; border-radius: 20px; display: flex; align-items: center; justify-content: center;
+                color: var(--text-primary); font-size: 16px; text-decoration: none; cursor: pointer; transition: 0.25s; flex-shrink: 0;
+            }
+            .back-btn:hover, .theme-btn:hover { transform: scale(1.05); border-color: var(--primary); color: var(--primary); }
 
             /* كارت الشرح الرئيسي الموحد (Full-Width) */
             .lesson-card-full {
@@ -354,47 +372,6 @@
             .perfect-theme .quiz-next-btn { background: #7C3AED; }
             .quiz-next-btn.active { display: block; }
 
-            /* نافذة البحث والقائمة الجانبية */
-            .search-modal-card { background: var(--card-bg); border: 1.5px solid var(--border-glow); border-radius: 26px; padding: 22px; width: 100%; max-width: 500px; box-shadow: 0 25px 50px rgba(0,0,0,0.5); display: flex; flex-direction: column; gap: 16px; }
-            .lesson-modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--card-border); padding-bottom: 12px; }
-            .lesson-modal-title-box { display: flex; align-items: center; gap: 10px; font-size: 16px; font-weight: 950; color: var(--heading-pure-color); }
-            .close-modal-btn { background: var(--light-bg); border: 1.5px solid var(--border-glow); width: 34px; height: 34px; border-radius: 10px; color: var(--text-primary); font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-            .search-input-wrapper { background: var(--bg-main); border: 1.5px solid var(--border-glow); border-radius: 16px; padding: 10px 14px; display: flex; align-items: center; }
-            .search-input-field { width: 100%; background: transparent; border: none; outline: none; color: var(--text-primary); font-family: 'Cairo', sans-serif; font-size: 13px; font-weight: 700; }
-            .search-results-list { display: flex; flex-direction: column; gap: 10px; max-height: 320px; overflow-y: auto; scrollbar-width: none; }
-            .search-result-item { background: var(--bg-main); border: 1.5px solid var(--card-border); border-radius: 16px; padding: 12px 14px; display: flex; flex-direction: column; gap: 3px; text-decoration: none; }
-            .search-result-title { font-size: 13px; font-weight: 950; color: var(--heading-pure-color); margin: 0; }
-            .search-result-desc { font-size: 11px; font-weight: 700; color: var(--text-secondary); margin: 0; }
-
-            .side-menu-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(5, 8, 17, 0.82); backdrop-filter: blur(10px); display: none; justify-content: flex-start; z-index: 10001; }
-            .side-menu-overlay.active { display: flex; }
-            .side-menu-drawer { background: var(--card-bg); border-left: 2px solid var(--border-glow); width: 85%; max-width: 320px; height: 100%; box-shadow: -15px 0 40px rgba(0,0,0,0.6); display: flex; flex-direction: column; padding: 22px; box-sizing: border-box; }
-            .drawer-top-box { background: var(--light-bg); border: 1.5px solid var(--border-glow); border-radius: 20px; padding: 14px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
-            .drawer-brand-info { display: flex; flex-direction: column; gap: 2px; }
-            .drawer-brand-title { font-size: 14px; font-weight: 950; color: var(--heading-pure-color); margin: 0; }
-            .drawer-brand-sub { font-size: 10px; font-weight: 800; color: var(--text-secondary); margin: 0; }
-            .drawer-brand-icon { width: 42px; height: 42px; background: var(--card-bg); border: 1.5px solid var(--border-glow); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
-            
-            .drawer-stats-card {
-                background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(96, 165, 250, 0.1));
-                border: 1.5px solid var(--border-glow);
-                border-radius: 18px;
-                padding: 14px;
-                margin-bottom: 16px;
-                display: flex;
-                flex-direction: column;
-                gap: 8px;
-            }
-            .drawer-stats-title { font-size: 12px; font-weight: 900; color: var(--text-secondary); display: flex; justify-content: space-between; align-items: center; }
-            .drawer-stats-value { font-size: 16px; font-weight: 950; color: var(--primary); }
-
-            .drawer-links-list { display: flex; flex-direction: column; gap: 8px; flex-grow: 1; }
-            .drawer-link-item { display: flex; align-items: center; justify-content: space-between; background: var(--bg-main); border: 1.5px solid var(--card-border); padding: 12px 16px; border-radius: 16px; color: var(--text-primary); text-decoration: none; font-size: 12px; font-weight: 900; cursor: pointer; }
-            .drawer-link-item.active { border-color: var(--primary); background: var(--light-bg); color: var(--heading-pure-color); }
-            .drawer-link-left { display: flex; align-items: center; gap: 10px; }
-            
-            .drawer-footer { text-align: center; font-size: 10px; font-weight: 800; color: var(--text-secondary); border-top: 1px solid var(--card-border); padding-top: 14px; margin-top: auto; }
-
             /* كروت الجمل التفاعلية مع الصوت */
             .icon-cards-list { display: flex; flex-direction: column; gap: 10px; margin-top: 8px; }
             
@@ -444,34 +421,26 @@
                 cursor: pointer; font-size: 14px; transition: 0.2s; flex-shrink: 0; border: 1.5px solid;
             }
 
+            /* شريط التنقل السفلي - مسارات مصححة بالخروج خطوتين للخلف ../../ */
             .bottom-nav {
-                position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); width: calc(100% - 28px); max-width: 500px; background: var(--header-bg); backdrop-filter: blur(15px); display: flex; justify-content: space-around; align-items: center; padding: 8px 10px; border: 1.5px solid var(--header-border); border-radius: 22px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15); z-index: 999;
+                position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); 
+                width: calc(100% - 32px); max-width: 460px; background: var(--header-bg);
+                display: flex; justify-content: space-around; align-items: center; padding: 6px 10px; border-radius: 30px; 
+                border: 2.5px solid var(--card-border); box-shadow: 0 8px 24px rgba(0,0,0,0.25); z-index: 999; box-sizing: border-box; transition: all 0.4s ease;
             }
-            .bottom-nav a { color: var(--text-secondary); text-decoration: none; font-size: 11px; text-align: center; font-weight: 800; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 6px 12px; border-radius: 16px; flex: 1; }
-            .bottom-nav a span { font-size: 18px; line-height: 1; }
-            .bottom-nav a.active { color: var(--heading-pure-color); background: var(--light-bg); border: 1.5px solid var(--border-glow); }
+            .bottom-nav a { 
+                color: var(--text-secondary); text-decoration: none; font-size: 10px; text-align: center; font-weight: 800; 
+                display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 12px; border-radius: 20px; flex: 1; 
+                border: 1.5px solid var(--card-border); background: var(--light-bg); transition: all 0.3s ease;
+            }
+            .bottom-nav a span { font-size: 16px; line-height: 1; }
+            .bottom-nav a:hover { color: var(--primary); border-color: var(--primary); background: rgba(128, 128, 128, 0.1); }
+            .bottom-nav a.active { color: #FFFFFF; background: var(--primary); border-color: var(--primary); box-shadow: 0 4px 15px rgba(37,99,235,0.3); }
         </style>
     </head>
     <body>
 
         <div class="top-progress-bar"><div class="top-progress-fill" id="progressFill"></div></div>
-
-        <!-- نافذة البحث -->
-        <div class="modal-overlay" id="searchModal" style="background: rgba(5, 8, 17, 0.82);">
-            <div class="search-modal-card">
-                <div class="lesson-modal-header">
-                    <div class="lesson-modal-title-box"><span>🔍</span><span>البحث في أفعال الكينونة (Verb To Be)</span></div>
-                    <button class="close-modal-btn" id="closeSearchBtn">✕</button>
-                </div>
-                <div class="search-input-wrapper"><input type="text" class="search-input-field" placeholder="ابحث عن: am, is, are, was, were, been..."></div>
-                <div class="search-results-list">
-                    <a href="#" class="search-result-item" onclick="document.getElementById('searchModal').classList.remove('active');">
-                        <span class="search-result-title">⚡ عائلة يكون (Verb To Be)</span>
-                        <span class="search-result-desc">دليل الاستخدام الشامل لأفعال الكينونة في مختلف الأزمنة.</span>
-                    </a>
-                </div>
-            </div>
-        </div>
 
         <!-- نافذة اختبار التحدي اليومي -->
         <div class="modal-overlay" id="quizModal">
@@ -488,30 +457,19 @@
             </div>
         </div>
 
-        <!-- القائمة الجانبية -->
-        <div class="side-menu-overlay" id="sideMenu" style="background: rgba(5, 8, 17, 0.82);">
-            <div class="side-menu-drawer">
-                <div class="drawer-top-box">
-                    <div class="drawer-brand-info"><h3 class="drawer-brand-title">أكاديمية العلوم التطبيقية</h3><p class="drawer-brand-sub">قسم قواعد اللغة الإنجليزية</p></div>
-                    <div class="drawer-brand-icon">🎓</div>
-                </div>
-
-                <div class="drawer-stats-card">
-                    <div class="drawer-stats-title"><span>⭐ نقاط إنجازك (XP)</span><span id="drawerXpDisplay" class="drawer-stats-value">0 XP</span></div>
-                </div>
-
-                <div class="drawer-links-list">
-                    <a href="index.html" class="drawer-link-item"><span class="drawer-link-left"><span>🏠</span> الرئيسية</span><span>➔</span></a>
-                    <a href="english.html" class="drawer-link-item"><span class="drawer-link-left"><span>🇬🇧</span> الإنجليزي</span><span>➔</span></a>
-                    <a href="fundamentals-path.html" class="drawer-link-item active"><span class="drawer-link-left"><span>📖</span> القواعد والأساسيات</span><span>➔</span></a>
-                    <a href="surveying.html" class="drawer-link-item"><span class="drawer-link-left"><span>📐</span> المساحة</span><span>➔</span></a>
-                    <a href="programming.html" class="drawer-link-item"><span class="drawer-link-left"><span>💻</span> البرمجة</span><span>➔</span></a>
-                </div>
-                <div class="drawer-footer">English Master v2.1 • Pro Edition</div>
-            </div>
-        </div>
-
         <div class="container">
+            <!-- شريط الهيدر العلوي الموحد -->
+            <div class="nav-bar">
+                <a href="auxiliary-verbs.html" class="back-btn" title="الرجوع للقائمة">←</a>
+                <div class="brand-minimalist-box">
+                    <span class="brand-main-title">عائلة يكون (Verb To Be)</span>
+                    <span class="brand-subtitle-text">أكاديمية العلوم التطبيقية</span>
+                </div>
+                <div class="nav-actions-group">
+                    <button class="theme-btn" id="themeToggleBtn" title="تغيير الثيم">🌙</button>
+                </div>
+            </div>
+
             <!-- الكارت الرئيسي الشامل للدرس -->
             <div class="lesson-card-full">
                 <div class="lesson-header">
@@ -936,11 +894,12 @@
 
         </div>
 
-        <div class="bottom-nav">
-            <a href="index.html"><span>🏠</span>الرئيسية</a>
-            <a href="fundamentals-path.html" class="active"><span>🇬🇧</span>القواعد</a>
-            <a href="surveying.html"><span>📐</span>المساحة</a>
-            <a href="programming.html"><span>💻</span>البرمجة</a>
+        <!-- شريط التنقل السفلي - مسارات مصححة بالخروج خطوتين للخلف ../../ -->
+        <div class="bottom-nav" id="bottomNav">
+            <a href="../../index.html"><span class="nav-icon">🏠</span>الرئيسية</a>
+            <a href="../english.html" class="active"><span class="nav-icon">🇬🇧</span>الإنجليزي</a>
+            <a href="../../surveying/surveying.html"><span class="nav-icon">📐</span>المساحة</a>
+            <a href="../../programming/programming.html"><span class="nav-icon">💻</span>البرمجة</a>
         </div>
 
         <script>
@@ -1167,13 +1126,6 @@
                 return quizBanks[tense].slice(startIndex, startIndex + 3);
             }
 
-            function updateMenuStats() {
-                let userXp = parseInt(localStorage.getItem("em_user_xp") || "0");
-                if (document.getElementById("drawerXpDisplay")) {
-                    document.getElementById("drawerXpDisplay").innerText = userXp + " XP";
-                }
-            }
-
             function checkTenseAvailabilities() {
                 ['present', 'past', 'perfect'].forEach(t => {
                     let isCompleted = localStorage.getItem(`em_${t}_completed_today`) === "true";
@@ -1235,7 +1187,6 @@
                 if (selectedIndex === q.correct) {
                     userXp += 10; 
                     localStorage.setItem("em_user_xp", userXp);
-                    updateMenuStats();
                     playSound('success'); 
 
                     if (cardElement) {
@@ -1258,7 +1209,6 @@
                 } else {
                     localStorage.setItem(`em_${activeTense}_completed_today`, "true");
                     checkTenseAvailabilities();
-                    updateMenuStats();
 
                     let body = document.getElementById('quizBody');
                     document.getElementById('quizNextBtn').classList.remove('active');
@@ -1273,35 +1223,36 @@
             }
 
             document.addEventListener("DOMContentLoaded", function() {
-                updateMenuStats();
                 checkTenseAvailabilities();
 
                 let quizModal = document.getElementById("quizModal");
                 let closeQuizBtn = document.getElementById("closeQuizBtn");
-                let sideMenu = document.getElementById("sideMenu");
 
                 if (closeQuizBtn && quizModal) {
                     closeQuizBtn.addEventListener("click", () => {
                         quizModal.classList.remove("active");
                         checkTenseAvailabilities();
-                        updateMenuStats();
                     });
                 }
 
-                let searchBtn = document.getElementById("searchBtn");
-                let searchModal = document.getElementById("searchModal");
-                let closeSearchBtn = document.getElementById("closeSearchBtn");
-                if (searchBtn && searchModal) { searchBtn.addEventListener("click", () => { searchModal.classList.add("active"); }); }
-                if (closeSearchBtn && searchModal) { closeSearchBtn.addEventListener("click", () => { searchModal.classList.remove("active"); }); }
-
-                let menuBtn = document.getElementById("menuBtn");
-                if (menuBtn && sideMenu) {
-                    menuBtn.addEventListener("click", () => {
-                        updateMenuStats();
-                        sideMenu.classList.add("active");
+                let themeBtn = document.getElementById("themeToggleBtn");
+                function applyTheme(isDark) {
+                    if (isDark) {
+                        document.documentElement.classList.add("dark-mode");
+                        localStorage.setItem("em_theme", "dark");
+                        if (themeBtn) themeBtn.innerHTML = "☀️";
+                    } else {
+                        document.documentElement.classList.remove("dark-mode");
+                        localStorage.setItem("em_theme", "light");
+                        if (themeBtn) themeBtn.innerHTML = "🌙";
+                    }
+                }
+                applyTheme(localStorage.getItem("em_theme") === "dark");
+                if (themeBtn) {
+                    themeBtn.addEventListener("click", () => {
+                        applyTheme(!document.documentElement.classList.contains("dark-mode"));
                     });
                 }
-                if (sideMenu) { sideMenu.addEventListener("click", (e) => { if (e.target === sideMenu) sideMenu.classList.remove("active"); }); }
             });
 
             window.onscroll = function() {
@@ -1312,5 +1263,14 @@
                 if (progressFill) progressFill.style.width = scrolled + "%";
             };
         </script>
+    </body>
+    <body>
+        <!-- شريط التنقل السفلي - مسارات مصححة بالخروج خطوتين للخلف ../../ -->
+        <div class="bottom-nav" id="bottomNav">
+            <a href="../../index.html"><span class="nav-icon">🏠</span>الرئيسية</a>
+            <a href="../english.html" class="active"><span class="nav-icon">🇬🇧</span>الإنجليزي</a>
+            <a href="../../surveying/surveying.html"><span class="nav-icon">📐</span>المساحة</a>
+            <a href="../../programming/programming.html"><span class="nav-icon">💻</span>البرمجة</a>
+        </div>
     </body>
 </html>
