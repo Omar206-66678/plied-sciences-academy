@@ -92,7 +92,7 @@
                 border-radius: 40px; box-shadow: var(--header-shadow); gap: 10px;
             }
             .brand-minimalist-box { display: flex; flex-direction: column; align-items: center; text-align: center; flex: 1; padding: 0 4px; min-width: 0; }
-            .brand-main-title { font-size: 14px; font-weight: 900; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
+            .brand-main-title { font-size: 15px; font-weight: 900; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
             .brand-subtitle-text { font-size: 10.5px; font-weight: 800; color: var(--accent); letter-spacing: 0.5px; text-transform: uppercase; margin-top: 2px; }
 
             .nav-actions-group { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
@@ -103,7 +103,7 @@
             }
             .back-btn:hover, .theme-btn:hover { transform: scale(1.05); border-color: var(--accent); color: var(--accent); }
 
-            /* كارت الترحيب الرئيسي مع انحناءات دائرية متقدمة */
+            /* كارت الترحيب الرئيسي */
             .hero-card {
                 background: var(--card-bg); 
                 border: 2.5px solid var(--card-border);
@@ -127,7 +127,7 @@
             .hero-title-en { margin: 0; font-size: 19px; font-weight: 950; color: var(--heading-pure-color); }
             .hero-title-ar { margin: 0; font-size: 13.5px; font-weight: 850; color: var(--accent); background: var(--light-bg); padding: 5px 14px; border-radius: 16px; border: 2px solid var(--card-border); }
 
-            /* الأيقونات الصامتة داخل الكارت بإنحناءات دائرية ناعمة */
+            /* الأيقونات الصامتة داخل الكارت */
             .sub-lessons-list {
                 display: flex;
                 flex-direction: column;
@@ -137,13 +137,13 @@
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
+                flex-wrap: wrap;
+                gap: 8px;
                 padding: 12px 18px;
                 border-radius: 20px;
                 border: 2px solid var(--card-border);
                 box-shadow: 0 4px 15px rgba(0,0,0,0.02);
-                white-space: nowrap;
-                overflow: hidden;
-                pointer-events: none; /* صامتة تماماً لا تستجيب للضغط */
+                pointer-events: none;
             }
             .item-be { background: rgba(37, 99, 235, 0.06); border-color: rgba(37, 99, 235, 0.25); color: #2563EB; }
             .item-have { background: rgba(16, 185, 129, 0.06); border-color: rgba(16, 185, 129, 0.25); color: #10B981; }
@@ -156,11 +156,13 @@
             html.dark-mode .item-modals { background: rgba(139, 92, 246, 0.1); color: #A78BFA; border-color: rgba(139, 92, 246, 0.3); }
 
             .sub-lesson-text {
-                font-size: 12.5px;
+                font-size: 12px;
                 font-weight: 900;
                 display: flex;
                 align-items: center;
                 gap: 8px;
+                direction: ltr;
+                text-align: left;
             }
             .sub-lesson-label {
                 font-size: 11.5px;
@@ -172,6 +174,7 @@
                 height: 8px;
                 border-radius: 50%;
                 background: currentColor;
+                flex-shrink: 0;
             }
 
             .hero-description-box {
@@ -186,18 +189,18 @@
                 text-align: justify;
             }
 
-            /* --- كروت النيون الزجاجية الكبيرة تحت الكارت --- */
+            /* --- كروت الدروس المحدثة والمنسقة بأعلى احترافية --- */
             .neon-cards-container {
                 display: flex;
                 flex-direction: column;
-                gap: 14px;
+                gap: 16px;
                 margin-bottom: 24px;
             }
 
             .neon-lesson-card {
                 background: var(--card-bg);
                 backdrop-filter: blur(16px);
-                border-radius: 28px;
+                border-radius: 30px;
                 padding: 20px 22px;
                 display: flex;
                 align-items: center;
@@ -205,56 +208,62 @@
                 text-decoration: none;
                 position: relative;
                 overflow: hidden;
-                transition: all 0.3s ease;
+                transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
                 box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
             }
 
             .neon-lesson-card:hover {
                 transform: translateY(-3px);
-                filter: brightness(1.04);
+                box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
             }
 
+            /* تخصيص الحدود والتأثيرات لكل كارت بناءً على هويته */
             .card-be {
-                border: 2px solid rgba(37, 99, 235, 0.4);
-                box-shadow: 0 8px 25px rgba(37, 99, 235, 0.12);
+                border: 2.5px solid rgba(37, 99, 235, 0.35);
             }
+            .card-be:hover { border-color: #2563EB; }
             .card-be::before { content: ''; position: absolute; top: 0; right: 0; bottom: 0; width: 6px; background: linear-gradient(180deg, #2563EB, #60A5FA); }
 
             .card-have {
-                border: 2px solid rgba(16, 185, 129, 0.4);
-                box-shadow: 0 8px 25px rgba(16, 185, 129, 0.12);
+                border: 2.5px solid rgba(16, 185, 129, 0.35);
             }
+            .card-have:hover { border-color: #10B981; }
             .card-have::before { content: ''; position: absolute; top: 0; right: 0; bottom: 0; width: 6px; background: linear-gradient(180deg, #10B981, #34D399); }
 
             .card-do {
-                border: 2px solid rgba(245, 158, 11, 0.4);
-                box-shadow: 0 8px 25px rgba(245, 158, 11, 0.12);
+                border: 2.5px solid rgba(245, 158, 11, 0.35);
             }
+            .card-do:hover { border-color: #F59E0B; }
             .card-do::before { content: ''; position: absolute; top: 0; right: 0; bottom: 0; width: 6px; background: linear-gradient(180deg, #F59E0B, #FBBF24); }
 
             .card-modals {
-                border: 2px solid rgba(139, 92, 246, 0.4);
-                box-shadow: 0 8px 25px rgba(139, 92, 246, 0.12);
+                border: 2.5px solid rgba(139, 92, 246, 0.35);
             }
+            .card-modals:hover { border-color: #8B5CF6; }
             .card-modals::before { content: ''; position: absolute; top: 0; right: 0; bottom: 0; width: 6px; background: linear-gradient(180deg, #8B5CF6, #A78BFA); }
 
             .card-content-group {
                 display: flex;
                 flex-direction: column;
-                gap: 4px;
+                gap: 6px;
+                padding-right: 8px;
             }
 
             .card-title-main {
+                font-family: system-ui, -apple-system, sans-serif;
                 font-size: 15px;
                 font-weight: 950;
                 color: var(--heading-pure-color);
                 letter-spacing: -0.2px;
+                direction: ltr;
+                text-align: right;
             }
 
             .card-title-sub {
-                font-size: 12px;
+                font-size: 12.5px;
                 font-weight: 850;
                 color: var(--text-secondary);
+                font-family: 'Cairo', sans-serif;
             }
 
             .card-action-badge {
@@ -262,22 +271,30 @@
                 align-items: center;
                 gap: 6px;
                 padding: 10px 16px;
-                border-radius: 16px;
+                border-radius: 18px;
                 font-size: 12.5px;
-                font-weight: 900;
-                transition: 0.2s ease;
-                border: 1.5px solid currentColor;
+                font-weight: 950;
+                transition: 0.25s ease;
+                border: 2px solid transparent;
+                flex-shrink: 0;
             }
 
-            .card-be .card-action-badge { background: rgba(37, 99, 235, 0.08); color: #2563EB; }
-            .card-have .card-action-badge { background: rgba(16, 185, 129, 0.08); color: #10B981; }
-            .card-do .card-action-badge { background: rgba(245, 158, 11, 0.08); color: #F59E0B; }
-            .card-modals .card-action-badge { background: rgba(139, 92, 246, 0.08); color: #8B5CF6; }
+            .card-be .card-action-badge { background: rgba(37, 99, 235, 0.08); color: #2563EB; border-color: rgba(37, 99, 235, 0.2); }
+            .card-have .card-action-badge { background: rgba(16, 185, 129, 0.08); color: #10B981; border-color: rgba(16, 185, 129, 0.2); }
+            .card-do .card-action-badge { background: rgba(245, 158, 11, 0.08); color: #F59E0B; border-color: rgba(245, 158, 11, 0.2); }
+            .card-modals .card-action-badge { background: rgba(139, 92, 246, 0.08); color: #8B5CF6; border-color: rgba(139, 92, 246, 0.2); }
 
-            html.dark-mode .card-be .card-action-badge { color: #60A5FA; }
-            html.dark-mode .card-have .card-action-badge { color: #34D399; }
-            html.dark-mode .card-do .card-action-badge { color: #FBBF24; }
-            html.dark-mode .card-modals .card-action-badge { color: #A78BFA; }
+            .neon-lesson-card:hover .card-action-badge {
+                background: currentColor;
+                color: #FFFFFF !important;
+                border-color: currentColor;
+                transform: scale(1.05);
+            }
+
+            html.dark-mode .card-be .card-action-badge { color: #60A5FA; border-color: rgba(96, 165, 250, 0.3); }
+            html.dark-mode .card-have .card-action-badge { color: #34D399; border-color: rgba(52, 211, 153, 0.3); }
+            html.dark-mode .card-do .card-action-badge { color: #FBBF24; border-color: rgba(251, 191, 36, 0.3); }
+            html.dark-mode .card-modals .card-action-badge { color: #A78BFA; border-color: rgba(167, 139, 250, 0.3); }
 
             /* شريط التنقل السفلي الموحد مع مسارات مصححة */
             .bottom-nav {
@@ -305,7 +322,7 @@
             <div class="nav-bar">
                 <a href="fundamentals-path.html" class="back-btn" title="الرجوع للقائمة">←</a>
                 <div class="brand-minimalist-box">
-                    <span class="brand-main-title">Auxiliary Verbs (الأفعال المساعدة)</span>
+                    <span class="brand-main-title">الأفعال المساعدة</span>
                     <span class="brand-subtitle-text">أكاديمية العلوم التطبيقية</span>
                 </div>
                 <div class="nav-actions-group">
@@ -313,7 +330,7 @@
                 </div>
             </div>
 
-            <!-- كارت الترحيب (بإنحناءات دائرية ناعمة) -->
+            <!-- كارت الترحيب -->
             <div class="hero-card">
                 <div class="hero-header-row">
                     <h1 class="hero-title-en">Auxiliary Verbs</h1>
@@ -344,7 +361,7 @@
                 </div>
             </div>
 
-            <!-- كروت النيون الزجاجية الكبيرة تحت الكارت -->
+            <!-- كروت النيون الزجاجية المحدثة للدروس -->
             <div class="neon-cards-container">
                 <a href="lesson-be.html" class="neon-lesson-card card-be">
                     <div class="card-content-group">
