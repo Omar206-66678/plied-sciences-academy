@@ -275,7 +275,7 @@
             }
             .dict-modal-title { font-size: 15px; font-weight: 950; color: var(--heading-pure-color); display: flex; align-items: center; gap: 8px; }
 
-            /* نافذة الاختبار التفاعلية (مطابقة للصورة تماماً)[span_1](start_span)[span_1](end_span) */
+            /* نافذة الاختبار التفاعلية */
             .modal-overlay { 
                 position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
                 background: rgba(0, 0, 0, 0.65); backdrop-filter: blur(16px); 
@@ -288,7 +288,6 @@
                 overflow-y: auto; box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25); display: flex; flex-direction: column; gap: 16px; position: relative; 
             }
             
-            /* شريط الـ HUD العلوي داخل نافذة التحدي (مطابق للصورة)[span_2](start_span)[span_2](end_span) */
             .game-hud-bar {
                 display: flex; justify-content: space-between; align-items: center;
                 background: var(--card-bg); border: 2px solid var(--card-border);
@@ -313,7 +312,6 @@
 
             .quiz-body { display: flex; flex-direction: column; gap: 14px; }
             
-            /* كارت السؤال المدمج المطابق للصورة تماماً[span_3](start_span)[span_3](end_span) */
             .quiz-question-card {
                 background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 28px; padding: 20px;
                 display: flex; flex-direction: column; gap: 14px; box-shadow: 0 6px 20px rgba(0, 0, 0, 0.02); transition: 0.3s ease;
@@ -323,7 +321,6 @@
                 font-size: 14.5px; font-weight: 950; color: var(--heading-pure-color); text-align: center; display: flex; align-items: center; justify-content: center; gap: 8px;
             }
 
-            /* صندوق الترجمة المنسدل داخل السؤال (مطابق للصورة)[span_4](start_span)[span_4](end_span) */
             .quiz-translation-box {
                 background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 20px; padding: 12px 16px;
                 font-size: 13px; font-weight: 800; color: var(--text-secondary); text-align: center; display: flex; align-items: center; justify-content: center; gap: 6px;
@@ -333,7 +330,6 @@
                 font-family: system-ui, -apple-system, sans-serif; font-size: 16px; font-weight: 950; color: var(--heading-pure-color); text-align: center; direction: ltr; margin: 10px 0;
             }
 
-            /* شبكة الاختيارات (أزرار 2x2 مطابقة للصورة)[span_5](start_span)[span_5](end_span) */
             .quiz-options-grid-2x2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 6px; }
             .quiz-option-btn-box {
                 background: var(--card-bg); border: 2px solid var(--card-border); padding: 14px; border-radius: 20px;
@@ -354,7 +350,7 @@
             .quiz-next-btn { background: var(--accent); color: #FFFFFF; border: none; padding: 10px 20px; border-radius: 18px; font-family: 'Cairo', sans-serif; font-weight: 950; cursor: pointer; display: none; }
             .quiz-next-btn.active { display: block; }
 
-            /* شريط التنقل السفلي */
+            /* شريط التنقل السفلي - مسارات مصححة بالخروج خطوتين للوراء ../../ */
             .bottom-nav {
                 position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); 
                 width: calc(100% - 32px); max-width: 460px; background: var(--header-bg);
@@ -391,7 +387,7 @@
             </div>
         </div>
 
-        <!-- نافذة اختبار التحدي اليومي (المطابقة للشورة تماماً)[span_6](start_span)[span_6](end_span) -->
+        <!-- نافذة اختبار التحدي اليومي -->
         <div class="modal-overlay" id="quizModal">
             <div class="quiz-modal-card">
                 <div class="game-hud-bar">
@@ -411,7 +407,7 @@
         </div>
 
         <div class="container">
-            <!-- شريط الهيدر -->
+            <!-- شريط الهيدر مع تصحيح زر الرجوع للخلف لصفحة fundamentals-path.html -->
             <div class="nav-bar">
                 <a href="fundamentals-path.html" class="back-btn" title="الرجوع للقائمة">←</a>
                 <div class="brand-minimalist-box">
@@ -497,12 +493,12 @@
                     </div>
                 </div>
 
-                <!-- 3. كروت التطبيق العملي للفاعل والمفعول (السبعة ضمائر كاملة) -->
+                <!-- 3. كروت التطبيق العملي للفاعل والمفعول -->
                 <div class="prep-practice-group">
                     <div style="font-size: 13px; font-weight: 950; color: var(--accent); margin-top: 4px;">🎯 التطبيق العملي الشامل (السبعة ضمائر كاملة):</div>
                     <div class="icon-cards-list">
                         
-                        <!-- 1. I / me (أنا) -->
+                        <!-- 1. I / me -->
                         <div class="icon-single-card" id="card-1">
                             <div class="sentence-group">
                                 <div class="sentence-row">
@@ -526,7 +522,7 @@
                             </div>
                         </div>
 
-                        <!-- 2. He / him (هو) -->
+                        <!-- 2. He / him -->
                         <div class="icon-single-card" id="card-2">
                             <div class="sentence-group">
                                 <div class="sentence-row">
@@ -550,7 +546,7 @@
                             </div>
                         </div>
 
-                        <!-- 3. She / her (هي) -->
+                        <!-- 3. She / her -->
                         <div class="icon-single-card" id="card-3">
                             <div class="sentence-group">
                                 <div class="sentence-row">
@@ -574,7 +570,7 @@
                             </div>
                         </div>
 
-                        <!-- 4. It / it (غير العاقل) -->
+                        <!-- 4. It / it -->
                         <div class="icon-single-card" id="card-4">
                             <div class="sentence-group">
                                 <div class="sentence-row">
@@ -598,7 +594,7 @@
                             </div>
                         </div>
 
-                        <!-- 5. We / us (نحن) -->
+                        <!-- 5. We / us -->
                         <div class="icon-single-card" id="card-5">
                             <div class="sentence-group">
                                 <div class="sentence-row">
@@ -622,7 +618,7 @@
                             </div>
                         </div>
 
-                        <!-- 6. You / you (أنت / أنتم) -->
+                        <!-- 6. You / you -->
                         <div class="icon-single-card" id="card-6">
                             <div class="sentence-group">
                                 <div class="sentence-row">
@@ -646,7 +642,7 @@
                             </div>
                         </div>
 
-                        <!-- 7. They / them (هم / هن) -->
+                        <!-- 7. They / them -->
                         <div class="icon-single-card" id="card-7">
                             <div class="sentence-group">
                                 <div class="sentence-row">
@@ -673,7 +669,7 @@
                     </div>
                 </div>
 
-                <!-- كارت تشغيل التحدي اليومي وقاموس الجمل الخارجي -->
+                <!-- كارت تشغيل التحدي اليومي وقاموس الجمل -->
                 <div class="quiz-launch-card" id="launchQuizCardBtn">
                     <div class="quiz-launch-header-row">
                         <span class="quiz-launch-title">تحدي الضمائر 🎯</span>
@@ -685,7 +681,6 @@
                         <span>ابدأ التحدي اليومي</span>
                         <span>➔</span>
                     </button>
-                    <!-- زر قاموس الجمل -->
                     <button class="dict-launch-btn" onclick="openDictionaryModal(event)">
                         📖 قاموس الجمل المُكتسبة
                     </button>
@@ -695,12 +690,12 @@
 
         </div>
 
-        <!-- شريط التنقل السفلي -->
+        <!-- شريط التنقل السفلي - مسارات مصححة بالخروج خطوتين للخلف ../../ -->
         <div class="bottom-nav" id="bottomNav">
-            <a href="index.html"><span class="nav-icon">🏠</span>الرئيسية</a>
-            <a href="english.html" class="active"><span class="nav-icon">🇬🇧</span>الإنجليزي</a>
-            <a href="surveying.html"><span class="nav-icon">📐</span>المساحة</a>
-            <a href="programming.html"><span class="nav-icon">💻</span>البرمجة</a>
+            <a href="../../index.html"><span class="nav-icon">🏠</span>الرئيسية</a>
+            <a href="../english.html" class="active"><span class="nav-icon">🇬🇧</span>الإنجليزي</a>
+            <a href="../../surveying/surveying.html" href-alt="../../surveying.html"><span class="nav-icon">📐</span>المساحة</a>
+            <a href="../../programming/programming.html" href-alt="../../programming.html"><span class="nav-icon">💻</span>البرمجة</a>
         </div>
 
         <script>
@@ -894,7 +889,6 @@
                 let nextBtn = document.getElementById('quizNextBtn');
                 nextBtn.classList.remove('active');
 
-                // تصميم الكارت المطابق لصورة التطبيق تماماً (سؤال + كارت الترجمة بـ 🔍 + خيارات 2x2)[span_7](start_span)[span_7](end_span)
                 let html = `<div class="quiz-question-card" id="activeQuestionCard">
                     <div class="quiz-question-instruction">
                         <span>اختر الضمير المناسب لسد الفراغ في الجملة التالية:</span>
