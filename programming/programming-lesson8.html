@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+        <title>التهديدات والتدابير المضادة 2 - أكاديمية العلوم التطبيقية</title>
+        <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+        
+        <script>
+            let savedTheme = localStorage.getItem("em_theme");
+            if (savedTheme === "dark") {
+                document.documentElement.classList.add("dark-mode");
+            }
+        </script>
+        
+        <style>
+            :root {
+                --bg-main: #F4F6F9;
+                --card-bg: #FFFFFF;
+                --card-border: #93C5FD;
+                --text-primary: #0F172A;
+                --text-secondary: #334155;
+                
+                --header-bg: #FFFFFF;
+                --header-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+                
+                --primary: #475569;
+                --accent: #0284C7; 
+                --light-bg: rgba(2, 132, 199, 0.04);
+
+                --verb-highlight: #0284C7; 
+                --pronoun-highlight: #059669; 
+                --heading-pure-color: #0F172A; 
+                --nav-theme-color: #0284C7;
+                --nav-glow-color: rgba(2, 132, 199, 0.25);
+            }
+
+            html.dark-mode, body.dark-mode {
+                --bg-main: #06080F;
+                --card-bg: #0B0F19;
+                --card-border: rgba(56, 189, 248, 0.3);
+                --text-primary: #FFFFFF;
+                --text-secondary: #94A3B8;
+                
+                --header-bg: #0B0F19;
+                --header-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+                
+                --primary: #94A3B8;
+                --accent: #38BDF8;
+                --light-bg: rgba(56, 189, 248, 0.06);
+
+                --verb-highlight: #38BDF8;
+                --pronoun-highlight: #34D399;
+                --heading-pure-color: #FFFFFF; 
+                --nav-theme-color: #38BDF8;
+                --nav-glow-color: rgba(56, 189, 248, 0.3);
+            }
+
+            body, * {
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                text-rendering: optimizeLegibility;
+            }
+
+            body {
+                background-color: var(--bg-main);
+                color: var(--text-primary);
+                font-family: 'Cairo', system-ui, -apple-system, sans-serif;
+                margin: 0;
+                padding: 16px 14px 90px 14px;
+                min-height: 100vh;
+                box-sizing: border-box;
+                transition: background-color 0.3s ease, color 0.3s ease;
+            }
+
+            .container { max-width: 680px; margin: auto; }
+
+            .top-progress-bar { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: transparent; z-index: 9999; }
+            .top-progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--accent), var(--primary)); }
+
+            /* شريط الهيدر العلوي */
+            .nav-bar {
+                display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
+                background: var(--header-bg); border: 2.5px solid var(--card-border); padding: 12px 20px;
+                border-radius: 40px; box-shadow: var(--header-shadow); gap: 10px;
+            }
+            .brand-minimalist-box { display: flex; flex-direction: column; align-items: center; text-align: center; flex: 1; padding: 0 4px; min-width: 0; }
+            .brand-main-title { font-size: 14px; font-weight: 900; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
+            .brand-subtitle-text { font-size: 10.5px; font-weight: 800; color: var(--accent); letter-spacing: 0.5px; text-transform: uppercase; margin-top: 2px; }
+
+            .back-btn, .theme-btn {
+                background: var(--light-bg); border: 2px solid var(--card-border);
+                width: 40px; height: 40px; border-radius: 20px; display: flex; align-items: center; justify-content: center;
+                color: var(--text-primary); font-size: 16px; text-decoration: none; cursor: pointer; transition: 0.25s; flex-shrink: 0;
+            }
+            .back-btn:hover, .theme-btn:hover { transform: scale(1.05); border-color: var(--accent); color: var(--accent); }
+
+            /* كارت الشرح الرئيسي (Hero Card) */
+            .hero-card {
+                background: var(--card-bg); border: 2.5px solid var(--card-border); border-radius: 34px;
+                padding: 24px; margin-bottom: 24px; box-shadow: 0 12px 30px rgba(0, 0, 0, 0.03); position: relative; overflow: hidden;
+            }
+
+            .pro-hero-badge {
+                display: inline-flex; align-items: center; gap: 8px;
+                background: var(--light-bg); border: 2px solid var(--card-border); color: var(--accent);
+                padding: 6px 16px; border-radius: 18px; font-size: 11.5px; font-weight: 950;
+                margin-bottom: 12px;
+            }
+            .pro-badge-dot { width: 7px; height: 7px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 10px var(--accent); }
+
+            .hero-title { margin: 0 0 8px 0; font-size: 21px; font-weight: 950; color: var(--heading-pure-color); letter-spacing: -0.5px; }
+            .hero-desc { margin: 0; font-size: 13.5px; color: var(--text-secondary); line-height: 1.8; font-weight: 800; text-align: justify; }
+
+            /* الكارت الشامل للدرس */
+            .lesson-card {
+                background: var(--card-bg); 
+                border: 2.5px solid var(--card-border);
+                border-radius: 40px;
+                padding: 28px; 
+                margin-bottom: 24px; 
+                box-shadow: 0 20px 45px rgba(0, 0, 0, 0.04); 
+                display: flex; 
+                flex-direction: column; 
+                gap: 20px;
+                position: relative; 
+                overflow: hidden;
+            }
+            
+            .lesson-header { display: flex; align-items: center; justify-content: space-between; border-bottom: 2px dashed var(--card-border); padding-bottom: 16px; }
+            .lesson-tag { font-size: 11.5px; font-weight: 900; color: var(--accent); text-transform: uppercase; letter-spacing: 0.5px; }
+            .lesson-heading { margin: 0; font-size: 19px; font-weight: 950; color: var(--heading-pure-color); line-height: 1.4; }
+            .lesson-icon-badge { width: 48px; height: 48px; border-radius: 20px; background: var(--light-bg); border: 2px solid var(--card-border); display: flex; align-items: center; justify-content: center; font-size: 20px; }
+
+            .section-block { display: flex; flex-direction: column; gap: 14px; }
+            .block-title { font-size: 15px; font-weight: 950; color: var(--heading-pure-color); border-right: 4px solid var(--accent); padding-right: 10px; }
+            
+            /* الكروت الداخلية (Glass Definition Cards) */
+            .glass-definition-card {
+                background: var(--card-bg);
+                backdrop-filter: blur(16px);
+                border: 2px solid var(--card-border);
+                border-radius: 28px;
+                padding: 20px 22px;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+                transition: 0.3s ease;
+            }
+            .glass-definition-card:hover {
+                border-color: var(--accent);
+                transform: translateY(-2px);
+                box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
+            }
+            .glass-def-title {
+                font-size: 14.5px;
+                font-weight: 950;
+                color: var(--accent);
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+            .glass-def-text {
+                font-size: 13.5px;
+                font-weight: 800;
+                color: var(--text-primary);
+                line-height: 1.8;
+                margin: 0;
+            }
+
+            /* زر فتح نافذة الأسئلة */
+            .modal-trigger-btn {
+                background: var(--accent);
+                color: #FFFFFF;
+                border: none;
+                padding: 15px 20px;
+                border-radius: 22px;
+                font-family: 'Cairo', sans-serif;
+                font-size: 14.5px;
+                font-weight: 950;
+                cursor: pointer;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                width: 100%;
+                margin-top: 10px;
+                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+                transition: 0.25s;
+            }
+            .modal-trigger-btn span:first-child { color: #FFFFFF; }
+            .modal-trigger-btn:hover { opacity: 0.9; transform: scale(1.01); }
+
+            /* تصميم النوافذ المنبثقة */
+            .custom-modal-overlay {
+                position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+                background: rgba(0, 0, 0, 0.65); backdrop-filter: blur(16px);
+                display: flex; align-items: center; justify-content: center;
+                z-index: 99999; opacity: 0; visibility: hidden; transition: 0.3s ease; padding: 16px; box-sizing: border-box;
+            }
+            .custom-modal-overlay.active { opacity: 1; visibility: visible; }
+            .custom-modal-box {
+                background: var(--card-bg); border: 2.5px solid var(--card-border); border-radius: 34px;
+                width: 100%; max-width: 500px; padding: 22px; box-shadow: 0 25px 60px rgba(0, 0, 0, 0.2);
+                transform: scale(0.9); transition: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+                display: flex; flex-direction: column; gap: 16px; position: relative; max-height: 85vh;
+            }
+            .custom-modal-overlay.active .custom-modal-box { transform: scale(1); }
+            .custom-modal-header {
+                display: flex; align-items: center; justify-content: space-between;
+                background: var(--light-bg); border: 2px solid var(--card-border); padding: 10px 16px; border-radius: 24px;
+            }
+            .custom-modal-title { font-size: 15px; font-weight: 950; color: var(--heading-pure-color); display: flex; align-items: center; gap: 8px; }
+            
+            .xp-counter-badge {
+                background: var(--card-bg); border: 2px solid var(--card-border); color: #F59E0B;
+                padding: 6px 14px; border-radius: 16px; font-size: 12.5px; font-weight: 950;
+            }
+
+            .custom-modal-close {
+                background: var(--light-bg); border: 2px solid var(--card-border);
+                width: 36px; height: 36px; border-radius: 18px; display: flex; align-items: center; justify-content: center;
+                color: var(--text-primary); font-size: 14px; font-weight: 950; cursor: pointer; transition: 0.2s;
+            }
+            .custom-modal-close:hover { background: #EF4444; color: #FFFFFF; border-color: #EF4444; }
+            
+            .custom-modal-body { display: flex; flex-direction: column; gap: 14px; overflow-y: auto; }
+
+            @keyframes screenSuccessPulse {
+                0% { transform: scale(1); border-color: var(--accent); box-shadow: 0 0 25px rgba(0, 0, 0, 0.05); }
+                50% { transform: scale(1.02); border-color: var(--primary); box-shadow: 0 0 35px rgba(0, 0, 0, 0.08); }
+                100% { transform: scale(1); border-color: var(--accent); box-shadow: 0 0 25px rgba(0, 0, 0, 0.05); }
+            }
+
+            @keyframes screenErrorShake {
+                0%, 100% { transform: translateX(0); }
+                20%, 60% { transform: translateX(-6px); }
+                40%, 80% { transform: translateX(6px); }
+            }
+
+            .quiz-container-box { display: flex; flex-direction: column; gap: 16px; }
+            .quiz-section-header { font-size: 14px; font-weight: 950; color: var(--heading-pure-color); background: var(--light-bg); padding: 10px 16px; border-radius: 18px; border: 2px solid var(--card-border); text-align: center; }
+            
+            .quiz-card-item {
+                background: var(--card-bg); 
+                border: 2px solid var(--card-border);
+                border-radius: 26px; padding: 18px; display: flex; flex-direction: column; gap: 12px;
+                box-shadow: 0 8px 25px rgba(0, 0, 0, 0.02);
+                transition: 0.35s ease;
+            }
+            
+            .quiz-card-item.correct-card { 
+                background: var(--light-bg) !important;
+                border: 2.5px solid var(--accent) !important; 
+                animation: screenSuccessPulse 0.6s ease infinite alternate;
+            }
+            
+            .quiz-card-item.wrong-card { 
+                background: rgba(239, 68, 68, 0.08) !important;
+                border: 2.5px solid #EF4444 !important; 
+                animation: screenErrorShake 0.4s ease;
+            }
+
+            .quiz-question-text { font-size: 14px; font-weight: 950; color: var(--heading-pure-color); line-height: 1.7; }
+            
+            .quiz-options-grid { display: flex; flex-direction: column; gap: 8px; }
+            .quiz-option-btn {
+                background: var(--bg-main); border: 2px solid var(--card-border); color: var(--text-primary);
+                padding: 12px 16px; border-radius: 18px; font-family: 'Cairo', sans-serif; font-size: 13.5px; font-weight: 900;
+                cursor: pointer; text-align: right; transition: 0.2s;
+            }
+            .quiz-option-btn:hover { border-color: var(--accent); background: var(--light-bg); color: var(--accent); }
+
+            .quiz-option-btn.correct-choice {
+                background: var(--light-bg) !important;
+                color: var(--accent) !important;
+                border-color: var(--accent) !important;
+                transform: scale(1.02);
+            }
+
+            .quiz-option-btn.wrong-choice {
+                background: rgba(239, 68, 68, 0.15) !important;
+                color: #EF4444 !important;
+                border-color: #EF4444 !important;
+            }
+
+            .quiz-input-box {
+                width: 100%; padding: 12px 16px; border-radius: 18px; border: 2px solid var(--card-border);
+                background: var(--bg-main); color: var(--text-primary); font-family: 'Cairo', sans-serif; font-size: 13.5px; font-weight: 900;
+                box-sizing: border-box; outline: none; transition: 0.2s;
+            }
+            .quiz-input-box:focus { border-color: var(--accent); }
+            
+            .quiz-submit-ans-btn {
+                background: var(--accent); color: #FFF; border: none; padding: 10px 18px; border-radius: 16px;
+                font-family: 'Cairo', sans-serif; font-size: 13px; font-weight: 950; cursor: pointer; align-self: flex-start;
+                transition: 0.2s; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            }
+            .quiz-submit-ans-btn:hover { opacity: 0.9; }
+
+            .quiz-feedback-msg { font-size: 13px; font-weight: 900; padding: 12px 16px; border-radius: 16px; display: none; line-height: 1.6; border: 2px solid; }
+            .quiz-feedback-msg.success { background: var(--light-bg); color: var(--accent); border-color: var(--card-border); display: block; }
+            .quiz-feedback-msg.error { background: rgba(239, 68, 68, 0.1); color: #EF4444; border-color: rgba(239, 68, 68, 0.3); display: block; }
+
+            /* زر العودة لأعلى الصفحة */
+            .scroll-to-top-btn {
+                position: fixed; bottom: 75px; left: 16px; transform: scale(0);
+                background: var(--accent); border: 2.5px solid var(--accent);
+                color: #FFFFFF; width: 42px; height: 42px; border-radius: 50%;
+                display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 900;
+                box-shadow: 0 8px 20px rgba(0,0,0,0.2); cursor: pointer; z-index: 998;
+                transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); opacity: 0; pointer-events: none;
+            }
+            .scroll-to-top-btn.show { transform: scale(1); opacity: 1; pointer-events: auto; }
+            .scroll-to-top-btn:hover { opacity: 0.9; transform: scale(1.1); }
+
+            /* شريط التنقل السفلي */
+            .bottom-nav {
+                position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); 
+                width: calc(100% - 32px); max-width: 460px;
+                background: var(--header-bg);
+                display: flex; justify-content: space-around; align-items: center;
+                padding: 6px 10px; border-radius: 30px; 
+                border: 2.5px solid var(--card-border);
+                box-shadow: 0 8px 24px rgba(0,0,0,0.25); 
+                z-index: 999; box-sizing: border-box;
+                transition: all 0.4s ease;
+            }
+            .bottom-nav a { 
+                color: var(--text-secondary); text-decoration: none; font-size: 10px; text-align: center; font-weight: 800; 
+                display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 12px; border-radius: 20px; flex: 1; 
+                border: 1.5px solid var(--card-border); background: var(--light-bg);
+                transition: all 0.3s ease;
+            }
+            .bottom-nav a span { font-size: 16px; line-height: 1; }
+            .bottom-nav a:hover { color: var(--nav-theme-color); border-color: var(--nav-theme-color); background: rgba(128, 128, 128, 0.1); }
+            .bottom-nav a.active { color: #FFFFFF; background: var(--nav-theme-color); border-color: var(--nav-theme-color); box-shadow: 0 4px 15px var(--nav-glow-color); }
+
+            /* ===== الهرم التفاعلي لسياسة أمن المعلومات ===== */
+            .policy-widget {
+                background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 28px;
+                padding: 18px 16px; display: flex; flex-direction: column; gap: 14px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+            }
+            .policy-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+            .policy-head-title { font-size: 14px; font-weight: 950; color: var(--accent); }
+            .policy-play-btn {
+                background: var(--accent); color: #FFF; border: none; border-radius: 14px; padding: 8px 14px;
+                font-family: 'Cairo', sans-serif; font-size: 12px; font-weight: 950; cursor: pointer; transition: 0.2s;
+            }
+            .policy-play-btn:hover { opacity: 0.9; }
+            .policy-stage { position: relative; padding: 0 34px; }
+            .policy-bracket {
+                position: absolute; right: 0; top: 0; height: 174px; width: 22px;
+                border: 3px solid var(--accent); border-left: none; border-radius: 0 12px 12px 0;
+                display: flex; align-items: center; justify-content: center;
+            }
+            .policy-bracket span {
+                writing-mode: vertical-rl; transform: rotate(180deg); white-space: nowrap;
+                font-size: 11px; font-weight: 950; color: var(--accent); margin-right: 36px;
+                background: var(--card-bg); padding: 2px 0;
+            }
+            .policy-tier-wrap { display: flex; flex-direction: column; align-items: stretch; }
+            .policy-tier {
+                position: relative; height: 76px; width: 100%; border: none; background: none; padding: 0 6px;
+                cursor: pointer; font-family: 'Cairo', sans-serif; font-weight: 950; font-size: 12.5px; line-height: 1.5;
+                display: flex; align-items: center; justify-content: center; text-align: center;
+                transition: transform 0.3s ease;
+                -webkit-tap-highlight-color: transparent;
+            }
+            .policy-tier::before { content: ''; position: absolute; inset: 0; background: var(--accent); opacity: 0.28; transition: opacity 0.3s ease; }
+            .policy-tier span { position: relative; z-index: 1; line-height: 1.45; color: var(--heading-pure-color); transition: color 0.3s ease; }
+            .policy-tier.active::before { opacity: 1; }
+            .policy-tier.active span { color: #FFFFFF; }
+            .policy-tier.active { transform: scaleX(1.04); }
+            .policy-tier.t1 { clip-path: polygon(24% 0, 76% 0, 82% 100%, 18% 100%); }
+            .policy-tier.t2 { clip-path: polygon(18% 0, 82% 0, 91% 100%, 9% 100%); }
+            .policy-tier.t3 { clip-path: polygon(9% 0, 91% 0, 100% 100%, 0 100%); }
+            .policy-arrow {
+                height: 22px; display: flex; align-items: center; justify-content: center;
+                font-size: 15px; font-weight: 950; color: var(--text-secondary); opacity: 0.45; transition: all 0.3s ease;
+            }
+            .policy-arrow.lit { color: var(--accent); opacity: 1; transform: scale(1.25); }
+            .policy-info {
+                display: flex; align-items: flex-start; gap: 12px;
+                background: var(--light-bg); border: 2px solid var(--card-border); border-radius: 22px; padding: 14px 16px;
+                min-height: 86px; transition: border-color 0.3s ease;
+            }
+            .policy-info.pulse { animation: policyInfoPop 0.4s ease; border-color: var(--accent); }
+            @keyframes policyInfoPop { 0% { transform: scale(0.97); opacity: 0.6; } 100% { transform: scale(1); opacity: 1; } }
+            .policy-info-num {
+                width: 34px; height: 34px; border-radius: 12px; background: var(--accent); color: #FFF; flex-shrink: 0;
+                display: flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 950;
+            }
+            .policy-info-title { font-size: 13.5px; font-weight: 950; color: var(--accent); margin-bottom: 4px; }
+            .policy-info-text { font-size: 13px; font-weight: 800; color: var(--text-primary); line-height: 1.8; margin: 0; }
+            .policy-steps-dots { display: flex; justify-content: center; gap: 6px; }
+            .policy-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--card-border); transition: all 0.3s ease; }
+            .policy-dot.active { width: 22px; border-radius: 6px; background: var(--accent); }
+        </style>
+    </head>
+    <body>
+
+        <div class="top-progress-bar"><div class="top-progress-fill" id="progressFill"></div></div>
+
+        <div class="container">
+            <div class="nav-bar">
+                <a href="programming.html" class="back-btn" title="رجوع لقسم البرمجة">←</a>
+                <div class="brand-minimalist-box">
+                    <span class="brand-main-title">التهديدات والتدابير المضادة 2</span>
+                    <span class="brand-subtitle-text">أكاديمية العلوم التطبيقية</span>
+                </div>
+                <button class="theme-btn" id="themeToggleBtn" title="تغيير الثيم">🌙</button>
+            </div>
+
+            <!-- كارت الشرح الرئيسي -->
+            <div class="hero-card">
+                <div class="pro-hero-badge">
+                    <span class="pro-badge-dot"></span>
+                    أكاديمية العلوم التطبيقية • قسم البرمجة وأمن المعلومات
+                </div>
+                <h1 class="hero-title">الدرس الثامن: التهديدات والتدابير المضادة في أمن المعلومات 2</h1>
+                <p class="hero-desc">
+                    يغطي هذا الدرس الاحتيال بالفواتير، وأساليب الحصول غير المصرح به على المعلومات مثل التصيد والهندسة الاجتماعية والتزوير، وسياسة أمن المعلومات ومستوياتها الثلاثة.
+                </p>
+            </div>
+
+            <!-- محتوى الدرس -->
+            <div class="lesson-card">
+                <div class="lesson-header">
+                    <div class="lesson-title-box">
+                        <span class="lesson-tag">التدابير المضادة (2)</span>
+                        <h2 class="lesson-heading">التهديدات والتدابير المضادة في أمن المعلومات 2</h2>
+                    </div>
+                    <div class="lesson-icon-badge">🛠️</div>
+                </div>
+
+                <div class="section-block">
+                    <div class="block-title">1. الاحتيال بالفواتير</div>
+                    <div class="glass-definition-card">
+                        <div class="glass-def-title"><span>🧾</span><span>فاتورة احتيالية (Fraudulent Billing)</span></div>
+                        <p class="glass-def-text">احتيال يتم فيه إصدار فاتورة لشخص ما مقابل خدمة وهمية لم يستخدمها أبدًا، بهدف الحصول على المال بشكل احتيالي.</p>
+                    </div>
+                    <div class="glass-definition-card">
+                        <div class="glass-def-title"><span>🖱️</span><span>الاحتيال بنقرة واحدة (One-click Fraud)</span></div>
+                        <p class="glass-def-text">احتيال يؤدي فيه النقر على رابط (URL) في موقع ويب أو بريد إلكتروني تلقائيًا إلى رسالة تدّعي أنه تم إبرام عقد، يليها طلب دفع مبالغ فيه.</p>
+                    </div>
+                </div>
+
+                <div class="section-block">
+                    <div class="block-title">2. الحصول غير المصرح به على المعلومات</div>
+                    <div class="glass-definition-card">
+                        <div class="glass-def-title"><span>🎣</span><span>التصيد (Phishing)</span></div>
+                        <p class="glass-def-text">احتيال يستخدم مواقع ويب مزيفة متنكرة على أنها مؤسسات مالية أو هيئات عامة لسرقة المعلومات الشخصية مثل رموز PIN أو تفاصيل الحساب.</p>
+                    </div>
+                    <div class="glass-definition-card">
+                        <div class="glass-def-title"><span>🧠</span><span>الهندسة الاجتماعية (Social Engineering)</span></div>
+                        <p class="glass-def-text">طريقة للحصول على المعلومات بشكل احتيالي عن طريق استغلال علم النفس البشري أو الإهمال وقلة الوعي.</p>
+                    </div>
+                    <div class="glass-definition-card">
+                        <div class="glass-def-title"><span>🎭</span><span>انتحال الشخصية (Impersonation)</span></div>
+                        <p class="glass-def-text">هو التظاهر بأنك شخص آخر، مثل إجراء مكالمة هاتفية باسم الشخص الآخر، للحصول على معلومات.</p>
+                    </div>
+                    <div class="glass-definition-card">
+                        <div class="glass-def-title"><span>👀</span><span>التجسس المباشر (Shoulder Surfing)</span></div>
+                        <p class="glass-def-text">التلصص على الشاشة أو لوحة مفاتيح شخص لسرقة كلمات المرور أو رموز PIN.</p>
+                    </div>
+                    <div class="glass-definition-card">
+                        <div class="glass-def-title"><span>🗑️</span><span>البحث في المهملات (Dumpster Diving)</span></div>
+                        <p class="glass-def-text">البحث في المهملات للحصول على معلومات سرية تم التخلص منها.</p>
+                    </div>
+                    <div class="glass-definition-card">
+                        <div class="glass-def-title"><span>💳</span><span>التزوير (Skimming)</span></div>
+                        <p class="glass-def-text">هو استخراج البيانات بشكل غير قانوني من بطاقة ائتمان أو خصم خاصة بشخص ما، واستخدام البيانات لإنشاء بطاقة مزورة.</p>
+                    </div>
+                </div>
+
+                <div class="section-block">
+                    <div class="block-title">3. سياسة أمن المعلومات</div>
+                    <div class="glass-definition-card">
+                        <div class="glass-def-title"><span>📜</span><span>سياسة أمن المعلومات (Information Security Policy)</span></div>
+                        <p class="glass-def-text">مجموعة من القواعد والإرشادات الأساسية التي تضعها شركة أو منظمة للحفاظ على أمن المعلومات وحمايتها.</p>
+                    </div>
+
+                    <div class="policy-widget">
+                        <div class="policy-head">
+                            <span class="policy-head-title">🏛️ هرم سياسة أمن المعلومات (اضغط على أي مستوى)</span>
+                            <button type="button" class="policy-play-btn" id="policyPlayBtn">▶ عرض متسلسل</button>
+                        </div>
+                        <div class="policy-stage">
+                            <div class="policy-bracket"><span>سياسة أمن المعلومات</span></div>
+                            <div class="policy-tier-wrap">
+                                <button type="button" class="policy-tier t1"><span>السياسة<br>الأساسية</span></button>
+                                <div class="policy-arrow">⬇</div>
+                                <button type="button" class="policy-tier t2"><span>معايير الأمان</span></button>
+                                <div class="policy-arrow">⬇</div>
+                                <button type="button" class="policy-tier t3"><span>إجراءات التنفيذ وقواعد التشغيل</span></button>
+                            </div>
+                        </div>
+                        <div class="policy-steps-dots"><span class="policy-dot"></span><span class="policy-dot"></span><span class="policy-dot"></span></div>
+                        <div class="policy-info" id="policyInfo">
+                            <div class="policy-info-num" id="policyNum">1</div>
+                            <div>
+                                <div class="policy-info-title" id="policyTitle"></div>
+                                <p class="policy-info-text" id="policyText"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- زر فتح نافذة الأسئلة -->
+                <button class="modal-trigger-btn" onclick="openModal('quizModal')">
+                    <span>⚡ بنك الأسئلة والتدريبات التفاعلية (160 XP)</span>
+                    <span>←</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- نافذة الاختبارات التفاعلية -->
+        <div class="custom-modal-overlay" id="quizModal">
+            <div class="custom-modal-box">
+                <div class="custom-modal-header">
+                    <div class="custom-modal-title"><span>⚡</span><span>اختبار التدريبات التفاعلي</span></div>
+                    <div class="xp-counter-badge" id="xpDisplay">⭐ XP: 0</div>
+                    <button class="custom-modal-close" onclick="closeModal('quizModal')">✕</button>
+                </div>
+                
+                <div class="custom-modal-body quiz-container-box">
+
+                    <div class="quiz-section-header">1. أسئلة الاختيار من متعدد</div>
+
+                    <div class="quiz-card-item" id="mcq1">
+                        <div class="quiz-question-text">س1: ما اسم الاحتيال الذي يتم فيه إصدار فاتورة لشخص ما مقابل خدمة وهمية لم يستخدمها أبدًا؟</div>
+                        <div class="quiz-options-grid">
+                            <button class="quiz-option-btn" onclick="checkMCQ('mcq1', this, 1, 2, 10)">أ) التصيد</button>
+                            <button class="quiz-option-btn" onclick="checkMCQ('mcq1', this, 2, 2, 10)">ب) فاتورة احتيالية</button>
+                            <button class="quiz-option-btn" onclick="checkMCQ('mcq1', this, 3, 2, 10)">ج) التزوير</button>
+                            <button class="quiz-option-btn" onclick="checkMCQ('mcq1', this, 4, 2, 10)">د) انتحال الشخصية</button>
+                        </div>
+                        <div class="quiz-feedback-msg" id="feedback_mcq1"></div>
+                    </div>
+
+                    <div class="quiz-card-item" id="mcq2">
+                        <div class="quiz-question-text">س2: ما اسم الاحتيال الذي يؤدي فيه النقر على رابط تلقائيًا إلى رسالة تدّعي إبرام عقد يليها طلب دفع مبالغ فيه؟</div>
+                        <div class="quiz-options-grid">
+                            <button class="quiz-option-btn" onclick="checkMCQ('mcq2', this, 1, 1, 10)">أ) الاحتيال بنقرة واحدة</button>
+                            <button class="quiz-option-btn" onclick="checkMCQ('mcq2', this, 2, 1, 10)">ب) البحث في المهملات</button>
+                            <button class="quiz-option-btn" onclick="checkMCQ('mcq2', this, 3, 1, 10)">ج) التجسس المباشر</button>
+                            <button class="quiz-option-btn" onclick="checkMCQ('mcq2', this, 4, 1, 10)">د) سياسة أمن المعلومات</button>
+                        </div>
+                        <div class="quiz-feedback-msg" id="feedback_mcq2"></div>
+                    </div>
+
+                    <div class="quiz-card-item" id="mcq3">
+                        <div class="quiz-question-text">س3: أي أساليب الاحتيال الآتية يستخدم مواقع ويب مزيفة متنكرة على أنها مؤسسات مالية لسرقة المعلومات الشخصية؟</div>
+                        <div class="quiz-options-grid">
+                            <button class="quiz-option-btn" onclick="checkMCQ('mcq3', this, 1, 3, 10)">أ) البحث في المهملات</button>
+                            <button class="quiz-option-btn" onclick="checkMCQ('mcq3', this, 2, 3, 10)">ب) التجسس المباشر</button>
+                            <button class="quiz-option-btn" onclick="checkMCQ('mcq3', this, 3, 3, 10)">ج) التصيد (Phishing)</button>
+                            <button class="quiz-option-btn" onclick="checkMCQ('mcq3', this, 4, 3, 10)">د) التزوير (Skimming)</button>
+                        </div>
+                        <div class="quiz-feedback-msg" id="feedback_mcq3"></div>
+                    </div>
+
+                    <div class="quiz-card-item" id="mcq4">
+                        <div class="quiz-question-text">س4: ما اسم التلصص على شاشة أو لوحة مفاتيح شخص لسرقة كلمات المرور أو رموز PIN؟</div>
+                        <div class="quiz-options-grid">
+                            <button class="quiz-option-btn" onclick="checkMCQ('mcq4', this, 1, 4, 10)">أ) انتحال الشخصية</button>
+                            <button class="quiz-option-btn" onclick="checkMCQ('mcq4', this, 2, 4, 10)">ب) التزوير</button>
+                            <button class="quiz-option-btn" onclick="checkMCQ('mcq4', this, 3, 4, 10)">ج) البحث في المهملات</button>
+                            <button class="quiz-option-btn" onclick="checkMCQ('mcq4', this, 4, 4, 10)">د) التجسس المباشر (Shoulder surfing)</button>
+                        </div>
+                        <div class="quiz-feedback-msg" id="feedback_mcq4"></div>
+                    </div>
+
+                    <div class="quiz-section-header">2. ما هو المصطلح الدال على العبارات الآتية؟</div>
+
+                    <div class="quiz-card-item" id="term1">
+                        <div class="quiz-question-text">س1: التظاهر بأنك شخص آخر، مثل إجراء مكالمة هاتفية باسمه، للحصول على معلومات.</div>
+                        <input type="text" class="quiz-input-box" id="input_term1" placeholder="اكتب المصطلح هنا...">
+                        <button class="quiz-submit-ans-btn" onclick="checkTerm('term1', 'انتحال الشخصية', 'input_term1', 'feedback_term1')">تحقق من الإجابة</button>
+                        <div class="quiz-feedback-msg" id="feedback_term1"></div>
+                    </div>
+
+                    <div class="quiz-card-item" id="term2">
+                        <div class="quiz-question-text">س2: البحث في المهملات للحصول على معلومات سرية تم التخلص منها.</div>
+                        <input type="text" class="quiz-input-box" id="input_term2" placeholder="اكتب المصطلح هنا...">
+                        <button class="quiz-submit-ans-btn" onclick="checkTerm('term2', 'البحث في المهملات', 'input_term2', 'feedback_term2')">تحقق من الإجابة</button>
+                        <div class="quiz-feedback-msg" id="feedback_term2"></div>
+                    </div>
+
+                    <div class="quiz-card-item" id="term3">
+                        <div class="quiz-question-text">س3: استخراج البيانات بشكل غير قانوني من بطاقة ائتمان أو خصم لإنشاء بطاقة مزورة.</div>
+                        <input type="text" class="quiz-input-box" id="input_term3" placeholder="اكتب المصطلح هنا...">
+                        <button class="quiz-submit-ans-btn" onclick="checkTerm('term3', 'التزوير', 'input_term3', 'feedback_term3')">تحقق من الإجابة</button>
+                        <div class="quiz-feedback-msg" id="feedback_term3"></div>
+                    </div>
+
+                    <div class="quiz-card-item" id="term4">
+                        <div class="quiz-question-text">س4: مجموعة من القواعد والإرشادات الأساسية التي تضعها شركة أو منظمة للحفاظ على أمن المعلومات وحمايتها.</div>
+                        <input type="text" class="quiz-input-box" id="input_term4" placeholder="اكتب المصطلح هنا...">
+                        <button class="quiz-submit-ans-btn" onclick="checkTerm('term4', 'سياسة أمن المعلومات', 'input_term4', 'feedback_term4')">تحقق من الإجابة</button>
+                        <div class="quiz-feedback-msg" id="feedback_term4"></div>
+                    </div>
+
+                    <div class="quiz-section-header">3. أسئلة صح أو خطأ</div>
+
+                    <div class="quiz-card-item" id="tf1">
+                        <div class="quiz-question-text">س1: التصيد (Phishing) يستخدم مواقع ويب مزيفة لسرقة المعلومات الشخصية مثل رموز PIN وتفاصيل الحساب.</div>
+                        <div class="quiz-options-grid">
+                            <button class="quiz-option-btn" onclick="checkTF('tf1', this, 'صح', 'صح', 10)">صح</button>
+                            <button class="quiz-option-btn" onclick="checkTF('tf1', this, 'خطأ', 'صح', 10)">خطأ</button>
+                        </div>
+                        <div class="quiz-feedback-msg" id="feedback_tf1"></div>
+                    </div>
+
+                    <div class="quiz-card-item" id="tf2">
+                        <div class="quiz-question-text">س2: الهندسة الاجتماعية تعتمد على استغلال الثغرات البرمجية في الأنظمة فقط.</div>
+                        <div class="quiz-options-grid">
+                            <button class="quiz-option-btn" onclick="checkTF('tf2', this, 'صح', 'خطأ', 10)">صح</button>
+                            <button class="quiz-option-btn" onclick="checkTF('tf2', this, 'خطأ', 'خطأ', 10)">خطأ</button>
+                        </div>
+                        <div class="quiz-feedback-msg" id="feedback_tf2"></div>
+                    </div>
+
+                    <div class="quiz-card-item" id="tf3">
+                        <div class="quiz-question-text">س3: التزوير (Skimming) هو استخراج بيانات بطاقة الائتمان أو الخصم بشكل غير قانوني.</div>
+                        <div class="quiz-options-grid">
+                            <button class="quiz-option-btn" onclick="checkTF('tf3', this, 'صح', 'صح', 10)">صح</button>
+                            <button class="quiz-option-btn" onclick="checkTF('tf3', this, 'خطأ', 'صح', 10)">خطأ</button>
+                        </div>
+                        <div class="quiz-feedback-msg" id="feedback_tf3"></div>
+                    </div>
+
+                    <div class="quiz-card-item" id="tf4">
+                        <div class="quiz-question-text">س4: إجراءات التنفيذ وقواعد التشغيل هي التي تصف المبادئ الأساسية والإعلانات المتعلقة بأمن المعلومات.</div>
+                        <div class="quiz-options-grid">
+                            <button class="quiz-option-btn" onclick="checkTF('tf4', this, 'صح', 'خطأ', 10)">صح</button>
+                            <button class="quiz-option-btn" onclick="checkTF('tf4', this, 'خطأ', 'خطأ', 10)">خطأ</button>
+                        </div>
+                        <div class="quiz-feedback-msg" id="feedback_tf4"></div>
+                    </div>
+
+                    <div class="quiz-section-header">4. عرف كل ما يأتي (اكتب باختصار)</div>
+
+                    <div class="quiz-card-item" id="def1">
+                        <div class="quiz-question-text">س1: عرف التصيد (Phishing).</div>
+                        <input type="text" class="quiz-input-box" id="input_def1" placeholder="اكتب تعريفاً مختصراً...">
+                        <button class="quiz-submit-ans-btn" onclick="checkDefinition('def1', 'input_def1', 'التصيد: احتيال بمواقع ويب مزيفة لسرقة المعلومات الشخصية مثل رموز PIN وتفاصيل الحساب', 'feedback_def1')">تحقق من الإجابة</button>
+                        <div class="quiz-feedback-msg" id="feedback_def1"></div>
+                    </div>
+
+                    <div class="quiz-card-item" id="def2">
+                        <div class="quiz-question-text">س2: عرف الهندسة الاجتماعية (Social Engineering).</div>
+                        <input type="text" class="quiz-input-box" id="input_def2" placeholder="اكتب تعريفاً مختصراً...">
+                        <button class="quiz-submit-ans-btn" onclick="checkDefinition('def2', 'input_def2', 'الهندسة الاجتماعية: الحصول على المعلومات بشكل احتيالي باستغلال علم النفس البشري أو قلة الوعي', 'feedback_def2')">تحقق من الإجابة</button>
+                        <div class="quiz-feedback-msg" id="feedback_def2"></div>
+                    </div>
+
+                    <div class="quiz-card-item" id="def3">
+                        <div class="quiz-question-text">س3: عرف التزوير (Skimming).</div>
+                        <input type="text" class="quiz-input-box" id="input_def3" placeholder="اكتب تعريفاً مختصراً...">
+                        <button class="quiz-submit-ans-btn" onclick="checkDefinition('def3', 'input_def3', 'التزوير: استخراج بيانات بطاقة ائتمان أو خصم بشكل غير قانوني لإنشاء بطاقة مزورة', 'feedback_def3')">تحقق من الإجابة</button>
+                        <div class="quiz-feedback-msg" id="feedback_def3"></div>
+                    </div>
+
+                    <div class="quiz-card-item" id="def4">
+                        <div class="quiz-question-text">س4: عرف سياسة أمن المعلومات (Information Security Policy).</div>
+                        <input type="text" class="quiz-input-box" id="input_def4" placeholder="اكتب تعريفاً مختصراً...">
+                        <button class="quiz-submit-ans-btn" onclick="checkDefinition('def4', 'input_def4', 'سياسة أمن المعلومات: قواعد وإرشادات أساسية تضعها المنظمة للحفاظ على أمن المعلومات وحمايتها', 'feedback_def4')">تحقق من الإجابة</button>
+                        <div class="quiz-feedback-msg" id="feedback_def4"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- زر الصعود لأعلى الصفحة -->
+        <button class="scroll-to-top-btn" id="scrollToTopBtn" onclick="scrollToTop()" title="الرجوع لأعلى الصفحة">↑</button>
+
+        <!-- شريط التنقل السفلي -->
+        <div class="bottom-nav" id="bottomNav">
+            <a href="../index.html"><span class="nav-icon">🏠</span>الرئيسية</a>
+            <a href="../english/english.html"><span class="nav-icon">🇬🇧</span>الإنجليزي</a>
+            <a href="../surveying/surveying.html"><span class="nav-icon">📐</span>المساحة</a>
+            <a href="programming.html" class="active"><span class="nav-icon">💻</span>البرمجة</a>
+        </div>
+
+        <script>
+            let currentXP = 0;
+            let answeredQuestions = {};
+
+            const applauseAudio = new Audio('https://www.myinstants.com/media/sounds/applause.mp3');
+            const wrongGroanAudio = new Audio('groan.mp3');
+
+            function playApplauseSound() {
+                try {
+                    applauseAudio.currentTime = 0;
+                    applauseAudio.play().catch(e => {});
+                } catch(e) {}
+            }
+
+            function playWrongGroanSound() {
+                try {
+                    wrongGroanAudio.currentTime = 0;
+                    wrongGroanAudio.play().catch(e => {});
+                } catch(e) {}
+            }
+
+            const successMessages = [
+                "عاش يا دحيح العصر! إجابة زي الذهب 🥇",
+                "إبداع وتفوق عالي! استمر يا بطل 🚀",
+                "ضربة معلم صح الصح! إجابة في الصميم 🎯",
+                "الله عليك! دماغ شغال وسريع الفهم 💡"
+            ];
+
+            const errorMessages = [
+                "خطأ صغير، بس الصح قدامك اهو ركز فيه كويس يا بشمهندس 🔍",
+                "معليش يا بطل، اتعلمنا حاجة جديدة النهاردة، والصح هو: ",
+                "مش مشكلة خالص! التجربة بتعلم، وادي الإجابة الصح قدامك 📚",
+                "فووق معايا! ركز في المرة الجاية والإجابة الصحيحة هي: "
+            ];
+
+            function getRandomMsg(arr) {
+                return arr[Math.floor(Math.random() * arr.length)];
+            }
+
+            function updateXP(amount) {
+                currentXP += amount;
+                document.getElementById('xpDisplay').innerText = "⭐ XP: " + currentXP;
+            }
+
+            function openModal(modalId) {
+                document.getElementById(modalId).classList.add('active');
+            }
+            function closeModal(modalId) {
+                document.getElementById(modalId).classList.remove('active');
+            }
+
+            // فحص الاختيار من متعدد
+            function checkMCQ(questionId, btnElement, selectedIndex, correctIndex, xpReward) {
+                if (answeredQuestions[questionId]) return;
+                
+                let container = document.getElementById(questionId);
+                let buttons = container.querySelectorAll('.quiz-option-btn');
+                let feedback = document.getElementById('feedback_' + questionId);
+                
+                answeredQuestions[questionId] = true;
+                buttons.forEach(btn => btn.disabled = true);
+
+                if (selectedIndex === correctIndex) {
+                    playApplauseSound();
+                    container.classList.add('correct-card');
+                    btnElement.classList.add('correct-choice');
+                    feedback.className = "quiz-feedback-msg success";
+                    feedback.innerText = getRandomMsg(successMessages) + " (+ " + xpReward + " XP)";
+                    updateXP(xpReward);
+                } else {
+                    playWrongGroanSound();
+                    container.classList.add('wrong-card');
+                    btnElement.classList.add('wrong-choice');
+                    buttons[correctIndex - 1].classList.add('correct-choice');
+                    feedback.className = "quiz-feedback-msg error";
+                    feedback.innerText = getRandomMsg(errorMessages) + "الخيار رقم (" + correctIndex + ")";
+                }
+            }
+
+            // فحص المصطلحات
+            function checkTerm(questionId, correctAnswer, inputId, feedbackId) {
+                if (answeredQuestions[questionId]) return;
+
+                let userVal = document.getElementById(inputId).value.trim();
+                let container = document.getElementById(questionId);
+                let feedback = document.getElementById(feedbackId);
+
+                if (userVal === "") {
+                    alert("من فضلك اكتب الإجابة أولاً!");
+                    return;
+                }
+
+                answeredQuestions[questionId] = true;
+                document.getElementById(inputId).disabled = true;
+
+                if (userVal.includes(correctAnswer) || correctAnswer.includes(userVal)) {
+                    playApplauseSound();
+                    container.classList.add('correct-card');
+                    feedback.className = "quiz-feedback-msg success";
+                    feedback.innerText = getRandomMsg(successMessages) + " (+ 10 XP)";
+                    updateXP(10);
+                } else {
+                    playWrongGroanSound();
+                    container.classList.add('wrong-card');
+                    feedback.className = "quiz-feedback-msg error";
+                    feedback.innerText = getRandomMsg(errorMessages) + correctAnswer;
+                }
+            }
+
+            // فحص صح أو خطأ
+            function checkTF(questionId, btnElement, selectedAns, correctAns, xpReward) {
+                if (answeredQuestions[questionId]) return;
+
+                let container = document.getElementById(questionId);
+                let buttons = container.querySelectorAll('.quiz-option-btn');
+                let feedback = document.getElementById('feedback_' + questionId);
+
+                answeredQuestions[questionId] = true;
+                buttons.forEach(btn => btn.disabled = true);
+
+                if (selectedAns === correctAns) {
+                    playApplauseSound();
+                    container.classList.add('correct-card');
+                    btnElement.classList.add('correct-choice');
+                    feedback.className = "quiz-feedback-msg success";
+                    feedback.innerText = getRandomMsg(successMessages) + " (+ " + xpReward + " XP)";
+                    updateXP(xpReward);
+                } else {
+                    playWrongGroanSound();
+                    container.classList.add('wrong-card');
+                    btnElement.classList.add('wrong-choice');
+                    buttons.forEach(btn => {
+                        if (btn.innerText.includes(correctAns)) btn.classList.add('correct-choice');
+                    });
+                    feedback.className = "quiz-feedback-msg error";
+                    feedback.innerText = getRandomMsg(errorMessages) + correctAns;
+                }
+            }
+
+            // فحص التعريفات
+            function checkDefinition(questionId, inputId, correctAnswerText, feedbackId) {
+                if (answeredQuestions[questionId]) return;
+
+                let userVal = document.getElementById(inputId).value.trim();
+                let container = document.getElementById(questionId);
+                let feedback = feedbackId ? document.getElementById(feedbackId) : document.getElementById('feedback_' + questionId);
+
+                if (userVal.length < 3) {
+                    alert("يرجى كتابة إجابة صحيحة للتحقق!");
+                    return;
+                }
+
+                answeredQuestions[questionId] = true;
+                document.getElementById(inputId).disabled = true;
+
+                playApplauseSound();
+                container.classList.add('correct-card');
+                feedback.className = "quiz-feedback-msg success";
+                feedback.innerText = getRandomMsg(successMessages) + " (+ 10 XP) | الإجابة المثالية: " + correctAnswerText;
+                updateXP(10);
+            }
+
+            // وظيفة التمرير لأعلى الصفحة
+            function scrollToTop() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            window.addEventListener('click', function(e) {
+                if (e.target.classList.contains('custom-modal-overlay')) {
+                    e.target.classList.remove('active');
+                }
+            });
+
+            document.addEventListener("DOMContentLoaded", function() {
+                let themeBtn = document.getElementById("themeToggleBtn");
+                function applyTheme(isDark) {
+                    if (isDark) {
+                        document.documentElement.classList.add("dark-mode");
+                        localStorage.setItem("em_theme", "dark");
+                        if (themeBtn) themeBtn.innerHTML = "☀️";
+                    } else {
+                        document.documentElement.classList.remove("dark-mode");
+                        localStorage.setItem("em_theme", "light");
+                        if (themeBtn) themeBtn.innerHTML = "🌙";
+                    }
+                }
+
+                applyTheme(localStorage.getItem("em_theme") === "dark");
+
+                if (themeBtn) {
+                    themeBtn.addEventListener("click", () => {
+                        applyTheme(!document.documentElement.classList.contains("dark-mode"));
+                    });
+                }
+            });
+
+            window.onscroll = function() {
+                let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                let scrolled = (winScroll / height) * 100;
+                let progressFill = document.getElementById("progressFill");
+                if (progressFill) progressFill.style.width = scrolled + "%";
+
+                // إظهار أو إخفاء زر الصعود لأعلى بناءً على النزول في الصفحة
+                let scrollToTopBtn = document.getElementById("scrollToTopBtn");
+                if (scrollToTopBtn) {
+                    if (winScroll > 300) {
+                        scrollToTopBtn.classList.add("show");
+                    } else {
+                        scrollToTopBtn.classList.remove("show");
+                    }
+                }
+            };
+
+            // ===== الهرم التفاعلي لسياسة أمن المعلومات =====
+            const policyTiers = [
+                { title: 'السياسة الأساسية (Basic Policy)', text: 'صف المبادئ الأساسية والإعلانات المتعلقة بأمن المعلومات الخاصة بالمنظمة.' },
+                { title: 'معايير الأمان (Security Standards)', text: 'حدد القواعد اللازمة لتطبيق السياسة الأساسية عمليًا.' },
+                { title: 'إجراءات التنفيذ وقواعد التشغيل', text: 'حدد بوضوح الإجراءات اللازمة بناءً على الجمهور المستهدف والغرض المقصود.' }
+            ];
+            let policyIdx = 0;
+            let policyTimer = null;
+
+            function renderPolicy(pulse) {
+                document.querySelectorAll('.policy-tier').forEach((el, i) => el.classList.toggle('active', i === policyIdx));
+                document.querySelectorAll('.policy-arrow').forEach((el, i) => el.classList.toggle('lit', policyIdx > i));
+                document.querySelectorAll('.policy-dot').forEach((el, i) => el.classList.toggle('active', i === policyIdx));
+                let info = document.getElementById('policyInfo');
+                document.getElementById('policyNum').innerText = policyIdx + 1;
+                document.getElementById('policyTitle').innerText = policyTiers[policyIdx].title;
+                document.getElementById('policyText').innerText = policyTiers[policyIdx].text;
+                if (pulse) {
+                    info.classList.remove('pulse');
+                    void info.offsetWidth;
+                    info.classList.add('pulse');
+                }
+            }
+
+            function stopPolicyPlay() {
+                if (policyTimer) { clearInterval(policyTimer); policyTimer = null; }
+                let btn = document.getElementById('policyPlayBtn');
+                if (btn) btn.innerText = '▶ عرض متسلسل';
+            }
+
+            function selectPolicyTier(i) {
+                stopPolicyPlay();
+                policyIdx = i;
+                renderPolicy(true);
+            }
+
+            function togglePolicyPlay() {
+                if (policyTimer) { stopPolicyPlay(); return; }
+                policyIdx = 0;
+                renderPolicy(true);
+                document.getElementById('policyPlayBtn').innerText = '⏸ إيقاف العرض';
+                policyTimer = setInterval(() => {
+                    policyIdx = (policyIdx + 1) % policyTiers.length;
+                    renderPolicy(true);
+                }, 2600);
+            }
+
+            document.querySelectorAll('.policy-tier').forEach((el, i) => el.addEventListener('click', () => selectPolicyTier(i)));
+            document.getElementById('policyPlayBtn').addEventListener('click', togglePolicyPlay);
+            renderPolicy(false);
+        </script>
+    </body>
+</html>
