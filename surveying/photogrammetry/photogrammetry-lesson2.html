@@ -3,56 +3,57 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-        <title>أخلاقيات المعلومات - أكاديمية العلوم التطبيقية</title>
+        <title>الدرس الثاني: أقسام ومراحل التصوير - أكاديمية العلوم التطبيقية</title>
         <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
         
         <script>
-            let savedTheme = localStorage.getItem("em_theme");
-            if (savedTheme === "dark") {
-                document.documentElement.classList.add("dark-mode");
+            if (typeof savedTheme === 'undefined') {
+                var savedTheme = localStorage.getItem("em_theme");
+                if (savedTheme === "dark") {
+                    document.documentElement.classList.add("dark-mode");
+                }
             }
         </script>
         
         <style>
             :root {
-                --bg-main: #F8FAFC;
+                --bg-main: #F4F6F9;
                 --card-bg: #FFFFFF;
                 --card-border: #E2E8F0;
                 --text-primary: #0F172A;
-                --text-secondary: #64748B;
+                --text-secondary: #475569;
                 
                 --header-bg: rgba(255, 255, 255, 0.85);
-                --header-border: rgba(79, 70, 229, 0.15);
-                --header-shadow: 0 10px 30px rgba(79, 70, 229, 0.05);
+                --header-border: rgba(67, 56, 202, 0.15);
+                --header-shadow: 0 10px 30px rgba(67, 56, 202, 0.05);
                 --shadow-main: 0 20px 40px -15px rgba(15, 23, 42, 0.05);
                 
-                /* 🔷 اللون النيلي (Indigo) الفاخر */
-                --primary: #4F46E5;
+                --primary: #4338CA;
                 --primary-dark: #3730A3;
                 --accent: #818CF8;
-                --light-bg: rgba(79, 70, 229, 0.05);
-                --border-glow: rgba(79, 70, 229, 0.25);
-                --card-glow: 0 10px 30px rgba(79, 70, 229, 0.08);
+                --light-bg: rgba(67, 56, 202, 0.05);
+                --border-glow: rgba(67, 56, 202, 0.25);
+                --card-glow: 0 10px 30px rgba(67, 56, 202, 0.08);
             }
 
-            html.dark-mode, body.dark-mode {
-                --bg-main: #030712;
+            html.dark-model, html.dark-mode, body.dark-mode {
+                --bg-main: #06080F;
                 --card-bg: #0B0F19;
                 --card-border: rgba(255, 255, 255, 0.07);
-                --text-primary: #F8FAFC;
-                --text-secondary: #94A3B8;
+                --text-primary: #F3F4F6;
+                --text-secondary: #CBD5E1;
                 
                 --header-bg: rgba(11, 15, 25, 0.85);
                 --header-border: rgba(129, 140, 248, 0.2);
                 --header-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
                 --shadow-main: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
                 
-                --primary: #6366F1;
-                --primary-dark: #4F46E5;
+                --primary: #818CF8;
+                --primary-dark: #6366F1;
                 --accent: #A5B4FC;
-                --light-bg: rgba(99, 102, 241, 0.08);
-                --border-glow: rgba(99, 102, 241, 0.35);
-                --card-glow: 0 15px 40px rgba(99, 102, 241, 0.12);
+                --light-bg: rgba(129, 140, 248, 0.08);
+                --border-glow: rgba(129, 140, 248, 0.35);
+                --card-glow: 0 15px 40px rgba(129, 140, 248, 0.12);
             }
 
             body {
@@ -73,231 +74,87 @@
 
             .nav-bar {
                 display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
-                background: var(--header-bg); backdrop-filter: blur(12px); border: 1.5px solid var(--header-border); padding: 12px 18px;
-                border-radius: 24px; box-shadow: var(--header-shadow);
+                background: var(--header-bg); backdrop-filter: blur(12px); border: 1.5px solid var(--header-border); padding: 12px 16px;
+                border-radius: 24px; box-shadow: var(--header-shadow); gap: 10px;
             }
-            .brand-minimalist-box { display: flex; flex-direction: column; align-items: center; text-align: center; }
-            .brand-main-title { font-size: 14px; font-weight: 900; color: var(--text-primary); }
-            .brand-subtitle-text { font-size: 10px; font-weight: 800; color: var(--primary); letter-spacing: 0.5px; text-transform: uppercase; }
+            .brand-minimalist-box { display: flex; flex-direction: column; align-items: center; text-align: center; flex: 1; padding: 0 4px; min-width: 0; }
+            .brand-main-title { font-size: 13.5px; font-weight: 900; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
+            .brand-subtitle-text { font-size: 10px; font-weight: 800; color: var(--primary); letter-spacing: 0.5px; text-transform: uppercase; margin-top: 2px; }
 
             .back-btn, .theme-btn {
                 background: var(--light-bg); border: 1.5px solid var(--border-glow);
-                width: 38px; height: 38px; border-radius: 14px; display: flex; align-items: center; justify-content: center;
-                color: var(--text-primary); font-size: 16px; text-decoration: none; cursor: pointer; transition: 0.25s;
+                width: 36px; height: 36px; border-radius: 14px; display: flex; align-items: center; justify-content: center;
+                color: var(--text-primary); font-size: 16px; text-decoration: none; cursor: pointer; transition: 0.25s; flex-shrink: 0;
             }
-            .back-btn:hover, .theme-btn:hover { transform: scale(1.05); border-color: var(--primary); }
-
-            .hero-card {
-                background: var(--card-bg); border: 1.5px solid var(--border-glow); border-radius: 28px;
-                padding: 24px; margin-bottom: 20px; box-shadow: var(--card-glow); position: relative; overflow: hidden;
-            }
-            .hero-card::after {
-                content: ''; position: absolute; top: -50px; left: -50px; width: 120px; height: 120px;
-                background: var(--primary); opacity: 0.08; border-radius: 50%; filter: blur(30px);
-            }
-
-            .pro-hero-badge {
-                display: inline-flex; align-items: center; gap: 8px;
-                background: linear-gradient(135deg, var(--light-bg) 0%, rgba(79, 70, 229, 0.1) 100%);
-                border: 1.5px solid var(--border-glow); color: var(--primary);
-                padding: 6px 16px; border-radius: 16px; font-size: 11.5px; font-weight: 950;
-                margin-bottom: 12px; box-shadow: 0 4px 15px rgba(79, 70, 229, 0.08);
-            }
-            .pro-badge-dot { width: 7px; height: 7px; background: var(--primary); border-radius: 50%; box-shadow: 0 0 10px var(--primary); }
-
-            .hero-title { margin: 0 0 8px 0; font-size: 21px; font-weight: 900; letter-spacing: -0.5px; color: var(--primary); }
-            .hero-desc { margin: 0; font-size: 13px; color: var(--text-secondary); line-height: 1.8; font-weight: 600; text-align: justify; }
+            .back-btn:hover, .theme-btn:hover { transform: scale(1.05); border-color: var(--primary); color: var(--primary); }
 
             .lesson-card {
-                background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 30px;
-                padding: 24px; margin-bottom: 24px; box-shadow: var(--card-glow); display: flex; flex-direction: column; gap: 20px;
+                background: var(--card-bg); border: 1.5px solid var(--card-border); border-radius: 28px;
+                padding: 26px; margin-bottom: 24px; box-shadow: var(--shadow-main); display: flex; flex-direction: column; gap: 22px;
                 position: relative; overflow: hidden;
             }
-            .lesson-card::before { content: ''; display: block; height: 5px; width: 70px; background: linear-gradient(90deg, var(--primary), var(--accent)); border-radius: 10px; }
+            .lesson-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, var(--primary), var(--accent)); }
             
-            .lesson-header { display: flex; align-items: center; justify-content: space-between; border-bottom: 1.5px dashed var(--card-border); padding-bottom: 14px; }
-            .lesson-tag { font-size: 11.5px; font-weight: 900; color: var(--accent); text-transform: uppercase; letter-spacing: 0.5px; }
-            .lesson-heading { margin: 0; font-size: 20px; font-weight: 950; color: var(--primary); line-height: 1.4; }
-            .lesson-icon-badge { width: 48px; height: 48px; border-radius: 16px; background: var(--light-bg); border: 1.5px solid var(--border-glow); display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: inset 0 2px 5px rgba(79, 70, 229, 0.1); }
+            .lesson-header { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--card-border); padding-bottom: 16px; }
+            .lesson-title-box { display: flex; flex-direction: column; gap: 6px; }
+            .lesson-tag { font-size: 11px; font-weight: 900; color: var(--accent); text-transform: uppercase; letter-spacing: 0.8px; }
+            .lesson-heading { margin: 0; font-size: 20px; font-weight: 950; color: var(--primary); line-height: 1.3; }
+            .lesson-icon-badge { width: 50px; height: 50px; border-radius: 16px; background: var(--light-bg); border: 1.5px solid var(--border-glow); display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
 
-            .section-block { display: flex; flex-direction: column; gap: 12px; }
-            .block-title { font-size: 14.5px; font-weight: 900; color: var(--text-primary); border-right: 3.5px solid var(--primary); padding-right: 10px; }
+            .section-block { display: flex; flex-direction: column; gap: 14px; background: var(--light-bg); border: 1.5px solid var(--border-glow); padding: 18px; border-radius: 20px; }
+            .block-title { font-size: 14.5px; font-weight: 900; color: var(--text-primary); display: flex; align-items: center; gap: 8px; }
+            .block-title::before { content: ''; width: 4px; height: 16px; background: var(--primary); border-radius: 4px; display: inline-block; }
             
-            .glass-definition-card {
-                background: var(--light-bg);
-                backdrop-filter: blur(12px);
-                border: 1.5px solid var(--border-glow);
-                border-radius: 20px;
-                padding: 16px 18px;
-                margin: 8px 0;
-                box-shadow: var(--shadow-main);
-                display: flex;
-                flex-direction: column;
-                gap: 6px;
-                transition: 0.25s;
+            .definition-box {
+                background: var(--card-bg); border: 2px solid var(--primary); border-radius: 16px; padding: 16px; margin-bottom: 10px; box-shadow: 0 4px 15px rgba(67, 56, 202, 0.05);
             }
-            .glass-definition-card:hover {
-                border-color: var(--primary);
-                transform: translateY(-2px);
-                box-shadow: 0 10px 25px rgba(79, 70, 229, 0.12);
-            }
-            .glass-def-title {
-                font-size: 14px;
-                font-weight: 950;
-                color: var(--primary);
-                display: flex;
-                align-items: center;
-                gap: 8px;
-            }
-            .glass-def-text {
-                font-size: 13px;
-                font-weight: 700;
-                color: var(--text-primary);
-                line-height: 1.7;
-                margin: 0;
-            }
+            .definition-title { font-size: 13px; font-weight: 900; color: var(--primary); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+            .definition-text { font-size: 14px; font-weight: 800; color: var(--text-primary); line-height: 1.9; margin: 0; }
 
-            .modal-trigger-btn {
-                background: var(--card-bg);
-                border: 1.5px solid var(--border-glow);
-                color: var(--text-primary);
-                padding: 14px 18px;
-                border-radius: 20px;
-                font-family: 'Cairo', sans-serif;
-                font-size: 13.5px;
-                font-weight: 900;
-                cursor: pointer;
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                width: 100%;
-                margin: 14px 0;
-                box-shadow: var(--shadow-main);
-                transition: 0.25s;
-            }
-            .modal-trigger-btn span:first-child { color: var(--primary); }
-            .modal-trigger-btn:hover { background: var(--light-bg); transform: translateY(-2px); border-color: var(--primary); }
+            .custom-list-group { display: flex; flex-direction: column; gap: 14px; }
+            .list-item-row { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; font-weight: 750; color: var(--text-primary); line-height: 1.9; }
+            .list-bullet { color: var(--primary); font-size: 18px; line-height: 1.4; flex-shrink: 0; font-weight: 900; }
+            .list-content { flex: 1; color: var(--text-primary); }
+            .list-content strong { color: var(--primary); font-weight: 950; }
 
-            /* تصميم النوافذ المنبثقة */
-            .custom-modal-overlay {
-                position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-                background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(8px);
-                display: flex; align-items: center; justify-content: center;
-                z-index: 99999; opacity: 0; visibility: hidden; transition: 0.3s ease; padding: 16px;
+            .accordion-card {
+                background: var(--card-bg); border: 1.5px solid var(--border-glow); border-radius: 20px;
+                overflow: hidden; transition: 0.3s ease; box-shadow: 0 4px 15px rgba(67, 56, 202, 0.04);
             }
-            .custom-modal-overlay.active { opacity: 1; visibility: visible; }
-            .custom-modal-box {
-                background: var(--card-bg); border: 2px solid var(--border-glow); border-radius: 28px;
-                width: 100%; max-width: 560px; padding: 24px; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-                transform: scale(0.9); transition: 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-                display: flex; flex-direction: column; gap: 16px; position: relative; max-height: 85vh;
+            .accordion-header {
+                padding: 16px 18px; background: var(--light-bg); cursor: pointer; display: flex;
+                align-items: center; justify-content: space-between; gap: 10px; user-select: none;
             }
-            .custom-modal-overlay.active .custom-modal-box { transform: scale(1); }
-            .custom-modal-header {
-                display: flex; align-items: center; justify-content: space-between;
-                border-bottom: 1.5px dashed var(--card-border); padding-bottom: 12px;
-            }
-            .custom-modal-title { font-size: 15px; font-weight: 950; color: var(--primary); display: flex; align-items: center; gap: 8px; }
-            
-            .xp-counter-badge {
-                background: linear-gradient(135deg, #F59E0B, #D97706); color: #FFF;
-                padding: 4px 12px; border-radius: 12px; font-size: 12px; font-weight: 900;
-                box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
-            }
+            .accordion-header-title { font-size: 14px; font-weight: 900; color: var(--primary); display: flex; align-items: center; gap: 8px; }
+            .accordion-arrow { font-size: 14px; transition: transform 0.3s ease; color: var(--primary); font-weight: 900; }
+            .accordion-card.active .accordion-arrow { transform: rotate(180deg); }
 
-            .custom-modal-close {
-                background: var(--light-bg); border: 1.5px solid var(--border-glow);
-                width: 36px; height: 36px; border-radius: 12px; display: flex; align-items: center; justify-content: center;
-                color: var(--text-primary); font-size: 16px; font-weight: 900; cursor: pointer; transition: 0.2s;
+            .accordion-body {
+                display: none; padding: 16px; flex-direction: column; gap: 14px;
+                border-top: 1px solid var(--border-glow); background: var(--card-bg);
             }
-            .custom-modal-close:hover { background: var(--primary); color: #FFFFFF; }
-            
-            .custom-modal-body { display: flex; flex-direction: column; gap: 16px; overflow-y: auto; padding-left: 4px; padding-right: 4px; }
+            .accordion-card.active .accordion-body { display: flex; }
 
-            @keyframes screenSuccessPulse {
-                0% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.4), var(--shadow-main); }
-                50% { box-shadow: 0 0 35px 8px rgba(79, 70, 229, 0.3), var(--shadow-main); }
-                100% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0), var(--shadow-main); }
-            }
-
-            @keyframes screenErrorShake {
-                0%, 100% { transform: translateX(0); }
-                20%, 60% { transform: translateX(-6px); }
-                40%, 80% { transform: translateX(6px); }
-            }
-
-            .quiz-container-box { display: flex; flex-direction: column; gap: 16px; }
-            .quiz-section-header { font-size: 14px; font-weight: 900; color: var(--primary); background: var(--light-bg); padding: 8px 14px; border-radius: 12px; border: 1px solid var(--border-glow); }
-            
-            .quiz-card-item {
-                background: var(--light-bg); 
-                border: 2px solid var(--border-glow);
-                border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 12px;
-                box-shadow: var(--shadow-main);
-                transition: 0.35s ease;
-            }
-            
-            .quiz-card-item.correct-card { 
-                background: rgba(79, 70, 229, 0.05) !important;
-                border: 2.5px solid #4F46E5 !important; 
-                animation: screenSuccessPulse 0.8s ease;
-            }
-            
-            .quiz-card-item.wrong-card { 
-                background: rgba(239, 68, 68, 0.05) !important;
-                border: 2.5px solid #EF4444 !important; 
-                animation: screenErrorShake 0.4s ease;
-            }
-
-            .quiz-question-text { font-size: 13.5px; font-weight: 900; color: var(--text-primary); line-height: 1.7; }
-            
-            .quiz-options-grid { display: flex; flex-direction: column; gap: 8px; }
-            .quiz-option-btn {
-                background: var(--card-bg); border: 1.5px solid var(--card-border); color: var(--text-primary);
-                padding: 10px 14px; border-radius: 14px; font-family: 'Cairo', sans-serif; font-size: 13px; font-weight: 700;
-                cursor: pointer; text-align: right; transition: 0.2s;
-            }
-            .quiz-option-btn:hover { border-color: var(--primary); background: var(--light-bg); }
-
-            .quiz-option-btn.correct-choice {
-                background: #4F46E5 !important;
-                color: #FFFFFF !important;
-                border-color: #3730A3 !important;
-            }
-
-            .quiz-option-btn.wrong-choice {
-                background: #EF4444 !important;
-                color: #FFFFFF !important;
-                border-color: #DC2626 !important;
-            }
-
-            .quiz-input-box {
-                width: 100%; padding: 10px 14px; border-radius: 14px; border: 1.5px solid var(--card-border);
-                background: var(--card-bg); color: var(--text-primary); font-family: 'Cairo', sans-serif; font-size: 13px; font-weight: 700;
-                box-sizing: border-box; outline: none; transition: 0.2s;
-            }
-            .quiz-input-box:focus { border-color: var(--primary); }
-            
-            .quiz-submit-ans-btn {
-                background: var(--primary); color: #FFF; border: none; padding: 8px 16px; border-radius: 12px;
-                font-family: 'Cairo', sans-serif; font-size: 12.5px; font-weight: 900; cursor: pointer; align-self: flex-start;
-                transition: 0.2s;
-            }
-            .quiz-submit-ans-btn:hover { background: var(--primary-dark); }
-
-            .quiz-feedback-msg { font-size: 12.5px; font-weight: 800; padding: 10px 14px; border-radius: 12px; display: none; line-height: 1.6; }
-            .quiz-feedback-msg.success { background: rgba(79, 70, 229, 0.15); color: #3730A3; border: 1.5px solid rgba(79, 70, 229, 0.4); display: block; }
-            .quiz-feedback-msg.error { background: rgba(239, 68, 68, 0.15); color: #DC2626; border: 1.5px solid rgba(239, 68, 68, 0.4); display: block; }
+            .quiz-item { display: flex; flex-direction: column; gap: 8px; font-size: 14px; background: var(--light-bg); border: 1.5px solid var(--border-glow); border-radius: 14px; padding: 12px 14px; }
+            .quiz-item-q { font-weight: 850; color: var(--text-primary); line-height: 1.8; }
+            .reveal-ans-btn { background: var(--card-bg); border: 1.5px solid var(--border-glow); color: var(--primary); padding: 7px 12px; border-radius: 10px; font-size: 12px; font-weight: 900; cursor: pointer; align-self: flex-start; font-family: 'Cairo', sans-serif; transition: 0.2s; }
+            .reveal-ans-btn:hover { background: var(--primary); color: #FFF; }
+            .quiz-item-a { display: none; font-weight: 800; color: #059669; background: rgba(16, 185, 129, 0.08); padding: 10px 12px; border-radius: 10px; border-right: 3.5px solid #059669; line-height: 1.8; margin-top: 4px; }
+            .quiz-item-a.show { display: block; }
 
             .bottom-nav {
-                position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); width: calc(100% - 28px); max-width: 500px;
+                position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%); width: calc(100% - 32px); max-width: 460px;
                 background: var(--header-bg); backdrop-filter: blur(15px); display: flex; justify-content: space-around; align-items: center;
-                padding: 8px 10px; border: 1.5px solid var(--header-border); border-radius: 22px; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15); z-index: 999;
+                padding: 5px 6px; border: 1.5px solid var(--header-border); border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); z-index: 999;
             }
-            .bottom-nav a { color: var(--text-secondary); text-decoration: none; font-size: 11.5px; text-align: center; font-weight: 800; display: flex; flex-direction: column; align-items: center; gap: 3px; padding: 6px 12px; border-radius: 16px; flex: 1; transition: 0.25s; }
-            .bottom-nav a span { font-size: 18px; line-height: 1; }
-            .bottom-nav a:hover { color: var(--primary); }
-            .bottom-nav a.active { color: var(--primary); background: var(--light-bg); border: 1.5px solid var(--border-glow); }
+            .bottom-nav a { 
+                color: var(--text-secondary); text-decoration: none; font-size: 10.5px; text-align: center; font-weight: 800; 
+                display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 5px 8px; border-radius: 14px; flex: 1; transition: 0.25s;
+                background: var(--light-bg); border: 1px solid var(--border-glow); margin: 0 2px;
+            }
+            .bottom-nav a span { font-size: 16px; line-height: 1; }
+            .bottom-nav a:hover { color: var(--primary); border-color: var(--primary); transform: translateY(-1px); }
+            .bottom-nav a.active { color: #FFFFFF; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); border: 1px solid var(--accent); box-shadow: 0 4px 12px rgba(67, 56, 202, 0.3); }
         </style>
     </head>
     <body>
@@ -306,458 +163,235 @@
 
         <div class="container">
             <div class="nav-bar">
-                <a href="programming.html" class="back-btn" title="رجوع لقسم البرمجة">←</a>
+                <a href="photogrammetry.html" class="back-btn" title="رجوع للقسم الرئيسي">←</a>
                 <div class="brand-minimalist-box">
-                    <span class="brand-main-title">أخلاقيات المعلومات</span>
+                    <span class="brand-main-title">أقسام ومراحل التصوير</span>
                     <span class="brand-subtitle-text">أكاديمية العلوم التطبيقية</span>
                 </div>
                 <button class="theme-btn" id="themeToggleBtn" title="تغيير الثيم">🌙</button>
             </div>
 
-            <!-- كارت الشرح الشامل للدرس الثاني -->
-            <div class="hero-card">
-                <div class="pro-hero-badge">
-                    <span class="pro-badge-dot"></span>
-                    أكاديمية العلوم التطبيقية • قسم البرمجة وأمن المعلومات
-                </div>
-                <h1 class="hero-title">أخلاقيات المعلومات</h1>
-                <p class="hero-desc">
-                    يغطي هذا الدرس المفاهيم والتوجيهات الأساسية لأخلاقيات المعلومات، النقاط الواجب مراعاتها عند النشر، العلامة الجغرافية، المعلومات المضللة، تسريب المعلومات، والمشاكل المتعلقة بالهواتف الذكية ووسائل التواصل الاجتماعي.
-                </p>
-            </div>
-
-            <!-- محتوى الدرس الثاني -->
             <div class="lesson-card">
                 <div class="lesson-header">
                     <div class="lesson-title-box">
-                        <span class="lesson-tag">المنهج الدراسي المعتمد</span>
-                        <h2 class="lesson-heading">أخلاقيات المعلومات والمخاطر الرقمية</h2>
+                        <span class="lesson-tag">الدرس الثاني • العمليات التصويرية</span>
+                        <h2 class="lesson-heading">أقسام ومراحل الاستخدام في المساحة التصويرية</h2>
                     </div>
-                    <div class="lesson-icon-badge">⚖️</div>
+                    <div class="lesson-icon-badge">📷</div>
                 </div>
 
                 <div class="section-block">
-                    <div class="block-title">1. أخلاقيات المعلومات</div>
-                    <div class="glass-definition-card">
-                        <div class="glass-def-title"><span>🛡️</span><span>أخلاقيات المعلومات (Information Ethics)</span></div>
-                        <p class="glass-def-text">المفاهيم والتوجيهات الأساسية للقيام بأنشطة حساسة في مجتمع المعلومات، هذا بغض النظر عن وجود أو عدم وجود القوانين.</p>
+                    <div class="block-title">أقسام المساحة التصويرية</div>
+                    <div class="custom-list-group">
+                        <div class="list-item-row">
+                            <span class="list-bullet">•</span>
+                            <div class="list-content"><strong>التصوير الجوي (Aerial Photography):</strong> يتم التقاط الصور باستخدام كاميرات هندسية مثبتة على طائرات مأهولة أو طائرات بدون طيار (Drones) لتغطية مساحات واسعة بدقة عالية.</div>
+                        </div>
+                        <div class="list-item-row">
+                            <span class="list-bullet">•</span>
+                            <div class="list-content"><strong>التصوير الأرضي (Terrestrial Photography):</strong> تُثبت الكاميرا على سطح الأرض لرصد الأبنية، الآثار، الواجهات المعمارية، والمنحدرات الصخرية القريبة.</div>
+                        </div>
+                        <div class="list-item-row">
+                            <span class="list-bullet">•</span>
+                            <div class="list-content"><strong>التصوير الفضائي (Space Photography):</strong> يتم عبر كاميرات ومستشعرات محكومة على متن أقمار صناعية مدارية لرصد وتصوير كوكب الأرض على نطاق قاري واسع.</div>
+                        </div>
                     </div>
                 </div>
 
+                <!-- مراحل تطور المساحة التصويرية -->
                 <div class="section-block">
-                    <div class="block-title">2. النقاط الواجب مراعاتها عند النشر</div>
-                    <div class="glass-definition-card">
-                        <div class="glass-def-title"><span>🌐</span><span>خصائص المعلومات على الإنترنت</span></div>
-                        <p class="glass-def-text">تنتشر بسهولة وبمجرد انتشارها لا تعود سهلة.</p>
-                    </div>
-                    <div class="glass-definition-card">
-                        <div class="glass-def-title"><span>📷</span><span>الملكية والخصوصية</span></div>
-                        <p class="glass-def-text">لا يجوز لك مشاركة الصور أو مقاطع الفيديو التي يمتلكها الآخرون دون الحصول على إذن.</p>
-                    </div>
-                    <div class="glass-definition-card">
-                        <div class="glass-def-title"><span>🔐</span><span>حماية البيانات الشخصية</span></div>
-                        <p class="glass-def-text">لا يجوز لك تسريب المعلومات الشخصية (Personal information) لشخص آخر على الإنترنت.</p>
-                    </div>
-                    <div class="glass-definition-card">
-                        <div class="glass-def-title"><span>©️</span><span>حقوق المؤلف</span></div>
-                        <p class="glass-def-text">لا يجوز لك مشاركة الصور أو مقاطع الفيديو التي يحفظ الآخرون حقوق المؤلف (Copyright) عليها دون إذن.</p>
-                    </div>
-                    <div class="glass-definition-card">
-                        <div class="glass-def-title"><span>🔒</span><span>الخصوصية</span></div>
-                        <p class="glass-def-text">لا يجب عليك انتهاك خصوصية الآخرين.</p>
-                    </div>
-                    <div class="glass-definition-card">
-                        <div class="glass-def-title"><span>🚫</span><span>مكافحة التنمر</span></div>
-                        <p class="glass-def-text">لا يجب عليك نشر تعليقات للتنمر بالآخرين أو الانخراط في التنمر الإلكتروني (Cyber bullying).</p>
+                    <div class="block-title">مراحل تطور المساحة التصويرية</div>
+                    <div class="custom-list-group">
+                        <div class="list-item-row">
+                            <span class="list-bullet">1.</span>
+                            <div class="list-content"><strong>اختراع التصوير الضوئي:</strong> بدأ عام 1839م.</div>
+                        </div>
+                        <div class="list-item-row">
+                            <span class="list-bullet">2.</span>
+                            <div class="list-content"><strong>استعمال الصور الفردية:</strong> لغايات إجراء القياس والمخططات في الحقبة 1840 - 1892م، وكانت هذه الصور مأخوذة من محطات أرضية وجوية باستخدام بالونات أو الطائرات الورقية[span_0](start_span)[span_0](end_span).</div>
+                        </div>
+                        <div class="list-item-row">
+                            <span class="list-bullet">3.</span>
+                            <div class="list-content"><strong>إنتاج الأفلام الملفوفة:</strong> تم تحقيق ذلك في عام 1884م[span_1](start_span)[span_1](end_span).</div>
+                        </div>
+                        <div class="list-item-row">
+                            <span class="list-bullet">4.</span>
+                            <div class="list-content"><strong>اكتشاف الرؤية المجسمة:</strong> من الصور واختراع العلامة الطافية[span_2](start_span)[span_2](end_span).</div>
+                        </div>
+                        <div class="list-item-row">
+                            <span class="list-bullet">5.</span>
+                            <div class="list-content"><strong>اختراع الطائرة:</strong> في عام 1903م، واستخدمت لأول مرة في التقاط الصور لأغراض المساحة عام 1913م[span_3](start_span)[span_3](end_span).</div>
+                        </div>
+                        <div class="list-item-row">
+                            <span class="list-bullet">6.</span>
+                            <div class="list-content"><strong>اتساع نطاق التسابق:</strong> في هذا المجال أثناء الحرب العالمية الأولى والثانية للأغراض العسكرية والمدنية، وتأسست خلال هذه الفترة الكثير من الشركات المساحية.</div>
+                        </div>
+                        <div class="list-item-row">
+                            <span class="list-bullet">7.</span>
+                            <div class="list-content"><strong>اختراع الحاسبات:</strong> خلال العقد 1960م أدى إلى تقدم هائل في نوعية الأجهزة وطرق الإنتاج، وظهر جيل جديد من الأجهزة التي تتعامل مع الصور الجوية باستخدام الحاسب الآلي، واقترن ذلك بغزو الفضاء ووضع الأقمار الصناعية ومحطات الفضاء لأغراض المراقبة والاستطلاع.</div>
+                        </div>
                     </div>
                 </div>
 
+                <!-- استخدامات المساحة التصويرية -->
                 <div class="section-block">
-                    <div class="block-title">3. العلامة الجغرافية والمستجدات الرقمية</div>
-                    <div class="glass-definition-card">
-                        <div class="glass-def-title"><span>📍</span><span>العلامة الجغرافية (Geo tagging)</span></div>
-                        <p class="glass-def-text">معلومات تتضمن خطوط الطول والعرض المتضمنة في الصور ومقاطع الفيديو التي تم التقاطها بالهواتف الذكية والهواتف المحمولة؛ هناك خطر التعرض للتحديد والكشف عن موقعك.</p>
-                    </div>
-                    <div class="glass-definition-card">
-                        <div class="glass-def-title"><span>⚠️</span><span>المعلومات المضللة والشائعات (Disinformation and rumors)</span></div>
-                        <p class="glass-def-text">معلومات كاذبة يتم نشرها عمداً أو شائعات لا أساس لها.</p>
-                    </div>
-                    <div class="glass-definition-card">
-                        <div class="glass-def-title"><span>🔓</span><span>تسريب المعلومات الشخصية (Leakage of personal information)</span></div>
-                        <p class="glass-def-text">عندما يتم الكشف عن المعلومات الشخصية التي يجب أن تظل سرية لطرف ثالث.</p>
+                    <div class="block-title">استخدامات المساحة التصويرية</div>
+                    <div class="custom-list-group">
+                        <div class="list-item-row">
+                            <span class="list-bullet">1.</span>
+                            <div class="list-content">إعداد المخططات والخرائط المستوية بدقة عالية وسرعة وتكلفة أقل.</div>
+                        </div>
+                        <div class="list-item-row">
+                            <span class="list-bullet">2.</span>
+                            <div class="list-content">إعداد المخططات والخرائط الطبوغرافية بدقة عالية وسرعة وتكلفة أقل.</div>
+                        </div>
+                        <div class="list-item-row">
+                            <span class="list-bullet">3.</span>
+                            <div class="list-content">استكشاف وتخطيط وتصميم شبكات المواصلات المختلفة والسدود وقنوات الري والاتصالات وغيرها من المشاريع المدنية.</div>
+                        </div>
+                        <div class="list-item-row">
+                            <span class="list-bullet">4.</span>
+                            <div class="list-content">يمكن استخدام الصور الجوية أو الفضائية كبديل عن الخرائط في المناطق التي لا توفر لها أية معلومات مساحية أو خرائط.</div>
+                        </div>
+                        <div class="list-item-row">
+                            <span class="list-bullet">5.</span>
+                            <div class="list-content">تستخدم المساحة التصويرية في حقل الجيولوجيا (علم الأرض) للتنقيب عن المعادن والمياه الجوفية ودراسات التربة وسطح الأرض لمعرفة مدى ملائمته للأغراض المختلفة من زراعة أو صناعة ومعرفة أنواع الصخور الموجودة على سطح الأرض وفي باطنها.</div>
+                        </div>
+                        <div class="list-item-row">
+                            <span class="list-bullet">6.</span>
+                            <div class="list-content">تستخدم المساحة التصويرية في حقل الاستخبارات العسكرية وذلك بإمداد الجيش بمعلومات عن مواقع ومعدات وأعداد وتحركات العدو.</div>
+                        </div>
+                        <div class="list-item-row">
+                            <span class="list-bullet">7.</span>
+                            <div class="list-content">تستخدم المساحة التصويرية في المجالات الطبية مثل استخدام أشعة إكس وصناعة الأطراف الصناعية.</div>
+                        </div>
+                        <div class="list-item-row">
+                            <span class="list-bullet">8.</span>
+                            <div class="list-content">تستخدم المساحة التصويرية الجوية في أعمال الحصر، مثل الحصر السكاني والحصر الزراعي.</div>
+                        </div>
+                        <div class="list-item-row">
+                            <span class="list-bullet">9.</span>
+                            <div class="list-content">تستخدم المساحة التصويرية في حل ومراقبة المشاكل المرورية.</div>
+                        </div>
                     </div>
                 </div>
 
+                <!-- طرق الاستفادة من الصور -->
                 <div class="section-block">
-                    <div class="block-title">4. المشاكل التي تحدث مع الهواتف الذكية ووسائل التواصل الاجتماعي</div>
-                    <div class="glass-definition-card">
-                        <div class="glass-def-title"><span>📱</span><span>رسائل التواصل الاجتماعي (Social media)</span></div>
-                        <p class="glass-def-text">خدمات توفر منصات حيث يمكن للأفراد التواصل مع بعضهم البعض على الإنترنت.</p>
-                    </div>
-                    <div class="glass-definition-card">
-                        <div class="glass-def-title"><span>🌐</span><span>إدمان الإنترنت (Internet addiction)</span></div>
-                        <p class="glass-def-text">حالة يصبح فيها الشخص منغمسًا بشكل مفرط في الإنترنت لدرجة تعطيل الحياة اليومية.</p>
-                    </div>
-                    <div class="glass-definition-card">
-                        <div class="glass-def-title"><span>🚶‍♂️</span><span>استخدام الهاتف أثناء المشي (Using smartphone while walking)</span></div>
-                        <p class="glass-def-text">فعل استخدام الهاتف الذكي أثناء المشي.</p>
-                    </div>
-                    <div class="glass-definition-card">
-                        <div class="glass-def-title"><span>💻</span><span>الجريمة الإلكترونية (Cybercrime)</span></div>
-                        <p class="glass-def-text">إساءة استخدام أجهزة الكمبيوتر والشبكات في الأنشطة الإجرامية.</p>
-                    </div>
-                    <div class="glass-definition-card">
-                        <div class="glass-def-title"><span>🕵️‍♂️</span><span>انتحال الشخصية (Identity theft)</span></div>
-                        <p class="glass-def-text">قيام شخص آخر بانتحال شخصية فرد أو مؤسسة لسرقة بيانات أو كلمات مرور.</p>
+                    <div class="block-title">طرق الاستفادة من الصور</div>
+                    <div class="custom-list-group">
+                        <div class="list-item-row">
+                            <span class="list-bullet">أ)</span>
+                            <div class="list-content"><strong>التعامل مع الصور المفردة:</strong> تتم الدراسة فيها من خلال صورة تعطي بُعدين فقط للمعلم موضع الدراسة، حيث يُحصل منها على قياسات تقريبية ومعلومات نوعية مثل الإحصاءات والتخطيط للمشاريع المدنية، ويمكن تجميع مجموعة من الصور المتتالية وتوصيلها معاً لتغطية مساحة كبيرة وهو ما يُسمى بالموزاييك (Mosaic).</div>
+                        </div>
+                        <div class="list-item-row">
+                            <span class="list-bullet">ب)</span>
+                            <div class="list-content"><strong>التعامل مع أزواج الصور:</strong> يُقصد بها التعامل مع صورتين مصورتين بوضع محدد، بحيث يكون جزء من الصورتين لنفس المنطقة وبمجرد توجيههما باستخدام طرق وأجهزة خاصة يمكن الحصول منهما على منظر مجسم (ذي ثلاثة أبعاد) للمنطقة المشتركة بين الصورتين، ثم التعامل مع المنظر المجسم للحصول على المعلومات.</div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- زر فتح نافذة الأسئلة -->
-                <button class="modal-trigger-btn" onclick="openModal('quizModal')">
-                    <span>⚡ بنك الأسئلة والتدريبات التفاعلية (160 XP)</span>
-                    <span>←</span>
-                </button>
-            </div>
-        </div>
+                <!-- كارت الأسئلة التفاعلية المنسدل (8 أسئلة محلولة للدرس الثاني) -->
+                <div class="accordion-card" id="quizAccordion">
+                    <div class="accordion-header" id="quizAccordionHeader">
+                        <div class="accordion-header-title">
+                            <span>💡</span> 8 أسئلة تفاعلية ومحلولة على الدرس الثاني
+                        </div>
+                        <span class="accordion-arrow">▼</span>
+                    </div>
+                    <div class="accordion-body">
+                        
+                        <div class="quiz-item">
+                            <span class="quiz-item-q">س1: ما هي الأقسام الرئيسية للتصوير المساحي؟</span>
+                            <button class="reveal-ans-btn">🔍 أظهر الإجابة النموذجية</button>
+                            <div class="quiz-item-a"><strong>الإجابة:</strong> تنقسم إلى: التصوير الجوي، التصوير الأرضي، والتصوير الفضائي.</div>
+                        </div>
 
-        <!-- نافذة الاختبارات -->
-        <div class="custom-modal-overlay" id="quizModal">
-            <div class="custom-modal-box">
-                <div class="custom-modal-header">
-                    <div class="custom-modal-title"><span>⚡</span><span>اختبار التدريبات التفاعلي</span></div>
-                    <div class="xp-counter-badge" id="xpDisplay">⭐ رصيد XP: 0</div>
-                    <button class="custom-modal-close" onclick="closeModal('quizModal')">✕</button>
+                        <div class="quiz-item">
+                            <span class="quiz-item-q">س2: اذكر اثنين من استخدامات المساحة التصويرية في الحقول الطبية والعسكرية.</span>
+                            <button class="reveal-ans-btn">🔍 أظهر الإجابة النموذجية</button>
+                            <div class="quiz-item-a"><strong>الإجابة:</strong> في الحقول الطبية مثل استخدام أشعة إكس وصناعة الأطراف الصناعية، وفي الحقول العسكرية للاستخبارات وإمداد الجيش بمعلومات عن مواقع ومعدات وتحركات العدو.</div>
+                        </div>
+
+                        <div class="quiz-item">
+                            <span class="quiz-item-q">س3: متى تم اختراع التصوير الضوئي لأول مرة؟</span>
+                            <button class="reveal-ans-btn">🔍 أظهر الإجابة النموذجية</button>
+                            <div class="quiz-item-a"><strong>الإجابة:</strong> تم اختراع التصوير الضوئي عام 1839م.</div>
+                        </div>
+
+                        <div class="quiz-item">
+                            <span class="quiz-item-q">س4: ما هو المقصود بالموزاييك (Mosaic) في التعامل مع الصور المفردة؟</span>
+                            <button class="reveal-ans-btn">🔍 أظهر الإجابة النموذجية</button>
+                            <div class="quiz-item-a"><strong>الإجابة:</strong> هو تجميع مجموعة من الصور المتتالية وتوصيلها معاً بحيث تعطي صورة كبيرة تغطي مساحة واسعة.</div>
+                        </div>
+
+                        <div class="quiz-item">
+                            <span class="quiz-item-q">س5: كيف يمكن الحصول على منظر مجسم (ذي ثلاثة أبعاد) من الصور؟</span>
+                            <button class="reveal-ans-btn">🔍 أظهر الإجابة النموذجية</button>
+                            <div class="quiz-item-a"><strong>الإجابة:</strong> من خلال التعامل مع أزواج الصور (صورتين لموقع محدد يوجد بينهما منطقة مشتركة) وتوجيههما باستخدام أجهزة وطرق خاصة.</div>
+                        </div>
+
+                        <div class="quiz-item">
+                            <span class="quiz-item-q">س6: كيف تُستخدم المساحة التصويرية في مجالات الجيولوجيا والتنقيب؟</span>
+                            <button class="reveal-ans-btn">🔍 أظهر الإجابة النموذجية</button>
+                            <div class="quiz-item-a"><strong>الإجابة:</strong> للتنقيب عن المعادن والمياه الجوفية، ودراسات التربة وسطح الأرض لمعرفة ملائمتها للزراعة أو الصناعة، ومعرفة أنواع الصخور على السطح وفي باطن الأرض.</div>
+                        </div>
+
+                        <div class="quiz-item">
+                            <span class="quiz-item-q">س7: ما التأثير الذي أحدثه دخول الحاسبات في العقد 1960م على المساحة التصويرية؟</span>
+                            <button class="reveal-ans-btn">🔍 أظهر الإجابة النموذجية</button>
+                            <div class="quiz-item-a"><strong>الإجابة:</strong> أدى إلى تقدم هائل في نوعية الأجهزة وطرق الإنتاج، وظهر جيل جديد من الأجهزة التي تتعامل مع الصور الجوية بالحاسب الآلي.</div>
+                        </div>
+
+                        <div class="quiz-item">
+                            <span class="quiz-item-q">س8: ما الفائدة من استخدام الصور الجوية أو الفضائية في المناطق التي لا توفر لها أية معلومات مساحية؟</span>
+                            <button class="reveal-ans-btn">🔍 أظهر الإجابة النموذجية</button>
+                            <div class="quiz-item-a"><strong>الإجابة:</strong> تُستخدم كبديل مباشر عن الخرائط لسد النقص التام في البيانات المساحية للمنطقة.</div>
+                        </div>
+
+                    </div>
                 </div>
-                
-                <div class="custom-modal-body quiz-container-box">
-                    
-                    <!-- القسم الأول: اختر من متعدد (4 أسئلة) -->
-                    <div class="quiz-section-header">1. أسئلة الاختيار من متعدد</div>
-                    
-                    <div class="quiz-card-item" id="mcq1">
-                        <div class="quiz-question-text">س1: ما هو المصطلح الذي يشير إلى المفاهيم والتوجيهات الأساسية للقيام بأنشطة حساسة في مجتمع المعلومات؟</div>
-                        <div class="quiz-options-grid">
-                            <button class="quiz-option-btn" onclick="checkMCQ('mcq1', this, 1, 2, 10)">أ) الجريمة الإلكترونية</button>
-                            <button class="quiz-option-btn" onclick="checkMCQ('mcq1', this, 2, 2, 10)">ب) أخلاقيات المعلومات</button>
-                            <button class="quiz-option-btn" onclick="checkMCQ('mcq1', this, 3, 2, 10)">ج) العلامة الجغرافية</button>
-                            <button class="quiz-option-btn" onclick="checkMCQ('mcq1', this, 4, 2, 10)">د) سياسة الخصوصية</button>
-                        </div>
-                        <div class="quiz-feedback-msg" id="feedback_mcq1"></div>
-                    </div>
 
-                    <div class="quiz-card-item" id="mcq2">
-                        <div class="quiz-question-text">س2: أي مما يلي يُعد من خصائص المعلومات على الإنترنت؟</div>
-                        <div class="quiz-options-grid">
-                            <button class="quiz-option-btn" onclick="checkMCQ('mcq2', this, 1, 1, 10)">أ) تنتشر بسهولة وبمجرد انتشارها لا تعود سهلة</button>
-                            <button class="quiz-option-btn" onclick="checkMCQ('mcq2', this, 2, 1, 10)">ب) تظل سرية دائماً ولا يراها أحد</button>
-                            <button class="quiz-option-btn" onclick="checkMCQ('mcq2', this, 3, 1, 10)">ج) لا يمكن نسخها مطلقا</button>
-                            <button class="quiz-option-btn" onclick="checkMCQ('mcq2', this, 4, 1, 10)">د) غير قابلة للنشر الخارجي</button>
-                        </div>
-                        <div class="quiz-feedback-msg" id="feedback_mcq2"></div>
-                    </div>
-
-                    <div class="quiz-card-item" id="mcq3">
-                        <div class="quiz-question-text">س3: ما هو المصطلح الدال على معلومات تتضمن خطوط الطول والعرض المتضمنة في الصور؟</div>
-                        <div class="quiz-options-grid">
-                            <button class="quiz-option-btn" onclick="checkMCQ('mcq3', this, 1, 3, 10)">أ) تسريب المعلومات</button>
-                            <button class="quiz-option-btn" onclick="checkMCQ('mcq3', this, 2, 3, 10)">ب) إدمان الإنترنت</button>
-                            <button class="quiz-option-btn" onclick="checkMCQ('mcq3', this, 3, 3, 10)">ج) العلامة الجغرافية (Geo tagging)</button>
-                            <button class="quiz-option-btn" onclick="checkMCQ('mcq3', this, 4, 3, 10)">د) انتحال الشخصية</button>
-                        </div>
-                        <div class="quiz-feedback-msg" id="feedback_mcq3"></div>
-                    </div>
-
-                    <div class="quiz-card-item" id="mcq4">
-                        <div class="quiz-question-text">س4: ماذا تسمى الحالة التي يصبح فيها الشخص منغمسًا بشكل مفرط في الإنترنت لدرجة تعطيل الحياة اليومية؟</div>
-                        <div class="quiz-options-grid">
-                            <button class="quiz-option-btn" onclick="checkMCQ('mcq4', this, 1, 2, 10)">أ) الجريمة الإلكترونية</button>
-                            <button class="quiz-option-btn" onclick="checkMCQ('mcq4', this, 2, 2, 10)">ب) إدمان الإنترنت (Internet addiction)</button>
-                            <button class="quiz-option-btn" onclick="checkMCQ('mcq4', this, 3, 2, 10)">ج) التنمر الإلكتروني</button>
-                            <button class="quiz-option-btn" onclick="checkMCQ('mcq4', this, 4, 2, 10)">د) حقوق المؤلف</button>
-                        </div>
-                        <div class="quiz-feedback-msg" id="feedback_mcq4"></div>
-                    </div>
-
-
-                    <!-- القسم الثاني: ما هو المصطلح (4 أسئلة) -->
-                    <div class="quiz-section-header">2. ما هو المصطلح الدال على العبارات الآتية؟</div>
-                    
-                    <div class="quiz-card-item" id="term1">
-                        <div class="quiz-question-text">س1: المفاهيم والتوجيهات الأساسية للقيام بأنشطة حساسة في مجتمع المعلومات.</div>
-                        <input type="text" class="quiz-input-box" id="input_term1" placeholder="اكتب المصطلح هنا...">
-                        <button class="quiz-submit-ans-btn" onclick="checkTerm('term1', 'أخلاقيات المعلومات', 'input_term1', 'feedback_term1')">تحقق من الإجابة</button>
-                        <div class="quiz-feedback-msg" id="feedback_term1"></div>
-                    </div>
-
-                    <div class="quiz-card-item" id="term2">
-                        <div class="quiz-question-text">س2: معلومات كاذبة يتم نشرها عمداً أو شائعات لا أساس لها.</div>
-                        <input type="text" class="quiz-input-box" id="input_term2" placeholder="اكتب المصطلح هنا...">
-                        <button class="quiz-submit-ans-btn" onclick="checkTerm('term2', 'المعلومات المضللة', 'input_term2', 'feedback_term2')">تحقق من الإجابة</button>
-                        <div class="quiz-feedback-msg" id="feedback_term2"></div>
-                    </div>
-
-                    <div class="quiz-card-item" id="term3">
-                        <div class="quiz-question-text">س3: إساءة استخدام أجهزة الكمبيوتر والشبكات في الأنشطة الإجرامية.</div>
-                        <input type="text" class="quiz-input-box" id="input_term3" placeholder="اكتب المصطلح هنا...">
-                        <button class="quiz-submit-ans-btn" onclick="checkTerm('term3', 'الجريمة الإلكترونية', 'input_term3', 'feedback_term3')">تحقق من الإجابة</button>
-                        <div class="quiz-feedback-msg" id="feedback_term3"></div>
-                    </div>
-
-                    <div class="quiz-card-item" id="term4">
-                        <div class="quiz-question-text">س4: قيام شخص آخر بانتحال شخصية فرد أو مؤسسة لسرقة بيانات أو كلمات مرور.</div>
-                        <input type="text" class="quiz-input-box" id="input_term4" placeholder="اكتب المصطلح هنا...">
-                        <button class="quiz-submit-ans-btn" onclick="checkTerm('term4', 'انتحال الشخصية', 'input_term4', 'feedback_term4')">تحقق من الإجابة</button>
-                        <div class="quiz-feedback-msg" id="feedback_term4"></div>
-                    </div>
-
-
-                    <!-- القسم الثالث: صح أو خطأ (4 أسئلة) -->
-                    <div class="quiz-section-header">3. أسئلة صح أو خطأ</div>
-
-                    <div class="quiz-card-item" id="tf1">
-                        <div class="quiz-question-text">س1: لا يجوز مشاركة الصور أو مقاطع الفيديو التي يمتلكها الآخرون دون الحصول على إذن.</div>
-                        <div class="quiz-options-grid">
-                            <button class="quiz-option-btn" onclick="checkTF('tf1', this, 'صح', 'صح', 10)">صح</button>
-                            <button class="quiz-option-btn" onclick="checkTF('tf1', this, 'خطأ', 'صح', 10)">خطأ</button>
-                        </div>
-                        <div class="quiz-feedback-msg" id="feedback_tf1"></div>
-                    </div>
-
-                    <div class="quiz-card-item" id="tf2">
-                        <div class="quiz-question-text">س2: العلامة الجغرافية لا تحمل أي مخاطر لكشف موقع منزلك أو مكان تواجدك.</div>
-                        <div class="quiz-options-grid">
-                            <button class="quiz-option-btn" onclick="checkTF('tf2', this, 'صح', 'خطأ', 10)">صح</button>
-                            <button class="quiz-option-btn" onclick="checkTF('tf2', this, 'خطأ', 'خطأ', 10)">خطأ</button>
-                        </div>
-                        <div class="quiz-feedback-msg" id="feedback_tf2"></div>
-                    </div>
-
-                    <div class="quiz-card-item" id="tf3">
-                        <div class="quiz-question-text">س3: التنمر الإلكتروني يعد من السلوكيات والممارسات المرفوضة أخلاقياً وقانونياً عند النشر.</div>
-                        <div class="quiz-options-grid">
-                            <button class="quiz-option-btn" onclick="checkTF('tf3', this, 'صح', 'صح', 10)">صح</button>
-                            <button class="quiz-option-btn" onclick="checkTF('tf3', this, 'خطأ', 'صح', 10)">خطأ</button>
-                        </div>
-                        <div class="quiz-feedback-msg" id="feedback_tf3"></div>
-                    </div>
-
-                    <div class="quiz-card-item" id="tf4">
-                        <div class="quiz-question-text">س4: إدمان الإنترنت لا يؤثر نهائياً على سير الحياة اليومية للأشخاص.</div>
-                        <div class="quiz-options-grid">
-                            <button class="quiz-option-btn" onclick="checkTF('tf4', this, 'صح', 'خطأ', 10)">صح</button>
-                            <button class="quiz-option-btn" onclick="checkTF('tf4', this, 'خطأ', 'خطأ', 10)">خطأ</button>
-                        </div>
-                        <div class="quiz-feedback-msg" id="feedback_tf4"></div>
-                    </div>
-
-
-                    <!-- القسم الرابع: عرف كل ما يأتي (4 أسئلة) -->
-                    <div class="quiz-section-header">4. عرف كل ما يأتي (اكتب باختصار)</div>
-
-                    <div class="quiz-card-item" id="def1">
-                        <div class="quiz-question-text">س1: عرف أخلاقيات المعلومات (Information Ethics).</div>
-                        <input type="text" class="quiz-input-box" id="input_def1" placeholder="اكتب تعريفاً مختصراً...">
-                        <button class="quiz-submit-ans-btn" onclick="checkDefinition('def1', 'input_def1', 'أخلاقيات المعلومات: المفاهيم والتوجيهات الأساسية للأنشطة الحساسة', 'feedback_def1')">تحقق من الإجابة</button>
-                        <div class="quiz-feedback-msg" id="feedback_def1"></div>
-                    </div>
-
-                    <div class="quiz-card-item" id="def2">
-                        <div class="quiz-question-text">س2: عرف العلامة الجغرافية (Geo tagging).</div>
-                        <input type="text" class="quiz-input-box" id="input_def2" placeholder="اكتب تعريفاً مختصراً...">
-                        <button class="quiz-submit-ans-btn" onclick="checkDefinition('def2', 'input_def2', 'العلامة الجغرافية: معلومات خطوط الطول والعرض في الصور', 'feedback_def2')">تحقق من الإجابة</button>
-                        <div class="quiz-feedback-msg" id="feedback_def2"></div>
-                    </div>
-
-                    <div class="quiz-card-item" id="def3">
-                        <div class="quiz-question-text">س3: عرف الجريمة الإلكترونية (Cybercrime).</div>
-                        <input type="text" class="quiz-input-box" id="input_def3" placeholder="اكتب تعريفاً مختصراً...">
-                        <button class="quiz-submit-ans-btn" onclick="checkDefinition('def3', 'input_def3', 'الجريمة الإلكترونية: إساءة استخدام الحواسيب والشبكات للإجرام', 'feedback_def3')">تحقق من الإجابة</button>
-                        <div class="quiz-feedback-msg" id="feedback_def3"></div>
-                    </div>
-
-                    <div class="quiz-card-item" id="def4">
-                        <div class="quiz-question-text">س4: عرف إدمان الإنترنت (Internet addiction).</div>
-                        <input type="text" class="quiz-input-box" id="input_def4" placeholder="اكتب تعريفاً مختصراً...">
-                        <button class="quiz-submit-ans-btn" onclick="checkDefinition('def4', 'input_def4', 'إدمان الإنترنت: الانغماس المفرط المعطل للحياة اليومية', 'feedback_def4')">تحقق من الإجابة</button>
-                        <div class="quiz-feedback-msg" id="feedback_def4"></div>
-                    </div>
-
-                </div>
             </div>
         </div>
 
         <div class="bottom-nav">
-            <a href="index.html"><span>🏠</span>الرئيسية</a>
-            <a href="surveying.html"><span>📐</span>المساحة</a>
-            <a href="english.html"><span>🇬🇧</span>الإنجليزي</a>
-            <a href="programming.html" class="active"><span>💻</span>البرمجة</a>
+            <a href="../../index.html"><span>🏠</span>الرئيسية</a>
+            <a href="../surveying.html" class="active"><span>📐</span>المساحة</a>
+            <a href="../../english/english.html"><span>🇬🇧</span>الإنجليزي</a>
+            <a href="../../programming/programming.html"><span>💻</span>البرمجة</a>
         </div>
 
         <script>
-            let currentXP = 0;
-            let answeredQuestions = {};
-
-            const applauseAudio = new Audio('https://www.myinstants.com/media/sounds/applause.mp3');
-            const wrongGroanAudio = new Audio('groan.mp3');
-
-            function playApplauseSound() {
-                try {
-                    applauseAudio.currentTime = 0;
-                    applauseAudio.play().catch(e => {});
-                } catch(e) {}
-            }
-
-            function playWrongGroanSound() {
-                try {
-                    wrongGroanAudio.currentTime = 0;
-                    wrongGroanAudio.play().catch(e => {});
-                } catch(e) {}
-            }
-
-            const successMessages = [
-                "عاش يا دحيح العصر! إجابة زي الذهب 🥇",
-                "إبداع وتفوق عالي! استمر يا بطل 🚀",
-                "ضربة معلم صح الصح! إجابة في الصميم 🎯",
-                "الله عليك! دماغ شغال وسريع الفهم 💡"
-            ];
-
-            const errorMessages = [
-                "خطأ صغير، بس الصح قدامك اهو ركز فيه كويس يا بشمهندس 🔍",
-                "معليش يا بطل، اتعلمنا حاجة جديدة النهاردة، والصح هو: ",
-                "مش مشكلة خالص! التجربة بتعلم، وادي الإجابة الصح قدامك 📚",
-                "فووق معايا! ركز في المرة الجاية والإجابة الصحيحة هي: "
-            ];
-
-            function getRandomMsg(arr) {
-                return arr[Math.floor(Math.random() * arr.length)];
-            }
-
-            function updateXP(amount) {
-                currentXP += amount;
-                document.getElementById('xpDisplay').innerText = "⭐ رصيد XP: " + currentXP;
-            }
-
-            function openModal(modalId) {
-                document.getElementById(modalId).classList.add('active');
-            }
-            function closeModal(modalId) {
-                document.getElementById(modalId).classList.remove('active');
-            }
-
-            function checkMCQ(questionId, btnElement, selectedIndex, correctIndex, xpReward) {
-                if (answeredQuestions[questionId]) return;
-                
-                let container = document.getElementById(questionId);
-                let buttons = container.querySelectorAll('.quiz-option-btn');
-                let feedback = document.getElementById('feedback_' + questionId);
-                
-                answeredQuestions[questionId] = true;
-                buttons.forEach(btn => btn.disabled = true);
-
-                if (selectedIndex === correctIndex) {
-                    playApplauseSound();
-                    container.classList.add('correct-card');
-                    btnElement.classList.add('correct-choice');
-                    feedback.className = "quiz-feedback-msg success";
-                    feedback.innerText = getRandomMsg(successMessages) + " (+ " + xpReward + " XP)";
-                    updateXP(xpReward);
-                } else {
-                    playWrongGroanSound();
-                    container.classList.add('wrong-card');
-                    btnElement.classList.add('wrong-choice');
-                    buttons[correctIndex - 1].classList.add('correct-choice');
-                    feedback.className = "quiz-feedback-msg error";
-                    feedback.innerText = getRandomMsg(errorMessages) + "الخيار رقم (" + correctIndex + ")";
-                }
-            }
-
-            function checkTerm(questionId, correctAnswer, inputId, feedbackId) {
-                if (answeredQuestions[questionId]) return;
-
-                let userVal = document.getElementById(inputId).value.trim();
-                let container = document.getElementById(questionId);
-                let feedback = document.getElementById(feedbackId);
-
-                if (userVal === "") {
-                    alert("من فضلك اكتب الإجابة أولاً!");
-                    return;
-                }
-
-                answeredQuestions[questionId] = true;
-                document.getElementById(inputId).disabled = true;
-
-                if (userVal.includes(correctAnswer) || correctAnswer.includes(userVal)) {
-                    playApplauseSound();
-                    container.classList.add('correct-card');
-                    feedback.className = "quiz-feedback-msg success";
-                    feedback.innerText = getRandomMsg(successMessages) + " (+ 10 XP)";
-                    updateXP(10);
-                } else {
-                    playWrongGroanSound();
-                    container.classList.add('wrong-card');
-                    feedback.className = "quiz-feedback-msg error";
-                    feedback.innerText = getRandomMsg(errorMessages) + correctAnswer;
-                }
-            }
-
-            function checkTF(questionId, btnElement, selectedAns, correctAns, xpReward) {
-                if (answeredQuestions[questionId]) return;
-
-                let container = document.getElementById(questionId);
-                let buttons = container.querySelectorAll('.quiz-option-btn');
-                let feedback = document.getElementById('feedback_' + questionId);
-
-                answeredQuestions[questionId] = true;
-                buttons.forEach(btn => btn.disabled = true);
-
-                if (selectedAns === correctAns) {
-                    playApplauseSound();
-                    container.classList.add('correct-card');
-                    btnElement.classList.add('correct-choice');
-                    feedback.className = "quiz-feedback-msg success";
-                    feedback.innerText = getRandomMsg(successMessages) + " (+ " + xpReward + " XP)";
-                    updateXP(xpReward);
-                } else {
-                    playWrongGroanSound();
-                    container.classList.add('wrong-card');
-                    btnElement.classList.add('wrong-choice');
-                    buttons.forEach(btn => {
-                        if (btn.innerText.includes(correctAns)) btn.classList.add('correct-choice');
-                    });
-                    feedback.className = "quiz-feedback-msg error";
-                    feedback.innerText = getRandomMsg(errorMessages) + correctAns;
-                }
-            }
-
-            function checkDefinition(questionId, inputId, correctAnswerText, feedbackId) {
-                if (answeredQuestions[questionId]) return;
-
-                let userVal = document.getElementById(inputId).value.trim();
-                let container = document.getElementById(questionId);
-                let feedback = feedbackId ? document.getElementById(feedbackId) : document.getElementById('feedback_' + questionId);
-
-                if (userVal.length < 3) {
-                    alert("يرجى كتابة إجابة صحيحة للتحقق!");
-                    return;
-                }
-
-                answeredQuestions[questionId] = true;
-                document.getElementById(inputId).disabled = true;
-
-                playApplauseSound();
-                container.classList.add('correct-card');
-                feedback.className = "quiz-feedback-msg success";
-                feedback.innerText = getRandomMsg(successMessages) + " (+ 10 XP) | الإجابة المثالية: " + correctAnswerText;
-                updateXP(10);
-            }
-
-            window.addEventListener('click', function(e) {
-                if (e.target.classList.contains('custom-modal-overlay')) {
-                    e.target.classList.remove('active');
-                }
-            });
-
             document.addEventListener("DOMContentLoaded", function() {
+                // تفعيل الأكورديون للأسئلة
+                let accordionCard = document.getElementById("quizAccordion");
+                let accordionHeader = document.getElementById("quizAccordionHeader");
+                if (accordionHeader && accordionCard) {
+                    accordionHeader.addEventListener("click", function() {
+                        accordionCard.classList.toggle("active");
+                    });
+                }
+
+                // كشف الإجابات
+                let revealBtns = document.querySelectorAll(".reveal-ans-btn");
+                revealBtns.forEach(btn => {
+                    btn.addEventListener("click", function(e) {
+                        e.stopPropagation();
+                        let ansBox = this.nextElementSibling;
+                        if (ansBox.style.display === "block" || ansBox.classList.contains("show")) {
+                            ansBox.classList.remove("show");
+                            ansBox.style.display = "none";
+                            this.innerHTML = "🔍 أظهر الإجابة النموذجية";
+                        } else {
+                            ansBox.classList.add("show");
+                            ansBox.style.display = "block";
+                            this.innerHTML = "🔒 إخفاء الإجابة";
+                        }
+                    });
+                });
+
+                // نظام الثيمات
                 let themeBtn = document.getElementById("themeToggleBtn");
                 function applyTheme(isDark) {
                     if (isDark) {
@@ -770,9 +404,7 @@
                         if (themeBtn) themeBtn.innerHTML = "🌙";
                     }
                 }
-
                 applyTheme(localStorage.getItem("em_theme") === "dark");
-
                 if (themeBtn) {
                     themeBtn.addEventListener("click", () => {
                         applyTheme(!document.documentElement.classList.contains("dark-mode"));
@@ -780,6 +412,7 @@
                 }
             });
 
+            // شريط التقدم العلوي
             window.onscroll = function() {
                 let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
                 let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
