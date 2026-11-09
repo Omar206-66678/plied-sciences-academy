@@ -6,40 +6,18 @@
         <title>موسوعة علم الأرض والجيولوجيا الشاملة - أكاديمية العلوم التطبيقية</title>
         <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
         
+        <!-- سكريبت التحقق الفوري من الثيم لمنع الوميض -->
         <script>
-            let savedTheme = localStorage.getItem("em_theme");
-            if (savedTheme === "dark") {
+            if (localStorage.getItem("em_theme") === "dark") {
                 document.documentElement.classList.add("dark-mode");
             }
         </script>
         
         <style>
+            /* الوضع الفاتح الافتراضي (:root) */
             :root {
-                --bg-main: #0B0F19;
-                --card-bg: rgba(255, 255, 255, 0.03);
-                --card-border: rgba(4, 120, 87, 0.2);
-                --text-primary: #F8FAFC;
-                --text-secondary: #94A3B8;
-                
-                --header-bg: #0B0F19;
-                --header-border: rgba(4, 120, 87, 0.3);
-                --header-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-                --shadow-main: 0 20px 50px rgba(0, 0, 0, 0.5);
-                
-                --primary: #10B981;
-                --primary-dark: #059669;
-                --accent: #34D399;
-                --light-bg: rgba(16, 185, 129, 0.08);
-                --border-glow: rgba(16, 185, 129, 0.4);
-                --card-glow: 0 20px 50px rgba(4, 120, 87, 0.15);
-
-                --nav-theme-color: #10B981;
-                --nav-glow-color: rgba(16, 185, 129, 0.35);
-            }
-
-            html:not(.dark-mode) {
                 --bg-main: #F1F5F9;
-                --card-bg: rgba(255, 255, 255, 0.9);
+                --card-bg: #FFFFFF;
                 --card-border: rgba(4, 120, 87, 0.15);
                 --text-primary: #0F172A;
                 --text-secondary: #475569;
@@ -58,6 +36,30 @@
 
                 --nav-theme-color: #047857;
                 --nav-glow-color: rgba(4, 120, 87, 0.25);
+            }
+
+            /* الوضع الداكن (dark-mode) */
+            html.dark-mode, body.dark-mode {
+                --bg-main: #0B0F19;
+                --card-bg: #0B0F19;
+                --card-border: rgba(4, 120, 87, 0.2);
+                --text-primary: #F8FAFC;
+                --text-secondary: #94A3B8;
+                
+                --header-bg: #0B0F19;
+                --header-border: rgba(4, 120, 87, 0.3);
+                --header-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+                --shadow-main: 0 20px 50px rgba(0, 0, 0, 0.5);
+                
+                --primary: #10B981;
+                --primary-dark: #059669;
+                --accent: #34D399;
+                --light-bg: rgba(16, 185, 129, 0.08);
+                --border-glow: rgba(16, 185, 129, 0.4);
+                --card-glow: 0 20px 50px rgba(4, 120, 87, 0.15);
+
+                --nav-theme-color: #10B981;
+                --nav-glow-color: rgba(16, 185, 129, 0.35);
             }
 
             body {
@@ -95,7 +97,7 @@
             .back-btn:hover, .theme-btn:hover { transform: scale(1.08); border-color: var(--primary); box-shadow: 0 0 15px var(--border-glow); }
 
             .hero-card {
-                background: var(--card-bg); backdrop-filter: blur(20px); border: 1.5px solid var(--border-glow); border-radius: 30px;
+                background: var(--card-bg); border: 1.5px solid var(--border-glow); border-radius: 30px;
                 padding: 26px; margin-bottom: 22px; box-shadow: var(--card-glow); position: relative; overflow: hidden;
             }
             .pro-hero-badge {
@@ -112,7 +114,7 @@
             .tabs-container::-webkit-scrollbar { display: none; }
             
             .tab-btn {
-                background: var(--card-bg); backdrop-filter: blur(10px); border: 1.5px solid var(--card-border); color: var(--text-secondary);
+                background: var(--card-bg); border: 1.5px solid var(--card-border); color: var(--text-secondary);
                 padding: 12px 16px; border-radius: 20px; font-family: 'Cairo', sans-serif; font-size: 11.5px; font-weight: 900;
                 white-space: nowrap; cursor: pointer; display: flex; align-items: center; gap: 8px; box-shadow: var(--shadow-main);
                 transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1); text-decoration: none; flex-shrink: 0;
@@ -324,27 +326,36 @@
             <a href="../../programming/programming.html"><span class="nav-icon">💻</span>البرمجة</a>
         </div>
 
+        <!-- سكريبت إدارة الثيمات وشريط التقدم -->
         <script>
             document.addEventListener("DOMContentLoaded", function() {
                 let themeBtn = document.getElementById("themeToggleBtn");
+                
                 function applyTheme(isDark) {
                     if (isDark) {
-                        document.documentElement.classList.remove("dark-mode");
+                        document.documentElement.classList.add("dark-mode");
                         localStorage.setItem("em_theme", "dark");
                         if (themeBtn) themeBtn.innerHTML = "☀️";
                     } else {
-                        document.documentElement.classList.add("dark-mode");
+                        document.documentElement.classList.remove("dark-mode");
                         localStorage.setItem("em_theme", "light");
                         if (themeBtn) themeBtn.innerHTML = "🌙";
                     }
                 }
-                applyTheme(localStorage.getItem("em_theme") !== "dark");
+
+                // تطبيق الثيم المحفوظ عند فتح الصفحة
+                applyTheme(localStorage.getItem("em_theme") === "dark");
+
+                // الحدث عند الضغط على زر التبديل
                 if (themeBtn) {
                     themeBtn.addEventListener("click", () => {
-                        applyTheme(!document.documentElement.classList.contains("dark-mode"));
+                        let isCurrentlyDark = document.documentElement.classList.contains("dark-mode");
+                        applyTheme(!isCurrentlyDark);
                     });
                 }
             });
+
+            // شريط التقدم العلوي المتحرك مع التمرير
             window.onscroll = function() {
                 let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
                 let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
