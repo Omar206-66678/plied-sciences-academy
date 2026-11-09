@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+        <title>الدرس الرابع: خصائص ومعادن القشرة - علم الأرض والجيولوجيا</title>
+        <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+        
+        <!-- سكريبت التحقق الفوري من الثيم لمنع الوميض -->
+        <script>
+            if (localStorage.getItem("em_theme") === "dark") {
+                document.documentElement.classList.add("dark-mode");
+            }
+        </script>
+        
+        <style>
+            /* الوضع الفاتح الافتراضي (:root) */
+            :root {
+                --bg-main: #F1F5F9;
+                --card-bg: #FFFFFF;
+                --card-border: rgba(4, 120, 87, 0.15);
+                --text-primary: #0F172A;
+                --text-secondary: #475569;
+                
+                --header-bg: #FFFFFF;
+                --header-border: rgba(4, 120, 87, 0.15);
+                --header-shadow: 0 10px 30px rgba(4, 120, 87, 0.08);
+                --shadow-main: 0 20px 40px -15px rgba(15, 23, 42, 0.08);
+                
+                --primary: #047857;
+                --primary-dark: #065F46;
+                --accent: #10B981;
+                --light-bg: rgba(4, 120, 87, 0.05);
+                --border-glow: rgba(4, 120, 87, 0.25);
+                --card-glow: 0 20px 40px rgba(4, 120, 87, 0.06);
+
+                --math-color: #0D9488; 
+                --content-bg: rgba(248, 250, 252, 0.8);
+                --term-bg: linear-gradient(135deg, rgba(4, 120, 87, 0.1), rgba(16, 185, 129, 0.03));
+
+                --nav-theme-color: #047857;
+                --nav-glow-color: rgba(4, 120, 87, 0.25);
+            }
+
+            /* الوضع الداكن (dark-mode) */
+            html.dark-mode, body.dark-mode {
+                --bg-main: #0B0F19;
+                --card-bg: #0B0F19;
+                --card-border: rgba(4, 120, 87, 0.2);
+                --text-primary: #F8FAFC;
+                --text-secondary: #94A3B8;
+                
+                --header-bg: #0B0F19;
+                --header-border: rgba(4, 120, 87, 0.3);
+                --header-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+                --shadow-main: 0 20px 50px rgba(0, 0, 0, 0.5);
+                
+                --primary: #10B981;
+                --primary-dark: #059669;
+                --accent: #34D399;
+                --light-bg: rgba(16, 185, 129, 0.08);
+                --border-glow: rgba(16, 185, 129, 0.4);
+                --card-glow: 0 20px 50px rgba(4, 120, 87, 0.15);
+
+                --math-color: #2DD4BF; 
+                --content-bg: rgba(255, 255, 255, 0.02);
+                --term-bg: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(4, 120, 87, 0.05));
+
+                --nav-theme-color: #10B981;
+                --nav-glow-color: rgba(16, 185, 129, 0.35);
+            }
+
+            body {
+                background-color: var(--bg-main);
+                color: var(--text-primary);
+                font-family: 'Cairo', system-ui, -apple-system, sans-serif;
+                margin: 0;
+                padding: 16px 14px 90px 14px;
+                min-height: 100vh;
+                box-sizing: border-box;
+                transition: background-color 0.4s ease, color 0.4s ease;
+            }
+
+            .math-num {
+                color: var(--math-color);
+                font-weight: 900;
+                display: inline-block;
+                padding: 0 3px;
+                text-shadow: 0 0 12px rgba(45, 212, 191, 0.25);
+            }
+
+            .container { max-width: 680px; margin: auto; }
+
+            .top-progress-bar { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: transparent; z-index: 9999; }
+            .top-progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--primary), var(--accent)); box-shadow: 0 0 10px var(--primary); }
+
+            .nav-bar {
+                display: flex; justify-content: space-between; align-items: center; margin-bottom: 22px;
+                background: var(--header-bg); border: 1.5px solid var(--header-border); padding: 12px 18px;
+                border-radius: 24px; box-shadow: var(--header-shadow); gap: 10px;
+            }
+            .brand-minimalist-box { display: flex; flex-direction: column; align-items: center; text-align: center; flex: 1; padding: 0 4px; min-width: 0; }
+            .brand-main-title { font-size: 13.5px; font-weight: 900; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
+            .brand-subtitle-text { font-size: 10px; font-weight: 800; color: var(--primary); letter-spacing: 0.5px; text-transform: uppercase; margin-top: 2px; }
+
+            .nav-actions-group { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+
+            .back-btn, .theme-btn {
+                background: var(--light-bg); border: 1.5px solid var(--border-glow);
+                width: 38px; height: 38px; border-radius: 14px; display: flex; align-items: center; justify-content: center;
+                color: var(--text-primary); font-size: 16px; text-decoration: none; cursor: pointer; transition: 0.3s; flex-shrink: 0;
+            }
+            .back-btn:hover, .theme-btn:hover { transform: scale(1.08); border-color: var(--primary); box-shadow: 0 0 15px var(--border-glow); }
+
+            .lesson-card {
+                background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 32px;
+                padding: 26px; margin-bottom: 26px; box-shadow: var(--card-glow); display: flex; flex-direction: column; gap: 22px;
+                position: relative; overflow: hidden;
+            }
+            .lesson-card::before { content: ''; display: block; height: 5px; width: 80px; background: linear-gradient(90deg, var(--primary), var(--accent)); border-radius: 10px; box-shadow: 0 0 15px var(--primary); }
+            
+            .lesson-header { display: flex; align-items: center; justify-content: space-between; border-bottom: 1.5px dashed var(--card-border); padding-bottom: 16px; }
+            .lesson-tag { font-size: 11.5px; font-weight: 900; color: var(--accent); text-transform: uppercase; letter-spacing: 0.5px; }
+            .lesson-heading { margin: 0; font-size: 18px; font-weight: 950; color: var(--text-primary); line-height: 1.4; }
+            .lesson-icon-badge { width: 48px; height: 48px; border-radius: 18px; background: var(--light-bg); border: 1.5px solid var(--border-glow); display: flex; align-items: center; justify-content: center; font-size: 20px; box-shadow: 0 0 20px rgba(16, 185, 129, 0.1); }
+
+            .section-block { display: flex; flex-direction: column; gap: 14px; }
+            .block-title { font-size: 14px; font-weight: 900; color: var(--text-primary); border-right: 4px solid var(--primary); padding-right: 12px; }
+            
+            .pro-content-grid { display: flex; flex-direction: column; gap: 12px; }
+            .pro-concept-item {
+                background: var(--content-bg); border: 1.5px solid var(--card-border); border-radius: 20px; padding: 16px 18px;
+                display: flex; flex-direction: column; gap: 10px; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); box-shadow: var(--shadow-main);
+            }
+            .pro-concept-item:hover { border-color: var(--border-glow); transform: translateY(-3px); box-shadow: 0 15px 35px rgba(16, 185, 129, 0.12); }
+            
+            .concept-header-row { display: flex; align-items: center; gap: 10px; }
+            .pro-bullet-icon { font-size: 12px; filter: drop-shadow(0 0 8px var(--primary)); }
+            
+            .concept-title-badge {
+                background: var(--term-bg); color: var(--primary); font-size: 13px; font-weight: 950;
+                padding: 6px 14px; border-radius: 12px; border: 1.5px solid var(--border-glow); letter-spacing: 0.3px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            }
+
+            .concept-desc-text { font-size: 13px; font-weight: 700; line-height: 1.9; color: var(--text-secondary); padding-right: 26px; }
+
+            .pro-table-wrapper {
+                overflow-x: auto; border-radius: 20px; border: 1.5px solid var(--card-border);
+                box-shadow: var(--shadow-main); margin: 12px 0; background: var(--card-bg);
+            }
+            .pro-table { width: 100%; border-collapse: collapse; font-size: 12px; text-align: center; }
+            .pro-table th { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #FFF; padding: 14px 12px; font-weight: 950; border-bottom: 2px solid var(--primary-dark); }
+            .pro-table td { padding: 12px; border-bottom: 1px solid var(--card-border); font-weight: 700; color: var(--text-primary); background: transparent; }
+            .pro-table tr:last-child td { border-bottom: none; }
+            .pro-table tr:hover td { background: var(--light-bg); }
+
+            .note-box {
+                background: rgba(245, 158, 11, 0.08); border: 1.5px solid rgba(245, 158, 11, 0.4); border-radius: 20px;
+                padding: 16px 18px; font-size: 13px; font-weight: 700; line-height: 1.8; color: var(--text-primary); margin: 8px 0;
+                box-shadow: 0 10px 30px rgba(245, 158, 11, 0.05);
+            }
+            .note-title { font-weight: 950; color: #F59E0B; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; font-size: 13.5px; }
+
+            .example-box {
+                background: rgba(16, 185, 129, 0.06); border: 1.5px solid rgba(16, 185, 129, 0.35); border-radius: 20px;
+                padding: 16px 18px; font-size: 13px; font-weight: 700; line-height: 1.8; margin: 8px 0; box-shadow: 0 10px 30px rgba(16, 185, 129, 0.05);
+            }
+            .example-title { font-weight: 950; color: var(--primary); margin-bottom: 6px; display: flex; align-items: center; gap: 8px; font-size: 13.5px; }
+
+            .lesson-quiz-box {
+                background: var(--light-bg); border: 1.5px dashed var(--border-glow); border-radius: 22px;
+                padding: 20px; margin-top: 14px; display: flex; flex-direction: column; gap: 14px;
+            }
+            .lesson-quiz-header { font-size: 14px; font-weight: 950; color: var(--primary); border-bottom: 1.5px solid var(--card-border); padding-bottom: 10px; }
+            .quiz-item { display: flex; flex-direction: column; gap: 8px; font-size: 13px; }
+            .quiz-item-q { font-weight: 850; color: var(--text-primary); line-height: 1.8; }
+            .quiz-item-a { font-weight: 750; color: var(--primary); background: var(--card-bg); padding: 10px 14px; border-radius: 14px; border-right: 4px solid var(--primary); line-height: 1.8; box-shadow: 0 4px 12px rgba(0,0,0,0.03); }
+
+            .bottom-nav {
+                position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); width: calc(100% - 32px); max-width: 460px;
+                background: var(--header-bg); display: flex; justify-content: space-around; align-items: center;
+                padding: 6px 10px; border-radius: 24px; border: 1.5px solid var(--card-border); box-shadow: 0 8px 24px rgba(0,0,0,0.25); z-index: 999; box-sizing: border-box;
+            }
+            .bottom-nav a { 
+                color: var(--text-secondary); text-decoration: none; font-size: 10px; text-align: center; font-weight: 800; 
+                display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 12px; border-radius: 16px; flex: 1; 
+                border: 1px solid rgba(128, 128, 128, 0.18); background: rgba(128, 128, 128, 0.05); transition: all 0.3s ease;
+            }
+            .bottom-nav a span { font-size: 16px; line-height: 1; }
+            .bottom-nav a:hover { color: var(--nav-theme-color); border-color: var(--nav-theme-color); background: rgba(128, 128, 128, 0.1); }
+            .bottom-nav a.active { color: #FFFFFF; background: var(--nav-theme-color); border-color: var(--nav-theme-color); box-shadow: 0 4px 15px var(--nav-glow-color); }
+        </style>
+    </head>
+    <body>
+
+        <div class="top-progress-bar"><div class="top-progress-fill" id="progressFill"></div></div>
+
+        <div class="container">
+            <!-- الهيدر العلوي -->
+            <div class="nav-bar">
+                <a href="earth-science.html" class="back-btn" title="رجوع لقسم علم الأرض">←</a>
+                <div class="brand-minimalist-box">
+                    <span class="brand-main-title">الدرس الرابع: خصائص القشرة</span>
+                    <span class="brand-subtitle-text">أكاديمية العلوم التطبيقية</span>
+                </div>
+                <div class="nav-actions-group">
+                    <button class="theme-btn" id="themeToggleBtn" title="تغيير الثيم">🌙</button>
+                </div>
+            </div>
+
+            <!-- كارت الدرس الرابع -->
+            <div class="lesson-card">
+                <div class="lesson-header">
+                    <div class="lesson-title-box">
+                        <span class="lesson-tag">الدرس الرابع • الفحوص ومعادن القشرة</span>
+                        <h2 class="lesson-heading">الخصائص الفيزيائية، التغير الكيميائي، ومعادن القشرة</h2>
+                    </div>
+                    <div class="lesson-icon-badge">⚖️</div>
+                </div>
+
+                <div class="section-block">
+                    <div class="block-title">1. الفحوص والقرائن والمعادن الأكثر شيوعاً</div>
+                    <div class="pro-content-grid">
+                        <div class="pro-concept-item">
+                            <div class="concept-header-row">
+                                <span class="pro-bullet-icon">🔹</span>
+                                <span class="concept-title-badge">البريق والمخدش واللون</span>
+                            </div>
+                            <div class="concept-desc-text">البريق عكس الضوء (فلزي/لافلزي)، والمخدش لون المسحوق (موثوق)، واللون أقل مصداقية.</div>
+                        </div>
+                        <div class="pro-concept-item">
+                            <div class="concept-header-row">
+                                <span class="pro-bullet-icon">🔹</span>
+                                <span class="concept-title-badge">التغير الكيميائي</span>
+                            </div>
+                            <div class="concept-desc-text">تغير المكونات في الفلسبار البلاجيويز (ألبيت غني بالصوديوم وأنورثيت غني بالكالسيوم)، مما ينتج تدرجات لونية وضوئية كما في <strong>اللاابرادورايت</strong>.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-block">
+                    <div class="block-title">2. جدول المعادن الثمانية الأساسية في القشرة الأرضية</div>
+                    <div class="pro-table-wrapper">
+                        <table class="pro-table">
+                            <tr>
+                                <th>المعدن</th>
+                                <th>التركيب الكيميائي / الصيغة</th>
+                            </tr>
+                            <tr><td>الكوارتز</td><td>ثنائي أكسيد السيليكون</td></tr>
+                            <tr><td>الفلسبار</td><td>سيليكات الألومنيوم والصوديوم / الكالسيوم / البوتاسيوم</td></tr>
+                            <tr><td>المايكا</td><td>سيليكات البوتاسيوم والمغنيسيوم والحديد والألومنيوم</td></tr>
+                            <tr><td>البيروكسين</td><td>سيليكات المغنيسيوم والحديد والكالسيوم</td></tr>
+                            <tr><td>الأمفيبول</td><td>سيليكات الكالسيوم والمغنيسيوم والحديد المعقدة</td></tr>
+                            <tr><td>الأوليفين</td><td>سيليكات المغنيسيوم والحديد</td></tr>
+                            <tr><td>الجارنت</td><td>سيليكات المغنيسيوم والألومنيوم</td></tr>
+                            <tr><td>الكالسيت</td><td>كربونات الكالسيوم</td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="note-box">
+                    <div class="note-title">💡 ملاحظة أكاديمية هامة:</div>
+                    رغم تعدد المعادن، إلا أن <span class="math-num">30</span> معدناً فقط شائعة، وثمانية منها تشكل غالبية صخور القشرة الأرضية.
+                </div>
+
+                <div class="example-box">
+                    <div class="example-title">praktisch تطبيق واقعي:</div>
+                    ظهور تدرج الألوان المتلألئة في معدن اللاابرادورايت نتيجة تشتت الضوء في بنائه البلوري المتغير.
+                </div>
+
+                <div class="lesson-quiz-box">
+                    <div class="lesson-quiz-header">اختبارات الدرس الرابع (3 أسئلة قياس الفهم):</div>
+                    <div class="quiz-item">
+                        <span class="quiz-item-q">س1: ما هو المعدن الغني بالصوديوم في الفلسبار البلاجيويز؟</span>
+                        <div class="quiz-item-a"><strong>الإجابة:</strong> الألبيت.</div>
+                    </div>
+                    <div class="quiz-item">
+                        <span class="quiz-item-q">س2: كم عدد المعادن التي تشكل معظم صخور القشرة الأرضية؟</span>
+                        <div class="quiz-item-a"><strong>الإجابة:</strong> ثمانية معادن أساسية.</div>
+                    </div>
+                    <div class="quiz-item">
+                        <span class="quiz-item-q">س3: اذكر الصيغة الكيميائية لمعدن الكالسيت.</span>
+                        <div class="quiz-item-a"><strong>الإجابة:</strong> كربونات الكالسيوم.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- شريط التنقل السفلي -->
+        <div class="bottom-nav">
+            <a href="../../index.html"><span class="nav-icon">🏠</span>الرئيسية</a>
+            <a href="../surveying.html" class="active"><span class="nav-icon">📐</span>المساحة</a>
+            <a href="../../english/english.html"><span class="nav-icon">🇬🇧</span>الإنجليزي</a>
+            <a href="../../programming/programming.html"><span class="nav-icon">💻</span>البرمجة</a>
+        </div>
+
+        <!-- السكريبت البرمجي للثيم وشريط التقدم -->
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                let themeBtn = document.getElementById("themeToggleBtn");
+                
+                function applyTheme(isDark) {
+                    if (isDark) {
+                        document.documentElement.classList.add("dark-mode");
+                        localStorage.setItem("em_theme", "dark");
+                        if (themeBtn) themeBtn.innerHTML = "☀️";
+                    } else {
+                        document.documentElement.classList.remove("dark-mode");
+                        localStorage.setItem("em_theme", "light");
+                        if (themeBtn) themeBtn.innerHTML = "🌙";
+                    }
+                }
+
+                applyTheme(localStorage.getItem("em_theme") === "dark");
+
+                if (themeBtn) {
+                    themeBtn.addEventListener("click", () => {
+                        let isCurrentlyDark = document.documentElement.classList.contains("dark-mode");
+                        applyTheme(!isCurrentlyDark);
+                    });
+                }
+            });
+
+            window.onscroll = function() {
+                let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                let scrolled = (winScroll / height) * 100;
+                let progressFill = document.getElementById("progressFill");
+                if (progressFill) progressFill.style.width = scrolled + "%";
+            };
+        </script>
+    </body>
+</html>
