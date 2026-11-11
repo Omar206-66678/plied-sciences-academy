@@ -154,14 +154,7 @@
                 box-shadow: var(--card-glow); position: relative; overflow: hidden; scroll-margin-top: 20px;
             }
 
-            .glass-section-card[data-track="1"] { --track-primary: #0284C7; --track-light: rgba(2, 132, 199, 0.08); --track-border: rgba(2, 132, 199, 0.3); }
-            .glass-section-card[data-track="2"] { --track-primary: #0284C7; --track-light: rgba(2, 132, 199, 0.08); --track-border: rgba(2, 132, 199, 0.3); }
-            .glass-section-card[data-track="3"] { --track-primary: #0284C7; --track-light: rgba(2, 132, 199, 0.08); --track-border: rgba(2, 132, 199, 0.3); }
-            .glass-section-card[data-track="4"] { --track-primary: #0284C7; --track-light: rgba(2, 132, 199, 0.08); --track-border: rgba(2, 132, 199, 0.3); }
-            .glass-section-card[data-track="5"] { --track-primary: #0284C7; --track-light: rgba(2, 132, 199, 0.08); --track-border: rgba(2, 132, 199, 0.3); }
-            .glass-section-card[data-track="6"] { --track-primary: #0284C7; --track-light: rgba(2, 132, 199, 0.08); --track-border: rgba(2, 132, 199, 0.3); }
-            .glass-section-card[data-track="7"] { --track-primary: #0284C7; --track-light: rgba(2, 132, 199, 0.08); --track-border: rgba(2, 132, 199, 0.3); }
-            .glass-section-card[data-track="8"] { --track-primary: #0284C7; --track-light: rgba(2, 132, 199, 0.08); --track-border: rgba(2, 132, 199, 0.3); }
+            .glass-section-card[data-track] { --track-primary: #0284C7; --track-light: rgba(2, 132, 199, 0.08); --track-border: rgba(2, 132, 199, 0.3); }
             
             .glass-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
             .glass-header-right { display: flex; align-items: center; gap: 14px; }
@@ -307,7 +300,8 @@
                 <h2 class="hero-title">المرجع الشامل في أمن المعلومات,<br><span>الوسائط الرقمية، وحماية البيانات</span>.</h2>
                 <p class="hero-description">منظومة تعليمية متكاملة تغطي المنهج الدراسي للبرمجة وأمن المعلومات، أخلاقيات البيانات، وحماية الأنظمة الرقمية.</p>
                 <div class="hero-image-container">
-                    <img src="data:image/jpeg;base64,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" alt="أمن المعلومات والبرمجة" decoding="async">
+                    <!-- مسار صحيح للصورة بناءً على هيكل مجلدات المشروع على جيت هاب -->
+                    <img src="../images/programmer.jpg" alt="أمن المعلومات والبرمجة" decoding="async">
                 </div>
             </div>
 
@@ -325,7 +319,7 @@
             </div>
 
             <!-- 📚 الدرس الأول -->
-            <div class="glass-section-card" id="section-1" data-track="1" data-nav-color="#0284C7" data-nav-glow="rgba(2, 132, 199, 0.25)">
+            <div class="glass-section-card" id="section-1" data-track="1">
                 <div class="glass-card-header">
                     <div class="glass-header-right">
                         <div class="glass-icon-box">📊</div>
@@ -343,7 +337,7 @@
             </div>
 
             <!-- ⚖️ الدرس الثاني -->
-            <div class="glass-section-card" id="section-2" data-track="2" data-nav-color="#0284C7" data-nav-glow="rgba(2, 132, 199, 0.25)">
+            <div class="glass-section-card" id="section-2" data-track="2">
                 <div class="glass-card-header">
                     <div class="glass-header-right">
                         <div class="glass-icon-box">⚖️</div>
@@ -361,7 +355,7 @@
             </div>
 
             <!-- 🛡️ الدرس الثالث -->
-            <div class="glass-section-card" id="section-3" data-track="3" data-nav-color="#0284C7" data-nav-glow="rgba(2, 132, 199, 0.25)">
+            <div class="glass-section-card" id="section-3" data-track="3">
                 <div class="glass-card-header">
                     <div class="glass-header-right">
                         <div class="glass-icon-box">🛡️</div>
@@ -379,7 +373,7 @@
             </div>
 
             <!-- 📂 الدرس الرابع -->
-            <div class="glass-section-card" id="section-4" data-track="4" data-nav-color="#0284C7" data-nav-glow="rgba(2, 132, 199, 0.25)">
+            <div class="glass-section-card" id="section-4" data-track="4">
                 <div class="glass-card-header">
                     <div class="glass-header-right">
                         <div class="glass-icon-box">📂</div>
@@ -397,7 +391,7 @@
             </div>
 
             <!-- 🔑 الدرس الخامس -->
-            <div class="glass-section-card" id="section-5" data-track="5" data-nav-color="#0284C7" data-nav-glow="rgba(2, 132, 199, 0.25)">
+            <div class="glass-section-card" id="section-5" data-track="5">
                 <div class="glass-card-header">
                     <div class="glass-header-right">
                         <div class="glass-icon-box">🔑</div>
@@ -414,8 +408,8 @@
                 <a href="programming-lesson5.html" class="glass-action-btn"><span>🔑 استعرض تفاصيل الدرس الخامس</span><div class="cta-btn-icon-wrapper">➔</div></a>
             </div>
 
-            <!-- 🚨 الدرس السادس (محدث ودقيق) -->
-            <div class="glass-section-card" id="section-6" data-track="6" data-nav-color="#0284C7" data-nav-glow="rgba(2, 132, 199, 0.25)">
+            <!-- 🚨 الدرس السادس -->
+            <div class="glass-section-card" id="section-6" data-track="6">
                 <div class="glass-card-header">
                     <div class="glass-header-right">
                         <div class="glass-icon-box">🚨</div>
@@ -432,8 +426,8 @@
                 <a href="programming-lesson6.html" class="glass-action-btn"><span>🚨 استعرض تفاصيل الدرس السادس</span><div class="cta-btn-icon-wrapper">➔</div></a>
             </div>
 
-            <!-- 🔐 الدرس السابع (محدث ودقيق) -->
-            <div class="glass-section-card" id="section-7" data-track="7" data-nav-color="#0284C7" data-nav-glow="rgba(2, 132, 199, 0.25)">
+            <!-- 🔐 الدرس السابع -->
+            <div class="glass-section-card" id="section-7" data-track="7">
                 <div class="glass-card-header">
                     <div class="glass-header-right">
                         <div class="glass-icon-box">🔐</div>
@@ -450,8 +444,8 @@
                 <a href="programming-lesson7.html" class="glass-action-btn"><span>🔐 استعرض تفاصيل الدرس السابع</span><div class="cta-btn-icon-wrapper">➔</div></a>
             </div>
 
-            <!-- 🛠️ الدرس الثامن / التأمين (محدث ودقيق) -->
-            <div class="glass-section-card" id="section-8" data-track="8" data-nav-color="#0284C7" data-nav-glow="rgba(2, 132, 199, 0.25)">
+            <!-- 🛠️ الدرس الثامن -->
+            <div class="glass-section-card" id="section-8" data-track="8">
                 <div class="glass-card-header">
                     <div class="glass-header-right">
                         <div class="glass-icon-box">🛠️</div>
@@ -534,8 +528,8 @@
                     let bottom = top + sec.offsetHeight;
                     if (mid >= top && mid < bottom && currentIdx !== idx) {
                         currentIdx = idx;
-                        let color = sec.getAttribute("data-nav-color");
-                        let glow = sec.getAttribute("data-nav-glow");
+                        let color = sec.getAttribute("data-nav-color") || "#0284C7";
+                        let glow = sec.getAttribute("data-nav-glow") || "rgba(2, 132, 199, 0.25)";
                         if (bottomNav) {
                             bottomNav.style.setProperty("--nav-theme-color", color);
                             bottomNav.style.setProperty("--nav-glow-color", glow);
