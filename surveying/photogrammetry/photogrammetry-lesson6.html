@@ -189,7 +189,7 @@
                 display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 5px 8px; border-radius: 14px; flex: 1; transition: 0.25s;
                 background: var(--light-bg); border: 1px solid var(--border-glow); margin: 0 2px;
             }
-            .bottom-nav a span { font-size: 16px; line-height: 1; }
+            .bottom-nav a div { font-size: 16px; line-height: 1; }
             .bottom-nav a:hover { color: var(--primary); border-color: var(--primary); transform: translateY(-1px); }
             .bottom-nav a.active { color: #FFFFFF; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); border: 1px solid var(--accent); box-shadow: 0 4px 12px rgba(67, 56, 202, 0.3); }
         </style>
@@ -202,8 +202,8 @@
             <div class="nav-bar">
                 <a href="photogrammetry.html" class="back-btn" title="رجوع للقسم الرئيسي">←</a>
                 <div class="brand-minimalist-box">
-                    <span class="brand-main-title">آلات التصوير الجوي وزوايا الرؤية</span>
-                    <span class="brand-subtitle-text">أكاديمية العلوم التطبيقية</span>
+                    <div class="brand-main-title">آلات التصوير الجوي وزوايا الرؤية</div>
+                    <div class="brand-subtitle-text">أكاديمية العلوم التطبيقية</div>
                 </div>
                 <button class="theme-btn" id="themeToggleBtn" title="تغيير الثيم">🌙</button>
             </div>
@@ -211,28 +211,45 @@
             <div class="lesson-card">
                 <div class="lesson-header">
                     <div class="lesson-title-box">
-                        <span class="lesson-tag">الوحدة الثانية • الدرس السادس</span>
+                        <div class="lesson-tag">الوحدة الثانية • الدرس السادس</div>
                         <h2 class="lesson-heading">آلات التصوير الجوي وحسابات زاوية الرؤية</h2>
                     </div>
                     <div class="lesson-icon-badge">📷</div>
                 </div>
 
-                <!-- الكارت الأول: آلات التصوير الجوي وشروطها الأساسية -->
+                <!-- الكارت الأول: تعريف الصورة الجوية، وآلات التصوير الجوي وشروطها الأساسية -->
                 <div class="section-block">
-                    <div class="block-title">أولاً: آلات التصوير الجوي وشروطها الأساسية</div>
+                    <div class="block-title">أولاً: تعريف الصورة الجوية وآلات التصوير الجوي</div>
                     <div class="custom-list-group">
                         <div class="list-item-row">
-                            <span class="list-bullet">•</span>
-                            <div class="list-content"><span class="hl">مفهوم آلة التصوير الجوي:</span> هي الكاميرات المثبتة داخل طائرات مخصصة لالتقاط صور متسلسلة لسطح الأرض بهدف إنتاج الخرائط وجمع البيانات المكانية بدقة هندسية عالية.</div>
+                            <div class="list-bullet">•</div>
+                            <div class="list-content"><strong class="hl">تعريف الصورة الجوية:</strong> تعتبر الصورة الجوية تمثيلاً لجزء من الأرض بما يحتوي من معالم من خلال التقاط صورة لهذا الجزء باستخدام آلة تصوير محمولة جواً، حيث يمكن الحصول على معلومات كمية ونوعية لهذا الجزء من الأرض، ودرجة الاستفادة من الصورة تعتمد على دقة تمثيل للمعالم على سطح الأرض والذي يعتمد على أمور كثيرة من أهمها الوضع الذي تكون فيه آلة التصوير أثناء التقاط الصورة ودقة آلة التصوير والظروف الجوية.</div>
                         </div>
 
                         <div class="list-item-row">
-                            <span class="list-bullet">•</span>
-                            <div class="list-content"><span class="hl">الشروط الواجب توفرها في الكاميرا الجوية:</span> قوة تفريغ عالية (Resolving Power) لإظهار أدق التفاصيل، هيكل متين ومقاوم للاهتزازات الشديدة، وثبات تام في البعد البوري تحت تغيرات درجات حرارة الجو أثناء الطيران.</div>
+                            <div class="list-bullet">•</div>
+                            <div class="list-content"><strong class="hl">مفهوم آلة التصوير الجوي:</strong> هي الكاميرات المثبتة داخل طائرات مخصصة لالتقاط صور متسلسلة لسطح الأرض بهدف إنتاج الخرائط وجمع البيانات المكانية بدقة هندسية عالية.</div>
                         </div>
+
                         <div class="list-item-row">
-                            <span class="list-bullet">•</span>
-                            <div class="list-content"><span class="hl">التصنيف من حيث الهدف:</span> آلات استطلاعية (تستخدم للرؤية العامة والتفسير السريع) وآلات مساحية (تتميز بدقة هندسية فائقة ومصممة خصيصاً للقياسات ورسم الخرائط).</div>
+                            <div class="list-bullet">•</div>
+                            <div class="list-content"><strong class="hl">الشروط الواجب توفرها في الكاميرا الجوية:</strong> قوة تفريغ عالية لإظهار أدق التفاصيل، هيكل متين ومقاوم للاهتزازات الشديدة، وثبات تام في البعد البوري تحت تغيرات درجات حرارة الجو أثناء الطيران.</div>
+                        </div>
+
+                        <div class="list-item-row">
+                            <div class="list-bullet">•</div>
+                            <div class="list-content"><strong class="hl">تصنيف آلات التصوير من حيث الهدف الذي صممت لأجله:</strong><br>
+                            1. <strong class="hl">آلة التصوير الجوية الاستطلاعية:</strong> يصمم هذا النوع من آلات التصوير ليعطي صوراً ذات وضوح عالي وتغطية كبيرة لاستخدامها في مجال التفسير والتعرف على المعالم الطبيعية والأغراض العسكرية وغالباً ما تكون الخصائص الهندسية للصور الملتقطة بهذه الآلات منخفضة مما لا يسمح بالقياس منها.<br>
+                            2. <strong class="hl">آلة التصوير الجوية المساحية:</strong> هي التي يتم تصميمها خصيصاً لالتقاط صور جوية ذات درجة عالية من الدقة الهندسية للقياس الدقيق منها.</div>
+                        </div>
+
+                        <div class="list-item-row">
+                            <div class="list-bullet">•</div>
+                            <div class="list-content"><strong class="hl">تصنيف آلات التصوير الجوي من حيث التصميم:</strong> يمكن تصنيف آلات التصوير من حيث تصميمها إلى أربعة أنواع:<br>
+                            1. آلة التصوير ذات العدسة الواحدة (Single-Lens Frame Camera)<br>
+                            2. آلة التصوير متعددة العدسات (Multilens Frame Camera)<br>
+                            3. آلة التصوير البانورامية (Panoramic Camera)<br>
+                            4. آلة التصوير الشريطية (Strip camera)</div>
                         </div>
                     </div>
                 </div>
@@ -243,7 +260,7 @@
                     
                     <div class="formula-card-box">
                         <div class="list-content" style="font-size: 13.5px; line-height: 1.8;">
-                            <span class="hl">آلة التصوير الجوي ذات العدسة الواحدة (Single-Lens Aerial Camera):</span> هي أبسط أنواع آلات التصوير الجوي وأكثرها استخداماً في عمليات المسح الجوي، حيث إن لها خصائص هندسية جيدة. تتركب هذه الآلة بشكل عام من عدسة واحدة وثابتة ذات بؤرة يوجد عليه فيلم حساس بأبعاد غالباً ما تكون <span class="hl">(23سم × 23سم)</span> على المستوى البؤري.
+                            <strong class="hl">آلة التصوير الجوي ذات العدسة الواحدة (Single-Lens Frame Camera):</strong> هي أبسط أنواع آلات التصوير الجوي وأكثرها استخداماً في عمليات المسح الجوي، حيث إن لها خصائص هندسية جيدة. تتركب هذه الآلة بشكل عام من عدسة واحدة وثابتة ذات بؤرة يوجد عليه فيلم حساس بأبعاد غالباً ما تكون <strong class="hl">(23سم × 23سم)</strong> على المستوى البؤري.
                         </div>
 
                         <div class="formula-display">
@@ -251,9 +268,9 @@
                         </div>
 
                         <div class="formula-meanings">
-                            <span>• <strong class="hl">α:</strong> زاوية مجال الرؤية (Field of View).</span>
-                            <span>• <strong class="hl">D₁, D₂:</strong> أبعاد اللوحه أو إطار الفيلم السالب على المستوى البؤري (الطول والعرض، وغالباً 23سم × 23سم).</span>
-                            <span>• <strong class="hl">F:</strong> البعد البوري للعدسة (المسافة بين مركز العدسة وبؤرتها).</span>
+                            <div>• <strong class="hl">α:</strong> زاوية مجال الرؤية (Field of View).</div>
+                            <div>• <strong class="hl">D₁, D₂:</strong> أبعاد اللوحه أو إطار الفيلم السالب على المستوى البؤري (الطول والعرض، وغالباً 23سم × 23سم).</div>
+                            <div>• <strong class="hl">F:</strong> البعد البوري للعدسة (المسافة بين مركز العدسة وبؤرتها).</div>
                         </div>
                         <!-- رسم زاوية مجال الرؤية (شكل 2-13) -->
                         <div class="svg-figure-box">
@@ -303,14 +320,14 @@
                                     <text x="180" y="194" font-size="12">α/2</text>
                                 </g>
                             </svg>
-                            <span class="svg-caption">شكل توضيحي: زاوية مجال الرؤية</span>
+                            <div class="svg-caption">شكل توضيحي: زاوية مجال الرؤية</div>
                         </div>
                     </div>
 
                     <!-- المثال الأول -->
                     <div class="problem-box">
-                        <div class="problem-title"><span>📝</span> المثال الأول: حساب زاوية الرؤية لإطار قياسي</div>
-                        <div class="problem-desc">احسب زاوية مجال الرؤية (α) لآلة تصوير جوي ذات عدسة واحدة، إذا علمت أن البعد البوري للعدسة (<span class="hl">F = 152 مم</span>)، وأبعاد إطار الفيلم على المستوى البؤري هي (<span class="hl">D₁ = D₂ = 230 مم</span>).</div>
+                        <div class="problem-title"><div>📝</div> المثال الأول: حساب زاوية الرؤية لإطار قياسي</div>
+                        <div class="problem-desc">احسب زاوية مجال الرؤية (α) لآلة تصوير جوي ذات عدسة واحدة، إذا علمت أن البعد البوري للعدسة (<strong class="hl">F = 152 مم</strong>)، وأبعاد إطار الفيلم على المستوى البؤري هي (<strong class="hl">D₁ = D₂ = 230 مم</strong>).</div>
                         <div class="problem-steps">
                             1. التعويض في الجزء الخاص بالقطر: √(D₁² + D₂²) = √(230² + 230²) = √(52900 + 52900) = √105800 = 325.27 مم<br>
                             2. القسمة على ضعف البعد البوري: 325.27 / (2 × 152) = 325.27 / 304 = 1.070<br>
@@ -321,8 +338,8 @@
 
                     <!-- المثال الثاني الجديد -->
                     <div class="problem-box">
-                        <div class="problem-title"><span>📝</span> المثال الثاني: حساب زاوية الرؤية لبعد بوري مختلف</div>
-                        <div class="problem-desc">احسب زاوية مجال الرؤية (α) لآلة تصوير جوي بُعدها البوري (<span class="hl">F = 100 مم</span>)، وأبعاد إطار الفيلم الحساس على المستوى البؤري (<span class="hl">D₁ = D₂ = 230 مم</span>).</div>
+                        <div class="problem-title"><div>📝</div> المثال الثاني: حساب زاوية الرؤية لبعد بوري مختلف</div>
+                        <div class="problem-desc">احسب زاوية مجال الرؤية (α) لآلة تصوير جوي بُعدها البوري (<strong class="hl">F = 100 مم</strong>)، وأبعاد إطار الفيلم الحساس على المستوى البؤري (<strong class="hl">D₁ = D₂ = 230 مم</strong>).</div>
                         <div class="problem-steps">
                             1. حساب القطر البؤري للإطار: √(D₁² + D₂²) = √(230² + 230²) = 325.27 مم<br>
                             2. حساب المقام (ضعف البعد البوري): 2 × 100 = 200 مم<br>
@@ -343,23 +360,23 @@
                         <div class="camera-item-card">
                             <div class="camera-item-header">
                                 <div class="camera-title-box">
-                                    <span>📷</span> كاميرا عادية (Normal)
+                                    <div>📷</div> كاميرا عادية (Normal)
                                 </div>
-                                <span class="camera-badge">فئة قياسية</span>
+                                <div class="camera-badge">فئة قياسية</div>
                             </div>
                             <div class="camera-info-row">
                                 <div class="camera-info-box">
-                                    <span class="camera-info-lbl">زاوية الرؤية (α)</span>
-                                    <span class="camera-info-val">60° - 70°</span>
+                                    <div class="camera-info-lbl">زاوية الرؤية (α)</div>
+                                    <div class="camera-info-val">60° - 70°</div>
                                 </div>
                                 <div class="camera-info-box">
-                                    <span class="camera-info-lbl">البعد البوري (F)</span>
-                                    <span class="camera-info-val">170 - 305 ملم</span>
+                                    <div class="camera-info-lbl">البعد البوري (F)</div>
+                                    <div class="camera-info-val">170 - 305 ملم</div>
                                 </div>
                             </div>
                             <div class="camera-usage-box">
-                                <span>في الأراضي ذات الارتفاعات الكبيرة (أقل من 10% من ارتفاع الطائرة)</span>
-                                <span>🎯</span>
+                                <div>في الأراضي ذات الارتفاعات الكبيرة (أقل من 10% من ارتفاع الطائرة)</div>
+                                <div>🎯</div>
                             </div>
                         </div>
 
@@ -367,23 +384,23 @@
                         <div class="camera-item-card">
                             <div class="camera-item-header">
                                 <div class="camera-title-box">
-                                    <span>📸</span> كاميرا واسعة (Wide)
+                                    <div>📸</div> كاميرا واسعة (Wide)
                                 </div>
-                                <span class="camera-badge">فئة متوسطة</span>
+                                <div class="camera-badge">فئة متوسطة</div>
                             </div>
                             <div class="camera-info-row">
                                 <div class="camera-info-box">
-                                    <span class="camera-info-lbl">زاوية الرؤية (α)</span>
-                                    <span class="camera-info-val">75° - 100°</span>
+                                    <div class="camera-info-lbl">زاوية الرؤية (α)</div>
+                                    <div class="camera-info-val">75° - 100°</div>
                                 </div>
                                 <div class="camera-info-box">
-                                    <span class="camera-info-lbl">البعد البوري (F)</span>
-                                    <span class="camera-info-val">100 - 152 ملم</span>
+                                    <div class="camera-info-lbl">البعد البوري (F)</div>
+                                    <div class="camera-info-val">100 - 152 ملم</div>
                                 </div>
                             </div>
                             <div class="camera-usage-box">
-                                <span>في الأراضي ذات الارتفاعات المتوسطة (من 10% إلى 20% من ارتفاع الطائرة)</span>
-                                <span>🎯</span>
+                                <div>في الأراضي ذات الارتفاعات المتوسطة (من 10% إلى 20% من ارتفاع الطائرة)</div>
+                                <div>🎯</div>
                             </div>
                         </div>
 
@@ -391,23 +408,23 @@
                         <div class="camera-item-card">
                             <div class="camera-item-header">
                                 <div class="camera-title-box">
-                                    <span>📹</span> كاميرا واسعة جداً (Super Wide)
+                                    <div>📹</div> كاميرا واسعة جداً (Super Wide)
                                 </div>
-                                <span class="camera-badge">فئة متقدمة</span>
+                                <div class="camera-badge">فئة متقدمة</div>
                             </div>
                             <div class="camera-info-row">
                                 <div class="camera-info-box">
-                                    <span class="camera-info-lbl">زاوية الرؤية (α)</span>
-                                    <span class="camera-info-val">100° - 135°</span>
+                                    <div class="camera-info-lbl">زاوية الرؤية (α)</div>
+                                    <div class="camera-info-val">100° - 135°</div>
                                 </div>
                                 <div class="camera-info-box">
-                                    <span class="camera-info-lbl">البعد البوري (F)</span>
-                                    <span class="camera-info-val">88.5 - 100 ملم</span>
+                                    <div class="camera-info-lbl">البعد البوري (F)</div>
+                                    <div class="camera-info-val">88.5 - 100 ملم</div>
                                 </div>
                             </div>
                             <div class="camera-usage-box">
-                                <span>في الأراضي ذات الارتفاعات البسيطة (أكثر من 20% من ارتفاع الطائرة)</span>
-                                <span>🎯</span>
+                                <div>في الأراضي ذات الارتفاعات البسيطة (أكثر من 20% من ارتفاع الطائرة)</div>
+                                <div>🎯</div>
                             </div>
                         </div>
 
@@ -418,26 +435,26 @@
                 <div class="accordion-card" id="quizAccordion">
                     <div class="accordion-header" id="quizAccordionHeader">
                         <div class="accordion-header-title">
-                            <span>💡</span> أسئلة تفاعلية على الدرس السادس
+                            <div>💡</div> أسئلة تفاعلية على الدرس السادس
                         </div>
-                        <span class="accordion-arrow">▼</span>
+                        <div class="accordion-arrow">▼</div>
                     </div>
                     <div class="accordion-body">
                         
                         <div class="quiz-item">
-                            <span class="quiz-item-q">س1: ما هو تعريف آلة التصوير الجوي ذات العدسة الواحدة وما أبعاد فيلمها؟</span>
+                            <div class="quiz-item-q">س1: ما هو تعريف الصورة الجوية، وما هو تعريف آلة التصوير الجوي ذات العدسة الواحدة وأبعاد فيلمها؟</div>
                             <button class="reveal-ans-btn">🔍 أظهر الإجابة النموذجية</button>
-                            <div class="quiz-item-a"><strong>الإجابة:</strong> هي أبسط وأكثر آلات التصوير استخداماً في المسح الجوي، وتوجد عدستها على المستوى البؤري بفيلم حساس غالباً بأبعاد (23سم × 23سم).</div>
+                            <div class="quiz-item-a"><strong>الإجابة:</strong> الصورة الجوية هي تمثيلاً لجزء من الأرض بما يحتوي من معالم من خلال التقاط صورة له باستخدام آلة تصوير محمولة جواً. أما آلة التصوير ذات العدسة الواحدة فهي أبسط وأكثر آلات التصوير استخداماً في المسح الجوي، وغالباً بأبعاد فيلم (23سم × 23سم).</div>
                         </div>
 
                         <div class="quiz-item">
-                            <span class="quiz-item-q">س2: ما هي رموز معادلة زاوية الرؤية وما تعنيه؟</span>
+                            <div class="quiz-item-q">س2: كيف يتم تصنيف آلات التصوير الجوي من حيث الهدف ومن حيث التصميم؟</div>
                             <button class="reveal-ans-btn">🔍 أظهر الإجابة النموذجية</button>
-                            <div class="quiz-item-a"><strong>الإجابة:</strong> α زاوية مجال الرؤية، D₁ و D₂ أبعاد إطار الفيلم على المستوى البؤري، و F البعد البوري للعدسة.</div>
+                            <div class="quiz-item-a"><strong>الإجابة:</strong> من حيث الهدف تنقسم إلى: استطلاعية (للتفسير والتعرف ولا تُستخدم للقياس) ومساحية (لالتقاط صور ذات دقة هندسية عالية للقياس). ومن حيث التصميم تنقسم إلى: ذات العدسة الواحدة، متعددة العدسات، البانورامية، والشريطية.</div>
                         </div>
 
                         <div class="quiz-item">
-                            <span class="quiz-item-q">س3: ما هي زاوية الرؤية والبعد البوري للكاميرا الواسعة (Wide)؟</span>
+                            <div class="quiz-item-q">س3: ما هي زاوية الرؤية والبعد البوري للكاميرا الواسعة (Wide)؟</div>
                             <button class="reveal-ans-btn">🔍 أظهر الإجابة النموذجية</button>
                             <div class="quiz-item-a"><strong>الإجابة:</strong> زاوية الرؤية تتراوح بين 75° إلى 100°، والبعد البوري بين 100 إلى 152 ملم، وتُستخدم في الأراضي ذات الارتفاعات المتوسطة.</div>
                         </div>
@@ -449,10 +466,10 @@
         </div>
 
         <div class="bottom-nav">
-            <a href="../../index.html"><span>🏠</span>الرئيسية</a>
-            <a href="../surveying.html" class="active"><span>📐</span>المساحة</a>
-            <a href="../../english/english.html"><span>🇬🇧</span>الإنجليزي</a>
-            <a href="../../programming/programming.html"><span>💻</span>البرمجة</a>
+            <a href="../../index.html"><div>🏠</div>الرئيسية</a>
+            <a href="../surveying.html" class="active"><div>📐</div>المساحة</a>
+            <a href="../../english/english.html"><div>🇬🇧</div>الإنجليزي</a>
+            <a href="../../programming/programming.html"><div>💻</div>البرمجة</a>
         </div>
 
         <script>
