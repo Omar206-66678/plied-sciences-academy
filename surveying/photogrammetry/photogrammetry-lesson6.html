@@ -7,11 +7,9 @@
         <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
         
         <script>
-            if (typeof savedTheme === 'undefined') {
-                var savedTheme = localStorage.getItem("em_theme");
-                if (savedTheme === "dark") {
-                    document.documentElement.classList.add("dark-mode");
-                }
+            let savedTheme = localStorage.getItem("em_theme");
+            if (savedTheme === "dark") {
+                document.documentElement.classList.add("dark-mode");
             }
         </script>
         
@@ -19,41 +17,45 @@
             :root {
                 --bg-main: #F4F6F9;
                 --card-bg: #FFFFFF;
-                --card-border: #E2E8F0;
+                --card-border: #C7D2FE;
                 --text-primary: #0F172A;
                 --text-secondary: #475569;
                 
-                --header-bg: rgba(255, 255, 255, 0.85);
-                --header-border: rgba(67, 56, 202, 0.15);
-                --header-shadow: 0 10px 30px rgba(67, 56, 202, 0.05);
-                --shadow-main: 0 20px 40px -15px rgba(15, 23, 42, 0.05);
+                --header-bg: #FFFFFF;
+                --header-shadow: 0 10px 30px rgba(67, 56, 202, 0.04);
                 
                 --primary: #4338CA;
-                --primary-dark: #3730A3;
-                --accent: #818CF8;
-                --light-bg: rgba(67, 56, 202, 0.05);
-                --border-glow: rgba(67, 56, 202, 0.25);
-                --card-glow: 0 10px 30px rgba(67, 56, 202, 0.08);
+                --accent: #6366F1; 
+                --light-bg: rgba(67, 56, 202, 0.04);
+
+                --heading-pure-color: #0F172A; 
+                --nav-theme-color: #4338CA;
+                --nav-glow-color: rgba(67, 56, 202, 0.25);
             }
 
-            html.dark-model, html.dark-mode, body.dark-mode {
+            html.dark-mode, body.dark-mode {
                 --bg-main: #06080F;
                 --card-bg: #0B0F19;
-                --card-border: rgba(255, 255, 255, 0.07);
-                --text-primary: #F3F4F6;
-                --text-secondary: #CBD5E1;
+                --card-border: rgba(129, 140, 248, 0.3);
+                --text-primary: #FFFFFF;
+                --text-secondary: #94A3B8;
                 
-                --header-bg: rgba(11, 15, 25, 0.85);
-                --header-border: rgba(129, 140, 248, 0.2);
+                --header-bg: #0B0F19;
                 --header-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-                --shadow-main: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
                 
                 --primary: #818CF8;
-                --primary-dark: #6366F1;
                 --accent: #A5B4FC;
-                --light-bg: rgba(129, 140, 248, 0.08);
-                --border-glow: rgba(129, 140, 248, 0.35);
-                --card-glow: 0 15px 40px rgba(129, 140, 248, 0.12);
+                --light-bg: rgba(129, 140, 248, 0.06);
+
+                --heading-pure-color: #FFFFFF; 
+                --nav-theme-color: #818CF8;
+                --nav-glow-color: rgba(129, 140, 248, 0.3);
+            }
+
+            body, * {
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                text-rendering: optimizeLegibility;
             }
 
             body {
@@ -67,131 +69,195 @@
                 transition: background-color 0.3s ease, color 0.3s ease;
             }
 
-            .container { max-width: 680px; margin: auto; }
+            .container { max-width: 680px; margin: auto; display: flex; flex-direction: column; gap: 24px; }
 
             .top-progress-bar { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: transparent; z-index: 9999; }
             .top-progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--primary), var(--accent)); }
 
+            /* شريط الهيدر العلوي */
             .nav-bar {
-                display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
-                background: var(--header-bg); backdrop-filter: blur(12px); border: 1.5px solid var(--header-border); padding: 12px 16px;
-                border-radius: 24px; box-shadow: var(--header-shadow); gap: 10px;
+                display: flex; justify-content: space-between; align-items: center;
+                background: var(--header-bg); border: 2.5px solid var(--card-border); padding: 12px 20px;
+                border-radius: 40px; box-shadow: var(--header-shadow); gap: 10px;
             }
             .brand-minimalist-box { display: flex; flex-direction: column; align-items: center; text-align: center; flex: 1; padding: 0 4px; min-width: 0; }
-            .brand-main-title { font-size: 13.5px; font-weight: 900; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
-            .brand-subtitle-text { font-size: 10px; font-weight: 800; color: var(--primary); letter-spacing: 0.5px; text-transform: uppercase; margin-top: 2px; }
+            .brand-main-title { font-size: 14px; font-weight: 900; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
+            .brand-subtitle-text { font-size: 10.5px; font-weight: 800; color: var(--primary); letter-spacing: 0.5px; text-transform: uppercase; margin-top: 2px; }
 
             .back-btn, .theme-btn {
-                background: var(--light-bg); border: 1.5px solid var(--border-glow);
-                width: 36px; height: 36px; border-radius: 14px; display: flex; align-items: center; justify-content: center;
+                background: var(--light-bg); border: 2px solid var(--card-border);
+                width: 40px; height: 40px; border-radius: 20px; display: flex; align-items: center; justify-content: center;
                 color: var(--text-primary); font-size: 16px; text-decoration: none; cursor: pointer; transition: 0.25s; flex-shrink: 0;
             }
             .back-btn:hover, .theme-btn:hover { transform: scale(1.05); border-color: var(--primary); color: var(--primary); }
 
-            .lesson-card {
-                background: var(--card-bg); border: 1.5px solid var(--card-border); border-radius: 28px;
-                padding: 26px; margin-bottom: 24px; box-shadow: var(--shadow-main); display: flex; flex-direction: column; gap: 22px;
-                position: relative; overflow: hidden;
+            /* كارت الترحيب الرئيسي (منفصل تماماً) */
+            .hero-card {
+                background: var(--card-bg); border: 2.5px solid var(--card-border); border-radius: 34px;
+                padding: 24px; box-shadow: 0 12px 30px rgba(0, 0, 0, 0.03); position: relative; overflow: hidden;
             }
-            .lesson-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, var(--primary), var(--accent)); }
-            
-            .lesson-header { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--card-border); padding-bottom: 16px; }
-            .lesson-title-box { display: flex; flex-direction: column; gap: 6px; }
-            .lesson-tag { font-size: 11px; font-weight: 900; color: var(--accent); text-transform: uppercase; letter-spacing: 0.8px; }
-            .lesson-heading { margin: 0; font-size: 20px; font-weight: 950; color: var(--primary); line-height: 1.3; }
-            .lesson-icon-badge { width: 50px; height: 50px; border-radius: 16px; background: var(--light-bg); border: 1.5px solid var(--border-glow); display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
 
-            .section-block { display: flex; flex-direction: column; gap: 14px; background: var(--light-bg); border: 1.5px solid var(--border-glow); padding: 18px; border-radius: 20px; }
-            .block-title { font-size: 14.5px; font-weight: 900; color: var(--primary); display: flex; align-items: center; gap: 8px; }
-            .block-title::before { content: ''; width: 4px; height: 16px; background: var(--primary); border-radius: 4px; display: inline-block; }
+            .pro-hero-badge {
+                display: inline-flex; align-items: center; gap: 8px;
+                background: var(--light-bg); border: 2px solid var(--card-border); color: var(--primary);
+                padding: 6px 16px; border-radius: 18px; font-size: 11.5px; font-weight: 950;
+                margin-bottom: 12px;
+            }
+            .pro-badge-dot { width: 7px; height: 7px; background: var(--primary); border-radius: 50%; box-shadow: 0 0 10px var(--primary); }
+
+            .hero-title { margin: 0 0 8px 0; font-size: 21px; font-weight: 950; color: var(--heading-pure-color); letter-spacing: -0.5px; }
+            .hero-desc { margin: 0; font-size: 13.5px; color: var(--text-secondary); line-height: 1.8; font-weight: 800; text-align: justify; }
+
+            /* الكارت الشامل للدرس */
+            .lesson-card {
+                background: var(--card-bg); 
+                border: 2.5px solid var(--card-border);
+                border-radius: 40px;
+                padding: 28px; 
+                box-shadow: 0 20px 45px rgba(0, 0, 0, 0.04); 
+                display: flex; 
+                flex-direction: column; 
+                gap: 20px;
+                position: relative; 
+                overflow: hidden;
+            }
             
-            .custom-list-group { display: flex; flex-direction: column; gap: 14px; }
-            .list-item-row { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; font-weight: 750; line-height: 1.9; }
-            .list-bullet { color: var(--primary); font-size: 18px; line-height: 1.4; flex-shrink: 0; font-weight: 900; }
+            .lesson-header { display: flex; align-items: center; justify-content: space-between; border-bottom: 2px dashed var(--card-border); padding-bottom: 16px; }
+            .lesson-tag { font-size: 11.5px; font-weight: 900; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px; }
+            .lesson-heading { margin: 0; font-size: 19px; font-weight: 950; color: var(--heading-pure-color); line-height: 1.4; }
+            .lesson-icon-badge { width: 48px; height: 48px; border-radius: 20px; background: var(--light-bg); border: 2px solid var(--card-border); display: flex; align-items: center; justify-content: center; font-size: 20px; }
+
+            .section-block { display: flex; flex-direction: column; gap: 14px; }
+            .block-title { font-size: 15px; font-weight: 950; color: var(--heading-pure-color); border-right: 4px solid var(--primary); padding-right: 10px; }
             
-            .list-content { flex: 1; color: #000000; font-weight: 800; }
-            html.dark-model .list-content, html.dark-mode .list-content, body.dark-mode .list-content { color: #FFFFFF; }
-            
+            /* كروت التعريفات الداخلية النظيفة */
+            .glass-definition-card {
+                background: var(--card-bg);
+                border: 2px solid var(--card-border);
+                border-radius: 28px;
+                padding: 20px 22px;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+            }
+            .glass-def-title {
+                font-size: 14.5px;
+                font-weight: 950;
+                color: var(--primary);
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+            .glass-def-text {
+                font-size: 13.5px;
+                font-weight: 800;
+                color: var(--text-primary);
+                line-height: 1.8;
+                margin: 0;
+            }
+
             .hl { color: var(--primary); font-weight: 950; }
 
+            /* رسم الـ SVG والمسائل والقوانين */
             .svg-figure-box {
-                background: var(--card-bg); border: 1.5px solid var(--border-glow); border-radius: 16px; padding: 12px; margin-top: 6px; display: flex; flex-direction: column; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(67, 56, 202, 0.04);
+                background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 24px; padding: 14px; display: flex; flex-direction: column; align-items: center; gap: 8px;
             }
-            .svg-figure-box svg { width: 100%; height: auto; max-height: 420px; border-radius: 10px; }
+            .svg-figure-box svg { width: 100%; height: auto; max-height: 420px; border-radius: 12px; }
             .svg-caption { font-size: 12px; font-weight: 800; color: var(--text-secondary); text-align: center; }
 
             .formula-card-box {
-                background: var(--card-bg); border: 1.5px solid var(--border-glow); border-radius: 20px; padding: 18px; display: flex; flex-direction: column; gap: 14px; box-shadow: 0 4px 15px rgba(67, 56, 202, 0.04);
+                background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 28px; padding: 20px; display: flex; flex-direction: column; gap: 14px;
             }
             .formula-display {
-                background: var(--light-bg); border: 1.5px solid var(--border-glow); border-radius: 14px; padding: 14px; text-align: center; font-size: 15px; font-weight: 950; color: var(--primary); direction: ltr;
+                background: var(--light-bg); border: 2px solid var(--card-border); border-radius: 18px; padding: 14px; text-align: center; font-size: 15px; font-weight: 950; color: var(--primary); direction: ltr;
             }
             .formula-meanings {
-                background: var(--card-bg); border: 1.5px solid var(--card-border); border-radius: 14px; padding: 14px; display: flex; flex-direction: column; gap: 8px; font-size: 13.5px; font-weight: 800; color: var(--text-primary);
+                background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 18px; padding: 16px; display: flex; flex-direction: column; gap: 8px; font-size: 13.5px; font-weight: 800; color: var(--text-primary);
             }
 
             .camera-card-grid { display: flex; flex-direction: column; gap: 14px; }
             .camera-item-card {
-                background: var(--card-bg); border: 1.5px solid var(--border-glow); border-radius: 18px; padding: 16px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 4px 12px rgba(67, 56, 202, 0.03);
+                background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 26px; padding: 18px; display: flex; flex-direction: column; gap: 12px;
             }
-            .camera-item-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed var(--card-border); padding-bottom: 10px; }
+            .camera-item-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px dashed var(--card-border); padding-bottom: 10px; }
             .camera-title-box { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 950; color: var(--primary); }
-            .camera-badge { font-size: 11px; font-weight: 900; background: var(--light-bg); border: 1px solid var(--border-glow); color: var(--primary); padding: 4px 10px; border-radius: 8px; }
+            .camera-badge { font-size: 11px; font-weight: 900; background: var(--light-bg); border: 2px solid var(--card-border); color: var(--primary); padding: 4px 12px; border-radius: 12px; }
             
             .camera-info-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-            .camera-info-box { background: var(--light-bg); border: 1px solid var(--border-glow); border-radius: 12px; padding: 10px; text-align: center; display: flex; flex-direction: column; gap: 4px; }
+            .camera-info-box { background: var(--light-bg); border: 2px solid var(--card-border); border-radius: 16px; padding: 12px; text-align: center; display: flex; flex-direction: column; gap: 4px; }
             .camera-info-lbl { font-size: 11px; font-weight: 850; color: var(--text-secondary); }
             .camera-info-val { font-size: 13.5px; font-weight: 950; color: var(--primary); direction: ltr; }
 
-            .camera-usage-box { background: rgba(16, 185, 129, 0.06); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 12px; padding: 10px 12px; font-size: 12.5px; font-weight: 850; color: #059669; display: flex; justify-content: space-between; align-items: center; }
+            .camera-usage-box { background: rgba(16, 185, 129, 0.06); border: 2px solid rgba(16, 185, 129, 0.25); border-radius: 16px; padding: 12px; font-size: 12.5px; font-weight: 850; color: #059669; display: flex; justify-content: space-between; align-items: center; }
 
             .problem-box {
-                background: var(--card-bg); border: 1.5px solid var(--border-glow); border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 10px; box-shadow: 0 4px 12px rgba(67, 56, 202, 0.03);
+                background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 26px; padding: 18px; display: flex; flex-direction: column; gap: 10px;
             }
-            .problem-title { font-size: 13.5px; font-weight: 900; color: var(--primary); display: flex; align-items: center; gap: 6px; }
-            .problem-desc { font-size: 13px; font-weight: 800; color: var(--text-secondary); line-height: 1.8; }
+            .problem-title { font-size: 14px; font-weight: 950; color: var(--primary); display: flex; align-items: center; gap: 8px; }
+            .problem-desc { font-size: 13.5px; font-weight: 800; color: var(--text-secondary); line-height: 1.8; }
             .problem-steps { 
-                font-size: 12.5px; font-weight: 800; color: var(--text-primary); line-height: 1.8; background: var(--light-bg); padding: 12px; border-radius: 10px; direction: ltr; text-align: left; overflow-x: auto; 
+                font-size: 13px; font-weight: 800; color: var(--text-primary); line-height: 1.8; background: var(--light-bg); padding: 14px; border-radius: 16px; direction: ltr; text-align: left; overflow-x: auto; border: 2px solid var(--card-border); 
             }
 
             .accordion-card {
-                background: var(--card-bg); border: 1.5px solid var(--border-glow); border-radius: 20px;
-                overflow: hidden; transition: 0.3s ease; box-shadow: 0 4px 15px rgba(67, 56, 202, 0.04);
+                background: var(--card-bg); border: 2.5px solid var(--card-border); border-radius: 34px;
+                overflow: hidden; transition: 0.3s ease; box-shadow: 0 12px 30px rgba(0, 0, 0, 0.03);
             }
             .accordion-header {
-                padding: 16px 18px; background: var(--light-bg); cursor: pointer; display: flex;
+                padding: 18px 22px; background: var(--light-bg); cursor: pointer; display: flex;
                 align-items: center; justify-content: space-between; gap: 10px; user-select: none;
             }
-            .accordion-header-title { font-size: 14px; font-weight: 900; color: var(--primary); display: flex; align-items: center; gap: 8px; }
+            .accordion-header-title { font-size: 15px; font-weight: 950; color: var(--heading-pure-color); display: flex; align-items: center; gap: 8px; }
             .accordion-arrow { font-size: 14px; transition: transform 0.3s ease; color: var(--primary); font-weight: 900; }
             .accordion-card.active .accordion-arrow { transform: rotate(180deg); }
 
             .accordion-body {
-                display: none; padding: 16px; flex-direction: column; gap: 14px;
-                border-top: 1px solid var(--border-glow); background: var(--card-bg);
+                display: none; padding: 20px; flex-direction: column; gap: 14px;
+                border-top: 2px dashed var(--card-border); background: var(--card-bg);
             }
             .accordion-card.active .accordion-body { display: flex; }
 
-            .quiz-item { display: flex; flex-direction: column; gap: 8px; font-size: 14px; background: var(--light-bg); border: 1.5px solid var(--border-glow); border-radius: 14px; padding: 12px 14px; }
-            .quiz-item-q { font-weight: 850; color: var(--text-primary); line-height: 1.8; }
-            .reveal-ans-btn { background: var(--card-bg); border: 1.5px solid var(--border-glow); color: var(--primary); padding: 7px 12px; border-radius: 10px; font-size: 12px; font-weight: 900; cursor: pointer; align-self: flex-start; font-family: 'Cairo', sans-serif; transition: 0.2s; }
-            .reveal-ans-btn:hover { background: var(--primary); color: #FFF; }
-            .quiz-item-a { display: none; font-weight: 800; color: #059669; background: rgba(16, 185, 129, 0.08); padding: 10px 12px; border-radius: 10px; border-right: 3.5px solid #059669; line-height: 1.8; margin-top: 4px; }
+            .quiz-item { display: flex; flex-direction: column; gap: 10px; font-size: 14px; background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 22px; padding: 16px; }
+            .quiz-item-q { font-weight: 900; color: var(--text-primary); line-height: 1.8; }
+            .reveal-ans-btn { background: var(--light-bg); border: 2px solid var(--card-border); color: var(--primary); padding: 8px 14px; border-radius: 14px; font-size: 12.5px; font-weight: 950; cursor: pointer; align-self: flex-start; font-family: 'Cairo', sans-serif; transition: 0.2s; }
+            .reveal-ans-btn:hover { background: var(--primary); color: #FFF; border-color: var(--primary); }
+            .quiz-item-a { display: none; font-weight: 850; color: #059669; background: rgba(16, 185, 129, 0.08); padding: 12px 14px; border-radius: 16px; border: 2px solid rgba(16, 185, 129, 0.25); line-height: 1.8; margin-top: 4px; }
             .quiz-item-a.show { display: block; }
 
+            /* زر العودة لأعلى */
+            .scroll-to-top-btn {
+                position: fixed; bottom: 75px; left: 16px; transform: scale(0);
+                background: var(--primary); border: 2.5px solid var(--primary);
+                color: #FFFFFF; width: 42px; height: 42px; border-radius: 50%;
+                display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 900;
+                box-shadow: 0 8px 20px rgba(0,0,0,0.2); cursor: pointer; z-index: 998;
+                transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); opacity: 0; pointer-events: none;
+            }
+            .scroll-to-top-btn.show { transform: scale(1); opacity: 1; pointer-events: auto; }
+            .scroll-to-top-btn:hover { opacity: 0.9; transform: scale(1.1); }
+
+            /* شريط التنقل السفلي */
             .bottom-nav {
-                position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%); width: calc(100% - 32px); max-width: 460px;
-                background: var(--header-bg); backdrop-filter: blur(15px); display: flex; justify-content: space-around; align-items: center;
-                padding: 5px 6px; border: 1.5px solid var(--header-border); border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); z-index: 999;
+                position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); 
+                width: calc(100% - 32px); max-width: 460px;
+                background: var(--header-bg);
+                display: flex; justify-content: space-around; align-items: center;
+                padding: 6px 10px; border-radius: 30px; 
+                border: 2.5px solid var(--card-border);
+                box-shadow: 0 8px 24px rgba(0,0,0,0.25); 
+                z-index: 999; box-sizing: border-box;
+                transition: all 0.4s ease;
             }
             .bottom-nav a { 
-                color: var(--text-secondary); text-decoration: none; font-size: 10.5px; text-align: center; font-weight: 800; 
-                display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 5px 8px; border-radius: 14px; flex: 1; transition: 0.25s;
-                background: var(--light-bg); border: 1px solid var(--border-glow); margin: 0 2px;
+                color: var(--text-secondary); text-decoration: none; font-size: 10px; text-align: center; font-weight: 800; 
+                display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 12px; border-radius: 20px; flex: 1; 
+                border: 1.5px solid var(--card-border); background: var(--light-bg);
+                transition: all 0.3s ease;
             }
-            .bottom-nav a div { font-size: 16px; line-height: 1; }
-            .bottom-nav a:hover { color: var(--primary); border-color: var(--primary); transform: translateY(-1px); }
-            .bottom-nav a.active { color: #FFFFFF; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); border: 1px solid var(--accent); box-shadow: 0 4px 12px rgba(67, 56, 202, 0.3); }
+            .bottom-nav a span { font-size: 16px; line-height: 1; }
+            .bottom-nav a:hover { color: var(--nav-theme-color); border-color: var(--nav-theme-color); background: rgba(128, 128, 128, 0.1); }
+            .bottom-nav a.active { color: #FFFFFF; background: var(--nav-theme-color); border-color: var(--nav-theme-color); box-shadow: 0 4px 15px var(--nav-glow-color); }
         </style>
     </head>
     <body>
@@ -199,69 +265,92 @@
         <div class="top-progress-bar"><div class="top-progress-fill" id="progressFill"></div></div>
 
         <div class="container">
+            <!-- شريط الهيدر العلوي -->
             <div class="nav-bar">
                 <a href="photogrammetry.html" class="back-btn" title="رجوع للقسم الرئيسي">←</a>
                 <div class="brand-minimalist-box">
-                    <div class="brand-main-title">آلات التصوير الجوي وزوايا الرؤية</div>
-                    <div class="brand-subtitle-text">أكاديمية العلوم التطبيقية</div>
+                    <span class="brand-main-title">آلات التصوير الجوي وزوايا الرؤية</span>
+                    <span class="brand-subtitle-text">أكاديمية العلوم التطبيقية</span>
                 </div>
                 <button class="theme-btn" id="themeToggleBtn" title="تغيير الثيم">🌙</button>
             </div>
 
+            <!-- كارت الترحيب (Hero Card) المنفصل تماماً -->
+            <div class="hero-card">
+                <div class="pro-hero-badge">
+                    <span class="pro-badge-dot"></span>
+                    أكاديمية العلوم التطبيقية • قسم المساحة التصويرية
+                </div>
+                <h1 class="hero-title">الدرس السادس: آلات التصوير الجوي</h1>
+                <p class="hero-desc">
+                    يغطي هذا الدرس المفاهيم الأساسية للصورة الجوية، آلات التصوير الجوي، الشروط الواجب توفرها فيها، تصنيفاتها المختلفة، قانون زاوية الرؤية والأمثلة التطبيقية عليها.
+                </p>
+            </div>
+
+            <!-- الكارت الأول: تعريف الصورة الجوية وآلات التصوير الجوي -->
             <div class="lesson-card">
                 <div class="lesson-header">
                     <div class="lesson-title-box">
-                        <div class="lesson-tag">الوحدة الثانية • الدرس السادس</div>
+                        <span class="lesson-tag">الوحدة الثانية • الدرس السادس</span>
                         <h2 class="lesson-heading">آلات التصوير الجوي وحسابات زاوية الرؤية</h2>
                     </div>
                     <div class="lesson-icon-badge">📷</div>
                 </div>
 
-                <!-- الكارت الأول: تعريف الصورة الجوية، وآلات التصوير الجوي وشروطها الأساسية -->
                 <div class="section-block">
                     <div class="block-title">أولاً: تعريف الصورة الجوية وآلات التصوير الجوي</div>
-                    <div class="custom-list-group">
-                        <div class="list-item-row">
-                            <div class="list-bullet">•</div>
-                            <div class="list-content"><strong class="hl">تعريف الصورة الجوية:</strong> تعتبر الصورة الجوية تمثيلاً لجزء من الأرض بما يحتوي من معالم من خلال التقاط صورة لهذا الجزء باستخدام آلة تصوير محمولة جواً، حيث يمكن الحصول على معلومات كمية ونوعية لهذا الجزء من الأرض، ودرجة الاستفادة من الصورة تعتمد على دقة تمثيل للمعالم على سطح الأرض والذي يعتمد على أمور كثيرة من أهمها الوضع الذي تكون فيه آلة التصوير أثناء التقاط الصورة ودقة آلة التصوير والظروف الجوية.</div>
-                        </div>
+                    
+                    <div class="glass-definition-card">
+                        <div class="glass-def-title"><span>🖼️</span><span>تعريف الصورة الجوية</span></div>
+                        <p class="glass-def-text">هي تمثيل دقيق لجزء من سطح الأرض وما يحتويه من معالم مختلفة من خلال التقاط صورة جوية بواسطة آلة تصوير محمولة جواً، حيث تعتمد الاستفادة ودقة التمثيل على عدة عوامل تشمل: وضعية آلة التصوير لحظة الالتقاط، دقة وكفاءة الكاميرا، والظروف الجوية المحيطة.</p>
+                    </div>
 
-                        <div class="list-item-row">
-                            <div class="list-bullet">•</div>
-                            <div class="list-content"><strong class="hl">مفهوم آلة التصوير الجوي:</strong> هي الكاميرات المثبتة داخل طائرات مخصصة لالتقاط صور متسلسلة لسطح الأرض بهدف إنتاج الخرائط وجمع البيانات المكانية بدقة هندسية عالية.</div>
-                        </div>
+                    <div class="glass-definition-card">
+                        <div class="glass-def-title"><span>📷</span><span>مفهوم آلة التصوير الجوي</span></div>
+                        <p class="glass-def-text">هي الكاميرات المتطورة والمثبتة بدقة داخل طائرات مخصصة لالتقاط صور متسلسلة لسطح الأرض بغرض إنتاج الخرائط وجمع البيانات المكانية بدقة هندسية عالية.</p>
+                    </div>
 
-                        <div class="list-item-row">
-                            <div class="list-bullet">•</div>
-                            <div class="list-content"><strong class="hl">الشروط الواجب توفرها في الكاميرا الجوية:</strong> قوة تفريغ عالية لإظهار أدق التفاصيل، هيكل متين ومقاوم للاهتزازات الشديدة، وثبات تام في البعد البوري تحت تغيرات درجات حرارة الجو أثناء الطيران.</div>
-                        </div>
+                    <div class="glass-definition-card">
+                        <div class="glass-def-title"><span>⚙️</span><span>الشروط الواجب توفرها في الكاميرا الجوية</span></div>
+                        <p class="glass-def-text">امتلاك قوة تفريغ عالية لإظهار أدق التفاصيل المعالمية، هيكل متين ومقاوم للاهتزازات الشديدة، وثبات تام في البعد البوري للعدسة تحت تأثير التغيرات المستمرة في درجات الحرارة الجوية.</p>
+                    </div>
 
-                        <div class="list-item-row">
-                            <div class="list-bullet">•</div>
-                            <div class="list-content"><strong class="hl">تصنيف آلات التصوير من حيث الهدف الذي صممت لأجله:</strong><br>
-                            1. <strong class="hl">آلة التصوير الجوية الاستطلاعية:</strong> يصمم هذا النوع من آلات التصوير ليعطي صوراً ذات وضوح عالي وتغطية كبيرة لاستخدامها في مجال التفسير والتعرف على المعالم الطبيعية والأغراض العسكرية وغالباً ما تكون الخصائص الهندسية للصور الملتقطة بهذه الآلات منخفضة مما لا يسمح بالقياس منها.<br>
-                            2. <strong class="hl">آلة التصوير الجوية المساحية:</strong> هي التي يتم تصميمها خصيصاً لالتقاط صور جوية ذات درجة عالية من الدقة الهندسية للقياس الدقيق منها.</div>
-                        </div>
+                    <div class="glass-definition-card">
+                        <div class="glass-def-title"><span>🎯</span><span>تصنيف آلات التصوير حسب الهدف</span></div>
+                        <p class="glass-def-text">
+                            1. <strong class="hl">آلة التصوير الاستطلاعية:</strong> مصممة لإعطاء صور ذات وضوح عالي وتغطية واسعة بهدف التفسير والتعرف السريع على المعالم والأغراض العسكرية، وتتميز بخصائص هندسية منخفضة لا تسمح بالقياس الدقيق منها<br>
+                            2. <strong class="hl">آلة التصوير المساحية:</strong> مصممة خصيصاً لالتقاط صور جوية ذات درجة فائقة من الدقة الهندسية المخصصة للقياس الدقيق ورسم الخرائط
+                        </p>
+                    </div>
 
-                        <div class="list-item-row">
-                            <div class="list-bullet">•</div>
-                            <div class="list-content"><strong class="hl">تصنيف آلات التصوير الجوي من حيث التصميم:</strong> يمكن تصنيف آلات التصوير من حيث تصميمها إلى أربعة أنواع:<br>
+                    <div class="glass-definition-card">
+                        <div class="glass-def-title"><span>📐</span><span>تصنيف آلات التصوير حسب التصميم</span></div>
+                        <p class="glass-def-text">
+                            تنقسم إلى أربعة أنواع رئيسية:<br>
                             1. آلة التصوير ذات العدسة الواحدة (Single-Lens Frame Camera)<br>
                             2. آلة التصوير متعددة العدسات (Multilens Frame Camera)<br>
                             3. آلة التصوير البانورامية (Panoramic Camera)<br>
-                            4. آلة التصوير الشريطية (Strip camera)</div>
-                        </div>
+                            4. آلة التصوير الشريطية (Strip camera)
+                        </p>
                     </div>
                 </div>
+            </div>
 
-                <!-- الكارت التاني: قانون زاوية الرؤية، شرح الرموز، والمثالان التطبيقيان المنظمان -->
+            <!-- الكارت الثاني: قانون زاوية الرؤية والأمثلة التطبيقية -->
+            <div class="lesson-card">
+                <div class="lesson-header">
+                    <div class="lesson-title-box">
+                        <span class="lesson-tag">التحليلات الهندسية</span>
+                        <h2 class="lesson-heading">ثانياً: قانون زاوية الرؤية (α) والأمثلة التطبيقية</h2>
+                    </div>
+                    <div class="lesson-icon-badge">📐</div>
+                </div>
+
                 <div class="section-block">
-                    <div class="block-title">ثانياً: قانون زاوية الرؤية (α) والأمثلة التطبيقية</div>
-                    
                     <div class="formula-card-box">
-                        <div class="list-content" style="font-size: 13.5px; line-height: 1.8;">
-                            <strong class="hl">آلة التصوير الجوي ذات العدسة الواحدة (Single-Lens Frame Camera):</strong> هي أبسط أنواع آلات التصوير الجوي وأكثرها استخداماً في عمليات المسح الجوي، حيث إن لها خصائص هندسية جيدة. تتركب هذه الآلة بشكل عام من عدسة واحدة وثابتة ذات بؤرة يوجد عليه فيلم حساس بأبعاد غالباً ما تكون <strong class="hl">(23سم × 23سم)</strong> على المستوى البؤري.
-                        </div>
+                        <p class="glass-def-text">
+                            <strong class="hl">آلة التصوير الجوي ذات العدسة الواحدة (Single-Lens Frame Camera):</strong> هي أبسط وأكثر أنواع آلات التصوير الجوي شيوعاً واستخداماً في أعمال المسح الجوي نظراً لخصائصها الهندسية الجيدة، وتتكون من عدسة واحدة ثابتة ومستوى بؤري يستقر عليه فيلم حساس بأبعاد قياسية شائعة غالباً ما تكون <strong class="hl">(23سم × 23سم)</strong>.
+                        </p>
 
                         <div class="formula-display">
                             α = 2 · tan⁻¹ ( √(D₁² + D₂²) / (2F) )
@@ -272,31 +361,22 @@
                             <div>• <strong class="hl">D₁, D₂:</strong> أبعاد اللوحه أو إطار الفيلم السالب على المستوى البؤري (الطول والعرض، وغالباً 23سم × 23سم).</div>
                             <div>• <strong class="hl">F:</strong> البعد البوري للعدسة (المسافة بين مركز العدسة وبؤرتها).</div>
                         </div>
-                        <!-- رسم زاوية مجال الرؤية (شكل 2-13) -->
+                        
+                        <!-- رسم زاوية مجال الرؤية -->
                         <div class="svg-figure-box">
                             <svg xmlns="http://www.w3.org/2000/svg" width="1520" height="1080" viewBox="0 0 380 270">
-                                <rect width="380" height="270" fill="#ffffff"/>
-
-                                <!-- هرم الرؤية (ثلاثي الأبعاد) -->
+                                <rect width="380" height="270" fill="transparent"/>
                                 <polygon points="150,250 50,125 250,155" fill="#E6F1FB" fill-opacity="0.85" stroke="#185FA5" stroke-width="1"/>
                                 <polygon points="150,250 250,155 335,105" fill="#B5D4F4" fill-opacity="0.85" stroke="#185FA5" stroke-width="1"/>
-
-                                <!-- المستوى البؤري -->
                                 <polygon points="50,125 135,78 335,105 250,155" fill="#EAF3DE" fill-opacity="0.9" stroke="#3B6D11" stroke-width="1.4"/>
-
-                                <!-- الحافة الخلفية والخطوط -->
                                 <line x1="150" y1="250" x2="135" y2="78" stroke="#5F5E5A" stroke-width="1" stroke-dasharray="5 4"/>
                                 <line x1="135" y1="78" x2="250" y2="155" stroke="#5F5E5A" stroke-width="1.2" stroke-dasharray="5 4"/>
                                 <line x1="150" y1="250" x2="192.5" y2="116.5" stroke="#2C2C2A" stroke-width="1.2" stroke-dasharray="5 4"/>
                                 <line x1="150" y1="250" x2="250" y2="155" stroke="#2C2C2A" stroke-width="2.2"/>
                                 <path d="M199.1 120.9 L196.7 128.5 L190.1 124.1" fill="none" stroke="#2C2C2A" stroke-width="0.9"/>
-
-                                <!-- الأقواس -->
                                 <path d="M143.9 180.3 A70 70 0 0 1 200.8 201.8" fill="none" stroke="#A32D2D" stroke-width="1.2"/>
                                 <path d="M166.7 197.6 A55 55 0 0 1 189.9 212.1" fill="none" stroke="#A32D2D" stroke-width="1.2"/>
                                 <circle cx="150" cy="250" r="3" fill="#2C2C2A"/>
-
-                                <!-- خطوط التوصيل -->
                                 <g stroke="#3B6D11" stroke-width="0.9" fill="none">
                                     <line x1="240" y1="50" x2="232" y2="96"/>
                                     <line x1="100" y1="206" x2="166" y2="190"/>
@@ -304,7 +384,6 @@
                                     <line x1="258" y1="74" x2="248" y2="90"/>
                                     <line x1="64" y1="86" x2="84" y2="106"/>
                                 </g>
-
                                 <g font-family="Cairo, Arial, sans-serif" font-weight="bold" fill="#3B6D11" font-size="12.5" direction="ltr">
                                     <text x="240" y="42" text-anchor="middle">المستوى البؤري</text>
                                     <text x="104" y="216" text-anchor="end">البعد البؤري F</text>
@@ -326,7 +405,7 @@
 
                     <!-- المثال الأول -->
                     <div class="problem-box">
-                        <div class="problem-title"><div>📝</div> المثال الأول: حساب زاوية الرؤية لإطار قياسي</div>
+                        <div class="problem-title"><span>📝</span> المثال الأول: حساب زاوية الرؤية لإطار قياسي</div>
                         <div class="problem-desc">احسب زاوية مجال الرؤية (α) لآلة تصوير جوي ذات عدسة واحدة، إذا علمت أن البعد البوري للعدسة (<strong class="hl">F = 152 مم</strong>)، وأبعاد إطار الفيلم على المستوى البؤري هي (<strong class="hl">D₁ = D₂ = 230 مم</strong>).</div>
                         <div class="problem-steps">
                             1. التعويض في الجزء الخاص بالقطر: √(D₁² + D₂²) = √(230² + 230²) = √(52900 + 52900) = √105800 = 325.27 مم<br>
@@ -336,9 +415,9 @@
                         </div>
                     </div>
 
-                    <!-- المثال الثاني الجديد -->
+                    <!-- المثال الثاني -->
                     <div class="problem-box">
-                        <div class="problem-title"><div>📝</div> المثال الثاني: حساب زاوية الرؤية لبعد بوري مختلف</div>
+                        <div class="problem-title"><span>📝</span> المثال الثاني: حساب زاوية الرؤية لبعد بوري مختلف</div>
                         <div class="problem-desc">احسب زاوية مجال الرؤية (α) لآلة تصوير جوي بُعدها البوري (<strong class="hl">F = 100 مم</strong>)، وأبعاد إطار الفيلم الحساس على المستوى البؤري (<strong class="hl">D₁ = D₂ = 230 مم</strong>).</div>
                         <div class="problem-steps">
                             1. حساب القطر البؤري للإطار: √(D₁² + D₂²) = √(230² + 230²) = 325.27 مم<br>
@@ -349,19 +428,23 @@
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- الكارت التالت: أنواع الكاميرات الفئوية مطابقة لجدول الكتاب -->
+            <!-- الكارت الثالث: تصنيف آلات التصوير حسب زاوية الرؤية -->
+            <div class="lesson-card">
+                <div class="lesson-header">
+                    <div class="lesson-title-box">
+                        <span class="lesson-tag">التصنيفات الفنية</span>
+                        <h2 class="lesson-heading">ثالثاً: تصنيف آلات التصوير الجوي حسب زاوية الرؤية</h2>
+                    </div>
+                    <div class="lesson-icon-badge">📸</div>
+                </div>
+
                 <div class="section-block">
-                    <div class="block-title">ثالثاً: تصنيف آلات التصوير الجوي حسب زاوية الرؤية</div>
-                    
                     <div class="camera-card-grid">
-                        
-                        <!-- كاميرا عادية -->
                         <div class="camera-item-card">
                             <div class="camera-item-header">
-                                <div class="camera-title-box">
-                                    <div>📷</div> كاميرا عادية (Normal)
-                                </div>
+                                <div class="camera-title-box"><span>📷</span> كاميرا عادية (Normal)</div>
                                 <div class="camera-badge">فئة قياسية</div>
                             </div>
                             <div class="camera-info-row">
@@ -380,12 +463,9 @@
                             </div>
                         </div>
 
-                        <!-- كاميرا واسعة -->
                         <div class="camera-item-card">
                             <div class="camera-item-header">
-                                <div class="camera-title-box">
-                                    <div>📸</div> كاميرا واسعة (Wide)
-                                </div>
+                                <div class="camera-title-box"><span>📸</span> كاميرا واسعة (Wide)</div>
                                 <div class="camera-badge">فئة متوسطة</div>
                             </div>
                             <div class="camera-info-row">
@@ -404,12 +484,9 @@
                             </div>
                         </div>
 
-                        <!-- كاميرا واسعة جداً -->
                         <div class="camera-item-card">
                             <div class="camera-item-header">
-                                <div class="camera-title-box">
-                                    <div>📹</div> كاميرا واسعة جداً (Super Wide)
-                                </div>
+                                <div class="camera-title-box"><span>📹</span> كاميرا واسعة جداً (Super Wide)</div>
                                 <div class="camera-badge">فئة متقدمة</div>
                             </div>
                             <div class="camera-info-row">
@@ -427,49 +504,50 @@
                                 <div>🎯</div>
                             </div>
                         </div>
-
                     </div>
                 </div>
-
-                <!-- الأسئلة التفاعلية -->
-                <div class="accordion-card" id="quizAccordion">
-                    <div class="accordion-header" id="quizAccordionHeader">
-                        <div class="accordion-header-title">
-                            <div>💡</div> أسئلة تفاعلية على الدرس السادس
-                        </div>
-                        <div class="accordion-arrow">▼</div>
-                    </div>
-                    <div class="accordion-body">
-                        
-                        <div class="quiz-item">
-                            <div class="quiz-item-q">س1: ما هو تعريف الصورة الجوية، وما هو تعريف آلة التصوير الجوي ذات العدسة الواحدة وأبعاد فيلمها؟</div>
-                            <button class="reveal-ans-btn">🔍 أظهر الإجابة النموذجية</button>
-                            <div class="quiz-item-a"><strong>الإجابة:</strong> الصورة الجوية هي تمثيلاً لجزء من الأرض بما يحتوي من معالم من خلال التقاط صورة له باستخدام آلة تصوير محمولة جواً. أما آلة التصوير ذات العدسة الواحدة فهي أبسط وأكثر آلات التصوير استخداماً في المسح الجوي، وغالباً بأبعاد فيلم (23سم × 23سم).</div>
-                        </div>
-
-                        <div class="quiz-item">
-                            <div class="quiz-item-q">س2: كيف يتم تصنيف آلات التصوير الجوي من حيث الهدف ومن حيث التصميم؟</div>
-                            <button class="reveal-ans-btn">🔍 أظهر الإجابة النموذجية</button>
-                            <div class="quiz-item-a"><strong>الإجابة:</strong> من حيث الهدف تنقسم إلى: استطلاعية (للتفسير والتعرف ولا تُستخدم للقياس) ومساحية (لالتقاط صور ذات دقة هندسية عالية للقياس). ومن حيث التصميم تنقسم إلى: ذات العدسة الواحدة، متعددة العدسات، البانورامية، والشريطية.</div>
-                        </div>
-
-                        <div class="quiz-item">
-                            <div class="quiz-item-q">س3: ما هي زاوية الرؤية والبعد البوري للكاميرا الواسعة (Wide)؟</div>
-                            <button class="reveal-ans-btn">🔍 أظهر الإجابة النموذجية</button>
-                            <div class="quiz-item-a"><strong>الإجابة:</strong> زاوية الرؤية تتراوح بين 75° إلى 100°، والبعد البوري بين 100 إلى 152 ملم، وتُستخدم في الأراضي ذات الارتفاعات المتوسطة.</div>
-                        </div>
-
-                    </div>
-                </div>
-
             </div>
+
+            <!-- الأسئلة التفاعلية -->
+            <div class="accordion-card" id="quizAccordion">
+                <div class="accordion-header" id="quizAccordionHeader">
+                    <div class="accordion-header-title">
+                        <span>💡</span> أسئلة تفاعلية على الدرس السادس
+                    </div>
+                    <div class="accordion-arrow">▼</div>
+                </div>
+                <div class="accordion-body">
+                    <div class="quiz-item">
+                        <div class="quiz-item-q">س1: ما هو تعريف الصورة الجوية، وما هو تعريف آلة التصوير الجوي ذات العدسة الواحدة وأبعاد فيلمها؟</div>
+                        <button class="reveal-ans-btn">🔍 أظهر الإجابة النموذجية</button>
+                        <div class="quiz-item-a"><strong>الإجابة:</strong> الصورة الجوية هي تمثيل دقيق لجزء من الأرض بما يحتوي من معالم من خلال التقاط صورة له باستخدام آلة تصوير محمولة جواً أما آلة التصوير ذات العدسة الواحدة فهي أبسط وأكثر آلات التصوير استخداماً في المسح الجوي، وغالباً بأبعاد فيلم (23سم × 23سم).</div>
+                    </div>
+
+                    <div class="quiz-item">
+                        <div class="quiz-item-q">س2: كيف يتم تصنيف آلات التصوير الجوي من حيث الهدف ومن حيث التصميم؟</div>
+                        <button class="reveal-ans-btn">🔍 أظهر الإجابة النموذجية</button>
+                        <div class="quiz-item-a"><strong>الإجابة:</strong> من حيث الهدف تنقسم إلى: استطلاعية (للتفسير والتعرف ولا تُستخدم للقياس) ومساحية (لالتقاط صور ذات دقة هندسية عالية للقياس)[span_9](start_span)[span_9](end_span). ومن حيث التصميم تنقسم إلى: ذات العدسة الواحدة، متعددة العدسات، البانورامية، والشريطية.</div>
+                    </div>
+
+                    <div class="quiz-item">
+                        <div class="quiz-item-q">س3: ما هي زاوية الرؤية والبعد البوري للكاميرا الواسعة (Wide)؟</div>
+                        <button class="reveal-ans-btn">🔍 أظهر الإجابة النموذجية</button>
+                        <div class="quiz-item-a"><strong>الإجابة:</strong> زاوية الرؤية تتراوح بين 75° إلى 100°، والبعد البوري بين 100 إلى 152 ملم، وتُستخدم في الأراضي ذات الارتفاعات المتوسطة.</div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-        <div class="bottom-nav">
-            <a href="../../index.html"><div>🏠</div>الرئيسية</a>
-            <a href="../surveying.html" class="active"><div>📐</div>المساحة</a>
-            <a href="../../english/english.html"><div>🇬🇧</div>الإنجليزي</a>
-            <a href="../../programming/programming.html"><div>💻</div>البرمجة</a>
+        <!-- زر الصعود لأعلى -->
+        <button class="scroll-to-top-btn" id="scrollToTopBtn" onclick="scrollToTop()" title="الرجوع لأعلى الصفحة">↑</button>
+
+        <!-- شريط التنقل السفلي -->
+        <div class="bottom-nav" id="bottomNav">
+            <a href="../../index.html"><span>🏠</span>الرئيسية</a>
+            <a href="../../english/english.html"><span>🇬🇧</span>الإنجليزي</a>
+            <a href="../surveying.html" class="active"><span>📐</span>المساحة</a>
+            <a href="../../programming/programming.html"><span>💻</span>البرمجة</a>
         </div>
 
         <script>
@@ -511,11 +589,15 @@
                 }
                 applyTheme(localStorage.getItem("em_theme") === "dark");
                 if (themeBtn) {
-                    themeBtn.addEventListener("click", () => {
+                    themeBtn.addEventListener("click", function() {
                         applyTheme(!document.documentElement.classList.contains("dark-mode"));
                     });
                 }
             });
+
+            function scrollToTop() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
 
             window.onscroll = function() {
                 let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
@@ -523,6 +605,15 @@
                 let scrolled = (winScroll / height) * 100;
                 let progressFill = document.getElementById("progressFill");
                 if (progressFill) progressFill.style.width = scrolled + "%";
+
+                let scrollToTopBtn = document.getElementById("scrollToTopBtn");
+                if (scrollToTopBtn) {
+                    if (winScroll > 300) {
+                        scrollToTopBtn.classList.add("show");
+                    } else {
+                        scrollToTopBtn.classList.remove("show");
+                    }
+                }
             };
         </script>
     </body>
