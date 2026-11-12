@@ -7,11 +7,9 @@
         <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
         
         <script>
-            if (typeof savedTheme === 'undefined') {
-                var savedTheme = localStorage.getItem("em_theme");
-                if (savedTheme === "dark") {
-                    document.documentElement.classList.add("dark-mode");
-                }
+            let savedTheme = localStorage.getItem("em_theme");
+            if (savedTheme === "dark") {
+                document.documentElement.classList.add("dark-mode");
             }
         </script>
         
@@ -19,41 +17,45 @@
             :root {
                 --bg-main: #F4F6F9;
                 --card-bg: #FFFFFF;
-                --card-border: #E2E8F0;
+                --card-border: #C7D2FE;
                 --text-primary: #0F172A;
                 --text-secondary: #475569;
                 
-                --header-bg: rgba(255, 255, 255, 0.85);
-                --header-border: rgba(67, 56, 202, 0.15);
-                --header-shadow: 0 10px 30px rgba(67, 56, 202, 0.05);
-                --shadow-main: 0 20px 40px -15px rgba(15, 23, 42, 0.05);
+                --header-bg: #FFFFFF;
+                --header-shadow: 0 10px 30px rgba(67, 56, 202, 0.04);
                 
                 --primary: #4338CA;
-                --primary-dark: #3730A3;
-                --accent: #818CF8;
-                --light-bg: rgba(67, 56, 202, 0.05);
-                --border-glow: rgba(67, 56, 202, 0.25);
-                --card-glow: 0 10px 30px rgba(67, 56, 202, 0.08);
+                --accent: #6366F1; 
+                --light-bg: rgba(67, 56, 202, 0.04);
+
+                --heading-pure-color: #0F172A; 
+                --nav-theme-color: #4338CA;
+                --nav-glow-color: rgba(67, 56, 202, 0.25);
             }
 
-            html.dark-model, html.dark-mode, body.dark-mode {
+            html.dark-mode, body.dark-mode {
                 --bg-main: #06080F;
                 --card-bg: #0B0F19;
-                --card-border: rgba(255, 255, 255, 0.07);
-                --text-primary: #F3F4F6;
-                --text-secondary: #CBD5E1;
+                --card-border: rgba(129, 140, 248, 0.3);
+                --text-primary: #FFFFFF;
+                --text-secondary: #94A3B8;
                 
-                --header-bg: rgba(11, 15, 25, 0.85);
-                --header-border: rgba(129, 140, 248, 0.2);
+                --header-bg: #0B0F19;
                 --header-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-                --shadow-main: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
                 
                 --primary: #818CF8;
-                --primary-dark: #6366F1;
                 --accent: #A5B4FC;
-                --light-bg: rgba(129, 140, 248, 0.08);
-                --border-glow: rgba(129, 140, 248, 0.35);
-                --card-glow: 0 15px 40px rgba(129, 140, 248, 0.12);
+                --light-bg: rgba(129, 140, 248, 0.06);
+
+                --heading-pure-color: #FFFFFF; 
+                --nav-theme-color: #818CF8;
+                --nav-glow-color: rgba(129, 140, 248, 0.3);
+            }
+
+            body, * {
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                text-rendering: optimizeLegibility;
             }
 
             body {
@@ -67,97 +69,161 @@
                 transition: background-color 0.3s ease, color 0.3s ease;
             }
 
-            .container { max-width: 680px; margin: auto; }
+            .container { max-width: 680px; margin: auto; display: flex; flex-direction: column; gap: 24px; }
 
             .top-progress-bar { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: transparent; z-index: 9999; }
             .top-progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--primary), var(--accent)); }
 
+            /* شريط الهيدر العلوي */
             .nav-bar {
-                display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
-                background: var(--header-bg); backdrop-filter: blur(12px); border: 1.5px solid var(--header-border); padding: 12px 16px;
-                border-radius: 24px; box-shadow: var(--header-shadow); gap: 10px;
+                display: flex; justify-content: space-between; align-items: center;
+                background: var(--header-bg); border: 2.5px solid var(--card-border); padding: 12px 20px;
+                border-radius: 40px; box-shadow: var(--header-shadow); gap: 10px;
             }
             .brand-minimalist-box { display: flex; flex-direction: column; align-items: center; text-align: center; flex: 1; padding: 0 4px; min-width: 0; }
-            .brand-main-title { font-size: 13.5px; font-weight: 900; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
-            .brand-subtitle-text { font-size: 10px; font-weight: 800; color: var(--primary); letter-spacing: 0.5px; text-transform: uppercase; margin-top: 2px; }
+            .brand-main-title { font-size: 14px; font-weight: 900; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
+            .brand-subtitle-text { font-size: 10.5px; font-weight: 800; color: var(--primary); letter-spacing: 0.5px; text-transform: uppercase; margin-top: 2px; }
 
             .back-btn, .theme-btn {
-                background: var(--light-bg); border: 1.5px solid var(--border-glow);
-                width: 36px; height: 36px; border-radius: 14px; display: flex; align-items: center; justify-content: center;
+                background: var(--light-bg); border: 2px solid var(--card-border);
+                width: 40px; height: 40px; border-radius: 20px; display: flex; align-items: center; justify-content: center;
                 color: var(--text-primary); font-size: 16px; text-decoration: none; cursor: pointer; transition: 0.25s; flex-shrink: 0;
             }
             .back-btn:hover, .theme-btn:hover { transform: scale(1.05); border-color: var(--primary); color: var(--primary); }
 
-            .lesson-card {
-                background: var(--card-bg); border: 1.5px solid var(--card-border); border-radius: 28px;
-                padding: 26px; margin-bottom: 24px; box-shadow: var(--shadow-main); display: flex; flex-direction: column; gap: 22px;
-                position: relative; overflow: hidden;
+            /* كارت الترحيب الرئيسي (منفصل تماماً) */
+            .hero-card {
+                background: var(--card-bg); border: 2.5px solid var(--card-border); border-radius: 34px;
+                padding: 24px; box-shadow: 0 12px 30px rgba(0, 0, 0, 0.03); position: relative; overflow: hidden;
             }
-            .lesson-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, var(--primary), var(--accent)); }
-            
-            .lesson-header { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--card-border); padding-bottom: 16px; }
-            .lesson-title-box { display: flex; flex-direction: column; gap: 6px; }
-            .lesson-tag { font-size: 11px; font-weight: 900; color: var(--accent); text-transform: uppercase; letter-spacing: 0.8px; }
-            .lesson-heading { margin: 0; font-size: 20px; font-weight: 950; color: var(--primary); line-height: 1.3; }
-            .lesson-icon-badge { width: 50px; height: 50px; border-radius: 16px; background: var(--light-bg); border: 1.5px solid var(--border-glow); display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
 
-            .section-block { display: flex; flex-direction: column; gap: 14px; background: var(--light-bg); border: 1.5px solid var(--border-glow); padding: 18px; border-radius: 20px; }
-            .block-title { font-size: 14.5px; font-weight: 900; color: var(--primary); display: flex; align-items: center; gap: 8px; }
-            .block-title::before { content: ''; width: 4px; height: 16px; background: var(--primary); border-radius: 4px; display: inline-block; }
+            .pro-hero-badge {
+                display: inline-flex; align-items: center; gap: 8px;
+                background: var(--light-bg); border: 2px solid var(--card-border); color: var(--primary);
+                padding: 6px 16px; border-radius: 18px; font-size: 11.5px; font-weight: 950;
+                margin-bottom: 12px;
+            }
+            .pro-badge-dot { width: 7px; height: 7px; background: var(--primary); border-radius: 50%; box-shadow: 0 0 10px var(--primary); }
+
+            .hero-title { margin: 0 0 8px 0; font-size: 21px; font-weight: 950; color: var(--heading-pure-color); letter-spacing: -0.5px; }
+            .hero-desc { margin: 0; font-size: 13.5px; color: var(--text-secondary); line-height: 1.8; font-weight: 800; text-align: justify; }
+
+            /* الكارت الشامل للدرس */
+            .lesson-card {
+                background: var(--card-bg); 
+                border: 2.5px solid var(--card-border);
+                border-radius: 40px;
+                padding: 28px; 
+                box-shadow: 0 20px 45px rgba(0, 0, 0, 0.04); 
+                display: flex; 
+                flex-direction: column; 
+                gap: 20px;
+                position: relative; 
+                overflow: hidden;
+            }
             
-            .custom-list-group { display: flex; flex-direction: column; gap: 14px; }
-            .list-item-row { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; font-weight: 750; line-height: 1.9; }
-            .list-bullet { color: var(--primary); font-size: 18px; line-height: 1.4; flex-shrink: 0; font-weight: 900; }
+            .lesson-header { display: flex; align-items: center; justify-content: space-between; border-bottom: 2px dashed var(--card-border); padding-bottom: 16px; }
+            .lesson-tag { font-size: 11.5px; font-weight: 900; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px; }
+            .lesson-heading { margin: 0; font-size: 19px; font-weight: 950; color: var(--heading-pure-color); line-height: 1.4; }
+            .lesson-icon-badge { width: 48px; height: 48px; border-radius: 20px; background: var(--light-bg); border: 2px solid var(--card-border); display: flex; align-items: center; justify-content: center; font-size: 20px; }
+
+            .section-block { display: flex; flex-direction: column; gap: 14px; }
+            .block-title { font-size: 15px; font-weight: 950; color: var(--heading-pure-color); border-right: 4px solid var(--primary); padding-right: 10px; }
             
-            .list-content { flex: 1; color: #000000; font-weight: 800; }
-            html.dark-model .list-content, html.dark-mode .list-content, body.dark-mode .list-content { color: #FFFFFF; }
-            
+            /* كروت التعريفات الداخلية النظيفة */
+            .glass-definition-card {
+                background: var(--card-bg);
+                border: 2px solid var(--card-border);
+                border-radius: 28px;
+                padding: 20px 22px;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+            }
+            .glass-def-title {
+                font-size: 14.5px;
+                font-weight: 950;
+                color: var(--primary);
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+            .glass-def-text {
+                font-size: 13.5px;
+                font-weight: 800;
+                color: var(--text-primary);
+                line-height: 1.8;
+                margin: 0;
+            }
+
             .hl { color: var(--primary); font-weight: 950; }
 
+            /* رسم الـ SVG */
             .svg-figure-box {
-                background: var(--card-bg); border: 1.5px solid var(--border-glow); border-radius: 16px; padding: 12px; margin-top: 6px; display: flex; flex-direction: column; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(67, 56, 202, 0.04);
+                background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 24px; padding: 14px; display: flex; flex-direction: column; align-items: center; gap: 8px;
             }
-            .svg-figure-box svg { width: 100%; height: auto; max-height: 420px; border-radius: 10px; }
+            .svg-figure-box svg { width: 100%; height: auto; max-height: 420px; border-radius: 12px; }
             .svg-caption { font-size: 12px; font-weight: 800; color: var(--text-secondary); text-align: center; }
 
             .accordion-card {
-                background: var(--card-bg); border: 1.5px solid var(--border-glow); border-radius: 20px;
-                overflow: hidden; transition: 0.3s ease; box-shadow: 0 4px 15px rgba(67, 56, 202, 0.04);
+                background: var(--card-bg); border: 2.5px solid var(--card-border); border-radius: 34px;
+                overflow: hidden; transition: 0.3s ease; box-shadow: 0 12px 30px rgba(0, 0, 0, 0.03);
             }
             .accordion-header {
-                padding: 16px 18px; background: var(--light-bg); cursor: pointer; display: flex;
+                padding: 18px 22px; background: var(--light-bg); cursor: pointer; display: flex;
                 align-items: center; justify-content: space-between; gap: 10px; user-select: none;
             }
-            .accordion-header-title { font-size: 14px; font-weight: 900; color: var(--primary); display: flex; align-items: center; gap: 8px; }
+            .accordion-header-title { font-size: 15px; font-weight: 950; color: var(--heading-pure-color); display: flex; align-items: center; gap: 8px; }
             .accordion-arrow { font-size: 14px; transition: transform 0.3s ease; color: var(--primary); font-weight: 900; }
             .accordion-card.active .accordion-arrow { transform: rotate(180deg); }
 
             .accordion-body {
-                display: none; padding: 16px; flex-direction: column; gap: 14px;
-                border-top: 1px solid var(--border-glow); background: var(--card-bg);
+                display: none; padding: 20px; flex-direction: column; gap: 14px;
+                border-top: 2px dashed var(--card-border); background: var(--card-bg);
             }
             .accordion-card.active .accordion-body { display: flex; }
 
-            .quiz-item { display: flex; flex-direction: column; gap: 8px; font-size: 14px; background: var(--light-bg); border: 1.5px solid var(--border-glow); border-radius: 14px; padding: 12px 14px; }
-            .quiz-item-q { font-weight: 850; color: var(--text-primary); line-height: 1.8; }
-            .reveal-ans-btn { background: var(--card-bg); border: 1.5px solid var(--border-glow); color: var(--primary); padding: 7px 12px; border-radius: 10px; font-size: 12px; font-weight: 900; cursor: pointer; align-self: flex-start; font-family: 'Cairo', sans-serif; transition: 0.2s; }
-            .reveal-ans-btn:hover { background: var(--primary); color: #FFF; }
-            .quiz-item-a { display: none; font-weight: 800; color: #059669; background: rgba(16, 185, 129, 0.08); padding: 10px 12px; border-radius: 10px; border-right: 3.5px solid #059669; line-height: 1.8; margin-top: 4px; }
+            .quiz-item { display: flex; flex-direction: column; gap: 10px; font-size: 14px; background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 22px; padding: 16px; }
+            .quiz-item-q { font-weight: 900; color: var(--text-primary); line-height: 1.8; }
+            .reveal-ans-btn { background: var(--light-bg); border: 2px solid var(--card-border); color: var(--primary); padding: 8px 14px; border-radius: 14px; font-size: 12.5px; font-weight: 950; cursor: pointer; align-self: flex-start; font-family: 'Cairo', sans-serif; transition: 0.2s; }
+            .reveal-ans-btn:hover { background: var(--primary); color: #FFF; border-color: var(--primary); }
+            .quiz-item-a { display: none; font-weight: 850; color: #059669; background: rgba(16, 185, 129, 0.08); padding: 12px 14px; border-radius: 16px; border: 2px solid rgba(16, 185, 129, 0.25); line-height: 1.8; margin-top: 4px; }
             .quiz-item-a.show { display: block; }
 
+            /* زر العودة لأعلى */
+            .scroll-to-top-btn {
+                position: fixed; bottom: 75px; left: 16px; transform: scale(0);
+                background: var(--primary); border: 2.5px solid var(--primary);
+                color: #FFFFFF; width: 42px; height: 42px; border-radius: 50%;
+                display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 900;
+                box-shadow: 0 8px 20px rgba(0,0,0,0.2); cursor: pointer; z-index: 998;
+                transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); opacity: 0; pointer-events: none;
+            }
+            .scroll-to-top-btn.show { transform: scale(1); opacity: 1; pointer-events: auto; }
+            .scroll-to-top-btn:hover { opacity: 0.9; transform: scale(1.1); }
+
+            /* شريط التنقل السفلي */
             .bottom-nav {
-                position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%); width: calc(100% - 32px); max-width: 460px;
-                background: var(--header-bg); backdrop-filter: blur(15px); display: flex; justify-content: space-around; align-items: center;
-                padding: 5px 6px; border: 1.5px solid var(--header-border); border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); z-index: 999;
+                position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); 
+                width: calc(100% - 32px); max-width: 460px;
+                background: var(--header-bg);
+                display: flex; justify-content: space-around; align-items: center;
+                padding: 6px 10px; border-radius: 30px; 
+                border: 2.5px solid var(--card-border);
+                box-shadow: 0 8px 24px rgba(0,0,0,0.25); 
+                z-index: 999; box-sizing: border-box;
+                transition: all 0.4s ease;
             }
             .bottom-nav a { 
-                color: var(--text-secondary); text-decoration: none; font-size: 10.5px; text-align: center; font-weight: 800; 
-                display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 5px 8px; border-radius: 14px; flex: 1; transition: 0.25s;
-                background: var(--light-bg); border: 1px solid var(--border-glow); margin: 0 2px;
+                color: var(--text-secondary); text-decoration: none; font-size: 10px; text-align: center; font-weight: 800; 
+                display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 12px; border-radius: 20px; flex: 1; 
+                border: 1.5px solid var(--card-border); background: var(--light-bg);
+                transition: all 0.3s ease;
             }
             .bottom-nav a span { font-size: 16px; line-height: 1; }
-            .bottom-nav a:hover { color: var(--primary); border-color: var(--primary); transform: translateY(-1px); }
-            .bottom-nav a.active { color: #FFFFFF; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); border: 1px solid var(--accent); box-shadow: 0 4px 12px rgba(67, 56, 202, 0.3); }
+            .bottom-nav a:hover { color: var(--nav-theme-color); border-color: var(--nav-theme-color); background: rgba(128, 128, 128, 0.1); }
+            .bottom-nav a.active { color: #FFFFFF; background: var(--nav-theme-color); border-color: var(--nav-theme-color); box-shadow: 0 4px 15px var(--nav-glow-color); }
         </style>
     </head>
     <body>
@@ -165,6 +231,7 @@
         <div class="top-progress-bar"><div class="top-progress-fill" id="progressFill"></div></div>
 
         <div class="container">
+            <!-- شريط الهيدر العلوي -->
             <div class="nav-bar">
                 <a href="photogrammetry.html" class="back-btn" title="رجوع للقسم الرئيسي">←</a>
                 <div class="brand-minimalist-box">
@@ -174,6 +241,19 @@
                 <button class="theme-btn" id="themeToggleBtn" title="تغيير الثيم">🌙</button>
             </div>
 
+            <!-- كارت الترحيب (Hero Card) المنفصل تماماً -->
+            <div class="hero-card">
+                <div class="pro-hero-badge">
+                    <span class="pro-badge-dot"></span>
+                    أكاديمية العلوم التطبيقية • قسم المساحة التصويرية
+                </div>
+                <h1 class="hero-title">الدرس الخامس: الأفلام وأنواع الصور وطرق طبعها</h1>
+                <p class="hero-desc">
+                    يغطي هذا الدرس أنواع الأفلام الحساسة، الصور الموجبة المعتمة والشفافة، طرق طبع الصور الجوية (بالتلامس والإسقاط)، بالإضافة إلى الصور الرقمية وطرق الحصول عليها.
+                </p>
+            </div>
+
+            <!-- الكارت الأول: الأفلام الحساسة والنتيجة النهائية -->
             <div class="lesson-card">
                 <div class="lesson-header">
                     <div class="lesson-title-box">
@@ -183,269 +263,248 @@
                     <div class="lesson-icon-badge">🎞️</div>
                 </div>
 
-                <!-- قسم الأفلام وأنواع الصور وطرق الطبع -->
                 <div class="section-block">
                     <div class="block-title">أولاً: الأفلام الحساسة والنتيجة النهائية (الصور الموجبة)</div>
-                    <div class="custom-list-group">
-                        <div class="list-item-row">
-                            <span class="list-bullet">•</span>
-                            <div class="list-content"><span class="hl">الفيلم الحساس (The Negative):</span> شريط أو لوح مغطى بمادة كيميائية حساسة للضوء، تتكون عليه الصورة السالبة كخطوة أولى حيث تنعكس الألوان والإضاءة الأصلية (المناطق الفاتحة تظهر داكنة والعكس).</div>
-                        </div>
-                        <div class="list-item-row">
-                            <span class="list-bullet">•</span>
-                            <div class="list-content"><span class="hl">الصورة الموجبة المعتمة (Paper Prints / Positive Prints):</span> صور ورقية نهائية (غير شفافة) تنتج بعد طبع الفيلم السالب، وتظهر فيها الألوان الطبيعية للأجسام وتُستخدم مباشرة في الدراسات المكتبية والتفسير الأرضي والعمل الحقلي.</div>
-                        </div>
-                        <div class="list-item-row">
-                            <span class="list-bullet">•</span>
-                            <div class="list-content"><span class="hl">الصورة الموجبة الشفافة (The Diapositive):</span> صورة شفافة تُطبع لاستخدامها في أجهزة الرسم التجسيمي (Stereoplotter) لاستخراج المعالم والارتفاعات بدقة هندسية عالية.</div>
-                        </div>
+                    
+                    <div class="glass-definition-card">
+                        <div class="glass-def-title"><span>🎞️</span><span>الفيلم الحساس (The Negative)</span></div>
+                        <p class="glass-def-text">شريط أو لوح مغطى بمادة كيميائية حساسة للضوء، تتكون عليه الصورة السالبة كخطوة أولى حيث تنعكس الألوان والإضاءة الأصلية (المناطق الفاتحة تظهر داكنة والعكس).</p>
+                    </div>
+
+                    <div class="glass-definition-card">
+                        <div class="glass-def-title"><span>📄</span><span>الصورة الموجبة المعتمة (Paper Prints)</span></div>
+                        <p class="glass-def-text">صور ورقية نهائية (غير شفافة) تنتج بعد طبع الفيلم السالب، وتظهر فيها الألوان الطبيعية للأجسام وتُستخدم مباشرة في الدراسات المكتبية والتفسير الأرضي والعمل الحقلي.</p>
+                    </div>
+
+                    <div class="glass-definition-card">
+                        <div class="glass-def-title"><span>🔍</span><span>الصورة الموجبة الشفافة (The Diapositive)</span></div>
+                        <p class="glass-def-text">صورة شفافة تُطبع لاستخدامها في أجهزة الرسم التجسيمي لاستخراج المعالم والارتفاعات بدقة هندسية عالية.</p>
                     </div>
                 </div>
-
-                <!-- قسم طرق الطبع -->
-                <div class="section-block">
-                    <div class="block-title">ثانياً: طرق طبع الصور الجوية</div>
-                    <div class="custom-list-group">
-                        <div class="list-item-row">
-                            <span class="list-bullet">•</span>
-                            <div class="list-content"><span class="hl">الطبع بالتلامس (Contact Printing):</span> طريقة بسيطة يتم فيها وضع الفيلم السالب مباشرة ملامساً للورق أو الفيلم الحساس وتعريضه للضوء، لإنتاج صورة مطابقة للفيلم بنفس الحجم والمقیاس (1:1).</div>
-                        </div>
-
-                        <!-- رسم الطبع بالتلامس (شكل 2-9) -->
-                        <div class="svg-figure-box">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="1520" height="1160" viewBox="0 0 380 290">
-                                <rect width="380" height="290" fill="#ffffff"/>
-                                <defs>
-                                    <marker id="arrowC" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#5F5E5A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
-                                    <pattern id="hatchBase" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="#F1EFE8"/><line x1="0" y1="0" x2="0" y2="6" stroke="#5F5E5A" stroke-width="1.4"/></pattern>
-                                </defs>
-
-                                <!-- مصدر ضوئي -->
-                                <polygon points="110,18 270,18 292,58 88,58" fill="#FAEEDA" stroke="#BA7517" stroke-width="1.2"/>
-                                <polygon points="88,58 292,58 292,64 88,64" fill="#EF9F27" stroke="#BA7517" stroke-width="1"/>
-
-                                <!-- أشعة الضوء -->
-                                <g stroke="#5F5E5A" stroke-width="1.2" fill="none">
-                                    <line x1="172" y1="64" x2="172" y2="172"/>
-                                    <line x1="208" y1="64" x2="208" y2="172"/>
-                                </g>
-                                <g stroke="#5F5E5A" stroke-width="1" stroke-dasharray="5 4" fill="none">
-                                    <line x1="100" y1="70" x2="74" y2="166" marker-end="url(#arrowC)"/>
-                                    <line x1="132" y1="70" x2="110" y2="168" marker-end="url(#arrowC)"/>
-                                    <line x1="250" y1="70" x2="268" y2="168" marker-end="url(#arrowC)"/>
-                                    <line x1="278" y1="70" x2="288" y2="164" marker-end="url(#arrowC)"/>
-                                </g>
-
-                                <!-- الطبقات بسُمك (ثلاثي الأبعاد) -->
-                                <polygon points="70,190 250,190 300,172 120,172" fill="#E6F1FB" stroke="#185FA5" stroke-width="1"/>
-                                <rect x="70" y="190" width="180" height="12" fill="#CFE3F3" stroke="#185FA5" stroke-width="1"/>
-                                <polygon points="250,190 300,172 300,184 250,202" fill="#B5D4F4" stroke="#185FA5" stroke-width="1"/>
-
-                                <rect x="70" y="202" width="180" height="6" fill="#444441" stroke="#2C2C2A" stroke-width="1"/>
-                                <polygon points="250,202 300,184 300,190 250,208" fill="#2C2C2A" stroke="#2C2C2A" stroke-width="1"/>
-
-                                <rect x="70" y="208" width="180" height="6" fill="#F1EFE8" stroke="#888780" stroke-width="1"/>
-                                <polygon points="250,208 300,190 300,196 250,214" fill="#D3D1C7" stroke="#888780" stroke-width="1"/>
-
-                                <rect x="70" y="214" width="180" height="8" fill="#FAEEDA" stroke="#BA7517" stroke-width="1"/>
-                                <polygon points="250,214 300,196 300,204 250,222" fill="#F5C4B3" stroke="#BA7517" stroke-width="1"/>
-
-                                <rect x="70" y="222" width="180" height="26" fill="url(#hatchBase)" stroke="#5F5E5A" stroke-width="1"/>
-                                <polygon points="250,222 300,204 300,230 250,248" fill="#B4B2A9" stroke="#5F5E5A" stroke-width="1"/>
-
-                                <g font-family="Cairo, Arial, sans-serif" font-weight="bold" fill="#3B6D11" font-size="12.5" direction="ltr">
-                                    <text x="190" y="43" text-anchor="middle" fill="#633806">مصدر ضوئي</text>
-
-                                    <line x1="300" y1="178" x2="311" y2="180" stroke="#3B6D11" stroke-width="0.9"/>
-                                    <text x="314" y="184" text-anchor="start">طبقة زجاج</text>
-
-                                    <line x1="300" y1="187" x2="311" y2="212" stroke="#3B6D11" stroke-width="0.9"/>
-                                    <text x="314" y="216" text-anchor="start">الفلم</text>
-
-                                    <line x1="300" y1="201" x2="311" y2="242" stroke="#3B6D11" stroke-width="0.9"/>
-                                    <text x="314" y="246" text-anchor="start">ورق حساس</text>
-                                    <text x="314" y="262" text-anchor="start">للضوء</text>
-                                </g>
-                            </svg>
-                            <span class="svg-caption">شكل توضيحي: الطبع بالتلامس</span>
-                        </div>
-
-                        <div class="list-item-row">
-                            <span class="list-bullet">•</span>
-                            <div class="list-content"><span class="hl">الطبع بالإسقاط (Projection Printing):</span> طريقة تعتمد على إسقاط الضوء من خلال عدسة مكبرة تمر عبر الفيلم السالب لتسقط على الورق الحساس، وتتيح إمكانية تكبير أو تصحيح وتعديل مقياس الصورة الناتجة حسب الحاجة الهندسية.</div>
-                        </div>
-
-                        <!-- رسم الطبع بالإسقاط (شكل 2-8) -->
-                        <div class="svg-figure-box">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="1520" height="1580" viewBox="0 0 380 395">
-                                <rect width="380" height="395" fill="#ffffff"/>
-
-                                <!-- غطاء المصباح -->
-                                <rect x="180" y="12" width="20" height="34" rx="9" fill="#E4E2DA" stroke="#888780" stroke-width="1"/>
-                                <rect x="185" y="22" width="10" height="16" fill="#B4B2A9" stroke="#888780" stroke-width="0.8"/>
-                                <path d="M118 150 C112 100 140 44 190 44 C240 44 268 100 262 150 Z" fill="#F7F6F2" stroke="#888780" stroke-width="1.2"/>
-                                <path d="M262 150 C268 100 240 44 190 44 C228 56 246 100 248 150 Z" fill="#E4E2DA" opacity="0.8"/>
-
-                                <!-- المصدر الضوئي والأشعة -->
-                                <g stroke="#BA7517" stroke-width="1" fill="none">
-                                    <line x1="190" y1="87" x2="150" y2="150"/>
-                                    <line x1="190" y1="87" x2="190" y2="150"/>
-                                    <line x1="190" y1="87" x2="230" y2="150"/>
-                                </g>
-                                <circle cx="190" cy="78" r="10" fill="#FFF3B0" stroke="#BA7517" stroke-width="1.2"/>
-
-                                <!-- حامل الفلم بسُمك -->
-                                <rect x="132" y="148" width="116" height="5" fill="#B5D4F4" stroke="#185FA5" stroke-width="0.8"/>
-                                <polygon points="112,158 268,158 278,152 122,152" fill="#E4E2DA" stroke="#888780" stroke-width="1"/>
-                                <rect x="112" y="158" width="156" height="14" fill="#D3D1C7" stroke="#888780" stroke-width="1"/>
-                                <polygon points="268,158 278,152 278,166 268,172" fill="#B4B2A9" stroke="#888780" stroke-width="1"/>
-                                <rect x="138" y="161" width="104" height="6" fill="#444441"/>
-
-                                <!-- منفاخ العدسة -->
-                                <polygon points="146,172 234,172 206,224 174,224" fill="#F1EFE8" stroke="#888780" stroke-width="1"/>
-                                <g stroke="#888780" stroke-width="1" fill="none">
-                                    <line x1="152" y1="183" x2="228" y2="183"/>
-                                    <line x1="159" y1="194" x2="221" y2="194"/>
-                                    <line x1="166" y1="205" x2="214" y2="205"/>
-                                    <line x1="170" y1="215" x2="210" y2="215"/>
-                                </g>
-
-                                <!-- لوح العدسة والعدسة -->
-                                <rect x="156" y="224" width="68" height="6" fill="#B4B2A9" stroke="#888780" stroke-width="1"/>
-                                <ellipse cx="190" cy="236" rx="11" ry="5" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.2"/>
-
-                                <!-- ذراع تغيير البعد البؤري -->
-                                <polyline points="268,165 284,165 284,230" fill="none" stroke="#5F5E5A" stroke-width="1.6"/>
-                                <circle cx="284" cy="238" r="7" fill="#E4E2DA" stroke="#5F5E5A" stroke-width="1.2"/>
-
-                                <!-- مخروط الضوء والصورة الموجبة -->
-                                <polygon points="190,236 54,372 326,372" fill="#FAEEDA" fill-opacity="0.6" stroke="#BA7517" stroke-width="0.9"/>
-                                <g stroke="#5F5E5A" stroke-width="1" fill="none">
-                                    <line x1="140" y1="170" x2="190" y2="236"/>
-                                    <line x1="240" y1="170" x2="190" y2="236"/>
-                                </g>
-                                <polygon points="50,372 330,372 346,360 66,360" fill="#F1EFE8" stroke="#888780" stroke-width="1"/>
-                                <rect x="50" y="372" width="280" height="7" fill="#B4B2A9" stroke="#888780" stroke-width="1"/>
-                                <polygon points="330,372 346,360 346,367 330,379" fill="#888780" stroke="#888780" stroke-width="1"/>
-
-                                <g font-family="Cairo, Arial, sans-serif" font-weight="bold" fill="#3B6D11" font-size="12.5" direction="ltr">
-                                    <line x1="180" y1="78" x2="100" y2="78" stroke="#3B6D11" stroke-width="0.9"/>
-                                    <text x="96" y="82" text-anchor="end">مصدر ضوئي</text>
-
-                                    <line x1="140" y1="164" x2="96" y2="190" stroke="#3B6D11" stroke-width="0.9"/>
-                                    <text x="92" y="196" text-anchor="end">الفلم</text>
-
-                                    <line x1="182" y1="238" x2="130" y2="262" stroke="#3B6D11" stroke-width="0.9"/>
-                                    <text x="126" y="268" text-anchor="end">العدسة</text>
-
-                                    <line x1="289" y1="243" x2="316" y2="256" stroke="#3B6D11" stroke-width="0.9"/>
-                                    <text x="322" y="274" text-anchor="middle" font-size="13.5">تغيير البعد</text>
-                                    <text x="322" y="292" text-anchor="middle" font-size="13.5">البؤري</text>
-
-                                    <text x="190" y="350" text-anchor="middle" font-size="13.5">الصورة الموجبة</text>
-                                </g>
-                            </svg>
-                            <span class="svg-caption">شكل توضيحي: الطبع بالإسقاط</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- قسم الصور الرقمية وطرق الحصول عليها -->
-                <div class="section-block">
-                    <div class="block-title">ثالثاً: الصور الرقمية وطرق الحصول عليها</div>
-                    <div class="custom-list-group">
-                        <div class="list-item-row">
-                            <span class="list-bullet">•</span>
-                            <div class="list-content"><span class="hl">مفهوم الصورة الرقمية (Digital Photograph):</span> صورة تتكون من شبكة منتظمة من الخلايا أو المربعات الصغرى تسمى <span class="hl">بيكسلات (Pixels)</span>، ولكل بيكسل قيمة رقمية تعبر عن شدة الإضاءة واللون.</div>
-                        </div>
-                        <div class="list-item-row">
-                            <span class="list-bullet">•</span>
-                            <div class="list-content"><span class="hl">طرق الحصول على الصورة الرقمية:</span>
-                                <br>1. <strong class="hl">الالتقاط المباشر:</strong> باستخدام آلات تصوير جوي رقمية حديثة مزودة بمستشعرات إلكترونية متطورة (مثل CCD أو CMOS) تقوم بتسجيل البيانات المساحية بصيغة رقمية فور التقاطها.
-                                <br>2. <strong class="hl">المسح الضوئي (Scanning):</strong> استخدام ماسحات ضوئية دقيقة (Scanners) لتحويل الصور الجوية التقليدية (الأفلام السالبة أو المطبوعات الورقية) إلى ملفات رقمية قابلة للمعالجة بالحاسوب.
-                            </div>
-                        </div>
-
-                        <!-- رسم التصوير العادي والرقمي (شكل 2-10) -->
-                        <div class="svg-figure-box">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="1520" height="1040" viewBox="0 0 380 260">
-                                <rect width="380" height="260" fill="#ffffff"/>
-                                <defs>
-                                    <pattern id="ccdDots" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="4" fill="#B4B2A9"/><rect x="0.5" y="0.5" width="3" height="3" fill="#444441"/></pattern>
-                                </defs>
-
-                                <!-- آلة التصوير ذات الفلم (ثلاثية الأبعاد) -->
-                                <polygon points="30,50 44,40 184,40 170,50" fill="#E4E2DA" stroke="#888780" stroke-width="1"/>
-                                <polygon points="170,50 184,40 184,180 170,190" fill="#D3D1C7" stroke="#888780" stroke-width="1"/>
-                                <rect x="30" y="50" width="140" height="140" fill="#F7F6F2" stroke="#888780" stroke-width="1.2"/>
-                                <g stroke="#5F5E5A" stroke-width="1.2" fill="none">
-                                    <line x1="10" y1="84" x2="152" y2="169"/>
-                                    <line x1="10" y1="156" x2="152" y2="71"/>
-                                </g>
-                                <ellipse cx="70" cy="120" rx="6" ry="22" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.2"/>
-                                <line x1="152" y1="72" x2="152" y2="168" stroke="#444441" stroke-width="3"/>
-                                <circle cx="152" cy="64" r="9" fill="#888780" stroke="#444441" stroke-width="1"/>
-                                <circle cx="152" cy="176" r="9" fill="#888780" stroke="#444441" stroke-width="1"/>
-
-                                <!-- آلة التصوير الرقمية (ثلاثية الأبعاد) -->
-                                <polygon points="210,46 222,37 352,37 340,46" fill="#E4E2DA" stroke="#888780" stroke-width="1"/>
-                                <polygon points="340,46 352,37 352,183 340,192" fill="#D3D1C7" stroke="#888780" stroke-width="1"/>
-                                <rect x="210" y="46" width="130" height="146" fill="#F7F6F2" stroke="#888780" stroke-width="1.2"/>
-                                <g stroke="#5F5E5A" stroke-width="1.2" fill="none">
-                                    <line x1="192" y1="86.4" x2="330" y2="169.2"/>
-                                    <line x1="192" y1="153.6" x2="330" y2="70.8"/>
-                                </g>
-                                <ellipse cx="248" cy="120" rx="6" ry="22" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.2"/>
-                                <rect x="326" y="58" width="8" height="124" fill="url(#ccdDots)" stroke="#444441" stroke-width="0.8"/>
-
-                                <g font-family="Cairo, Arial, sans-serif" font-weight="bold" fill="#3B6D11" font-size="13.5" text-anchor="middle" direction="rtl">
-                                    <text x="100" y="230">فلم ضوئي</text>
-                                    <text x="276" y="230">شريحة إلكترونية</text>
-                                </g>
-                            </svg>
-                            <span class="svg-caption">شكل توضيحي: التصوير العادي والرقمي</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- الأسئلة التفاعلية -->
-                <div class="accordion-card" id="quizAccordion">
-                    <div class="accordion-header" id="quizAccordionHeader">
-                        <div class="accordion-header-title">
-                            <span>💡</span> أسئلة تفاعلية على الدرس الخامس
-                        </div>
-                        <span class="accordion-arrow">▼</span>
-                    </div>
-                    <div class="accordion-body">
-                        
-                        <div class="quiz-item">
-                            <span class="quiz-item-q">س1: ما هو الفرق بين الطبع بالتلامس والطبع بالإسقاط؟</span>
-                            <button class="reveal-ans-btn">🔍 أظهر الإجابة النموذجية</button>
-                            <div class="quiz-item-a"><strong>الإجابة:</strong> الطبع بالتلامس ينتج صورة بنفس الحجم والمقياس (1:1) عبر ملامسة الفيلم للورق الحساس مباشرة، بينما الطبع بالإسقاط يمرر الضوء عبر عدسة مكبرة ويسمح بتكبير أو تعديل مقياس الصورة.</div>
-                        </div>
-
-                        <div class="quiz-item">
-                            <span class="quiz-item-q">س2: متى نستخدم الصورة الموجبة المعتمة ومتى نستخدم الشفافة (Diapositive)؟</span>
-                            <button class="reveal-ans-btn">🔍 أظهر الإجابة النموذجية</button>
-                            <div class="quiz-item-a"><strong>الإجابة:</strong> الموجبة المعتمة تُستخدم في الدراسات المكتبية والتفسير الحقلي المباشر، بينما الشفافة تُستخدم في أجهزة الرسم التجسيمي لاستخراج المعالم بدقة.</div>
-                        </div>
-
-                        <div class="quiz-item">
-                            <span class="quiz-item-q">س3: اذكر طريقتي الحصول على الصور الرقمية في التصوير المساحي.</span>
-                            <button class="reveal-ans-btn">🔍 أظهر الإجابة النموذجية</button>
-                            <div class="quiz-item-a"><strong>الإجابة:</strong> 1. الالتقاط المباشر بالمستشعرات الرقمية (CCD / CMOS). 2. المسح الضوئي (Scanning) للصور والأفلام التقليدية.</div>
-                        </div>
-
-                    </div>
-                </div>
-
             </div>
+
+            <!-- الكارت الثاني: طرق طبع الصور الجوية -->
+            <div class="lesson-card">
+                <div class="lesson-header">
+                    <div class="lesson-title-box">
+                        <span class="lesson-tag">العمليات الفنية</span>
+                        <h2 class="lesson-heading">ثانياً: طرق طبع الصور الجوية</h2>
+                    </div>
+                    <div class="lesson-icon-badge">🖨️</div>
+                </div>
+
+                <div class="section-block">
+                    <div class="glass-definition-card">
+                        <div class="glass-def-title"><span>💡</span><span>الطبع بالتلامس (Contact Printing)</span></div>
+                        <p class="glass-def-text">طريقة بسيطة يتم فيها وضع الفيلم السالب مباشرة ملامساً للورق أو الفيلم الحساس وتعريضه للضوء، لإنتاج صورة مطابقة للفيلم بنفس الحجم والمقیاس (1:1).</p>
+                    </div>
+
+                    <!-- رسم الطبع بالتلامس -->
+                    <div class="svg-figure-box">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1520" height="1160" viewBox="0 0 380 290">
+                            <rect width="380" height="290" fill="transparent"/>
+                            <defs>
+                                <marker id="arrowC" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#5F5E5A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+                                <pattern id="hatchBase" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="#F1EFE8"/><line x1="0" y1="0" x2="0" y2="6" stroke="#5F5E5A" stroke-width="1.4"/></pattern>
+                            </defs>
+                            <polygon points="110,18 270,18 292,58 88,58" fill="#FAEEDA" stroke="#BA7517" stroke-width="1.2"/>
+                            <polygon points="88,58 292,58 292,64 88,64" fill="#EF9F27" stroke="#BA7517" stroke-width="1"/>
+                            <g stroke="#5F5E5A" stroke-width="1.2" fill="none">
+                                <line x1="172" y1="64" x2="172" y2="172"/>
+                                <line x1="208" y1="64" x2="208" y2="172"/>
+                            </g>
+                            <g stroke="#5F5E5A" stroke-width="1" stroke-dasharray="5 4" fill="none">
+                                <line x1="100" y1="70" x2="74" y2="166" marker-end="url(#arrowC)"/>
+                                <line x1="132" y1="70" x2="110" y2="168" marker-end="url(#arrowC)"/>
+                                <line x1="250" y1="70" x2="268" y2="168" marker-end="url(#arrowC)"/>
+                                <line x1="278" y1="70" x2="288" y2="164" marker-end="url(#arrowC)"/>
+                            </g>
+                            <polygon points="70,190 250,190 300,172 120,172" fill="#E6F1FB" stroke="#185FA5" stroke-width="1"/>
+                            <rect x="70" y="190" width="180" height="12" fill="#CFE3F3" stroke="#185FA5" stroke-width="1"/>
+                            <polygon points="250,190 300,172 300,184 250,202" fill="#B5D4F4" stroke="#185FA5" stroke-width="1"/>
+                            <rect x="70" y="202" width="180" height="6" fill="#444441" stroke="#2C2C2A" stroke-width="1"/>
+                            <polygon points="250,202 300,184 300,190 250,208" fill="#2C2C2A" stroke="#2C2C2A" stroke-width="1"/>
+                            <rect x="70" y="208" width="180" height="6" fill="#F1EFE8" stroke="#888780" stroke-width="1"/>
+                            <polygon points="250,208 300,190 300,196 250,214" fill="#D3D1C7" stroke="#888780" stroke-width="1"/>
+                            <rect x="70" y="214" width="180" height="8" fill="#FAEEDA" stroke="#BA7517" stroke-width="1"/>
+                            <polygon points="250,214 300,196 300,204 250,222" fill="#F5C4B3" stroke="#BA7517" stroke-width="1"/>
+                            <rect x="70" y="222" width="180" height="26" fill="url(#hatchBase)" stroke="#5F5E5A" stroke-width="1"/>
+                            <polygon points="250,222 300,204 300,230 250,248" fill="#B4B2A9" stroke="#5F5E5A" stroke-width="1"/>
+                            <g font-family="Cairo, Arial, sans-serif" font-weight="bold" fill="#3B6D11" font-size="12.5" direction="ltr">
+                                <text x="190" y="43" text-anchor="middle" fill="#633806">مصدر ضوئي</text>
+                                <line x1="300" y1="178" x2="311" y2="180" stroke="#3B6D11" stroke-width="0.9"/>
+                                <text x="314" y="184" text-anchor="start">طبقة زجاج</text>
+                                <line x1="300" y1="187" x2="311" y2="212" stroke="#3B6D11" stroke-width="0.9"/>
+                                <text x="314" y="216" text-anchor="start">الفلم</text>
+                                <line x1="300" y1="201" x2="311" y2="242" stroke="#3B6D11" stroke-width="0.9"/>
+                                <text x="314" y="246" text-anchor="start">ورق حساس</text>
+                                <text x="314" y="262" text-anchor="start">للضوء</text>
+                            </g>
+                        </svg>
+                        <span class="svg-caption">شكل توضيحي: الطبع بالتلامس</span>
+                    </div>
+
+                    <div class="glass-definition-card" style="margin-top: 10px;">
+                        <div class="glass-def-title"><span>📽️</span><span>الطبع بالإسقاط (Projection Printing)</span></div>
+                        <p class="glass-def-text">طريقة تعتمد على إسقاط الضوء من خلال عدسة مكبرة تمر عبر الفيلم السالب لتسقط على الورق الحساس، وتتيح إمكانية تكبير أو تصحيح وتعديل مقياس الصورة الناتجة حسب الحاجة الهندسية.</p>
+                    </div>
+
+                    <!-- رسم الطبع بالإسقاط -->
+                    <div class="svg-figure-box">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1520" height="1580" viewBox="0 0 380 395">
+                            <rect width="380" height="395" fill="transparent"/>
+                            <rect x="180" y="12" width="20" height="34" rx="9" fill="#E4E2DA" stroke="#888780" stroke-width="1"/>
+                            <rect x="185" y="22" width="10" height="16" fill="#B4B2A9" stroke="#888780" stroke-width="0.8"/>
+                            <path d="M118 150 C112 100 140 44 190 44 C240 44 268 100 262 150 Z" fill="#F7F6F2" stroke="#888780" stroke-width="1.2"/>
+                            <path d="M262 150 C268 100 240 44 190 44 C228 56 246 100 248 150 Z" fill="#E4E2DA" opacity="0.8"/>
+                            <g stroke="#BA7517" stroke-width="1" fill="none">
+                                <line x1="190" y1="87" x2="150" y2="150"/>
+                                <line x1="190" y1="87" x2="190" y2="150"/>
+                                <line x1="190" y1="87" x2="230" y2="150"/>
+                            </g>
+                            <circle cx="190" cy="78" r="10" fill="#FFF3B0" stroke="#BA7517" stroke-width="1.2"/>
+                            <rect x="132" y="148" width="116" height="5" fill="#B5D4F4" stroke="#185FA5" stroke-width="0.8"/>
+                            <polygon points="112,158 268,158 278,152 122,152" fill="#E4E2DA" stroke="#888780" stroke-width="1"/>
+                            <rect x="112" y="158" width="156" height="14" fill="#D3D1C7" stroke="#888780" stroke-width="1"/>
+                            <polygon points="268,158 278,152 278,166 268,172" fill="#B4B2A9" stroke="#888780" stroke-width="1"/>
+                            <rect x="138" y="161" width="104" height="6" fill="#444441"/>
+                            <polygon points="146,172 234,172 206,224 174,224" fill="#F1EFE8" stroke="#888780" stroke-width="1"/>
+                            <g stroke="#888780" stroke-width="1" fill="none">
+                                <line x1="152" y1="183" x2="228" y2="183"/>
+                                <line x1="159" y1="194" x2="221" y2="194"/>
+                                <line x1="166" y1="205" x2="214" y2="205"/>
+                                <line x1="170" y1="215" x2="210" y2="215"/>
+                            </g>
+                            <rect x="156" y="224" width="68" height="6" fill="#B4B2A9" stroke="#888780" stroke-width="1"/>
+                            <ellipse cx="190" cy="236" rx="11" ry="5" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.2"/>
+                            <polyline points="268,165 284,165 284,230" fill="none" stroke="#5F5E5A" stroke-width="1.6"/>
+                            <circle cx="284" cy="238" r="7" fill="#E4E2DA" stroke="#5F5E5A" stroke-width="1.2"/>
+                            <polygon points="190,236 54,372 326,372" fill="#FAEEDA" fill-opacity="0.6" stroke="#BA7517" stroke-width="0.9"/>
+                            <g stroke="#5F5E5A" stroke-width="1" fill="none">
+                                <line x1="140" y1="170" x2="190" y2="236"/>
+                                <line x1="240" y1="170" x2="190" y2="236"/>
+                            </g>
+                            <polygon points="50,372 330,372 346,360 66,360" fill="#F1EFE8" stroke="#888780" stroke-width="1"/>
+                            <rect x="50" y="372" width="280" height="7" fill="#B4B2A9" stroke="#888780" stroke-width="1"/>
+                            <polygon points="330,372 346,360 346,367 330,379" fill="#888780" stroke="#888780" stroke-width="1"/>
+                            <g font-family="Cairo, Arial, sans-serif" font-weight="bold" fill="#3B6D11" font-size="12.5" direction="ltr">
+                                <line x1="180" y1="78" x2="100" y2="78" stroke="#3B6D11" stroke-width="0.9"/>
+                                <text x="96" y="82" text-anchor="end">مصدر ضوئي</text>
+                                <line x1="140" y1="164" x2="96" y2="190" stroke="#3B6D11" stroke-width="0.9"/>
+                                <text x="92" y="196" text-anchor="end">الفلم</text>
+                                <line x1="182" y1="238" x2="130" y2="262" stroke="#3B6D11" stroke-width="0.9"/>
+                                <text x="126" y="268" text-anchor="end">العدسة</text>
+                                <line x1="289" y1="243" x2="316" y2="256" stroke="#3B6D11" stroke-width="0.9"/>
+                                <text x="322" y="274" text-anchor="middle" font-size="13.5">تغيير البعد</text>
+                                <text x="322" y="292" text-anchor="middle" font-size="13.5">البؤري</text>
+                                <text x="190" y="350" text-anchor="middle" font-size="13.5">الصورة الموجبة</text>
+                            </g>
+                        </svg>
+                        <span class="svg-caption">شكل توضيحي: الطبع بالإسقاط</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- الكارت الثالث: الصور الرقمية وطرق الحصول عليها -->
+            <div class="lesson-card">
+                <div class="lesson-header">
+                    <div class="lesson-title-box">
+                        <span class="lesson-tag">التقنيات الرقمية</span>
+                        <h2 class="lesson-heading">ثالثاً: الصور الرقمية وطرق الحصول عليها</h2>
+                    </div>
+                    <div class="lesson-icon-badge">💻</div>
+                </div>
+
+                <div class="section-block">
+                    <div class="glass-definition-card">
+                        <div class="glass-def-title"><span>🌐</span><span>مفهوم الصورة الرقمية (Digital Photograph)</span></div>
+                        <p class="glass-def-text">صورة تتكون من شبكة منتظمة من الخلايا أو المربعات الصغرى تسمى <strong class="hl">بيكسلات (Pixels)</strong>، ولكل بيكسل قيمة رقمية تعبر عن شدة الإضاءة واللون.</p>
+                    </div>
+
+                    <div class="glass-definition-card">
+                        <div class="glass-def-title"><span>📡</span><span>طرق الحصول على الصورة الرقمية</span></div>
+                        <p class="glass-def-text">
+                            1. <strong class="hl">الالتقاط المباشر:</strong> باستخدام آلات تصوير جوي رقمية حديثة مزودة بمستشعرات إلكترونية متطورة (مثل CCD أو CMOS) تقوم بتسجيل البيانات المساحية بصيغة رقمية فور التقاطها.<br>
+                            2. <strong class="hl">المسح الضوئي (Scanning):</strong> استخدام ماسحات ضوئية دقيقة (Scanners) لتحويل الصور الجوية التقليدية (الأفلام السالبة أو المطبوعات الورقية) إلى ملفات رقمية قابلة للمعالجة بالحاسوب.
+                        </p>
+                    </div>
+
+                    <!-- رسم التصوير العادي والرقمي -->
+                    <div class="svg-figure-box">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1520" height="1040" viewBox="0 0 380 260">
+                            <rect width="380" height="260" fill="transparent"/>
+                            <defs>
+                                <pattern id="ccdDots" width="4" height="4" patternUnits="userSpaceOnUse"><rect width="4" height="4" fill="#B4B2A9"/><rect x="0.5" y="0.5" width="3" height="3" fill="#444441"/></pattern>
+                            </defs>
+                            <polygon points="30,50 44,40 184,40 170,50" fill="#E4E2DA" stroke="#888780" stroke-width="1"/>
+                            <polygon points="170,50 184,40 184,180 170,190" fill="#D3D1C7" stroke="#888780" stroke-width="1"/>
+                            <rect x="30" y="50" width="140" height="140" fill="#F7F6F2" stroke="#888780" stroke-width="1.2"/>
+                            <g stroke="#5F5E5A" stroke-width="1.2" fill="none">
+                                <line x1="10" y1="84" x2="152" y2="169"/>
+                                <line x1="10" y1="156" x2="152" y2="71"/>
+                            </g>
+                            <ellipse cx="70" cy="120" rx="6" ry="22" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.2"/>
+                            <line x1="152" y1="72" x2="152" y2="168" stroke="#444441" stroke-width="3"/>
+                            <circle cx="152" cy="64" r="9" fill="#888780" stroke="#444441" stroke-width="1"/>
+                            <circle cx="152" cy="176" r="9" fill="#888780" stroke="#444441" stroke-width="1"/>
+                            <polygon points="210,46 222,37 352,37 340,46" fill="#E4E2DA" stroke="#888780" stroke-width="1"/>
+                            <polygon points="340,46 352,37 352,183 340,192" fill="#D3D1C7" stroke="#888780" stroke-width="1"/>
+                            <rect x="210" y="46" width="130" height="146" fill="#F7F6F2" stroke="#888780" stroke-width="1.2"/>
+                            <g stroke="#5F5E5A" stroke-width="1.2" fill="none">
+                                <line x1="192" y1="86.4" x2="330" y2="169.2"/>
+                                <line x1="192" y1="153.6" x2="330" y2="70.8"/>
+                            </g>
+                            <ellipse cx="248" cy="120" rx="6" ry="22" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.2"/>
+                            <rect x="326" y="58" width="8" height="124" fill="url(#ccdDots)" stroke="#444441" stroke-width="0.8"/>
+                            <g font-family="Cairo, Arial, sans-serif" font-weight="bold" fill="#3B6D11" font-size="13.5" text-anchor="middle" direction="rtl">
+                                <text x="100" y="230">فلم ضوئي</text>
+                                <text x="276" y="230">شريحة إلكترونية</text>
+                            </g>
+                        </svg>
+                        <span class="svg-caption">شكل توضيحي: التصوير العادي والرقمي</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- الأسئلة التفاعلية -->
+            <div class="accordion-card" id="quizAccordion">
+                <div class="accordion-header" id="quizAccordionHeader">
+                    <div class="accordion-header-title">
+                        <span>💡</span> أسئلة تفاعلية على الدرس الخامس
+                    </div>
+                    <div class="accordion-arrow">▼</div>
+                </div>
+                <div class="accordion-body">
+                    <div class="quiz-item">
+                        <div class="quiz-item-q">س1: ما هو الفرق بين الطبع بالتلامس والطبع بالإسقاط؟</div>
+                        <button class="reveal-ans-btn">🔍 أظهر الإجابة النموذجية</button>
+                        <div class="quiz-item-a"><strong>الإجابة:</strong> الطبع بالتلامس ينتج صورة بنفس الحجم والمقياس (1:1) عبر ملامسة الفيلم للورق الحساس مباشرة، بينما الطبع بالإسقاط يمرر الضوء عبر عدسة مكبرة ويسمح بتكبير أو تعديل مقياس الصورة.</div>
+                    </div>
+
+                    <div class="quiz-item">
+                        <div class="quiz-item-q">س2: متى نستخدم الصورة الموجبة المعتمة ومتى نستخدم الشفافة (Diapositive)؟</div>
+                        <button class="reveal-ans-btn">🔍 أظهر الإجابة النموذجية</button>
+                        <div class="quiz-item-a"><strong>الإجابة:</strong> الموجبة المعتمة تُستخدم في الدراسات المكتبية والتفسير الحقلي المباشر، بينما الشفافة تُستخدم في أجهزة الرسم التجسيمي لاستخراج المعالم بدقة.</div>
+                    </div>
+
+                    <div class="quiz-item">
+                        <div class="quiz-item-q">س3: اذكر طريقتي الحصول على الصور الرقمية في التصوير المساحي.</div>
+                        <button class="reveal-ans-btn">🔍 أظهر الإجابة النموذجية</button>
+                        <div class="quiz-item-a"><strong>الإجابة:</strong> 1. الالتقاط المباشر بالمستشعرات الرقمية (CCD / CMOS). 2. المسح الضوئي (Scanning) للصور والأفلام التقليدية.</div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-        <div class="bottom-nav">
+        <!-- زر الصعود لأعلى -->
+        <button class="scroll-to-top-btn" id="scrollToTopBtn" onclick="scrollToTop()" title="الرجوع لأعلى الصفحة">↑</button>
+
+        <!-- شريط التنقل السفلي -->
+        <div class="bottom-nav" id="bottomNav">
             <a href="../../index.html"><span>🏠</span>الرئيسية</a>
-            <a href="../surveying.html" class="active"><span>📐</span>المساحة</a>
             <a href="../../english/english.html"><span>🇬🇧</span>الإنجليزي</a>
+            <a href="../surveying.html" class="active"><span>📐</span>المساحة</a>
             <a href="../../programming/programming.html"><span>💻</span>البرمجة</a>
         </div>
 
@@ -488,11 +547,15 @@
                 }
                 applyTheme(localStorage.getItem("em_theme") === "dark");
                 if (themeBtn) {
-                    themeBtn.addEventListener("click", () => {
+                    themeBtn.addEventListener("click", function() {
                         applyTheme(!document.documentElement.classList.contains("dark-mode"));
                     });
                 }
             });
+
+            function scrollToTop() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
 
             window.onscroll = function() {
                 let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
@@ -500,6 +563,15 @@
                 let scrolled = (winScroll / height) * 100;
                 let progressFill = document.getElementById("progressFill");
                 if (progressFill) progressFill.style.width = scrolled + "%";
+
+                let scrollToTopBtn = document.getElementById("scrollToTopBtn");
+                if (scrollToTopBtn) {
+                    if (winScroll > 300) {
+                        scrollToTopBtn.classList.add("show");
+                    } else {
+                        scrollToTopBtn.classList.remove("show");
+                    }
+                }
             };
         </script>
     </body>
