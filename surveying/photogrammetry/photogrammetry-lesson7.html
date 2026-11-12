@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+        <title>أنواع آلات التصوير الجوي (المتعددة، الشريطية، البانورامية) - أكاديمية العلوم التطبيقية</title>
+        <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+        
+        <script>
+            let savedTheme = localStorage.getItem("em_theme");
+            if (savedTheme === "dark") {
+                document.documentElement.classList.add("dark-mode");
+            }
+        </script>
+        
+        <style>
+            :root {
+                --bg-main: #F4F6F9;
+                --card-bg: #FFFFFF;
+                --card-border: #C7D2FE;
+                --text-primary: #0F172A;
+                --text-secondary: #475569;
+                
+                --header-bg: #FFFFFF;
+                --header-shadow: 0 10px 30px rgba(67, 56, 202, 0.04);
+                
+                --primary: #4338CA;
+                --accent: #6366F1; 
+                --light-bg: rgba(67, 56, 202, 0.04);
+
+                --heading-pure-color: #0F172A; 
+                --nav-theme-color: #4338CA;
+                --nav-glow-color: rgba(67, 56, 202, 0.25);
+            }
+
+            html.dark-mode, body.dark-mode {
+                --bg-main: #06080F;
+                --card-bg: #0B0F19;
+                --card-border: rgba(129, 140, 248, 0.3);
+                --text-primary: #FFFFFF;
+                --text-secondary: #94A3B8;
+                
+                --header-bg: #0B0F19;
+                --header-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+                
+                --primary: #818CF8;
+                --accent: #A5B4FC;
+                --light-bg: rgba(129, 140, 248, 0.06);
+
+                --heading-pure-color: #FFFFFF; 
+                --nav-theme-color: #818CF8;
+                --nav-glow-color: rgba(129, 140, 248, 0.3);
+            }
+
+            body, * {
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                text-rendering: optimizeLegibility;
+            }
+
+            body {
+                background-color: var(--bg-main);
+                color: var(--text-primary);
+                font-family: 'Cairo', system-ui, -apple-system, sans-serif;
+                margin: 0;
+                padding: 16px 14px 90px 14px;
+                min-height: 100vh;
+                box-sizing: border-box;
+                transition: background-color 0.3s ease, color 0.3s ease;
+            }
+
+            .container { max-width: 680px; margin: auto; display: flex; flex-direction: column; gap: 24px; }
+
+            .top-progress-bar { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: transparent; z-index: 9999; }
+            .top-progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--primary), var(--accent)); }
+
+            /* شريط الهيدر العلوي */
+            .nav-bar {
+                display: flex; justify-content: space-between; align-items: center;
+                background: var(--header-bg); border: 2.5px solid var(--card-border); padding: 12px 20px;
+                border-radius: 40px; box-shadow: var(--header-shadow); gap: 10px;
+            }
+            .brand-minimalist-box { display: flex; flex-direction: column; align-items: center; text-align: center; flex: 1; padding: 0 4px; min-width: 0; }
+            .brand-main-title { font-size: 14px; font-weight: 900; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
+            .brand-subtitle-text { font-size: 10.5px; font-weight: 800; color: var(--primary); letter-spacing: 0.5px; text-transform: uppercase; margin-top: 2px; }
+
+            .back-btn, .theme-btn {
+                background: var(--light-bg); border: 2px solid var(--card-border);
+                width: 40px; height: 40px; border-radius: 20px; display: flex; align-items: center; justify-content: center;
+                color: var(--text-primary); font-size: 16px; text-decoration: none; cursor: pointer; transition: 0.25s; flex-shrink: 0;
+            }
+            .back-btn:hover, .theme-btn:hover { transform: scale(1.05); border-color: var(--primary); color: var(--primary); }
+
+            /* كارت الترحيب الرئيسي (منفصل تماماً) */
+            .hero-card {
+                background: var(--card-bg); border: 2.5px solid var(--card-border); border-radius: 34px;
+                padding: 24px; box-shadow: 0 12px 30px rgba(0, 0, 0, 0.03); position: relative; overflow: hidden;
+            }
+
+            .pro-hero-badge {
+                display: inline-flex; align-items: center; gap: 8px;
+                background: var(--light-bg); border: 2px solid var(--card-border); color: var(--primary);
+                padding: 6px 16px; border-radius: 18px; font-size: 11.5px; font-weight: 950;
+                margin-bottom: 12px;
+            }
+            .pro-badge-dot { width: 7px; height: 7px; background: var(--primary); border-radius: 50%; box-shadow: 0 0 10px var(--primary); }
+
+            .hero-title { margin: 0 0 8px 0; font-size: 21px; font-weight: 950; color: var(--heading-pure-color); letter-spacing: -0.5px; }
+            .hero-desc { margin: 0; font-size: 13.5px; color: var(--text-secondary); line-height: 1.8; font-weight: 800; text-align: justify; }
+
+            /* الكارت الشامل للدرس */
+            .lesson-card {
+                background: var(--card-bg); 
+                border: 2.5px solid var(--card-border);
+                border-radius: 40px;
+                padding: 28px; 
+                box-shadow: 0 20px 45px rgba(0, 0, 0, 0.04); 
+                display: flex; 
+                flex-direction: column; 
+                gap: 20px;
+                position: relative; 
+                overflow: hidden;
+            }
+            
+            .lesson-header { display: flex; align-items: center; justify-content: space-between; border-bottom: 2px dashed var(--card-border); padding-bottom: 16px; }
+            .lesson-tag { font-size: 11.5px; font-weight: 900; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px; }
+            .lesson-heading { margin: 0; font-size: 19px; font-weight: 950; color: var(--heading-pure-color); line-height: 1.4; }
+            .lesson-icon-badge { width: 48px; height: 48px; border-radius: 20px; background: var(--light-bg); border: 2px solid var(--card-border); display: flex; align-items: center; justify-content: center; font-size: 20px; }
+
+            .section-block { display: flex; flex-direction: column; gap: 14px; }
+            .block-title { font-size: 15px; font-weight: 950; color: var(--heading-pure-color); border-right: 4px solid var(--primary); padding-right: 10px; }
+            
+            /* كروت التعريفات الداخلية النظيفة */
+            .glass-definition-card {
+                background: var(--card-bg);
+                border: 2px solid var(--card-border);
+                border-radius: 28px;
+                padding: 20px 22px;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+            }
+            .glass-def-title {
+                font-size: 14.5px;
+                font-weight: 950;
+                color: var(--primary);
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+            .glass-def-text {
+                font-size: 13.5px;
+                font-weight: 800;
+                color: var(--text-primary);
+                line-height: 1.8;
+                margin: 0;
+            }
+            .glass-def-text strong { color: var(--primary); font-weight: 950; }
+
+            .hl { color: var(--primary); font-weight: 950; }
+
+            /* عرض الصور */
+            .images-group-container { display: flex; flex-direction: column; gap: 16px; }
+            .image-showcase-box {
+                background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 24px;
+                padding: 14px; display: flex; flex-direction: column; gap: 10px;
+            }
+            .image-showcase-title { font-size: 14px; font-weight: 950; color: var(--primary); display: flex; align-items: center; gap: 8px; }
+            .lesson-img-frame {
+                width: 100%; border-radius: 16px; overflow: hidden; border: 2px solid var(--card-border);
+                background: var(--light-bg); display: flex; align-items: center; justify-content: center;
+            }
+            .lesson-img-frame img {
+                width: 100%; height: auto; max-height: 320px; object-fit: cover; display: block;
+                transition: transform 0.3s ease;
+            }
+            .lesson-img-frame img:hover { transform: scale(1.02); }
+            .img-caption { font-size: 12px; font-weight: 800; color: var(--text-secondary); text-align: center; }
+
+            .accordion-card {
+                background: var(--card-bg); border: 2.5px solid var(--card-border); border-radius: 34px;
+                overflow: hidden; transition: 0.3s ease; box-shadow: 0 12px 30px rgba(0, 0, 0, 0.03);
+            }
+            .accordion-header {
+                padding: 18px 22px; background: var(--light-bg); cursor: pointer; display: flex;
+                align-items: center; justify-content: space-between; gap: 10px; user-select: none;
+            }
+            .accordion-header-title { font-size: 15px; font-weight: 950; color: var(--heading-pure-color); display: flex; align-items: center; gap: 8px; }
+            .accordion-arrow { font-size: 14px; transition: transform 0.3s ease; color: var(--primary); font-weight: 900; }
+            .accordion-card.active .accordion-arrow { transform: rotate(180deg); }
+
+            .accordion-body {
+                display: none; padding: 20px; flex-direction: column; gap: 14px;
+                border-top: 2px dashed var(--card-border); background: var(--card-bg);
+            }
+            .accordion-card.active .accordion-body { display: flex; }
+
+            .quiz-item { display: flex; flex-direction: column; gap: 10px; font-size: 14px; background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 22px; padding: 16px; }
+            .quiz-item-q { font-weight: 900; color: var(--text-primary); line-height: 1.8; }
+            .reveal-ans-btn { background: var(--light-bg); border: 2px solid var(--card-border); color: var(--primary); padding: 8px 14px; border-radius: 14px; font-size: 12.5px; font-weight: 950; cursor: pointer; align-self: flex-start; font-family: 'Cairo', sans-serif; transition: 0.2s; }
+            .reveal-ans-btn:hover { background: var(--primary); color: #FFF; border-color: var(--primary); }
+            .quiz-item-a { display: none; font-weight: 850; color: #059669; background: rgba(16, 185, 129, 0.08); padding: 12px 14px; border-radius: 16px; border: 2px solid rgba(16, 185, 129, 0.25); line-height: 1.8; margin-top: 4px; }
+            .quiz-item-a.show { display: block; }
+
+            /* زر العودة لأعلى */
+            .scroll-to-top-btn {
+                position: fixed; bottom: 75px; left: 16px; transform: scale(0);
+                background: var(--primary); border: 2.5px solid var(--primary);
+                color: #FFFFFF; width: 42px; height: 42px; border-radius: 50%;
+                display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 900;
+                box-shadow: 0 8px 20px rgba(0,0,0,0.2); cursor: pointer; z-index: 998;
+                transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); opacity: 0; pointer-events: none;
+            }
+            .scroll-to-top-btn.show { transform: scale(1); opacity: 1; pointer-events: auto; }
+            .scroll-to-top-btn:hover { opacity: 0.9; transform: scale(1.1); }
+
+            /* شريط التنقل السفلي */
+            .bottom-nav {
+                position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); 
+                width: calc(100% - 32px); max-width: 460px;
+                background: var(--header-bg);
+                display: flex; justify-content: space-around; align-items: center;
+                padding: 6px 10px; border-radius: 30px; 
+                border: 2.5px solid var(--card-border);
+                box-shadow: 0 8px 24px rgba(0,0,0,0.25); 
+                z-index: 999; box-sizing: border-box;
+                transition: all 0.4s ease;
+            }
+            .bottom-nav a { 
+                color: var(--text-secondary); text-decoration: none; font-size: 10px; text-align: center; font-weight: 800; 
+                display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 12px; border-radius: 20px; flex: 1; 
+                border: 1.5px solid var(--card-border); background: var(--light-bg);
+                transition: all 0.3s ease;
+            }
+            .bottom-nav a span { font-size: 16px; line-height: 1; }
+            .bottom-nav a:hover { color: var(--nav-theme-color); border-color: var(--nav-theme-color); background: rgba(128, 128, 128, 0.1); }
+            .bottom-nav a.active { color: #FFFFFF; background: var(--nav-theme-color); border-color: var(--nav-theme-color); box-shadow: 0 4px 15px var(--nav-glow-color); }
+        </style>
+    </head>
+    <body>
+
+        <div class="top-progress-bar"><div class="top-progress-fill" id="progressFill"></div></div>
+
+        <div class="container">
+            <!-- شريط الهيدر العلوي -->
+            <div class="nav-bar">
+                <a href="photogrammetry.html" class="back-btn" title="رجوع للقسم الرئيسي">←</a>
+                <div class="brand-minimalist-box">
+                    <span class="brand-main-title">أنواع آلات التصوير الجوي</span>
+                    <span class="brand-subtitle-text">أكاديمية العلوم التطبيقية</span>
+                </div>
+                <button class="theme-btn" id="themeToggleBtn" title="تغيير الثيم">🌙</button>
+            </div>
+
+            <!-- كارت الترحيب (Hero Card) المنفصل تماماً -->
+            <div class="hero-card">
+                <div class="pro-hero-badge">
+                    <span class="pro-badge-dot"></span>
+                    أكاديمية العلوم التطبيقية • قسم المساحة التصويرية
+                </div>
+                <h1 class="hero-title">الدرس السابع: أنواع آلات التصوير الجوي المتقدمة</h1>
+                <p class="hero-desc">
+                    يغطي هذا الدرس تفاصيل آلة التصوير الجوي متعددة العدسات، آلة التصوير الشريطية، وآلة التصوير البانورامية، وخصائص كل منها واستخداماتها الهندسية والتطبيقية.
+                </p>
+            </div>
+
+            <!-- الكارت الأول: آلة التصوير الجوي متعددة العدسات -->
+            <div class="lesson-card">
+                <div class="lesson-header">
+                    <div class="lesson-title-box">
+                        <span class="lesson-tag">الوحدة الثانية • الدرس السابع</span>
+                        <h2 class="lesson-heading">أولاً: آلة التصوير الجوي متعددة العدسات</h2>
+                    </div>
+                    <div class="lesson-icon-badge">📷</div>
+                </div>
+
+                <div class="section-block">
+                    <div class="glass-definition-card">
+                        <div class="glass-def-title"><span>⚙️</span><span>مفهوم متعددة العدسات</span></div>
+                        <p class="glass-def-text">هذا النوع من آلات التصوير يضم عدستان أو أكثر، ويمكن بالتالي التقاط صورتين أو أكثر في آن واحد، وفيما يتعلق بالأجزاء الرئيسية فهذه الآلة تماثل إلى حد كبير آلة التصوير ذات العدسة الواحدة </p>
+                    </div>
+
+                    <div class="glass-definition-card">
+                        <div class="glass-def-title"><span>🌟</span><span>الميزة التقنية والفلاتر</span></div>
+                        <p class="glass-def-text">وتجدر الإشارة هنا إلى أن ميزة التقاط عدة صور للأرض في آن واحد تتيح تزويد هذه العدسات بمصافر (<strong class="hl">Filters</strong>) مختلفة وبأفلام تتحسس لمجالات متباينة من الطيف الكهرومغناطيسي، مما يساعد في تفسير وتحليل أدق، ويغلب استخدام هذا النوع لأغراض الزراعة والبيئة والجيلوجيا </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- الكارت الثاني: آلة التصوير الشريطية -->
+            <div class="lesson-card">
+                <div class="lesson-header">
+                    <div class="lesson-title-box">
+                        <span class="lesson-tag">التصوير الخطي</span>
+                        <h2 class="lesson-heading">ثانياً: آلة التصوير الشريطية (Strip Camera)</h2>
+                    </div>
+                    <div class="lesson-icon-badge">🎞️</div>
+                </div>
+
+                <div class="section-block">
+                    <div class="glass-definition-card">
+                        <div class="glass-def-title"><span>📏</span><span>مفهوم الكاميرا الشريطية</span></div>
+                        <p class="glass-def-text">تلتقط آلة التصوير الشريطية صورة متواصلة لشريط طولي من الأرض تحت مسار الطائرة، تتم هذه العملية بواسطة مرور الفيلم فوق شق طولي ضيق عند المستوى البؤري بسرعة تساوي معدل سرعة حركة الطائرة </p>
+                    </div>
+
+                    <div class="glass-definition-card">
+                        <div class="glass-def-title"><span>🎯</span><span>الاستخدامات الهندسية</span></div>
+                        <p class="glass-def-text">قد تستخدم آلة التصوير الشريطية عدستين مرتبتين بحيث تتناسب الصور الناتجة سمات الصور التجسيمية، ويستفاد من هذا النوع بشكل خاص في المشاريع الطولية مثل الطرق ومخططات الأنابيب </p>
+                    </div>
+
+                    <!-- عرض الصورة الأولى للشريطية -->
+                    <div class="images-group-container">
+                        <div class="image-showcase-box">
+                            <div class="image-showcase-title"><span>🎞️</span> مخطط آلة التصوير الشريطية</div>
+                            <div class="lesson-img-frame">
+                                <img src="Photogrammetric images/strip-camera.jpg" alt="آلة التصوير الشريطية" onerror="this.src=''">
+                            </div>
+                            <div class="img-caption"> آلة التصوير الشريطية ومثال على صورة منها </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- الكارت الثالث: آلة التصوير البانورامية -->
+            <div class="lesson-card">
+                <div class="lesson-header">
+                    <div class="lesson-title-box">
+                        <span class="lesson-tag">التغطية الواسعة</span>
+                        <h2 class="lesson-heading">ثالثاً: آلة التصوير البانورامية (Panoramic Camera)</h2>
+                    </div>
+                    <div class="lesson-icon-badge">🌅</div>
+                </div>
+
+                <div class="section-block">
+                    <div class="glass-definition-card">
+                        <div class="glass-def-title"><span>🌐</span><span>مفهوم الكاميرا البانورامية</span></div>
+                        <p class="glass-def-text">يسمح هذا النوع من آلات التصوير بتغطية للأرض المراد تصويرها تمتد من أقصى اليمين عند خط الأفق إلى أقصى اليسار عند خط الأفق وبشكل متعامد على خط الطيران، الشكل  </p>
+                    </div>
+
+                    <!-- عرض الصورة الثانية للبانورامية -->
+                    <div class="images-group-container">
+                        <div class="image-showcase-box">
+                            <div class="image-showcase-title"><span>🌅</span> مخطط آلة التصوير البانورامية</div>
+                            <div class="lesson-img-frame">
+                                <img src="Photogrammetric images/panoramic-camera.jpg" alt="آلة التصوير البانورامية" onerror="this.src=''">
+                            </div>
+                            <div class="img-caption"> آلة التصوير البانورامية ومثال على صورة منها </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- الأسئلة التفاعلية -->
+            <div class="accordion-card" id="quizAccordion">
+                <div class="accordion-header" id="quizAccordionHeader">
+                    <div class="accordion-header-title">
+                        <span>💡</span> أسئلة تفاعلية على الدرس السابع
+                    </div>
+                    <div class="accordion-arrow">▼</div>
+                </div>
+                <div class="accordion-body">
+                    <div class="quiz-item">
+                        <div class="quiz-item-q">س1: ما هي ميزة استخدام آلة التصوير متعددة العدسات؟</div>
+                        <button class="reveal-ans-btn">🔍 أظهر الإجابة النموذجية</button>
+                        <div class="quiz-item-a"><strong>الإجابة:</strong> تتيح التقاط عدة صور في آن واحد وتزويد العدسات بمصافر (Filters) مختلفة وبأفلام تحسس مجالات متباينة من الطيف الكهرومغناطيسي، مما يساعد في التحليل الدقيق للزراعة والبيئة والجيلوجيا </div>
+                    </div>
+
+                    <div class="quiz-item">
+                        <div class="quiz-item-q">س2: كيف تعمل آلة التصوير الشريطية وما هي أهم استخداماتها؟</div>
+                        <button class="reveal-ans-btn">🔍 أظهر الإجابة النموذجية</button>
+                        <div class="quiz-item-a"><strong>الإجابة:</strong> تعمل عبر مرور الفيلم فوق شق طولي ضيق بسرعة تساوي سرعة الطائرة لتلتقط شريطاً متواصلاً، وتُستخدم بشكل خاص في المشاريع الطولية مثل الطرق ومخططات الأنابيب </div>
+                    </div>
+
+                    <div class="quiz-item">
+                        <div class="quiz-item-q">س3: ما هو نطاق التغطية لآلة التصوير البانورامية؟</div>
+                        <button class="reveal-ans-btn">🔍 أظهر الإجابة النموذجية</button>
+                        <div class="quiz-item-a"><strong>الإجابة:</strong> تغطي الأرض من أقصى اليمين عند خط الأفق إلى أقصى اليسار عند خط الأفق وبشكل متعامد على خط الطيران </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- زر الصعود لأعلى -->
+        <button class="scroll-to-top-btn" id="scrollToTopBtn" onclick="scrollToTop()" title="الرجوع لأعلى الصفحة">↑</button>
+
+        <!-- شريط التنقل السفلي -->
+        <div class="bottom-nav" id="bottomNav">
+            <a href="../../index.html"><span>🏠</span>الرئيسية</a>
+            <a href="../../english/english.html"><span>🇬🇧</span>الإنجليزي</a>
+            <a href="../surveying.html" class="active"><span>📐</span>المساحة</a>
+            <a href="../../programming/programming.html"><span>💻</span>البرمجة</a>
+        </div>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                let accordionCard = document.getElementById("quizAccordion");
+                let accordionHeader = document.getElementById("quizAccordionHeader");
+                if (accordionHeader && accordionCard) {
+                    accordionHeader.addEventListener("click", function() {
+                        accordionCard.classList.toggle("active");
+                    });
+                }
+
+                let revealBtns = document.querySelectorAll(".reveal-ans-btn");
+                revealBtns.forEach(btn => {
+                    btn.addEventListener("click", function(e) {
+                        e.stopPropagation();
+                        let ansBox = this.nextElementSibling;
+                        if (ansBox.classList.contains("show")) {
+                            ansBox.classList.remove("show");
+                            this.innerHTML = "🔍 أظهر الإجابة النموذجية";
+                        } else {
+                            ansBox.classList.add("show");
+                            this.innerHTML = "🔒 إخفاء الإجابة";
+                        }
+                    });
+                });
+
+                let themeBtn = document.getElementById("themeToggleBtn");
+                function applyTheme(isDark) {
+                    if (isDark) {
+                        document.documentElement.classList.add("dark-mode");
+                        localStorage.setItem("em_theme", "dark");
+                        if (themeBtn) themeBtn.innerHTML = "☀️";
+                    } else {
+                        document.documentElement.classList.remove("dark-mode");
+                        localStorage.setItem("em_theme", "light");
+                        if (themeBtn) themeBtn.innerHTML = "🌙";
+                    }
+                }
+                applyTheme(localStorage.getItem("em_theme") === "dark");
+                if (themeBtn) {
+                    themeBtn.addEventListener("click", function() {
+                        applyTheme(!document.documentElement.classList.contains("dark-mode"));
+                    });
+                }
+            });
+
+            function scrollToTop() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            window.onscroll = function() {
+                let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                let height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                let scrolled = (winScroll / height) * 100;
+                let progressFill = document.getElementById("progressFill");
+                if (progressFill) progressFill.style.width = scrolled + "%";
+
+                let scrollToTopBtn = document.getElementById("scrollToTopBtn");
+                if (scrollToTopBtn) {
+                    if (winScroll > 300) {
+                        scrollToTopBtn.classList.add("show");
+                    } else {
+                        scrollToTopBtn.classList.remove("show");
+                    }
+                }
+            };
+        </script>
+    </body>
+  </html>
