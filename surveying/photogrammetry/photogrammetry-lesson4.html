@@ -7,11 +7,9 @@
         <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
         
         <script>
-            if (typeof savedTheme === 'undefined') {
-                var savedTheme = localStorage.getItem("em_theme");
-                if (savedTheme === "dark") {
-                    document.documentElement.classList.add("dark-mode");
-                }
+            let savedTheme = localStorage.getItem("em_theme");
+            if (savedTheme === "dark") {
+                document.documentElement.classList.add("dark-mode");
             }
         </script>
         
@@ -19,41 +17,45 @@
             :root {
                 --bg-main: #F4F6F9;
                 --card-bg: #FFFFFF;
-                --card-border: #E2E8F0;
+                --card-border: #C7D2FE;
                 --text-primary: #0F172A;
                 --text-secondary: #475569;
                 
-                --header-bg: rgba(255, 255, 255, 0.85);
-                --header-border: rgba(67, 56, 202, 0.15);
-                --header-shadow: 0 10px 30px rgba(67, 56, 202, 0.05);
-                --shadow-main: 0 20px 40px -15px rgba(15, 23, 42, 0.05);
+                --header-bg: #FFFFFF;
+                --header-shadow: 0 10px 30px rgba(67, 56, 202, 0.04);
                 
                 --primary: #4338CA;
-                --primary-dark: #3730A3;
-                --accent: #818CF8;
-                --light-bg: rgba(67, 56, 202, 0.05);
-                --border-glow: rgba(67, 56, 202, 0.25);
-                --card-glow: 0 10px 30px rgba(67, 56, 202, 0.08);
+                --accent: #6366F1; 
+                --light-bg: rgba(67, 56, 202, 0.04);
+
+                --heading-pure-color: #0F172A; 
+                --nav-theme-color: #4338CA;
+                --nav-glow-color: rgba(67, 56, 202, 0.25);
             }
 
-            html.dark-model, html.dark-mode, body.dark-mode {
+            html.dark-mode, body.dark-mode {
                 --bg-main: #06080F;
                 --card-bg: #0B0F19;
-                --card-border: rgba(255, 255, 255, 0.07);
-                --text-primary: #F3F4F6;
-                --text-secondary: #CBD5E1;
+                --card-border: rgba(129, 140, 248, 0.3);
+                --text-primary: #FFFFFF;
+                --text-secondary: #94A3B8;
                 
-                --header-bg: rgba(11, 15, 25, 0.85);
-                --header-border: rgba(129, 140, 248, 0.2);
+                --header-bg: #0B0F19;
                 --header-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-                --shadow-main: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
                 
                 --primary: #818CF8;
-                --primary-dark: #6366F1;
                 --accent: #A5B4FC;
-                --light-bg: rgba(129, 140, 248, 0.08);
-                --border-glow: rgba(129, 140, 248, 0.35);
-                --card-glow: 0 15px 40px rgba(129, 140, 248, 0.12);
+                --light-bg: rgba(129, 140, 248, 0.06);
+
+                --heading-pure-color: #FFFFFF; 
+                --nav-theme-color: #818CF8;
+                --nav-glow-color: rgba(129, 140, 248, 0.3);
+            }
+
+            body, * {
+                -webkit-font-smoothing: antialiased;
+                -moz-osx-font-smoothing: grayscale;
+                text-rendering: optimizeLegibility;
             }
 
             body {
@@ -67,123 +69,180 @@
                 transition: background-color 0.3s ease, color 0.3s ease;
             }
 
-            .container { max-width: 680px; margin: auto; }
+            .container { max-width: 680px; margin: auto; display: flex; flex-direction: column; gap: 24px; }
 
             .top-progress-bar { position: fixed; top: 0; left: 0; right: 0; height: 3px; background: transparent; z-index: 9999; }
             .top-progress-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--primary), var(--accent)); }
 
+            /* شريط الهيدر العلوي */
             .nav-bar {
-                display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;
-                background: var(--header-bg); backdrop-filter: blur(12px); border: 1.5px solid var(--header-border); padding: 12px 16px;
-                border-radius: 24px; box-shadow: var(--header-shadow); gap: 10px;
+                display: flex; justify-content: space-between; align-items: center;
+                background: var(--header-bg); border: 2.5px solid var(--card-border); padding: 12px 20px;
+                border-radius: 40px; box-shadow: var(--header-shadow); gap: 10px;
             }
             .brand-minimalist-box { display: flex; flex-direction: column; align-items: center; text-align: center; flex: 1; padding: 0 4px; min-width: 0; }
-            .brand-main-title { font-size: 13.5px; font-weight: 900; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
-            .brand-subtitle-text { font-size: 10px; font-weight: 800; color: var(--primary); letter-spacing: 0.5px; text-transform: uppercase; margin-top: 2px; }
+            .brand-main-title { font-size: 14px; font-weight: 900; color: var(--text-primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
+            .brand-subtitle-text { font-size: 10.5px; font-weight: 800; color: var(--primary); letter-spacing: 0.5px; text-transform: uppercase; margin-top: 2px; }
 
             .back-btn, .theme-btn {
-                background: var(--light-bg); border: 1.5px solid var(--border-glow);
-                width: 36px; height: 36px; border-radius: 14px; display: flex; align-items: center; justify-content: center;
+                background: var(--light-bg); border: 2px solid var(--card-border);
+                width: 40px; height: 40px; border-radius: 20px; display: flex; align-items: center; justify-content: center;
                 color: var(--text-primary); font-size: 16px; text-decoration: none; cursor: pointer; transition: 0.25s; flex-shrink: 0;
             }
             .back-btn:hover, .theme-btn:hover { transform: scale(1.05); border-color: var(--primary); color: var(--primary); }
 
-            .lesson-card {
-                background: var(--card-bg); border: 1.5px solid var(--card-border); border-radius: 28px;
-                padding: 26px; margin-bottom: 24px; box-shadow: var(--shadow-main); display: flex; flex-direction: column; gap: 22px;
-                position: relative; overflow: hidden;
+            /* كارت الترحيب الرئيسي (منفصل تماماً) */
+            .hero-card {
+                background: var(--card-bg); border: 2.5px solid var(--card-border); border-radius: 34px;
+                padding: 24px; box-shadow: 0 12px 30px rgba(0, 0, 0, 0.03); position: relative; overflow: hidden;
             }
-            .lesson-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, var(--primary), var(--accent)); }
-            
-            .lesson-header { display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--card-border); padding-bottom: 16px; }
-            .lesson-title-box { display: flex; flex-direction: column; gap: 6px; }
-            .lesson-tag { font-size: 11px; font-weight: 900; color: var(--accent); text-transform: uppercase; letter-spacing: 0.8px; }
-            .lesson-heading { margin: 0; font-size: 20px; font-weight: 950; color: var(--primary); line-height: 1.3; }
-            .lesson-icon-badge { width: 50px; height: 50px; border-radius: 16px; background: var(--light-bg); border: 1.5px solid var(--border-glow); display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
 
-            .section-block { display: flex; flex-direction: column; gap: 14px; background: var(--light-bg); border: 1.5px solid var(--border-glow); padding: 18px; border-radius: 20px; }
-            .block-title { font-size: 14.5px; font-weight: 900; color: var(--primary); display: flex; align-items: center; gap: 8px; }
-            .block-title::before { content: ''; width: 4px; height: 16px; background: var(--primary); border-radius: 4px; display: inline-block; }
+            .pro-hero-badge {
+                display: inline-flex; align-items: center; gap: 8px;
+                background: var(--light-bg); border: 2px solid var(--card-border); color: var(--primary);
+                padding: 6px 16px; border-radius: 18px; font-size: 11.5px; font-weight: 950;
+                margin-bottom: 12px;
+            }
+            .pro-badge-dot { width: 7px; height: 7px; background: var(--primary); border-radius: 50%; box-shadow: 0 0 10px var(--primary); }
+
+            .hero-title { margin: 0 0 8px 0; font-size: 21px; font-weight: 950; color: var(--heading-pure-color); letter-spacing: -0.5px; }
+            .hero-desc { margin: 0; font-size: 13.5px; color: var(--text-secondary); line-height: 1.8; font-weight: 800; text-align: justify; }
+
+            /* الكارت الشامل للدرس */
+            .lesson-card {
+                background: var(--card-bg); 
+                border: 2.5px solid var(--card-border);
+                border-radius: 40px;
+                padding: 28px; 
+                box-shadow: 0 20px 45px rgba(0, 0, 0, 0.04); 
+                display: flex; 
+                flex-direction: column; 
+                gap: 20px;
+                position: relative; 
+                overflow: hidden;
+            }
             
-            .custom-list-group { display: flex; flex-direction: column; gap: 14px; }
-            .list-item-row { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; font-weight: 750; line-height: 1.9; }
-            .list-bullet { color: var(--primary); font-size: 18px; line-height: 1.4; flex-shrink: 0; font-weight: 900; }
+            .lesson-header { display: flex; align-items: center; justify-content: space-between; border-bottom: 2px dashed var(--card-border); padding-bottom: 16px; }
+            .lesson-tag { font-size: 11.5px; font-weight: 900; color: var(--primary); text-transform: uppercase; letter-spacing: 0.5px; }
+            .lesson-heading { margin: 0; font-size: 19px; font-weight: 950; color: var(--heading-pure-color); line-height: 1.4; }
+            .lesson-icon-badge { width: 48px; height: 48px; border-radius: 20px; background: var(--light-bg); border: 2px solid var(--card-border); display: flex; align-items: center; justify-content: center; font-size: 20px; }
+
+            .section-block { display: flex; flex-direction: column; gap: 14px; }
+            .block-title { font-size: 15px; font-weight: 950; color: var(--heading-pure-color); border-right: 4px solid var(--primary); padding-right: 10px; }
             
-            .list-content { flex: 1; color: #000000; font-weight: 800; }
-            html.dark-model .list-content, html.dark-mode .list-content, body.dark-mode .list-content { color: #FFFFFF; }
-            
+            /* كروت التعريفات الداخلية النظيفة */
+            .glass-definition-card {
+                background: var(--card-bg);
+                border: 2px solid var(--card-border);
+                border-radius: 28px;
+                padding: 20px 22px;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+            }
+            .glass-def-title {
+                font-size: 14.5px;
+                font-weight: 950;
+                color: var(--primary);
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+            .glass-def-text {
+                font-size: 13.5px;
+                font-weight: 800;
+                color: var(--text-primary);
+                line-height: 1.8;
+                margin: 0;
+            }
+
             .hl { color: var(--primary); font-weight: 950; }
 
+            /* رسم الـ SVG والمسائل والقوانين */
             .svg-figure-box {
-                background: var(--card-bg); border: 1.5px solid var(--border-glow); border-radius: 16px; padding: 12px; margin-top: 6px; display: flex; flex-direction: column; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(67, 56, 202, 0.04);
+                background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 24px; padding: 14px; display: flex; flex-direction: column; align-items: center; gap: 8px;
             }
-            .svg-figure-box svg { width: 100%; height: auto; max-height: 290px; border-radius: 10px; }
+            .svg-figure-box svg { width: 100%; height: auto; max-height: 420px; border-radius: 12px; }
             .svg-caption { font-size: 12px; font-weight: 800; color: var(--text-secondary); text-align: center; }
 
-            .formula-box {
-                background: var(--card-bg); border: 2px solid var(--primary); border-radius: 16px; padding: 16px; margin-top: 6px; box-shadow: 0 4px 15px rgba(67, 56, 202, 0.05); text-align: center;
+            .formula-card-box {
+                background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 28px; padding: 20px; display: flex; flex-direction: column; gap: 14px;
             }
-            .formula-eq { font-size: 17px; font-weight: 950; color: var(--primary); margin-bottom: 10px; direction: ltr; }
-            .formula-details { text-align: right; font-size: 13.5px; font-weight: 800; color: var(--text-primary); display: flex; flex-direction: column; gap: 6px; }
+            .formula-display {
+                background: var(--light-bg); border: 2px solid var(--card-border); border-radius: 18px; padding: 14px; text-align: center; font-size: 15px; font-weight: 950; color: var(--primary); direction: ltr;
+            }
+            .formula-meanings {
+                background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 18px; padding: 16px; display: flex; flex-direction: column; gap: 8px; font-size: 13.5px; font-weight: 800; color: var(--text-primary);
+            }
 
             .problem-box {
-                background: var(--card-bg); border: 1.5px solid var(--border-glow); border-radius: 16px; padding: 16px; margin-top: 10px; display: flex; flex-direction: column; gap: 8px; box-shadow: 0 4px 12px rgba(67, 56, 202, 0.03);
+                background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 26px; padding: 18px; display: flex; flex-direction: column; gap: 10px;
             }
-            .problem-title { font-size: 13.5px; font-weight: 900; color: var(--primary); display: flex; align-items: center; gap: 6px; }
+            .problem-title { font-size: 14px; font-weight: 950; color: var(--primary); display: flex; align-items: center; gap: 8px; }
             .problem-desc { font-size: 13.5px; font-weight: 800; color: var(--text-secondary); line-height: 1.8; }
-            
             .problem-steps { 
-                font-size: 12.5px; 
-                font-weight: 800; 
-                color: var(--text-primary); 
-                line-height: 1.8; 
-                background: var(--light-bg); 
-                padding: 12px 14px; 
-                border-radius: 10px; 
-                direction: ltr; 
-                text-align: left; 
-                overflow-x: auto; 
-                white-space: nowrap; 
+                font-size: 13px; font-weight: 800; color: var(--text-primary); line-height: 1.8; background: var(--light-bg); padding: 14px; border-radius: 16px; direction: ltr; text-align: left; overflow-x: auto; border: 2px solid var(--card-border); 
             }
 
             .accordion-card {
-                background: var(--card-bg); border: 1.5px solid var(--border-glow); border-radius: 20px;
-                overflow: hidden; transition: 0.3s ease; box-shadow: 0 4px 15px rgba(67, 56, 202, 0.04);
+                background: var(--card-bg); border: 2.5px solid var(--card-border); border-radius: 34px;
+                overflow: hidden; transition: 0.3s ease; box-shadow: 0 12px 30px rgba(0, 0, 0, 0.03);
             }
             .accordion-header {
-                padding: 16px 18px; background: var(--light-bg); cursor: pointer; display: flex;
+                padding: 18px 22px; background: var(--light-bg); cursor: pointer; display: flex;
                 align-items: center; justify-content: space-between; gap: 10px; user-select: none;
             }
-            .accordion-header-title { font-size: 14px; font-weight: 900; color: var(--primary); display: flex; align-items: center; gap: 8px; }
+            .accordion-header-title { font-size: 15px; font-weight: 950; color: var(--heading-pure-color); display: flex; align-items: center; gap: 8px; }
             .accordion-arrow { font-size: 14px; transition: transform 0.3s ease; color: var(--primary); font-weight: 900; }
             .accordion-card.active .accordion-arrow { transform: rotate(180deg); }
 
             .accordion-body {
-                display: none; padding: 16px; flex-direction: column; gap: 14px;
-                border-top: 1px solid var(--border-glow); background: var(--card-bg);
+                display: none; padding: 20px; flex-direction: column; gap: 14px;
+                border-top: 2px dashed var(--card-border); background: var(--card-bg);
             }
             .accordion-card.active .accordion-body { display: flex; }
 
-            .quiz-item { display: flex; flex-direction: column; gap: 8px; font-size: 14px; background: var(--light-bg); border: 1.5px solid var(--border-glow); border-radius: 14px; padding: 12px 14px; }
-            .quiz-item-q { font-weight: 850; color: var(--text-primary); line-height: 1.8; }
-            .reveal-ans-btn { background: var(--card-bg); border: 1.5px solid var(--border-glow); color: var(--primary); padding: 7px 12px; border-radius: 10px; font-size: 12px; font-weight: 900; cursor: pointer; align-self: flex-start; font-family: 'Cairo', sans-serif; transition: 0.2s; }
-            .reveal-ans-btn:hover { background: var(--primary); color: #FFF; }
-            .quiz-item-a { display: none; font-weight: 800; color: #059669; background: rgba(16, 185, 129, 0.08); padding: 10px 12px; border-radius: 10px; border-right: 3.5px solid #059669; line-height: 1.8; margin-top: 4px; }
+            .quiz-item { display: flex; flex-direction: column; gap: 10px; font-size: 14px; background: var(--card-bg); border: 2px solid var(--card-border); border-radius: 22px; padding: 16px; }
+            .quiz-item-q { font-weight: 900; color: var(--text-primary); line-height: 1.8; }
+            .reveal-ans-btn { background: var(--light-bg); border: 2px solid var(--card-border); color: var(--primary); padding: 8px 14px; border-radius: 14px; font-size: 12.5px; font-weight: 950; cursor: pointer; align-self: flex-start; font-family: 'Cairo', sans-serif; transition: 0.2s; }
+            .reveal-ans-btn:hover { background: var(--primary); color: #FFF; border-color: var(--primary); }
+            .quiz-item-a { display: none; font-weight: 850; color: #059669; background: rgba(16, 185, 129, 0.08); padding: 12px 14px; border-radius: 16px; border: 2px solid rgba(16, 185, 129, 0.25); line-height: 1.8; margin-top: 4px; }
             .quiz-item-a.show { display: block; }
 
+            /* زر العودة لأعلى */
+            .scroll-to-top-btn {
+                position: fixed; bottom: 75px; left: 16px; transform: scale(0);
+                background: var(--primary); border: 2.5px solid var(--primary);
+                color: #FFFFFF; width: 42px; height: 42px; border-radius: 50%;
+                display: flex; align-items: center; justify-content: center; font-size: 18px; font-weight: 900;
+                box-shadow: 0 8px 20px rgba(0,0,0,0.2); cursor: pointer; z-index: 998;
+                transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); opacity: 0; pointer-events: none;
+            }
+            .scroll-to-top-btn.show { transform: scale(1); opacity: 1; pointer-events: auto; }
+            .scroll-to-top-btn:hover { opacity: 0.9; transform: scale(1.1); }
+
+            /* شريط التنقل السفلي */
             .bottom-nav {
-                position: fixed; bottom: 10px; left: 50%; transform: translateX(-50%); width: calc(100% - 32px); max-width: 460px;
-                background: var(--header-bg); backdrop-filter: blur(15px); display: flex; justify-content: space-around; align-items: center;
-                padding: 5px 6px; border: 1.5px solid var(--header-border); border-radius: 20px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12); z-index: 999;
+                position: fixed; bottom: 12px; left: 50%; transform: translateX(-50%); 
+                width: calc(100% - 32px); max-width: 460px;
+                background: var(--header-bg);
+                display: flex; justify-content: space-around; align-items: center;
+                padding: 6px 10px; border-radius: 30px; 
+                border: 2.5px solid var(--card-border);
+                box-shadow: 0 8px 24px rgba(0,0,0,0.25); 
+                z-index: 999; box-sizing: border-box;
+                transition: all 0.4s ease;
             }
             .bottom-nav a { 
-                color: var(--text-secondary); text-decoration: none; font-size: 10.5px; text-align: center; font-weight: 800; 
-                display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 5px 8px; border-radius: 14px; flex: 1; transition: 0.25s;
-                background: var(--light-bg); border: 1px solid var(--border-glow); margin: 0 2px;
+                color: var(--text-secondary); text-decoration: none; font-size: 10px; text-align: center; font-weight: 800; 
+                display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 12px; border-radius: 20px; flex: 1; 
+                border: 1.5px solid var(--card-border); background: var(--light-bg);
+                transition: all 0.3s ease;
             }
             .bottom-nav a span { font-size: 16px; line-height: 1; }
-            .bottom-nav a:hover { color: var(--primary); border-color: var(--primary); transform: translateY(-1px); }
-            .bottom-nav a.active { color: #FFFFFF; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); border: 1px solid var(--accent); box-shadow: 0 4px 12px rgba(67, 56, 202, 0.3); }
+            .bottom-nav a:hover { color: var(--nav-theme-color); border-color: var(--nav-theme-color); background: rgba(128, 128, 128, 0.1); }
+            .bottom-nav a.active { color: #FFFFFF; background: var(--nav-theme-color); border-color: var(--nav-theme-color); box-shadow: 0 4px 15px var(--nav-glow-color); }
         </style>
     </head>
     <body>
@@ -191,6 +250,7 @@
         <div class="top-progress-bar"><div class="top-progress-fill" id="progressFill"></div></div>
 
         <div class="container">
+            <!-- شريط الهيدر العلوي -->
             <div class="nav-bar">
                 <a href="photogrammetry.html" class="back-btn" title="رجوع للقسم الرئيسي">←</a>
                 <div class="brand-minimalist-box">
@@ -200,176 +260,169 @@
                 <button class="theme-btn" id="themeToggleBtn" title="تغيير الثيم">🌙</button>
             </div>
 
+            <!-- كارت الترحيب (Hero Card) المنفصل تماماً -->
+            <div class="hero-card">
+                <div class="pro-hero-badge">
+                    <span class="pro-badge-dot"></span>
+                    أكاديمية العلوم التطبيقية • قسم المساحة التصويرية
+                </div>
+                <h1 class="hero-title">الدرس الرابع: أنواع المساقط وأساسيات التصوير</h1>
+                <p class="hero-desc">
+                    يغطي هذا الدرس مفاهيم المساقط الهندسية، الإسقاط العمودي والإسقاط المركزي، أساسيات علم التصوير وآلة التصوير ذات الثقب والعدسة، بالإضافة إلى معادلة العدسات والمسائل التطبيقية عليها.
+                </p>
+            </div>
+
+            <!-- الكارت الأول: أنواع المساقط -->
             <div class="lesson-card">
                 <div class="lesson-header">
                     <div class="lesson-title-box">
                         <span class="lesson-tag">الوحدة الثانية • الدرس الرابع</span>
-                        <h2 class="lesson-heading">أنواع المساقط وأساسيات علم التصوير</h2>
+                        <h2 class="lesson-heading">أولاً: أنواع المساقط (Type of Projections)</h2>
                     </div>
                     <div class="lesson-icon-badge">📐</div>
                 </div>
 
-                <!-- قسم أنواع المساقط مع الرسم SVG المعدل بخصائص الاتجاه الصحيحة -->
                 <div class="section-block">
-                    <div class="block-title">أولاً: أنواع المساقط (Type of Projections)</div>
-                    <div class="custom-list-group">
-                        <div class="list-item-row">
-                            <span class="list-bullet">•</span>
-                            <div class="list-content"><span class="hl">مفهوم المساقط الهندسية:</span> هي الطرق المستخدمة لتمثيل سطح معين بما يحتويه من معالم على سطح آخر، وتختلف باختلاف السطح المسقط والسطح المسقط عليه لإنتاج الخرائط.</div>
-                        </div>
-                        <div class="list-item-row">
-                            <span class="list-bullet">•</span>
-                            <div class="list-content"><span class="hl">الإسقاط العمودي (Orthogonal Projection):</span> نوع من الإسقاط تُسقط فيه نقاط السطح على السطح المسقط عليه بشكل عمودي تماماً.</div>
-                        </div>
+                    <div class="glass-definition-card">
+                        <div class="glass-def-title"><span>🌐</span><span>مفهوم المساقط الهندسية</span></div>
+                        <p class="glass-def-text">هي الطرق المستخدمة لتمثيل سطح معين بما يحتويه من معالم على سطح آخر، وتختلف باختلاف السطح المسقط والسطح المسقط عليه لإنتاج الخرائط.</p>
+                    </div>
 
-                        <!-- الرسم التوضيحي SVG مع محاذاة واتجاه نصوص دقيق -->
-                        <div class="svg-figure-box">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="1520" height="1280" viewBox="0 0 380 320">
-                                <rect width="380" height="320" fill="#ffffff"/>
-                                <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#5F5E5A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+                    <div class="glass-definition-card">
+                        <div class="glass-def-title"><span>⬇️</span><span>الإسقاط العمودي (Orthogonal Projection)</span></div>
+                        <p class="glass-def-text">نوع من الإسقاط تُسقط فيه نقاط السطح على السطح المسقط عليه بشكل عمودي تماماً.</p>
+                    </div>
 
-                                <!-- المستوى P بسُمك (ثلاثي الأبعاد) -->
-                                <polygon points="20,262 205,262 205,270 20,270" fill="#D3D1C7" stroke="#888780" stroke-width="1"/>
-                                <polygon points="205,262 365,152 365,160 205,270" fill="#B4B2A9" stroke="#888780" stroke-width="1"/>
-                                <polygon points="20,262 205,262 365,152 180,152" fill="#F1EFE8" stroke="#888780" stroke-width="1"/>
-
-                                <!-- السطح المسقط عليه -->
-                                <polygon points="110,215 162,185 248,185 196,215" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.2"/>
-                                <path d="M118 215 L118 207 L110 207 M188 215 L188 207 L196 207" fill="none" stroke="#185FA5" stroke-width="0.9"/>
-
-                                <!-- أشعة الإسقاط -->
-                                <g stroke="#5F5E5A" stroke-width="1" stroke-dasharray="5 4" fill="none">
-                                    <line x1="110" y1="66" x2="110" y2="208" marker-end="url(#arrow)"/>
-                                    <line x1="162" y1="36" x2="162" y2="178" marker-end="url(#arrow)"/>
-                                    <line x1="196" y1="66" x2="196" y2="208" marker-end="url(#arrow)"/>
-                                    <line x1="248" y1="36" x2="248" y2="178" marker-end="url(#arrow)"/>
+                    <!-- الرسم التوضيحي للإسقاط العمودي -->
+                    <div class="svg-figure-box">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1520" height="1280" viewBox="0 0 380 320">
+                            <rect width="380" height="320" fill="transparent"/>
+                            <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#5F5E5A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker></defs>
+                            <polygon points="20,262 205,262 205,270 20,270" fill="#D3D1C7" stroke="#888780" stroke-width="1"/>
+                            <polygon points="205,262 365,152 365,160 205,270" fill="#B4B2A9" stroke="#888780" stroke-width="1"/>
+                            <polygon points="20,262 205,262 365,152 180,152" fill="#F1EFE8" stroke="#888780" stroke-width="1"/>
+                            <polygon points="110,215 162,185 248,185 196,215" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.2"/>
+                            <path d="M118 215 L118 207 L110 207 M188 215 L188 207 L196 207" fill="none" stroke="#185FA5" stroke-width="0.9"/>
+                            <g stroke="#5F5E5A" stroke-width="1" stroke-dasharray="5 4" fill="none">
+                                <line x1="110" y1="66" x2="110" y2="208" marker-end="url(#arrow)"/>
+                                <line x1="162" y1="36" x2="162" y2="178" marker-end="url(#arrow)"/>
+                                <line x1="196" y1="66" x2="196" y2="208" marker-end="url(#arrow)"/>
+                                <line x1="248" y1="36" x2="248" y2="178" marker-end="url(#arrow)"/>
+                            </g>
+                            <polygon points="110,60 196,60 196,66 110,66" fill="#C0DD97" stroke="#3B6D11" stroke-width="1"/>
+                            <polygon points="196,60 248,30 248,36 196,66" fill="#97C459" stroke="#3B6D11" stroke-width="1"/>
+                            <polygon points="110,60 162,30 248,30 196,60" fill="#EAF3DE" stroke="#3B6D11" stroke-width="1.2"/>
+                            <path d="M48 262 A28 28 0 0 0 43.1 246.2" fill="none" stroke="#5F5E5A" stroke-width="1"/>
+                            <g font-family="Cairo, Arial, sans-serif" fill="#2C2C2A" font-size="14">
+                                <g font-weight="bold" direction="ltr">
+                                    <text x="56" y="256">α</text>
+                                    <text x="102" y="56" text-anchor="end">A</text>
+                                    <text x="162" y="22" text-anchor="middle">B</text>
+                                    <text x="248" y="22" text-anchor="middle">C</text>
+                                    <text x="204" y="80">D</text>
+                                    <text x="102" y="232" text-anchor="end">A′</text>
+                                    <text x="154" y="182" text-anchor="end">B′</text>
+                                    <text x="256" y="188">C′</text>
+                                    <text x="204" y="232">D′</text>
+                                    <text x="300" y="176">P</text>
+                                    <text x="264" y="48" font-size="12.5" fill="#3B6D11" text-anchor="start">السطح المسقط</text>
+                                    <line x1="224" y1="203" x2="272" y2="222" stroke="#185FA5" stroke-width="0.8" stroke-dasharray="3 3"/>
+                                    <text x="276" y="226" font-size="12.5" fill="#185FA5" text-anchor="start">السطح المسقط</text>
+                                    <text x="276" y="242" font-size="12.5" fill="#185FA5" text-anchor="start">عليه</text>
                                 </g>
-
-                                <!-- السطح المسقط بسُمك (ثلاثي الأبعاد) -->
-                                <polygon points="110,60 196,60 196,66 110,66" fill="#C0DD97" stroke="#3B6D11" stroke-width="1"/>
-                                <polygon points="196,60 248,30 248,36 196,66" fill="#97C459" stroke="#3B6D11" stroke-width="1"/>
-                                <polygon points="110,60 162,30 248,30 196,60" fill="#EAF3DE" stroke="#3B6D11" stroke-width="1.2"/>
-
-                                <path d="M48 262 A28 28 0 0 0 43.1 246.2" fill="none" stroke="#5F5E5A" stroke-width="1"/>
-                                <g font-family="Cairo, Arial, sans-serif" fill="#2C2C2A" font-size="14">
-                                    <g font-weight="bold" direction="ltr">
-                                        <text x="56" y="256">α</text>
-                                        <text x="102" y="56" text-anchor="end">A</text>
-                                        <text x="162" y="22" text-anchor="middle">B</text>
-                                        <text x="248" y="22" text-anchor="middle">C</text>
-                                        <text x="204" y="80">D</text>
-                                        <text x="102" y="232" text-anchor="end">A′</text>
-                                        <text x="154" y="182" text-anchor="end">B′</text>
-                                        <text x="256" y="188">C′</text>
-                                        <text x="204" y="232">D′</text>
-                                        <text x="300" y="176">P</text>
-
-                                        <!-- السطح المسقط: على يمين السطح العلوي -->
-                                        <text x="264" y="48" font-size="12.5" fill="#3B6D11" text-anchor="start">السطح المسقط</text>
-
-                                        <!-- السطح المسقط عليه: على يمين السطح السفلي مع خط توصيل -->
-                                        <line x1="224" y1="203" x2="272" y2="222" stroke="#185FA5" stroke-width="0.8" stroke-dasharray="3 3"/>
-                                        <text x="276" y="226" font-size="12.5" fill="#185FA5" text-anchor="start">السطح المسقط</text>
-                                        <text x="276" y="242" font-size="12.5" fill="#185FA5" text-anchor="start">عليه</text>
-                                    </g>
-                                    <g direction="rtl" font-size="12">
-                                        <text x="52" y="98" text-anchor="middle">أشعة</text>
-                                        <text x="52" y="116" text-anchor="middle">الإسقاط عمودية</text>
-                                        <text x="52" y="134" text-anchor="middle">على السطح</text>
-                                        <text x="52" y="152" text-anchor="middle">المسقط عليه</text>
-                                    </g>
+                                <g direction="rtl" font-size="12">
+                                    <text x="52" y="98" text-anchor="middle">أشعة</text>
+                                    <text x="52" y="116" text-anchor="middle">الإسقاط عمودية</text>
+                                    <text x="52" y="134" text-anchor="middle">على السطح</text>
+                                    <text x="52" y="152" text-anchor="middle">المسقط عليه</text>
                                 </g>
-                            </svg>
-                            <span class="svg-caption">شكل توضيحي: مبدأ الإسقاط العمودي وأشعة الإسقاط</span>
-                        </div>
+                            </g>
+                        </svg>
+                        <span class="svg-caption">شكل توضيحي: مبدأ الإسقاط العمودي وأشعة الإسقاط</span>
+                    </div>
 
-                        <div class="list-item-row" style="margin-top: 10px;">
-                            <span class="list-bullet">•</span>
-                            <div class="list-content"><span class="hl">الإسقاط المركزي (Perspetiv Projection):</span> نوع تُسقط فيه النقاط على السطح المسقط عليه بحيث تمر جميع خطوط الإسقاط بنقطة تسمى مركز الإسقاط.</div>
-                        </div>
+                    <div class="glass-definition-card" style="margin-top: 10px;">
+                        <div class="glass-def-title"><span>🎯</span><span>الإسقاط المركزي (Perspetiv Projection)</span></div>
+                        <p class="glass-def-text">نوع تُسقط فيه النقاط على السطح المسقط عليه بحيث تمر جميع خطوط الإسقاط بنقطة تسمى مركز الإسقاط.</p>
+                    </div>
 
-                        <!-- الرسم التوضيحي للإسقاط المركزي -->
-                        <div class="svg-figure-box">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="1520" height="1280" viewBox="0 0 380 320">
-                                <rect width="380" height="320" fill="#ffffff"/>
-
-                                <!-- المستوى P بسُمك (ثلاثي الأبعاد) -->
-                                <polygon points="40,258 315,258 315,266 40,266" fill="#D3D1C7" stroke="#888780" stroke-width="1"/>
-                                <polygon points="315,258 365,140 365,148 315,266" fill="#B4B2A9" stroke="#888780" stroke-width="1"/>
-                                <polygon points="40,258 315,258 365,140 90,140" fill="#F1EFE8" stroke="#888780" stroke-width="1"/>
-
-                                <!-- السطح المسقط عليه -->
-                                <polygon points="260,165 140,165 120,208 240,208" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.2"/>
-
-                                <!-- أشعة الإسقاط تمر بمركز الإسقاط O -->
-                                <g stroke="#5F5E5A" stroke-width="1" stroke-dasharray="5 4" fill="none">
-                                    <line x1="120" y1="85" x2="260" y2="165"/>
-                                    <line x1="140" y1="42" x2="240" y2="208"/>
-                                    <line x1="260" y1="42" x2="120" y2="208"/>
-                                    <line x1="240" y1="85" x2="140" y2="165"/>
+                    <!-- الرسم التوضيحي للإسقاط المركزي -->
+                    <div class="svg-figure-box">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="1520" height="1280" viewBox="0 0 380 320">
+                            <rect width="380" height="320" fill="transparent"/>
+                            <polygon points="40,258 315,258 315,266 40,266" fill="#D3D1C7" stroke="#888780" stroke-width="1"/>
+                            <polygon points="315,258 365,140 365,148 315,266" fill="#B4B2A9" stroke="#888780" stroke-width="1"/>
+                            <polygon points="40,258 315,258 365,140 90,140" fill="#F1EFE8" stroke="#888780" stroke-width="1"/>
+                            <polygon points="260,165 140,165 120,208 240,208" fill="#E6F1FB" stroke="#185FA5" stroke-width="1.2"/>
+                            <g stroke="#5F5E5A" stroke-width="1" stroke-dasharray="5 4" fill="none">
+                                <line x1="120" y1="85" x2="260" y2="165"/>
+                                <line x1="140" y1="42" x2="240" y2="208"/>
+                                <line x1="260" y1="42" x2="120" y2="208"/>
+                                <line x1="240" y1="85" x2="140" y2="165"/>
+                            </g>
+                            <polygon points="120,85 240,85 240,91 120,91" fill="#C0DD97" stroke="#3B6D11" stroke-width="1"/>
+                            <polygon points="240,85 260,42 260,48 240,91" fill="#97C459" stroke="#3B6D11" stroke-width="1"/>
+                            <polygon points="120,85 140,42 260,42 240,85" fill="#EAF3DE" stroke="#3B6D11" stroke-width="1.2"/>
+                            <circle cx="190" cy="125" r="3" fill="#A32D2D"/>
+                            <path d="M66 258 A26 26 0 0 0 50.1 234.1" fill="none" stroke="#5F5E5A" stroke-width="1"/>
+                            <g font-family="Cairo, Arial, sans-serif" fill="#2C2C2A" font-size="14">
+                                <g font-weight="bold" direction="ltr">
+                                    <text x="70" y="250">α</text>
+                                    <text x="114" y="90" text-anchor="end">A</text>
+                                    <text x="140" y="34" text-anchor="middle">B</text>
+                                    <text x="260" y="34" text-anchor="middle">C</text>
+                                    <text x="246" y="94">D</text>
+                                    <text x="198" y="130" fill="#A32D2D">O</text>
+                                    <text x="268" y="162">A′</text>
+                                    <text x="246" y="224">B′</text>
+                                    <text x="114" y="224" text-anchor="end">C′</text>
+                                    <text x="134" y="182" text-anchor="end">D′</text>
+                                    <text x="274" y="52" font-size="12.5" fill="#3B6D11" text-anchor="start">السطح المسقط</text>
+                                    <text x="274" y="180" font-size="12.5" fill="#185FA5" text-anchor="start">السطح</text>
+                                    <text x="274" y="196" font-size="12.5" fill="#185FA5" text-anchor="start">المسقط عليه</text>
                                 </g>
-
-                                <!-- السطح المسقط بسُمك (ثلاثي الأبعاد) -->
-                                <polygon points="120,85 240,85 240,91 120,91" fill="#C0DD97" stroke="#3B6D11" stroke-width="1"/>
-                                <polygon points="240,85 260,42 260,48 240,91" fill="#97C459" stroke="#3B6D11" stroke-width="1"/>
-                                <polygon points="120,85 140,42 260,42 240,85" fill="#EAF3DE" stroke="#3B6D11" stroke-width="1.2"/>
-
-                                <circle cx="190" cy="125" r="3" fill="#A32D2D"/>
-                                <path d="M66 258 A26 26 0 0 0 50.1 234.1" fill="none" stroke="#5F5E5A" stroke-width="1"/>
-                                <g font-family="Cairo, Arial, sans-serif" fill="#2C2C2A" font-size="14">
-                                    <g font-weight="bold" direction="ltr">
-                                        <text x="70" y="250">α</text>
-                                        <text x="114" y="90" text-anchor="end">A</text>
-                                        <text x="140" y="34" text-anchor="middle">B</text>
-                                        <text x="260" y="34" text-anchor="middle">C</text>
-                                        <text x="246" y="94">D</text>
-                                        <text x="198" y="130" fill="#A32D2D">O</text>
-                                        <text x="268" y="162">A′</text>
-                                        <text x="246" y="224">B′</text>
-                                        <text x="114" y="224" text-anchor="end">C′</text>
-                                        <text x="134" y="182" text-anchor="end">D′</text>
-
-                                        <!-- السطح المسقط: على يمين السطح العلوي -->
-                                        <text x="274" y="52" font-size="12.5" fill="#3B6D11" text-anchor="start">السطح المسقط</text>
-
-                                        <!-- السطح المسقط عليه: على يمين السطح السفلي -->
-                                        <text x="274" y="180" font-size="12.5" fill="#185FA5" text-anchor="start">السطح</text>
-                                        <text x="274" y="196" font-size="12.5" fill="#185FA5" text-anchor="start">المسقط عليه</text>
-                                    </g>
-                                    <g direction="rtl" font-size="12">
-                                        <text x="52" y="100" text-anchor="middle">أشعة الإسقاط</text>
-                                        <text x="52" y="118" text-anchor="middle">تمر بمركز</text>
-                                        <text x="52" y="136" text-anchor="middle">الإسقاط O</text>
-                                    </g>
+                                <g direction="rtl" font-size="12">
+                                    <text x="52" y="100" text-anchor="middle">أشعة الإسقاط</text>
+                                    <text x="52" y="118" text-anchor="middle">تمر بمركز</text>
+                                    <text x="52" y="136" text-anchor="middle">الإسقاط O</text>
                                 </g>
-                            </svg>
-                            <span class="svg-caption">شكل توضيحي: مبدأ الإسقاط المركزي ومركز الإسقاط O</span>
-                        </div>
+                            </g>
+                        </svg>
+                        <span class="svg-caption">شكل توضيحي: مبدأ الإسقاط المركزي ومركز الإسقاط O</span>
                     </div>
                 </div>
+            </div>
 
-                <!-- قسم أساسيات علم التصوير وآلة العدسة والمعادلة -->
+            <!-- الكارت الثاني: أساسيات علم التصوير وآلة العدسة والمعادلة -->
+            <div class="lesson-card">
+                <div class="lesson-header">
+                    <div class="lesson-title-box">
+                        <span class="lesson-tag">الأسس البصرية</span>
+                        <h2 class="lesson-heading">ثانياً: أساسيات علم التصوير وآلة العدسة</h2>
+                    </div>
+                    <div class="lesson-icon-badge">📷</div>
+                </div>
+
                 <div class="section-block">
-                    <div class="block-title">ثانياً: أساسيات علم التصوير وآلة العدسة</div>
-                    <div class="custom-list-group">
-                        <div class="list-item-row">
-                            <span class="list-bullet">•</span>
-                            <div class="list-content"><span class="hl">التصوير الضوئي (Photography):</span> مصطلح يعني الرسم باستخدام الضوء الصادر من الأجسام للحصول على صور مطابقة للواقع.</div>
-                        </div>
-                        <div class="list-item-row">
-                            <span class="list-bullet">•</span>
-                            <div class="list-content"><span class="hl">آلة التصوير ذات الثقب (Pinhole Camera):</span> أول جهاز لظهور الصورة (صندوق مظلم به ثقب وفي مؤخرته فيلم حساس). اكتشف الظاهرة العالم المسلم ابن الهيثم عام 1038م، وتطور العمل عام 1839م بواسطة لويس داجوري.</div>
-                        </div>
-                        <div class="list-item-row">
-                            <span class="list-bullet">•</span>
-                            <div class="list-content"><span class="hl">آلة التصوير ذات العدسة (Lens Camera):</span> تعتمد على عدسة لتجميع الضوء، وتتشابه في عملها مع عين الإنسان (التي تحتوي عدسة محدبة وشبكية تقوم مقام الفلم لتنقل الصورة إلى مركز الإبصار).</div>
-                        </div>
+                    <div class="glass-definition-card">
+                        <div class="glass-def-title"><span>📸</span><span>التصوير الضوئي (Photography)</span></div>
+                        <p class="glass-def-text">مصطلح يعني الرسم باستخدام الضوء الصادر من الأجسام للحصول على صور مطابقة للواقع.</p>
+                    </div>
+
+                    <div class="glass-definition-card">
+                        <div class="glass-def-title"><span>📦</span><span>آلة التصوير ذات الثقب (Pinhole Camera)</span></div>
+                        <p class="glass-def-text">أول جهاز لظهور الصورة (صندوق مظلم به ثقب وفي مؤخرته فيلم حساس). اكتشف الظاهرة العالم المسلم ابن الهيثم عام 1038م، وتطور العمل عام 1839م بواسطة لويس داجوري.</p>
+                    </div>
+
+                    <div class="glass-definition-card">
+                        <div class="glass-def-title"><span>🔍</span><span>آلة التصوير ذات العدسة (Lens Camera)</span></div>
+                        <p class="glass-def-text">تعتمد على عدسة لتجميع الضوء، وتتشابه في عملها مع عين الإنسان (التي تحتوي عدسة محدبة وشبكية تقوم مقام الفلم لتنقل الصورة إلى مركز الإبصار).</p>
                     </div>
 
                     <!-- الرسم التوضيحي لمبدأ عمل آلة التصوير ذات العدسة -->
                     <div class="svg-figure-box">
                         <svg xmlns="http://www.w3.org/2000/svg" width="1520" height="720" viewBox="0 0 380 180">
-                            <rect width="380" height="180" fill="#ffffff"/>
+                            <rect width="380" height="180" fill="transparent"/>
                             <defs>
                                 <marker id="rayArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#5F5E5A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
                                 <g id="clover">
@@ -379,15 +432,9 @@
                                     <path d="M58 96 Q60 106 67 111" fill="none" stroke="#3B8F5F" stroke-width="1.5" stroke-linecap="round"/>
                                 </g>
                             </defs>
-
-                            <!-- الجسم -->
                             <use href="#clover"/>
-
-                            <!-- العدسة -->
                             <path d="M190 27 Q208 85 190 144 Q172 85 190 27 Z" fill="#E4E6DF" stroke="#888780" stroke-width="1.2"/>
                             <line x1="190" y1="30" x2="190" y2="141" stroke="#B4B2A9" stroke-width="0.8"/>
-
-                            <!-- أشعة الضوء -->
                             <g stroke="#5F5E5A" stroke-width="1" fill="none">
                                 <line x1="78" y1="61" x2="190" y2="61"/>
                                 <line x1="78" y1="112" x2="190" y2="112"/>
@@ -400,18 +447,12 @@
                                 <line x1="215" y1="70" x2="230" y2="75.4" marker-end="url(#rayArrow)"/>
                                 <line x1="215" y1="103" x2="230" y2="97.6" marker-end="url(#rayArrow)"/>
                             </g>
-
-                            <!-- البؤرة -->
                             <line x1="261" y1="86.5" x2="261" y2="104" stroke="#2C2C2A" stroke-width="1"/>
                             <circle cx="261" cy="86.5" r="2" fill="#A32D2D"/>
-
-                            <!-- مستوى الصورة -->
                             <polygon points="300,59 338,40 340,125 300,110" fill="#F1EFE8" fill-opacity="0.7" stroke="#5F5E5A" stroke-width="1.2"/>
                             <g transform="translate(320 85) rotate(180) scale(0.8) translate(-57 -88)">
                                 <use href="#clover"/>
                             </g>
-
-                            <!-- التسميات -->
                             <g font-family="Cairo, Arial, sans-serif" font-size="12.5" font-weight="bold" fill="#3B6D11" text-anchor="middle" direction="rtl">
                                 <text x="57" y="152">الجسم</text>
                                 <text x="190" y="158">العدسة</text>
@@ -423,20 +464,28 @@
                     </div>
 
                     <!-- صندوق معادلة العدسات والشرح -->
-                    <div class="formula-box">
-                        <div class="formula-eq">1 / V = 1 / F - 1 / U</div>
-                        <div class="formula-details">
-                            <span>• <strong class="hl">V:</strong> بعد الصورة عن مركز العدسة.</span>
-                            <span>• <strong class="hl">F:</strong> المسافة بين مركز العدسة وبؤرتها (البعد البوري).</span>
-                            <span>• <strong class="hl">U:</strong> بعد الجسم عن مركز العدسة.</span>
+                    <div class="formula-card-box">
+                        <div class="formula-display">1 / V = 1 / F - 1 / U</div>
+                        <div class="formula-meanings">
+                            <div>• <strong class="hl">V:</strong> بعد الصورة عن مركز العدسة.</div>
+                            <div>• <strong class="hl">F:</strong> المسافة بين مركز العدسة وبؤرتها (البعد البوري).</div>
+                            <div>• <strong class="hl">U:</strong> بعد الجسم عن مركز العدسة.</div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- قسم المسائل التعليمية الثلاثة لمعادلة العدسات -->
+            <!-- الكارت الثالث: المسائل التعليمية والتطبيقية على معادلة العدسات -->
+            <div class="lesson-card">
+                <div class="lesson-header">
+                    <div class="lesson-title-box">
+                        <span class="lesson-tag">التمارين والمسائل</span>
+                        <h2 class="lesson-heading">ثالثاً: مسائل تعليمية وتطبيقية على معادلة العدسات</h2>
+                    </div>
+                    <div class="lesson-icon-badge">📝</div>
+                </div>
+
                 <div class="section-block">
-                    <div class="block-title">ثالثاً: مسائل تعليمية وتطبيقية على معادلة العدسات</div>
-                    
                     <div class="problem-box">
                         <div class="problem-title"><span>📝</span> المسألة الأولى: إيجاد البعد البوري (F)</div>
                         <div class="problem-desc">إذا كانت المسافة بين الصورة والعدسة (V = 20cm)، وبعد الجسم عن العدسة (U = 60cm)، احسب البعد البوري (F).</div>
@@ -467,45 +516,47 @@
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- الأسئلة التفاعلية -->
-                <div class="accordion-card" id="quizAccordion">
-                    <div class="accordion-header" id="quizAccordionHeader">
-                        <div class="accordion-header-title">
-                            <span>💡</span> أسئلة تفاعلية على الدرس الرابع
-                        </div>
-                        <span class="accordion-arrow">▼</span>
+            <!-- الأسئلة التفاعلية -->
+            <div class="accordion-card" id="quizAccordion">
+                <div class="accordion-header" id="quizAccordionHeader">
+                    <div class="accordion-header-title">
+                        <span>💡</span> أسئلة تفاعلية على الدرس الرابع
                     </div>
-                    <div class="accordion-body">
-                        
-                        <div class="quiz-item">
-                            <span class="quiz-item-q">س1: ما هو الفرق بين الإسقاط العمودي والإسقاط المركزي؟</span>
-                            <button class="reveal-ans-btn">🔍 أظهر الإجابة النموذجية</button>
-                            <div class="quiz-item-a"><strong>الإجابة:</strong> في الإسقاط العمودي تُسقط النقاط عمودياً، بينما في المركزي تمر جميع خطوط الإسقاط عبر مركز الإسقاط.</div>
-                        </div>
+                    <div class="accordion-arrow">▼</div>
+                </div>
+                <div class="accordion-body">
+                    <div class="quiz-item">
+                        <div class="quiz-item-q">س1: ما هو الفرق بين الإسقاط العمودي والإسقاط المركزي؟</div>
+                        <button class="reveal-ans-btn">🔍 أظهر الإجابة النموذجية</button>
+                        <div class="quiz-item-a"><strong>الإجابة:</strong> في الإسقاط العمودي تُسقط النقاط عمودياً، بينما في المركزي تمر جميع خطوط الإسقاط عبر مركز الإسقاط.</div>
+                    </div>
 
-                        <div class="quiz-item">
-                            <span class="quiz-item-q">س2: ما هي رموز معادلة آلة التصوير ذات العدسة وما تعنيه؟</span>
-                            <button class="reveal-ans-btn">🔍 أظهر الإجابة النموذجية</button>
-                            <div class="quiz-item-a"><strong>الإجابة:</strong> V بعد الصورة، F البعد البوري، و U بعد الجسم عن مركز العدسة.</div>
-                        </div>
+                    <div class="quiz-item">
+                        <div class="quiz-item-q">س2: ما هي رموز معادلة آلة التصوير ذات العدسة وما تعنيه؟</div>
+                        <button class="reveal-ans-btn">🔍 أظهر الإجابة النموذجية</button>
+                        <div class="quiz-item-a"><strong>الإجابة:</strong> V بعد الصورة، F البعد البوري، و U بعد الجسم عن مركز العدسة.</div>
+                    </div>
 
-                        <div class="quiz-item">
-                            <span class="quiz-item-q">س3: كيف تحسب البعد البوري (F) رياضياً إذا علمت (V) و (U)؟</span>
-                            <button class="reveal-ans-btn">🔍 أظهر الإجابة النموذجية</button>
-                            <div class="quiz-item-a"><strong>الإجابة:</strong> من خلال العلاقة: F = (V × U) / (U + V).</div>
-                        </div>
-
+                    <div class="quiz-item">
+                        <div class="quiz-item-q">س3: كيف تحسب البعد البوري (F) رياضياً إذا علمت (V) و (U)؟</div>
+                        <button class="reveal-ans-btn">🔍 أظهر الإجابة النموذجية</button>
+                        <div class="quiz-item-a"><strong>الإجابة:</strong> من خلال العلاقة: F = (V × U) / (U + V).</div>
                     </div>
                 </div>
-
             </div>
+
         </div>
 
-        <div class="bottom-nav">
+        <!-- زر الصعود لأعلى -->
+        <button class="scroll-to-top-btn" id="scrollToTopBtn" onclick="scrollToTop()" title="الرجوع لأعلى الصفحة">↑</button>
+
+        <!-- شريط التنقل السفلي -->
+        <div class="bottom-nav" id="bottomNav">
             <a href="../../index.html"><span>🏠</span>الرئيسية</a>
-            <a href="../surveying.html" class="active"><span>📐</span>المساحة</a>
             <a href="../../english/english.html"><span>🇬🇧</span>الإنجليزي</a>
+            <a href="../surveying.html" class="active"><span>📐</span>المساحة</a>
             <a href="../../programming/programming.html"><span>💻</span>البرمجة</a>
         </div>
 
@@ -548,11 +599,15 @@
                 }
                 applyTheme(localStorage.getItem("em_theme") === "dark");
                 if (themeBtn) {
-                    themeBtn.addEventListener("click", () => {
+                    themeBtn.addEventListener("click", function() {
                         applyTheme(!document.documentElement.classList.contains("dark-mode"));
                     });
                 }
             });
+
+            function scrollToTop() {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
 
             window.onscroll = function() {
                 let winScroll = document.body.scrollTop || document.documentElement.scrollTop;
@@ -560,6 +615,15 @@
                 let scrolled = (winScroll / height) * 100;
                 let progressFill = document.getElementById("progressFill");
                 if (progressFill) progressFill.style.width = scrolled + "%";
+
+                let scrollToTopBtn = document.getElementById("scrollToTopBtn");
+                if (scrollToTopBtn) {
+                    if (winScroll > 300) {
+                        scrollToTopBtn.classList.add("show");
+                    } else {
+                        scrollToTopBtn.classList.remove("show");
+                    }
+                }
             };
         </script>
     </body>
